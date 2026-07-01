@@ -1,0 +1,74 @@
+// Schéma Prisma d'Arboris — catalogue de skills IA.
+// Base SQLite (zéro config en local). Les textes bilingues (FR/EN) sont stockés
+// dans des colonnes dédiées ; les listes (tech, compat, does, triggers) sont
+// sérialisées en JSON (SQLite n'a pas de type tableau natif) et désérialisées
+// dans la couche serveur (src/server).
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+/// Catégorie d'un skill (Backend & API, Runtime & Core, …).
+model Category {
+  id      String  @id
+  labelFr String
+  labelEn String
+  color   String
+  icon    String
+  sort    Int     @default(0)
+
+  skills Skill[]
+
+  @@map("categories")
+}
+
+/// Stack / technologie mise en avant sur la page « Premier pas ».
+model Stack {
+  id      String @id
+  label   String
+  icon    String
+  color   String
+  briefFr String
+  briefEn String
+  sort    Int    @default(0)
+
+  // Relation many-to-many implicite avec les skills recommandés.
+  skills Skill[]
+
+  @@map("stacks")
+}
+
+/// Skill IA du catalogue.
+model Skill {
+  id            String  @id
+  icon          String
+  score         Int?
+  tagFr         String
+  tagEn         String
+  actFr         String
+  actEn         String
+  // Listes sérialisées en JSON (tableaux de chaînes).
+  techJson      String  @default("[]")
+  compatJson    String  @default("[]")
+  doesFrJson    String  @default("[]")
+  doesEnJson    String  @default("[]")
+  triggersFrJson String @default("[]")
+  triggersEnJson String @default("[]")
+  sort          Int     @default(0)
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  stacks Stack[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+  @@map("skills")
+}

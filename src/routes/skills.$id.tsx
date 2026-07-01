@@ -1,0 +1,287 @@
+import { createFileRoute, Link } from '@tanstack/react-router'
+import { useMemo } from 'react'
+import Icon from '#/components/Icon'
+import { useI18n } from '#/lib/i18n'
+import { useCopy } from '#/lib/useCopy'
+import { getCatalog, getSkill } from '#/server/functions'
+import { compatDot, hexToRgba, promptFor, type Category } from '#/lib/catalog'
+
+export const Route = createFileRoute('/skills/$id')({
+  loader: async ({ params }) => {
+    const [skill, catalog] = await Promise.all([
+      getSkill({ data: { id: params.id } }),
+      getCatalog(),
+    ])
+    return { skill, catalog }
+  },
+  component: SkillDetailPage,
+})
+
+function SkillDetailPage() {
+  const { skill, catalog } = Route.useLoaderData()
+  const { t, lang } = useI18n()
+  const { copiedKey, copy } = useCopy(1700)
+
+  const catById = useMemo(() => {
+    const map = new Map<string, Category>()
+    for (const c of catalog.categories) map.set(c.id, c)
+    return map
+  }, [catalog.categories])
+
+  const related = useMemo(() => {
+    if (!skill) return []
+    const same = catalog.skills.filter((x) => x.categoryId === skill.categoryId && x.id !== skill.id)
+    const list = [...same]
+    if (list.length < 3) {
+      for (const x of catalog.skills) {
+        if (x.id !== skill.id && !list.includes(x) && list.length < 3) list.push(x)
+      }
+    }
+    return list.slice(0, 3)
+  }, [catalog.skills, skill])
+
+  if (!skill) {
+    return (
+      <main className="mx-auto w-full max-w-[1080px] px-5 py-24 text-center sm:px-7">
+        <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-[var(--surface-2)] text-[var(--text-3)]">
+          <Icon name="magnifying-glass" size={26} />
+        </div>
+        <h1 className="mb-2 font-display text-[24px] font-semibold">{t.skill.notFoundTitle}</h1>
+        <p className="mb-6 text-[15px] text-[var(--text-2)]">{t.skill.notFoundBody}</p>
+        <Link
+          to="/skills"
+          className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-[var(--accent-press)]"
+        >
+          <Icon name="arrow-left" bold size={16} />
+          {t.skill.back}
+        </Link>
+      </main>
+    )
+  }
+
+  const category = catById.get(skill.categoryId)
+  const color = category?.color ?? 'var(--text-3)'
+  const tint = category ? hexToRgba(category.color, 0.14) : 'var(--surface-2)'
+  const prompt = promptFor(skill, lang)
+  const copied = copiedKey === skill.id
+
+  const copyBtn = (extra: string) =>
+    `inline-flex items-center justify-center gap-2 font-semibold transition-colors ${extra}`
+
+  return (
+    <main className="mx-auto w-full max-w-[1080px] px-5 pt-6 pb-20 sm:px-7">
+      {/* Fil d'ariane */}
+      <div className="mb-[26px] flex items-center gap-2 text-[13px] text-[var(--text-3)]">
+        <Link to="/skills" className="text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
+          {t.skill.back}
+        </Link>
+        <Icon name="caret-right" size={12} />
+        <span className="font-mono text-[var(--text-2)]">{skill.id}</span>
+      </div>
+
+      {/* En-tête */}
+      <div className="flex flex-wrap items-start gap-[22px]">
+        <div className="grid h-16 w-16 flex-none place-items-center rounded-2xl" style={{ background: tint, color }}>
+          <Icon name={skill.icon} bold size={32} />
+        </div>
+        <div className="min-w-[280px] flex-1">
+          <div className="mb-2.5 flex flex-wrap items-center gap-2.5">
+            <span
+              className="inline-flex items-center gap-1.5 rounded-full border px-[11px] py-1 text-[12px] font-semibold"
+              style={{ background: tint, color, borderColor: category ? hexToRgba(category.color, 0.3) : 'var(--border)' }}
+            >
+              <Icon name={category?.icon ?? 'squares-four'} bold size={13} />
+              {category ? category.label[lang] : ''}
+            </span>
+          </div>
+          <h1 className="mb-3 break-words font-mono text-[30px] font-semibold leading-[1.1] tracking-[-0.01em]">
+            {skill.id}
+          </h1>
+          <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">{skill.tag[lang]}</p>
+          <div className="flex flex-wrap items-center gap-3.5">
+            <button
+              type="button"
+              onClick={() => copy(prompt, skill.id)}
+              className={copyBtn(
+                'rounded-[11px] bg-[var(--accent)] px-5 py-3 text-[15px] text-white shadow-[0_6px_18px_var(--accent-soft)] hover:bg-[var(--accent-press)]',
+              )}
+            >
+              <Icon name={copied ? 'check' : 'copy'} bold size={18} />
+              {copied ? t.skill.copied : t.skill.copy}
+            </button>
+            <span className="max-w-[260px] text-[13px] text-[var(--text-3)]">{t.skill.ctaHint}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Prompt */}
+      <div className="mt-[30px] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
+        <div className="flex items-center justify-between gap-3.5 border-b border-[var(--border)] bg-[var(--surface-2)] px-[18px] py-[13px]">
+          <div className="flex items-center gap-2.5 font-mono text-[11.5px] font-semibold uppercase tracking-[0.08em] text-[var(--text-3)]">
+            <Icon name="cursor-text" bold size={14} className="text-[var(--accent)]" />
+            {t.skill.promptTitle}
+          </div>
+          <button
+            type="button"
+            onClick={() => copy(prompt, skill.id)}
+            className={copyBtn(
+              `rounded-lg border px-3 py-1.5 text-[12.5px] ${
+                copied
+                  ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)]'
+                  : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-1)] hover:border-[var(--accent)]'
+              }`,
+            )}
+          >
+            <Icon name={copied ? 'check' : 'copy'} bold size={14} />
+            {copied ? t.skill.copied : t.skill.copy}
+          </button>
+        </div>
+        <div className="flex items-start gap-3.5 px-5 py-[18px]">
+          <div className="w-[3px] flex-none self-stretch rounded-full bg-[var(--accent)] opacity-60" />
+          <p className="text-[15.5px] leading-[1.6] text-[var(--text-1)]">{prompt}</p>
+        </div>
+        <div className="px-5 pb-4 text-[12.5px] text-[var(--text-3)]">{t.skill.promptHint}</div>
+      </div>
+
+      {/* Corps : détails + méta */}
+      <div className="mt-8 grid items-start gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+        <div>
+          <section className="mb-[34px]">
+            <h2 className="mb-4 font-display text-[19px] font-semibold">{t.skill.doesTitle}</h2>
+            <div className="flex flex-col gap-[11px]">
+              {skill.does[lang].map((text) => (
+                <div key={text} className="flex items-start gap-[11px]">
+                  <Icon name="check-circle" bold size={18} className="mt-px flex-none text-[var(--accent)]" />
+                  <span className="text-[14.5px] text-[var(--text-1)]">{text}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="mb-[34px]">
+            <h2 className="mb-4 font-display text-[19px] font-semibold">{t.skill.howTitle}</h2>
+            <div className="flex flex-col gap-3.5">
+              {t.skill.how.map((h, i) => (
+                <div key={h.t} className="flex items-start gap-3.5">
+                  <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-[var(--accent-soft)] font-mono text-[13px] font-semibold text-[var(--accent)]">
+                    {i + 1}
+                  </span>
+                  <div className="pt-0.5">
+                    <div className="mb-0.5 text-[14.5px] font-semibold text-[var(--text-1)]">{h.t}</div>
+                    <div className="text-[13.5px] text-[var(--text-2)]">{h.d}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section>
+            <h2 className="mb-2 font-display text-[19px] font-semibold">{t.skill.triggersTitle}</h2>
+            <p className="mb-3.5 text-[13.5px] text-[var(--text-2)]">{t.skill.triggersHint}</p>
+            <div className="flex flex-col gap-2.5">
+              {skill.triggers[lang].map((text) => (
+                <div
+                  key={text}
+                  className="flex items-center gap-[11px] rounded-[10px] border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2.5"
+                >
+                  <Icon name="quotes" size={15} className="text-[var(--text-3)]" />
+                  <span className="text-[14px] text-[var(--text-1)]">{text}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        <aside className="flex flex-col gap-[18px] lg:sticky lg:top-[78px]">
+          <div className="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-[18px] shadow-[var(--shadow-card)]">
+            <div className="mb-3.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
+              {t.skill.metaTitle}
+            </div>
+            <div className="flex flex-col gap-3.5">
+              <div>
+                <div className="mb-1.5 text-[12px] text-[var(--text-3)]">{t.skill.compat}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {skill.compat.map((name) => (
+                    <span
+                      key={name}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-2.5 py-1 text-[12px] text-[var(--text-2)]"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: compatDot(name) }} />
+                      {name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="mb-1.5 text-[12px] text-[var(--text-3)]">{t.skill.tech}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {skill.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-md border border-[var(--border)] px-2 py-[3px] font-mono text-[11px] text-[var(--text-2)]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => copy(prompt, skill.id)}
+              className={copyBtn(
+                'mt-[18px] w-full rounded-[10px] bg-[var(--accent)] px-3 py-2.5 text-[14px] text-white hover:bg-[var(--accent-press)]',
+              )}
+            >
+              <Icon name={copied ? 'check' : 'copy'} bold size={16} />
+              {copied ? t.skill.copied : t.skill.copy}
+            </button>
+          </div>
+
+          <div className="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-[18px]">
+            <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
+              {t.skill.insideTitle}
+            </div>
+            <div className="flex flex-col gap-2.5">
+              {t.skill.inside.map((text) => (
+                <div key={text} className="flex items-start gap-2.5">
+                  <Icon name="file-text" size={15} className="mt-px text-[var(--text-3)]" />
+                  <span className="text-[13px] text-[var(--text-2)]">{text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      {/* Skills liés */}
+      <section className="mt-12">
+        <h2 className="mb-4 font-display text-[18px] font-semibold">{t.skill.related}</h2>
+        <div className="grid gap-3.5 sm:grid-cols-2 md:grid-cols-3">
+          {related.map((r) => {
+            const rc = catById.get(r.categoryId)
+            return (
+              <Link
+                key={r.id}
+                to="/skills/$id"
+                params={{ id: r.id }}
+                className="flex flex-col gap-2.5 rounded-[13px] border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)] transition-colors hover:border-[var(--border-2)]"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span
+                    className="grid h-[34px] w-[34px] place-items-center rounded-[9px]"
+                    style={{ background: rc ? hexToRgba(rc.color, 0.14) : 'var(--surface-2)', color: rc?.color ?? 'var(--text-3)' }}
+                  >
+                    <Icon name={r.icon} bold size={17} />
+                  </span>
+                  <span className="truncate font-mono text-[13px] font-semibold text-[var(--text-1)]">{r.id}</span>
+                </div>
+                <span className="line-clamp-2 text-[12.5px] leading-[1.45] text-[var(--text-2)]">{r.tag[lang]}</span>
+              </Link>
+            )
+          })}
+        </div>
+      </section>
+    </main>
+  )
+}

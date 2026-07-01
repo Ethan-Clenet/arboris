@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* ── Design tokens Arboris ─────────────────────────────────────────────── */
+:root,
+[data-theme="light"] {
+  --bg: #fbfbfc;
+  --bg-elev: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f6f7f9;
+  --surface-hover: #f1f3f6;
+  --border: #e7e9ee;
+  --border-2: #dbdfe6;
+  --text-1: #14171c;
+  --text-2: #5a616c;
+  --text-3: #8a909b;
+  --accent: #1f8a50;
+  --accent-press: #197544;
+  --accent-soft: rgba(31, 138, 80, 0.1);
+  --accent-border: rgba(31, 138, 80, 0.3);
+  --success: #16a36b;
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.05), 0 1px 3px rgba(16, 24, 40, 0.05);
+  --shadow-pop: 0 18px 50px rgba(16, 24, 40, 0.16);
+  --font-body: "Hanken Grotesk", sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg: #0a0b0e;
+  --bg-elev: #0f1115;
+  --surface: #14161b;
+  --surface-2: #191c22;
+  --surface-hover: #1c2027;
+  --border: #23262e;
+  --border-2: #2d313a;
+  --text-1: #eceef2;
+  --text-2: #a2a9b5;
+  --text-3: #6b7280;
+  --accent: #30a46c;
+  --accent-press: #2b9a63;
+  --accent-soft: rgba(48, 164, 108, 0.13);
+  --accent-border: rgba(48, 164, 108, 0.34);
+  --success: #3ecf8e;
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.02) inset, 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-pop: 0 22px 60px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: #0a0b0e;
+}
+
+html[data-theme="light"] {
+  background: #fbfbfc;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(48, 164, 108, 0.28);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Transition de thème (Magic-UI style) : révélation en clip-path circulaire. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html[data-arboris-vt="active"]::view-transition-group(root) {
+  animation-duration: var(--arboris-vt-duration);
+}
+
+@keyframes sp-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes sp-pop {
+  0% {
+    transform: scale(0.97);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: rise-in 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Scrollbar discrète pour les zones défilables. */
+.scroll-x {
+  overflow-x: auto;
+}
