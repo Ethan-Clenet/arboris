@@ -167,3 +167,53 @@ html[data-arboris-vt="active"]::view-transition-group(root) {
 .scroll-x {
   overflow-x: auto;
 }
+
+/* Accessibilité — contenu masqué visuellement, disponible aux lecteurs d'écran */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: 0 0 0.5rem 0;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus-visible {
+  left: 0;
+  top: 0;
+  outline: 2px solid var(--text-1);
+  outline-offset: 2px;
+}
+
+/* Indicateur de focus visible pour la navigation clavier */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in {
+    animation: none;
+  }
+}

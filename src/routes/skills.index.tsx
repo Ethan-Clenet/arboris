@@ -78,7 +78,7 @@ function SkillsPage() {
   const resultLabel = `${rows.length > 1 ? t.skills.resMany : t.skills.resOne} ${t.skills.resTail(catalog.skills.length)}`
 
   return (
-    <div className="w-full">
+    <main id="main-content" className="w-full">
       <PageShell as="div" className="pt-9">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-[640px]">
@@ -116,12 +116,17 @@ function SkillsPage() {
         <aside className="flex flex-col gap-[22px] lg:sticky lg:top-[78px]">
           {/* Recherche */}
           <div className="relative">
+            <label htmlFor="skills-search" className="sr-only">
+              {t.a11y.searchSkills}
+            </label>
             <Icon
               name="magnifying-glass"
               size={16}
               className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-3)]"
             />
             <input
+              id="skills-search"
+              type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder={t.skills.searchPh}
@@ -131,7 +136,7 @@ function SkillsPage() {
               <button
                 type="button"
                 onClick={() => setQ('')}
-                aria-label="Effacer"
+                aria-label={t.a11y.clearSearch}
                 className="absolute right-2 top-1/2 grid h-[22px] w-[22px] -translate-y-1/2 place-items-center text-[var(--text-3)] hover:text-[var(--text-1)]"
               >
                 <Icon name="x" size={13} />
@@ -178,6 +183,7 @@ function SkillsPage() {
                   <button
                     key={name}
                     type="button"
+                    aria-pressed={active}
                     onClick={() => setCompat(toggle(compat, name))}
                     className={`flex items-center gap-1.5 rounded-md border px-[11px] py-[5px] text-[12.5px] font-medium transition-colors ${
                       active
@@ -205,6 +211,7 @@ function SkillsPage() {
                   <button
                     key={name}
                     type="button"
+                    aria-pressed={active}
                     onClick={() => setTechs(toggle(techs, name))}
                     className={`rounded-md border px-[11px] py-[5px] font-mono text-[11.5px] font-medium transition-colors ${
                       active
@@ -237,11 +244,16 @@ function SkillsPage() {
             <div className="text-[13.5px] text-[var(--text-2)]">
               <span className="font-semibold text-[var(--text-1)]">{rows.length}</span> {resultLabel}
             </div>
-            <div className="flex items-center rounded-lg border border-[var(--border)] bg-[var(--surface)] p-0.5">
+            <div
+              className="flex items-center rounded-lg border border-[var(--border)] bg-[var(--surface)] p-0.5"
+              role="group"
+              aria-label={t.a11y.sortBy}
+            >
               {(['score', 'name'] as SortMode[]).map((mode) => (
                 <button
                   key={mode}
                   type="button"
+                  aria-pressed={sort === mode}
                   onClick={() => setSort(mode)}
                     className={`shrink-0 cursor-pointer rounded px-2.5 py-1 text-xs font-medium transition-colors ${
                       sort === mode
@@ -272,7 +284,7 @@ function SkillsPage() {
                     skill={skill}
                     category={catById.get(skill.categoryId)}
                     copied={copiedKey === skill.id}
-                    onCopy={() => copy(promptFor(skill, lang), skill.id)}
+                    onCopy={() => copy(promptFor(skill, lang), skill.id, t.skills.copied)}
                   />
                 ))}
               </div>
@@ -298,7 +310,7 @@ function SkillsPage() {
           </div>
         </section>
       </PageShell>
-    </div>
+    </main>
   )
 }
 
@@ -321,6 +333,7 @@ function CategoryButton({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={`flex w-full items-center gap-2.5 rounded-[9px] border px-2.5 py-2 text-left text-[13.5px] transition-colors ${
         active
           ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--text-1)]'
@@ -410,7 +423,7 @@ function SkillRow({
         <Link
           to="/skills/$id"
           params={{ id: skill.id }}
-          title={t.skills.detail}
+          aria-label={t.skills.detail}
           className="grid h-8 w-8 flex-none place-items-center rounded-lg border border-[var(--border)] text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
         >
           <Icon name="arrow-up-right" bold size={14} />

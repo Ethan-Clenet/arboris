@@ -5,13 +5,14 @@
 pratiques. Zéro config.
 
 Application full-stack construite avec **TanStack Start** (React 19), **Prisma**
-(SQLite) et **Tailwind CSS v4**, entièrement typée en **TypeScript**.
+(PostgreSQL) et **Tailwind CSS v4**, entièrement typée en **TypeScript**.
 
 ## ✨ Fonctionnalités
 
 - **Catalogue filtrable** — recherche, filtres par catégorie, compatibilité et technologie, tri par score ou nom.
 - **Fiches détaillées** — prompt à copier, « ce que fait le skill », étapes, déclencheurs, skills liés.
 - **Premier pas** — choisis ta stack (Node, TypeScript, React, Next.js…) et copie tous les skills recommandés d'un coup.
+- **Authentification** — connexion / inscription (e-mail + mot de passe, sessions HTTP-only).
 - **Bilingue FR / EN** — bascule instantanée, mémorisée.
 - **Thème clair / sombre** — bascule animée (View Transitions API), sans flash au chargement.
 - **Rendu côté serveur (SSR)** — les données viennent de la base via des *server functions* TanStack Start adossées à Prisma.
@@ -22,31 +23,61 @@ Application full-stack construite avec **TanStack Start** (React 19), **Prisma**
 | -------------- | ---------------------------------------------------------- |
 | Framework      | TanStack Start (React 19, routing fichiers, SSR)           |
 | Server / RPC   | `createServerFn` (server functions, exécutées sur Node)    |
-| ORM / Base     | Prisma 6 + SQLite (`prisma/dev.db`)                        |
+| ORM / Base     | Prisma 6 + PostgreSQL 16 (Docker)                          |
 | Styles         | Tailwind CSS v4 + tokens de design (variables CSS)         |
 | Icônes/Polices | Phosphor Icons, Space Grotesk / Hanken Grotesk / JetBrains Mono |
 | Langage        | TypeScript                                                 |
 
 ## 🚀 Démarrage
 
-> **Prérequis** : Node.js (recommandé **≥ 22.12**, fonctionne aussi en 20.19+) et npm.
+> **Prérequis** : Node.js (recommandé **≥ 22.12**, fonctionne aussi en 20.19+), npm et **Docker**.
 
 ```bash
 # 1. Installer les dépendances
 npm install
 
-# 2. Créer la base SQLite + appliquer la migration + insérer les données
+# 2. Copier la config d'environnement
+cp .env.example .env
+
+# 3. Démarrer PostgreSQL (Docker) + migrations + seed
+npm run db:up
 npm run db:migrate      # applique les migrations et lance le seed
 
-# 3. Lancer le serveur de développement
+# 4. Lancer le serveur de développement
 npm run dev
 ```
 
 L'application démarre sur **http://localhost:3000** (bascule sur un autre port
 si 3000 est occupé).
 
-> La variable `DATABASE_URL` est définie dans `.env` (`file:./dev.db`). Copie
-> `.env.example` en `.env` si le fichier est absent.
+### PostgreSQL (Docker)
+
+Le fichier `docker-compose.yml` lance Postgres sur le port **5433** (évite les
+conflits avec une instance locale sur 5432) :
+
+| Variable | Valeur par défaut |
+| -------- | ----------------- |
+| Utilisateur | `arboris` |
+| Mot de passe | `arboris` |
+| Base | `arboris` |
+| Port hôte | `5433` |
+
+Format `DATABASE_URL` dans `.env` :
+
+```
+postgresql://arboris:arboris@localhost:5433/arboris
+```
+
+Commandes utiles :
+
+```bash
+npm run db:up      # docker compose up -d
+npm run db:down    # docker compose down
+npm run db:studio  # explorateur Prisma Studio
+npm run db:reset   # réinitialise la base + reseed
+```
+
+> `SESSION_SECRET` (min. 32 caractères) est requis pour l'authentification.
 
 ## 📜 Scripts npm
 
@@ -57,6 +88,8 @@ si 3000 est occupé).
 | `npm run start`         | Sert le build de production                            |
 | `npm run typecheck`     | Vérification des types TypeScript                      |
 | `npm run generate-routes` | Régénère l'arbre de routes TanStack (`routeTree.gen.ts`) |
+| `npm run db:up`         | Démarre PostgreSQL via Docker Compose                  |
+| `npm run db:down`       | Arrête le conteneur PostgreSQL                         |
 | `npm run db:migrate`    | Crée/applique les migrations Prisma (puis seed)        |
 | `npm run db:push`       | Synchronise le schéma sans migration (prototypage)     |
 | `npm run db:seed`       | (Re)remplit la base avec le catalogue                  |
@@ -67,21 +100,24 @@ si 3000 est occupé).
 
 ```
 arboris/
+├── docker-compose.yml       # PostgreSQL 16 (port 5433)
 ├── prisma/
-│   ├── schema.prisma        # Modèles Category, Stack, Skill (+ relations)
+│   ├── schema.prisma        # Modèles Category, Stack, Skill, User
 │   ├── catalog-data.ts      # Données source du catalogue (pour le seed)
 │   ├── seed.ts              # Script de seed (prisma db seed)
-│   └── migrations/          # Historique des migrations
+│   └── migrations/          # Historique des migrations PostgreSQL
 ├── src/
 │   ├── routes/
 │   │   ├── __root.tsx           # Shell HTML (head, providers, Header/Footer)
 │   │   ├── index.tsx            # Accueil (hero + index rapide)
+│   │   ├── auth.tsx             # Connexion / inscription
 │   │   ├── skills.index.tsx     # /skills — catalogue filtrable
 │   │   ├── skills.$id.tsx       # /skills/:id — fiche d'un skill
 │   │   └── getting-started.tsx  # /getting-started — premier pas par stack
 │   ├── server/
 │   │   ├── db.ts                # Singleton PrismaClient (serveur uniquement)
 │   │   ├── catalog.server.ts    # Requêtes Prisma → objets UI
+│   │   ├── auth.functions.ts    # Login, register, logout, session
 │   │   └── functions.ts         # Server functions (getCatalog, getSkill)
 │   ├── components/              # Header, Footer, ThemeToggle, LangSwitch, Icon
 │   ├── lib/
@@ -97,28 +133,18 @@ arboris/
 
 - **Accès base côté serveur uniquement.** Prisma n'est jamais importé côté client :
   `src/server/db.ts` est chargé *dynamiquement* à l'intérieur des handlers de
-  server functions (`src/server/functions.ts`), donc il ne finit jamais dans le
-  bundle navigateur. Les pages appellent ces fonctions via leur `loader`.
-- **Modèle de données.** `Category (1) — (N) Skill` et `Skill (N) — (N) Stack`
-  (relation many-to-many implicite). Les listes bilingues et les tableaux
-  (`tech`, `compat`, `does`, `triggers`) sont stockés en JSON sérialisé car
-  SQLite n'a pas de type tableau natif ; ils sont désérialisés dans
-  `catalog.server.ts`.
+  server functions, donc il ne finit jamais dans le bundle navigateur. Les pages
+  appellent ces fonctions via leur `loader`.
+- **Modèle de données.** `Category (1) — (N) Skill`, `Skill (N) — (N) Stack`
+  (relation many-to-many implicite), `User` pour l'authentification. Les listes
+  bilingues et les tableaux (`tech`, `compat`, `does`, `triggers`) sont stockés
+  en JSON sérialisé (colonnes `*Json`) et désérialisés dans `catalog.server.ts`.
+- **Sessions.** Cookies HTTP-only chiffrés via `@tanstack/react-start/server`
+  (`useSession`), secret `SESSION_SECRET` dans `.env`.
 - **i18n sans flash de contenu.** Le serveur rend le français par défaut ; la
   langue mémorisée (localStorage) est appliquée au montage côté client.
 - **Thème sans flash.** Un court script inline (`THEME_INIT_SCRIPT`) applique
   `data-theme` avant le premier paint.
-
-## 🔁 Passer à PostgreSQL (plus tard)
-
-Le schéma est prêt pour un vrai SGBD. Pour migrer vers Postgres :
-
-1. Dans `prisma/schema.prisma`, remplace `provider = "sqlite"` par `provider = "postgresql"`.
-2. Mets `DATABASE_URL` à jour dans `.env` (chaîne de connexion Postgres).
-3. Relance `npm run db:migrate`.
-
-Les colonnes JSON pourront alors devenir de vrais types `Json` ou des relations
-dédiées si besoin.
 
 ---
 

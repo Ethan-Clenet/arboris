@@ -51,13 +51,15 @@ function SkillDetailPage() {
   return (
     <PageShell className="pt-6 pb-20">
       {/* Fil d'ariane */}
-      <div className="mb-[26px] flex items-center gap-2 text-[13px] text-[var(--text-3)]">
+      <nav className="mb-[26px] flex items-center gap-2 text-[13px] text-[var(--text-3)]" aria-label={t.a11y.breadcrumb}>
         <Link to="/skills" className="text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
           {t.skill.back}
         </Link>
         <Icon name="caret-right" size={12} />
-        <span className="font-mono text-[var(--text-2)]">{skill.id}</span>
-      </div>
+        <span className="font-mono text-[var(--text-2)]" aria-current="page">
+          {skill.id}
+        </span>
+      </nav>
 
       {/* En-tête */}
       <div className="flex flex-wrap items-start gap-[22px]">
@@ -79,7 +81,7 @@ function SkillDetailPage() {
           </h1>
           <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">{skill.tag[lang]}</p>
           <div className="flex flex-wrap items-center gap-3.5">
-            <Button variant="primary" size="lg" copied={copied} onClick={() => copy(prompt, skill.id)}>
+            <Button variant="primary" size="lg" copied={copied} onClick={() => copy(prompt, skill.id, t.skill.copied)}>
               <Icon name={copied ? 'check' : 'copy'} size={16} />
               {copied ? t.skill.copied : t.skill.copy}
             </Button>
@@ -95,7 +97,7 @@ function SkillDetailPage() {
             <Icon name="cursor-text" bold size={14} className="text-[var(--accent)]" />
             {t.skill.promptTitle}
           </div>
-          <Button variant="copy" size="sm" copied={copied} onClick={() => copy(prompt, skill.id)}>
+          <Button variant="copy" size="sm" copied={copied} onClick={() => copy(prompt, skill.id, t.skill.copied)}>
             <Icon name={copied ? 'check' : 'copy'} size={14} />
             {copied ? t.skill.copied : t.skill.copy}
           </Button>
@@ -195,7 +197,7 @@ function SkillDetailPage() {
               block
               copied={copied}
               className="mt-[18px]"
-              onClick={() => copy(prompt, skill.id)}
+              onClick={() => copy(prompt, skill.id, t.skill.copied)}
             >
               <Icon name={copied ? 'check' : 'copy'} size={15} />
               {copied ? t.skill.copied : t.skill.copy}

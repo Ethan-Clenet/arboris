@@ -13,7 +13,10 @@ export default function PageShell({
   as: Tag = 'main',
 }: PageShellProps) {
   return (
-    <Tag className={`page-shell${className ? ` ${className}` : ''}`}>
+    <Tag
+      id={Tag === 'main' ? 'main-content' : undefined}
+      className={`page-shell${className ? ` ${className}` : ''}`}
+    >
       {children}
     </Tag>
   )

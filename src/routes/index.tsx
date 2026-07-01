@@ -115,12 +115,17 @@ function HomePage() {
             </span>
           </div>
           <div className="relative w-[240px]">
+            <label htmlFor="home-search" className="sr-only">
+              {t.a11y.filterSkills}
+            </label>
             <Icon
               name="magnifying-glass"
               size={15}
               className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-3)]"
             />
             <input
+              id="home-search"
+              type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t.home.searchPh}
@@ -144,7 +149,7 @@ function HomePage() {
                   skill={skill}
                   category={catById.get(skill.categoryId)}
                   copied={copiedKey === skill.id}
-                  onCopy={() => copy(promptFor(skill, lang), skill.id)}
+                  onCopy={() => copy(promptFor(skill, lang), skill.id, t.home.copied)}
                 />
               ))}
 

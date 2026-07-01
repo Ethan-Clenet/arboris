@@ -2,15 +2,20 @@ import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import type { ReactNode } from 'react'
-import Header from '#/components/Header'
-import Footer from '#/components/Footer'
+import AppShell from '#/components/AppShell'
 import NotFoundPage from '#/components/NotFoundPage'
 import ServerErrorPage from '#/components/ServerErrorPage'
+import { AnnouncerProvider } from '#/lib/announcer'
 import { I18nProvider } from '#/lib/i18n'
+import { getCurrentUser } from '#/server/auth.functions'
 import { THEME_INIT_SCRIPT } from '#/lib/theme'
 import appCss from '#/styles.css?url'
 
 export const Route = createRootRoute({
+  beforeLoad: async () => {
+    const user = await getCurrentUser()
+    return { auth: { user } }
+  },
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
@@ -50,11 +55,9 @@ function RootDocument({ children }: { children: ReactNode }) {
       </head>
       <body>
         <I18nProvider>
-          <div className="app-shell bg-[var(--bg)] text-[var(--text-1)]">
-            <Header />
-            <div className="app-main">{children}</div>
-            <Footer />
-          </div>
+          <AnnouncerProvider>
+            <AppShell>{children}</AppShell>
+          </AnnouncerProvider>
         </I18nProvider>
         <TanStackDevtools
           config={{ position: 'bottom-right' }}

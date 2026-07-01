@@ -1,11 +1,10 @@
 // Schéma Prisma d'Arboris — catalogue de skills IA.
-// Base SQLite (zéro config en local). Les textes bilingues (FR/EN) sont stockés
+// Base PostgreSQL (Docker). Les textes bilingues (FR/EN) sont stockés
 // dans des colonnes dédiées ; les listes (tech, compat, does, triggers) sont
-// sérialisées en JSON (SQLite n'a pas de type tableau natif) et désérialisées
-// dans la couche serveur (src/server).
+// sérialisées en JSON et désérialisées dans la couche serveur (src/server).
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -41,6 +40,18 @@ model Stack {
   skills Skill[]
 
   @@map("stacks")
+}
+
+/// Utilisateur Arboris (auth e-mail / mot de passe).
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("users")
 }
 
 /// Skill IA du catalogue.

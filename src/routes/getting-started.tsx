@@ -85,6 +85,7 @@ function GettingStartedPage() {
               <button
                 key={k.id}
                 type="button"
+                aria-pressed={isActive}
                 onClick={() => setStackId(k.id)}
                 className={`flex items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
                   isActive
@@ -130,7 +131,7 @@ function GettingStartedPage() {
                     </div>
                   </div>
                 </div>
-                <Button variant="copy" copied={copiedAll} onClick={() => copy(promptForStack(active, lang), '__all')}>
+                <Button variant="copy" copied={copiedAll} onClick={() => copy(promptForStack(active, lang), '__all', t.start.copiedAll)}>
                   <Icon name={copiedAll ? 'check' : 'copy'} size={15} />
                   {copiedAll ? t.start.copiedAll : t.start.copyAll}
                 </Button>
@@ -143,7 +144,7 @@ function GettingStartedPage() {
                     skill={skill}
                     category={catById.get(skill.categoryId)}
                     copied={copiedKey === skill.id}
-                    onCopy={() => copy(promptFor(skill, lang), skill.id)}
+                    onCopy={() => copy(promptFor(skill, lang), skill.id, t.start.copied)}
                   />
                 ))}
               </div>
@@ -213,7 +214,7 @@ function StackSkillCard({
         <Link
           to="/skills/$id"
           params={{ id: skill.id }}
-          title={t.start.detail}
+          aria-label={t.start.detail}
           className="grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px] border border-[var(--border)] text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
         >
           <Icon name="arrow-up-right" bold size={14} />
