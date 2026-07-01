@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as GettingStartedRouteImport } from './routes/getting-started'
+import { Route as R500RouteImport } from './routes/500'
+import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SkillsIndexRouteImport } from './routes/skills.index'
 import { Route as SkillsIdRouteImport } from './routes/skills.$id'
@@ -17,6 +19,16 @@ import { Route as SkillsIdRouteImport } from './routes/skills.$id'
 const GettingStartedRoute = GettingStartedRouteImport.update({
   id: '/getting-started',
   path: '/getting-started',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const R500Route = R500RouteImport.update({
+  id: '/500',
+  path: '/500',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const R404Route = R404RouteImport.update({
+  id: '/404',
+  path: '/404',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -37,12 +49,16 @@ const SkillsIdRoute = SkillsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
+  '/500': typeof R500Route
   '/getting-started': typeof GettingStartedRoute
   '/skills/$id': typeof SkillsIdRoute
   '/skills/': typeof SkillsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
+  '/500': typeof R500Route
   '/getting-started': typeof GettingStartedRoute
   '/skills/$id': typeof SkillsIdRoute
   '/skills': typeof SkillsIndexRoute
@@ -50,20 +66,32 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/404': typeof R404Route
+  '/500': typeof R500Route
   '/getting-started': typeof GettingStartedRoute
   '/skills/$id': typeof SkillsIdRoute
   '/skills/': typeof SkillsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/getting-started' | '/skills/$id' | '/skills/'
+  fullPaths:
+    '/' | '/404' | '/500' | '/getting-started' | '/skills/$id' | '/skills/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/getting-started' | '/skills/$id' | '/skills'
-  id: '__root__' | '/' | '/getting-started' | '/skills/$id' | '/skills/'
+  to: '/' | '/404' | '/500' | '/getting-started' | '/skills/$id' | '/skills'
+  id:
+    | '__root__'
+    | '/'
+    | '/404'
+    | '/500'
+    | '/getting-started'
+    | '/skills/$id'
+    | '/skills/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R404Route: typeof R404Route
+  R500Route: typeof R500Route
   GettingStartedRoute: typeof GettingStartedRoute
   SkillsIdRoute: typeof SkillsIdRoute
   SkillsIndexRoute: typeof SkillsIndexRoute
@@ -76,6 +104,20 @@ declare module '@tanstack/react-router' {
       path: '/getting-started'
       fullPath: '/getting-started'
       preLoaderRoute: typeof GettingStartedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/500': {
+      id: '/500'
+      path: '/500'
+      fullPath: '/500'
+      preLoaderRoute: typeof R500RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/404': {
+      id: '/404'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof R404RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -104,6 +146,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R404Route: R404Route,
+  R500Route: R500Route,
   GettingStartedRoute: GettingStartedRoute,
   SkillsIdRoute: SkillsIdRoute,
   SkillsIndexRoute: SkillsIndexRoute,

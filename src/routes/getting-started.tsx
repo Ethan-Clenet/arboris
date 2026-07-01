@@ -23,7 +23,7 @@ function GettingStartedPage() {
   const catalog = Route.useLoaderData()
   const { t, lang } = useI18n()
   const { copiedKey, copy } = useCopy(1700)
-  const [stackId, setStackId] = useState('node')
+  const [stackId, setStackId] = useState<string | null>(null)
 
   const catById = useMemo(() => {
     const map = new Map<string, Category>()
@@ -33,8 +33,8 @@ function GettingStartedPage() {
 
   const skillsForStack = (id: string) => catalog.skills.filter((s) => s.stacks.includes(id))
 
-  const active = catalog.stacks.find((s) => s.id === stackId) ?? catalog.stacks[0]
-  const rows = skillsForStack(active.id)
+  const active = stackId ? catalog.stacks.find((s) => s.id === stackId) : undefined
+  const rows = active ? skillsForStack(active.id) : []
   const copiedAll = copiedKey === '__all'
 
   return (
@@ -79,7 +79,7 @@ function GettingStartedPage() {
         </div>
         <div className="flex flex-wrap gap-2.5">
           {catalog.stacks.map((k) => {
-            const isActive = k.id === active.id
+            const isActive = k.id === stackId
             const count = skillsForStack(k.id).length
             return (
               <button
@@ -111,40 +111,51 @@ function GettingStartedPage() {
       {/* Skills recommandés */}
       <section className="pt-6 pb-[70px]">
         <div className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border)] bg-[var(--surface-2)] px-5 py-[18px]">
-            <div className="flex items-center gap-3.5">
-              <span
-                className="grid h-11 w-11 place-items-center rounded-xl"
-                style={{ background: hexToRgba(active.color, 0.15), color: active.color }}
-              >
-                <Icon name={active.icon} bold size={23} />
-              </span>
-              <div>
-                <div className="font-display text-[18px] font-semibold">
-                  {t.start.recFor} {active.label}
+          {active ? (
+            <>
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border)] bg-[var(--surface-2)] px-5 py-[18px]">
+                <div className="flex items-center gap-3.5">
+                  <span
+                    className="grid h-11 w-11 place-items-center rounded-xl"
+                    style={{ background: hexToRgba(active.color, 0.15), color: active.color }}
+                  >
+                    <Icon name={active.icon} bold size={23} />
+                  </span>
+                  <div>
+                    <div className="font-display text-[18px] font-semibold">
+                      {t.start.recFor} {active.label}
+                    </div>
+                    <div className="text-[13px] text-[var(--text-2)]">
+                      {active.brief[lang]} · {rows.length} {t.start.skillsWord}
+                    </div>
+                  </div>
                 </div>
-                <div className="text-[13px] text-[var(--text-2)]">
-                  {active.brief[lang]} · {rows.length} {t.start.skillsWord}
-                </div>
+                <Button variant="copy" copied={copiedAll} onClick={() => copy(promptForStack(active, lang), '__all')}>
+                  <Icon name={copiedAll ? 'check' : 'copy'} size={15} />
+                  {copiedAll ? t.start.copiedAll : t.start.copyAll}
+                </Button>
               </div>
-            </div>
-            <Button variant="copy" copied={copiedAll} onClick={() => copy(promptForStack(active, lang), '__all')}>
-              <Icon name={copiedAll ? 'check' : 'copy'} size={15} />
-              {copiedAll ? t.start.copiedAll : t.start.copyAll}
-            </Button>
-          </div>
 
-          <div className="grid gap-3 p-4 sm:grid-cols-2">
-            {rows.map((skill) => (
-              <StackSkillCard
-                key={skill.id}
-                skill={skill}
-                category={catById.get(skill.categoryId)}
-                copied={copiedKey === skill.id}
-                onCopy={() => copy(promptFor(skill, lang), skill.id)}
-              />
-            ))}
-          </div>
+              <div className="grid gap-3 p-4 sm:grid-cols-2">
+                {rows.map((skill) => (
+                  <StackSkillCard
+                    key={skill.id}
+                    skill={skill}
+                    category={catById.get(skill.categoryId)}
+                    copied={copiedKey === skill.id}
+                    onCopy={() => copy(promptFor(skill, lang), skill.id)}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="flex flex-col items-center px-6 py-16 text-center">
+              <div className="mb-3.5 grid h-12 w-12 place-items-center rounded-xl bg-[var(--surface-2)] text-[var(--text-3)]">
+                <Icon name="stack" size={22} />
+              </div>
+              <p className="max-w-[360px] text-[15px] text-[var(--text-2)]">{t.start.pickPrompt}</p>
+            </div>
+          )}
         </div>
 
         <div className="mt-3.5 flex items-center gap-2 text-[12.5px] text-[var(--text-3)]">

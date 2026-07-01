@@ -1,7 +1,7 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { useMemo } from 'react'
 import Icon from '#/components/Icon'
-import { Button, ButtonLink } from '#/components/Button'
+import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useCopy } from '#/lib/useCopy'
@@ -14,6 +14,7 @@ export const Route = createFileRoute('/skills/$id')({
       getSkill({ data: { id: params.id } }),
       getCatalog(),
     ])
+    if (!skill) throw notFound()
     return { skill, catalog }
   },
   component: SkillDetailPage,
@@ -31,7 +32,6 @@ function SkillDetailPage() {
   }, [catalog.categories])
 
   const related = useMemo(() => {
-    if (!skill) return []
     const same = catalog.skills.filter((x) => x.categoryId === skill.categoryId && x.id !== skill.id)
     const list = [...same]
     if (list.length < 3) {
@@ -41,22 +41,6 @@ function SkillDetailPage() {
     }
     return list.slice(0, 3)
   }, [catalog.skills, skill])
-
-  if (!skill) {
-    return (
-      <PageShell className="py-24 text-center">
-        <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-[var(--surface-2)] text-[var(--text-3)]">
-          <Icon name="magnifying-glass" size={26} />
-        </div>
-        <h1 className="mb-2 font-display text-[24px] font-semibold">{t.skill.notFoundTitle}</h1>
-        <p className="mb-6 text-[15px] text-[var(--text-2)]">{t.skill.notFoundBody}</p>
-        <ButtonLink to="/skills" variant="primary">
-          <Icon name="arrow-left" size={15} />
-          {t.skill.back}
-        </ButtonLink>
-      </PageShell>
-    )
-  }
 
   const category = catById.get(skill.categoryId)
   const color = category?.color ?? 'var(--text-3)'

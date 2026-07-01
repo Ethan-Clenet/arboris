@@ -4,6 +4,8 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import type { ReactNode } from 'react'
 import Header from '#/components/Header'
 import Footer from '#/components/Footer'
+import NotFoundPage from '#/components/NotFoundPage'
+import ServerErrorPage from '#/components/ServerErrorPage'
 import { I18nProvider } from '#/lib/i18n'
 import { THEME_INIT_SCRIPT } from '#/lib/theme'
 import appCss from '#/styles.css?url'
@@ -34,6 +36,8 @@ export const Route = createRootRoute({
       },
     ],
   }),
+  notFoundComponent: NotFoundPage,
+  errorComponent: ServerErrorPage,
   shellComponent: RootDocument,
 })
 
