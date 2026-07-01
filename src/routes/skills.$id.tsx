@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo } from 'react'
 import Icon from '#/components/Icon'
+import { Button, ButtonLink } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useCopy } from '#/lib/useCopy'
@@ -43,19 +44,16 @@ function SkillDetailPage() {
 
   if (!skill) {
     return (
-      <PageShell narrow className="py-24 text-center">
+      <PageShell className="py-24 text-center">
         <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-[var(--surface-2)] text-[var(--text-3)]">
           <Icon name="magnifying-glass" size={26} />
         </div>
         <h1 className="mb-2 font-display text-[24px] font-semibold">{t.skill.notFoundTitle}</h1>
         <p className="mb-6 text-[15px] text-[var(--text-2)]">{t.skill.notFoundBody}</p>
-        <Link
-          to="/skills"
-          className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-[var(--accent-press)]"
-        >
-          <Icon name="arrow-left" bold size={16} />
+        <ButtonLink to="/skills" variant="primary">
+          <Icon name="arrow-left" size={15} />
           {t.skill.back}
-        </Link>
+        </ButtonLink>
       </PageShell>
     )
   }
@@ -66,11 +64,8 @@ function SkillDetailPage() {
   const prompt = promptFor(skill, lang)
   const copied = copiedKey === skill.id
 
-  const copyBtn = (extra: string) =>
-    `inline-flex items-center justify-center gap-2 font-semibold transition-colors ${extra}`
-
   return (
-    <PageShell narrow className="pt-6 pb-20">
+    <PageShell className="pt-6 pb-20">
       {/* Fil d'ariane */}
       <div className="mb-[26px] flex items-center gap-2 text-[13px] text-[var(--text-3)]">
         <Link to="/skills" className="text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
@@ -100,16 +95,10 @@ function SkillDetailPage() {
           </h1>
           <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">{skill.tag[lang]}</p>
           <div className="flex flex-wrap items-center gap-3.5">
-            <button
-              type="button"
-              onClick={() => copy(prompt, skill.id)}
-              className={copyBtn(
-                'rounded-[11px] bg-[var(--accent)] px-5 py-3 text-[15px] text-white shadow-[0_6px_18px_var(--accent-soft)] hover:bg-[var(--accent-press)]',
-              )}
-            >
-              <Icon name={copied ? 'check' : 'copy'} bold size={18} />
+            <Button variant="primary" size="lg" copied={copied} onClick={() => copy(prompt, skill.id)}>
+              <Icon name={copied ? 'check' : 'copy'} size={16} />
               {copied ? t.skill.copied : t.skill.copy}
-            </button>
+            </Button>
             <span className="max-w-[260px] text-[13px] text-[var(--text-3)]">{t.skill.ctaHint}</span>
           </div>
         </div>
@@ -122,20 +111,10 @@ function SkillDetailPage() {
             <Icon name="cursor-text" bold size={14} className="text-[var(--accent)]" />
             {t.skill.promptTitle}
           </div>
-          <button
-            type="button"
-            onClick={() => copy(prompt, skill.id)}
-            className={copyBtn(
-              `rounded-lg border px-3 py-1.5 text-[12.5px] ${
-                copied
-                  ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)]'
-                  : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-1)] hover:border-[var(--accent)]'
-              }`,
-            )}
-          >
-            <Icon name={copied ? 'check' : 'copy'} bold size={14} />
+          <Button variant="copy" size="sm" copied={copied} onClick={() => copy(prompt, skill.id)}>
+            <Icon name={copied ? 'check' : 'copy'} size={14} />
             {copied ? t.skill.copied : t.skill.copy}
-          </button>
+          </Button>
         </div>
         <div className="flex items-start gap-3.5 px-5 py-[18px]">
           <div className="w-[3px] flex-none self-stretch rounded-full bg-[var(--accent)] opacity-60" />
@@ -227,16 +206,16 @@ function SkillDetailPage() {
                 </div>
               </div>
             </div>
-            <button
-              type="button"
+            <Button
+              variant="primary"
+              block
+              copied={copied}
+              className="mt-[18px]"
               onClick={() => copy(prompt, skill.id)}
-              className={copyBtn(
-                'mt-[18px] w-full rounded-[10px] bg-[var(--accent)] px-3 py-2.5 text-[14px] text-white hover:bg-[var(--accent-press)]',
-              )}
             >
-              <Icon name={copied ? 'check' : 'copy'} bold size={16} />
+              <Icon name={copied ? 'check' : 'copy'} size={15} />
               {copied ? t.skill.copied : t.skill.copy}
-            </button>
+            </Button>
           </div>
 
           <div className="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-[18px]">

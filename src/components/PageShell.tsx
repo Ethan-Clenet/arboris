@@ -3,8 +3,6 @@ import type { ReactNode } from 'react'
 interface PageShellProps {
   children: ReactNode
   className?: string
-  /** Fiche skill : colonne un peu plus étroite (1080px). */
-  narrow?: boolean
   as?: 'main' | 'div'
 }
 
@@ -12,13 +10,10 @@ interface PageShellProps {
 export default function PageShell({
   children,
   className = '',
-  narrow = false,
   as: Tag = 'main',
 }: PageShellProps) {
   return (
-    <Tag
-      className={`page-shell${narrow ? ' page-shell-narrow' : ''}${className ? ` ${className}` : ''}`}
-    >
+    <Tag className={`page-shell${className ? ` ${className}` : ''}`}>
       {children}
     </Tag>
   )

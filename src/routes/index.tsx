@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import Icon from '#/components/Icon'
+import { Button, ButtonLink } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useCopy } from '#/lib/useCopy'
@@ -54,21 +55,14 @@ function HomePage() {
           </h1>
           <p className="mb-7 max-w-[460px] text-[17px] text-[var(--text-2)]">{t.home.sub}</p>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              to="/skills"
-              className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-[22px] py-[13px] text-[15px] font-semibold text-white shadow-[0_8px_22px_var(--accent-soft)] transition-colors hover:bg-[var(--accent-press)]"
-            >
-              <Icon name="list-magnifying-glass" bold size={18} />
+          <div className="flex flex-wrap items-center gap-2.5">
+            <ButtonLink to="/skills" variant="primary" size="lg">
+              <Icon name="list-magnifying-glass" size={16} />
               {t.home.openIndex}
-            </Link>
-            <Link
-              to="/skills/$id"
-              params={{ id: 'fastify' }}
-              className="inline-flex items-center gap-[7px] rounded-xl border border-[var(--border-2)] px-5 py-[13px] text-[15px] font-semibold text-[var(--text-1)] transition-colors hover:border-[var(--accent)]"
-            >
+            </ButtonLink>
+            <ButtonLink to="/skills/$id" params={{ id: 'fastify' }} variant="secondary" size="lg">
               {t.home.example}
-            </Link>
+            </ButtonLink>
           </div>
 
           <div className="mt-[30px] flex flex-wrap items-center gap-3">
@@ -197,18 +191,10 @@ function HomeRow({
       <div className="line-clamp-2 text-[12.5px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
 
       <div className="flex justify-end">
-        <button
-          type="button"
-          onClick={onCopy}
-          className={`flex items-center gap-1.5 rounded-lg border px-[11px] py-[7px] text-[12px] font-semibold transition-colors ${
-            copied
-              ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)]'
-              : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-1)] hover:border-[var(--accent)]'
-          }`}
-        >
-          <Icon name={copied ? 'check' : 'copy'} bold size={13} />
+        <Button variant="copy" size="sm" copied={copied} onClick={onCopy}>
+          <Icon name={copied ? 'check' : 'copy'} size={13} />
           {copied ? t.home.copied : t.home.copy}
-        </button>
+        </Button>
       </div>
     </div>
   )

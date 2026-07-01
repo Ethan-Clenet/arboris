@@ -83,10 +83,6 @@ body {
   padding-inline: clamp(1.25rem, 4vw, 1.75rem);
 }
 
-.page-shell-narrow {
-  width: min(1080px, calc(100% - 2.5rem));
-}
-
 .page-shell-header {
   box-sizing: border-box;
   width: min(1280px, calc(100% - 2.5rem));
@@ -116,16 +112,10 @@ body {
   background: rgba(48, 164, 108, 0.28);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 button {
   font-family: inherit;
 }
 
-/* Transition de thème (Magic-UI style) : révélation en clip-path circulaire. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;

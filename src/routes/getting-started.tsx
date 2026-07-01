@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import Icon from '#/components/Icon'
+import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useCopy } from '#/lib/useCopy'
@@ -85,9 +86,9 @@ function GettingStartedPage() {
                 key={k.id}
                 type="button"
                 onClick={() => setStackId(k.id)}
-                className={`flex items-center gap-2.5 rounded-xl border py-2.5 pl-[11px] pr-[15px] text-[14px] font-semibold text-[var(--text-1)] transition-colors ${
+                className={`flex items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
                   isActive
-                    ? 'border-[var(--accent-border)] bg-[var(--accent-soft)]'
+                    ? 'border-[var(--border-2)] bg-[var(--surface-hover)]'
                     : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-2)]'
                 }`}
               >
@@ -127,18 +128,10 @@ function GettingStartedPage() {
                 </div>
               </div>
             </div>
-            <button
-              type="button"
-              onClick={() => copy(promptForStack(active, lang), '__all')}
-              className={`inline-flex items-center gap-2 rounded-[10px] border px-[15px] py-2.5 text-[13.5px] font-semibold transition-colors ${
-                copiedAll
-                  ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)]'
-                  : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-1)] hover:border-[var(--accent)]'
-              }`}
-            >
-              <Icon name={copiedAll ? 'check' : 'copy'} bold size={16} />
+            <Button variant="copy" copied={copiedAll} onClick={() => copy(promptForStack(active, lang), '__all')}>
+              <Icon name={copiedAll ? 'check' : 'copy'} size={15} />
               {copiedAll ? t.start.copiedAll : t.start.copyAll}
-            </button>
+            </Button>
           </div>
 
           <div className="grid gap-3 p-4 sm:grid-cols-2">
@@ -202,18 +195,10 @@ function StackSkillCard({
       </div>
       <p className="line-clamp-2 min-h-[39px] text-[13px] leading-[1.5] text-[var(--text-2)]">{skill.tag[lang]}</p>
       <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={onCopy}
-          className={`flex flex-1 items-center justify-center gap-1.5 rounded-[9px] border px-2 py-2 text-[12.5px] font-semibold transition-colors ${
-            copied
-              ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)]'
-              : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-1)] hover:border-[var(--accent)]'
-          }`}
-        >
-          <Icon name={copied ? 'check' : 'copy'} bold size={14} />
+        <Button variant="copy" size="sm" copied={copied} className="flex-1" onClick={onCopy}>
+          <Icon name={copied ? 'check' : 'copy'} size={14} />
           {copied ? t.start.copied : t.start.copy}
-        </button>
+        </Button>
         <Link
           to="/skills/$id"
           params={{ id: skill.id }}

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import Icon from '#/components/Icon'
+import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useCopy } from '#/lib/useCopy'
@@ -178,9 +179,9 @@ function SkillsPage() {
                     key={name}
                     type="button"
                     onClick={() => setCompat(toggle(compat, name))}
-                    className={`flex items-center gap-1.5 rounded-full border px-[11px] py-[5px] text-[12.5px] font-medium transition-colors ${
+                    className={`flex items-center gap-1.5 rounded-md border px-[11px] py-[5px] text-[12.5px] font-medium transition-colors ${
                       active
-                        ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--text-1)]'
+                        ? 'border-[var(--border-2)] bg-[var(--surface-hover)] text-[var(--text-1)]'
                         : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-2)] hover:border-[var(--border-2)]'
                     }`}
                   >
@@ -205,9 +206,9 @@ function SkillsPage() {
                     key={name}
                     type="button"
                     onClick={() => setTechs(toggle(techs, name))}
-                    className={`rounded-full border px-[11px] py-[5px] font-mono text-[11.5px] font-medium transition-colors ${
+                    className={`rounded-md border px-[11px] py-[5px] font-mono text-[11.5px] font-medium transition-colors ${
                       active
-                        ? 'border-[var(--accent)] bg-[var(--accent)] text-white'
+                        ? 'border-[var(--border-2)] bg-[var(--text-1)] text-[var(--bg)]'
                         : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-2)] hover:border-[var(--border-2)]'
                     }`}
                   >
@@ -242,9 +243,11 @@ function SkillsPage() {
                   key={mode}
                   type="button"
                   onClick={() => setSort(mode)}
-                  className={`rounded-md px-2.5 py-1 text-[12px] font-semibold transition-colors ${
-                    sort === mode ? 'bg-[var(--accent)] text-white' : 'text-[var(--text-2)] hover:text-[var(--text-1)]'
-                  }`}
+                    className={`shrink-0 cursor-pointer rounded px-2.5 py-1 text-xs font-medium transition-colors ${
+                      sort === mode
+                        ? 'bg-[var(--text-1)] text-[var(--bg)]'
+                        : 'text-[var(--text-2)] hover:bg-[var(--surface-hover)] hover:text-[var(--text-1)]'
+                    }`}
                 >
                   {mode === 'score' ? 'Score' : lang === 'fr' ? 'Nom' : 'Name'}
                 </button>
@@ -282,13 +285,9 @@ function SkillsPage() {
                 </div>
                 <div className="mb-1.5 font-display text-[17px] font-semibold">{t.skills.emptyTitle}</div>
                 <div className="mb-4 text-[13.5px] text-[var(--text-2)]">{t.skills.emptyBody}</div>
-                <button
-                  type="button"
-                  onClick={clearAll}
-                  className="rounded-[9px] border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2 text-[13px] font-semibold text-[var(--text-1)]"
-                >
+                <Button variant="outline" size="sm" onClick={clearAll}>
                   {t.skills.clear}
-                </button>
+                </Button>
               </div>
             )}
           </div>
@@ -404,18 +403,10 @@ function SkillRow({
       </div>
 
       <div className="flex items-center justify-end gap-1.5">
-        <button
-          type="button"
-          onClick={onCopy}
-          className={`flex items-center gap-1.5 whitespace-nowrap rounded-lg border px-[11px] py-[7px] text-[12.5px] font-semibold transition-colors ${
-            copied
-              ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)]'
-              : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-1)] hover:border-[var(--accent)]'
-          }`}
-        >
-          <Icon name={copied ? 'check' : 'copy'} bold size={14} />
+        <Button variant="copy" size="sm" copied={copied} onClick={onCopy}>
+          <Icon name={copied ? 'check' : 'copy'} size={14} />
           {copied ? t.skills.copied : t.skills.copy}
-        </button>
+        </Button>
         <Link
           to="/skills/$id"
           params={{ id: skill.id }}
