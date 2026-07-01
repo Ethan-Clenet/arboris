@@ -13,7 +13,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--bg)_80%,transparent)] backdrop-blur-[14px] backdrop-saturate-150">
-      <div className="mx-auto flex h-[60px] w-full max-w-[1280px] items-center gap-4 px-5 sm:gap-6 sm:px-7">
+      <div className="page-shell-header flex h-[60px] items-center gap-4 sm:gap-6">
         <Link to="/" className="flex flex-shrink-0 items-center gap-2.5 text-[var(--text-1)]">
           <span className="grid h-[30px] w-[30px] place-items-center rounded-lg bg-[var(--accent)] text-white shadow-[0_2px_8px_var(--accent-soft)]">
             <Icon name="tree" bold size={17} />

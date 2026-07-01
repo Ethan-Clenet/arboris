@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo } from 'react'
 import Icon from '#/components/Icon'
+import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useCopy } from '#/lib/useCopy'
 import { getCatalog, getSkill } from '#/server/functions'
@@ -42,7 +43,7 @@ function SkillDetailPage() {
 
   if (!skill) {
     return (
-      <main className="mx-auto w-full max-w-[1080px] px-5 py-24 text-center sm:px-7">
+      <PageShell narrow className="py-24 text-center">
         <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-[var(--surface-2)] text-[var(--text-3)]">
           <Icon name="magnifying-glass" size={26} />
         </div>
@@ -55,7 +56,7 @@ function SkillDetailPage() {
           <Icon name="arrow-left" bold size={16} />
           {t.skill.back}
         </Link>
-      </main>
+      </PageShell>
     )
   }
 
@@ -69,7 +70,7 @@ function SkillDetailPage() {
     `inline-flex items-center justify-center gap-2 font-semibold transition-colors ${extra}`
 
   return (
-    <main className="mx-auto w-full max-w-[1080px] px-5 pt-6 pb-20 sm:px-7">
+    <PageShell narrow className="pt-6 pb-20">
       {/* Fil d'ariane */}
       <div className="mb-[26px] flex items-center gap-2 text-[13px] text-[var(--text-3)]">
         <Link to="/skills" className="text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
@@ -282,6 +283,6 @@ function SkillDetailPage() {
           })}
         </div>
       </section>
-    </main>
+    </PageShell>
   )
 }

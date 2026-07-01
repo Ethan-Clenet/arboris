@@ -58,6 +58,40 @@ html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+/* Shell pleine largeur — le contenu enfant se centre via .page-shell */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  width: 100%;
+}
+
+.app-main {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+}
+
+.page-shell {
+  box-sizing: border-box;
+  width: min(1280px, calc(100% - 2.5rem));
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.page-shell-narrow {
+  width: min(1080px, calc(100% - 2.5rem));
+}
+
+.page-shell-header {
+  box-sizing: border-box;
+  width: min(1280px, calc(100% - 2.5rem));
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 1.75rem);
 }
 
 html {

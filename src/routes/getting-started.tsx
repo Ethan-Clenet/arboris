@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import Icon from '#/components/Icon'
+import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useCopy } from '#/lib/useCopy'
 import { getCatalog } from '#/server/functions'
@@ -36,7 +37,7 @@ function GettingStartedPage() {
   const copiedAll = copiedKey === '__all'
 
   return (
-    <main className="mx-auto w-full max-w-[1180px] px-5 sm:px-7">
+    <PageShell>
       <section className="max-w-[660px] pt-12 pb-2">
         <div className="mb-5 inline-flex items-center gap-[7px] rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-[13px] py-[5px] font-mono text-[11.5px] text-[var(--accent)]">
           <Icon name="seedling" bold size={13} />
@@ -158,7 +159,7 @@ function GettingStartedPage() {
           {t.start.footHint}
         </div>
       </section>
-    </main>
+    </PageShell>
   )
 }
 

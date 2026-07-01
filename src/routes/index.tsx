@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import Icon from '#/components/Icon'
+import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useCopy } from '#/lib/useCopy'
 import { getCatalog } from '#/server/functions'
@@ -40,7 +41,7 @@ function HomePage() {
   }, [query, catalog.skills, catById, lang])
 
   return (
-    <main className="mx-auto w-full max-w-[1180px] px-5 sm:px-7">
+    <PageShell>
       {/* Hero */}
       <section className="grid items-center gap-11 pt-14 pb-8 lg:grid-cols-[1fr_470px]">
         <div className="rise-in">
@@ -160,7 +161,7 @@ function HomePage() {
           </div>
         </div>
       </section>
-    </main>
+    </PageShell>
   )
 }
 

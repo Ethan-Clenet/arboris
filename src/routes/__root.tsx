@@ -46,9 +46,9 @@ function RootDocument({ children }: { children: ReactNode }) {
       </head>
       <body>
         <I18nProvider>
-          <div className="flex min-h-screen flex-col bg-[var(--bg)] text-[var(--text-1)]">
+          <div className="app-shell bg-[var(--bg)] text-[var(--text-1)]">
             <Header />
-            <div className="flex-1">{children}</div>
+            <div className="app-main">{children}</div>
             <Footer />
           </div>
         </I18nProvider>

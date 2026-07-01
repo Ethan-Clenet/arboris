@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import Icon from '#/components/Icon'
+import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useCopy } from '#/lib/useCopy'
 import { getCatalog } from '#/server/functions'
@@ -76,9 +77,8 @@ function SkillsPage() {
   const resultLabel = `${rows.length > 1 ? t.skills.resMany : t.skills.resOne} ${t.skills.resTail(catalog.skills.length)}`
 
   return (
-    <div>
-      {/* En-tête */}
-      <div className="mx-auto w-full max-w-[1280px] px-5 pt-9 sm:px-7">
+    <div className="w-full">
+      <PageShell as="div" className="pt-9">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-[640px]">
             <div className="mb-3 flex items-center gap-2.5 font-mono text-[11.5px] font-medium tracking-[0.02em] text-[var(--accent)]">
@@ -109,10 +109,9 @@ function SkillsPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageShell>
 
-      {/* Grille filtres + résultats */}
-      <div className="mx-auto grid w-full max-w-[1280px] items-start gap-7 px-5 pt-6 pb-[70px] sm:px-7 lg:grid-cols-[248px_minmax(0,1fr)]">
+      <PageShell as="div" className="grid items-start gap-7 pt-6 pb-[70px] lg:grid-cols-[248px_minmax(0,1fr)]">
         <aside className="flex flex-col gap-[22px] lg:sticky lg:top-[78px]">
           {/* Recherche */}
           <div className="relative">
@@ -299,7 +298,7 @@ function SkillsPage() {
             <span>{t.skills.scoreHint}</span>
           </div>
         </section>
-      </div>
+      </PageShell>
     </div>
   )
 }
