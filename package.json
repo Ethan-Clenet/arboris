@@ -1,7 +1,22 @@
 {
   "name": "arboris",
-  "private": true,
+  "version": "0.1.0",
+  "description": "Catalogue de skills IA — installe les skills recommandés pour ta stack via CLI.",
+  "private": false,
   "type": "module",
+  "bin": {
+    "arboris": "./cli/run.mjs"
+  },
+  "files": [
+    "cli/run.mjs",
+    "cli/main.ts",
+    "cli/stack-resolve.ts",
+    "cli/manifest.json",
+    "dist/cli.mjs",
+    "prisma/skills",
+    "prisma/catalog-data.ts",
+    "prisma/catalog-from-skills.ts"
+  ],
   "imports": {
     "#/*": "./src/*"
   },
@@ -13,6 +28,9 @@
     "generate-routes": "tsr generate",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
+    "cli:manifest": "tsx scripts/generate-cli-manifest.ts",
+    "build:cli": "npm run cli:manifest && node scripts/build-cli.mjs",
+    "prepack": "npm run build:cli",
     "db:generate": "prisma generate",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
@@ -46,6 +64,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
+    "esbuild": "^0.25.12",
     "prisma": "^6.19.2",
     "tsx": "^4.19.2",
     "typescript": "^6.0.2",

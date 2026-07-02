@@ -1,8 +1,8 @@
-import { mkdir, writeFile } from 'node:fs/promises'
-import { dirname, resolve } from 'node:path'
 import type { Lang } from '#/lib/catalog'
-import { agentSkillPath, isAgentName, type AgentName } from '#/lib/agents'
-import { loadSkillCopyContent } from './skill-content.server'
+import { installSkillToWorkspace } from '#/lib/skill-install-core'
+import { defaultSkillsDir, resolvePackageRoot } from '#/lib/package-root'
+import { isAgentName } from '#/lib/agents'
+import { resolve } from 'node:path'
 
 function workspaceRoot(): string {
   const root = process.env.ARBORIS_WORKSPACE_ROOT?.trim()
@@ -10,16 +10,7 @@ function workspaceRoot(): string {
   return resolve(root)
 }
 
-function assertInsideWorkspace(root: string, target: string) {
-  const normalizedRoot = resolve(root)
-  const normalizedTarget = resolve(target)
-  if (
-    normalizedTarget !== normalizedRoot &&
-    !normalizedTarget.startsWith(`${normalizedRoot}/`)
-  ) {
-    throw new Error('invalid_path')
-  }
-}
+const SKILLS_DIR = defaultSkillsDir(resolvePackageRoot(import.meta.url))
 
 export async function installSkillForAgent(input: {
   skillId: string
@@ -28,16 +19,19 @@ export async function installSkillForAgent(input: {
 }): Promise<{ path: string }> {
   if (!isAgentName(input.agent)) throw new Error('unknown_agent')
 
-  const content = await loadSkillCopyContent(input.skillId, input.lang)
-  if (!content) throw new Error('skill_not_found')
+  const result = await installSkillToWorkspace({
+    skillId: input.skillId,
+    agent: input.agent,
+    workspaceRoot: workspaceRoot(),
+    skillsDir: SKILLS_DIR,
+    force: true,
+  })
 
-  const root = workspaceRoot()
-  const relativePath = agentSkillPath(input.agent as AgentName, input.skillId)
-  const absolutePath = resolve(root, relativePath)
-  assertInsideWorkspace(root, absolutePath)
+  if (!result.ok) {
+    if (result.error === 'skill_not_found') throw new Error('skill_not_found')
+    if (result.error === 'invalid_path') throw new Error('invalid_path')
+    throw new Error('unknown_agent')
+  }
 
-  await mkdir(dirname(absolutePath), { recursive: true })
-  await writeFile(absolutePath, content, 'utf-8')
-
-  return { path: relativePath }
+  return { path: result.path }
 }
