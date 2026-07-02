@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit",
     "cli:manifest": "tsx scripts/generate-cli-manifest.ts",
     "build:cli": "npm run cli:manifest && node scripts/build-cli.mjs",
-    "publish:cli": "npm run build:cli && npm publish --workspace packages/arboris-cli --access public",
+    "publish:cli": "npm run build:cli && npm publish -w @rubix0270/arboris --access public && npm publish -w arboris-cli --access public && npm publish -w arb --access public",
     "db:generate": "prisma generate",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",

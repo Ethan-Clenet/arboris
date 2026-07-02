@@ -1,10 +1,11 @@
 {
   "name": "@rubix0270/arboris",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Installe les skills IA recommandés pour ta stack (Node, React, TypeScript…).",
   "type": "module",
   "bin": {
-    "arboris": "dist/cli.mjs"
+    "arboris": "dist/cli.mjs",
+    "arb": "dist/cli.mjs"
   },
   "files": [
     "dist/cli.mjs",

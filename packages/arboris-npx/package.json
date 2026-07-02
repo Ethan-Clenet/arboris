@@ -1,0 +1,23 @@
+{
+  "name": "arboris-cli",
+  "version": "1.0.0",
+  "description": "CLI Arboris — installe les skills IA recommandés pour ta stack.",
+  "type": "module",
+  "bin": {
+    "arboris-cli": "run.mjs",
+    "arb": "run.mjs"
+  },
+  "dependencies": {
+    "@rubix0270/arboris": "^1.0.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": ["arboris", "skills", "cursor", "claude", "cli"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThePheniX974/arboris.git",
+    "directory": "packages/arboris-npx"
+  },
+  "license": "MIT"
+}
