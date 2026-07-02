@@ -10,6 +10,7 @@ interface AdminSkillFormProps {
   editing: boolean
   stacks: Stack[]
   cats: AdminCatState[]
+  saving?: boolean
   onChange: (patch: Partial<AdminFormState>) => void
   onToggleCompat: (name: string) => void
   onToggleStack: (id: string) => void
@@ -45,6 +46,7 @@ export default function AdminSkillForm({
   onSave,
   t,
   lang,
+  saving = false,
 }: AdminSkillFormProps) {
   const valid = form.id.trim() && form.descFr.trim()
   const saveLabel = editing ? t.save : t.create
@@ -202,7 +204,7 @@ export default function AdminSkillForm({
             <button
               type="button"
               onClick={onSave}
-              disabled={!valid}
+              disabled={!valid || saving}
               className="inline-flex cursor-pointer items-center gap-2 rounded-[10px] border-0 px-[18px] py-2.5 text-[13.5px] font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-60"
               style={{ background: valid ? 'var(--accent)' : 'var(--text-3)' }}
             >

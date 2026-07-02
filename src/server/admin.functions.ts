@@ -2,6 +2,27 @@ import { createServerFn } from '@tanstack/react-start'
 import { prisma } from '#/server/db'
 import { findUserById } from '#/server/auth.server'
 import { useAppSession } from '#/server/session'
+import {
+  createCategory,
+  createStack,
+  deleteCategory,
+  deleteSkill,
+  deleteStack,
+  toggleSkillStack,
+  upsertSkill,
+} from '#/server/admin.catalog.server'
+
+export type AdminMutationError =
+  | 'forbidden'
+  | 'category_exists'
+  | 'category_has_skills'
+  | 'stack_exists'
+  | 'skill_exists'
+  | 'skill_not_found'
+  | 'stack_not_found'
+  | 'generic'
+
+export type AdminMutationResult = { ok: true } | { ok: false; error: AdminMutationError }
 
 async function requireAdmin() {
   const session = await useAppSession()
@@ -10,6 +31,34 @@ async function requireAdmin() {
   const user = await findUserById(userId)
   if (!user || user.role !== 'ADMIN') return null
   return user
+}
+
+function mapError(err: unknown): AdminMutationError {
+  if (err instanceof Error) {
+    const code = err.message as AdminMutationError
+    if (
+      code === 'category_exists' ||
+      code === 'category_has_skills' ||
+      code === 'stack_exists' ||
+      code === 'skill_exists' ||
+      code === 'skill_not_found' ||
+      code === 'stack_not_found'
+    ) {
+      return code
+    }
+  }
+  return 'generic'
+}
+
+async function guard(fn: () => Promise<void>): Promise<AdminMutationResult> {
+  const admin = await requireAdmin()
+  if (!admin) return { ok: false, error: 'forbidden' }
+  try {
+    await fn()
+    return { ok: true }
+  } catch (err) {
+    return { ok: false, error: mapError(err) }
+  }
 }
 
 export const getAdminDashboard = createServerFn({ method: 'GET' }).handler(async () => {
@@ -34,3 +83,62 @@ export const getAdminDashboard = createServerFn({ method: 'GET' }).handler(async
     users,
   }
 })
+
+export const adminCreateCategory = createServerFn({ method: 'POST' })
+  .validator(
+    (data: { id: string; labelFr: string; labelEn: string; color: string; icon: string }) => data,
+  )
+  .handler(async ({ data }): Promise<AdminMutationResult> => {
+    return guard(() => createCategory(data))
+  })
+
+export const adminDeleteCategory = createServerFn({ method: 'POST' })
+  .validator((data: { id: string }) => data)
+  .handler(async ({ data }): Promise<AdminMutationResult> => {
+    return guard(() => deleteCategory(data.id))
+  })
+
+export const adminCreateStack = createServerFn({ method: 'POST' })
+  .validator(
+    (data: { id: string; label: string; icon: string; color: string; briefFr?: string; briefEn?: string }) =>
+      data,
+  )
+  .handler(async ({ data }): Promise<AdminMutationResult> => {
+    return guard(() => createStack(data))
+  })
+
+export const adminDeleteStack = createServerFn({ method: 'POST' })
+  .validator((data: { id: string }) => data)
+  .handler(async ({ data }): Promise<AdminMutationResult> => {
+    return guard(() => deleteStack(data.id))
+  })
+
+export const adminUpsertSkill = createServerFn({ method: 'POST' })
+  .validator(
+    (data: {
+      id: string
+      categoryId: string
+      icon: string
+      tagFr: string
+      tagEn: string
+      tech: string[]
+      compat: string[]
+      stackIds: string[]
+      editingId?: string
+    }) => data,
+  )
+  .handler(async ({ data }): Promise<AdminMutationResult> => {
+    return guard(() => upsertSkill(data))
+  })
+
+export const adminDeleteSkill = createServerFn({ method: 'POST' })
+  .validator((data: { id: string }) => data)
+  .handler(async ({ data }): Promise<AdminMutationResult> => {
+    return guard(() => deleteSkill(data.id))
+  })
+
+export const adminToggleSkillStack = createServerFn({ method: 'POST' })
+  .validator((data: { skillId: string; stackId: string }) => data)
+  .handler(async ({ data }): Promise<AdminMutationResult> => {
+    return guard(() => toggleSkillStack(data.skillId, data.stackId))
+  })

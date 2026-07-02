@@ -9,6 +9,7 @@ interface AdminCategoriesProps {
   cats: AdminCatState[]
   skills: AdminSkillState[]
   newCat: AdminNewCatState
+  saving?: boolean
   onNewCat: (patch: Partial<AdminNewCatState>) => void
   onAdd: () => void
   onRemove: (id: string) => void
@@ -34,6 +35,7 @@ export default function AdminCategories({
   onAdd,
   onRemove,
   t,
+  saving = false,
 }: AdminCategoriesProps) {
   const catValid = newCat.name.trim()
 
@@ -134,7 +136,7 @@ export default function AdminCategories({
           <button
             type="button"
             onClick={onAdd}
-            disabled={!catValid}
+            disabled={!catValid || saving}
             className="mt-0.5 flex h-[42px] cursor-pointer items-center justify-center gap-2 rounded-[10px] border-0 text-[14px] font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-60"
             style={{ background: catValid ? 'var(--accent)' : 'var(--text-3)' }}
           >

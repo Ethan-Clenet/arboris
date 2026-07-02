@@ -36,6 +36,12 @@ export type AdminNewCatState = {
   icon: string
 }
 
+export type AdminNewStackState = {
+  name: string
+  color: string
+  icon: string
+}
+
 export function catalogToAdminState(catalog: Catalog) {
   const skills: AdminSkillState[] = catalog.skills.map((s) => ({
     id: s.id,
@@ -111,4 +117,16 @@ export function newCatRecord(name: string, color: string, icon: string): AdminCa
   const id = slugify(trimmed)
   if (!id) return null
   return { id, fr: trimmed, en: trimmed, color, icon }
+}
+
+export function newStackRecord(
+  name: string,
+  color: string,
+  icon: string,
+): { id: string; label: string; color: string; icon: string } | null {
+  const trimmed = name.trim()
+  if (!trimmed) return null
+  const id = slugify(trimmed)
+  if (!id) return null
+  return { id, label: trimmed, color, icon }
 }

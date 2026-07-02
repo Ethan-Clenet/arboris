@@ -200,6 +200,16 @@ const fr = {
     addCat: 'Ajouter la catégorie',
     technosIntro:
       'Coche une case pour associer un skill à une techno, décoche pour le retirer. Les changements sont appliqués en direct.',
+    stacksTitle: 'Technologies',
+    newStack: 'Nouvelle techno',
+    stackName: 'Nom',
+    stackNamePh: 'ex. Bun',
+    addStack: 'Ajouter la techno',
+    toastStackAdded: 'Techno ajoutée',
+    toastStackRemoved: 'Techno supprimée',
+    toastStackExists: 'Cette techno existe déjà.',
+    catsVsTechnosHint:
+      'Les catégories organisent les skills. Les technos (Node.js, React…) apparaissent ici et dans la matrice ci-dessous.',
     nav: {
       overview: "Vue d'ensemble",
       skills: 'Skills',
@@ -220,6 +230,9 @@ const fr = {
     toastRemoved: 'Skill supprimé',
     toastCatAdded: 'Catégorie ajoutée',
     toastCatRemoved: 'Catégorie supprimée',
+    toastError: 'Erreur lors de l’enregistrement.',
+    toastCatExists: 'Cette catégorie existe déjà.',
+    toastCatInUse: 'Impossible de supprimer : des skills utilisent cette catégorie.',
     statSkills: 'Skills',
     statCats: 'Catégories',
     statTechnos: 'Technos',
@@ -441,6 +454,16 @@ const en: typeof fr = {
     addCat: 'Add category',
     technosIntro:
       'Tick a box to associate a skill with a technology, untick to remove it. Changes apply live.',
+    stacksTitle: 'Technologies',
+    newStack: 'New technology',
+    stackName: 'Name',
+    stackNamePh: 'e.g. Bun',
+    addStack: 'Add technology',
+    toastStackAdded: 'Technology added',
+    toastStackRemoved: 'Technology removed',
+    toastStackExists: 'This technology already exists.',
+    catsVsTechnosHint:
+      'Categories organize skills. Technologies (Node.js, React…) appear here and in the matrix below.',
     nav: {
       overview: 'Overview',
       skills: 'Skills',
@@ -461,6 +484,9 @@ const en: typeof fr = {
     toastRemoved: 'Skill removed',
     toastCatAdded: 'Category added',
     toastCatRemoved: 'Category removed',
+    toastError: 'Could not save changes.',
+    toastCatExists: 'This category already exists.',
+    toastCatInUse: 'Cannot delete: skills are using this category.',
     statSkills: 'Skills',
     statCats: 'Categories',
     statTechnos: 'Technos',

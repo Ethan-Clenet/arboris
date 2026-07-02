@@ -21,9 +21,7 @@ const NAV_ITEMS: { id: AdminView; icon: string }[] = [
 interface AdminSidebarProps {
   view: AdminView
   expanded: boolean
-  pinned: boolean
   onHover: (hover: boolean) => void
-  onTogglePin: () => void
   onNavigate: (view: AdminView) => void
   onStartCreate: () => void
 }
@@ -31,9 +29,7 @@ interface AdminSidebarProps {
 export default function AdminSidebar({
   view,
   expanded,
-  pinned,
   onHover,
-  onTogglePin,
   onNavigate,
   onStartCreate,
 }: AdminSidebarProps) {
@@ -111,23 +107,6 @@ export default function AdminSidebar({
       <span className="flex-1" />
 
       <div className="flex flex-col gap-0.5 border-t border-[var(--border)] pt-2">
-        <button
-          type="button"
-          title={pinned ? a.collapse : a.expand}
-          onClick={onTogglePin}
-          className="flex h-10 cursor-pointer items-center gap-3 rounded-[10px] border-0 bg-transparent px-2.5 text-[var(--text-2)] transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text-1)]"
-        >
-          <span className="grid h-6 w-6 flex-none place-items-center">
-            <Icon name={expanded ? 'caret-line-left' : 'caret-line-right'} size={19} />
-          </span>
-          <span
-            className={`whitespace-nowrap text-[14px] transition-opacity duration-[180ms] ${
-              showLabels ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            {pinned ? a.collapse : a.expand}
-          </span>
-        </button>
         <button
           ref={setThemeBtn}
           type="button"

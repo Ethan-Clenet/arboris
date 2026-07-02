@@ -332,4 +332,49 @@ export const SKILLS: SkillSeed[] = [
       en: ['Type this generic function', 'Remove the anys here', 'Create a utility type'],
     },
   },
+  {
+    id: 'accessibility',
+    cat: 'dx',
+    icon: 'wheelchair',
+    score: 98,
+    stacks: ['javascript', 'typescript', 'react', 'angular', 'next'],
+    tech: ['WCAG 2.2', 'WAI-ARIA', 'a11y'],
+    compat: ['Claude', 'Cursor', 'Codex', 'Copilot'],
+    tag: {
+      fr: 'Conçoit, implémente et audite des interfaces inclusives selon WCAG 2.2 AA — ARIA (Web), traits et labels (iOS/Android).',
+      en: 'Design, implement, and audit inclusive interfaces using WCAG 2.2 AA — semantic ARIA (Web) and accessibility traits (iOS/Android).',
+    },
+    act: {
+      fr: 'applique les bonnes pratiques WCAG 2.2 (POUR, ARIA, focus, contrastes, cibles tactiles)',
+      en: 'apply WCAG 2.2 best practices (POUR, ARIA, focus, contrast, target sizes)',
+    },
+    does: {
+      fr: [
+        'Identifie le rôle sémantique des composants (bouton, lien, onglet)',
+        'Assure contraste 4.5:1, alternatives textuelles et reflow jusqu’à 400 %',
+        'Implémente cibles 24×24 px, focus visible et alternatives au drag',
+        'Fournit des messages d’erreur descriptifs et une logique compréhensible',
+        'Vérifie Name/Role/Value et les régions live pour les mises à jour dynamiques',
+      ],
+      en: [
+        'Identifies semantic component roles (button, link, tab)',
+        'Ensures 4.5:1 contrast, text alternatives, and reflow up to 400% zoom',
+        'Implements 24×24 px targets, visible focus, and drag alternatives',
+        'Provides descriptive error messages and understandable logic',
+        'Verifies Name/Role/Value and live regions for dynamic updates',
+      ],
+    },
+    triggers: {
+      fr: [
+        'Audite l’accessibilité de cette page',
+        'Rends ce composant conforme WCAG',
+        'Ajoute les labels ARIA manquants',
+      ],
+      en: [
+        'Audit this page for accessibility',
+        'Make this component WCAG compliant',
+        'Add missing ARIA labels',
+      ],
+    },
+  },
 ]

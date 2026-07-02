@@ -1,4 +1,5 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { createFileRoute, redirect, useRouter } from '@tanstack/react-router'
+import { useServerFn } from '@tanstack/react-start'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import AdminCategories from '#/components/admin/AdminCategories'
 import AdminOverview from '#/components/admin/AdminOverview'
@@ -15,12 +16,24 @@ import {
   formFromSkill,
   formToSkill,
   newCatRecord,
+  newStackRecord,
   type AdminCatState,
   type AdminFormState,
   type AdminNewCatState,
+  type AdminNewStackState,
   type AdminSkillState,
 } from '#/lib/admin-state'
 import { useI18n } from '#/lib/i18n'
+import {
+  adminCreateCategory,
+  adminCreateStack,
+  adminDeleteCategory,
+  adminDeleteSkill,
+  adminDeleteStack,
+  adminToggleSkillStack,
+  adminUpsertSkill,
+  type AdminMutationError,
+} from '#/server/admin.functions'
 import { getCatalog } from '#/server/functions'
 import { Route as RootRoute } from '#/routes/__root'
 
@@ -37,13 +50,21 @@ export const Route = createFileRoute('/admin')({
 
 function AdminPage() {
   const catalog = Route.useLoaderData()
+  const router = useRouter()
   const { auth } = RootRoute.useRouteContext()
   const { t, lang } = useI18n()
   const a = t.admin
 
+  const createCategoryFn = useServerFn(adminCreateCategory)
+  const createStackFn = useServerFn(adminCreateStack)
+  const deleteCategoryFn = useServerFn(adminDeleteCategory)
+  const deleteStackFn = useServerFn(adminDeleteStack)
+  const upsertSkillFn = useServerFn(adminUpsertSkill)
+  const deleteSkillFn = useServerFn(adminDeleteSkill)
+  const toggleStackFn = useServerFn(adminToggleSkillStack)
+
   const [view, setView] = useState<AdminView>('overview')
   const [hover, setHover] = useState(false)
-  const [pinned, setPinned] = useState(false)
   const [query, setQuery] = useState('')
   const [skills, setSkills] = useState<AdminSkillState[]>([])
   const [cats, setCats] = useState<AdminCatState[]>([])
@@ -54,16 +75,22 @@ function AdminPage() {
     color: '#43A047',
     icon: 'lightning',
   })
+  const [newStack, setNewStack] = useState<AdminNewStackState>({
+    name: '',
+    color: '#43A047',
+    icon: 'hexagon',
+  })
   const [toast, setToast] = useState('')
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     const state = catalogToAdminState(catalog)
     setSkills(state.skills)
     setCats(state.cats)
-    setForm(emptyForm(state.cats))
-  }, [catalog])
+    setForm((prev) => (view === 'create' ? prev : emptyForm(state.cats)))
+  }, [catalog, view])
 
-  const expanded = hover || pinned
+  const expanded = hover
 
   const catOf = useCallback(
     (id: string): AdminCatState =>
@@ -82,6 +109,44 @@ function AdminPage() {
     window.setTimeout(() => setToast(''), 1900)
   }
 
+  const mapError = (error: AdminMutationError) => {
+    switch (error) {
+      case 'category_exists':
+        return a.toastCatExists
+      case 'stack_exists':
+        return a.toastStackExists
+      case 'category_has_skills':
+        return a.toastCatInUse
+      case 'forbidden':
+        return a.forbidden
+      default:
+        return a.toastError
+    }
+  }
+
+  const refreshCatalog = async () => {
+    await router.invalidate()
+  }
+
+  const runMutation = async (
+    fn: () => Promise<{ ok: boolean; error?: AdminMutationError }>,
+    successMsg: string,
+  ) => {
+    setSaving(true)
+    try {
+      const result = await fn()
+      if (!result.ok) {
+        showToast(mapError(result.error ?? 'generic'))
+        return false
+      }
+      await refreshCatalog()
+      showToast(successMsg)
+      return true
+    } finally {
+      setSaving(false)
+    }
+  }
+
   const startCreate = () => {
     setEditingId(null)
     setForm(emptyForm(cats))
@@ -94,53 +159,107 @@ function AdminPage() {
     setView('create')
   }
 
-  const saveForm = () => {
+  const saveForm = async () => {
     const rec = formToSkill(form)
     if (!rec) return
-    const list = skills.slice()
-    const idx = list.findIndex((s) => s.id === (editingId ?? rec.id))
-    if (idx >= 0) {
-      list[idx] = rec
-    } else {
-      const dup = list.findIndex((s) => s.id === rec.id)
-      if (dup >= 0) list[dup] = rec
-      else list.unshift(rec)
-    }
-    setSkills(list)
-    setView('skills')
-    setEditingId(null)
-    showToast(editingId ? a.toastUpdated : a.toastCreated)
-  }
-
-  const removeSkill = (id: string) => {
-    setSkills(skills.filter((s) => s.id !== id))
-    showToast(a.toastRemoved)
-  }
-
-  const toggleStack = (skillId: string, stackId: string) => {
-    setSkills(
-      skills.map((s) => {
-        if (s.id !== skillId) return s
-        const has = s.stacks.includes(stackId)
-        return {
-          ...s,
-          stacks: has ? s.stacks.filter((x) => x !== stackId) : [...s.stacks, stackId],
-        }
-      }),
+    const ok = await runMutation(
+      () =>
+        upsertSkillFn({
+          data: {
+            id: rec.id,
+            categoryId: rec.cat,
+            icon: rec.icon,
+            tagFr: rec.tag.fr,
+            tagEn: rec.tag.en,
+            tech: rec.tech,
+            compat: rec.compat,
+            stackIds: rec.stacks,
+            editingId: editingId ?? undefined,
+          },
+        }),
+      editingId ? a.toastUpdated : a.toastCreated,
     )
+    if (ok) {
+      setView('skills')
+      setEditingId(null)
+    }
   }
 
-  const addCat = () => {
+  const removeSkill = async (id: string) => {
+    const ok = await runMutation(() => deleteSkillFn({ data: { id } }), a.toastRemoved)
+    if (ok && editingId === id) {
+      setEditingId(null)
+      setView('skills')
+    }
+  }
+
+  const toggleStack = async (skillId: string, stackId: string) => {
+    setSaving(true)
+    try {
+      const result = await toggleStackFn({ data: { skillId, stackId } })
+      if (!result.ok) {
+        showToast(mapError(result.error ?? 'generic'))
+        return
+      }
+      await refreshCatalog()
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const addCat = async () => {
     const rec = newCatRecord(newCat.name, newCat.color, newCat.icon)
-    if (!rec || cats.some((c) => c.id === rec.id)) return
-    setCats([...cats, rec])
-    setNewCat({ name: '', color: '#43A047', icon: 'lightning' })
-    showToast(a.toastCatAdded)
+    if (!rec || cats.some((c) => c.id === rec.id)) {
+      if (rec && cats.some((c) => c.id === rec.id)) showToast(a.toastCatExists)
+      return
+    }
+    const ok = await runMutation(
+      () =>
+        createCategoryFn({
+          data: {
+            id: rec.id,
+            labelFr: rec.fr,
+            labelEn: rec.en,
+            color: rec.color,
+            icon: rec.icon,
+          },
+        }),
+      a.toastCatAdded,
+    )
+    if (ok) {
+      setNewCat({ name: '', color: '#43A047', icon: 'lightning' })
+    }
   }
 
-  const removeCat = (id: string) => {
-    setCats(cats.filter((c) => c.id !== id))
-    showToast(a.toastCatRemoved)
+  const removeCat = async (id: string) => {
+    await runMutation(() => deleteCategoryFn({ data: { id } }), a.toastCatRemoved)
+  }
+
+  const addStack = async () => {
+    const rec = newStackRecord(newStack.name, newStack.color, newStack.icon)
+    if (!rec || catalog.stacks.some((s) => s.id === rec.id)) {
+      if (rec && catalog.stacks.some((s) => s.id === rec.id)) showToast(a.toastStackExists)
+      return
+    }
+    const ok = await runMutation(
+      () =>
+        createStackFn({
+          data: {
+            id: rec.id,
+            label: rec.label,
+            icon: rec.icon,
+            color: rec.color,
+          },
+        }),
+      a.toastStackAdded,
+    )
+    if (ok) {
+      setNewStack({ name: '', color: '#43A047', icon: 'hexagon' })
+    }
+  }
+
+  const removeStack = async (id: string) => {
+    await runMutation(() => deleteStackFn({ data: { id } }), a.toastStackRemoved)
   }
 
   const titleKey = view === 'create' ? (editingId ? 'edit' : 'create') : view
@@ -172,9 +291,7 @@ function AdminPage() {
       <AdminSidebar
         view={view}
         expanded={expanded}
-        pinned={pinned}
         onHover={setHover}
-        onTogglePin={() => setPinned((p) => !p)}
         onNavigate={setView}
         onStartCreate={startCreate}
       />
@@ -235,6 +352,7 @@ function AdminPage() {
                 editing={editingId != null}
                 stacks={catalog.stacks}
                 cats={cats}
+                saving={saving}
                 onChange={(patch) => setForm((f) => ({ ...f, ...patch }))}
                 onToggleCompat={(name) =>
                   setForm((f) => ({
@@ -268,6 +386,7 @@ function AdminPage() {
                 cats={cats}
                 skills={skills}
                 newCat={newCat}
+                saving={saving}
                 onNewCat={(patch) => setNewCat((c) => ({ ...c, ...patch }))}
                 onAdd={addCat}
                 onRemove={removeCat}
@@ -289,9 +408,25 @@ function AdminPage() {
               <AdminTechnos
                 stacks={catalog.stacks}
                 skills={skills}
+                newStack={newStack}
+                saving={saving}
+                onNewStack={(patch) => setNewStack((s) => ({ ...s, ...patch }))}
+                onAddStack={addStack}
+                onRemoveStack={removeStack}
                 onToggle={toggleStack}
                 catOf={catOf}
-                t={{ technosIntro: a.technosIntro }}
+                t={{
+                  technosIntro: a.technosIntro,
+                  catsVsTechnosHint: a.catsVsTechnosHint,
+                  stacksTitle: a.stacksTitle,
+                  newStack: a.newStack,
+                  stackName: a.stackName,
+                  stackNamePh: a.stackNamePh,
+                  addStack: a.addStack,
+                  remove: a.remove,
+                  fIcon: a.fIcon,
+                  catColor: a.catColor,
+                }}
               />
             )}
           </div>
