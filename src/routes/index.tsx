@@ -4,12 +4,11 @@ import Icon from '#/components/Icon'
 import { Button, ButtonLink } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
-import { useCopy } from '#/lib/useCopy'
+import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
 import {
   compatDot,
   hexToRgba,
-  promptFor,
   type Category,
   type SkillSummary,
 } from '#/lib/catalog'
@@ -22,7 +21,7 @@ export const Route = createFileRoute('/')({
 function HomePage() {
   const catalog = Route.useLoaderData()
   const { t, lang } = useI18n()
-  const { copiedKey, copy } = useCopy()
+  const { copiedKey, copySkill } = useSkillCopy()
   const [query, setQuery] = useState('')
 
   const catById = useMemo(() => {
@@ -149,7 +148,7 @@ function HomePage() {
                   skill={skill}
                   category={catById.get(skill.categoryId)}
                   copied={copiedKey === skill.id}
-                  onCopy={() => copy(promptFor(skill, lang), skill.id, t.home.copied)}
+                  onCopy={() => copySkill({ id: skill.id, lang, announceMsg: t.home.copied })}
                 />
               ))}
 

@@ -426,6 +426,9 @@ function AdminPage() {
                   remove: a.remove,
                   fIcon: a.fIcon,
                   catColor: a.catColor,
+                  filterTechnoHint: a.filterTechnoHint,
+                  clearTechnoFilters: a.clearTechnoFilters,
+                  matrixNoMatch: a.matrixNoMatch,
                 }}
               />
             )}

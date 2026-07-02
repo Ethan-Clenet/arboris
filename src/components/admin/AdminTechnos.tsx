@@ -4,6 +4,7 @@ import { ADMIN_CAT_COLORS, ADMIN_SKILL_ICONS } from '#/lib/admin-constants'
 import { hexToRgba } from '#/lib/catalog'
 import type { AdminCatState, AdminNewStackState, AdminSkillState } from '#/lib/admin-state'
 import type { Stack } from '#/lib/catalog'
+import { useMemo, useState } from 'react'
 
 interface AdminTechnosProps {
   stacks: Stack[]
@@ -26,6 +27,9 @@ interface AdminTechnosProps {
     remove: string
     fIcon: string
     catColor: string
+    filterTechnoHint: string
+    clearTechnoFilters: string
+    matrixNoMatch: string
   }
 }
 
@@ -42,6 +46,58 @@ export default function AdminTechnos({
   t,
 }: AdminTechnosProps) {
   const stackValid = newStack.name.trim()
+  const [query, setQuery] = useState('')
+  const [selectedStacks, setSelectedStacks] = useState<string[]>([])
+
+  const toggleStackFilter = (stackId: string) => {
+    setSelectedStacks((prev) =>
+      prev.includes(stackId) ? prev.filter((id) => id !== stackId) : [...prev, stackId],
+    )
+  }
+
+  const clearFilters = () => {
+    setSelectedStacks([])
+    setQuery('')
+  }
+
+  const hasActiveFilters = selectedStacks.length > 0 || query.trim().length > 0
+
+  const visibleStacks = useMemo(() => {
+    if (selectedStacks.length === 0) return stacks
+    return stacks.filter((stack) => selectedStacks.includes(stack.id))
+  }, [selectedStacks, stacks])
+
+  const filteredSkills = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    return skills.filter((skill) => {
+      if (selectedStacks.length > 0) {
+        const linked = selectedStacks.some((stackId) => skill.stacks.includes(stackId))
+        if (!linked) return false
+      }
+      if (!q) return true
+      const cat = catOf(skill.cat)
+      return `${skill.id} ${cat.fr} ${cat.en}`.toLowerCase().includes(q)
+    })
+  }, [catOf, query, selectedStacks, skills])
+
+  const shortLabel = (label: string) => {
+    const map: Record<string, string> = {
+      'Node.js': 'Node',
+      JavaScript: 'JS',
+      TypeScript: 'TS',
+      FastAPI: 'FastAPI',
+      Angular: 'Angular',
+      React: 'React',
+      Java: 'Java',
+      'Spring Boot': 'Spring',
+      Docker: 'Docker',
+      K9: 'K9',
+      PostgreSQL: 'Postgres',
+      MySQL: 'MySQL',
+      Prisma: 'Prisma',
+    }
+    return map[label] ?? label
+  }
 
   return (
     <>
@@ -156,21 +212,71 @@ export default function AdminTechnos({
       </div>
 
       <AdminCard>
+        <div className="border-b border-[var(--border)] px-4 py-3">
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+            <p className="text-[12px] text-[var(--text-3)]">{t.filterTechnoHint}</p>
+            {hasActiveFilters ? (
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5 text-[12px] font-medium text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
+              >
+                <Icon name="x" size={12} />
+                {t.clearTechnoFilters}
+              </button>
+            ) : null}
+          </div>
+          <div className="mb-3 flex flex-wrap gap-2">
+            {stacks.map((stack) => {
+              const active = selectedStacks.includes(stack.id)
+              return (
+                <button
+                  key={stack.id}
+                  type="button"
+                  onClick={() => toggleStackFilter(stack.id)}
+                  aria-pressed={active}
+                  title={stack.label}
+                  className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border px-2.5 py-1 text-[12px] font-medium transition-colors"
+                  style={{
+                    borderColor: active ? 'var(--accent-border)' : 'var(--border)',
+                    background: active ? 'var(--accent-soft)' : 'var(--surface)',
+                    color: active ? 'var(--accent)' : 'var(--text-2)',
+                  }}
+                >
+                  <span
+                    className="grid h-4 w-4 place-items-center rounded"
+                    style={{ background: hexToRgba(stack.color, 0.16), color: stack.color }}
+                  >
+                    <Icon name={stack.icon} bold size={10} />
+                  </span>
+                  {shortLabel(stack.label)}
+                </button>
+              )
+            })}
+          </div>
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Filtrer les skills…"
+            className="h-10 w-full rounded-[10px] border border-[var(--border)] bg-[var(--bg)] px-3 text-[13.5px] text-[var(--text-1)] outline-none focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_var(--accent-soft)]"
+          />
+        </div>
         <div className="overflow-x-auto">
-          <div style={{ minWidth: 220 + stacks.length * 80 }}>
+          <div style={{ minWidth: 260 + visibleStacks.length * 74 }}>
             <div
-              className="grid border-b border-[var(--border)] bg-[var(--surface-2)]"
-              style={{ gridTemplateColumns: `220px repeat(${stacks.length}, 1fr)` }}
+              className="sticky top-0 z-10 grid border-b border-[var(--border)] bg-[var(--surface-2)]"
+              style={{ gridTemplateColumns: `260px repeat(${visibleStacks.length}, 74px)` }}
             >
-              <div className="px-4 py-3 text-[11px] font-semibold uppercase tracking-wider text-[var(--text-3)]">
+              <div className="sticky left-0 z-20 bg-[var(--surface-2)] px-4 py-3 text-[11px] font-semibold uppercase tracking-wider text-[var(--text-3)]">
                 Skill
               </div>
-              {stacks.map((stack) => {
-                const count = skills.filter((s) => s.stacks.includes(stack.id)).length
+              {visibleStacks.map((stack) => {
+                const count = filteredSkills.filter((s) => s.stacks.includes(stack.id)).length
                 return (
                   <div
                     key={stack.id}
-                    className="flex flex-col items-center gap-1 border-l border-[var(--border)] px-2 py-2.5"
+                    className="flex flex-col items-center gap-1 border-l border-[var(--border)] px-1.5 py-2"
+                    title={stack.label}
                   >
                     <span
                       className="grid h-[26px] w-[26px] place-items-center rounded-[7px]"
@@ -181,22 +287,22 @@ export default function AdminTechnos({
                     >
                       <Icon name={stack.icon} bold size={15} />
                     </span>
-                    <span className="whitespace-nowrap text-[11px] font-semibold">{stack.label}</span>
+                    <span className="whitespace-nowrap text-[10px] font-semibold">{shortLabel(stack.label)}</span>
                     <span className="font-mono text-[10px] text-[var(--text-3)]">{count}</span>
                   </div>
                 )
               })}
             </div>
 
-            {skills.map((skill) => {
+            {filteredSkills.map((skill) => {
               const cat = catOf(skill.cat)
               return (
                 <div
                   key={skill.id}
                   className="grid items-center border-b border-[var(--border)] last:border-0 hover:bg-[var(--surface-hover)]"
-                  style={{ gridTemplateColumns: `220px repeat(${stacks.length}, 1fr)` }}
+                  style={{ gridTemplateColumns: `260px repeat(${visibleStacks.length}, 74px)` }}
                 >
-                  <div className="flex min-w-0 items-center gap-2.5 px-4 py-[11px]">
+                  <div className="sticky left-0 z-[1] flex min-w-0 items-center gap-2.5 bg-[var(--surface)] px-4 py-[11px]">
                     <span
                       className="grid h-[30px] w-[30px] flex-none place-items-center rounded-lg"
                       style={{
@@ -206,9 +312,12 @@ export default function AdminTechnos({
                     >
                       <Icon name={skill.icon} bold size={15} />
                     </span>
-                    <span className="truncate font-mono text-[12.5px] font-semibold">{skill.id}</span>
+                    <div className="min-w-0">
+                      <div className="truncate font-mono text-[12.5px] font-semibold">{skill.id}</div>
+                      <div className="truncate text-[11px] text-[var(--text-3)]">{cat.fr}</div>
+                    </div>
                   </div>
-                  {stacks.map((stack) => {
+                  {visibleStacks.map((stack) => {
                     const on = skill.stacks.includes(stack.id)
                     return (
                       <div
@@ -239,6 +348,11 @@ export default function AdminTechnos({
                 </div>
               )
             })}
+            {filteredSkills.length === 0 ? (
+              <div className="px-4 py-10 text-center text-[13px] text-[var(--text-3)]">
+                {t.matrixNoMatch}
+              </div>
+            ) : null}
           </div>
         </div>
       </AdminCard>

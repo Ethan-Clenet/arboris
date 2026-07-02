@@ -79,11 +79,47 @@ export function hexToRgba(hex: string, alpha: number): string {
   return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${alpha})`
 }
 
-/** Prompt « copier » pour un skill donné, dans la langue courante. */
+/** Prompt court (legacy) — préférer buildSkillMarkdown / SKILL.md pour la copie. */
 export function promptFor(skill: Pick<SkillSummary, 'id' | 'act'>, lang: Lang): string {
   return lang === 'fr'
     ? `Ajoute le skill « ${skill.id} » à mon projet et ${skill.act.fr}.`
     : `Add the "${skill.id}" skill to my project and ${skill.act.en}.`
+}
+
+/** Markdown copiable pour un agent : frontmatter + description + instructions. */
+export function buildSkillMarkdown(skill: SkillDetail, lang: Lang): string {
+  const tag = skill.tag[lang]
+  const act = skill.act[lang]
+  const does = skill.does[lang]
+  const triggers = skill.triggers[lang]
+
+  const lines = [
+    '---',
+    `name: ${skill.id}`,
+    `description: ${tag.replace(/\n/g, ' ')}`,
+    '---',
+    '',
+    `# ${skill.id}`,
+    '',
+    tag,
+    '',
+    lang === 'fr' ? '## Ce que fait ce skill' : '## What this skill does',
+    ...does.map((item) => `- ${item}`),
+    '',
+    lang === 'fr' ? '## Instructions' : '## Instructions',
+    lang === 'fr'
+      ? `Ajoute ce skill à mon projet (fichier \`.cursor/skills/${skill.id}/SKILL.md\` ou équivalent) et ${act}.`
+      : `Add this skill to your project (e.g. \`.cursor/skills/${skill.id}/SKILL.md\`) and ${act}.`,
+    '',
+    lang === 'fr' ? '## Exemples de déclencheurs' : '## Example triggers',
+    ...triggers.map((item) => `- ${item}`),
+  ]
+
+  if (skill.tech.length > 0) {
+    lines.push('', lang === 'fr' ? '## Technologies' : '## Technologies', skill.tech.join(', '))
+  }
+
+  return lines.join('\n')
 }
 
 /** Prompt « tout copier » pour une stack (liste des skills recommandés). */

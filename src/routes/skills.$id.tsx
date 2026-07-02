@@ -4,26 +4,28 @@ import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
-import { useCopy } from '#/lib/useCopy'
-import { getCatalog, getSkill } from '#/server/functions'
-import { compatDot, hexToRgba, promptFor, type Category } from '#/lib/catalog'
+import { useSkillCopy } from '#/lib/useSkillCopy'
+import { getCatalog, getSkill, getSkillFileContent } from '#/server/functions'
+import { buildSkillMarkdown, compatDot, hexToRgba, type Category } from '#/lib/catalog'
+import SkillInstallButtons from '#/components/SkillInstallButtons'
 
 export const Route = createFileRoute('/skills/$id')({
   loader: async ({ params }) => {
-    const [skill, catalog] = await Promise.all([
+    const [skill, catalog, fileContent] = await Promise.all([
       getSkill({ data: { id: params.id } }),
       getCatalog(),
+      getSkillFileContent({ data: { id: params.id } }),
     ])
     if (!skill) throw notFound()
-    return { skill, catalog }
+    return { skill, catalog, fileContent }
   },
   component: SkillDetailPage,
 })
 
 function SkillDetailPage() {
-  const { skill, catalog } = Route.useLoaderData()
+  const { skill, catalog, fileContent } = Route.useLoaderData()
   const { t, lang } = useI18n()
-  const { copiedKey, copy } = useCopy(1700)
+  const { copiedKey, copySkill } = useSkillCopy(1700)
 
   const catById = useMemo(() => {
     const map = new Map<string, Category>()
@@ -45,8 +47,19 @@ function SkillDetailPage() {
   const category = catById.get(skill.categoryId)
   const color = category?.color ?? 'var(--text-3)'
   const tint = category ? hexToRgba(category.color, 0.14) : 'var(--surface-2)'
-  const prompt = promptFor(skill, lang)
+  const copyContent = useMemo(
+    () => fileContent ?? buildSkillMarkdown(skill, lang),
+    [fileContent, skill, lang],
+  )
   const copied = copiedKey === skill.id
+  const handleCopy = () =>
+    copySkill({
+      id: skill.id,
+      lang,
+      announceMsg: t.skill.copied,
+      fallback: skill,
+      fileContent,
+    })
 
   return (
     <PageShell className="pt-6 pb-20">
@@ -81,12 +94,23 @@ function SkillDetailPage() {
           </h1>
           <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">{skill.tag[lang]}</p>
           <div className="flex flex-wrap items-center gap-3.5">
-            <Button variant="primary" size="lg" copied={copied} onClick={() => copy(prompt, skill.id, t.skill.copied)}>
+            <Button variant="primary" size="lg" copied={copied} onClick={handleCopy}>
               <Icon name={copied ? 'check' : 'copy'} size={16} />
               {copied ? t.skill.copied : t.skill.copy}
             </Button>
             <span className="max-w-[260px] text-[13px] text-[var(--text-3)]">{t.skill.ctaHint}</span>
           </div>
+          <SkillInstallButtons
+            skillId={skill.id}
+            agents={skill.compat}
+            lang={lang}
+            t={{
+              installTitle: t.skill.installTitle,
+              install: t.skill.install,
+              installed: t.skill.installed,
+              errors: t.skill.installErrors,
+            }}
+          />
         </div>
       </div>
 
@@ -97,14 +121,15 @@ function SkillDetailPage() {
             <Icon name="cursor-text" bold size={14} className="text-[var(--accent)]" />
             {t.skill.promptTitle}
           </div>
-          <Button variant="copy" size="sm" copied={copied} onClick={() => copy(prompt, skill.id, t.skill.copied)}>
+          <Button variant="copy" size="sm" copied={copied} onClick={handleCopy}>
             <Icon name={copied ? 'check' : 'copy'} size={14} />
             {copied ? t.skill.copied : t.skill.copy}
           </Button>
         </div>
-        <div className="flex items-start gap-3.5 px-5 py-[18px]">
-          <div className="w-[3px] flex-none self-stretch rounded-full bg-[var(--accent)] opacity-60" />
-          <p className="text-[15.5px] leading-[1.6] text-[var(--text-1)]">{prompt}</p>
+        <div className="px-5 py-[18px]">
+          <pre className="max-h-[420px] overflow-auto whitespace-pre-wrap rounded-xl border border-[var(--border)] bg-[var(--bg)] p-4 font-mono text-[12.5px] leading-[1.65] text-[var(--text-1)]">
+            {copyContent}
+          </pre>
         </div>
         <div className="px-5 pb-4 text-[12.5px] text-[var(--text-3)]">{t.skill.promptHint}</div>
       </div>
@@ -197,7 +222,7 @@ function SkillDetailPage() {
               block
               copied={copied}
               className="mt-[18px]"
-              onClick={() => copy(prompt, skill.id, t.skill.copied)}
+              onClick={handleCopy}
             >
               <Icon name={copied ? 'check' : 'copy'} size={15} />
               {copied ? t.skill.copied : t.skill.copy}

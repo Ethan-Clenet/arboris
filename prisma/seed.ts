@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { hashPassword } from '../src/server/password'
-import { CATEGORIES, SKILLS, STACKS } from './catalog-data'
+import { CATEGORIES, STACKS } from './catalog-data'
+import { loadSkillSeeds } from './catalog-from-skills'
 
 const prisma = new PrismaClient()
 
@@ -29,6 +30,7 @@ async function seedAdmin() {
 
 async function main() {
   console.log('🌱 Seeding Arboris…')
+  const SKILLS = await loadSkillSeeds()
 
   // Repartir d'une base propre (l'ordre respecte les contraintes de clés).
   await prisma.skill.deleteMany()

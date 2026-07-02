@@ -4,12 +4,10 @@ import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
-import { useCopy } from '#/lib/useCopy'
+import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
 import {
   hexToRgba,
-  promptFor,
-  promptForStack,
   type Category,
   type SkillSummary,
 } from '#/lib/catalog'
@@ -22,8 +20,9 @@ export const Route = createFileRoute('/getting-started')({
 function GettingStartedPage() {
   const catalog = Route.useLoaderData()
   const { t, lang } = useI18n()
-  const { copiedKey, copy } = useCopy(1700)
+  const { copiedKey, copySkill } = useSkillCopy(1700)
   const [stackId, setStackId] = useState<string | null>(null)
+  const [query, setQuery] = useState('')
 
   const catById = useMemo(() => {
     const map = new Map<string, Category>()
@@ -35,7 +34,20 @@ function GettingStartedPage() {
 
   const active = stackId ? catalog.stacks.find((s) => s.id === stackId) : undefined
   const rows = active ? skillsForStack(active.id) : []
-  const copiedAll = copiedKey === '__all'
+  const filteredRows = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    if (!q) return rows
+    return rows.filter((skill) => {
+      const cat = catById.get(skill.categoryId)
+      const haystack = `${skill.id} ${skill.tag[lang]} ${cat?.label[lang] ?? ''}`.toLowerCase()
+      return haystack.includes(q)
+    })
+  }, [catById, lang, query, rows])
+
+  const pickStack = (id: string) => {
+    setStackId(id)
+    setQuery('')
+  }
 
   return (
     <PageShell>
@@ -86,7 +98,7 @@ function GettingStartedPage() {
                 key={k.id}
                 type="button"
                 aria-pressed={isActive}
-                onClick={() => setStackId(k.id)}
+                onClick={() => pickStack(k.id)}
                 className={`flex items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
                   isActive
                     ? 'border-[var(--border-2)] bg-[var(--surface-hover)]'
@@ -127,27 +139,59 @@ function GettingStartedPage() {
                       {t.start.recFor} {active.label}
                     </div>
                     <div className="text-[13px] text-[var(--text-2)]">
-                      {active.brief[lang]} · {rows.length} {t.start.skillsWord}
+                      {active.brief[lang]} ·{' '}
+                      {query.trim()
+                        ? `${filteredRows.length} / ${rows.length} ${t.start.skillsWord}`
+                        : `${rows.length} ${t.start.skillsWord}`}
                     </div>
                   </div>
                 </div>
-                <Button variant="copy" copied={copiedAll} onClick={() => copy(promptForStack(active, lang), '__all', t.start.copiedAll)}>
-                  <Icon name={copiedAll ? 'check' : 'copy'} size={15} />
-                  {copiedAll ? t.start.copiedAll : t.start.copyAll}
-                </Button>
+                <div className="relative w-full min-w-[220px] sm:max-w-[280px]">
+                  <label htmlFor="stack-skills-search" className="sr-only">
+                    {t.a11y.searchSkills}
+                  </label>
+                  <Icon
+                    name="magnifying-glass"
+                    size={16}
+                    className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-3)]"
+                  />
+                  <input
+                    id="stack-skills-search"
+                    type="search"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder={t.start.searchPh}
+                    className="h-10 w-full rounded-[10px] border border-[var(--border)] bg-[var(--surface)] pl-9 pr-9 text-[13.5px] text-[var(--text-1)] outline-none focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_var(--accent-soft)]"
+                  />
+                  {query.length > 0 ? (
+                    <button
+                      type="button"
+                      onClick={() => setQuery('')}
+                      aria-label={t.a11y.clearSearch}
+                      className="absolute right-2 top-1/2 grid h-[22px] w-[22px] -translate-y-1/2 place-items-center text-[var(--text-3)] hover:text-[var(--text-1)]"
+                    >
+                      <Icon name="x" size={13} />
+                    </button>
+                  ) : null}
+                </div>
               </div>
 
               <div className="grid gap-3 p-4 sm:grid-cols-2">
-                {rows.map((skill) => (
+                {filteredRows.map((skill) => (
                   <StackSkillCard
                     key={skill.id}
                     skill={skill}
                     category={catById.get(skill.categoryId)}
                     copied={copiedKey === skill.id}
-                    onCopy={() => copy(promptFor(skill, lang), skill.id, t.start.copied)}
+                    onCopy={() => copySkill({ id: skill.id, lang, announceMsg: t.start.copied })}
                   />
                 ))}
               </div>
+              {filteredRows.length === 0 ? (
+                <div className="border-t border-[var(--border)] px-6 py-12 text-center text-[14px] text-[var(--text-3)]">
+                  {t.start.searchEmpty}
+                </div>
+              ) : null}
             </>
           ) : (
             <div className="flex flex-col items-center px-6 py-16 text-center">

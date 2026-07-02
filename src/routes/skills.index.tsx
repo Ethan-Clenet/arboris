@@ -4,12 +4,11 @@ import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
-import { useCopy } from '#/lib/useCopy'
+import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
 import {
   compatDot,
   hexToRgba,
-  promptFor,
   type Category,
   type SkillSummary,
 } from '#/lib/catalog'
@@ -24,7 +23,7 @@ type SortMode = 'score' | 'name'
 function SkillsPage() {
   const catalog = Route.useLoaderData()
   const { t, lang } = useI18n()
-  const { copiedKey, copy } = useCopy()
+  const { copiedKey, copySkill } = useSkillCopy()
 
   const [q, setQ] = useState('')
   const [cat, setCat] = useState<string>('all')
@@ -284,7 +283,7 @@ function SkillsPage() {
                     skill={skill}
                     category={catById.get(skill.categoryId)}
                     copied={copiedKey === skill.id}
-                    onCopy={() => copy(promptFor(skill, lang), skill.id, t.skills.copied)}
+                    onCopy={() => copySkill({ id: skill.id, lang, announceMsg: t.skills.copied })}
                   />
                 ))}
               </div>
