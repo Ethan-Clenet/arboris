@@ -1,7 +1,31 @@
 import { PrismaClient } from '@prisma/client'
+import { hashPassword } from '../src/server/password'
 import { CATEGORIES, SKILLS, STACKS } from './catalog-data'
 
 const prisma = new PrismaClient()
+
+async function seedAdmin() {
+  const email = (process.env.ADMIN_EMAIL ?? 'admin@arboris.local').toLowerCase().trim()
+  const password = process.env.ADMIN_PASSWORD ?? 'ArborisAdmin2026!'
+  const name = process.env.ADMIN_NAME ?? 'Admin Arboris'
+
+  await prisma.user.upsert({
+    where: { email },
+    update: {
+      name,
+      role: 'ADMIN',
+      passwordHash: await hashPassword(password),
+    },
+    create: {
+      email,
+      name,
+      role: 'ADMIN',
+      passwordHash: await hashPassword(password),
+    },
+  })
+
+  console.log(`✅ Admin : ${email}`)
+}
 
 async function main() {
   console.log('🌱 Seeding Arboris…')
@@ -63,6 +87,7 @@ async function main() {
     prisma.skill.count(),
   ])
   console.log(`✅ Seed terminé : ${cats} catégories, ${stacks} stacks, ${skills} skills.`)
+  await seedAdmin()
 }
 
 main()

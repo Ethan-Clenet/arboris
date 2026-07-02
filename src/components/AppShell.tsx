@@ -6,10 +6,12 @@ import { useI18n } from '#/lib/i18n'
 
 /** Masque header/footer sur la page auth (layout plein écran). */
 export default function AppShell({ children }: { children: ReactNode }) {
-  const isAuth = useRouterState({ select: (s) => s.location.pathname === '/auth' })
+  const isFullscreen = useRouterState({
+    select: (s) => s.location.pathname === '/auth' || s.location.pathname.startsWith('/admin'),
+  })
   const { t } = useI18n()
 
-  if (isAuth) {
+  if (isFullscreen) {
     return <>{children}</>
   }
 

@@ -3,6 +3,7 @@ import { useServerFn } from '@tanstack/react-start'
 import Icon from './Icon'
 import LangSwitch from './LangSwitch'
 import ThemeToggle from './ThemeToggle'
+import { ButtonLink } from './Button'
 import { useI18n } from '#/lib/i18n'
 import { logout } from '#/server/auth.functions'
 import { Route as RootRoute } from '#/routes/__root'
@@ -45,6 +46,12 @@ export default function Header() {
 
         {auth.user ? (
           <div className="hidden items-center gap-2 sm:flex">
+            {auth.user.role === 'ADMIN' ? (
+              <ButtonLink to="/admin" variant="secondary" size="sm" className="gap-1.5">
+                <Icon name="shield-check" size={14} />
+                {t.nav.admin}
+              </ButtonLink>
+            ) : null}
             <span className="max-w-[140px] truncate font-mono text-[12px] text-[var(--text-2)]">
               {auth.user.name}
             </span>
