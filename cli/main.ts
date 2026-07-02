@@ -16,17 +16,16 @@ type CliOptions = {
 }
 
 function printHelp() {
-  console.log(`arboris — installe les skills IA recommandés pour une techno
+  console.log(`arboris-cli — installe les skills IA recommandés pour une techno
 
 Usage:
-  npx arb <techno> [options]
   npx arboris-cli <techno> [options]
-  npx @rubix0270/arboris <techno> [options]
+  npx arboris-cli list
 
 Exemples:
-  npx arb node
+  npx arboris-cli node
   npx arboris-cli node.js --agent cursor
-  npx arb typescript --force
+  npx arboris-cli typescript --force
 
 Technos (alias acceptés: node.js, k8s, spring, postgres…):
   node, js, ts, fastapi, react, angular, java, spring-boot,
@@ -96,7 +95,7 @@ async function runList() {
   const manifest = await loadCliManifest()
   console.log('Technos disponibles:\n')
   console.log(formatStackList(manifest))
-  console.log('\nExemple: npx arb node')
+  console.log('\nExemple: npx arboris-cli node')
 }
 
 async function runInstall(stackInput: string, options: CliOptions) {
