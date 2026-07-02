@@ -8,6 +8,7 @@ import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog, getSkill, getSkillFileContent } from '#/server/functions'
 import { buildSkillMarkdown, compatDot, hexToRgba, type Category } from '#/lib/catalog'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
+import CliCommandBar from '#/components/CliCommandBar'
 
 export const Route = createFileRoute('/skills/$id')({
   loader: async ({ params }) => {
@@ -75,11 +76,12 @@ function SkillDetailPage() {
       </nav>
 
       {/* En-tête */}
-      <div className="flex flex-wrap items-start gap-[22px]">
-        <div className="grid h-16 w-16 flex-none place-items-center rounded-2xl" style={{ background: tint, color }}>
-          <Icon name={skill.icon} bold size={32} />
-        </div>
-        <div className="min-w-[280px] flex-1">
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+        <div className="flex min-w-0 flex-1 flex-wrap items-start gap-[22px]">
+          <div className="grid h-16 w-16 flex-none place-items-center rounded-2xl" style={{ background: tint, color }}>
+            <Icon name={skill.icon} bold size={32} />
+          </div>
+          <div className="min-w-[240px] flex-1">
           <div className="mb-2.5 flex flex-wrap items-center gap-2.5">
             <span
               className="inline-flex items-center gap-1.5 rounded-full border px-[11px] py-1 text-[12px] font-semibold"
@@ -111,7 +113,14 @@ function SkillDetailPage() {
               errors: t.skill.installErrors,
             }}
           />
+          </div>
         </div>
+        <CliCommandBar
+          args={`install ${skill.id}`}
+          copyLabel={t.skill.copyCommand}
+          copiedLabel={t.skill.copied}
+          className="w-full shrink-0 lg:mt-1 lg:max-w-[440px]"
+        />
       </div>
 
       {/* Prompt */}

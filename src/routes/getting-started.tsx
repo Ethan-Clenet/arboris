@@ -4,6 +4,7 @@ import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
+import CliCommandBar from '#/components/CliCommandBar'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
 import {
@@ -126,8 +127,8 @@ function GettingStartedPage() {
         <div className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
           {active ? (
             <>
-              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border)] bg-[var(--surface-2)] px-5 py-[18px]">
-                <div className="flex items-center gap-3.5">
+              <div className="flex flex-col gap-4 border-b border-[var(--border)] bg-[var(--surface-2)] px-5 py-[18px] lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center lg:gap-4">
+                <div className="flex items-center gap-3.5 lg:justify-self-start">
                   <span
                     className="grid h-11 w-11 place-items-center rounded-xl"
                     style={{ background: hexToRgba(active.color, 0.15), color: active.color }}
@@ -146,7 +147,13 @@ function GettingStartedPage() {
                     </div>
                   </div>
                 </div>
-                <div className="relative w-full min-w-[220px] sm:max-w-[280px]">
+                <CliCommandBar
+                  args={active.id}
+                  copyLabel={t.start.copyCommand}
+                  copiedLabel={t.start.copied}
+                  className="mx-auto lg:justify-self-center"
+                />
+                <div className="relative w-full min-w-[220px] sm:max-w-[280px] lg:justify-self-end">
                   <label htmlFor="stack-skills-search" className="sr-only">
                     {t.a11y.searchSkills}
                   </label>

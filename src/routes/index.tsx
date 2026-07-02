@@ -92,12 +92,16 @@ function HomePage() {
           </div>
           <div className="p-5 font-mono text-[13.5px] leading-[1.95] text-[#C9D1D9]">
             <div>
-              <span className="text-[#30A46C]">$</span> arboris copy <span className="text-[#9BCB3C]">fastify</span>
+              <span className="text-[#30A46C]">$</span> npm i <span className="text-[#9BCB3C]">arboris-cli</span>
             </div>
-            <div className="text-[#3ECF8E]">✓ {t.home.term1}</div>
-            <div className="text-[#6B7280]">→ {t.home.term2}</div>
+            <div className="text-[#3ECF8E]">✓ {t.home.termInstallOk}</div>
+            <div className="mt-1">
+              <span className="text-[#30A46C]">$</span> npx <span className="text-[#9BCB3C]">arboris-cli</span> list
+            </div>
+            <div className="text-[#6B7280]">{t.home.termListLine1}</div>
+            <div className="text-[#6B7280]">{t.home.termListLine2}</div>
             <div className="text-[#3ECF8E]">
-              ✓ {t.home.term3}
+              {t.home.termListMore}
               <span className="ml-[5px] inline-block h-4 w-2 -translate-y-[2px] bg-[#3ECF8E] align-middle [animation:sp-blink_1.1s_steps(1)_infinite]" />
             </div>
           </div>

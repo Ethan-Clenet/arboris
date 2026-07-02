@@ -5,6 +5,7 @@ export type CliManifest = {
   version: 1
   generatedAt: string
   stacks: Array<{ id: string; label: string }>
+  skills?: string[]
   skillsByStack: Record<string, string[]>
 }
 
@@ -77,4 +78,9 @@ export function formatStackList(manifest: CliManifest): string {
       return `  ${stack.label.padEnd(14)} (${stack.id}) — ${count} skills`
     })
     .join('\n')
+}
+
+export function hasSkillId(manifest: CliManifest, skillId: string): boolean {
+  if (manifest.skills?.includes(skillId)) return true
+  return Object.values(manifest.skillsByStack).some((ids) => ids.includes(skillId))
 }

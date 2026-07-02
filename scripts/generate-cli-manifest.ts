@@ -8,6 +8,7 @@ type CliManifest = {
   version: 1
   generatedAt: string
   stacks: Array<{ id: string; label: string }>
+  skills: string[]
   skillsByStack: Record<string, string[]>
 }
 
@@ -34,6 +35,7 @@ async function main() {
     version: 1,
     generatedAt: new Date().toISOString(),
     stacks: STACKS.map((stack) => ({ id: stack.id, label: stack.label })),
+    skills: seeds.map((skill) => skill.id).sort((a, b) => a.localeCompare(b)),
     skillsByStack,
   }
 

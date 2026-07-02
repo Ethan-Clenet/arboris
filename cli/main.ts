@@ -1,8 +1,8 @@
 import { resolve } from 'node:path'
 import { isAgentName, type AgentName } from '../src/lib/agents.ts'
 import { defaultSkillsDir, resolvePackageRoot } from '../src/lib/package-root.ts'
-import { installStackToWorkspace } from '../src/lib/skill-install-core.ts'
-import { formatStackList, loadCliManifest, resolveStackId } from './stack-resolve.ts'
+import { installSkillToWorkspace, installStackToWorkspace } from '../src/lib/skill-install-core.ts'
+import { formatStackList, hasSkillId, loadCliManifest, resolveStackId } from './stack-resolve.ts'
 
 const PACKAGE_ROOT = resolvePackageRoot(import.meta.url)
 const SKILLS_DIR = defaultSkillsDir(PACKAGE_ROOT)
@@ -20,10 +20,12 @@ function printHelp() {
 
 Usage:
   npx arboris-cli <techno> [options]
+  npx arboris-cli install <skill-id> [options]
   npx arboris-cli list
 
 Exemples:
   npx arboris-cli node
+  npx arboris-cli install fastapi-patterns
   npx arboris-cli node.js --agent cursor
   npx arboris-cli typescript --force
 
@@ -40,7 +42,11 @@ Options:
 `)
 }
 
-function parseArgs(argv: string[]): { command: string | null; options: CliOptions } {
+function parseArgs(argv: string[]): {
+  command: string | null
+  target: string | null
+  options: CliOptions
+} {
   const options: CliOptions = {
     agent: 'Cursor',
     cwd: process.cwd(),
@@ -88,7 +94,7 @@ function parseArgs(argv: string[]): { command: string | null; options: CliOption
     positional.push(arg)
   }
 
-  return { command: positional[0] ?? null, options }
+  return { command: positional[0] ?? null, target: positional[1] ?? null, options }
 }
 
 async function runList() {
@@ -98,7 +104,42 @@ async function runList() {
   console.log('\nExemple: npx arboris-cli node')
 }
 
-async function runInstall(stackInput: string, options: CliOptions) {
+async function runInstallSkill(skillId: string, options: CliOptions) {
+  const manifest = await loadCliManifest()
+
+  if (!hasSkillId(manifest, skillId)) {
+    console.error(`Skill inconnu: "${skillId}"`)
+    process.exit(1)
+  }
+
+  console.log(
+    `${options.dryRun ? '[dry-run] ' : ''}Installation de ${skillId} → ${options.agent} (${options.cwd})`,
+  )
+
+  if (options.dryRun) return
+
+  const result = await installSkillToWorkspace({
+    skillId,
+    agent: options.agent,
+    workspaceRoot: options.cwd,
+    skillsDir: SKILLS_DIR,
+    force: options.force,
+  })
+
+  if (!result.ok) {
+    console.error(`Échec: ${result.error}`)
+    process.exit(1)
+  }
+
+  if (result.skipped) {
+    console.log(`⊘ Déjà présent: ${result.path}`)
+    return
+  }
+
+  console.log(`✓ ${result.path}`)
+}
+
+async function runInstallStack(stackInput: string, options: CliOptions) {
   const manifest = await loadCliManifest()
   const stackId = resolveStackId(stackInput, manifest)
 
@@ -158,7 +199,7 @@ async function runInstall(stackInput: string, options: CliOptions) {
 
 async function main() {
   try {
-    const { command, options } = parseArgs(process.argv.slice(2))
+    const { command, target, options } = parseArgs(process.argv.slice(2))
 
     if (options.help || !command) {
       printHelp()
@@ -170,7 +211,13 @@ async function main() {
       return
     }
 
-    await runInstall(command, options)
+    if (command === 'install') {
+      if (!target) throw new Error('Usage: npx arboris-cli install <skill-id>')
+      await runInstallSkill(target, options)
+      return
+    }
+
+    await runInstallStack(command, options)
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error))
     process.exit(1)
