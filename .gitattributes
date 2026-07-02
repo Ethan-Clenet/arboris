@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.mjs text eol=lf
+cli/run.mjs text eol=lf
+dist/cli.mjs text eol=lf

@@ -19,13 +19,13 @@ function printHelp() {
   console.log(`arboris — installe les skills IA recommandés pour une techno
 
 Usage:
-  npx arboris <techno> [options]
-  npx arboris list
+  npx @rubix0270/arboris <techno> [options]
+  npx @rubix0270/arboris list
 
 Exemples:
-  npx arboris node
-  npx arboris node.js --agent cursor
-  npx arboris typescript --force
+  npx @rubix0270/arboris node
+  npx @rubix0270/arboris node.js --agent cursor
+  npx @rubix0270/arboris typescript --force
 
 Technos (alias acceptés: node.js, k8s, spring, postgres…):
   node, js, ts, fastapi, react, angular, java, spring-boot,
@@ -95,7 +95,7 @@ async function runList() {
   const manifest = await loadCliManifest()
   console.log('Technos disponibles:\n')
   console.log(formatStackList(manifest))
-  console.log('\nExemple: npx arboris node')
+  console.log('\nExemple: npx @rubix0270/arboris node')
 }
 
 async function runInstall(stackInput: string, options: CliOptions) {

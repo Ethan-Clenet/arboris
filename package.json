@@ -1,21 +1,19 @@
 {
-  "name": "arboris",
-  "version": "0.1.0",
+  "name": "@rubix0270/arboris",
+  "version": "1.0.0",
   "description": "Catalogue de skills IA — installe les skills recommandés pour ta stack via CLI.",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "bin": {
-    "arboris": "./cli/run.mjs"
+    "arboris": "dist/cli.mjs"
   },
   "files": [
-    "cli/run.mjs",
-    "cli/main.ts",
-    "cli/stack-resolve.ts",
-    "cli/manifest.json",
     "dist/cli.mjs",
-    "prisma/skills",
-    "prisma/catalog-data.ts",
-    "prisma/catalog-from-skills.ts"
+    "cli/manifest.json",
+    "prisma/skills"
   ],
   "imports": {
     "#/*": "./src/*"

@@ -1,5 +1,5 @@
 import * as esbuild from 'esbuild'
-import { chmod } from 'node:fs/promises'
+import { chmod, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -13,9 +13,13 @@ await esbuild.build({
   format: 'esm',
   target: 'node20',
   outfile,
-  banner: { js: '#!/usr/bin/env node' },
   logLevel: 'info',
 })
 
+let code = await readFile(outfile, 'utf-8')
+code = code.replace(/\r\n/g, '\n').replace(/^#!.*\n/, '')
+code = `#!/usr/bin/env node\n${code}`
+await writeFile(outfile, code, { encoding: 'utf-8' })
 await chmod(outfile, 0o755)
+
 console.log(`✅ CLI compilée: ${outfile}`)
