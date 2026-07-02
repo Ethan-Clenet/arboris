@@ -1,20 +1,9 @@
 {
-  "name": "@rubix0270/arboris",
-  "version": "1.0.0",
-  "description": "Catalogue de skills IA — installe les skills recommandés pour ta stack via CLI.",
-  "private": false,
-  "publishConfig": {
-    "access": "public"
-  },
+  "name": "arboris",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Catalogue de skills IA — application web Arboris.",
   "type": "module",
-  "bin": {
-    "arboris": "dist/cli.mjs"
-  },
-  "files": [
-    "dist/cli.mjs",
-    "cli/manifest.json",
-    "prisma/skills"
-  ],
   "imports": {
     "#/*": "./src/*"
   },
@@ -28,7 +17,7 @@
     "typecheck": "tsc --noEmit",
     "cli:manifest": "tsx scripts/generate-cli-manifest.ts",
     "build:cli": "npm run cli:manifest && node scripts/build-cli.mjs",
-    "prepack": "npm run build:cli",
+    "publish:cli": "npm run build:cli && npm publish --workspace packages/arboris-cli --access public",
     "db:generate": "prisma generate",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
@@ -42,6 +31,9 @@
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "@prisma/client": "^6.19.2",
     "@tailwindcss/vite": "^4.1.18",

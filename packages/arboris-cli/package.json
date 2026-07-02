@@ -1,0 +1,36 @@
+{
+  "name": "@rubix0270/arboris",
+  "version": "1.0.1",
+  "description": "Installe les skills IA recommandés pour ta stack (Node, React, TypeScript…).",
+  "type": "module",
+  "bin": {
+    "arboris": "dist/cli.mjs"
+  },
+  "files": [
+    "dist/cli.mjs",
+    "manifest.json",
+    "prisma/skills"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prepack": "node ../../scripts/build-cli.mjs"
+  },
+  "keywords": [
+    "skills",
+    "cursor",
+    "claude",
+    "ai",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThePheniX974/arboris.git",
+    "directory": "packages/arboris-cli"
+  },
+  "license": "MIT"
+}

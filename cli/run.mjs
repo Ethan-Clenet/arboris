@@ -5,7 +5,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const bundled = join(root, 'dist', 'cli.mjs')
+const bundled = join(root, 'packages', 'arboris-cli', 'dist', 'cli.mjs')
 const args = process.argv.slice(2)
 
 if (existsSync(bundled)) {

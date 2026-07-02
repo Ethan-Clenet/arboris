@@ -11,6 +11,7 @@ dist-ssr
 .vinxi
 __unconfig*
 todos.json
+*.tgz
 
 # Prisma / bases locales (legacy SQLite)
 prisma/*.db

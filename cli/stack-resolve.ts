@@ -1,6 +1,5 @@
 import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
-import { resolvePackageRoot } from '../src/lib/package-root.ts'
+import { defaultManifestPath, resolvePackageRoot } from '../src/lib/package-root.ts'
 
 export type CliManifest = {
   version: 1
@@ -10,7 +9,7 @@ export type CliManifest = {
 }
 
 const PACKAGE_ROOT = resolvePackageRoot(import.meta.url)
-const MANIFEST_PATH = join(PACKAGE_ROOT, 'cli', 'manifest.json')
+const MANIFEST_PATH = defaultManifestPath(PACKAGE_ROOT)
 
 let cached: CliManifest | null = null
 
