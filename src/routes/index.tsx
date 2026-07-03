@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import Icon from '#/components/Icon'
 import { ButtonLink } from '#/components/Button'
+import { ShimmerButtonLink } from '#/components/ui/shimmer-button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
@@ -84,11 +85,11 @@ function HomePage() {
           <p className="mb-7 max-w-[460px] text-[17px] text-[var(--text-2)]">{t.home.sub}</p>
 
           <div className="flex flex-wrap items-center gap-2.5">
-            <ButtonLink to="/skills" variant="primary" size="lg">
+            <ShimmerButtonLink to="/skills" className="px-4 py-2.5 text-sm">
               <Icon name="list-magnifying-glass" size={16} />
               {t.home.openIndex}
-            </ButtonLink>
-            <ButtonLink to="/skills/$id" params={{ id: 'fastify' }} variant="secondary" size="lg">
+            </ShimmerButtonLink>
+            <ButtonLink to="/skills/$id" params={{ id: 'fastapi-patterns' }} variant="secondary" size="lg">
               {t.home.example}
             </ButtonLink>
           </div>

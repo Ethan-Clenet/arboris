@@ -1,5 +1,6 @@
-import { Link, type LinkComponentProps } from '@tanstack/react-router'
+import { type LinkComponentProps } from '@tanstack/react-router'
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import { RippleButton, RippleLink } from '#/components/ui/ripple-button'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'copy'
 export type ButtonSize = 'sm' | 'md' | 'lg'
@@ -26,6 +27,14 @@ const sizes: Record<ButtonSize, string> = {
   sm: 'px-2.5 py-1 text-[13px]',
   md: 'px-3.5 py-2 text-sm',
   lg: 'px-4 py-2.5 text-sm',
+}
+
+const rippleColors: Record<ButtonVariant, string> = {
+  primary: 'rgba(255, 255, 255, 0.55)',
+  secondary: 'rgba(48, 164, 108, 0.45)',
+  outline: 'rgba(48, 164, 108, 0.4)',
+  ghost: 'rgba(48, 164, 108, 0.35)',
+  copy: 'rgba(48, 164, 108, 0.4)',
 }
 
 function classes(
@@ -63,9 +72,13 @@ export function Button({
   ...props
 }: ButtonProps) {
   return (
-    <button type="button" className={classes(variant, size, { copied, block, className })} {...props}>
+    <RippleButton
+      rippleColor={rippleColors[variant]}
+      className={classes(variant, size, { copied, block, className })}
+      {...props}
+    >
       {children}
-    </button>
+    </RippleButton>
   )
 }
 
@@ -86,8 +99,12 @@ export function ButtonLink({
   ...props
 }: ButtonLinkProps) {
   return (
-    <Link className={classes(variant, size, { block, className })} {...props}>
+    <RippleLink
+      rippleColor={rippleColors[variant]}
+      className={classes(variant, size, { block, className })}
+      {...props}
+    >
       {children}
-    </Link>
+    </RippleLink>
   )
 }
