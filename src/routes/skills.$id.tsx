@@ -6,7 +6,8 @@ import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog, getSkill, getSkillFileContent } from '#/server/functions'
-import { buildSkillMarkdown, compatDot, hexToRgba, type Category } from '#/lib/catalog'
+import { buildSkillMarkdown, hexToRgba, type Category } from '#/lib/catalog'
+import { AgentBadge } from '#/components/AgentLogo'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
 import CliCommandBar from '#/components/CliCommandBar'
 
@@ -202,13 +203,7 @@ function SkillDetailPage() {
                 <div className="mb-1.5 text-[12px] text-[var(--text-3)]">{t.skill.compat}</div>
                 <div className="flex flex-wrap gap-1.5">
                   {skill.compat.map((name) => (
-                    <span
-                      key={name}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-2.5 py-1 text-[12px] text-[var(--text-2)]"
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: compatDot(name) }} />
-                      {name}
-                    </span>
+                    <AgentBadge key={name} agent={name} size={15} />
                   ))}
                 </div>
               </div>

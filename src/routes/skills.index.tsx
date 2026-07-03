@@ -3,11 +3,11 @@ import { useMemo, useState } from 'react'
 import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
+import { AgentBadge, AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
 import {
-  compatDot,
   hexToRgba,
   type Category,
   type SkillSummary,
@@ -17,6 +17,9 @@ export const Route = createFileRoute('/skills/')({
   loader: () => getCatalog(),
   component: SkillsPage,
 })
+
+const SKILL_TABLE_COLS =
+  'grid grid-cols-[minmax(176px,1.1fr)_minmax(156px,1.5fr)_minmax(132px,148px)_minmax(200px,auto)_minmax(108px,116px)] items-center gap-x-6'
 
 function SkillsPage() {
   const catalog = Route.useLoaderData()
@@ -92,17 +95,7 @@ function SkillsPage() {
             <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
               {t.skills.worksWith}
             </div>
-            <div className="flex flex-wrap gap-[7px]">
-              {catalog.compatOrder.map((name) => (
-                <span
-                  key={name}
-                  className="flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-[11px] py-[5px] text-[12.5px] text-[var(--text-2)]"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full" style={{ background: compatDot(name) }} />
-                  {name}
-                </span>
-              ))}
-            </div>
+            <AgentLogoRow agents={catalog.compatOrder} size={16} />
           </div>
         </div>
       </PageShell>
@@ -175,20 +168,13 @@ function SkillsPage() {
               {catalog.compatOrder.map((name) => {
                 const active = compat.includes(name)
                 return (
-                  <button
+                  <AgentBadge
                     key={name}
-                    type="button"
-                    aria-pressed={active}
+                    agent={name}
+                    active={active}
+                    size={15}
                     onClick={() => setCompat(toggle(compat, name))}
-                    className={`flex items-center gap-1.5 rounded-md border px-[11px] py-[5px] text-[12.5px] font-medium transition-colors ${
-                      active
-                        ? 'border-[var(--border-2)] bg-[var(--surface-hover)] text-[var(--text-1)]'
-                        : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-2)] hover:border-[var(--border-2)]'
-                    }`}
-                  >
-                    <span className="h-1.5 w-1.5 rounded-full" style={{ background: compatDot(name) }} />
-                    {name}
-                  </button>
+                  />
                 )
               })}
             </div>
@@ -241,12 +227,12 @@ function SkillsPage() {
 
           <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
             <div className="scroll-x">
-              <div className="min-w-[820px]">
-                <div className="grid grid-cols-[minmax(200px,1.4fr)_minmax(220px,2fr)_156px_152px_130px] gap-3.5 border-b border-[var(--border)] bg-[var(--surface-2)] px-[18px] py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)]">
+              <div className="min-w-[900px]">
+                <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] bg-[var(--surface-2)] px-4 py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)] sm:px-[18px]`}>
                   <div>{t.skills.colSkill}</div>
                   <div>{t.skills.colDesc}</div>
-                  <div>{t.skills.colTech}</div>
-                  <div>{t.skills.colCompat}</div>
+                  <div className="min-w-0">{t.skills.colTech}</div>
+                  <div className="shrink-0 border-l border-[var(--border)] pl-6">{t.skills.colCompat}</div>
                   <div />
                 </div>
 
@@ -336,11 +322,9 @@ function SkillRow({
 }) {
   const { t, lang } = useI18n()
   const color = category?.color ?? 'var(--text-3)'
-  const techShort = skill.tech.slice(0, 2)
-  const compatShort = skill.compat.slice(0, 2)
 
   return (
-    <div className="grid grid-cols-[minmax(200px,1.4fr)_minmax(220px,2fr)_156px_152px_130px] items-center gap-3.5 border-b border-[var(--border)] px-[18px] py-3.5 transition-colors hover:bg-[var(--surface-hover)]">
+    <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] px-4 py-3.5 transition-colors hover:bg-[var(--surface-hover)] sm:px-[18px]`}>
       <Link to="/skills/$id" params={{ id: skill.id }} className="flex min-w-0 items-center gap-[11px] text-[var(--text-1)]">
         <span
           className="grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px]"
@@ -354,35 +338,28 @@ function SkillRow({
         </span>
       </Link>
 
-      <div className="line-clamp-2 text-[13px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
+      <div className="min-w-0 line-clamp-2 text-[13px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
 
-      <div className="flex flex-wrap items-center gap-1.5">
-        {techShort.map((tech) => (
-          <span
-            key={tech}
-            className="whitespace-nowrap rounded-md border border-[var(--border)] px-[7px] py-0.5 font-mono text-[10.5px] text-[var(--text-2)]"
-          >
-            {tech}
-          </span>
-        ))}
-        {skill.tech.length > 2 && (
-          <span className="font-mono text-[10.5px] text-[var(--text-3)]">+{skill.tech.length - 2}</span>
+      <div className="min-w-0 overflow-hidden pr-2" title={skill.tech.join(', ')}>
+        {skill.tech.length > 0 ? (
+          <div className="flex min-w-0 items-center gap-1.5">
+            <span className="max-w-full truncate rounded-md border border-[var(--border)] px-[7px] py-0.5 font-mono text-[10.5px] text-[var(--text-2)]">
+              {skill.tech[0]}
+            </span>
+            {skill.tech.length > 1 ? (
+              <span className="shrink-0 font-mono text-[10.5px] text-[var(--text-3)]">+{skill.tech.length - 1}</span>
+            ) : null}
+          </div>
+        ) : (
+          <span className="text-[var(--text-3)]">—</span>
         )}
       </div>
 
-      <div className="flex flex-wrap items-center gap-1.5">
-        {compatShort.map((name) => (
-          <span key={name} className="inline-flex items-center gap-1 text-[11.5px] text-[var(--text-2)]">
-            <span className="h-[5px] w-[5px] rounded-full" style={{ background: compatDot(name) }} />
-            {name}
-          </span>
-        ))}
-        {skill.compat.length > 2 && (
-          <span className="text-[11px] text-[var(--text-3)]">+{skill.compat.length - 2}</span>
-        )}
+      <div className="flex shrink-0 items-center border-l border-[var(--border)] pl-6">
+        <AgentCompatList agents={skill.compat} size={15} />
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex shrink-0 justify-end">
         <Button variant="copy" size="sm" copied={copied} onClick={onCopy}>
           <Icon name={copied ? 'check' : 'copy'} size={14} />
           {copied ? t.skills.copied : t.skills.copy}

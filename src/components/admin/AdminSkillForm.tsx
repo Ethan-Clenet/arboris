@@ -1,6 +1,7 @@
 import Icon from '#/components/Icon'
 import { adminFieldClass, adminTextareaClass } from '#/components/admin/AdminUi'
 import { ADMIN_COMPAT, ADMIN_SKILL_ICONS } from '#/lib/admin-constants'
+import { AgentBadge } from '#/components/AgentLogo'
 import { hexToRgba } from '#/lib/catalog'
 import type { AdminCatState, AdminFormState } from '#/lib/admin-state'
 import type { Stack } from '#/lib/catalog'
@@ -141,20 +142,13 @@ export default function AdminSkillForm({
               {ADMIN_COMPAT.map((cm) => {
                 const on = form.compat.includes(cm.name)
                 return (
-                  <button
+                  <AgentBadge
                     key={cm.name}
-                    type="button"
+                    agent={cm.name}
+                    active={on}
+                    size={15}
                     onClick={() => onToggleCompat(cm.name)}
-                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] font-medium transition-colors"
-                    style={{
-                      border: `1px solid ${on ? 'var(--accent-border)' : 'var(--border)'}`,
-                      background: on ? 'var(--accent-soft)' : 'var(--surface)',
-                      color: on ? 'var(--accent)' : 'var(--text-2)',
-                    }}
-                  >
-                    <Icon name={cm.icon} bold size={14} />
-                    {cm.name}
-                  </button>
+                  />
                 )
               })}
             </div>

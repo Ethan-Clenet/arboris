@@ -6,8 +6,8 @@ import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
+import { AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
 import {
-  compatDot,
   hexToRgba,
   type Category,
   type SkillSummary,
@@ -21,15 +21,9 @@ export const Route = createFileRoute('/')({
 type TabMode = 'popular' | 'trending' | 'recent'
 
 const TABLE_COLS =
-  'grid grid-cols-[minmax(160px,1.4fr)_minmax(160px,1.6fr)_72px_96px] items-center gap-x-4'
+  'grid grid-cols-[minmax(152px,1.15fr)_minmax(148px,1.1fr)_56px_minmax(136px,auto)] items-center gap-x-6'
 
 const HOME_INDEX_LIMIT = 10
-
-function formatCompat(compat: string[]): string {
-  if (!compat.length) return '—'
-  if (compat.length === 1) return compat[0]
-  return `${compat[0]} +${compat.length - 1}`
-}
 
 function HomePage() {
   const catalog = Route.useLoaderData()
@@ -103,17 +97,7 @@ function HomePage() {
             <span className="text-[12px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)]">
               {t.home.worksWith}
             </span>
-            <div className="flex flex-wrap gap-[7px]">
-              {catalog.compatOrder.map((name) => (
-                <span
-                  key={name}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-[12px] text-[var(--text-2)]"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full" style={{ background: compatDot(name) }} />
-                  {name}
-                </span>
-              ))}
-            </div>
+            <AgentLogoRow agents={catalog.compatOrder} size={16} />
           </div>
         </div>
 
@@ -190,14 +174,14 @@ function HomePage() {
           </div>
 
           <div className="scroll-x">
-            <div className="min-w-[520px]">
+            <div className="min-w-[580px]">
               <div
                 className={`${TABLE_COLS} border-b border-[var(--border)] px-4 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.07em] text-[var(--text-3)] sm:px-5`}
               >
                 <div />
                 <div>{t.home.colCategory}</div>
-                <div className="text-right">{t.home.colStacks}</div>
-                <div className="text-right">{t.home.colCompat}</div>
+                <div className="text-center">{t.home.colStacks}</div>
+                <div className="border-l border-[var(--border)] pl-5">{t.home.colCompat}</div>
               </div>
 
               {rows.map((skill) => (
@@ -285,11 +269,13 @@ function HomeTableRow({
         <span className="truncate font-mono text-[12px]">/{category?.id ?? skill.categoryId}</span>
       </div>
 
-      <div className="text-right font-mono text-[13px] tabular-nums text-[var(--text-2)]">
+      <div className="text-center font-mono text-[13px] tabular-nums text-[var(--text-2)]">
         {skill.stacks.length || '—'}
       </div>
 
-      <div className="truncate text-right text-[12.5px] text-[var(--text-2)]">{formatCompat(skill.compat)}</div>
+      <div className="flex min-w-[136px] items-center border-l border-[var(--border)] pl-5">
+        <AgentCompatList agents={skill.compat} size={15} />
+      </div>
     </div>
   )
 }

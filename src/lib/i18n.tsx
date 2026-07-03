@@ -150,7 +150,7 @@ const fr = {
   },
   auth: {
     brandTitle: 'Le store de skills pour ton agent IA.',
-    footNote: 'Compatible Cursor · Claude · Codex · Copilot',
+    footNote: 'Compatible avec',
     perks: [
       { icon: 'cursor-click', text: "Copie un prompt, ton agent installe la fonctionnalité." },
       { icon: 'stack', text: 'Un catalogue de skills organisés par techno.' },
@@ -434,7 +434,7 @@ const en: typeof fr = {
   },
   auth: {
     brandTitle: 'The skill store for your AI agent.',
-    footNote: 'Works with Cursor · Claude · Codex · Copilot',
+    footNote: 'Works with',
     perks: [
       { icon: 'cursor-click', text: 'Copy a prompt, your agent installs the feature.' },
       { icon: 'stack', text: 'A catalog of skills organized by technology.' },

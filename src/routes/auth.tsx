@@ -4,6 +4,8 @@ import { useServerFn } from '@tanstack/react-start'
 import Icon from '#/components/Icon'
 import LangSwitch from '#/components/LangSwitch'
 import ThemeToggle from '#/components/ThemeToggle'
+import { AgentLogoRow } from '#/components/AgentLogo'
+import { COMPAT_ORDER } from '#/lib/catalog'
 import { useI18n } from '#/lib/i18n'
 import { login, register } from '#/server/auth.functions'
 
@@ -122,9 +124,10 @@ function AuthPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 font-mono text-[11.5px] text-[var(--text-3)]">
+        <div className="flex items-center gap-2.5 font-mono text-[11.5px] text-[var(--text-3)]">
           <span className="h-[7px] w-[7px] rounded-full bg-[var(--accent)]" />
-          {a.footNote}
+          <span>{a.footNote}</span>
+          <AgentLogoRow agents={COMPAT_ORDER} size={14} />
         </div>
       </aside>
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useServerFn } from '@tanstack/react-start'
-import Icon from '#/components/Icon'
-import { agentDot, agentSkillPath, AGENT_ICON, isAgentName } from '#/lib/agents'
+import AgentLogo from '#/components/AgentLogo'
+import { agentSkillPath, isAgentName } from '#/lib/agents'
 import type { Lang } from '#/lib/catalog'
 import { installSkill, type InstallSkillError } from '#/server/functions'
 
@@ -57,24 +57,21 @@ export default function SkillInstallButtons({ skillId, agents, lang, t }: SkillI
               type="button"
               disabled={busy !== null}
               title={path}
+              aria-label={t.install(agent)}
               onClick={() => handleInstall(agent)}
-              className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-[13px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${
+              className={`inline-flex items-center justify-center rounded-lg border p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${
                 active
-                  ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)]'
-                  : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-1)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]'
+                  ? 'border-[var(--accent-border)] bg-[var(--accent-soft)]'
+                  : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]'
               }`}
             >
-              <span
-                className="grid h-5 w-5 place-items-center rounded-md"
-                style={{
-                  background: `color-mix(in srgb, ${agentDot(agent)} 18%, transparent)`,
-                  color: agentDot(agent),
-                }}
-              >
-                <Icon name={AGENT_ICON[agent]} bold size={12} />
-              </span>
-              {loading ? '…' : active ? '✓' : null}
-              {t.install(agent)}
+              {loading ? (
+                <span className="grid h-[18px] w-[18px] place-items-center text-[13px] text-[var(--text-3)]">…</span>
+              ) : active ? (
+                <span className="grid h-[18px] w-[18px] place-items-center text-[13px] text-[var(--accent)]">✓</span>
+              ) : (
+                <AgentLogo agent={agent} size={18} />
+              )}
             </button>
           )
         })}
