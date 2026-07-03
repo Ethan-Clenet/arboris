@@ -8,8 +8,11 @@ import CliCommandBar from '#/components/CliCommandBar'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
 import {
+  CATEGORY_GROUPS,
+  categoryIdsInGroup,
   hexToRgba,
   stackSupportsCategory,
+  skillsForStackAndCategory,
   type Category,
   type SkillSummary,
 } from '#/lib/catalog'
@@ -23,6 +26,7 @@ function GettingStartedPage() {
   const catalog = Route.useLoaderData()
   const { t, lang } = useI18n()
   const { copiedKey, copySkill } = useSkillCopy(1700)
+  const [groupId, setGroupId] = useState<string | null>(null)
   const [categoryId, setCategoryId] = useState<string | null>(null)
   const [stackId, setStackId] = useState<string | null>(null)
   const [query, setQuery] = useState('')
@@ -36,7 +40,7 @@ function GettingStartedPage() {
   }, [catalog.categories])
 
   const skillsForSelection = (stack: string, category: string) =>
-    catalog.skills.filter((s) => s.stacks.includes(stack) && s.categoryId === category)
+    skillsForStackAndCategory(catalog.skills, stack, category)
 
   const stacksForCategory = useMemo(() => {
     if (!categoryId) return []
@@ -44,12 +48,19 @@ function GettingStartedPage() {
       .filter((stack) => stackSupportsCategory(stack.id, categoryId))
       .map((stack) => ({
         stack,
-        count: catalog.skills.filter((s) => s.stacks.includes(stack.id) && s.categoryId === categoryId).length,
+        count: skillsForStackAndCategory(catalog.skills, stack.id, categoryId).length,
       }))
       .filter((entry) => entry.count > 0)
       .sort((a, b) => b.count - a.count || a.stack.label.localeCompare(b.stack.label))
   }, [catalog.stacks, catalog.skills, categoryId])
 
+  const categoriesForGroup = useMemo(() => {
+    if (!groupId) return []
+    const ids = categoryIdsInGroup(groupId)
+    return catalog.categories.filter((c) => ids.includes(c.id))
+  }, [catalog.categories, groupId])
+
+  const activeGroup = groupId ? CATEGORY_GROUPS.find((g) => g.id === groupId) : undefined
   const activeCategory = categoryId ? catById.get(categoryId) : undefined
   const active = stackId ? catalog.stacks.find((s) => s.id === stackId) : undefined
   const rows = active && categoryId ? skillsForSelection(active.id, categoryId) : []
@@ -62,6 +73,14 @@ function GettingStartedPage() {
       return haystack.includes(q)
     })
   }, [catById, lang, query, rows])
+
+  const pickGroup = (id: string) => {
+    setGroupId(id)
+    setCategoryId(null)
+    setStackId(null)
+    setQuery('')
+    setSearchOpen(false)
+  }
 
   const pickCategory = (id: string) => {
     setCategoryId(id)
@@ -116,22 +135,23 @@ function GettingStartedPage() {
         </div>
       </section>
 
-      {/* Choix de la catégorie */}
+      {/* Choix du domaine */}
       <section className="pt-[34px]">
         <div className="mb-4">
-          <h2 className="mb-1 font-display text-[22px] font-semibold">{t.start.pickCategoryTitle}</h2>
-          <p className="text-[14px] text-[var(--text-2)]">{t.start.pickCategorySub}</p>
+          <h2 className="mb-1 font-display text-[22px] font-semibold">{t.start.pickGroupTitle}</h2>
+          <p className="text-[14px] text-[var(--text-2)]">{t.start.pickGroupSub}</p>
         </div>
         <div className="flex flex-wrap gap-2.5">
-          {catalog.categories.map((c) => {
-            const isActive = c.id === categoryId
-            const count = catalog.skills.filter((s) => s.categoryId === c.id).length
+          {CATEGORY_GROUPS.map((group) => {
+            const isActive = group.id === groupId
+            const count = catalog.skills.filter((s) => group.categoryIds.includes(s.categoryId)).length
+            if (count === 0) return null
             return (
               <button
-                key={c.id}
+                key={group.id}
                 type="button"
                 aria-pressed={isActive}
-                onClick={() => pickCategory(c.id)}
+                onClick={() => pickGroup(group.id)}
                 className={`flex items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
                   isActive
                     ? 'border-[var(--accent-border)] bg-[var(--accent-soft)]'
@@ -140,12 +160,12 @@ function GettingStartedPage() {
               >
                 <span
                   className="grid h-[30px] w-[30px] place-items-center rounded-lg"
-                  style={{ background: hexToRgba(c.color, 0.15), color: c.color }}
+                  style={{ background: hexToRgba(group.color, 0.15), color: group.color }}
                 >
-                  <Icon name={c.icon} bold size={17} />
+                  <Icon name={group.icon} bold size={17} />
                 </span>
                 <span className="flex flex-col items-start leading-[1.15]">
-                  <span>{c.label[lang]}</span>
+                  <span>{group.label[lang]}</span>
                   <span className="font-mono text-[10.5px] font-medium text-[var(--text-3)]">{count} skills</span>
                 </span>
               </button>
@@ -153,6 +173,65 @@ function GettingStartedPage() {
           })}
         </div>
       </section>
+
+      {/* Choix de la spécialité */}
+      {groupId ? (
+        <section className="pt-[26px]">
+          <div className="mb-4">
+            <h2 className="mb-1 font-display text-[22px] font-semibold">{t.start.pickCategoryTitle}</h2>
+            <p className="text-[14px] text-[var(--text-2)]">
+              {activeGroup ? (
+                <>
+                  <span
+                    className="inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[12px] font-medium"
+                    style={{
+                      background: hexToRgba(activeGroup.color, 0.12),
+                      color: activeGroup.color,
+                      borderColor: hexToRgba(activeGroup.color, 0.28),
+                    }}
+                  >
+                    <Icon name={activeGroup.icon} size={11} bold />
+                    {activeGroup.label[lang]}
+                  </span>
+                  <span className="ml-2">{t.start.pickCategorySub}</span>
+                </>
+              ) : (
+                t.start.pickCategorySub
+              )}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2.5">
+            {categoriesForGroup.map((c) => {
+              const isActive = c.id === categoryId
+              const count = catalog.skills.filter((s) => s.categoryId === c.id).length
+              return (
+                <button
+                  key={c.id}
+                  type="button"
+                  aria-pressed={isActive}
+                  onClick={() => pickCategory(c.id)}
+                  className={`flex items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
+                    isActive
+                      ? 'border-[var(--accent-border)] bg-[var(--accent-soft)]'
+                      : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-2)]'
+                  }`}
+                >
+                  <span
+                    className="grid h-[30px] w-[30px] place-items-center rounded-lg"
+                    style={{ background: hexToRgba(c.color, 0.15), color: c.color }}
+                  >
+                    <Icon name={c.icon} bold size={17} />
+                  </span>
+                  <span className="flex flex-col items-start leading-[1.15]">
+                    <span>{c.label[lang]}</span>
+                    <span className="font-mono text-[10.5px] font-medium text-[var(--text-3)]">{count} skills</span>
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+        </section>
+      ) : null}
 
       {/* Choix de la stack */}
       {categoryId ? (
@@ -326,10 +405,17 @@ function GettingStartedPage() {
           ) : (
             <div className="flex flex-col items-center px-6 py-16 text-center">
               <div className="mb-3.5 grid h-12 w-12 place-items-center rounded-xl bg-[var(--surface-2)] text-[var(--text-3)]">
-                <Icon name={categoryId ? 'stack' : 'squares-four'} size={22} />
+                <Icon
+                  name={!groupId ? 'squares-four' : !categoryId ? 'folders' : 'stack'}
+                  size={22}
+                />
               </div>
               <p className="max-w-[360px] text-[15px] text-[var(--text-2)]">
-                {!categoryId ? t.start.pickCategoryPrompt : t.start.pickPrompt}
+                {!groupId
+                  ? t.start.pickGroupPrompt
+                  : !categoryId
+                    ? t.start.pickCategoryPrompt
+                    : t.start.pickPrompt}
               </p>
             </div>
           )}

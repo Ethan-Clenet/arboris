@@ -62,25 +62,103 @@ export const COMPAT_DOT: Record<string, string> = {
   Copilot: '#8B7FF7',
 }
 
+export interface CategoryGroup {
+  id: string
+  label: Bilingual
+  icon: string
+  color: string
+  categoryIds: readonly string[]
+}
+
+/** Regroupements de catégories (page Premier pas). */
+export const CATEGORY_GROUPS: CategoryGroup[] = [
+  {
+    id: 'development',
+    label: { fr: 'Développement', en: 'Development' },
+    icon: 'code',
+    color: '#4F8FF7',
+    categoryIds: ['frontend', 'backend', 'language'],
+  },
+  {
+    id: 'devops',
+    label: { fr: 'DevOps', en: 'DevOps' },
+    icon: 'git-branch',
+    color: '#F08A4B',
+    categoryIds: ['ops', 'security'],
+  },
+  {
+    id: 'quality',
+    label: { fr: 'Qualité & Tests', en: 'Quality & Testing' },
+    icon: 'flask',
+    color: '#2DB8B0',
+    categoryIds: ['tests', 'verification'],
+  },
+  {
+    id: 'agents',
+    label: { fr: 'IA & Agents', en: 'AI & Agents' },
+    icon: 'magic-wand',
+    color: '#46C2E8',
+    categoryIds: ['agents'],
+  },
+  {
+    id: 'data',
+    label: { fr: 'Données', en: 'Data' },
+    icon: 'database',
+    color: '#9BCB3C',
+    categoryIds: ['data'],
+  },
+  {
+    id: 'product',
+    label: { fr: 'Produit', en: 'Product' },
+    icon: 'image',
+    color: '#E5484D',
+    categoryIds: ['product'],
+  },
+  {
+    id: 'tools',
+    label: { fr: 'Outils', en: 'Tools' },
+    icon: 'wrench',
+    color: '#F2789F',
+    categoryIds: ['docs'],
+  },
+]
+
+export function categoryIdsInGroup(groupId: string): readonly string[] {
+  return CATEGORY_GROUPS.find((group) => group.id === groupId)?.categoryIds ?? []
+}
+
 /** Catégories pertinentes par techno (page Premier pas). */
 export const STACK_CATEGORY_IDS: Record<string, readonly string[]> = {
-  node: ['backend', 'language', 'testing', 'ops', 'agents', 'security', 'data', 'product'],
-  js: ['frontend', 'language', 'testing', 'agents', 'docs'],
-  ts: ['frontend', 'backend', 'language', 'testing', 'agents', 'data'],
-  fastapi: ['backend', 'language', 'testing', 'security', 'data', 'agents'],
-  react: ['frontend', 'testing', 'language', 'agents'],
-  angular: ['frontend', 'testing', 'language'],
-  java: ['backend', 'language', 'testing', 'security', 'data'],
-  'spring-boot': ['backend', 'language', 'testing', 'security', 'data'],
-  docker: ['ops', 'backend', 'testing', 'agents'],
-  k9: ['ops', 'backend', 'testing'],
-  postgresql: ['backend', 'data', 'testing', 'language'],
-  mysql: ['backend', 'data', 'testing'],
-  prisma: ['backend', 'data', 'testing', 'language'],
+  node: ['backend', 'language', 'tests', 'verification', 'ops', 'agents', 'security', 'data', 'product', 'docs'],
+  js: ['frontend', 'language', 'tests', 'verification', 'agents', 'docs', 'product'],
+  ts: ['frontend', 'backend', 'language', 'tests', 'verification', 'agents', 'data', 'docs', 'product'],
+  fastapi: ['backend', 'language', 'tests', 'verification', 'security', 'data', 'agents', 'docs'],
+  react: ['frontend', 'tests', 'verification', 'language', 'agents', 'docs', 'product'],
+  angular: ['frontend', 'tests', 'verification', 'language', 'product'],
+  java: ['backend', 'language', 'tests', 'verification', 'security', 'data', 'product'],
+  'spring-boot': ['backend', 'language', 'tests', 'verification', 'security', 'data', 'product'],
+  docker: ['ops', 'backend', 'tests', 'verification', 'agents', 'product'],
+  k9: ['ops', 'backend', 'tests', 'verification'],
+  postgresql: ['backend', 'data', 'tests', 'verification', 'language', 'docs'],
+  mysql: ['backend', 'data', 'tests', 'verification'],
+  prisma: ['backend', 'data', 'tests', 'verification', 'language', 'docs'],
 }
 
 export function stackSupportsCategory(stackId: string, categoryId: string): boolean {
   return STACK_CATEGORY_IDS[stackId]?.includes(categoryId) ?? false
+}
+
+/** Skills sans stack explicite sont proposés pour toute techno compatible avec leur catégorie. */
+export function skillMatchesStack(skill: Pick<SkillSummary, 'stacks'>, stackId: string): boolean {
+  return skill.stacks.length === 0 || skill.stacks.includes(stackId)
+}
+
+export function skillsForStackAndCategory(
+  skills: readonly SkillSummary[],
+  stackId: string,
+  categoryId: string,
+): SkillSummary[] {
+  return skills.filter((skill) => skill.categoryId === categoryId && skillMatchesStack(skill, stackId))
 }
 
 export function compatDot(name: string): string {

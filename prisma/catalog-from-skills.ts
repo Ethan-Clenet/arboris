@@ -46,10 +46,38 @@ function sectionBullets(body: string, sectionTitle: string): string[] {
 function inferCategory(id: string, description: string): CategorySeed['id'] {
   const slug = id.toLowerCase()
   const text = `${id} ${description}`.toLowerCase()
+  const wb = (...words: string[]) => new RegExp(`\\b(?:${words.join('|')})\\b`, 'i')
+
+  // Overrides slug (évite les faux positifs « test » / « verification » dans la description)
+  if (/^orch-/.test(slug)) return 'agents'
+  if (/^agent-harness|^autonomous-agent-harness|^gan-style-harness/.test(slug)) return 'agents'
+  if (slug === 'parallel-execution-optimizer' || slug === 'dynamic-workflow-mode' || slug === 'iterative-retrieval') {
+    return 'agents'
+  }
+  if (slug === 'email-ops') return 'ops'
+  if (slug === 'ui-demo') return 'frontend'
+  if (/cisco-ios/.test(slug)) return 'ops'
 
   // Slug (le plus fiable)
   if (/security|auth|oauth|hipaa|compliance/.test(slug)) return 'security'
-  if (/test|tdd|verification|qa|e2e|browser-qa|eval|harness|canary/.test(slug)) return 'testing'
+
+  // Vérification : schémas, gates, eval harness, *-verification
+  if (
+    /-verification$|^verification-|verification-loop|canary-watch|santa-method/.test(slug) ||
+    /eval-harness|agent-eval|agent-self-evaluation|scholar-evaluation|healthcare-eval-harness/.test(slug) ||
+    /zod|pydantic|joi|yup|typecheck|quality-gate|plankton-code-quality/.test(slug)
+  ) {
+    return 'verification'
+  }
+
+  // Tests : TDD, e2e, QA, frameworks de test (*-testing, *-tdd)
+  if (
+    /-testing$|-tdd$|browser-qa|e2e-testing|windows-desktop-e2e|^tdd-workflow|ai-regression-testing/.test(slug) ||
+    (/\b(test|tdd|qa|e2e)\b/.test(slug) && !/verif/.test(slug))
+  ) {
+    return 'tests'
+  }
+
   if (
     /^springboot|^quarkus|^fastapi|^nestjs|^django|^laravel|^jpa|^postgres|^mysql|^redis|^prisma|^api-|^backend/.test(
       slug,
@@ -65,10 +93,25 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
   if (/python|golang|java|kotlin|rust|csharp|swift|typescript|javascript|perl|dart|bun/.test(slug)) return 'language'
   if (/^agent/.test(slug)) return 'agents'
 
-  const wb = (...words: string[]) => new RegExp(`\\b(?:${words.join('|')})\\b`, 'i')
-
   if (wb('security', 'oauth', 'hipaa', 'compliance', 'authentication', 'authorization').test(text)) return 'security'
-  if (wb('testing', 'tdd', 'verification', 'qa', 'e2e', 'eval', 'harness', 'canary').test(text)) return 'testing'
+
+  if (
+    wb('zod', 'pydantic', 'joi', 'yup', 'json schema', 'schema validation', 'input validation', 'typecheck', 'lint gate').test(
+      text,
+    )
+  ) {
+    return 'verification'
+  }
+  if (wb('verification loop', 'eval harness', 'eval gate', 'quality gate', 'canary').test(text)) return 'verification'
+
+  if (
+    wb('unit test', 'integration test', 'e2e test', 'test-driven', 'tdd', 'playwright', 'vitest', 'jest', 'pytest', 'agilitest').test(
+      text,
+    )
+  ) {
+    return 'tests'
+  }
+  if (wb('testing', 'qa').test(text) && !wb('verification', 'validation').test(text)) return 'tests'
 
   // Backend avant frontend (évite « design » / « reactive » mal classés)
   if (/\bspring\s?-?\s?boot\b|\bspringboot\b|\bquarkus\b|\bfastapi\b|\bnestjs\b|\bdjango\b|\blaravel\b/.test(text)) {
