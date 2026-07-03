@@ -251,31 +251,6 @@ function AuthPage() {
               </button>
             </form>
 
-            <div className="my-5 flex items-center gap-3">
-              <span className="h-px flex-1 bg-[var(--border)]" />
-              <span className="text-[12px] text-[var(--text-3)]">{a.or}</span>
-              <span className="h-px flex-1 bg-[var(--border)]" />
-            </div>
-
-            <div className="flex flex-col gap-2.5">
-              <button
-                type="button"
-                onClick={() => setNotice(a.oauthSoon)}
-                className="flex h-11 items-center justify-center gap-2 rounded-[10px] border border-[var(--border-2)] bg-[var(--surface)] text-[14px] font-semibold text-[var(--text-1)] transition-colors hover:border-[var(--text-3)] hover:bg-[var(--surface-hover)]"
-              >
-                <Icon name="github-logo" bold size={18} />
-                {a.github}
-              </button>
-              <button
-                type="button"
-                onClick={() => setNotice(a.oauthSoon)}
-                className="flex h-11 items-center justify-center gap-2 rounded-[10px] border border-[var(--border-2)] bg-[var(--surface)] text-[14px] font-semibold text-[var(--text-1)] transition-colors hover:border-[var(--text-3)] hover:bg-[var(--surface-hover)]"
-              >
-                <Icon name="google-logo" bold size={18} />
-                {a.google}
-              </button>
-            </div>
-
             <p className="mt-5 text-center text-[13.5px] text-[var(--text-2)]">
               {isSignup ? a.toLogin : a.toSignup}{' '}
               <button

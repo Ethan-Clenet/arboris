@@ -75,9 +75,11 @@ function HomePage() {
       {/* Hero */}
       <section className="grid items-center gap-11 pt-14 pb-8 lg:grid-cols-[1fr_470px]">
         <div className="rise-in">
-          <div className="mb-[22px] inline-flex items-center gap-[7px] rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-[13px] py-[5px] font-mono text-[11.5px] text-[var(--accent)]">
-            <Icon name="leaf" bold size={13} />
-            {t.home.eyebrow}
+          <div className="mb-[22px] inline-flex h-7 items-center gap-1.5 rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-3 font-mono text-[11.5px] leading-none text-[var(--accent)]">
+            <span className="grid size-[13px] shrink-0 place-items-center">
+              <Icon name="leaf" bold size={13} />
+            </span>
+            <span>{t.home.eyebrow}</span>
           </div>
           <h1 className="mb-[18px] max-w-[560px] whitespace-pre-line font-display text-[40px] font-semibold leading-[1.04] tracking-[-0.03em] sm:text-[52px]">
             {t.home.title}

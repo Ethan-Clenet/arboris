@@ -104,9 +104,11 @@ function GettingStartedPage() {
   return (
     <PageShell>
       <section className="max-w-[660px] pt-12 pb-2">
-        <div className="mb-5 inline-flex items-center gap-[7px] rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-[13px] py-[5px] font-mono text-[11.5px] text-[var(--accent)]">
-          <Icon name="seedling" bold size={13} />
-          {t.start.eyebrow}
+        <div className="mb-5 inline-flex h-7 items-center gap-1.5 rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-3 font-mono text-[11.5px] leading-none text-[var(--accent)]">
+          <span className="grid size-[13px] shrink-0 place-items-center">
+            <Icon name="footprints" bold size={13} />
+          </span>
+          <span>{t.start.eyebrow}</span>
         </div>
         <h1 className="mb-3.5 font-display text-[40px] font-semibold leading-[1.06] tracking-[-0.025em]">
           {t.start.title}
