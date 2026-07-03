@@ -14,7 +14,7 @@
     "dev": "vite dev --port 3000",
     "postinstall": "prisma generate",
     "build": "prisma generate && vite build",
-    "vercel-build": "prisma migrate deploy && npm run build",
+    "vercel-build": "node scripts/vercel-build.mjs",
     "start": "node .output/server/index.mjs",
     "preview": "vite preview",
     "generate-routes": "tsr generate",
