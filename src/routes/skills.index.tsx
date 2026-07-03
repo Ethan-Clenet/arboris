@@ -18,8 +18,6 @@ export const Route = createFileRoute('/skills/')({
   component: SkillsPage,
 })
 
-type SortMode = 'score' | 'name'
-
 function SkillsPage() {
   const catalog = Route.useLoaderData()
   const { t, lang } = useI18n()
@@ -29,7 +27,6 @@ function SkillsPage() {
   const [cat, setCat] = useState<string>('all')
   const [techs, setTechs] = useState<string[]>([])
   const [compat, setCompat] = useState<string[]>([])
-  const [sort, setSort] = useState<SortMode>('score')
 
   const catById = useMemo(() => {
     const map = new Map<string, Category>()
@@ -60,11 +57,10 @@ function SkillsPage() {
       return true
     }
     const list = catalog.skills.filter(match)
-    if (sort === 'name') return [...list].sort((a, b) => a.id.localeCompare(b.id))
     return [...list].sort(
       (a, b) => (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id),
     )
-  }, [q, cat, techs, compat, sort, catalog.skills, catById, lang])
+  }, [q, cat, techs, compat, catalog.skills, catById, lang])
 
   const hasFilters = cat !== 'all' || techs.length > 0 || compat.length > 0 || q.trim().length > 0
   const clearAll = () => {
@@ -239,37 +235,14 @@ function SkillsPage() {
 
         {/* Résultats */}
         <section>
-          <div className="mb-3.5 flex items-center justify-between gap-4">
-            <div className="text-[13.5px] text-[var(--text-2)]">
-              <span className="font-semibold text-[var(--text-1)]">{rows.length}</span> {resultLabel}
-            </div>
-            <div
-              className="flex items-center rounded-lg border border-[var(--border)] bg-[var(--surface)] p-0.5"
-              role="group"
-              aria-label={t.a11y.sortBy}
-            >
-              {(['score', 'name'] as SortMode[]).map((mode) => (
-                <button
-                  key={mode}
-                  type="button"
-                  aria-pressed={sort === mode}
-                  onClick={() => setSort(mode)}
-                    className={`shrink-0 cursor-pointer rounded px-2.5 py-1 text-xs font-medium transition-colors ${
-                      sort === mode
-                        ? 'bg-[var(--text-1)] text-[var(--bg)]'
-                        : 'text-[var(--text-2)] hover:bg-[var(--surface-hover)] hover:text-[var(--text-1)]'
-                    }`}
-                >
-                  {mode === 'score' ? 'Score' : lang === 'fr' ? 'Nom' : 'Name'}
-                </button>
-              ))}
-            </div>
+          <div className="mb-3.5 text-[13.5px] text-[var(--text-2)]">
+            <span className="font-semibold text-[var(--text-1)]">{rows.length}</span> {resultLabel}
           </div>
 
           <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
             <div className="scroll-x">
-              <div className="min-w-[880px]">
-                <div className="grid grid-cols-[minmax(200px,1.4fr)_minmax(220px,2fr)_156px_152px_150px] gap-3.5 border-b border-[var(--border)] bg-[var(--surface-2)] px-[18px] py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)]">
+              <div className="min-w-[820px]">
+                <div className="grid grid-cols-[minmax(200px,1.4fr)_minmax(220px,2fr)_156px_152px_130px] gap-3.5 border-b border-[var(--border)] bg-[var(--surface-2)] px-[18px] py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)]">
                   <div>{t.skills.colSkill}</div>
                   <div>{t.skills.colDesc}</div>
                   <div>{t.skills.colTech}</div>
@@ -301,11 +274,6 @@ function SkillsPage() {
                 </Button>
               </div>
             )}
-          </div>
-
-          <div className="mt-3.5 flex flex-wrap items-center gap-2 text-[12px] text-[var(--text-3)]">
-            <Icon name="info" size={14} />
-            <span>{t.skills.scoreHint}</span>
           </div>
         </section>
       </PageShell>
@@ -372,7 +340,7 @@ function SkillRow({
   const compatShort = skill.compat.slice(0, 2)
 
   return (
-    <div className="grid grid-cols-[minmax(200px,1.4fr)_minmax(220px,2fr)_156px_152px_150px] items-center gap-3.5 border-b border-[var(--border)] px-[18px] py-3.5 transition-colors hover:bg-[var(--surface-hover)]">
+    <div className="grid grid-cols-[minmax(200px,1.4fr)_minmax(220px,2fr)_156px_152px_130px] items-center gap-3.5 border-b border-[var(--border)] px-[18px] py-3.5 transition-colors hover:bg-[var(--surface-hover)]">
       <Link to="/skills/$id" params={{ id: skill.id }} className="flex min-w-0 items-center gap-[11px] text-[var(--text-1)]">
         <span
           className="grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px]"
@@ -414,19 +382,11 @@ function SkillRow({
         )}
       </div>
 
-      <div className="flex items-center justify-end gap-1.5">
+      <div className="flex justify-end">
         <Button variant="copy" size="sm" copied={copied} onClick={onCopy}>
           <Icon name={copied ? 'check' : 'copy'} size={14} />
           {copied ? t.skills.copied : t.skills.copy}
         </Button>
-        <Link
-          to="/skills/$id"
-          params={{ id: skill.id }}
-          aria-label={t.skills.detail}
-          className="grid h-8 w-8 flex-none place-items-center rounded-lg border border-[var(--border)] text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
-        >
-          <Icon name="arrow-up-right" bold size={14} />
-        </Link>
       </div>
     </div>
   )

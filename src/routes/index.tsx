@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import Icon from '#/components/Icon'
-import { Button, ButtonLink } from '#/components/Button'
+import { ButtonLink } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
@@ -18,11 +18,25 @@ export const Route = createFileRoute('/')({
   component: HomePage,
 })
 
+type TabMode = 'popular' | 'trending' | 'recent'
+
+const TABLE_COLS =
+  'grid grid-cols-[minmax(160px,1.4fr)_minmax(160px,1.6fr)_72px_96px] items-center gap-x-4'
+
+const HOME_INDEX_LIMIT = 10
+
+function formatCompat(compat: string[]): string {
+  if (!compat.length) return '—'
+  if (compat.length === 1) return compat[0]
+  return `${compat[0]} +${compat.length - 1}`
+}
+
 function HomePage() {
   const catalog = Route.useLoaderData()
   const { t, lang } = useI18n()
   const { copiedKey, copySkill } = useSkillCopy()
   const [query, setQuery] = useState('')
+  const [tab, setTab] = useState<TabMode>('popular')
 
   const catById = useMemo(() => {
     const map = new Map<string, Category>()
@@ -30,7 +44,7 @@ function HomePage() {
     return map
   }, [catalog.categories])
 
-  const rows = useMemo(() => {
+  const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
     if (!q) return catalog.skills
     return catalog.skills.filter((s) => {
@@ -39,6 +53,27 @@ function HomePage() {
       return hay.includes(q)
     })
   }, [query, catalog.skills, catById, lang])
+
+  const rows = useMemo(() => {
+    const list = [...filtered]
+    let sorted: SkillSummary[]
+    if (tab === 'popular') {
+      sorted = list.sort((a, b) => (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id))
+    } else if (tab === 'trending') {
+      sorted = list.sort(
+        (a, b) => b.stacks.length - a.stacks.length || (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id),
+      )
+    } else {
+      sorted = list.sort((a, b) => a.id.localeCompare(b.id))
+    }
+    return sorted.slice(0, HOME_INDEX_LIMIT)
+  }, [filtered, tab])
+
+  const tabs: { id: TabMode; label: string; icon: string }[] = [
+    { id: 'popular', label: t.home.tabPopular, icon: 'star' },
+    { id: 'trending', label: t.home.tabTrending, icon: 'chart-line-up' },
+    { id: 'recent', label: t.home.tabRecent, icon: 'clock' },
+  ]
 
   return (
     <PageShell>
@@ -108,46 +143,65 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Index */}
+      {/* Index tableau */}
       <section className="pt-6 pb-[70px]">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-baseline gap-2.5">
-            <h2 className="font-display text-[22px] font-semibold">{t.home.indexTitle}</h2>
-            <span className="font-mono text-[12.5px] text-[var(--text-3)]">
-              {rows.length}/{catalog.skills.length}
-            </span>
-          </div>
-          <div className="relative w-[240px]">
-            <label htmlFor="home-search" className="sr-only">
-              {t.a11y.filterSkills}
-            </label>
-            <Icon
-              name="magnifying-glass"
-              size={15}
-              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-3)]"
-            />
-            <input
-              id="home-search"
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder={t.home.searchPh}
-              className="h-[38px] w-full rounded-[9px] border border-[var(--border)] bg-[var(--surface)] pl-[34px] pr-3 font-mono text-[12.5px] text-[var(--text-1)] outline-none focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_var(--accent-soft)]"
-            />
-          </div>
-        </div>
-
         <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
+          <div className="flex flex-wrap items-end justify-between gap-3 border-b border-[var(--border)] bg-[var(--surface-2)] px-3 pt-2 sm:px-4">
+            <div className="flex flex-wrap items-end gap-0.5" role="tablist" aria-label={t.home.indexTitle}>
+              {tabs.map((item) => {
+                const active = tab === item.id
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    onClick={() => setTab(item.id)}
+                    className={`inline-flex items-center gap-1.5 rounded-t-[10px] border px-3.5 py-2.5 text-[13px] font-medium transition-colors ${
+                      active
+                        ? 'relative z-[1] -mb-px border-[var(--border)] border-b-[var(--surface)] bg-[var(--surface)] text-[var(--text-1)]'
+                        : 'border-transparent text-[var(--text-3)] hover:text-[var(--text-2)]'
+                    }`}
+                  >
+                    <Icon name={item.icon} size={14} bold={active} />
+                    {item.label}
+                  </button>
+                )
+              })}
+            </div>
+            <div className="relative mb-2 w-full min-w-[200px] max-w-[260px] sm:mb-2.5">
+              <label htmlFor="home-search" className="sr-only">
+                {t.a11y.filterSkills}
+              </label>
+              <Icon
+                name="magnifying-glass"
+                size={14}
+                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-3)]"
+              />
+              <input
+                id="home-search"
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t.home.searchPh}
+                className="h-9 w-full rounded-[9px] border border-[var(--border)] bg-[var(--surface)] pl-[34px] pr-3 font-mono text-[12px] text-[var(--text-1)] outline-none focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_var(--accent-soft)]"
+              />
+            </div>
+          </div>
+
           <div className="scroll-x">
-            <div className="min-w-[760px]">
-              <div className="grid grid-cols-[minmax(200px,1.4fr)_minmax(200px,2fr)_132px] gap-3.5 border-b border-[var(--border)] bg-[var(--surface-2)] px-[18px] py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)]">
-                <div>Skill</div>
-                <div>Description</div>
+            <div className="min-w-[520px]">
+              <div
+                className={`${TABLE_COLS} border-b border-[var(--border)] px-4 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.07em] text-[var(--text-3)] sm:px-5`}
+              >
                 <div />
+                <div>{t.home.colCategory}</div>
+                <div className="text-right">{t.home.colStacks}</div>
+                <div className="text-right">{t.home.colCompat}</div>
               </div>
 
               {rows.map((skill) => (
-                <HomeRow
+                <HomeTableRow
                   key={skill.id}
                   skill={skill}
                   category={catById.get(skill.categoryId)}
@@ -156,10 +210,23 @@ function HomePage() {
                 />
               ))}
 
-              {rows.length === 0 && (
-                <div className="p-12 text-center text-[13.5px] text-[var(--text-3)]">{t.home.empty}</div>
-              )}
+              {rows.length === 0 ? (
+                <div className="px-6 py-14 text-center text-[13.5px] text-[var(--text-3)]">{t.home.empty}</div>
+              ) : null}
             </div>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[var(--border)] bg-[var(--surface-2)] px-4 py-3 sm:px-5">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
+              {t.home.footerCount(catalog.skills.length)}
+            </span>
+            <Link
+              to="/skills"
+              className="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)] transition-colors hover:text-[var(--accent)]"
+            >
+              {t.home.footerLink}
+              <Icon name="arrow-right" size={12} />
+            </Link>
           </div>
         </div>
       </section>
@@ -167,7 +234,7 @@ function HomePage() {
   )
 }
 
-function HomeRow({
+function HomeTableRow({
   skill,
   category,
   copied,
@@ -178,32 +245,51 @@ function HomeRow({
   copied: boolean
   onCopy: () => void
 }) {
-  const { t, lang } = useI18n()
+  const { t } = useI18n()
   const color = category?.color ?? 'var(--text-3)'
 
   return (
-    <div className="grid grid-cols-[minmax(200px,1.4fr)_minmax(200px,2fr)_132px] items-center gap-3.5 border-b border-[var(--border)] px-[18px] py-[13px] transition-colors hover:bg-[var(--surface-hover)]">
-      <Link to="/skills/$id" params={{ id: skill.id }} className="flex min-w-0 items-center gap-[11px] text-[var(--text-1)]">
+    <div
+      className={`group ${TABLE_COLS} border-b border-[var(--border)] px-4 py-3 transition-colors last:border-b-0 hover:bg-[var(--surface-hover)] sm:px-5`}
+    >
+      <div className="flex min-w-0 items-center gap-2">
+        <Link
+          to="/skills/$id"
+          params={{ id: skill.id }}
+          className="min-w-0 truncate font-semibold text-[var(--accent)] transition-colors hover:text-[var(--accent-press)]"
+        >
+          {skill.id}
+        </Link>
+        <button
+          type="button"
+          onClick={onCopy}
+          aria-label={copied ? t.home.copied : t.home.copy}
+          title={copied ? t.home.copied : t.home.copy}
+          className={`grid h-6 w-6 shrink-0 place-items-center rounded-md border text-[var(--text-3)] opacity-0 transition-all group-hover:opacity-100 ${
+            copied
+              ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)] opacity-100'
+              : 'border-[var(--border)] hover:border-[var(--border-2)] hover:text-[var(--text-1)]'
+          }`}
+        >
+          <Icon name={copied ? 'check' : 'copy'} size={12} />
+        </button>
+      </div>
+
+      <div className="flex min-w-0 items-center gap-2 text-[var(--text-3)]">
         <span
-          className="grid h-8 w-8 flex-none place-items-center rounded-[9px]"
+          className="grid h-5 w-5 shrink-0 place-items-center rounded-[5px]"
           style={{ background: category ? hexToRgba(category.color, 0.14) : 'var(--surface-2)', color }}
         >
-          <Icon name={skill.icon} bold size={16} />
+          <Icon name={category?.icon ?? 'folder'} size={11} />
         </span>
-        <span className="min-w-0">
-          <span className="block truncate font-mono text-[13px] font-semibold">{skill.id}</span>
-          <span className="block text-[11.5px] text-[var(--text-3)]">{category ? category.label[lang] : ''}</span>
-        </span>
-      </Link>
-
-      <div className="line-clamp-2 text-[12.5px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
-
-      <div className="flex justify-end">
-        <Button variant="copy" size="sm" copied={copied} onClick={onCopy}>
-          <Icon name={copied ? 'check' : 'copy'} size={13} />
-          {copied ? t.home.copied : t.home.copy}
-        </Button>
+        <span className="truncate font-mono text-[12px]">/{category?.id ?? skill.categoryId}</span>
       </div>
+
+      <div className="text-right font-mono text-[13px] tabular-nums text-[var(--text-2)]">
+        {skill.stacks.length || '—'}
+      </div>
+
+      <div className="truncate text-right text-[12.5px] text-[var(--text-2)]">{formatCompat(skill.compat)}</div>
     </div>
   )
 }

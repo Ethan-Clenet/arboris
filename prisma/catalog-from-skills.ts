@@ -44,16 +44,57 @@ function sectionBullets(body: string, sectionTitle: string): string[] {
 }
 
 function inferCategory(id: string, description: string): CategorySeed['id'] {
+  const slug = id.toLowerCase()
   const text = `${id} ${description}`.toLowerCase()
-  if (/(security|auth|oauth|hipaa|compliance|bounty|scan|review)/.test(text)) return 'security'
-  if (/(test|testing|tdd|verification|qa|eval|harness|canary|browser-qa|e2e)/.test(text)) return 'testing'
-  if (/(react|next|angular|vue|frontend|ui|swiftui|design|motion|remotion|video)/.test(text)) return 'frontend'
-  if (/(api|backend|fastapi|nestjs|django|laravel|springboot|quarkus|postgres|mysql|redis|prisma|database|connector)/.test(text)) return 'backend'
-  if (/(python|golang|rust|kotlin|java|csharp|fsharp|perl|dart|swift|nodejs|bun|typescript|javascript)/.test(text)) return 'language'
-  if (/(data|research|scientific|scraper|benchmark|market|pubmed|uspto|atlas|ml|pytorch)/.test(text)) return 'data'
-  if (/(git|github|deployment|docker|kubernetes|network|terminal|workspace|google-workspace|jira|homelab|mailtrap|browser)/.test(text)) return 'ops'
-  if (/(document|article|writing|decision-record|rfc|brand-voice|literature|lookup)/.test(text)) return 'docs'
-  if (/(product|brand|marketing|investor|growth|seo|social|customer|billing|finance|campaign)/.test(text)) return 'product'
+
+  // Slug (le plus fiable)
+  if (/security|auth|oauth|hipaa|compliance/.test(slug)) return 'security'
+  if (/test|tdd|verification|qa|e2e|browser-qa|eval|harness|canary/.test(slug)) return 'testing'
+  if (
+    /^springboot|^quarkus|^fastapi|^nestjs|^django|^laravel|^jpa|^postgres|^mysql|^redis|^prisma|^api-|^backend/.test(
+      slug,
+    )
+  ) {
+    return 'backend'
+  }
+  if (/react|angular|vue|next|frontend|swiftui|tailwind|accessibility|motion|remotion/.test(slug)) return 'frontend'
+  if (/docker|kubernetes|k8s|deployment|homelab|git-|github|network|terminal|workspace/.test(slug)) return 'ops'
+  if (/benchmark|scraper|data-|ml-|pytorch|clickhouse|market-|research/.test(slug)) return 'data'
+  if (/article|writing|document|brand-voice|rfc|decision-record/.test(slug)) return 'docs'
+  if (/product|marketing|investor|growth|seo|customer|billing|brand-/.test(slug)) return 'product'
+  if (/python|golang|java|kotlin|rust|csharp|swift|typescript|javascript|perl|dart|bun/.test(slug)) return 'language'
+  if (/^agent/.test(slug)) return 'agents'
+
+  const wb = (...words: string[]) => new RegExp(`\\b(?:${words.join('|')})\\b`, 'i')
+
+  if (wb('security', 'oauth', 'hipaa', 'compliance', 'authentication', 'authorization').test(text)) return 'security'
+  if (wb('testing', 'tdd', 'verification', 'qa', 'e2e', 'eval', 'harness', 'canary').test(text)) return 'testing'
+
+  // Backend avant frontend (évite « design » / « reactive » mal classés)
+  if (/\bspring\s?-?\s?boot\b|\bspringboot\b|\bquarkus\b|\bfastapi\b|\bnestjs\b|\bdjango\b|\blaravel\b/.test(text)) {
+    return 'backend'
+  }
+  if (wb('jpa', 'hibernate', 'postgresql', 'postgres', 'mysql', 'redis', 'prisma', 'graphql', 'backend', 'microservice').test(text)) {
+    return 'backend'
+  }
+  if (/\brest\s+api\b/.test(text)) return 'backend'
+
+  if (wb('react', 'angular', 'vue', 'nextjs', 'frontend', 'swiftui', 'tailwind').test(text)) return 'frontend'
+  if (/\bnext\.js\b/.test(text)) return 'frontend'
+  if (/\bui\s+component\b|\buser\s+interface\b|\bdesign\s+system\b/.test(text)) return 'frontend'
+
+  if (wb('python', 'golang', 'kotlin', 'rust', 'csharp', 'perl', 'dart', 'swift', 'typescript', 'javascript', 'nodejs', 'bun').test(text)) {
+    return 'language'
+  }
+  if (/\bjava\b(?!script)/.test(text)) return 'language'
+
+  if (wb('docker', 'kubernetes', 'deployment', 'homelab', 'network').test(text)) return 'ops'
+  if (/\bk8s\b|\bk9s?\b/.test(text)) return 'ops'
+
+  if (wb('research', 'scraper', 'benchmark', 'pytorch', 'clickhouse').test(text)) return 'data'
+  if (wb('article', 'writing', 'documentation', 'literature').test(text)) return 'docs'
+  if (wb('marketing', 'investor', 'product', 'seo', 'campaign').test(text)) return 'product'
+
   return 'agents'
 }
 
@@ -66,7 +107,7 @@ function inferStacks(id: string, description: string, body: string, stacks: Stac
     fastapi: /\bfastapi\b/,
     react: /\breact\b/,
     angular: /\bangular\b/,
-    java: /\bjava\b/,
+    java: /\bjava\b(?!script)/,
     'spring-boot': /\bspring\s?boot|springboot\b/,
     docker: /\bdocker\b/,
     k9: /\bk9\b|\bk9s\b|\bkubernetes\b|\bk8s\b/,

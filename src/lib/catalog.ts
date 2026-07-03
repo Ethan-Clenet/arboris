@@ -62,6 +62,27 @@ export const COMPAT_DOT: Record<string, string> = {
   Copilot: '#8B7FF7',
 }
 
+/** Catégories pertinentes par techno (page Premier pas). */
+export const STACK_CATEGORY_IDS: Record<string, readonly string[]> = {
+  node: ['backend', 'language', 'testing', 'ops', 'agents', 'security', 'data', 'product'],
+  js: ['frontend', 'language', 'testing', 'agents', 'docs'],
+  ts: ['frontend', 'backend', 'language', 'testing', 'agents', 'data'],
+  fastapi: ['backend', 'language', 'testing', 'security', 'data', 'agents'],
+  react: ['frontend', 'testing', 'language', 'agents'],
+  angular: ['frontend', 'testing', 'language'],
+  java: ['backend', 'language', 'testing', 'security', 'data'],
+  'spring-boot': ['backend', 'language', 'testing', 'security', 'data'],
+  docker: ['ops', 'backend', 'testing', 'agents'],
+  k9: ['ops', 'backend', 'testing'],
+  postgresql: ['backend', 'data', 'testing', 'language'],
+  mysql: ['backend', 'data', 'testing'],
+  prisma: ['backend', 'data', 'testing', 'language'],
+}
+
+export function stackSupportsCategory(stackId: string, categoryId: string): boolean {
+  return STACK_CATEGORY_IDS[stackId]?.includes(categoryId) ?? false
+}
+
 export function compatDot(name: string): string {
   return COMPAT_DOT[name] ?? 'var(--text-3)'
 }
