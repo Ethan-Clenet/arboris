@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-02T13:42:29.838Z",
+  "generatedAt": "2026-07-09T07:37:07.349Z",
   "stacks": [
     {
       "id": "node",
@@ -53,6 +53,34 @@
     {
       "id": "prisma",
       "label": "Prisma"
+    },
+    {
+      "id": "supabase",
+      "label": "Supabase"
+    },
+    {
+      "id": "firebase",
+      "label": "Firebase"
+    },
+    {
+      "id": "convex",
+      "label": "Convex"
+    },
+    {
+      "id": "neon",
+      "label": "Neon"
+    },
+    {
+      "id": "turso",
+      "label": "Turso"
+    },
+    {
+      "id": "duckdb",
+      "label": "DuckDB"
+    },
+    {
+      "id": "drizzle",
+      "label": "Drizzle ORM"
     }
   ],
   "skills": [
@@ -110,6 +138,8 @@
     "continuous-agent-loop",
     "continuous-learning",
     "continuous-learning-v2",
+    "convex-quickstart",
+    "convex-setup-auth",
     "cost-aware-llm-pipeline",
     "cost-tracking",
     "council",
@@ -138,6 +168,7 @@
     "docker-patterns",
     "documentation-lookup",
     "dotnet-patterns",
+    "drizzle",
     "dynamic-workflow-mode",
     "e2e-testing",
     "ecc-guide",
@@ -153,6 +184,9 @@
     "fal-ai-media",
     "fastapi-patterns",
     "finance-billing-ops",
+    "firebase-auth-basics",
+    "firebase-basics",
+    "firebase-firestore",
     "flox-environments",
     "flutter-dart-code-review",
     "foundation-models-on-device",
@@ -230,8 +264,10 @@
     "motion-foundations",
     "motion-patterns",
     "motion-ui",
+    "mysql",
     "mysql-patterns",
     "nanoclaw-repl",
+    "neon-postgres",
     "nestjs-patterns",
     "netmiko-ssh-automation",
     "network-bgp-diagnostics",
@@ -255,6 +291,7 @@
     "perl-testing",
     "plan-orchestrate",
     "plankton-code-quality",
+    "postgres",
     "postgres-patterns",
     "prediction-market-oracle-research",
     "prediction-market-risk-review",
@@ -274,10 +311,10 @@
     "quarkus-security",
     "quarkus-tdd",
     "quarkus-verification",
+    "query",
     "ralphinho-rfc-pipeline",
     "react-native-patterns",
     "react-patterns",
-    "react-performance",
     "react-testing",
     "recsys-pipeline-architect",
     "recursive-decision-ledger",
@@ -298,6 +335,7 @@
     "security-review",
     "security-scan",
     "seo",
+    "shadcn",
     "skill-comply",
     "skill-scout",
     "skill-stocktake",
@@ -308,10 +346,13 @@
     "springboot-tdd",
     "springboot-verification",
     "strategic-compact",
+    "supabase",
+    "supabase-postgres-best-practices",
     "swift-actor-persistence",
     "swift-concurrency-6-2",
     "swift-protocol-di-testing",
     "swiftui-patterns",
+    "tailwind-design-system",
     "taste",
     "tdd-workflow",
     "team-agent-orchestration",
@@ -319,17 +360,22 @@
     "terminal-ops",
     "tinystruct-patterns",
     "token-budget-advisor",
+    "turso-db",
+    "typescript-advanced-types",
     "ui-demo",
     "ui-to-vue",
     "uncloud",
     "unified-notifications-ops",
     "uspto-database",
+    "vercel-composition-patterns",
+    "vercel-react-best-practices",
     "verification-loop",
     "video-editing",
     "videodb",
     "visa-doc-translate",
     "vite-patterns",
     "vue-patterns",
+    "webapp-testing",
     "windows-desktop-e2e",
     "workspace-surface-audit",
     "x-api"
@@ -361,7 +407,6 @@
       "nodejs-keccak256",
       "prisma-patterns",
       "prompt-optimizer",
-      "react-performance",
       "react-testing",
       "redis-patterns",
       "search-first",
@@ -377,6 +422,9 @@
       "configure-ecc",
       "django-security",
       "error-handling",
+      "firebase-auth-basics",
+      "firebase-basics",
+      "firebase-firestore",
       "frontend-slides",
       "hexagonal-architecture",
       "iterative-retrieval",
@@ -387,10 +435,14 @@
       "plankton-code-quality",
       "quarkus-verification",
       "react-native-patterns",
-      "react-performance",
+      "tailwind-design-system",
+      "typescript-advanced-types",
       "ui-demo",
+      "vercel-composition-patterns",
+      "vercel-react-best-practices",
       "verification-loop",
-      "vite-patterns"
+      "vite-patterns",
+      "webapp-testing"
     ],
     "ts": [
       "agent-payment-x402",
@@ -406,11 +458,17 @@
       "codebase-onboarding",
       "coding-standards",
       "configure-ecc",
+      "convex-quickstart",
+      "convex-setup-auth",
       "database-migrations",
       "deployment-patterns",
+      "drizzle",
       "e2e-testing",
       "error-handling",
       "evm-token-decimals",
+      "firebase-auth-basics",
+      "firebase-basics",
+      "firebase-firestore",
       "frontend-patterns",
       "healthcare-cdss-patterns",
       "healthcare-emr-patterns",
@@ -429,10 +487,17 @@
       "react-native-patterns",
       "recsys-pipeline-architect",
       "security-review",
+      "shadcn",
+      "supabase",
+      "tailwind-design-system",
       "tdd-workflow",
+      "typescript-advanced-types",
+      "vercel-composition-patterns",
+      "vercel-react-best-practices",
       "verification-loop",
       "vite-patterns",
-      "vue-patterns"
+      "vue-patterns",
+      "webapp-testing"
     ],
     "fastapi": [
       "codebase-onboarding",
@@ -455,6 +520,7 @@
       "coding-standards",
       "configure-ecc",
       "continuous-learning-v2",
+      "convex-quickstart",
       "documentation-lookup",
       "error-handling",
       "frontend-a11y",
@@ -468,14 +534,20 @@
       "prompt-optimizer",
       "react-native-patterns",
       "react-patterns",
-      "react-performance",
       "react-testing",
       "remotion-video-creation",
       "security-review",
+      "shadcn",
+      "supabase",
+      "tailwind-design-system",
       "taste",
       "tdd-workflow",
+      "typescript-advanced-types",
+      "vercel-composition-patterns",
+      "vercel-react-best-practices",
       "video-editing",
-      "vite-patterns"
+      "vite-patterns",
+      "webapp-testing"
     ],
     "angular": [
       "angular-developer",
@@ -556,6 +628,7 @@
       "django-security",
       "django-verification",
       "docker-patterns",
+      "drizzle",
       "flox-environments",
       "git-workflow",
       "golang-patterns",
@@ -568,8 +641,10 @@
       "kotlin-patterns",
       "mle-workflow",
       "mysql-patterns",
+      "neon-postgres",
       "perl-testing",
       "plan-orchestrate",
+      "postgres",
       "postgres-patterns",
       "prisma-patterns",
       "prompt-optimizer",
@@ -579,12 +654,17 @@
       "redis-patterns",
       "springboot-tdd",
       "springboot-verification",
+      "supabase",
+      "supabase-postgres-best-practices",
+      "turso-db",
       "uncloud"
     ],
     "mysql": [
       "clickhouse-io",
       "database-migrations",
+      "drizzle",
       "laravel-security",
+      "mysql",
       "mysql-patterns",
       "python-testing"
     ],
@@ -595,8 +675,52 @@
       "database-migrations",
       "deployment-patterns",
       "documentation-lookup",
+      "drizzle",
+      "neon-postgres",
       "nestjs-patterns",
       "prisma-patterns"
+    ],
+    "supabase": [
+      "agent-sort",
+      "ai-regression-testing",
+      "autonomous-agent-harness",
+      "backend-patterns",
+      "coding-standards",
+      "context-budget",
+      "data-scraper-agent",
+      "documentation-lookup",
+      "knowledge-ops",
+      "postgres-patterns",
+      "prisma-patterns",
+      "security-review",
+      "supabase",
+      "supabase-postgres-best-practices",
+      "tdd-workflow"
+    ],
+    "firebase": [
+      "firebase-auth-basics",
+      "firebase-basics",
+      "firebase-firestore",
+      "flutter-dart-code-review"
+    ],
+    "convex": [
+      "convex-quickstart",
+      "convex-setup-auth"
+    ],
+    "neon": [
+      "fal-ai-media",
+      "neon-postgres",
+      "taste"
+    ],
+    "turso": [
+      "turso-db"
+    ],
+    "duckdb": [
+      "query"
+    ],
+    "drizzle": [
+      "database-migrations",
+      "drizzle"
     ]
   }
 }

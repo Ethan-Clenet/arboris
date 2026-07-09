@@ -142,6 +142,13 @@ export const STACK_CATEGORY_IDS: Record<string, readonly string[]> = {
   postgresql: ['backend', 'data', 'tests', 'verification', 'language', 'docs'],
   mysql: ['backend', 'data', 'tests', 'verification'],
   prisma: ['backend', 'data', 'tests', 'verification', 'language', 'docs'],
+  supabase: ['backend', 'data', 'security', 'frontend', 'tests', 'verification'],
+  firebase: ['backend', 'security', 'frontend', 'tests', 'verification'],
+  convex: ['backend', 'security', 'frontend', 'tests', 'verification'],
+  neon: ['backend', 'data', 'tests', 'verification', 'language'],
+  turso: ['backend', 'data', 'tests', 'verification'],
+  duckdb: ['data', 'backend', 'tests', 'verification'],
+  drizzle: ['backend', 'data', 'language', 'tests', 'verification'],
 }
 
 export function stackSupportsCategory(stackId: string, categoryId: string): boolean {

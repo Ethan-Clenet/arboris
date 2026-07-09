@@ -60,4 +60,11 @@ export const STACKS: StackSeed[] = [
   { id: 'postgresql', label: 'PostgreSQL', icon: 'database', color: '#336791', briefFr: 'Base de données relationnelle avancée', briefEn: 'Advanced relational database' },
   { id: 'mysql', label: 'MySQL', icon: 'database', color: '#4479A1', briefFr: 'Base de données relationnelle populaire', briefEn: 'Popular relational database' },
   { id: 'prisma', label: 'Prisma', icon: 'diamonds-four', color: '#2D3748', briefFr: 'ORM moderne pour TypeScript', briefEn: 'Modern ORM for TypeScript' },
+  { id: 'supabase', label: 'Supabase', icon: 'database', color: '#3ECF8E', briefFr: 'Backend Postgres avec auth, storage et edge functions', briefEn: 'Postgres backend with auth, storage, and edge functions' },
+  { id: 'firebase', label: 'Firebase', icon: 'flame', color: '#FFCA28', briefFr: 'Plateforme Google pour auth, Firestore et hosting', briefEn: 'Google platform for auth, Firestore, and hosting' },
+  { id: 'convex', label: 'Convex', icon: 'hexagon', color: '#FF5C35', briefFr: 'Backend réactif TypeScript avec base de données intégrée', briefEn: 'Reactive TypeScript backend with built-in database' },
+  { id: 'neon', label: 'Neon', icon: 'database', color: '#00E599', briefFr: 'Postgres serverless avec branching', briefEn: 'Serverless Postgres with branching' },
+  { id: 'turso', label: 'Turso', icon: 'database', color: '#4FF8D2', briefFr: 'SQLite distribué compatible edge', briefEn: 'Distributed SQLite for the edge' },
+  { id: 'duckdb', label: 'DuckDB', icon: 'database', color: '#FFF000', briefFr: 'Moteur analytique SQL embarqué', briefEn: 'Embedded analytical SQL engine' },
+  { id: 'drizzle', label: 'Drizzle ORM', icon: 'diamonds-four', color: '#C5F74F', briefFr: 'ORM TypeScript type-safe sans runtime', briefEn: 'Type-safe TypeScript ORM with zero runtime' },
 ]

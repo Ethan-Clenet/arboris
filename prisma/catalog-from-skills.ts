@@ -50,6 +50,19 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
 
   // Overrides slug (évite les faux positifs « test » / « verification » dans la description)
   if (slug === 'shadcn') return 'frontend'
+  if (slug === 'query') return 'data'
+  if (slug === 'convex-setup-auth' || slug === 'firebase-auth-basics') return 'security'
+  if (
+    slug === 'supabase' ||
+    slug === 'supabase-postgres-best-practices' ||
+    slug === 'neon-postgres' ||
+    slug === 'turso-db' ||
+    slug === 'drizzle' ||
+    /^firebase-/.test(slug) ||
+    /^convex-/.test(slug)
+  ) {
+    return 'backend'
+  }
   if (/^orch-/.test(slug)) return 'agents'
   if (/^agent-harness|^autonomous-agent-harness|^gan-style-harness/.test(slug)) return 'agents'
   if (slug === 'parallel-execution-optimizer' || slug === 'dynamic-workflow-mode' || slug === 'iterative-retrieval') {
@@ -153,6 +166,19 @@ function inferStacks(id: string, description: string, body: string, stacks: Stac
     'webapp-testing': ['react', 'js', 'ts'],
     'typescript-advanced-types': ['react', 'ts', 'js'],
     'tailwind-design-system': ['react', 'ts', 'js'],
+    'supabase-postgres-best-practices': ['postgresql', 'supabase'],
+    supabase: ['supabase', 'postgresql', 'react', 'ts'],
+    'firebase-basics': ['firebase', 'js', 'ts'],
+    'firebase-auth-basics': ['firebase', 'js', 'ts'],
+    'firebase-firestore': ['firebase', 'js', 'ts'],
+    'convex-quickstart': ['convex', 'ts', 'react'],
+    'convex-setup-auth': ['convex', 'ts'],
+    'neon-postgres': ['neon', 'postgresql', 'prisma'],
+    postgres: ['postgresql'],
+    mysql: ['mysql'],
+    'turso-db': ['turso', 'postgresql'],
+    query: ['duckdb'],
+    drizzle: ['drizzle', 'ts', 'postgresql', 'mysql', 'prisma'],
   }
 
   if (overrideStacks[slug]) return overrideStacks[slug]
@@ -171,6 +197,13 @@ function inferStacks(id: string, description: string, body: string, stacks: Stac
     postgresql: /\bpostgres|postgresql\b/,
     mysql: /\bmysql\b/,
     prisma: /\bprisma\b/,
+    supabase: /\bsupabase\b/,
+    firebase: /\bfirebase\b/,
+    convex: /\bconvex\b/,
+    neon: /\bneon\b/,
+    turso: /\bturso\b|\blibsql\b/,
+    duckdb: /\bduckdb\b/,
+    drizzle: /\bdrizzle\b/,
   }
 
   const ids = stacks.map((stack) => stack.id).filter((stackId) => keywords[stackId]?.test(text))
