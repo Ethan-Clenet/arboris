@@ -49,6 +49,7 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
   const wb = (...words: string[]) => new RegExp(`\\b(?:${words.join('|')})\\b`, 'i')
 
   // Overrides slug (évite les faux positifs « test » / « verification » dans la description)
+  if (slug === 'shadcn') return 'frontend'
   if (/^orch-/.test(slug)) return 'agents'
   if (/^agent-harness|^autonomous-agent-harness|^gan-style-harness/.test(slug)) return 'agents'
   if (slug === 'parallel-execution-optimizer' || slug === 'dynamic-workflow-mode' || slug === 'iterative-retrieval') {
@@ -143,6 +144,19 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
 
 function inferStacks(id: string, description: string, body: string, stacks: StackSeed[]): string[] {
   const text = `${id} ${description} ${body}`.toLowerCase()
+  const slug = id.toLowerCase()
+
+  const overrideStacks: Record<string, string[]> = {
+    'vercel-react-best-practices': ['react', 'js', 'ts'],
+    'vercel-composition-patterns': ['react', 'js', 'ts'],
+    shadcn: ['react', 'ts'],
+    'webapp-testing': ['react', 'js', 'ts'],
+    'typescript-advanced-types': ['react', 'ts', 'js'],
+    'tailwind-design-system': ['react', 'ts', 'js'],
+  }
+
+  if (overrideStacks[slug]) return overrideStacks[slug]
+
   const keywords: Record<string, RegExp> = {
     node: /\bnode(\.js)?\b/,
     js: /\bjavascript\b/,
