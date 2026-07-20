@@ -10,6 +10,7 @@ import { buildSkillMarkdown, hexToRgba, type Category } from '#/lib/catalog'
 import { AgentBadge } from '#/components/AgentLogo'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
 import CliCommandBar from '#/components/CliCommandBar'
+import SecurityBadge from '#/components/SecurityBadge'
 
 export const Route = createFileRoute('/skills/$id')({
   loader: async ({ params }) => {
@@ -91,6 +92,18 @@ function SkillDetailPage() {
               <Icon name={category?.icon ?? 'squares-four'} bold size={13} />
               {category ? category.label[lang] : ''}
             </span>
+            <SecurityBadge
+              score={skill.score}
+              recommendation={skill.securityRecommendation}
+              size="md"
+              labels={{
+                unscanned: t.skills.securityUnscanned,
+                safe: t.skills.securitySafe,
+                caution: t.skills.securityCaution,
+                unsafe: t.skills.securityUnsafe,
+                score: t.skills.securityScore,
+              }}
+            />
           </div>
           <h1 className="mb-3 break-words font-mono text-[30px] font-semibold leading-[1.1] tracking-[-0.01em]">
             {skill.id}
@@ -105,12 +118,17 @@ function SkillDetailPage() {
           </div>
           <SkillInstallButtons
             skillId={skill.id}
+            score={skill.score}
             agents={skill.compat}
             lang={lang}
             t={{
               installTitle: t.skill.installTitle,
               install: t.skill.install,
               installed: t.skill.installed,
+              installWarn: t.skill.installWarn,
+              installConfirm: t.skill.installConfirm,
+              installConfirmYes: t.skill.installConfirmYes,
+              installConfirmNo: t.skill.installConfirmNo,
               errors: t.skill.installErrors,
             }}
           />
@@ -194,6 +212,76 @@ function SkillDetailPage() {
         </div>
 
         <aside className="flex flex-col gap-[18px] lg:sticky lg:top-[78px]">
+          <div className="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-[18px] shadow-[var(--shadow-card)]">
+            <div className="mb-3.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
+              {t.skill.securityTitle}
+            </div>
+            {skill.score == null || !skill.securityReport ? (
+              <p className="text-[13px] text-[var(--text-2)]">{t.skill.securityUnscanned}</p>
+            ) : (
+              <div className="flex flex-col gap-3">
+                <SecurityBadge
+                  score={skill.score}
+                  recommendation={skill.securityRecommendation}
+                  size="md"
+                  labels={{
+                    unscanned: t.skills.securityUnscanned,
+                    safe: t.skills.securitySafe,
+                    caution: t.skills.securityCaution,
+                    unsafe: t.skills.securityUnsafe,
+                    score: t.skills.securityScore,
+                  }}
+                />
+                <div className="grid grid-cols-2 gap-2 text-[12px]">
+                  <div className="rounded-lg border border-[var(--border)] px-2.5 py-2">
+                    <div className="text-[var(--text-3)]">{t.skill.securityRisk}</div>
+                    <div className="font-mono font-semibold text-[var(--text-1)]">
+                      {skill.securityReport.riskScore}
+                    </div>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] px-2.5 py-2">
+                    <div className="text-[var(--text-3)]">{t.skill.securityMode}</div>
+                    <div className="font-mono font-semibold text-[var(--text-1)]">
+                      {skill.securityReport.scanMode}
+                    </div>
+                  </div>
+                </div>
+                {skill.scannedAt ? (
+                  <div className="text-[11.5px] text-[var(--text-3)]">
+                    {t.skill.securityScannedAt}:{' '}
+                    <time dateTime={skill.scannedAt}>
+                      {new Date(skill.scannedAt).toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US')}
+                    </time>
+                  </div>
+                ) : null}
+                <div>
+                  <div className="mb-1.5 text-[12px] text-[var(--text-3)]">{t.skill.securityIssues}</div>
+                  {skill.securityReport.issues.length === 0 ? (
+                    <p className="text-[13px] text-[var(--text-2)]">{t.skill.securityNone}</p>
+                  ) : (
+                    <ul className="flex max-h-[280px] flex-col gap-2 overflow-auto">
+                      {skill.securityReport.issues.slice(0, 8).map((issue) => (
+                        <li
+                          key={`${issue.id}-${issue.finding ?? issue.pattern}`}
+                          className="rounded-lg border border-[var(--border)] px-2.5 py-2"
+                        >
+                          <div className="mb-0.5 flex items-center gap-1.5 font-mono text-[11px] font-semibold">
+                            <span>{issue.severity}</span>
+                            <span className="text-[var(--text-3)]">·</span>
+                            <span className="truncate text-[var(--text-2)]">{issue.category}</span>
+                          </div>
+                          <div className="text-[12.5px] leading-[1.4] text-[var(--text-1)]">
+                            {issue.explanation ?? issue.finding ?? issue.pattern}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
           <div className="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-[18px] shadow-[var(--shadow-card)]">
             <div className="mb-3.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
               {t.skill.metaTitle}

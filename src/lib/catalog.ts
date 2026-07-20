@@ -2,6 +2,8 @@
 // Ce module est *isomorphe* (client + serveur) : il ne contient aucun accès
 // base de données, seulement des types et des fonctions pures.
 
+import type { SkillSecurityReport } from '#/lib/skillspector'
+
 export type Lang = 'fr' | 'en'
 
 export interface Bilingual {
@@ -31,7 +33,10 @@ export interface SkillSummary {
   id: string
   categoryId: string
   icon: string
+  /** Score de sûreté SkillSpector 0–100 (null = non scanné). */
   score: number | null
+  securityRecommendation: 'SAFE' | 'CAUTION' | 'UNSAFE' | 'UNKNOWN' | null
+  scannedAt: string | null
   tech: string[]
   compat: string[]
   stacks: string[]
@@ -43,6 +48,7 @@ export interface SkillSummary {
 export interface SkillDetail extends SkillSummary {
   does: { fr: string[]; en: string[] }
   triggers: { fr: string[]; en: string[] }
+  securityReport: SkillSecurityReport | null
 }
 
 export interface Catalog {
@@ -238,7 +244,7 @@ export function promptForStack(stack: Stack, lang: Lang): string {
 
 export function scoreColor(score: number | null): string {
   if (score == null) return 'var(--text-3)'
-  if (score >= 100) return 'var(--success)'
-  if (score >= 90) return 'var(--accent)'
-  return 'var(--text-2)'
+  if (score >= 70) return 'var(--success)'
+  if (score >= 50) return '#E5A53B'
+  return 'var(--danger, #E5484D)'
 }

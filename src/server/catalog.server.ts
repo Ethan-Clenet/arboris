@@ -8,6 +8,11 @@ import type {
   Stack,
 } from '#/lib/catalog'
 import { COMPAT_ORDER } from '#/lib/catalog'
+import {
+  normalizeRecommendation,
+  parseSecurityReport,
+  type SecurityRecommendation,
+} from '#/lib/skillspector'
 import { prisma } from './db'
 
 function parseList(json: string): string[] {
@@ -24,6 +29,8 @@ type SkillRow = {
   categoryId: string
   icon: string
   score: number | null
+  securityRecommendation: string | null
+  scannedAt: Date | null
   techJson: string
   compatJson: string
   tagFr: string
@@ -34,11 +41,19 @@ type SkillRow = {
 }
 
 function toSummary(row: SkillRow): SkillSummary {
+  const recommendation: SecurityRecommendation | null = row.securityRecommendation
+    ? normalizeRecommendation(row.securityRecommendation)
+    : row.score != null
+      ? normalizeRecommendation(row.score >= 70 ? 'SAFE' : row.score >= 50 ? 'CAUTION' : 'UNSAFE')
+      : null
+
   return {
     id: row.id,
     categoryId: row.categoryId,
     icon: row.icon,
     score: row.score,
+    securityRecommendation: recommendation,
+    scannedAt: row.scannedAt ? row.scannedAt.toISOString() : null,
     tech: parseList(row.techJson),
     compat: parseList(row.compatJson),
     stacks: row.stacks.map((s) => s.id),
@@ -98,5 +113,6 @@ export async function loadSkill(id: string): Promise<SkillDetail | null> {
       fr: parseList(row.triggersFrJson),
       en: parseList(row.triggersEnJson),
     },
+    securityReport: parseSecurityReport(row.securityReportJson),
   }
 }

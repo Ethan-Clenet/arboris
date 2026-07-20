@@ -65,7 +65,15 @@ model User {
 model Skill {
   id            String  @id
   icon          String
+  /// Score de sûreté 0–100 (SkillSpector) : 100 = sûr. Dérivé de 100 − risk_score.
   score         Int?
+  /// Recommandation SkillSpector : SAFE | CAUTION | UNSAFE (ou équivalent).
+  securityRecommendation String?
+  /// Rapport JSON compact (issues + risk_assessment).
+  securityReportJson     String  @default("null")
+  scannedAt     DateTime?
+  /// Mode de scan : static | semantic
+  scanMode      String?
   tagFr         String
   tagEn         String
   actFr         String
@@ -88,5 +96,6 @@ model Skill {
   updatedAt DateTime @updatedAt
 
   @@index([categoryId])
+  @@index([score])
   @@map("skills")
 }

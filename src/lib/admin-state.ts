@@ -9,6 +9,8 @@ export type AdminSkillState = {
   compat: string[]
   stacks: string[]
   tag: { fr: string; en: string }
+  score: number | null
+  securityRecommendation: 'SAFE' | 'CAUTION' | 'UNSAFE' | 'UNKNOWN' | null
 }
 
 export type AdminCatState = {
@@ -51,6 +53,8 @@ export function catalogToAdminState(catalog: Catalog) {
     compat: s.compat.slice(),
     stacks: s.stacks.slice(),
     tag: { fr: s.tag.fr, en: s.tag.en },
+    score: s.score,
+    securityRecommendation: s.securityRecommendation,
   }))
 
   const cats: AdminCatState[] = catalog.categories.map((c) => ({
@@ -108,6 +112,8 @@ export function formToSkill(form: AdminFormState): AdminSkillState | null {
       fr: form.descFr.trim(),
       en: (form.descEn.trim() || form.descFr.trim()),
     },
+    score: null,
+    securityRecommendation: null,
   }
 }
 

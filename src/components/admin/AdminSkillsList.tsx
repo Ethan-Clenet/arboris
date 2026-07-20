@@ -1,5 +1,6 @@
 import Icon from '#/components/Icon'
 import { AdminCard, AdminIconBtn } from '#/components/admin/AdminUi'
+import SecurityBadge from '#/components/SecurityBadge'
 import type { Lang } from '#/lib/catalog'
 import { hexToRgba } from '#/lib/catalog'
 import type { AdminCatState, AdminSkillState } from '#/lib/admin-state'
@@ -42,9 +43,26 @@ export default function AdminSkillsList({
       )
     : skills
 
+  const badgeLabels =
+    lang === 'fr'
+      ? {
+          unscanned: 'Non scanné',
+          safe: 'Sûr',
+          caution: 'Attention',
+          unsafe: 'Risqué',
+          score: (n: number) => `Sûreté ${n}/100`,
+        }
+      : {
+          unscanned: 'Unscanned',
+          safe: 'Safe',
+          caution: 'Caution',
+          unsafe: 'Risky',
+          score: (n: number) => `Safety ${n}/100`,
+        }
+
   return (
     <>
-      <div className="mb-4 flex items-center gap-3">
+      <div className="mb-4 flex flex-wrap items-center gap-3">
         <div className="relative max-w-[340px] flex-1">
           <Icon
             name="magnifying-glass"
@@ -59,13 +77,17 @@ export default function AdminSkillsList({
           />
         </div>
         <span className="text-[13px] text-[var(--text-3)]">{t.skillsCount(filtered.length)}</span>
+        <span className="font-mono text-[11px] text-[var(--text-3)]">
+          npm run skills:scan -- &lt;id&gt; --force
+        </span>
       </div>
 
       <AdminCard>
-        <div className="grid grid-cols-[minmax(180px,1.3fr)_minmax(200px,2fr)_130px_96px] gap-3.5 border-b border-[var(--border)] bg-[var(--surface-2)] px-[18px] py-[11px] text-[11px] font-semibold uppercase tracking-wider text-[var(--text-3)]">
+        <div className="grid grid-cols-[minmax(160px,1.2fr)_minmax(160px,1.6fr)_110px_120px_96px] gap-3.5 border-b border-[var(--border)] bg-[var(--surface-2)] px-[18px] py-[11px] text-[11px] font-semibold uppercase tracking-wider text-[var(--text-3)]">
           <div>Skill</div>
+          <div>Description</div>
+          <div>Sécurité</div>
           <div>{t.colCat}</div>
-          <div>{t.colTechnos}</div>
           <div className="text-right">{t.colActions}</div>
         </div>
         {filtered.length === 0 ? (
@@ -78,7 +100,7 @@ export default function AdminSkillsList({
             return (
               <div
                 key={skill.id}
-                className="grid grid-cols-[minmax(180px,1.3fr)_minmax(200px,2fr)_130px_96px] items-center gap-3.5 border-b border-[var(--border)] px-[18px] py-3 last:border-0 hover:bg-[var(--surface-hover)]"
+                className="grid grid-cols-[minmax(160px,1.2fr)_minmax(160px,1.6fr)_110px_120px_96px] items-center gap-3.5 border-b border-[var(--border)] px-[18px] py-3 last:border-0 hover:bg-[var(--surface-hover)]"
               >
                 <div className="flex min-w-0 items-center gap-2.5">
                   <span
@@ -93,6 +115,13 @@ export default function AdminSkillsList({
                   <span className="truncate font-mono text-[13px] font-semibold">{skill.id}</span>
                 </div>
                 <div className="truncate text-[12.5px] text-[var(--text-2)]">{skill.tag[lang]}</div>
+                <div>
+                  <SecurityBadge
+                    score={skill.score}
+                    recommendation={skill.securityRecommendation}
+                    labels={badgeLabels}
+                  />
+                </div>
                 <div>
                   <span className="inline-flex items-center gap-1.5 text-[12px] text-[var(--text-2)]">
                     <span

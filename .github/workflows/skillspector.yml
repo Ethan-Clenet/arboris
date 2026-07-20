@@ -1,0 +1,28 @@
+name: SkillSpector scan
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'prisma/skills/**'
+      - 'scripts/skillspector-scan.mjs'
+
+jobs:
+  scan-sample:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build SkillSpector image
+        run: |
+          git clone --depth 1 https://github.com/NVIDIA/SkillSpector.git /tmp/SkillSpector
+          docker build -t skillspector /tmp/SkillSpector
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Scan sample (static)
+        run: node scripts/skillspector-scan.mjs --limit 5 --no-db --force
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: skillspector-reports
+          path: prisma/skillspector-reports/*.json

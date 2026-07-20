@@ -1,8 +1,19 @@
 import { readdir, readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { CATEGORIES, STACKS, type CategorySeed, type SkillSeed, type StackSeed } from './catalog-data'
+import { riskToSafetyScore, type SkillSecurityReport } from '../src/lib/skillspector'
 
 const SKILLS_DIR = join(process.cwd(), 'prisma/skills')
+const REPORTS_DIR = join(process.cwd(), 'prisma/skillspector-reports')
+
+async function loadSecurityReport(skillId: string): Promise<SkillSecurityReport | null> {
+  try {
+    const raw = await readFile(join(REPORTS_DIR, `${skillId}.json`), 'utf-8')
+    return JSON.parse(raw) as SkillSecurityReport
+  } catch {
+    return null
+  }
+}
 
 type ParsedSkill = {
   id: string
@@ -245,12 +256,17 @@ export async function loadSkillSeeds(): Promise<SkillSeed[]> {
     const does = (activationBullets.length ? activationBullets : generalBullets).slice(0, 4)
     const triggers = genericTriggers(parsed.id)
     const stacks = inferStacks(parsed.id, parsed.description, parsed.body, STACKS)
+    const security = await loadSecurityReport(parsed.id)
 
     seeds.push({
       id: parsed.id,
       cat: categoryId,
       icon: inferIcon(categoryId),
-      score: null,
+      score: security ? riskToSafetyScore(security.riskScore) : null,
+      securityRecommendation: security?.recommendation ?? null,
+      securityReportJson: security ? JSON.stringify(security) : null,
+      scannedAt: security?.scannedAt ?? null,
+      scanMode: security?.scanMode ?? null,
       stacks,
       tech: stacks.length ? stacks.map((stackId) => STACKS.find((stack) => stack.id === stackId)?.label ?? stackId) : [slugTitle(parsed.id)],
       compat: ['Claude', 'Cursor', 'Codex', 'Copilot'],

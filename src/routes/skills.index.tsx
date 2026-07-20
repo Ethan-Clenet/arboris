@@ -4,6 +4,7 @@ import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { AgentBadge, AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
+import SecurityBadge from '#/components/SecurityBadge'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
@@ -12,6 +13,7 @@ import {
   type Category,
   type SkillSummary,
 } from '#/lib/catalog'
+import type { SecurityRecommendation } from '#/lib/skillspector'
 
 export const Route = createFileRoute('/skills/')({
   loader: () => getCatalog(),
@@ -19,7 +21,9 @@ export const Route = createFileRoute('/skills/')({
 })
 
 const SKILL_TABLE_COLS =
-  'grid grid-cols-[minmax(176px,1.1fr)_minmax(156px,1.5fr)_minmax(132px,148px)_minmax(200px,auto)_minmax(108px,116px)] items-center gap-x-6'
+  'grid grid-cols-[minmax(176px,1.05fr)_minmax(140px,1.3fr)_minmax(100px,120px)_minmax(110px,128px)_minmax(180px,auto)_minmax(108px,116px)] items-center gap-x-5'
+
+type SecurityFilter = 'all' | SecurityRecommendation
 
 function SkillsPage() {
   const catalog = Route.useLoaderData()
@@ -30,6 +34,7 @@ function SkillsPage() {
   const [cat, setCat] = useState<string>('all')
   const [techs, setTechs] = useState<string[]>([])
   const [compat, setCompat] = useState<string[]>([])
+  const [security, setSecurity] = useState<SecurityFilter>('all')
 
   const catById = useMemo(() => {
     const map = new Map<string, Category>()
@@ -43,6 +48,14 @@ function SkillsPage() {
     return seen
   }, [catalog.skills])
 
+  const badgeLabels = {
+    unscanned: t.skills.securityUnscanned,
+    safe: t.skills.securitySafe,
+    caution: t.skills.securityCaution,
+    unsafe: t.skills.securityUnsafe,
+    score: t.skills.securityScore,
+  }
+
   const toggle = (arr: string[], v: string) =>
     arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]
 
@@ -52,6 +65,10 @@ function SkillsPage() {
       if (cat !== 'all' && s.categoryId !== cat) return false
       if (techs.length && !techs.every((x) => s.tech.includes(x))) return false
       if (compat.length && !compat.every((x) => s.compat.includes(x))) return false
+      if (security !== 'all') {
+        const tone = s.securityRecommendation ?? 'UNKNOWN'
+        if (tone !== security) return false
+      }
       if (ql) {
         const c = catById.get(s.categoryId)
         const hay = `${s.id} ${s.tag[lang]} ${s.tech.join(' ')} ${c ? c.label[lang] : ''}`.toLowerCase()
@@ -63,14 +80,25 @@ function SkillsPage() {
     return [...list].sort(
       (a, b) => (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id),
     )
-  }, [q, cat, techs, compat, catalog.skills, catById, lang])
+  }, [q, cat, techs, compat, security, catalog.skills, catById, lang])
 
-  const hasFilters = cat !== 'all' || techs.length > 0 || compat.length > 0 || q.trim().length > 0
+  const securityCounts = useMemo(() => {
+    const counts = { SAFE: 0, CAUTION: 0, UNSAFE: 0, UNKNOWN: 0 }
+    for (const s of catalog.skills) {
+      const tone = s.securityRecommendation ?? 'UNKNOWN'
+      counts[tone]++
+    }
+    return counts
+  }, [catalog.skills])
+
+  const hasFilters =
+    cat !== 'all' || techs.length > 0 || compat.length > 0 || security !== 'all' || q.trim().length > 0
   const clearAll = () => {
     setQ('')
     setCat('all')
     setTechs([])
     setCompat([])
+    setSecurity('all')
   }
 
   const resultLabel = `${rows.length > 1 ? t.skills.resMany : t.skills.resOne} ${t.skills.resTail(catalog.skills.length)}`
@@ -102,7 +130,6 @@ function SkillsPage() {
 
       <PageShell as="div" className="grid items-start gap-7 pt-6 pb-[70px] lg:grid-cols-[248px_minmax(0,1fr)]">
         <aside className="flex flex-col gap-[22px] lg:sticky lg:top-[78px]">
-          {/* Recherche */}
           <div className="relative">
             <label htmlFor="skills-search" className="sr-only">
               {t.a11y.searchSkills}
@@ -132,7 +159,6 @@ function SkillsPage() {
             )}
           </div>
 
-          {/* Catégories */}
           <div>
             <div className="mb-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
               {t.skills.categories}
@@ -159,7 +185,32 @@ function SkillsPage() {
             </div>
           </div>
 
-          {/* Compatibilité */}
+          <div>
+            <div className="mb-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
+              {t.skills.security}
+            </div>
+            <div className="flex flex-col gap-0.5">
+              {(
+                [
+                  ['all', t.skills.securityAll, catalog.skills.length, 'shield'],
+                  ['SAFE', t.skills.securitySafe, securityCounts.SAFE, 'shield-check'],
+                  ['CAUTION', t.skills.securityCaution, securityCounts.CAUTION, 'warning'],
+                  ['UNSAFE', t.skills.securityUnsafe, securityCounts.UNSAFE, 'shield-warning'],
+                  ['UNKNOWN', t.skills.securityUnscanned, securityCounts.UNKNOWN, 'shield'],
+                ] as const
+              ).map(([id, label, count, icon]) => (
+                <CategoryButton
+                  key={id}
+                  active={security === id}
+                  icon={icon}
+                  label={label}
+                  count={count}
+                  onClick={() => setSecurity(security === id ? 'all' : id)}
+                />
+              ))}
+            </div>
+          </div>
+
           <div>
             <div className="mb-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
               {t.skills.compat}
@@ -180,7 +231,6 @@ function SkillsPage() {
             </div>
           </div>
 
-          {/* Technologies */}
           <div>
             <div className="mb-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
               {t.skills.tech}
@@ -219,7 +269,6 @@ function SkillsPage() {
           )}
         </aside>
 
-        {/* Résultats */}
         <section>
           <div className="mb-3.5 text-[13.5px] text-[var(--text-2)]">
             <span className="font-semibold text-[var(--text-1)]">{rows.length}</span> {resultLabel}
@@ -227,12 +276,13 @@ function SkillsPage() {
 
           <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
             <div className="scroll-x">
-              <div className="min-w-[900px]">
+              <div className="min-w-[980px]">
                 <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] bg-[var(--surface-2)] px-4 py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)] sm:px-[18px]`}>
                   <div>{t.skills.colSkill}</div>
                   <div>{t.skills.colDesc}</div>
+                  <div>{t.skills.colSecurity}</div>
                   <div className="min-w-0">{t.skills.colTech}</div>
-                  <div className="shrink-0 border-l border-[var(--border)] pl-6">{t.skills.colCompat}</div>
+                  <div className="shrink-0 border-l border-[var(--border)] pl-5">{t.skills.colCompat}</div>
                   <div />
                 </div>
 
@@ -242,6 +292,7 @@ function SkillsPage() {
                     skill={skill}
                     category={catById.get(skill.categoryId)}
                     copied={copiedKey === skill.id}
+                    badgeLabels={badgeLabels}
                     onCopy={() => copySkill({ id: skill.id, lang, announceMsg: t.skills.copied })}
                   />
                 ))}
@@ -313,11 +364,19 @@ function SkillRow({
   skill,
   category,
   copied,
+  badgeLabels,
   onCopy,
 }: {
   skill: SkillSummary
   category?: Category
   copied: boolean
+  badgeLabels: {
+    unscanned: string
+    safe: string
+    caution: string
+    unsafe: string
+    score: (n: number) => string
+  }
   onCopy: () => void
 }) {
   const { t, lang } = useI18n()
@@ -340,6 +399,14 @@ function SkillRow({
 
       <div className="min-w-0 line-clamp-2 text-[13px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
 
+      <div>
+        <SecurityBadge
+          score={skill.score}
+          recommendation={skill.securityRecommendation}
+          labels={badgeLabels}
+        />
+      </div>
+
       <div className="min-w-0 overflow-hidden pr-2" title={skill.tech.join(', ')}>
         {skill.tech.length > 0 ? (
           <div className="flex min-w-0 items-center gap-1.5">
@@ -355,7 +422,7 @@ function SkillRow({
         )}
       </div>
 
-      <div className="flex shrink-0 items-center border-l border-[var(--border)] pl-6">
+      <div className="flex shrink-0 items-center border-l border-[var(--border)] pl-5">
         <AgentCompatList agents={skill.compat} size={15} />
       </div>
 

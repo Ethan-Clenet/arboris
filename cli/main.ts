@@ -1,11 +1,36 @@
-import { resolve } from 'node:path'
+import { resolve, join } from 'node:path'
+import { readFile } from 'node:fs/promises'
 import { isAgentName, type AgentName } from '../src/lib/agents.ts'
 import { defaultSkillsDir, resolvePackageRoot } from '../src/lib/package-root.ts'
 import { installSkillToWorkspace, installStackToWorkspace } from '../src/lib/skill-install-core.ts'
+import { needsInstallConfirm, riskToSafetyScore } from '../src/lib/skillspector.ts'
 import { formatStackList, hasSkillId, loadCliManifest, resolveStackId } from './stack-resolve.ts'
 
 const PACKAGE_ROOT = resolvePackageRoot(import.meta.url)
 const SKILLS_DIR = defaultSkillsDir(PACKAGE_ROOT)
+const REPORTS_DIR = join(PACKAGE_ROOT, 'prisma', 'skillspector-reports')
+
+async function loadSafetyScore(skillId: string): Promise<number | null> {
+  try {
+    const raw = JSON.parse(await readFile(join(REPORTS_DIR, `${skillId}.json`), 'utf-8')) as {
+      riskScore?: number
+    }
+    if (typeof raw.riskScore === 'number') return riskToSafetyScore(raw.riskScore)
+  } catch {
+    // rapport absent
+  }
+  return null
+}
+
+async function assertSecurityOk(skillId: string, options: CliOptions) {
+  if (options.skipSecurityCheck) return
+  const score = await loadSafetyScore(skillId)
+  if (!needsInstallConfirm(score)) return
+  console.error(
+    `⚠ SkillSpector: « ${skillId} » a un score de sûreté bas (${score}/100). Relance avec --skip-security-check pour forcer.`,
+  )
+  process.exit(1)
+}
 
 type CliOptions = {
   agent: AgentName
@@ -13,6 +38,7 @@ type CliOptions = {
   dryRun: boolean
   force: boolean
   help: boolean
+  skipSecurityCheck: boolean
 }
 
 function printHelp() {
@@ -34,11 +60,12 @@ Technos (alias acceptés: node.js, k8s, spring, postgres…):
   docker, k9, postgresql, mysql, prisma
 
 Options:
-  --agent <name>   Agent cible: cursor | claude | codex | copilot (défaut: cursor)
-  --cwd <path>     Projet cible (défaut: répertoire courant)
-  --force          Écrase les skills déjà installés
-  --dry-run        Affiche sans écrire
-  -h, --help       Aide
+  --agent <name>            Agent cible: cursor | claude | codex | copilot (défaut: cursor)
+  --cwd <path>              Projet cible (défaut: répertoire courant)
+  --force                   Écrase les skills déjà installés
+  --dry-run                 Affiche sans écrire
+  --skip-security-check     Ignore l’avertissement SkillSpector (score < 50)
+  -h, --help                Aide
 `)
 }
 
@@ -53,6 +80,7 @@ function parseArgs(argv: string[]): {
     dryRun: false,
     force: false,
     help: false,
+    skipSecurityCheck: false,
   }
 
   const positional: string[] = []
@@ -69,6 +97,10 @@ function parseArgs(argv: string[]): {
     }
     if (arg === '--force') {
       options.force = true
+      continue
+    }
+    if (arg === '--skip-security-check') {
+      options.skipSecurityCheck = true
       continue
     }
     if (arg === '--agent') {
@@ -115,6 +147,8 @@ async function runInstallSkill(skillId: string, options: CliOptions) {
   console.log(
     `${options.dryRun ? '[dry-run] ' : ''}Installation de ${skillId} → ${options.agent} (${options.cwd})`,
   )
+
+  await assertSecurityOk(skillId, options)
 
   if (options.dryRun) return
 
@@ -167,6 +201,10 @@ async function runInstallStack(stackInput: string, options: CliOptions) {
       console.log(`  • ${skillId}`)
     }
     return
+  }
+
+  for (const skillId of skillIds) {
+    await assertSecurityOk(skillId, options)
   }
 
   const summary = await installStackToWorkspace({

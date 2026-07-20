@@ -60,12 +60,18 @@ async function main() {
     })),
   })
 
+  let withSecurity = 0
   for (const [i, skill] of SKILLS.entries()) {
+    if (skill.score != null) withSecurity++
     await prisma.skill.create({
       data: {
         id: skill.id,
         icon: skill.icon,
         score: skill.score,
+        securityRecommendation: skill.securityRecommendation ?? null,
+        securityReportJson: skill.securityReportJson ?? 'null',
+        scannedAt: skill.scannedAt ? new Date(skill.scannedAt) : null,
+        scanMode: skill.scanMode ?? null,
         tagFr: skill.tag.fr,
         tagEn: skill.tag.en,
         actFr: skill.act.fr,
@@ -81,6 +87,9 @@ async function main() {
         stacks: { connect: skill.stacks.map((id) => ({ id })) },
       },
     })
+  }
+  if (withSecurity > 0) {
+    console.log(`🛡  Scores SkillSpector réinjectés : ${withSecurity}/${SKILLS.length}`)
   }
 
   const [cats, stacks, skills] = await Promise.all([

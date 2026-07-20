@@ -23,6 +23,10 @@ export interface SkillSeed {
   cat: string
   icon: string
   score: number | null
+  securityRecommendation?: string | null
+  securityReportJson?: string | null
+  scannedAt?: string | null
+  scanMode?: string | null
   stacks: string[]
   tech: string[]
   compat: string[]

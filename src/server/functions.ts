@@ -38,6 +38,7 @@ export type InstallSkillError =
   | 'unknown_agent'
   | 'skill_not_found'
   | 'invalid_path'
+  | 'security_blocked'
   | 'generic'
 
 export type InstallSkillResult =
@@ -45,7 +46,7 @@ export type InstallSkillResult =
   | { ok: false; error: InstallSkillError }
 
 export const installSkill = createServerFn({ method: 'POST' })
-  .validator((data: { skillId: string; agent: string; lang: 'fr' | 'en' }) => data)
+  .validator((data: { skillId: string; agent: string; lang: 'fr' | 'en'; acknowledgeRisk?: boolean }) => data)
   .handler(async ({ data }): Promise<InstallSkillResult> => {
     try {
       const { installSkillForAgent } = await import('./skill-install.server')
@@ -57,7 +58,8 @@ export const installSkill = createServerFn({ method: 'POST' })
         (err.message === 'workspace_not_configured' ||
           err.message === 'unknown_agent' ||
           err.message === 'skill_not_found' ||
-          err.message === 'invalid_path')
+          err.message === 'invalid_path' ||
+          err.message === 'security_blocked')
           ? (err.message as InstallSkillError)
           : 'generic'
       return { ok: false, error: code }

@@ -31,7 +31,9 @@
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
-    "db:reset": "prisma migrate reset --force"
+    "db:reset": "prisma migrate reset --force",
+    "skills:scan": "node scripts/skillspector-scan.mjs",
+    "skills:scan:sample": "node scripts/skillspector-scan.mjs --limit 5"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
