@@ -8,6 +8,7 @@ type SecurityBadgeProps = {
   showLabel?: boolean
   /** Affiche seulement le score chiffré (ex. pastille compacte). */
   compact?: boolean
+  className?: string
   labels: {
     unscanned: string
     safe: string
@@ -48,6 +49,7 @@ export default function SecurityBadge({
   size = 'sm',
   showLabel = true,
   compact = false,
+  className = '',
   labels,
 }: SecurityBadgeProps) {
   const tone = resolveSecurityTone(score, recommendation)
@@ -61,31 +63,38 @@ export default function SecurityBadge({
           ? labels.unsafe
           : labels.unscanned
 
-  const pad = size === 'md' ? 'px-2.5 py-1 text-[12px]' : 'px-2 py-0.5 text-[11px]'
   const iconSize = size === 'md' ? 13 : 11
+  const title = score != null ? labels.score(score) : labels.unscanned
 
   if (compact) {
     return (
       <span
-        className="inline-flex h-[22px] min-w-[38px] items-center justify-center gap-0.5 rounded-md border px-1.5 font-mono text-[11px] font-bold tabular-nums"
+        className={`inline-flex h-[22px] w-[42px] shrink-0 items-center justify-center gap-0.5 rounded-md border font-mono text-[11px] font-bold tabular-nums leading-none ${className}`}
         style={{ color: style.fg, borderColor: style.border, background: style.bg }}
-        title={score != null ? labels.score(score) : labels.unscanned}
+        title={title}
       >
         <Icon name={style.icon} bold size={10} />
-        {score != null ? score : '—'}
+        <span className="min-w-[1.35rem] text-center">{score != null ? score : '—'}</span>
       </span>
     )
   }
 
+  const sizeClass =
+    size === 'md'
+      ? 'h-7 w-[8.5rem] gap-1.5 px-2.5 text-[12px]'
+      : 'h-[22px] w-[8rem] gap-1 px-2 text-[11px]'
+
   return (
     <span
-      className={`inline-flex max-w-full items-center gap-1 rounded-full border font-mono font-semibold ${pad}`}
+      className={`inline-flex shrink-0 items-center justify-center rounded-full border font-mono font-semibold leading-none ${sizeClass} ${className}`}
       style={{ color: style.fg, borderColor: style.border, background: style.bg }}
-      title={score != null ? labels.score(score) : labels.unscanned}
+      title={title}
     >
       <Icon name={style.icon} bold size={iconSize} />
       {showLabel ? <span className="truncate">{label}</span> : null}
-      {score != null ? <span className="tabular-nums opacity-90">{score}</span> : null}
+      <span className="inline-block min-w-[1.5rem] text-center tabular-nums opacity-90">
+        {score != null ? score : '—'}
+      </span>
     </span>
   )
 }

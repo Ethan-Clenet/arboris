@@ -23,7 +23,7 @@ export const Route = createFileRoute('/')({
 type TabMode = 'popular' | 'trending' | 'recent'
 
 const TABLE_COLS =
-  'grid grid-cols-[minmax(152px,1.15fr)_minmax(120px,0.9fr)_minmax(100px,110px)_56px_minmax(136px,auto)] items-center gap-x-5'
+  'grid grid-cols-[minmax(168px,1.2fr)_minmax(120px,0.9fr)_minmax(118px,128px)_56px_minmax(148px,160px)] items-center gap-x-5'
 
 const HOME_INDEX_LIMIT = 10
 
@@ -248,7 +248,7 @@ function HomeTableRow({
     <div
       className={`group ${TABLE_COLS} border-b border-[var(--border)] px-4 py-3 transition-colors last:border-b-0 hover:bg-[var(--surface-hover)] sm:px-5`}
     >
-      <div className="flex min-w-0 items-center gap-2">
+      <div className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2">
         <Link
           to="/skills/$id"
           params={{ id: skill.id }}
@@ -287,7 +287,7 @@ function HomeTableRow({
         <span className="truncate font-mono text-[12px]">/{category?.id ?? skill.categoryId}</span>
       </div>
 
-      <div>
+      <div className="flex items-center">
         <SecurityBadge
           score={skill.score}
           recommendation={skill.securityRecommendation}
@@ -299,7 +299,7 @@ function HomeTableRow({
         {skill.stacks.length || '—'}
       </div>
 
-      <div className="flex min-w-[136px] items-center border-l border-[var(--border)] pl-5">
+      <div className="flex min-w-[148px] items-center border-l border-[var(--border)] pl-5">
         <AgentCompatList agents={skill.compat} size={15} />
       </div>
     </div>

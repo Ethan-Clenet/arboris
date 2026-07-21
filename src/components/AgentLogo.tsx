@@ -84,19 +84,30 @@ type AgentCompatListProps = {
   className?: string
 }
 
-export function AgentCompatList({ agents, max = 4, size = 14, className = '' }: AgentCompatListProps) {
-  const known = agents.filter(isAgentName)
-  const shown = known.slice(0, max)
-  const rest = known.length - shown.length
+const COMPAT_SLOT_ORDER: AgentName[] = ['Claude', 'Cursor', 'Codex', 'Copilot']
 
-  if (!known.length) return <span className="text-[var(--text-3)]">—</span>
+export function AgentCompatList({ agents, max = 4, size = 14, className = '' }: AgentCompatListProps) {
+  const known = new Set(agents.filter(isAgentName))
+  const slots = COMPAT_SLOT_ORDER.slice(0, max)
+  const extras = agents.filter(isAgentName).filter((a) => !slots.includes(a)).length
+
+  if (!known.size) return <span className="text-[var(--text-3)]">—</span>
 
   return (
-    <span className={`inline-flex shrink-0 items-center gap-2.5 ${className}`}>
-      {shown.map((agent) => (
-        <AgentLogo key={agent} agent={agent} size={size} />
-      ))}
-      {rest > 0 ? <span className="font-mono text-[11px] text-[var(--text-3)]">+{rest}</span> : null}
+    <span className={`inline-flex h-[22px] shrink-0 items-center gap-2.5 ${className}`}>
+      {slots.map((agent) =>
+        known.has(agent) ? (
+          <AgentLogo key={agent} agent={agent} size={size} />
+        ) : (
+          <span
+            key={agent}
+            className="inline-block shrink-0 rounded-full bg-[var(--surface-2)] opacity-35"
+            style={{ width: size, height: size }}
+            aria-hidden
+          />
+        ),
+      )}
+      {extras > 0 ? <span className="font-mono text-[11px] leading-none text-[var(--text-3)]">+{extras}</span> : null}
     </span>
   )
 }

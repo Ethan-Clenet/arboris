@@ -21,7 +21,7 @@ export const Route = createFileRoute('/skills/')({
 })
 
 const SKILL_TABLE_COLS =
-  'grid grid-cols-[minmax(176px,1.05fr)_minmax(140px,1.3fr)_minmax(100px,120px)_minmax(110px,128px)_minmax(180px,auto)_minmax(108px,116px)] items-center gap-x-5'
+  'grid grid-cols-[minmax(200px,1.1fr)_minmax(140px,1.3fr)_minmax(128px,136px)_minmax(110px,128px)_minmax(148px,160px)_minmax(108px,116px)] items-center gap-x-5'
 
 type SecurityFilter = 'all' | SecurityRecommendation
 
@@ -391,23 +391,25 @@ function SkillRow({
         >
           <Icon name={skill.icon} bold size={17} />
         </span>
-        <span className="min-w-0">
-          <span className="flex min-w-0 items-center gap-2">
-            <span className="truncate font-mono text-[13.5px] font-semibold">{skill.id}</span>
-            <SecurityBadge
-              score={skill.score}
-              recommendation={skill.securityRecommendation}
-              compact
-              labels={badgeLabels}
-            />
+        <span className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
+          <span className="min-w-0">
+            <span className="block truncate font-mono text-[13.5px] font-semibold leading-tight">{skill.id}</span>
+            <span className="block truncate text-[11.5px] leading-tight text-[var(--text-3)]">
+              {category ? category.label[lang] : ''}
+            </span>
           </span>
-          <span className="block text-[11.5px] text-[var(--text-3)]">{category ? category.label[lang] : ''}</span>
+          <SecurityBadge
+            score={skill.score}
+            recommendation={skill.securityRecommendation}
+            compact
+            labels={badgeLabels}
+          />
         </span>
       </Link>
 
-      <div className="min-w-0 line-clamp-2 text-[13px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
+      <div className="min-w-0 line-clamp-2 self-center text-[13px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
 
-      <div className="min-w-0">
+      <div className="flex min-w-0 items-center">
         <SecurityBadge
           score={skill.score}
           recommendation={skill.securityRecommendation}
@@ -415,14 +417,16 @@ function SkillRow({
         />
       </div>
 
-      <div className="min-w-0 overflow-hidden pr-2" title={skill.tech.join(', ')}>
+      <div className="flex min-w-0 items-center overflow-hidden pr-2" title={skill.tech.join(', ')}>
         {skill.tech.length > 0 ? (
-          <div className="flex min-w-0 items-center gap-1.5">
-            <span className="max-w-full truncate rounded-md border border-[var(--border)] px-[7px] py-0.5 font-mono text-[10.5px] text-[var(--text-2)]">
+          <div className="flex h-[22px] min-w-0 items-center gap-1.5">
+            <span className="max-w-full truncate rounded-md border border-[var(--border)] px-[7px] py-0.5 font-mono text-[10.5px] leading-none text-[var(--text-2)]">
               {skill.tech[0]}
             </span>
             {skill.tech.length > 1 ? (
-              <span className="shrink-0 font-mono text-[10.5px] text-[var(--text-3)]">+{skill.tech.length - 1}</span>
+              <span className="inline-flex h-[22px] w-7 shrink-0 items-center justify-center rounded-md border border-[var(--border)] font-mono text-[10.5px] leading-none text-[var(--text-3)]">
+                +{skill.tech.length - 1}
+              </span>
             ) : null}
           </div>
         ) : (
@@ -430,7 +434,7 @@ function SkillRow({
         )}
       </div>
 
-      <div className="flex shrink-0 items-center border-l border-[var(--border)] pl-5">
+      <div className="flex h-full shrink-0 items-center border-l border-[var(--border)] pl-5">
         <AgentCompatList agents={skill.compat} size={15} />
       </div>
 

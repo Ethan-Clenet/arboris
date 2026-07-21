@@ -115,7 +115,7 @@ export default function AdminSkillsList({
                   <span className="truncate font-mono text-[13px] font-semibold">{skill.id}</span>
                 </div>
                 <div className="truncate text-[12.5px] text-[var(--text-2)]">{skill.tag[lang]}</div>
-                <div>
+                <div className="flex items-center">
                   <SecurityBadge
                     score={skill.score}
                     recommendation={skill.securityRecommendation}
