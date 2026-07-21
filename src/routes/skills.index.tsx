@@ -21,7 +21,7 @@ export const Route = createFileRoute('/skills/')({
 })
 
 const SKILL_TABLE_COLS =
-  'grid grid-cols-[minmax(200px,1.1fr)_minmax(140px,1.3fr)_minmax(128px,136px)_minmax(110px,128px)_minmax(148px,160px)_minmax(108px,116px)] items-center gap-x-5'
+  'grid grid-cols-[minmax(0,1.25fr)_minmax(0,1.4fr)_8rem_minmax(0,1fr)_5.5rem_7.75rem] items-center gap-x-1.5'
 
 type SecurityFilter = 'all' | SecurityRecommendation
 
@@ -276,14 +276,14 @@ function SkillsPage() {
 
           <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
             <div className="scroll-x">
-              <div className="min-w-[980px]">
+              <div className="min-w-[820px]">
                 <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] bg-[var(--surface-2)] px-4 py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)] sm:px-[18px]`}>
                   <div>{t.skills.colSkill}</div>
                   <div>{t.skills.colDesc}</div>
                   <div>{t.skills.colSecurity}</div>
                   <div className="min-w-0">{t.skills.colTech}</div>
-                  <div className="shrink-0 border-l border-[var(--border)] pl-5">{t.skills.colCompat}</div>
-                  <div />
+                  <div className="border-l border-[var(--border)] pl-2">{t.skills.colCompat}</div>
+                  <div className="text-right">{t.skills.copy}</div>
                 </div>
 
                 {rows.map((skill) => (
@@ -392,7 +392,7 @@ function SkillRow({
           <Icon name={skill.icon} bold size={17} />
         </span>
         <span className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-          <span className="min-w-0">
+          <span className="min-w-0 overflow-hidden">
             <span className="block truncate font-mono text-[13.5px] font-semibold leading-tight">{skill.id}</span>
             <span className="block truncate text-[11.5px] leading-tight text-[var(--text-3)]">
               {category ? category.label[lang] : ''}
@@ -407,9 +407,9 @@ function SkillRow({
         </span>
       </Link>
 
-      <div className="min-w-0 line-clamp-2 self-center text-[13px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
+      <div className="min-w-0 overflow-hidden line-clamp-2 self-center text-[13px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
 
-      <div className="flex min-w-0 items-center">
+      <div className="flex min-w-0 items-center overflow-hidden">
         <SecurityBadge
           score={skill.score}
           recommendation={skill.securityRecommendation}
@@ -417,10 +417,10 @@ function SkillRow({
         />
       </div>
 
-      <div className="flex min-w-0 items-center overflow-hidden pr-2" title={skill.tech.join(', ')}>
+      <div className="flex min-w-0 items-center overflow-hidden" title={skill.tech.join(', ')}>
         {skill.tech.length > 0 ? (
-          <div className="flex h-[22px] min-w-0 items-center gap-1.5">
-            <span className="max-w-full truncate rounded-md border border-[var(--border)] px-[7px] py-0.5 font-mono text-[10.5px] leading-none text-[var(--text-2)]">
+          <div className="flex h-[22px] min-w-0 max-w-full items-center gap-1.5">
+            <span className="min-w-0 truncate rounded-md border border-[var(--border)] px-[7px] py-0.5 font-mono text-[10.5px] leading-none text-[var(--text-2)]">
               {skill.tech[0]}
             </span>
             {skill.tech.length > 1 ? (
@@ -434,11 +434,11 @@ function SkillRow({
         )}
       </div>
 
-      <div className="flex h-full shrink-0 items-center border-l border-[var(--border)] pl-5">
-        <AgentCompatList agents={skill.compat} size={15} />
+      <div className="flex items-center border-l border-[var(--border)] pl-2">
+        <AgentCompatList agents={skill.compat} size={14} />
       </div>
 
-      <div className="flex shrink-0 justify-end">
+      <div className="flex items-center justify-end">
         <Button variant="copy" size="sm" copied={copied} onClick={onCopy}>
           <Icon name={copied ? 'check' : 'copy'} size={14} />
           {copied ? t.skills.copied : t.skills.copy}

@@ -94,7 +94,7 @@ export function AgentCompatList({ agents, max = 4, size = 14, className = '' }: 
   if (!known.size) return <span className="text-[var(--text-3)]">—</span>
 
   return (
-    <span className={`inline-flex h-[22px] shrink-0 items-center gap-2.5 ${className}`}>
+    <span className={`inline-flex h-[22px] shrink-0 items-center gap-1.5 ${className}`}>
       {slots.map((agent) =>
         known.has(agent) ? (
           <AgentLogo key={agent} agent={agent} size={size} />
