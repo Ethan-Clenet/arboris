@@ -29,5 +29,8 @@ await cp(join(root, 'cli', 'manifest.json'), join(publishDir, 'manifest.json'))
 await cp(join(root, 'prisma', 'skills'), join(publishDir, 'prisma', 'skills'), {
   recursive: true,
 })
+await cp(join(root, 'prisma', 'commands'), join(publishDir, 'prisma', 'commands'), {
+  recursive: true,
+})
 
 console.log(`✅ CLI publiable: ${publishDir}`)

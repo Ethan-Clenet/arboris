@@ -10,7 +10,8 @@
   "files": [
     "dist/cli.mjs",
     "manifest.json",
-    "prisma/skills"
+    "prisma/skills",
+    "prisma/commands"
   ],
   "engines": {
     "node": ">=20"

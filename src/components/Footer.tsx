@@ -17,6 +17,9 @@ export default function Footer() {
         <Link to="/skills" className="text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
           {t.home.browseAll} →
         </Link>
+        <Link to="/commands" className="text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
+          {t.nav.commands} →
+        </Link>
       </div>
     </footer>
   )

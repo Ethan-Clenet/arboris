@@ -65,3 +65,41 @@ export const installSkill = createServerFn({ method: 'POST' })
       return { ok: false, error: code }
     }
   })
+
+export type InstallCommandError =
+  | 'workspace_not_configured'
+  | 'unknown_agent'
+  | 'command_not_found'
+  | 'invalid_path'
+  | 'generic'
+
+export type InstallCommandResult =
+  | { ok: true; path: string }
+  | { ok: false; error: InstallCommandError }
+
+export const getCommand = createServerFn({ method: 'GET' })
+  .validator((data: { id: string }) => data)
+  .handler(async ({ data }) => {
+    const { loadCommand } = await import('./catalog.server')
+    return loadCommand(data.id)
+  })
+
+export const installCommand = createServerFn({ method: 'POST' })
+  .validator((data: { commandId: string; agent: string; lang: 'fr' | 'en' }) => data)
+  .handler(async ({ data }): Promise<InstallCommandResult> => {
+    try {
+      const { installCommandForAgent } = await import('./command-install.server')
+      const result = await installCommandForAgent(data)
+      return { ok: true, path: result.path }
+    } catch (err) {
+      const code =
+        err instanceof Error &&
+        (err.message === 'workspace_not_configured' ||
+          err.message === 'unknown_agent' ||
+          err.message === 'command_not_found' ||
+          err.message === 'invalid_path')
+          ? (err.message as InstallCommandError)
+          : 'generic'
+      return { ok: false, error: code }
+    }
+  })

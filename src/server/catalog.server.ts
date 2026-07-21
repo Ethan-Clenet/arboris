@@ -13,7 +13,11 @@ import {
   parseSecurityReport,
   type SecurityRecommendation,
 } from '#/lib/skillspector'
+import { loadAllCommands, toCommandSummary } from '#/lib/command-file'
+import { defaultCommandsDir, resolvePackageRoot } from '#/lib/package-root'
 import { prisma } from './db'
+
+const COMMANDS_DIR = defaultCommandsDir(resolvePackageRoot(import.meta.url))
 
 function parseList(json: string): string[] {
   try {
@@ -63,7 +67,7 @@ function toSummary(row: SkillRow): SkillSummary {
 }
 
 export async function loadCatalog(): Promise<Catalog> {
-  const [categories, stacks, skills] = await Promise.all([
+  const [categories, stacks, skills, commands] = await Promise.all([
     prisma.category.findMany({ orderBy: { sort: 'asc' } }),
     prisma.stack.findMany({
       orderBy: { sort: 'asc' },
@@ -73,6 +77,7 @@ export async function loadCatalog(): Promise<Catalog> {
       orderBy: { sort: 'asc' },
       include: { stacks: { select: { id: true } } },
     }),
+    loadAllCommands(COMMANDS_DIR),
   ])
 
   return {
@@ -95,6 +100,7 @@ export async function loadCatalog(): Promise<Catalog> {
       }),
     ),
     skills: skills.map(toSummary),
+    commands: commands.map(toCommandSummary),
     compatOrder: [...COMPAT_ORDER],
   }
 }
@@ -115,4 +121,9 @@ export async function loadSkill(id: string): Promise<SkillDetail | null> {
     },
     securityReport: parseSecurityReport(row.securityReportJson),
   }
+}
+
+export async function loadCommand(id: string) {
+  const { loadCommandFile } = await import('#/lib/command-file')
+  return loadCommandFile(COMMANDS_DIR, id)
 }

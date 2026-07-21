@@ -1,13 +1,16 @@
 import { resolve, join } from 'node:path'
 import { readFile } from 'node:fs/promises'
 import { isAgentName, type AgentName } from '../src/lib/agents.ts'
-import { defaultSkillsDir, resolvePackageRoot } from '../src/lib/package-root.ts'
+import { defaultCommandsDir, defaultSkillsDir, resolvePackageRoot } from '../src/lib/package-root.ts'
 import { installSkillToWorkspace, installStackToWorkspace } from '../src/lib/skill-install-core.ts'
+import { installCommandToWorkspace } from '../src/lib/command-install-core.ts'
+import { listCommandIds, loadCommandFile } from '../src/lib/command-file.ts'
 import { needsInstallConfirm, riskToSafetyScore } from '../src/lib/skillspector.ts'
 import { formatStackList, hasSkillId, loadCliManifest, resolveStackId } from './stack-resolve.ts'
 
 const PACKAGE_ROOT = resolvePackageRoot(import.meta.url)
 const SKILLS_DIR = defaultSkillsDir(PACKAGE_ROOT)
+const COMMANDS_DIR = defaultCommandsDir(PACKAGE_ROOT)
 const REPORTS_DIR = join(PACKAGE_ROOT, 'prisma', 'skillspector-reports')
 
 async function loadSafetyScore(skillId: string): Promise<number | null> {
@@ -42,17 +45,19 @@ type CliOptions = {
 }
 
 function printHelp() {
-  console.log(`arboris-cli — installe les skills IA recommandés pour une techno
+  console.log(`arboris-cli — installe les skills et commandes IA
 
 Usage:
   npx arboris-cli <techno> [options]
   npx arboris-cli install <skill-id> [options]
+  npx arboris-cli command <command-id> [options]
   npx arboris-cli list
+  npx arboris-cli list-commands
 
 Exemples:
   npx arboris-cli node
   npx arboris-cli install fastapi-patterns
-  npx arboris-cli node.js --agent cursor
+  npx arboris-cli command review-pr --agent cursor
   npx arboris-cli typescript --force
 
 Technos (alias acceptés: node.js, k8s, spring, postgres…):
@@ -62,10 +67,12 @@ Technos (alias acceptés: node.js, k8s, spring, postgres…):
 Options:
   --agent <name>            Agent cible: cursor | claude | codex | copilot (défaut: cursor)
   --cwd <path>              Projet cible (défaut: répertoire courant)
-  --force                   Écrase les skills déjà installés
+  --force                   Écrase les fichiers déjà installés
   --dry-run                 Affiche sans écrire
   --skip-security-check     Ignore l’avertissement SkillSpector (score < 50)
   -h, --help                Aide
+
+Après installation d’une commande, tape /nom dans le chat de l’agent.
 `)
 }
 
@@ -134,6 +141,57 @@ async function runList() {
   console.log('Technos disponibles:\n')
   console.log(formatStackList(manifest))
   console.log('\nExemple: npx arboris-cli node')
+}
+
+async function runListCommands() {
+  const ids = await listCommandIds(COMMANDS_DIR)
+  if (ids.length === 0) {
+    console.log('Aucune commande dans prisma/commands/.')
+    return
+  }
+  console.log('Commandes (slash) disponibles:\n')
+  for (const id of ids) {
+    const cmd = await loadCommandFile(COMMANDS_DIR, id)
+    console.log(`  /${id}${cmd ? ` — ${cmd.description.fr}` : ''}`)
+  }
+  console.log('\nExemple: npx arboris-cli command review-pr')
+  console.log('Puis tape /review-pr dans le chat de ton agent.')
+}
+
+async function runInstallCommand(commandId: string, options: CliOptions) {
+  const cmd = await loadCommandFile(COMMANDS_DIR, commandId)
+  if (!cmd) {
+    console.error(`Commande inconnue: "${commandId}"`)
+    console.error('Utilise: npx arboris-cli list-commands')
+    process.exit(1)
+  }
+
+  console.log(
+    `${options.dryRun ? '[dry-run] ' : ''}Installation de /${cmd.id} → ${options.agent} (${options.cwd})`,
+  )
+
+  if (options.dryRun) return
+
+  const result = await installCommandToWorkspace({
+    commandId: cmd.id,
+    agent: options.agent,
+    workspaceRoot: options.cwd,
+    commandsDir: COMMANDS_DIR,
+    force: options.force,
+  })
+
+  if (!result.ok) {
+    console.error(`Échec: ${result.error}`)
+    process.exit(1)
+  }
+
+  if (result.skipped) {
+    console.log(`⊘ Déjà présent: ${result.path}`)
+    return
+  }
+
+  console.log(`✓ ${result.path}`)
+  console.log(`→ Dans le chat agent, tape /${cmd.id}`)
 }
 
 async function runInstallSkill(skillId: string, options: CliOptions) {
@@ -246,6 +304,17 @@ async function main() {
 
     if (command === 'list' || command === 'ls') {
       await runList()
+      return
+    }
+
+    if (command === 'list-commands' || command === 'commands') {
+      await runListCommands()
+      return
+    }
+
+    if (command === 'command' || command === 'cmd') {
+      if (!target) throw new Error('Usage: npx arboris-cli command <command-id>')
+      await runInstallCommand(target, options)
       return
     }
 

@@ -16,7 +16,9 @@ import { Route as R500RouteImport } from './routes/500'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SkillsIndexRouteImport } from './routes/skills.index'
+import { Route as CommandsIndexRouteImport } from './routes/commands.index'
 import { Route as SkillsIdRouteImport } from './routes/skills.$id'
+import { Route as CommandsIdRouteImport } from './routes/commands.$id'
 
 const GettingStartedRoute = GettingStartedRouteImport.update({
   id: '/getting-started',
@@ -53,9 +55,19 @@ const SkillsIndexRoute = SkillsIndexRouteImport.update({
   path: '/skills/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CommandsIndexRoute = CommandsIndexRouteImport.update({
+  id: '/commands/',
+  path: '/commands/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SkillsIdRoute = SkillsIdRouteImport.update({
   id: '/skills/$id',
   path: '/skills/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommandsIdRoute = CommandsIdRouteImport.update({
+  id: '/commands/$id',
+  path: '/commands/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -66,7 +78,9 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
+  '/commands/': typeof CommandsIndexRoute
   '/skills/': typeof SkillsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -76,7 +90,9 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
+  '/commands': typeof CommandsIndexRoute
   '/skills': typeof SkillsIndexRoute
 }
 export interface FileRoutesById {
@@ -87,7 +103,9 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
+  '/commands/': typeof CommandsIndexRoute
   '/skills/': typeof SkillsIndexRoute
 }
 export interface FileRouteTypes {
@@ -99,7 +117,9 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/commands/$id'
     | '/skills/$id'
+    | '/commands/'
     | '/skills/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -109,7 +129,9 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/commands/$id'
     | '/skills/$id'
+    | '/commands'
     | '/skills'
   id:
     | '__root__'
@@ -119,7 +141,9 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/commands/$id'
     | '/skills/$id'
+    | '/commands/'
     | '/skills/'
   fileRoutesById: FileRoutesById
 }
@@ -130,7 +154,9 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   GettingStartedRoute: typeof GettingStartedRoute
+  CommandsIdRoute: typeof CommandsIdRoute
   SkillsIdRoute: typeof SkillsIdRoute
+  CommandsIndexRoute: typeof CommandsIndexRoute
   SkillsIndexRoute: typeof SkillsIndexRoute
 }
 
@@ -185,11 +211,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SkillsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/commands/': {
+      id: '/commands/'
+      path: '/commands'
+      fullPath: '/commands/'
+      preLoaderRoute: typeof CommandsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/skills/$id': {
       id: '/skills/$id'
       path: '/skills/$id'
       fullPath: '/skills/$id'
       preLoaderRoute: typeof SkillsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/commands/$id': {
+      id: '/commands/$id'
+      path: '/commands/$id'
+      fullPath: '/commands/$id'
+      preLoaderRoute: typeof CommandsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -202,7 +242,9 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   GettingStartedRoute: GettingStartedRoute,
+  CommandsIdRoute: CommandsIdRoute,
   SkillsIdRoute: SkillsIdRoute,
+  CommandsIndexRoute: CommandsIndexRoute,
   SkillsIndexRoute: SkillsIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -3,6 +3,7 @@
 // base de données, seulement des types et des fonctions pures.
 
 import type { SkillSecurityReport } from '#/lib/skillspector'
+import type { CommandSummary } from '#/lib/command-types'
 
 export type Lang = 'fr' | 'en'
 
@@ -55,6 +56,7 @@ export interface Catalog {
   categories: Category[]
   stacks: Stack[]
   skills: SkillSummary[]
+  commands: CommandSummary[]
   compatOrder: string[]
 }
 

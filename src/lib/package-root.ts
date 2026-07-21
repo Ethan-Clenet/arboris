@@ -26,6 +26,10 @@ export function defaultSkillsDir(packageRoot: string): string {
   return join(packageRoot, 'prisma', 'skills')
 }
 
+export function defaultCommandsDir(packageRoot: string): string {
+  return join(packageRoot, 'prisma', 'commands')
+}
+
 export function defaultManifestPath(packageRoot: string): string {
   const atRoot = join(packageRoot, 'manifest.json')
   if (existsSync(atRoot)) return atRoot
