@@ -1,0 +1,79 @@
+{
+  "riskScore": 38,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 5,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "scripts/export-pdf.sh",
+        "start_line": 368
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "scripts/export-pdf.sh",
+        "start_line": 370
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.fontshare.com/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "html-template.md",
+        "start_line": 16
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Fonts: use Fontshare or Google Fonts — never system fonts -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "html-template.md",
+        "start_line": 15
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:01:51.117513+00:00",
+  "scanMode": "static",
+  "skillName": "frontend-slides",
+  "contentHash": "afd3f7431b1d017c0f330580b2a7f94a2430ee4a32dfd46de3ba06d0634ba499"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:58:37.607955+00:00",
+  "scanMode": "static",
+  "skillName": "competitive-platform-analysis",
+  "contentHash": "579fbd15adba4c34961d3ffb222d15f90e78d6574bc353532c2573b415e87112"
+}

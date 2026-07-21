@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:05:12.245201+00:00",
+  "scanMode": "static",
+  "skillName": "mysql-patterns",
+  "contentHash": "acd0626e65fd40373a0fbea4167ad0bb3f5ac2e53afeb1aa946f328365b083ab"
+}

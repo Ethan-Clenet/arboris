@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:03:28.385770+00:00",
+  "scanMode": "static",
+  "skillName": "ito-trade-planner",
+  "contentHash": "fa75ad3c6ca32c0372dfe8ae72395a845962098cb5eb4ca240a239cb76955a00"
+}

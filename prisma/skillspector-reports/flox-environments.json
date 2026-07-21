@@ -1,0 +1,40 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "sudo ",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 444
+      }
+    },
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "sudo ",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 447
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:01:33.127204+00:00",
+  "scanMode": "static",
+  "skillName": "flox-environments",
+  "contentHash": "3403f688b7db97e1cf10b74b6aecbaa5a2d48586ba7c739eb49f0e2fcdfb6a30"
+}

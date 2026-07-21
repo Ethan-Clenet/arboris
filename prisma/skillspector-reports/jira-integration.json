@@ -1,0 +1,39 @@
+{
+  "riskScore": 12,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 293
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "curl -X POST \\\n  -H \"Content-Type: application/json\" \\\n  -d ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 153
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:03:34.095757+00:00",
+  "scanMode": "static",
+  "skillName": "jira-integration",
+  "contentHash": "67af4181d5a4d54593a5ccf3db56c2120226152aced1972964fd52f3cf23f499"
+}

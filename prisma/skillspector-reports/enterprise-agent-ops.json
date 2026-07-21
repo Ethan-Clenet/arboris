@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:01:02.780133+00:00",
+  "scanMode": "static",
+  "skillName": "enterprise-agent-ops",
+  "contentHash": "f40481936e4af613f0e887989d75bd561e58b748e8f4e9be29c4d5640da4390d"
+}

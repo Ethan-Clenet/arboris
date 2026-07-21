@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:59:00.618195+00:00",
+  "scanMode": "static",
+  "skillName": "context-budget",
+  "contentHash": "647c8336f11cff418bca7dbd348aed780e2ac17b77cb323238054c75f8cc0ab2"
+}

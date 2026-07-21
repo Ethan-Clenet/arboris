@@ -1,0 +1,66 @@
+{
+  "riskScore": 23,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 4,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "AGENTS.md",
+        "start_line": 2477
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "rules/rendering-svg-precision.md",
+        "start_line": 27
+      }
+    },
+    {
+      "id": "OH1",
+      "category": "Output Handling",
+      "pattern": "Unvalidated Output Injection",
+      "severity": "HIGH",
+      "confidence": 0.65,
+      "finding": "dangerouslySetInnerHTML={",
+      "explanation": "Model output is used without validation or sanitization. Unvalidated output injected into downstream contexts (SQL, shell, HTML) enables injection attacks and arbitrary code execution.",
+      "remediation": "Validate and sanitize all model output before using it in downstream contexts. Use parameterized queries for SQL, shell quoting for commands, and HTML encoding for web output.",
+      "location": {
+        "file": "AGENTS.md",
+        "start_line": 2537
+      }
+    },
+    {
+      "id": "OH1",
+      "category": "Output Handling",
+      "pattern": "Unvalidated Output Injection",
+      "severity": "HIGH",
+      "confidence": 0.65,
+      "finding": "dangerouslySetInnerHTML={",
+      "explanation": "Model output is used without validation or sanitization. Unvalidated output injected into downstream contexts (SQL, shell, HTML) enables injection attacks and arbitrary code execution.",
+      "remediation": "Validate and sanitize all model output before using it in downstream contexts. Use parameterized queries for SQL, shell quoting for commands, and HTML encoding for web output.",
+      "location": {
+        "file": "rules/rendering-hydration-no-flicker.md",
+        "start_line": 63
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:10:20.572387+00:00",
+  "scanMode": "static",
+  "skillName": "vercel-react-best-practices",
+  "contentHash": "3219a1944e404ffc14d1d9d6aef6dd2e3855b81387ee0a044ccbfe14d34c2357"
+}

@@ -1,0 +1,40 @@
+{
+  "riskScore": 26,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "os.environ.get(\"NETMIKO_PASSWORD",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 48
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "os.environ.get(\"NETMIKO_ENABLE_SECRET",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 49
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:05:23.302570+00:00",
+  "scanMode": "static",
+  "skillName": "netmiko-ssh-automation",
+  "contentHash": "57c1a46fe6b0023b39ae929b8e6da1ac3d7170a464e4b0817fb271363884c4e2"
+}

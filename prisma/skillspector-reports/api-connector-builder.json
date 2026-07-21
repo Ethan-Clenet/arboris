@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:57:15.424290+00:00",
+  "scanMode": "static",
+  "skillName": "api-connector-builder",
+  "contentHash": "d2fa8553ef17a3fc6217f0d68637f406c53830079e1cba62f9aec58ea49c8c75"
+}

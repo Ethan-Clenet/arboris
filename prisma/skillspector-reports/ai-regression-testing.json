@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:57:06.111247+00:00",
+  "scanMode": "static",
+  "skillName": "ai-regression-testing",
+  "contentHash": "1df63c2a7fd8e0a439ba52729ab14f182a5fdb4bfee436f8bd7c431882b99bf9"
+}

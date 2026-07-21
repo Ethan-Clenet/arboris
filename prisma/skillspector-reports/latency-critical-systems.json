@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:04:15.633394+00:00",
+  "scanMode": "static",
+  "skillName": "latency-critical-systems",
+  "contentHash": "456e84774473dd28ebeace56490b3cdbf9290a2ef2faab6e8fa98ea5a7246fb9"
+}

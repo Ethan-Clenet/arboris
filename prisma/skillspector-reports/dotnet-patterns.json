@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:00:39.228161+00:00",
+  "scanMode": "static",
+  "skillName": "dotnet-patterns",
+  "contentHash": "914af02450ce8aec3c8cf72efd9ec942167fc2a3bccee002d64987aaa4a63c67"
+}

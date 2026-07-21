@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:09:36.679377+00:00",
+  "scanMode": "static",
+  "skillName": "tdd-workflow",
+  "contentHash": "9c410adb94feea57de24dabc6071b191bac9665085c959ac96431c8eb9650c71"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:01:22.897801+00:00",
+  "scanMode": "static",
+  "skillName": "finance-billing-ops",
+  "contentHash": "0bd2441aa035530fc4ea1501e45ec9dae337bdb7e369fb46e22d95b8e3cbd69b"
+}

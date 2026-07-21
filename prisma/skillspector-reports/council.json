@@ -1,0 +1,26 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "write down:\n- your initial position\n- the three strongest reasons for it\n- the main risk in your preferred path\n\nDo this first so the synthesis does not simply mirror the external voices.\n\n### 4. Laun",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 78
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T05:59:26.117639+00:00",
+  "scanMode": "static",
+  "skillName": "council",
+  "contentHash": "7c2d224f8613646bf39e0360c199a681e504f808891050046936d0bac33417e7"
+}

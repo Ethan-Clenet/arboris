@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:58:04.780094+00:00",
+  "scanMode": "static",
+  "skillName": "canary-watch",
+  "contentHash": "cc57f6ada90455bc46d77df3a0c60613a5d39c5bf6a261ebb4a0bf2fd67e298f"
+}

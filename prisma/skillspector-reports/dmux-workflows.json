@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:00:30.724117+00:00",
+  "scanMode": "static",
+  "skillName": "dmux-workflows",
+  "contentHash": "b401e2f7fa2dc65085a820844a2280b6d113ba196f69495d049b30a5e31b9e4f"
+}

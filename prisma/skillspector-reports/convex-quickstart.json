@@ -1,0 +1,337 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 25,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 5
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 30
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 36
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 92
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 110
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 138
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 141
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 149
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 152
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 193
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 198
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 211
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 316
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 321
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 322
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 326
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 337
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 338
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 344
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 349
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 416
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 422
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 445
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 447
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "MCP server references in the skill manifest without version pinning are a rug-pull risk.",
+      "remediation": "Always pin MCP server versions in manifest references.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T05:59:13.954177+00:00",
+  "scanMode": "static",
+  "skillName": "convex-quickstart",
+  "contentHash": "54e5271d5d613cc4c0068baa250613b5abb6e4533df1e67adc26d2e0c7d68ded"
+}

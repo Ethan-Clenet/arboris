@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:02:26.204065+00:00",
+  "scanMode": "static",
+  "skillName": "healthcare-emr-patterns",
+  "contentHash": "21f48f21b8c5eab7a7e99bd246798efa13dee55a28d90bac7952122e1dee19ec"
+}

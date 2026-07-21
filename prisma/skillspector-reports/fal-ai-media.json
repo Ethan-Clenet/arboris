@@ -1,0 +1,82 @@
+{
+  "riskScore": 36,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 5,
+  "issues": [
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "requests.post(\n    \"https://",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 220
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "requests.post(\n    \"https://api.elevenlabs.io/v1/text-to-speech/<voice_id>\",\n    headers={\n        \"xi-api-key\": os.environ[\"ELEVENLABS_API_KEY\"],\n        \"Content-Type\": \"application/json\"\n    },\n   ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 220
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.elevenlabs.io/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 221
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "os.environ[\"ELEVENLABS_API_KEY\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 223
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "create video\", \"text to speech\", \"make a thumbnail\", or similar\n\n## MCP Requirement\n\nfal.ai MCP server must be configured. Add to `~/.claude",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 22
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:01:16.997433+00:00",
+  "scanMode": "static",
+  "skillName": "fal-ai-media",
+  "contentHash": "b694dbb54e265bfbe7b27507de51c3841d37a24936b8383ce11a16dde38dba49"
+}

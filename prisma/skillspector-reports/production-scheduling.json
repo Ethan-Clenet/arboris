@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:06:46.213095+00:00",
+  "scanMode": "static",
+  "skillName": "production-scheduling",
+  "contentHash": "2bd1c36b8019dc382a0207e6a3b0efffa73a932421646e6ab5b93c771efc9f86"
+}

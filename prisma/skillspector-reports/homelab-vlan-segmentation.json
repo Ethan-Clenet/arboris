@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:02:52.757118+00:00",
+  "scanMode": "static",
+  "skillName": "homelab-vlan-segmentation",
+  "contentHash": "9c367bfc470dfdef6dc7f70c42c69756d4b330b9892249d61369265d1431e9f3"
+}

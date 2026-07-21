@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:04:43.650130+00:00",
+  "scanMode": "static",
+  "skillName": "marketing-campaign",
+  "contentHash": "87dc33b5a12a1bbebc07c2f0e8cb57a754d1c5586cfc7b393510f377f3cbaf21"
+}

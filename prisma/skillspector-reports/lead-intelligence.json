@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:04:18.775617+00:00",
+  "scanMode": "static",
+  "skillName": "lead-intelligence",
+  "contentHash": "c713afdcd58b8b45aee6f0a0d06d6e6ac64ef9769586a9aa2a1ac7c85c44ee2c"
+}

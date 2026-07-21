@@ -1,0 +1,152 @@
+{
+  "riskScore": 15,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 10,
+  "issues": [
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "dir is auto-detected from `$PWD/.claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 50
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/skill-name/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 182
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR is omitted, defaults to $PWD/.claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/quick-diff.sh",
+        "start_line": 6
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR   Override ~/.claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/quick-diff.sh",
+        "start_line": 10
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR looks like a .claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/quick-diff.sh",
+        "start_line": 25
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR does not look like a .claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/quick-diff.sh",
+        "start_line": 28
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR is omitted, defaults to $PWD/.claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/scan.sh",
+        "start_line": 6
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR   Override ~/.claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/scan.sh",
+        "start_line": 10
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR looks like a .claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/scan.sh",
+        "start_line": 22
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR does not look like a .claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/scan.sh",
+        "start_line": 25
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:08:47.509840+00:00",
+  "scanMode": "static",
+  "skillName": "skill-stocktake",
+  "contentHash": "efe9ef3edb65ca0a9944ca7d68047c3ac7d3dc85cb8df820569fa3532aab64b0"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:00:50.876920+00:00",
+  "scanMode": "static",
+  "skillName": "ecc-recipes",
+  "contentHash": "442badb07b5789cda6c6397027d6e65c870813bc56aabf7cfced67d94cfc89cc"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:03:12.341267+00:00",
+  "scanMode": "static",
+  "skillName": "investor-outreach",
+  "contentHash": "7a4e527a37fcdcdb808e8469ad6b1e53154fc7f62e3c1d2ea84607f857652d9c"
+}

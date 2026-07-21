@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:02:38.426556+00:00",
+  "scanMode": "static",
+  "skillName": "hexagonal-architecture",
+  "contentHash": "423c177b1d49c286960da0d20f0788d57f5cbde3c0a8b706a0f99ba400c47dad"
+}

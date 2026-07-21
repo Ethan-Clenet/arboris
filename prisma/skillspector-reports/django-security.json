@@ -1,0 +1,54 @@
+{
+  "riskScore": 32,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "os.environ.get('DJANGO_SECRET_KEY",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 50
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 580
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 587
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:00:22.097907+00:00",
+  "scanMode": "static",
+  "skillName": "django-security",
+  "contentHash": "203ebb6cd07cd8082b51b4c66ccad71004438369e0644f24a1c9d69fff2d658e"
+}

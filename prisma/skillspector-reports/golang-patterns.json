@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:02:11.676391+00:00",
+  "scanMode": "static",
+  "skillName": "golang-patterns",
+  "contentHash": "eb058a2c65cc1bb212892821c8278aa5c6d66867b33fe1358686db93a892d2a3"
+}

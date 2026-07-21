@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:03:37.060901+00:00",
+  "scanMode": "static",
+  "skillName": "jpa-patterns",
+  "contentHash": "70b8e2fbd44da86c7762b2e6e89bbe6b8f09572a4d66050168c4eafe29909cc7"
+}

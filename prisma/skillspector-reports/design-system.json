@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:00:13.196338+00:00",
+  "scanMode": "static",
+  "skillName": "design-system",
+  "contentHash": "04ba4a8436c2d2fadcbeac7bc1ca8b8434096ebb6bf724426f5c2468430477d5"
+}

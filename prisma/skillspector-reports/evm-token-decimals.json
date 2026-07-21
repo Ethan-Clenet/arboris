@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:01:11.199104+00:00",
+  "scanMode": "static",
+  "skillName": "evm-token-decimals",
+  "contentHash": "9dc21dbe99869627755bb6496d8fe394a8235d62bddaae6766518c7845938ee5"
+}

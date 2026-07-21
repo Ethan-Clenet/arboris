@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:01:13.873761+00:00",
+  "scanMode": "static",
+  "skillName": "exa-search",
+  "contentHash": "83bb34e50312d2254ec7af1e28945a6ea25ba3f5fcf27a851a9de951a5fa7b2f"
+}

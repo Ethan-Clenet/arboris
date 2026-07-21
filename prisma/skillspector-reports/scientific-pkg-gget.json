@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:08:10.454730+00:00",
+  "scanMode": "static",
+  "skillName": "gget",
+  "contentHash": "7145c943c140f767c8b0283bb55b13e3ba0d84c828fd24068dc374646655a338"
+}

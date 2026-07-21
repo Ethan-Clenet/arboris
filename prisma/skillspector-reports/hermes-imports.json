@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:02:35.513881+00:00",
+  "scanMode": "static",
+  "skillName": "hermes-imports",
+  "contentHash": "785eb69c553eb91668ac9f76096c84cdc644537e9f264e6010963be983609e62"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:59:03.239651+00:00",
+  "scanMode": "static",
+  "skillName": "continuous-agent-loop",
+  "contentHash": "9f6e576fcb73dbf6399306c7d25a79a7ab9870ae5b14b85d736481d61b460523"
+}

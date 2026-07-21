@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:04:07.348492+00:00",
+  "scanMode": "static",
+  "skillName": "laravel-security",
+  "contentHash": "6ec0611d65b0787530f725ca630d9075e5e2eb3d7779abb43447983174dce854"
+}

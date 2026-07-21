@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:07:47.349699+00:00",
+  "scanMode": "static",
+  "skillName": "returns-reverse-logistics",
+  "contentHash": "40f7f3e3f09f0759104fcf69ebf09a0c20326d8f62fc9b1b60ed098f2c97cdfa"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:00:15.977948+00:00",
+  "scanMode": "static",
+  "skillName": "django-celery",
+  "contentHash": "50445431aef614f506a7d14c922c8af122c243c3e16a993aed43a33a6f50658e"
+}

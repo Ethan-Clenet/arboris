@@ -1,0 +1,82 @@
+{
+  "riskScore": 40,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 5,
+  "issues": [
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.x.com/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 45
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.x.com/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 101
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "os.environ[\"X_BEARER_TOKEN\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 40
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "os.environ[\"X_CONSUMER_KEY\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 71
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "os.environ[\"X_CONSUMER_SECRET\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 72
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:10:52.727505+00:00",
+  "scanMode": "static",
+  "skillName": "x-api",
+  "contentHash": "e5ea1d369577edf88126eaecc340b59465c0b718d09f85a490788ae51a2a6d23"
+}

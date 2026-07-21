@@ -1,0 +1,54 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                                            ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 23
+      }
+    },
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                                      ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 25
+      }
+    },
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                              ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 26
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:09:30.205978+00:00",
+  "scanMode": "static",
+  "skillName": "tailwind-design-system",
+  "contentHash": "cd61afd28f594e8b6712b61749209cbb4466e3eec4e4223793bbd97fc85c1b63"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:56:43.179734+00:00",
+  "scanMode": "static",
+  "skillName": "agent-harness-construction",
+  "contentHash": "f5acb291feacd83a613e1e72fd6403d902c734c489e72e8d7614e70bc2e8d0ce"
+}

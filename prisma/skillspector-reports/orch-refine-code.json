@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:06:04.105305+00:00",
+  "scanMode": "static",
+  "skillName": "orch-refine-code",
+  "contentHash": "2e2437996bba1619a8a6ab3f96cbb1b294cc65cc7294437a40503a97074a5de4"
+}

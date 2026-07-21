@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:59:46.812641+00:00",
+  "scanMode": "static",
+  "skillName": "dart-flutter-patterns",
+  "contentHash": "d2a29be233f68ccb84d966f9a6501b849407367db58c56f330a36777048b4fbc"
+}

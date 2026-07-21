@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:07:33.972233+00:00",
+  "scanMode": "static",
+  "skillName": "regex-vs-llm-structured-text",
+  "contentHash": "2370f85e28b23262fed15ff0832c4289b58d45e50d78e09dd129264ced0252f4"
+}

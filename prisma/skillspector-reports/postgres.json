@@ -1,0 +1,96 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 6,
+  "issues": [
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                                        ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 16
+      }
+    },
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                                  ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 16
+      }
+    },
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                                                    ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 28
+      }
+    },
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                                        ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 28
+      }
+    },
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                                                    ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 41
+      }
+    },
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                              ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 41
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:06:24.082040+00:00",
+  "scanMode": "static",
+  "skillName": "postgres",
+  "contentHash": "2acf9fae4fcdb6c392923708b67234828f8a9f10b10dfa5d228eaab6e9108245"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:06:20.883165+00:00",
+  "scanMode": "static",
+  "skillName": "plankton-code-quality",
+  "contentHash": "f995968088a122908e924329c2168a174ed021f9578932df6fb3f4171684b3c2"
+}

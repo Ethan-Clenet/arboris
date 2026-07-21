@@ -1,0 +1,67 @@
+{
+  "riskScore": 36,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 4,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 165
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "requests.post(\n    f\"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}\",\n    headers={\n        \"xi-api-key\": os.environ[\"ELEVENLABS_API_KEY\"],\n        \"Content-Type\": \"application/json\"\n    },\n  ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 180
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.elevenlabs.io/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 181
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "os.environ[\"ELEVENLABS_API_KEY\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 183
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:10:26.614824+00:00",
+  "scanMode": "static",
+  "skillName": "video-editing",
+  "contentHash": "f44c45ed71dec68cf955a316577ddd191248d0c607118c89ffc10f9f3f1ea3a0"
+}

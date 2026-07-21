@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:03:09.371459+00:00",
+  "scanMode": "static",
+  "skillName": "investor-materials",
+  "contentHash": "e1d1c0e530a2f45bb442ffef95aab0eaef5d91757189be9b1d98311268c5308d"
+}

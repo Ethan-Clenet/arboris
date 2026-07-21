@@ -1,0 +1,40 @@
+{
+  "riskScore": 12,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "ls -> install or keep in `.claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 145
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/skill-library/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 157
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T05:56:54.567668+00:00",
+  "scanMode": "static",
+  "skillName": "agent-sort",
+  "contentHash": "111c86b5627f9fe6ea58a2dc0077acf71d7f9bc427732b5bfb16d5b9e9e66edd"
+}

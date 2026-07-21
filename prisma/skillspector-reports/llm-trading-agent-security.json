@@ -1,0 +1,26 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "os.environ.get(\"TRADING_WALLET_PRIVATE_KEY",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 118
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:04:23.736345+00:00",
+  "scanMode": "static",
+  "skillName": "llm-trading-agent-security",
+  "contentHash": "603585631eeb0e3f7eeda29afb7a5228fa1e5e36497b0387e7ba3c73cec27061"
+}

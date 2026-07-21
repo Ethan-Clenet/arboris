@@ -1,0 +1,40 @@
+{
+  "riskScore": 31,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "AS2",
+      "category": "Agent Snooping",
+      "pattern": "MCP Config Access",
+      "severity": "HIGH",
+      "confidence": 0.95,
+      "finding": ".claude/mcp.json",
+      "explanation": "Skill accesses MCP server configuration files (mcp.json). MCP configs contain server URLs, authentication tokens, and tool definitions — reading them allows the skill to discover and potentially abuse other tool integrations.",
+      "remediation": "Remove all code or instructions that read MCP configuration files (mcp.json). MCP server details should be managed by the agent runtime, not read by individual skills.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 105
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "plist",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 222
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T05:57:00.351875+00:00",
+  "scanMode": "static",
+  "skillName": "agentic-os",
+  "contentHash": "b6ac462d60e4c79b8a6a4864ae4ffd80b2d37e8e0d427a65e0d389ee84abb99c"
+}

@@ -1,0 +1,26 @@
+{
+  "riskScore": 20,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "MP3",
+      "category": "Memory Poisoning",
+      "pattern": "Memory Manipulation",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "clear context",
+      "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+      "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+      "location": {
+        "file": "README.md",
+        "start_line": 28
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:10:15.139878+00:00",
+  "scanMode": "static",
+  "skillName": "vercel-composition-patterns",
+  "contentHash": "f98931159fa9c7fed043bcd18a891a46dcf89ababa38df13a4c5b7b30dc0ce07"
+}

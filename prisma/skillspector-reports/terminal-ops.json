@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:09:45.487736+00:00",
+  "scanMode": "static",
+  "skillName": "terminal-ops",
+  "contentHash": "3f29e7aeb87614042c37130b5e1d70ac4abb05ad8736da528b0ca2209cef3470"
+}

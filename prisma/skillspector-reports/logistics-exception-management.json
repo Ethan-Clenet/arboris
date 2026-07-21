@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:04:26.832771+00:00",
+  "scanMode": "static",
+  "skillName": "logistics-exception-management",
+  "contentHash": "15e705a01537e32200375bbeee7230b1b2b4e621444f41f0521492e62ca02026"
+}

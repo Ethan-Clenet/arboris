@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:00:28.118921+00:00",
+  "scanMode": "static",
+  "skillName": "django-verification",
+  "contentHash": "ba79c4bc0e32d9819df2747b998ac924f69cf7eec771da72400ea7de7e86bfaf"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:04:51.726947+00:00",
+  "scanMode": "static",
+  "skillName": "ml-adoption-playbook",
+  "contentHash": "1b626cd8a060f8008d3c1747a3dc9447f67d11308d27847fcb47c6b8958d3f7f"
+}

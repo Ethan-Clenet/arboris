@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:02:32.672549+00:00",
+  "scanMode": "static",
+  "skillName": "healthcare-phi-compliance",
+  "contentHash": "2886f41592996624d40e1fb746c891e88d702c9b049e394f97ab03f902c6033f"
+}

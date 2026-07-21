@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:02:47.165066+00:00",
+  "scanMode": "static",
+  "skillName": "homelab-network-setup",
+  "contentHash": "5f1f2c87205c863a6405f678f418a3a5b3ff88cf627714a8cba19e82b2f4af12"
+}

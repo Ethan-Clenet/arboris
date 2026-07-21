@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:59:55.460827+00:00",
+  "scanMode": "static",
+  "skillName": "data-throughput-accelerator",
+  "contentHash": "81d6355f17f35d13297ac6d327b02dac43c4fbf34bd0ea98190472d7ff1a52c1"
+}

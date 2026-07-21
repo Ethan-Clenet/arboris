@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:07:19.992893+00:00",
+  "scanMode": "static",
+  "skillName": "react-native-patterns",
+  "contentHash": "f109f2aabfaae343dd3b81195812f431d12a22ce63c32c0457515f9097fa38ea"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:05:45.207402+00:00",
+  "scanMode": "static",
+  "skillName": "openclaw-persona-forge",
+  "contentHash": "b70f8f15265448f3e90d37f1313cd98bff57cb997e04a0cf502d6e3e8934b96c"
+}

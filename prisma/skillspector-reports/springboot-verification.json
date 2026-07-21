@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:09:08.418606+00:00",
+  "scanMode": "static",
+  "skillName": "springboot-verification",
+  "contentHash": "5a2abe74331daccf722b452d9c85d2ec7dc4777a901f33b91e007b6102b84b05"
+}

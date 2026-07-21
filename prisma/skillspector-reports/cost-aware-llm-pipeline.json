@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:59:20.231259+00:00",
+  "scanMode": "static",
+  "skillName": "cost-aware-llm-pipeline",
+  "contentHash": "2a85ed42514a4b4e81c0a43f243fba5e18bfc4f4d964cd9a6988a0860b264a65"
+}

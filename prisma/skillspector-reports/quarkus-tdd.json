@@ -1,0 +1,26 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Prepare agent for test execution -->\n    <execution>\n      <id>prepare-agent</id>\n      <goals>\n        <goal>prepare-agent</goal>\n      </goals>\n    </execution>\n\n    <!-- Generate coverage repo",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 638
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:07:11.799025+00:00",
+  "scanMode": "static",
+  "skillName": "quarkus-tdd",
+  "contentHash": "798241f5c38560804e11aa43d9f28740e60c61b097088777a275c77862aae085"
+}

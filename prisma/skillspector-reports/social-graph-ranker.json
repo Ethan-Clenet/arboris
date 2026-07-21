@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:08:50.194734+00:00",
+  "scanMode": "static",
+  "skillName": "social-graph-ranker",
+  "contentHash": "b91461027ba59d38ed9746b5fa3302ae9b28611a4a705962670d935a3d3387ce"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:01:59.783945+00:00",
+  "scanMode": "static",
+  "skillName": "gateguard",
+  "contentHash": "7cfcd04f92625dadea27381dc18ca6fa9095dbbfc989a318edea160db81dc7ce"
+}

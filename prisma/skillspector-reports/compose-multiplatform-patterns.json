@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:58:43.039203+00:00",
+  "scanMode": "static",
+  "skillName": "compose-multiplatform-patterns",
+  "contentHash": "fa92e0b644061d081904be32445e158d81a0bdf3b1dc95ddedb2e53d69e95609"
+}

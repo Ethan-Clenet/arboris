@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:04:48.783343+00:00",
+  "scanMode": "static",
+  "skillName": "messages-ops",
+  "contentHash": "5e8e189c64bd3ac5387d2a14c320768f7661942893660e6e3555c590ef573365"
+}

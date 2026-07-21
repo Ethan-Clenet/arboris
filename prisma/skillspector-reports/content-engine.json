@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:58:54.779585+00:00",
+  "scanMode": "static",
+  "skillName": "content-engine",
+  "contentHash": "75bd75aff09c8ca965600df5c58a9e00d72a2c57166976ca45449c726d32e825"
+}

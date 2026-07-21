@@ -1,0 +1,26 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "create a skill\", \"build a skill\", \"make a skill\", or \"new\n  skill\".\n- The user asks \"is there a skill for X?\" or \"does a skill exist that does Y?\"\n- The user describes a workflow and you are about to ",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 18
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:08:43.924376+00:00",
+  "scanMode": "static",
+  "skillName": "skill-scout",
+  "contentHash": "01312193cd23fdc0c8eb65a8b507bd9a63c3474805451c088e500dd6903d4b2c"
+}

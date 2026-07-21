@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:05:00.255009+00:00",
+  "scanMode": "static",
+  "skillName": "motion-foundations",
+  "contentHash": "42cc6fa240695c21e382ee90eb1b63911ad25a61bfa39edc88cc357e4b1eb233"
+}

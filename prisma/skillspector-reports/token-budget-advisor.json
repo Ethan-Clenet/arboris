@@ -1,0 +1,54 @@
+{
+  "riskScore": 15,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "without asking",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 98
+      }
+    },
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                            ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 89
+      }
+    },
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                              ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 89
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:09:51.733503+00:00",
+  "scanMode": "static",
+  "skillName": "token-budget-advisor",
+  "contentHash": "c0c6cd04552e3a8a4fa074a516ce3b645606b4d3b54fe13f34952aab463ee1d1"
+}

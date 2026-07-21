@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:03:03.661227+00:00",
+  "scanMode": "static",
+  "skillName": "intent-driven-development",
+  "contentHash": "d6e4de51ec724a67d51264b09d06d8208c8046453b8a46dbf9a8e9a2dea1d7c6"
+}

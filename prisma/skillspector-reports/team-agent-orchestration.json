@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:09:39.455767+00:00",
+  "scanMode": "static",
+  "skillName": "team-agent-orchestration",
+  "contentHash": "6ae08cb2a6d0b396609f22c815167990cdc4c7c1bfd2701c603e6201e19fed3e"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:56:45.922879+00:00",
+  "scanMode": "static",
+  "skillName": "agent-introspection-debugging",
+  "contentHash": "1826142f83e70155dfcb734b5fbed18d0aa6a2bdf10253f2f7cbb933627e5c6a"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:56:57.493711+00:00",
+  "scanMode": "static",
+  "skillName": "agentic-engineering",
+  "contentHash": "4fd2d9976302037efb569251152ebfc39849219ca1c099b65adb77a074acb5f4"
+}

@@ -1,0 +1,40 @@
+{
+  "riskScore": 13,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "no confirmation",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "commands/forget.mjs",
+        "start_line": 11
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.55,
+      "finding": "Read previous session",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "hooks/session-start.mjs",
+        "start_line": 93
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T05:58:14.015197+00:00",
+  "scanMode": "static",
+  "skillName": "ck",
+  "contentHash": "baf12bd369d638184349b612a2279eb2c2b6f87b5e94f89d3ceab1bbe54c9c27"
+}

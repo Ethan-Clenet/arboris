@@ -1,0 +1,54 @@
+{
+  "riskScore": 34,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "chmod 777",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 34
+      }
+    },
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "chmod 777",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 34
+      }
+    },
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.65,
+      "finding": "git reset --hard",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 29
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:07:59.048755+00:00",
+  "scanMode": "static",
+  "skillName": "safety-guard",
+  "contentHash": "de4a3845d79a635b3e887057e87257dfd08b9c5331386c4bb606658fa73ab384"
+}

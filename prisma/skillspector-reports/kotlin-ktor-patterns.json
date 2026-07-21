@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:03:49.651551+00:00",
+  "scanMode": "static",
+  "skillName": "kotlin-ktor-patterns",
+  "contentHash": "405ff26c08850d73d5e31a9eb64eb96c7b98d0690770313cec8244d1aae3b7d6"
+}

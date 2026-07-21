@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:58:17.167204+00:00",
+  "scanMode": "static",
+  "skillName": "claude-devfleet",
+  "contentHash": "bcaacc009f12b852fa4fd015b234619eb125296314c8acb50bb0a65e17ecfb99"
+}

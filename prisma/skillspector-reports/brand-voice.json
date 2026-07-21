@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:57:56.412650+00:00",
+  "scanMode": "static",
+  "skillName": "brand-voice",
+  "contentHash": "d2a2d29814a36bb98e4e9f2ef6dc724e2152e935f3d32019f3e2e554ff91ddef"
+}

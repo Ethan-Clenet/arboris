@@ -1,0 +1,40 @@
+{
+  "riskScore": 20,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "AR2",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "no warnings",
+      "explanation": "Skill instructs the agent to omit warnings, disclaimers, or ethical commentary. Stripping safety caveats hides risk from the user and is a common jailbreak preamble.",
+      "remediation": "Remove instructions that suppress warnings, disclaimers, or ethical commentary. Let the agent surface safety-relevant caveats to the user.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 42
+      }
+    },
+    {
+      "id": "AR2",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "no warnings",
+      "explanation": "Skill instructs the agent to omit warnings, disclaimers, or ethical commentary. Stripping safety caveats hides risk from the user and is a common jailbreak preamble.",
+      "remediation": "Remove instructions that suppress warnings, disclaimers, or ethical commentary. Let the agent surface safety-relevant caveats to the user.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 323
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:06:09.652926+00:00",
+  "scanMode": "static",
+  "skillName": "perl-patterns",
+  "contentHash": "b14744312e2b62c9345c014db76e473382660d00c3c81fb654a46f4614c99a8d"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:10:11.447529+00:00",
+  "scanMode": "static",
+  "skillName": "unified-notifications-ops",
+  "contentHash": "c36aad1908bb05d9f38ac61e304f307a89c89b8c736a9e4c31903a6f6622e74f"
+}

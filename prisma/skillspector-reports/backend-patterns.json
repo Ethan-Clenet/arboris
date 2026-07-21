@@ -1,0 +1,26 @@
+{
+  "riskScore": 20,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "DELETE /api/markets/:id",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 33
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T05:57:36.217811+00:00",
+  "scanMode": "static",
+  "skillName": "backend-patterns",
+  "contentHash": "82ef426e6923d9ede1213e2062a0f069071afa3013f61b96d57db93d2dc2410c"
+}

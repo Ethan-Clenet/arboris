@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:05:33.894684+00:00",
+  "scanMode": "static",
+  "skillName": "nextjs-turbopack",
+  "contentHash": "f60e27a5d1f56989dc1dd8790e51066cb74cea73367562a0e3cc57eafb1711a6"
+}

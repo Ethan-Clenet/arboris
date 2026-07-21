@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:09:42.741671+00:00",
+  "scanMode": "static",
+  "skillName": "team-builder",
+  "contentHash": "3b0546ef4a2965ec100400e72196a6214677e6a3e2c74d60d509cc7636917d63"
+}

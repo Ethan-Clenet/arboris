@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:58:19.783102+00:00",
+  "scanMode": "static",
+  "skillName": "click-path-audit",
+  "contentHash": "5a3e02c991de328feb1f5e614697deb30a3965169d19a68b90036cedeffabaaa"
+}

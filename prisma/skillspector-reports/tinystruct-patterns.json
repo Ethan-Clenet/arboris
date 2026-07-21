@@ -1,0 +1,26 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA1",
+      "category": "Excessive Agency",
+      "pattern": "Unrestricted Tool Access",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "Tool:*",
+      "explanation": "Skill grants unrestricted tool access without appropriate constraints. An agent with unfettered tool access can perform arbitrary actions including file modification, network requests, and code execution.",
+      "remediation": "Restrict tool access to only the tools required for the skill's stated purpose. Use an explicit allowlist rather than granting blanket access.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 143
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:09:48.994510+00:00",
+  "scanMode": "static",
+  "skillName": "tinystruct-patterns",
+  "contentHash": "381ff74c8b0961b2d79771bcb05d62727eddca8a86ee4962e98c66a5c515d714"
+}

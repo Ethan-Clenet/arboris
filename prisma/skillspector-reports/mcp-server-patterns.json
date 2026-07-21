@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:04:46.261073+00:00",
+  "scanMode": "static",
+  "skillName": "mcp-server-patterns",
+  "contentHash": "55425683e7c75a1e9cc39ea3d016fe66f23e9a6921e0203487e325f1f7a28439"
+}

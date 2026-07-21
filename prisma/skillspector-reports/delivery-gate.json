@@ -1,0 +1,25 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:00:07.423499+00:00",
+  "scanMode": "static",
+  "skillName": "delivery-gate",
+  "contentHash": "0460d6df8ef72ff8bccac63f4002e2054b1430e09190aed8141481cb33a9ddc1"
+}

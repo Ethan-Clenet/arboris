@@ -1,0 +1,26 @@
+{
+  "riskScore": 22,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "AS1",
+      "category": "Agent Snooping",
+      "pattern": "Agent Config Directory Access",
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "finding": "~/.codex/config.toml",
+      "explanation": "Skill reads from agent configuration directories (.claude/, .codex/, .gemini/). These directories may contain API keys, personal settings, and other credentials that the skill has no legitimate need to access.",
+      "remediation": "Remove all code or instructions that access agent configuration directories (.claude/, .codex/, .gemini/). If configuration values are needed, pass them explicitly as parameters or environment variables — never read the agent's own config files.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 30
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:00:01.336195+00:00",
+  "scanMode": "static",
+  "skillName": "deep-research",
+  "contentHash": "a077ae15135e506490458ac6dacaf17be9dfa61600f1712c6b7dc79a7cef249e"
+}

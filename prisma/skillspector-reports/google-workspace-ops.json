@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:02:17.570906+00:00",
+  "scanMode": "static",
+  "skillName": "google-workspace-ops",
+  "contentHash": "b1b317fdee45543857bd26354b85b5c516d643e4e3a4fdda95a64f25fca04f54"
+}

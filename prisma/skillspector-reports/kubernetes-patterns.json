@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:03:58.422290+00:00",
+  "scanMode": "static",
+  "skillName": "kubernetes-patterns",
+  "contentHash": "a304fc5930a657452ea39ecb7ccbe3f558a8d24113c4a739cd0f1d4e5fd29c2b"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:09:20.976359+00:00",
+  "scanMode": "static",
+  "skillName": "swift-concurrency-6-2",
+  "contentHash": "494537bbbc803bd28b0a80bde5844fe82f4b334e7bcb8ba05a3b4a32b759b036"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:59:43.533735+00:00",
+  "scanMode": "static",
+  "skillName": "customs-trade-compliance",
+  "contentHash": "d57633e837e500fc918e0b5dd9f3fd46943544fe071bfd6953cb10283b19d13c"
+}

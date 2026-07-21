@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:00:53.579114+00:00",
+  "scanMode": "static",
+  "skillName": "ecc-tools-cost-audit",
+  "contentHash": "d50152da4b2323b40e79347967cd22ca248d91d023f254f07e229847a61aee11"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:58:08.203882+00:00",
+  "scanMode": "static",
+  "skillName": "carrier-relationship-management",
+  "contentHash": "db4de6016bbe0f5b8b3c77e6eeca7b8e6a0167af547907e81189afc0531cb137"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:06:32.480656+00:00",
+  "scanMode": "static",
+  "skillName": "prediction-market-risk-review",
+  "contentHash": "5a1014c40357b0ba3214eb3c80c92da1e5ebebf293502f474f457fb167d938ef"
+}

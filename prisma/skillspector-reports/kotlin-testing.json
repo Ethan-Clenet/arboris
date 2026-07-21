@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:03:55.773765+00:00",
+  "scanMode": "static",
+  "skillName": "kotlin-testing",
+  "contentHash": "c4ee26f777f74682257cecd8c0f5d7bc0bee2f0d6dd0cb4376219d3e4c946682"
+}

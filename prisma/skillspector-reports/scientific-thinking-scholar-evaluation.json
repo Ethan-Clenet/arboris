@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:08:16.302762+00:00",
+  "scanMode": "static",
+  "skillName": "scholar-evaluation",
+  "contentHash": "1faf1173bee86e415c467eb64a4e8ff52e61b639e2e7a115288fa1bbb3cf333a"
+}

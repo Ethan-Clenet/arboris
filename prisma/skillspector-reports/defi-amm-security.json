@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:00:04.071371+00:00",
+  "scanMode": "static",
+  "skillName": "defi-amm-security",
+  "contentHash": "e4239e72571657b20f292cb351124b83025da8f301d9a846ab30e5e78593d00b"
+}

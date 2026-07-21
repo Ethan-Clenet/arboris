@@ -1,0 +1,26 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA4",
+      "category": "Excessive Agency",
+      "pattern": "Unbounded Resource Access",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "timeout=0",
+      "explanation": "Skill allows unbounded resource consumption (API calls, storage, compute). Without rate limits or quotas, a compromised or misbehaving agent can cause denial-of-service or cost overruns.",
+      "remediation": "Set explicit rate limits, timeouts, and resource quotas for API calls, file operations, and compute. Implement circuit breakers for runaway loops.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 313
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:07:31.186402+00:00",
+  "scanMode": "static",
+  "skillName": "redis-patterns",
+  "contentHash": "ba069dd9e502a761e7f4c04a2c5b05830240a9bc4d9c7a1a6fb825e958fd845c"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:05:42.439574+00:00",
+  "scanMode": "static",
+  "skillName": "nuxt4-patterns",
+  "contentHash": "730b5727c2386da7a08c95b8ec022deb9168d34d36c7ad3d34375c48219cc578"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:05:25.846390+00:00",
+  "scanMode": "static",
+  "skillName": "network-bgp-diagnostics",
+  "contentHash": "2c9fd7b11593c031351d60704d4b5c8116df9f2702ac41d4ce66d2d82bda8528"
+}

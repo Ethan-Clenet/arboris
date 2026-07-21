@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:06:29.580452+00:00",
+  "scanMode": "static",
+  "skillName": "prediction-market-oracle-research",
+  "contentHash": "bf509dfa1c6e54c6362268d24244b8f5518e0a382ed053a4b8ea6d598d5f35c4"
+}

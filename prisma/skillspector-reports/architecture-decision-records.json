@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:57:21.416799+00:00",
+  "scanMode": "static",
+  "skillName": "architecture-decision-records",
+  "contentHash": "8291e07421c0bac735aafb1107f8b43d3efb17197489936bacd36f09657a9307"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:58:31.574143+00:00",
+  "scanMode": "static",
+  "skillName": "codehealth-mcp",
+  "contentHash": "b6578f825bebed7e8a727ba05bf6072719033ea078235508f79448d5c218b423"
+}

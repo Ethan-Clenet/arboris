@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:07:53.547320+00:00",
+  "scanMode": "static",
+  "skillName": "rust-patterns",
+  "contentHash": "8ea8d0511dd6d2260d3e49794a146ab12655e0d89fc71544699e5483a94e7230"
+}

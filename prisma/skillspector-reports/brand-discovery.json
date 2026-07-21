@@ -1,0 +1,40 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Verbatim quotes, stories, and examples captured during the interview.\n     Record exact language — paraphrase belongs in Synthesis, not here.\n     Include speaker attribution if multi-founder ses",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/10_purpose-why.md",
+        "start_line": 13
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Module 90 consolidates outputs from Modules 10–70; minimal new raw input is\n     collected here. Capture any final founder statements or corrections made\n     during the synthesis pass below. -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/90_SYNTHESIS.md",
+        "start_line": 16
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T05:57:53.261986+00:00",
+  "scanMode": "static",
+  "skillName": "brand-discovery",
+  "contentHash": "9dbfecde77acfd093e3468e95b615432aa7b56f3e6226c0b9b8c3d8c0ecc16d6"
+}

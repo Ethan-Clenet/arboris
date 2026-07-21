@@ -1,0 +1,40 @@
+{
+  "riskScore": 14,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/blueprint/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 97
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "Create migration scripts for each table\n- Step 3: Update repository layer to use new driver\n- Step 4: Add integration tests against PostgreSQL\n- Step 5: Remove old database code and config\n\n### Multi-",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 52
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T05:57:50.364904+00:00",
+  "scanMode": "static",
+  "skillName": "blueprint",
+  "contentHash": "783ea8a784bb08fe8bac72f1db5642bb665bba9326c5286d1017c0f354d42a6c"
+}

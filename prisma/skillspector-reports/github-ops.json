@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:02:08.414332+00:00",
+  "scanMode": "static",
+  "skillName": "github-ops",
+  "contentHash": "297f0eee98e3ecc5092266545f9fb9fb869bcf0fe8ed271e88c83629abb3d174"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:01:08.597143+00:00",
+  "scanMode": "static",
+  "skillName": "eval-harness",
+  "contentHash": "286b196db25f901d2dc202ed18d5a9fc88822ae7fc16f25cbff8a2b209bfda64"
+}

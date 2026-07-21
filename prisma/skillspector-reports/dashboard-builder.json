@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:59:49.454801+00:00",
+  "scanMode": "static",
+  "skillName": "dashboard-builder",
+  "contentHash": "7876504905ee7f206f325b534bbee205951d9812c42ce5a46f9386f55f9dce8f"
+}

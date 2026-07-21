@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:07:05.970374+00:00",
+  "scanMode": "static",
+  "skillName": "quarkus-patterns",
+  "contentHash": "bca30bd2dc7abca7268247659c4f58eb1c1c33ce2edc2dae92d9ef578b100c5e"
+}

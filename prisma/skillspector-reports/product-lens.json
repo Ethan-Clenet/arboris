@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:06:40.410209+00:00",
+  "scanMode": "static",
+  "skillName": "product-lens",
+  "contentHash": "36017ff87e303b4173ef512421dfa87e1aca8956d51da6428b5b3ad5e017da65"
+}

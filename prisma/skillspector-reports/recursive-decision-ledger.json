@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:07:28.555959+00:00",
+  "scanMode": "static",
+  "skillName": "recursive-decision-ledger",
+  "contentHash": "42e22332aa1f463ca2dfd9334064ee71f645be9276d6ffad0e434d6ec8bc7882"
+}

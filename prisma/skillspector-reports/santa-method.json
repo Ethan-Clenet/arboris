@@ -1,0 +1,26 @@
+{
+  "riskScore": 20,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "MP3",
+      "category": "Memory Poisoning",
+      "pattern": "Memory Manipulation",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "Clear context",
+      "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+      "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 236
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:08:02.204159+00:00",
+  "scanMode": "static",
+  "skillName": "santa-method",
+  "contentHash": "974f81db7a3d26ca0b952acce7611c74843da70e4c3d81a88bf67ac14aa9b519"
+}

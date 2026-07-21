@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:02:23.516986+00:00",
+  "scanMode": "static",
+  "skillName": "healthcare-cdss-patterns",
+  "contentHash": "8e88107bd757d106bc3a19e30dd240095c2c1fd4308245998826ab186674eb71"
+}

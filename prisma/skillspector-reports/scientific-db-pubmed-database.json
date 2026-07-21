@@ -1,0 +1,26 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "os.environ.get(\"NCBI_API_KEY",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 123
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:08:04.852671+00:00",
+  "scanMode": "static",
+  "skillName": "pubmed-database",
+  "contentHash": "97d4bfb3ff3f1661bd9775e8b62efea1fb470bff3ae294c1bebf42e288785065"
+}

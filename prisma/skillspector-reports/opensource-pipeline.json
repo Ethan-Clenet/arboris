@@ -1,0 +1,26 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "credentials.json",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 245
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:05:48.183572+00:00",
+  "scanMode": "static",
+  "skillName": "opensource-pipeline",
+  "contentHash": "c97b00556fdd35f9e3af3a61b40176d42f7765e5665ddddd37d30fd7bce88e13"
+}

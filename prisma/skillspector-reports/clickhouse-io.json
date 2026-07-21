@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:58:22.998329+00:00",
+  "scanMode": "static",
+  "skillName": "clickhouse-io",
+  "contentHash": "d1b5879a821d2523dcb6b52013e27b22395fae0b154f2996e2436c13209653b7"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:00:56.726494+00:00",
+  "scanMode": "static",
+  "skillName": "email-ops",
+  "contentHash": "065d2e573cbfa83396d2c3c9aff18e9def841111d41308572f184e9db33fcfa8"
+}

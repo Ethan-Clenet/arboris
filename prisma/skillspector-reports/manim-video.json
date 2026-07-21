@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:04:38.179590+00:00",
+  "scanMode": "static",
+  "skillName": "manim-video",
+  "contentHash": "e9dc71f3a899e54362b18688e097140f00d749db8046852c8bdc3ff1a73699b4"
+}

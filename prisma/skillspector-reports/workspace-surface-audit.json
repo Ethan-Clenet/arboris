@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:10:49.413515+00:00",
+  "scanMode": "static",
+  "skillName": "workspace-surface-audit",
+  "contentHash": "32edb2adcca0bd52d9d2ae460a46ed77c352624830aeb9d7fabf93467a8b1b9f"
+}

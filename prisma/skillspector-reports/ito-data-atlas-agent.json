@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:03:23.464430+00:00",
+  "scanMode": "static",
+  "skillName": "ito-data-atlas-agent",
+  "contentHash": "6816778b11686df10476078af95184ebc9727a0dad577b5fcaed4bb0d8557294"
+}

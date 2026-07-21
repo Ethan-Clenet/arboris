@@ -1,0 +1,82 @@
+{
+  "riskScore": 25,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 5,
+  "issues": [
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR is omitted, defaults to $PWD/.claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/scan-skills.sh",
+        "start_line": 6
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR   Override ~/.claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/scan-skills.sh",
+        "start_line": 10
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR looks like a .claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/scan-skills.sh",
+        "start_line": 18
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "DIR does not look like a .claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "scripts/scan-skills.sh",
+        "start_line": 21
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "create new rule files\"\nmetadata:\n  origin: ECC\n---\n\n# Rules Distill\n\nScan installed skills, extract cross-cutting principles that appear in multiple skills, and distill them into rules — appending to ",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 3
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:07:50.445931+00:00",
+  "scanMode": "static",
+  "skillName": "rules-distill",
+  "contentHash": "51600caf787dbbecab4bf4d615ae57856436f8f83b92e61ff57e6d01e2e8d9c5"
+}

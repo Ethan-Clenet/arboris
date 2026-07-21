@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:06:49.104068+00:00",
+  "scanMode": "static",
+  "skillName": "project-flow-ops",
+  "contentHash": "604b378b55c2be5a8a9dee0564515c12f3f8090890b2ad19f6f2f957e6331c96"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:05:03.357211+00:00",
+  "scanMode": "static",
+  "skillName": "motion-patterns",
+  "contentHash": "a9ddb0f04b4d0bff27f19d61428d84d5e987594a80b737464197e9279372b2de"
+}

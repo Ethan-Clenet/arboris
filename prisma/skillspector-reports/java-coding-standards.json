@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:03:31.503756+00:00",
+  "scanMode": "static",
+  "skillName": "java-coding-standards",
+  "contentHash": "04fe50546ecf4cdffc86306d0393b0e2076685085dadb1d4a0627467cce03b0a"
+}

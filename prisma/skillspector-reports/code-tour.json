@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:58:25.826078+00:00",
+  "scanMode": "static",
+  "skillName": "code-tour",
+  "contentHash": "0af97828c16a847b1b25f290db8cc7d10fc86276549e4ab0d88e24ae40f7c964"
+}

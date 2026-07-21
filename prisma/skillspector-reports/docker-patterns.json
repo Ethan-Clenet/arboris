@@ -1,0 +1,68 @@
+{
+  "riskScore": 29,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 4,
+  "issues": [
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "password.txt",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 274
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 267
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 267
+      }
+    },
+    {
+      "id": "TM3",
+      "category": "Tool Misuse",
+      "pattern": "Unsafe Defaults",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "NODE_ENV=development",
+      "explanation": "Tool defaults are unsafe or overly permissive (e.g. disabled TLS verification, no authentication, world-writable permissions). Unsafe defaults widen the attack surface.",
+      "remediation": "Override unsafe defaults with secure settings (verify=True, auth required, restrictive permissions). Review and harden all tool configurations.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 39
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:00:33.397295+00:00",
+  "scanMode": "static",
+  "skillName": "docker-patterns",
+  "contentHash": "b9b2764274bb4e4d1c398bf0214b528b547edc4847690b861b0b1ef5d8900934"
+}

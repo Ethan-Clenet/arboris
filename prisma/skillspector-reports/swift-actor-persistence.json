@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:09:17.949639+00:00",
+  "scanMode": "static",
+  "skillName": "swift-actor-persistence",
+  "contentHash": "61c7af5c121eb89fdd974e22758da147c1f96489fded335a96a0fc8f85c60650"
+}

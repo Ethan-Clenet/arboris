@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:08:22.482081+00:00",
+  "scanMode": "static",
+  "skillName": "security-bounty-hunter",
+  "contentHash": "d7b3ad7c505025a3835a87b44823f8baa78eaf2b4295255a4f5642cbfe9bcd6d"
+}

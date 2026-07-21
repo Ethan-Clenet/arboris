@@ -1,0 +1,25 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 243
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:09:33.721046+00:00",
+  "scanMode": "static",
+  "skillName": "taste",
+  "contentHash": "d8b4a67b63f5a4f45aa3a8086f96837a85a2b739d23c9f3dabfa4c02a2680343"
+}

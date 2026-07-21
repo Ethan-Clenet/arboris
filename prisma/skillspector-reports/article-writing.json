@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:57:24.259959+00:00",
+  "scanMode": "static",
+  "skillName": "article-writing",
+  "contentHash": "728cf7d0c32b65162d86133a8351398657207dad5d8ef68d031d4a5934a0d4df"
+}

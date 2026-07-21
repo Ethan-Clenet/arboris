@@ -1,0 +1,51 @@
+{
+  "riskScore": 24,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "LP1",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "explanation": "The skill uses 'env' capability that is not listed in its permissions. This may indicate deceptive intent or missing permission declarations.",
+      "remediation": "Add the 'env' permission to SKILL.md, or remove the code that requires it.",
+      "location": {
+        "file": "scripts/ws_listener.py",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "LP1",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "explanation": "The skill uses 'file_write' capability that is not listed in its permissions. This may indicate deceptive intent or missing permission declarations.",
+      "remediation": "Add the 'file_write' permission to SKILL.md, or remove the code that requires it.",
+      "location": {
+        "file": "scripts/ws_listener.py",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "LP1",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "explanation": "The skill uses 'shell' capability that is not listed in its permissions. This may indicate deceptive intent or missing permission declarations.",
+      "remediation": "Add the 'shell' permission to SKILL.md, or remove the code that requires it.",
+      "location": {
+        "file": "scripts/ws_listener.py",
+        "start_line": 1
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:10:30.722031+00:00",
+  "scanMode": "static",
+  "skillName": "videodb",
+  "contentHash": "24ac97e40a403420c95b82b2fcf238c246703332860333d686d53debe3de42e0"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T06:00:42.314046+00:00",
+  "scanMode": "static",
+  "skillName": "dynamic-workflow-mode",
+  "contentHash": "c7d3e78c5661c9b2ee2ada2faa708dc07214de243254c584e1ecaa1c37414c84"
+}

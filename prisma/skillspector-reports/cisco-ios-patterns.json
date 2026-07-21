@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-07-21T05:58:10.893569+00:00",
+  "scanMode": "static",
+  "skillName": "cisco-ios-patterns",
+  "contentHash": "dc82eb72845f1a613e18ec17a0f1750b92680c95cc2f75bd37f1c13b3f9017a0"
+}

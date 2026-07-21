@@ -1,0 +1,26 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "without checking",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 163
+      }
+    }
+  ],
+  "scannedAt": "2026-07-21T06:02:44.163309+00:00",
+  "scanMode": "static",
+  "skillName": "homelab-network-readiness",
+  "contentHash": "d7aa9716485ced92d5ef32da9a3f62c40cecf7c215b9ff4c61fb4f9b79ddda90"
+}
