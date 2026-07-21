@@ -8,6 +8,7 @@ import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
 import { AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
+import SecurityBadge from '#/components/SecurityBadge'
 import {
   hexToRgba,
   type Category,
@@ -22,7 +23,7 @@ export const Route = createFileRoute('/')({
 type TabMode = 'popular' | 'trending' | 'recent'
 
 const TABLE_COLS =
-  'grid grid-cols-[minmax(152px,1.15fr)_minmax(148px,1.1fr)_56px_minmax(136px,auto)] items-center gap-x-6'
+  'grid grid-cols-[minmax(152px,1.15fr)_minmax(120px,0.9fr)_minmax(100px,110px)_56px_minmax(136px,auto)] items-center gap-x-5'
 
 const HOME_INDEX_LIMIT = 10
 
@@ -177,12 +178,13 @@ function HomePage() {
           </div>
 
           <div className="scroll-x">
-            <div className="min-w-[580px]">
+            <div className="min-w-[720px]">
               <div
                 className={`${TABLE_COLS} border-b border-[var(--border)] px-4 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.07em] text-[var(--text-3)] sm:px-5`}
               >
                 <div />
                 <div>{t.home.colCategory}</div>
+                <div>{t.skills.colSecurity}</div>
                 <div className="text-center">{t.home.colStacks}</div>
                 <div className="border-l border-[var(--border)] pl-5">{t.home.colCompat}</div>
               </div>
@@ -234,6 +236,13 @@ function HomeTableRow({
 }) {
   const { t } = useI18n()
   const color = category?.color ?? 'var(--text-3)'
+  const badgeLabels = {
+    unscanned: t.skills.securityUnscanned,
+    safe: t.skills.securitySafe,
+    caution: t.skills.securityCaution,
+    unsafe: t.skills.securityUnsafe,
+    score: t.skills.securityScore,
+  }
 
   return (
     <div
@@ -247,6 +256,12 @@ function HomeTableRow({
         >
           {skill.id}
         </Link>
+        <SecurityBadge
+          score={skill.score}
+          recommendation={skill.securityRecommendation}
+          compact
+          labels={badgeLabels}
+        />
         <button
           type="button"
           onClick={onCopy}
@@ -270,6 +285,14 @@ function HomeTableRow({
           <Icon name={category?.icon ?? 'folder'} size={11} />
         </span>
         <span className="truncate font-mono text-[12px]">/{category?.id ?? skill.categoryId}</span>
+      </div>
+
+      <div>
+        <SecurityBadge
+          score={skill.score}
+          recommendation={skill.securityRecommendation}
+          labels={badgeLabels}
+        />
       </div>
 
       <div className="text-center font-mono text-[13px] tabular-nums text-[var(--text-2)]">

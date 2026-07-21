@@ -104,6 +104,12 @@ function SkillDetailPage() {
                 score: t.skills.securityScore,
               }}
             />
+            {skill.score != null ? (
+              <span className="inline-flex items-center gap-1 rounded-full border border-[var(--border)] bg-[var(--surface-2)] px-2.5 py-1 font-mono text-[12px] font-semibold tabular-nums text-[var(--text-1)]">
+                <Icon name="shield-check" bold size={12} className="text-[var(--accent)]" />
+                {skill.score}/100
+              </span>
+            ) : null}
           </div>
           <h1 className="mb-3 break-words font-mono text-[30px] font-semibold leading-[1.1] tracking-[-0.01em]">
             {skill.id}
@@ -213,25 +219,41 @@ function SkillDetailPage() {
 
         <aside className="flex flex-col gap-[18px] lg:sticky lg:top-[78px]">
           <div className="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-[18px] shadow-[var(--shadow-card)]">
-            <div className="mb-3.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
-              {t.skill.securityTitle}
+            <div className="mb-3.5 flex items-center justify-between gap-2">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
+                {t.skill.securityTitle}
+              </div>
+              <Icon name="shield-check" bold size={14} className="text-[var(--accent)]" />
             </div>
             {skill.score == null || !skill.securityReport ? (
-              <p className="text-[13px] text-[var(--text-2)]">{t.skill.securityUnscanned}</p>
+              <div className="rounded-xl border border-dashed border-[var(--border-2)] bg-[var(--surface-2)] px-3.5 py-4 text-center">
+                <div className="mx-auto mb-2 grid h-10 w-10 place-items-center rounded-full bg-[var(--surface)] text-[var(--text-3)]">
+                  <Icon name="shield" bold size={18} />
+                </div>
+                <p className="text-[13px] text-[var(--text-2)]">{t.skill.securityUnscanned}</p>
+              </div>
             ) : (
               <div className="flex flex-col gap-3">
-                <SecurityBadge
-                  score={skill.score}
-                  recommendation={skill.securityRecommendation}
-                  size="md"
-                  labels={{
-                    unscanned: t.skills.securityUnscanned,
-                    safe: t.skills.securitySafe,
-                    caution: t.skills.securityCaution,
-                    unsafe: t.skills.securityUnsafe,
-                    score: t.skills.securityScore,
-                  }}
-                />
+                <div className="flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] px-3.5 py-3">
+                  <div className="grid h-14 w-14 place-items-center rounded-2xl bg-[var(--surface)] font-mono text-[20px] font-bold tabular-nums text-[var(--text-1)] shadow-[var(--shadow-card)]">
+                    {skill.score}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <SecurityBadge
+                      score={skill.score}
+                      recommendation={skill.securityRecommendation}
+                      size="md"
+                      labels={{
+                        unscanned: t.skills.securityUnscanned,
+                        safe: t.skills.securitySafe,
+                        caution: t.skills.securityCaution,
+                        unsafe: t.skills.securityUnsafe,
+                        score: t.skills.securityScore,
+                      }}
+                    />
+                    <div className="mt-1 text-[11.5px] text-[var(--text-3)]">/ 100</div>
+                  </div>
+                </div>
                 <div className="grid grid-cols-2 gap-2 text-[12px]">
                   <div className="rounded-lg border border-[var(--border)] px-2.5 py-2">
                     <div className="text-[var(--text-3)]">{t.skill.securityRisk}</div>

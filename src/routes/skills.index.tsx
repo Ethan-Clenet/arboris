@@ -392,14 +392,22 @@ function SkillRow({
           <Icon name={skill.icon} bold size={17} />
         </span>
         <span className="min-w-0">
-          <span className="block truncate font-mono text-[13.5px] font-semibold">{skill.id}</span>
+          <span className="flex min-w-0 items-center gap-2">
+            <span className="truncate font-mono text-[13.5px] font-semibold">{skill.id}</span>
+            <SecurityBadge
+              score={skill.score}
+              recommendation={skill.securityRecommendation}
+              compact
+              labels={badgeLabels}
+            />
+          </span>
           <span className="block text-[11.5px] text-[var(--text-3)]">{category ? category.label[lang] : ''}</span>
         </span>
       </Link>
 
       <div className="min-w-0 line-clamp-2 text-[13px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
 
-      <div>
+      <div className="min-w-0">
         <SecurityBadge
           score={skill.score}
           recommendation={skill.securityRecommendation}

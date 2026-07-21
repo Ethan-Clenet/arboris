@@ -1,4 +1,3 @@
-import { scoreColor } from '#/lib/catalog'
 import type { SecurityRecommendation } from '#/lib/skillspector'
 import Icon from '#/components/Icon'
 
@@ -7,6 +6,8 @@ type SecurityBadgeProps = {
   recommendation?: SecurityRecommendation | null
   size?: 'sm' | 'md'
   showLabel?: boolean
+  /** Affiche seulement le score chiffré (ex. pastille compacte). */
+  compact?: boolean
   labels: {
     unscanned: string
     safe: string
@@ -16,7 +17,21 @@ type SecurityBadgeProps = {
   }
 }
 
-function resolveTone(
+type ToneStyle = {
+  fg: string
+  bg: string
+  border: string
+  icon: string
+}
+
+const TONE_STYLES: Record<SecurityRecommendation, ToneStyle> = {
+  SAFE: { fg: '#16a36b', bg: 'rgba(22, 163, 107, 0.14)', border: 'rgba(22, 163, 107, 0.4)', icon: 'shield-check' },
+  CAUTION: { fg: '#c9851a', bg: 'rgba(201, 133, 26, 0.14)', border: 'rgba(201, 133, 26, 0.45)', icon: 'warning' },
+  UNSAFE: { fg: '#da3b4a', bg: 'rgba(218, 59, 74, 0.14)', border: 'rgba(218, 59, 74, 0.45)', icon: 'shield-warning' },
+  UNKNOWN: { fg: '#8a909b', bg: 'rgba(138, 144, 155, 0.12)', border: 'rgba(138, 144, 155, 0.4)', icon: 'shield' },
+}
+
+export function resolveSecurityTone(
   score: number | null,
   recommendation: SecurityRecommendation | null | undefined,
 ): SecurityRecommendation {
@@ -32,10 +47,11 @@ export default function SecurityBadge({
   recommendation,
   size = 'sm',
   showLabel = true,
+  compact = false,
   labels,
 }: SecurityBadgeProps) {
-  const tone = resolveTone(score, recommendation)
-  const color = scoreColor(score)
+  const tone = resolveSecurityTone(score, recommendation)
+  const style = TONE_STYLES[tone]
   const label =
     tone === 'SAFE'
       ? labels.safe
@@ -45,24 +61,31 @@ export default function SecurityBadge({
           ? labels.unsafe
           : labels.unscanned
 
-  const icon =
-    tone === 'SAFE' ? 'shield-check' : tone === 'CAUTION' ? 'warning' : tone === 'UNSAFE' ? 'shield-warning' : 'shield'
-
   const pad = size === 'md' ? 'px-2.5 py-1 text-[12px]' : 'px-2 py-0.5 text-[11px]'
+  const iconSize = size === 'md' ? 13 : 11
+
+  if (compact) {
+    return (
+      <span
+        className="inline-flex h-[22px] min-w-[38px] items-center justify-center gap-0.5 rounded-md border px-1.5 font-mono text-[11px] font-bold tabular-nums"
+        style={{ color: style.fg, borderColor: style.border, background: style.bg }}
+        title={score != null ? labels.score(score) : labels.unscanned}
+      >
+        <Icon name={style.icon} bold size={10} />
+        {score != null ? score : '—'}
+      </span>
+    )
+  }
 
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full border font-mono font-semibold ${pad}`}
-      style={{
-        color,
-        borderColor: `color-mix(in srgb, ${color} 35%, transparent)`,
-        background: `color-mix(in srgb, ${color} 12%, transparent)`,
-      }}
+      className={`inline-flex max-w-full items-center gap-1 rounded-full border font-mono font-semibold ${pad}`}
+      style={{ color: style.fg, borderColor: style.border, background: style.bg }}
       title={score != null ? labels.score(score) : labels.unscanned}
     >
-      <Icon name={icon} bold size={size === 'md' ? 13 : 11} />
-      {showLabel ? <span>{label}</span> : null}
-      {score != null ? <span className="opacity-80">{score}</span> : null}
+      <Icon name={style.icon} bold size={iconSize} />
+      {showLabel ? <span className="truncate">{label}</span> : null}
+      {score != null ? <span className="tabular-nums opacity-90">{score}</span> : null}
     </span>
   )
 }
