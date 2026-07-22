@@ -4,7 +4,6 @@ import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { AgentBadge, AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
-import SecurityBadge from '#/components/SecurityBadge'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
@@ -21,7 +20,7 @@ export const Route = createFileRoute('/skills/')({
 })
 
 const SKILL_TABLE_COLS =
-  'grid grid-cols-[minmax(0,1.25fr)_minmax(0,1.4fr)_8rem_minmax(0,1fr)_5.5rem_7.75rem] items-center gap-x-1.5'
+  'grid grid-cols-[minmax(0,1.25fr)_minmax(0,1.4fr)_minmax(0,1fr)_5.5rem_7.75rem] items-center gap-x-1.5'
 
 type SecurityFilter = 'all' | SecurityRecommendation
 
@@ -47,14 +46,6 @@ function SkillsPage() {
     for (const s of catalog.skills) for (const x of s.tech) if (!seen.includes(x)) seen.push(x)
     return seen
   }, [catalog.skills])
-
-  const badgeLabels = {
-    unscanned: t.skills.securityUnscanned,
-    safe: t.skills.securitySafe,
-    caution: t.skills.securityCaution,
-    unsafe: t.skills.securityUnsafe,
-    score: t.skills.securityScore,
-  }
 
   const toggle = (arr: string[], v: string) =>
     arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]
@@ -276,11 +267,10 @@ function SkillsPage() {
 
           <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
             <div className="scroll-x">
-              <div className="min-w-[820px]">
+              <div className="min-w-[720px]">
                 <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] bg-[var(--surface-2)] px-4 py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)] sm:px-[18px]`}>
                   <div>{t.skills.colSkill}</div>
                   <div>{t.skills.colDesc}</div>
-                  <div>{t.skills.colSecurity}</div>
                   <div className="min-w-0">{t.skills.colTech}</div>
                   <div className="border-l border-[var(--border)] pl-2">{t.skills.colCompat}</div>
                   <div className="text-right">{t.skills.copy}</div>
@@ -292,7 +282,6 @@ function SkillsPage() {
                     skill={skill}
                     category={catById.get(skill.categoryId)}
                     copied={copiedKey === skill.id}
-                    badgeLabels={badgeLabels}
                     onCopy={() => copySkill({ id: skill.id, lang, announceMsg: t.skills.copied })}
                   />
                 ))}
@@ -364,19 +353,11 @@ function SkillRow({
   skill,
   category,
   copied,
-  badgeLabels,
   onCopy,
 }: {
   skill: SkillSummary
   category?: Category
   copied: boolean
-  badgeLabels: {
-    unscanned: string
-    safe: string
-    caution: string
-    unsafe: string
-    score: (n: number) => string
-  }
   onCopy: () => void
 }) {
   const { t, lang } = useI18n()
@@ -391,31 +372,15 @@ function SkillRow({
         >
           <Icon name={skill.icon} bold size={17} />
         </span>
-        <span className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-          <span className="min-w-0 overflow-hidden">
-            <span className="block truncate font-mono text-[13.5px] font-semibold leading-tight">{skill.id}</span>
-            <span className="block truncate text-[11.5px] leading-tight text-[var(--text-3)]">
-              {category ? category.label[lang] : ''}
-            </span>
+        <span className="min-w-0 flex-1 overflow-hidden">
+          <span className="block truncate font-mono text-[13.5px] font-semibold leading-tight">{skill.id}</span>
+          <span className="block truncate text-[11.5px] leading-tight text-[var(--text-3)]">
+            {category ? category.label[lang] : ''}
           </span>
-          <SecurityBadge
-            score={skill.score}
-            recommendation={skill.securityRecommendation}
-            compact
-            labels={badgeLabels}
-          />
         </span>
       </Link>
 
       <div className="min-w-0 overflow-hidden line-clamp-2 self-center text-[13px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
-
-      <div className="flex min-w-0 items-center overflow-hidden">
-        <SecurityBadge
-          score={skill.score}
-          recommendation={skill.securityRecommendation}
-          labels={badgeLabels}
-        />
-      </div>
 
       <div className="flex min-w-0 items-center overflow-hidden" title={skill.tech.join(', ')}>
         {skill.tech.length > 0 ? (
