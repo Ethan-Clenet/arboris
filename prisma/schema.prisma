@@ -85,6 +85,8 @@ model Skill {
   doesEnJson    String  @default("[]")
   triggersFrJson String @default("[]")
   triggersEnJson String @default("[]")
+  /// Contenu Markdown du skill (SKILL.md). Prioritaire sur le fichier disque.
+  bodyMd        String?
   sort          Int     @default(0)
 
   categoryId String

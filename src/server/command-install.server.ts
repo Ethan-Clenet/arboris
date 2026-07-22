@@ -2,6 +2,7 @@ import type { Lang } from '#/lib/catalog'
 import { installCommandToWorkspace } from '#/lib/command-install-core'
 import { defaultCommandsDir, resolvePackageRoot } from '#/lib/package-root'
 import { isAgentName } from '#/lib/agents'
+import { resolveCommand } from '#/server/commands.server'
 import { resolve } from 'node:path'
 
 function workspaceRoot(): string {
@@ -19,11 +20,15 @@ export async function installCommandForAgent(input: {
 }): Promise<{ path: string }> {
   if (!isAgentName(input.agent)) throw new Error('unknown_agent')
 
+  const command = await resolveCommand(input.commandId)
+  if (!command) throw new Error('command_not_found')
+
   const result = await installCommandToWorkspace({
     commandId: input.commandId,
     agent: input.agent,
     workspaceRoot: workspaceRoot(),
     commandsDir: COMMANDS_DIR,
+    command,
     force: true,
   })
 

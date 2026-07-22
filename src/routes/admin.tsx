@@ -13,10 +13,12 @@ import { ADMIN_COMPAT } from '#/lib/admin-constants'
 import {
   catalogToAdminState,
   emptyForm,
+  formFromLoadedSkill,
   formFromSkill,
   formToSkill,
   newCatRecord,
   newStackRecord,
+  textToLines,
   type AdminCatState,
   type AdminFormState,
   type AdminNewCatState,
@@ -30,6 +32,7 @@ import {
   adminDeleteCategory,
   adminDeleteSkill,
   adminDeleteStack,
+  adminGetSkillForm,
   adminToggleSkillStack,
   adminUpsertSkill,
   type AdminMutationError,
@@ -60,6 +63,7 @@ function AdminPage() {
   const deleteCategoryFn = useServerFn(adminDeleteCategory)
   const deleteStackFn = useServerFn(adminDeleteStack)
   const upsertSkillFn = useServerFn(adminUpsertSkill)
+  const getSkillFormFn = useServerFn(adminGetSkillForm)
   const deleteSkillFn = useServerFn(adminDeleteSkill)
   const toggleStackFn = useServerFn(adminToggleSkillStack)
 
@@ -153,10 +157,21 @@ function AdminPage() {
     setView('create')
   }
 
-  const startEdit = (skill: AdminSkillState) => {
+  const startEdit = async (skill: AdminSkillState) => {
     setEditingId(skill.id)
     setForm(formFromSkill(skill))
     setView('create')
+    setSaving(true)
+    try {
+      const result = await getSkillFormFn({ data: { id: skill.id } })
+      if (result.ok && 'form' in result && result.form) {
+        setForm(formFromLoadedSkill(result.form))
+      } else {
+        showToast(mapError(result.error ?? 'generic'))
+      }
+    } finally {
+      setSaving(false)
+    }
   }
 
   const saveForm = async () => {
@@ -174,6 +189,11 @@ function AdminPage() {
             tech: rec.tech,
             compat: rec.compat,
             stackIds: rec.stacks,
+            doesFr: textToLines(form.doesFr),
+            doesEn: textToLines(form.doesEn),
+            triggersFr: textToLines(form.triggersFr),
+            triggersEn: textToLines(form.triggersEn),
+            bodyMd: form.bodyMd,
             editingId: editingId ?? undefined,
           },
         }),
@@ -275,6 +295,15 @@ function AdminPage() {
       fDescFr: a.fDescFr,
       fDescEn: a.fDescEn,
       descPh: a.descPh,
+      fBody: a.fBody,
+      bodyPh: a.bodyPh,
+      bodyHint: a.bodyHint,
+      fDoesFr: a.fDoesFr,
+      fDoesEn: a.fDoesEn,
+      fTriggersFr: a.fTriggersFr,
+      fTriggersEn: a.fTriggersEn,
+      listPh: a.listPh,
+      listHint: a.listHint,
       fTech: a.fTech,
       techHint: a.techHint,
       fCompat: a.fCompat,

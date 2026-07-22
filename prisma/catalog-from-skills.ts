@@ -283,6 +283,7 @@ export async function loadSkillSeeds(): Promise<SkillSeed[]> {
         en: does.length ? does : [`Apply the ${parsed.id} skill practices.`],
       },
       triggers,
+      bodyMd: raw.trim() || null,
     })
   }
 

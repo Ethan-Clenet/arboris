@@ -13,7 +13,8 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "postinstall": "prisma generate",
-    "build": "prisma generate && vite build",
+    "generate:commands": "node scripts/generate-commands-bundle.mjs",
+    "build": "npm run generate:commands && prisma generate && vite build",
     "vercel-build": "node scripts/vercel-build.mjs",
     "start": "node .output/server/index.mjs",
     "preview": "vite preview",

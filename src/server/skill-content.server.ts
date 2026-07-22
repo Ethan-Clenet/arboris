@@ -6,19 +6,29 @@ import { loadSkill } from './catalog.server'
 
 const SKILLS_DIR = defaultSkillsDir(resolvePackageRoot(import.meta.url))
 
-/** Lit le SKILL.md embarqué s'il existe pour ce skill. */
-export async function tryLoadSkillFile(id: string): Promise<string | null> {
-  return readSkillFile(SKILLS_DIR, id)
-}
-
-/** Contenu à copier : SKILL.md compilé avec dépendances, sinon markdown généré. */
+/** Contenu à copier : bodyMd en DB, sinon SKILL.md compilé, sinon markdown généré. */
 export async function loadSkillCopyContent(id: string, lang: Lang): Promise<string | null> {
+  const skill = await loadSkill(id)
+  if (!skill) return null
+
+  const { prisma } = await import('./db')
+  const row = await prisma.skill.findUnique({ where: { id }, select: { bodyMd: true } })
+  if (row?.bodyMd?.trim()) return row.bodyMd.trim()
+
   const file = await loadSkillFileContent(SKILLS_DIR, id)
   if (file) return file
 
-  const skill = await loadSkill(id)
-  if (!skill) return null
   return buildSkillMarkdown(skill, lang)
+}
+
+/** Lit le SKILL.md embarqué s'il existe pour ce skill (fichier, sinon bodyMd DB). */
+export async function tryLoadSkillFile(id: string): Promise<string | null> {
+  const fromDisk = await readSkillFile(SKILLS_DIR, id)
+  if (fromDisk?.trim()) return fromDisk
+
+  const { prisma } = await import('./db')
+  const row = await prisma.skill.findUnique({ where: { id }, select: { bodyMd: true } })
+  return row?.bodyMd?.trim() || null
 }
 
 export async function loadSkillWithCopy(id: string, lang: Lang): Promise<{
@@ -27,9 +37,6 @@ export async function loadSkillWithCopy(id: string, lang: Lang): Promise<{
 } | null> {
   const skill = await loadSkill(id)
   if (!skill) return null
-  const file = await readSkillFile(SKILLS_DIR, id)
-  return {
-    skill,
-    copyContent: file ?? buildSkillMarkdown(skill, lang),
-  }
+  const copyContent = (await loadSkillCopyContent(id, lang)) ?? buildSkillMarkdown(skill, lang)
+  return { skill, copyContent }
 }

@@ -82,6 +82,7 @@ async function main() {
         doesEnJson: JSON.stringify(skill.does.en),
         triggersFrJson: JSON.stringify(skill.triggers.fr),
         triggersEnJson: JSON.stringify(skill.triggers.en),
+        bodyMd: skill.bodyMd ?? null,
         sort: i,
         category: { connect: { id: skill.cat } },
         stacks: { connect: skill.stacks.map((id) => ({ id })) },

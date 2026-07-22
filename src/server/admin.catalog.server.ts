@@ -83,16 +83,30 @@ export async function upsertSkill(input: {
   tech: string[]
   compat: string[]
   stackIds: string[]
+  doesFr: string[]
+  doesEn: string[]
+  triggersFr: string[]
+  triggersEn: string[]
+  bodyMd: string
   editingId?: string
 }) {
   const id = input.editingId ?? input.id
   const tagEn = input.tagEn.trim() || input.tagFr.trim()
   const stacks = input.stackIds.map((stackId) => ({ id: stackId }))
+  const bodyMd = input.bodyMd.trim() || null
 
   const existing = await prisma.skill.findUnique({ where: { id } })
   const act = existing
     ? { actFr: existing.actFr, actEn: existing.actEn }
     : defaultAct(input.tagFr, tagEn)
+
+  const contentData = {
+    doesFrJson: listJson(input.doesFr),
+    doesEnJson: listJson(input.doesEn.length ? input.doesEn : input.doesFr),
+    triggersFrJson: listJson(input.triggersFr),
+    triggersEnJson: listJson(input.triggersEn.length ? input.triggersEn : input.triggersFr),
+    bodyMd,
+  }
 
   if (existing) {
     await prisma.skill.update({
@@ -105,6 +119,7 @@ export async function upsertSkill(input: {
         techJson: listJson(input.tech),
         compatJson: listJson(input.compat),
         stacks: { set: stacks },
+        ...contentData,
       },
     })
     return
@@ -125,14 +140,54 @@ export async function upsertSkill(input: {
       actEn: act.actEn,
       techJson: listJson(input.tech),
       compatJson: listJson(input.compat),
-      doesFrJson: '[]',
-      doesEnJson: '[]',
-      triggersFrJson: '[]',
-      triggersEnJson: '[]',
+      ...contentData,
       sort: (maxSort._max.sort ?? -1) + 1,
       stacks: { connect: stacks },
     },
   })
+}
+
+export async function loadSkillAdminForm(id: string) {
+  const row = await prisma.skill.findUnique({
+    where: { id },
+    include: { stacks: { select: { id: true } } },
+  })
+  if (!row) return null
+
+  let bodyMd = row.bodyMd?.trim() || ''
+  if (!bodyMd) {
+    try {
+      const { tryLoadSkillFile } = await import('./skill-content.server')
+      bodyMd = (await tryLoadSkillFile(id))?.trim() || ''
+    } catch {
+      bodyMd = ''
+    }
+  }
+
+  const parse = (json: string): string[] => {
+    try {
+      const value = JSON.parse(json)
+      return Array.isArray(value) ? (value as string[]) : []
+    } catch {
+      return []
+    }
+  }
+
+  return {
+    id: row.id,
+    categoryId: row.categoryId,
+    icon: row.icon,
+    tagFr: row.tagFr,
+    tagEn: row.tagEn,
+    tech: parse(row.techJson),
+    compat: parse(row.compatJson),
+    stackIds: row.stacks.map((s) => s.id),
+    doesFr: parse(row.doesFrJson),
+    doesEn: parse(row.doesEnJson),
+    triggersFr: parse(row.triggersFrJson),
+    triggersEn: parse(row.triggersEnJson),
+    bodyMd,
+  }
 }
 
 export async function deleteSkill(id: string) {

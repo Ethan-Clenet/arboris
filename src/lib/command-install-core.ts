@@ -2,7 +2,7 @@ import { access, mkdir, writeFile } from 'node:fs/promises'
 import { constants } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { agentCommandPath, isAgentName, type AgentName } from '#/lib/agents'
-import { commandInstallContent } from '#/lib/command-types'
+import { commandInstallContent, type CommandDetail } from '#/lib/command-types'
 import { loadCommandFile } from '#/lib/command-file'
 
 function assertInsideWorkspace(root: string, target: string) {
@@ -31,6 +31,8 @@ export type InstallCommandOptions = {
   workspaceRoot: string
   commandsDir: string
   force?: boolean
+  /** Contenu déjà résolu (ex. embarqué Vercel) — sinon lecture disque. */
+  command?: CommandDetail | null
 }
 
 export type InstallCommandResult =
@@ -45,7 +47,7 @@ export async function installCommandToWorkspace(
     return { ok: false, error: 'unknown_agent' }
   }
 
-  const cmd = await loadCommandFile(input.commandsDir, input.commandId)
+  const cmd = input.command ?? (await loadCommandFile(input.commandsDir, input.commandId))
   if (!cmd) {
     return { ok: false, error: 'command_not_found' }
   }

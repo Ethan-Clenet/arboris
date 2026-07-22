@@ -30,6 +30,13 @@ export type AdminFormState = {
   tech: string
   compat: string[]
   stacks: string[]
+  /** Une ligne = un point (avec ou sans tiret). */
+  doesFr: string
+  doesEn: string
+  triggersFr: string
+  triggersEn: string
+  /** Contenu Markdown complet (SKILL.md). */
+  bodyMd: string
 }
 
 export type AdminNewCatState = {
@@ -68,6 +75,17 @@ export function catalogToAdminState(catalog: Catalog) {
   return { skills, cats }
 }
 
+export function linesToText(lines: string[]): string {
+  return lines.map((line) => (line.startsWith('- ') ? line : `- ${line}`)).join('\n')
+}
+
+export function textToLines(text: string): string[] {
+  return text
+    .split(/\r?\n/)
+    .map((line) => line.replace(/^[-*•]\s+/, '').trim())
+    .filter(Boolean)
+}
+
 export function emptyForm(cats: AdminCatState[]): AdminFormState {
   return {
     id: '',
@@ -78,6 +96,11 @@ export function emptyForm(cats: AdminCatState[]): AdminFormState {
     tech: '',
     compat: [],
     stacks: [],
+    doesFr: '',
+    doesEn: '',
+    triggersFr: '',
+    triggersEn: '',
+    bodyMd: '',
   }
 }
 
@@ -91,6 +114,44 @@ export function formFromSkill(skill: AdminSkillState): AdminFormState {
     tech: skill.tech.join(', '),
     compat: skill.compat.slice(),
     stacks: skill.stacks.slice(),
+    doesFr: '',
+    doesEn: '',
+    triggersFr: '',
+    triggersEn: '',
+    bodyMd: '',
+  }
+}
+
+/** Remplit le formulaire depuis le détail chargé côté serveur. */
+export function formFromLoadedSkill(detail: {
+  id: string
+  categoryId: string
+  icon: string
+  tagFr: string
+  tagEn: string
+  tech: string[]
+  compat: string[]
+  stackIds: string[]
+  doesFr: string[]
+  doesEn: string[]
+  triggersFr: string[]
+  triggersEn: string[]
+  bodyMd: string
+}): AdminFormState {
+  return {
+    id: detail.id,
+    cat: detail.categoryId,
+    icon: detail.icon,
+    descFr: detail.tagFr,
+    descEn: detail.tagEn,
+    tech: detail.tech.join(', '),
+    compat: detail.compat.slice(),
+    stacks: detail.stackIds.slice(),
+    doesFr: linesToText(detail.doesFr),
+    doesEn: linesToText(detail.doesEn),
+    triggersFr: linesToText(detail.triggersFr),
+    triggersEn: linesToText(detail.triggersEn),
+    bodyMd: detail.bodyMd,
   }
 }
 
@@ -110,7 +171,7 @@ export function formToSkill(form: AdminFormState): AdminSkillState | null {
     stacks: form.stacks.slice(),
     tag: {
       fr: form.descFr.trim(),
-      en: (form.descEn.trim() || form.descFr.trim()),
+      en: form.descEn.trim() || form.descFr.trim(),
     },
     score: null,
     securityRecommendation: null,

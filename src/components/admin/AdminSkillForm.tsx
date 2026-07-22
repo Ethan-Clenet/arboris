@@ -24,6 +24,15 @@ interface AdminSkillFormProps {
     fDescFr: string
     fDescEn: string
     descPh: string
+    fBody: string
+    bodyPh: string
+    bodyHint: string
+    fDoesFr: string
+    fDoesEn: string
+    fTriggersFr: string
+    fTriggersEn: string
+    listPh: string
+    listHint: string
     fTech: string
     techHint: string
     fCompat: string
@@ -124,6 +133,65 @@ export default function AdminSkillForm({
               className={adminTextareaClass}
             />
           </label>
+
+          <label className="flex flex-col gap-1.5">
+            <span className="text-[12.5px] font-semibold text-[var(--text-2)]">{t.fBody}</span>
+            <textarea
+              value={form.bodyMd}
+              onChange={(e) => onChange({ bodyMd: e.target.value })}
+              rows={14}
+              placeholder={t.bodyPh}
+              className={`${adminTextareaClass} font-mono text-[12.5px] leading-[1.55]`}
+            />
+            <span className="text-[11.5px] text-[var(--text-3)]">{t.bodyHint}</span>
+          </label>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="flex flex-col gap-1.5">
+              <span className="text-[12.5px] font-semibold text-[var(--text-2)]">{t.fDoesFr}</span>
+              <textarea
+                value={form.doesFr}
+                onChange={(e) => onChange({ doesFr: e.target.value })}
+                rows={5}
+                placeholder={t.listPh}
+                className={adminTextareaClass}
+              />
+            </label>
+            <label className="flex flex-col gap-1.5">
+              <span className="text-[12.5px] font-semibold text-[var(--text-2)]">{t.fDoesEn}</span>
+              <textarea
+                value={form.doesEn}
+                onChange={(e) => onChange({ doesEn: e.target.value })}
+                rows={5}
+                placeholder={t.listPh}
+                className={adminTextareaClass}
+              />
+            </label>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="flex flex-col gap-1.5">
+              <span className="text-[12.5px] font-semibold text-[var(--text-2)]">{t.fTriggersFr}</span>
+              <textarea
+                value={form.triggersFr}
+                onChange={(e) => onChange({ triggersFr: e.target.value })}
+                rows={4}
+                placeholder={t.listPh}
+                className={adminTextareaClass}
+              />
+            </label>
+            <label className="flex flex-col gap-1.5">
+              <span className="text-[12.5px] font-semibold text-[var(--text-2)]">{t.fTriggersEn}</span>
+              <textarea
+                value={form.triggersEn}
+                onChange={(e) => onChange({ triggersEn: e.target.value })}
+                rows={4}
+                placeholder={t.listPh}
+                className={adminTextareaClass}
+              />
+            </label>
+          </div>
+          <span className="-mt-2 text-[11.5px] text-[var(--text-3)]">{t.listHint}</span>
 
           <label className="flex flex-col gap-1.5">
             <span className="text-[12.5px] font-semibold text-[var(--text-2)]">{t.fTech}</span>

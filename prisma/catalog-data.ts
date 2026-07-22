@@ -34,6 +34,8 @@ export interface SkillSeed {
   act: { fr: string; en: string }
   does: { fr: string[]; en: string[] }
   triggers: { fr: string[]; en: string[] }
+  /** Contenu Markdown brut (SKILL.md), optionnel. */
+  bodyMd?: string | null
 }
 
 export const CATEGORIES: CategorySeed[] = [

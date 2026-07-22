@@ -8,6 +8,7 @@ import {
   deleteCategory,
   deleteSkill,
   deleteStack,
+  loadSkillAdminForm,
   toggleSkillStack,
   upsertSkill,
 } from '#/server/admin.catalog.server'
@@ -124,11 +125,26 @@ export const adminUpsertSkill = createServerFn({ method: 'POST' })
       tech: string[]
       compat: string[]
       stackIds: string[]
+      doesFr: string[]
+      doesEn: string[]
+      triggersFr: string[]
+      triggersEn: string[]
+      bodyMd: string
       editingId?: string
     }) => data,
   )
   .handler(async ({ data }): Promise<AdminMutationResult> => {
     return guard(() => upsertSkill(data))
+  })
+
+export const adminGetSkillForm = createServerFn({ method: 'GET' })
+  .validator((data: { id: string }) => data)
+  .handler(async ({ data }) => {
+    const admin = await requireAdmin()
+    if (!admin) return { ok: false as const, error: 'forbidden' as const }
+    const form = await loadSkillAdminForm(data.id)
+    if (!form) return { ok: false as const, error: 'skill_not_found' as const }
+    return { ok: true as const, form }
   })
 
 export const adminDeleteSkill = createServerFn({ method: 'POST' })
