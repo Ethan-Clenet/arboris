@@ -4,6 +4,7 @@ import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { AgentBadge, AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
+import SecurityBadge from '#/components/SecurityBadge'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
@@ -46,6 +47,14 @@ function SkillsPage() {
     for (const s of catalog.skills) for (const x of s.tech) if (!seen.includes(x)) seen.push(x)
     return seen
   }, [catalog.skills])
+
+  const badgeLabels = {
+    unscanned: t.skills.securityUnscanned,
+    safe: t.skills.securitySafe,
+    caution: t.skills.securityCaution,
+    unsafe: t.skills.securityUnsafe,
+    score: t.skills.securityScore,
+  }
 
   const toggle = (arr: string[], v: string) =>
     arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]
@@ -282,6 +291,7 @@ function SkillsPage() {
                     skill={skill}
                     category={catById.get(skill.categoryId)}
                     copied={copiedKey === skill.id}
+                    badgeLabels={badgeLabels}
                     onCopy={() => copySkill({ id: skill.id, lang, announceMsg: t.skills.copied })}
                   />
                 ))}
@@ -353,11 +363,19 @@ function SkillRow({
   skill,
   category,
   copied,
+  badgeLabels,
   onCopy,
 }: {
   skill: SkillSummary
   category?: Category
   copied: boolean
+  badgeLabels: {
+    unscanned: string
+    safe: string
+    caution: string
+    unsafe: string
+    score: (n: number) => string
+  }
   onCopy: () => void
 }) {
   const { t, lang } = useI18n()
@@ -372,11 +390,19 @@ function SkillRow({
         >
           <Icon name={skill.icon} bold size={17} />
         </span>
-        <span className="min-w-0 flex-1 overflow-hidden">
-          <span className="block truncate font-mono text-[13.5px] font-semibold leading-tight">{skill.id}</span>
-          <span className="block truncate text-[11.5px] leading-tight text-[var(--text-3)]">
-            {category ? category.label[lang] : ''}
+        <span className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
+          <span className="min-w-0 overflow-hidden">
+            <span className="block truncate font-mono text-[13.5px] font-semibold leading-tight">{skill.id}</span>
+            <span className="block truncate text-[11.5px] leading-tight text-[var(--text-3)]">
+              {category ? category.label[lang] : ''}
+            </span>
           </span>
+          <SecurityBadge
+            score={skill.score}
+            recommendation={skill.securityRecommendation}
+            compact
+            labels={badgeLabels}
+          />
         </span>
       </Link>
 
