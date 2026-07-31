@@ -44,7 +44,7 @@ export default function CliCommandBar({ args, copyLabel, copiedLabel, className 
         onClick={() => copy(command, command, copiedLabel)}
         aria-label={copyLabel}
         title={copyLabel}
-        className={`grid h-7 w-7 shrink-0 place-items-center rounded-md border transition-colors ${
+        className={`grid h-7 w-7 shrink-0 cursor-pointer place-items-center rounded-md border transition-colors ${
           copied
             ? 'border-[#3ECF8E]/40 bg-[#3ECF8E]/10 text-[#3ECF8E]'
             : 'border-[#30363d] text-[#8B949E] hover:border-[#484f58] hover:text-[#C9D1D9]'
