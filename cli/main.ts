@@ -5,6 +5,7 @@ import { defaultCommandsDir, defaultSkillsDir, resolvePackageRoot } from '../src
 import { installSkillToWorkspace, installStackToWorkspace } from '../src/lib/skill-install-core.ts'
 import { installCommandToWorkspace } from '../src/lib/command-install-core.ts'
 import { listCommandIds, loadCommandFile } from '../src/lib/command-file.ts'
+import { findCollectionSeed, COLLECTIONS } from '../src/lib/collections-data.ts'
 import { needsInstallConfirm, riskToSafetyScore } from '../src/lib/skillspector.ts'
 import { formatStackList, hasSkillId, loadCliManifest, resolveStackId } from './stack-resolve.ts'
 
@@ -51,13 +52,16 @@ Usage:
   npx arboris-cli <techno> [options]
   npx arboris-cli install <skill-id> [options]
   npx arboris-cli command <command-id> [options]
+  npx arboris-cli collection <collection-id> [options]
   npx arboris-cli list
   npx arboris-cli list-commands
+  npx arboris-cli list-collections
 
 Exemples:
   npx arboris-cli node
   npx arboris-cli install fastapi-patterns
   npx arboris-cli command review-pr --agent cursor
+  npx arboris-cli collection command-starter --agent cursor
   npx arboris-cli typescript --force
 
 Technos (alias acceptés: node.js, k8s, spring, postgres…):
@@ -194,6 +198,97 @@ async function runInstallCommand(commandId: string, options: CliOptions) {
   console.log(`→ Dans le chat agent, tape /${cmd.id}`)
 }
 
+async function runListCollections() {
+  console.log('Collections disponibles:\n')
+  for (const col of COLLECTIONS) {
+    const n = col.commandIds.length + col.skillIds.length
+    console.log(`  ${col.id} — ${col.labelFr} (${n} éléments, ${col.kind})`)
+  }
+  console.log('\nExemple: npx arboris-cli collection command-starter')
+}
+
+async function runInstallCollection(collectionId: string, options: CliOptions) {
+  const col = findCollectionSeed(collectionId)
+  if (!col) {
+    console.error(`Collection inconnue: "${collectionId}"`)
+    console.error('Utilise: npx arboris-cli list-collections')
+    process.exit(1)
+  }
+
+  console.log(
+    `${options.dryRun ? '[dry-run] ' : ''}Collection « ${col.labelFr} » → ${options.agent} (${options.cwd})`,
+  )
+  console.log(`  ${col.commandIds.length} commandes, ${col.skillIds.length} skills`)
+
+  if (options.dryRun) {
+    for (const id of col.commandIds) console.log(`  • /${id}`)
+    for (const id of col.skillIds) console.log(`  • skill ${id}`)
+    return
+  }
+
+  let ok = 0
+  let skipped = 0
+  let failed = 0
+
+  for (const commandId of col.commandIds) {
+    const cmd = await loadCommandFile(COMMANDS_DIR, commandId)
+    if (!cmd) {
+      console.log(`  ✗ /${commandId} (introuvable)`)
+      failed++
+      continue
+    }
+    const result = await installCommandToWorkspace({
+      commandId: cmd.id,
+      agent: options.agent,
+      workspaceRoot: options.cwd,
+      commandsDir: COMMANDS_DIR,
+      command: cmd,
+      force: options.force,
+    })
+    if (!result.ok) {
+      console.log(`  ✗ /${commandId} (${result.error})`)
+      failed++
+      continue
+    }
+    if (result.skipped) {
+      console.log(`  ⊘ /${commandId}`)
+      skipped++
+    } else {
+      console.log(`  ✓ /${commandId} → ${result.path}`)
+      ok++
+    }
+  }
+
+  for (const skillId of col.skillIds) {
+    await assertSecurityOk(skillId, options)
+    const result = await installSkillToWorkspace({
+      skillId,
+      agent: options.agent,
+      workspaceRoot: options.cwd,
+      skillsDir: SKILLS_DIR,
+      force: options.force,
+    })
+    if (!result.ok) {
+      console.log(`  ✗ ${skillId} (${result.error})`)
+      failed++
+      continue
+    }
+    if (result.skipped) {
+      console.log(`  ⊘ ${skillId}`)
+      skipped++
+    } else {
+      console.log(`  ✓ ${skillId} → ${result.path}`)
+      ok++
+    }
+  }
+
+  console.log(`\nTerminé: ${ok} installés, ${skipped} ignorés, ${failed} échecs.`)
+  if (col.commandIds.length > 0) {
+    console.log(`→ Dans le chat agent, tape /${col.commandIds[0]} (etc.)`)
+  }
+  if (failed > 0) process.exit(1)
+}
+
 async function runInstallSkill(skillId: string, options: CliOptions) {
   const manifest = await loadCliManifest()
 
@@ -309,6 +404,17 @@ async function main() {
 
     if (command === 'list-commands' || command === 'commands') {
       await runListCommands()
+      return
+    }
+
+    if (command === 'list-collections' || command === 'collections') {
+      await runListCollections()
+      return
+    }
+
+    if (command === 'collection' || command === 'pack') {
+      if (!target) throw new Error('Usage: npx arboris-cli collection <collection-id>')
+      await runInstallCollection(target, options)
       return
     }
 

@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { hashPassword } from '../src/server/password'
 import { CATEGORIES, STACKS } from './catalog-data'
+import { COLLECTIONS } from './collections-data'
 import { loadSkillSeeds } from './catalog-from-skills'
 
 const prisma = new PrismaClient()
@@ -31,9 +32,10 @@ async function seedAdmin() {
 async function main() {
   console.log('🌱 Seeding Arboris…')
   const SKILLS = await loadSkillSeeds()
+  const skillIdSet = new Set(SKILLS.map((s) => s.id))
 
-  // Repartir d'une base propre (l'ordre respecte les contraintes de clés).
   await prisma.skill.deleteMany()
+  await prisma.collection.deleteMany()
   await prisma.stack.deleteMany()
   await prisma.category.deleteMany()
 
@@ -93,12 +95,34 @@ async function main() {
     console.log(`🛡  Scores SkillSpector réinjectés : ${withSecurity}/${SKILLS.length}`)
   }
 
-  const [cats, stacks, skills] = await Promise.all([
+  for (const col of COLLECTIONS) {
+    const skillIds = col.skillIds.filter((id) => skillIdSet.has(id))
+    await prisma.collection.create({
+      data: {
+        id: col.id,
+        icon: col.icon,
+        color: col.color,
+        labelFr: col.labelFr,
+        labelEn: col.labelEn,
+        briefFr: col.briefFr,
+        briefEn: col.briefEn,
+        kind: col.kind,
+        commandIdsJson: JSON.stringify(col.commandIds),
+        sort: col.sort,
+        skills: skillIds.length ? { connect: skillIds.map((id) => ({ id })) } : undefined,
+      },
+    })
+  }
+
+  const [cats, stacks, skills, collections] = await Promise.all([
     prisma.category.count(),
     prisma.stack.count(),
     prisma.skill.count(),
+    prisma.collection.count(),
   ])
-  console.log(`✅ Seed terminé : ${cats} catégories, ${stacks} stacks, ${skills} skills.`)
+  console.log(
+    `✅ Seed terminé : ${cats} catégories, ${stacks} stacks, ${skills} skills, ${collections} collections.`,
+  )
   await seedAdmin()
 }
 

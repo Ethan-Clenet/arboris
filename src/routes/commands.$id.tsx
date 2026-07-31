@@ -8,7 +8,7 @@ import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog, getCommand } from '#/server/functions'
 import { AgentBadge } from '#/components/AgentLogo'
 import CommandInstallButtons from '#/components/CommandInstallButtons'
-import CliCommandBar from '#/components/CliCommandBar'
+import CloudInstallPanel from '#/components/CloudInstallPanel'
 import { commandInstallContent } from '#/lib/command-types'
 
 export const Route = createFileRoute('/commands/$id')({
@@ -72,26 +72,32 @@ function CommandDetailPage() {
                 {copied ? t.commands.copied : t.commands.copy}
               </Button>
             </div>
-            <CommandInstallButtons
-              commandId={command.id}
-              agents={command.compat}
-              lang={lang}
-              t={{
-                installTitle: t.commands.installTitle,
-                install: t.commands.install,
-                installed: t.commands.installed,
-                usageHint: t.commands.usageHint,
-                errors: t.commands.installErrors,
-              }}
-            />
           </div>
         </div>
-        <CliCommandBar
-          args={`command ${command.id}`}
-          copyLabel={t.commands.copyCommand}
-          copiedLabel={t.commands.copied}
-          className="w-full shrink-0 lg:mt-1 lg:max-w-[440px]"
-        />
+        <div className="w-full shrink-0 lg:mt-1 lg:max-w-[440px]">
+          <CloudInstallPanel
+            mode="command"
+            targetId={command.id}
+            lang={lang}
+            agents={command.compat}
+            cliArgs={`command ${command.id}`}
+            t={t.cloudInstall}
+            localSlot={
+              <CommandInstallButtons
+                commandId={command.id}
+                agents={command.compat}
+                lang={lang}
+                t={{
+                  installTitle: t.commands.installTitle,
+                  install: t.commands.install,
+                  installed: t.commands.installed,
+                  usageHint: t.commands.usageHint,
+                  errors: t.commands.installErrors,
+                }}
+              />
+            }
+          />
+        </div>
       </div>
 
       <div className="mt-[30px] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">

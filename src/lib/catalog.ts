@@ -57,7 +57,24 @@ export interface Catalog {
   stacks: Stack[]
   skills: SkillSummary[]
   commands: CommandSummary[]
+  collections: CollectionSummary[]
   compatOrder: string[]
+}
+
+export interface CollectionSummary {
+  id: string
+  icon: string
+  color: string
+  kind: 'featured' | 'pack' | string
+  label: Bilingual
+  brief: Bilingual
+  skillIds: string[]
+  commandIds: string[]
+}
+
+export interface CollectionDetail extends CollectionSummary {
+  skills: SkillSummary[]
+  commands: CommandSummary[]
 }
 
 /** Ordre + couleurs de pastille des compatibilités (présentation, non stocké). */

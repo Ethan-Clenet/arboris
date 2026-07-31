@@ -17,8 +17,10 @@ import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SkillsIndexRouteImport } from './routes/skills.index'
 import { Route as CommandsIndexRouteImport } from './routes/commands.index'
+import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
 import { Route as SkillsIdRouteImport } from './routes/skills.$id'
 import { Route as CommandsIdRouteImport } from './routes/commands.$id'
+import { Route as CollectionsIdRouteImport } from './routes/collections.$id'
 
 const GettingStartedRoute = GettingStartedRouteImport.update({
   id: '/getting-started',
@@ -60,6 +62,11 @@ const CommandsIndexRoute = CommandsIndexRouteImport.update({
   path: '/commands/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollectionsIndexRoute = CollectionsIndexRouteImport.update({
+  id: '/collections/',
+  path: '/collections/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SkillsIdRoute = SkillsIdRouteImport.update({
   id: '/skills/$id',
   path: '/skills/$id',
@@ -70,6 +77,11 @@ const CommandsIdRoute = CommandsIdRouteImport.update({
   path: '/commands/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollectionsIdRoute = CollectionsIdRouteImport.update({
+  id: '/collections/$id',
+  path: '/collections/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -78,8 +90,10 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/collections/$id': typeof CollectionsIdRoute
   '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
+  '/collections/': typeof CollectionsIndexRoute
   '/commands/': typeof CommandsIndexRoute
   '/skills/': typeof SkillsIndexRoute
 }
@@ -90,8 +104,10 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/collections/$id': typeof CollectionsIdRoute
   '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
+  '/collections': typeof CollectionsIndexRoute
   '/commands': typeof CommandsIndexRoute
   '/skills': typeof SkillsIndexRoute
 }
@@ -103,8 +119,10 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/collections/$id': typeof CollectionsIdRoute
   '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
+  '/collections/': typeof CollectionsIndexRoute
   '/commands/': typeof CommandsIndexRoute
   '/skills/': typeof SkillsIndexRoute
 }
@@ -117,8 +135,10 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/collections/$id'
     | '/commands/$id'
     | '/skills/$id'
+    | '/collections/'
     | '/commands/'
     | '/skills/'
   fileRoutesByTo: FileRoutesByTo
@@ -129,8 +149,10 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/collections/$id'
     | '/commands/$id'
     | '/skills/$id'
+    | '/collections'
     | '/commands'
     | '/skills'
   id:
@@ -141,8 +163,10 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/collections/$id'
     | '/commands/$id'
     | '/skills/$id'
+    | '/collections/'
     | '/commands/'
     | '/skills/'
   fileRoutesById: FileRoutesById
@@ -154,8 +178,10 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   GettingStartedRoute: typeof GettingStartedRoute
+  CollectionsIdRoute: typeof CollectionsIdRoute
   CommandsIdRoute: typeof CommandsIdRoute
   SkillsIdRoute: typeof SkillsIdRoute
+  CollectionsIndexRoute: typeof CollectionsIndexRoute
   CommandsIndexRoute: typeof CommandsIndexRoute
   SkillsIndexRoute: typeof SkillsIndexRoute
 }
@@ -218,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommandsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collections/': {
+      id: '/collections/'
+      path: '/collections'
+      fullPath: '/collections/'
+      preLoaderRoute: typeof CollectionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/skills/$id': {
       id: '/skills/$id'
       path: '/skills/$id'
@@ -232,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommandsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collections/$id': {
+      id: '/collections/$id'
+      path: '/collections/$id'
+      fullPath: '/collections/$id'
+      preLoaderRoute: typeof CollectionsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -242,20 +282,13 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   GettingStartedRoute: GettingStartedRoute,
+  CollectionsIdRoute: CollectionsIdRoute,
   CommandsIdRoute: CommandsIdRoute,
   SkillsIdRoute: SkillsIdRoute,
+  CollectionsIndexRoute: CollectionsIndexRoute,
   CommandsIndexRoute: CommandsIndexRoute,
   SkillsIndexRoute: SkillsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

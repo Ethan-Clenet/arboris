@@ -20,6 +20,9 @@ export default function Footer() {
         <Link to="/commands" className="text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
           {t.nav.commands} →
         </Link>
+        <Link to="/collections" className="text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
+          {t.nav.collections} →
+        </Link>
       </div>
     </footer>
   )

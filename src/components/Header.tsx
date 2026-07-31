@@ -43,6 +43,9 @@ export default function Header() {
           <Link to="/commands" className={navBase} activeProps={navActive} inactiveProps={navInactive}>
             {t.nav.commands}
           </Link>
+          <Link to="/collections" className={navBase} activeProps={navActive} inactiveProps={navInactive}>
+            {t.nav.collections}
+          </Link>
         </nav>
 
         <div className="flex-1" />

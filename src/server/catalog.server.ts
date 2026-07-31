@@ -1,8 +1,8 @@
-// Accès base de données (Prisma) — CÔTÉ SERVEUR UNIQUEMENT.
-// Transforme les lignes Prisma en objets sérialisables consommés par l'UI.
 import type {
   Catalog,
   Category,
+  CollectionDetail,
+  CollectionSummary,
   SkillDetail,
   SkillSummary,
   Stack,
@@ -14,6 +14,7 @@ import {
   type SecurityRecommendation,
 } from '#/lib/skillspector'
 import { toCommandSummary } from '#/lib/command-file'
+import { COLLECTIONS } from '#/lib/collections-data'
 import { resolveAllCommands, resolveCommand } from '#/server/commands.server'
 import { prisma } from './db'
 
@@ -64,8 +65,44 @@ function toSummary(row: SkillRow): SkillSummary {
   }
 }
 
+function seedCollections(): CollectionSummary[] {
+  return COLLECTIONS.map((c) => ({
+    id: c.id,
+    icon: c.icon,
+    color: c.color,
+    kind: c.kind,
+    label: { fr: c.labelFr, en: c.labelEn },
+    brief: { fr: c.briefFr, en: c.briefEn },
+    skillIds: c.skillIds.slice(),
+    commandIds: c.commandIds.slice(),
+  }))
+}
+
+async function loadCollectionsFromDb(): Promise<CollectionSummary[]> {
+  try {
+    const rows = await prisma.collection.findMany({
+      orderBy: { sort: 'asc' },
+      include: { skills: { select: { id: true }, orderBy: { sort: 'asc' } } },
+    })
+    if (rows.length === 0) return seedCollections()
+    return rows.map((c) => ({
+      id: c.id,
+      icon: c.icon,
+      color: c.color,
+      kind: c.kind,
+      label: { fr: c.labelFr, en: c.labelEn },
+      brief: { fr: c.briefFr, en: c.briefEn },
+      skillIds: c.skills.map((s) => s.id),
+      commandIds: parseList(c.commandIdsJson),
+    }))
+  } catch {
+    // Table absente avant migrate — fallback seed.
+    return seedCollections()
+  }
+}
+
 export async function loadCatalog(): Promise<Catalog> {
-  const [categories, stacks, skills, commands] = await Promise.all([
+  const [categories, stacks, skills, commands, collections] = await Promise.all([
     prisma.category.findMany({ orderBy: { sort: 'asc' } }),
     prisma.stack.findMany({
       orderBy: { sort: 'asc' },
@@ -76,6 +113,7 @@ export async function loadCatalog(): Promise<Catalog> {
       include: { stacks: { select: { id: true } } },
     }),
     resolveAllCommands(),
+    loadCollectionsFromDb(),
   ])
 
   return {
@@ -99,6 +137,7 @@ export async function loadCatalog(): Promise<Catalog> {
     ),
     skills: skills.map(toSummary),
     commands: commands.map(toCommandSummary),
+    collections,
     compatOrder: [...COMPAT_ORDER],
   }
 }
@@ -123,4 +162,21 @@ export async function loadSkill(id: string): Promise<SkillDetail | null> {
 
 export async function loadCommand(id: string) {
   return resolveCommand(id)
+}
+
+export async function loadCollection(id: string): Promise<CollectionDetail | null> {
+  const catalog = await loadCatalog()
+  const summary = catalog.collections.find((c) => c.id === id)
+  if (!summary) return null
+
+  const skillMap = new Map(catalog.skills.map((s) => [s.id, s]))
+  const commandMap = new Map(catalog.commands.map((c) => [c.id, c]))
+
+  return {
+    ...summary,
+    skills: summary.skillIds.map((sid) => skillMap.get(sid)).filter(Boolean) as SkillSummary[],
+    commands: summary.commandIds
+      .map((cid) => commandMap.get(cid))
+      .filter(Boolean) as CollectionDetail['commands'],
+  }
 }

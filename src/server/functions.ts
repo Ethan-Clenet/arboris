@@ -84,6 +84,63 @@ export const getCommand = createServerFn({ method: 'GET' })
     return loadCommand(data.id)
   })
 
+export const getCollection = createServerFn({ method: 'GET' })
+  .validator((data: { id: string }) => data)
+  .handler(async ({ data }) => {
+    const { loadCollection } = await import('./catalog.server')
+    return loadCollection(data.id)
+  })
+
+export const getWorkspaceInstallAvailable = createServerFn({ method: 'GET' }).handler(
+  async (): Promise<{ available: boolean }> => {
+    const { isWorkspaceInstallConfigured } = await import('./install-cloud.server')
+    return { available: isWorkspaceInstallConfigured() }
+  },
+)
+
+export type DownloadZipResult =
+  | { ok: true; filename: string; base64: string; fileCount: number }
+  | { ok: false; error: 'not_found' | 'unknown_agent' | 'empty' | 'generic' }
+
+export const downloadCollectionZip = createServerFn({ method: 'POST' })
+  .validator((data: { collectionId: string; agent: string; lang: 'fr' | 'en' }) => data)
+  .handler(async ({ data }): Promise<DownloadZipResult> => {
+    try {
+      const { buildCollectionZip } = await import('./install-cloud.server')
+      const zip = await buildCollectionZip(data)
+      if (!zip) return { ok: false, error: 'not_found' }
+      return { ok: true, ...zip }
+    } catch {
+      return { ok: false, error: 'generic' }
+    }
+  })
+
+export const downloadCommandZip = createServerFn({ method: 'POST' })
+  .validator((data: { commandId: string; agent: string }) => data)
+  .handler(async ({ data }): Promise<DownloadZipResult> => {
+    try {
+      const { buildCommandZip } = await import('./install-cloud.server')
+      const zip = await buildCommandZip(data)
+      if (!zip) return { ok: false, error: 'not_found' }
+      return { ok: true, ...zip }
+    } catch {
+      return { ok: false, error: 'generic' }
+    }
+  })
+
+export const downloadSkillZip = createServerFn({ method: 'POST' })
+  .validator((data: { skillId: string; agent: string; lang: 'fr' | 'en' }) => data)
+  .handler(async ({ data }): Promise<DownloadZipResult> => {
+    try {
+      const { buildSkillZip } = await import('./install-cloud.server')
+      const zip = await buildSkillZip(data)
+      if (!zip) return { ok: false, error: 'not_found' }
+      return { ok: true, ...zip }
+    } catch {
+      return { ok: false, error: 'generic' }
+    }
+  })
+
 export const installCommand = createServerFn({ method: 'POST' })
   .validator((data: { commandId: string; agent: string; lang: 'fr' | 'en' }) => data)
   .handler(async ({ data }): Promise<InstallCommandResult> => {

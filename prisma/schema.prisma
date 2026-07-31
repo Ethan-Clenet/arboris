@@ -93,6 +93,7 @@ model Skill {
   category   Category @relation(fields: [categoryId], references: [id])
 
   stacks Stack[]
+  collections Collection[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -100,4 +101,26 @@ model Skill {
   @@index([categoryId])
   @@index([score])
   @@map("skills")
+}
+
+/// Playlist / pack : skills et/ou slash commands à installer ensemble.
+model Collection {
+  id             String @id
+  icon           String
+  color          String @default("#43A047")
+  labelFr        String
+  labelEn        String
+  briefFr        String
+  briefEn        String
+  /// featured | pack
+  kind           String @default("featured")
+  commandIdsJson String @default("[]")
+  sort           Int    @default(0)
+
+  skills Skill[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("collections")
 }
