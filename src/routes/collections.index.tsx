@@ -10,7 +10,7 @@ export const Route = createFileRoute('/collections/')({
   loader: () => getCatalog(),
   head: () =>
     seoHead({
-      title: 'Collections',
+      title: 'Packs et collections de skills',
       path: '/collections',
       description:
         'Collections Arboris : packs de skills et commandes à installer d’un coup (starter, sécu, ops).',
@@ -39,6 +39,9 @@ function CollectionsPage() {
           <p className="max-w-[540px] text-[15px] text-[var(--text-2)]">{t.collections.subtitle}</p>
         </div>
 
+        <h2 className="mb-4 font-display text-[18px] font-semibold text-[var(--text-1)]">
+          {t.collections.listHeading}
+        </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((col) => (
             <CollectionCard key={col.id} collection={col} />

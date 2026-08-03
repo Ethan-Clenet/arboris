@@ -22,7 +22,7 @@ export const Route = createFileRoute('/getting-started')({
   loader: () => getCatalog(),
   head: () =>
     seoHead({
-      title: 'Premier pas',
+      title: 'Premier pas — choisir ses skills',
       path: '/getting-started',
       description: 'Choisis un domaine, une techno, et récupère les skills recommandés pour ton agent.',
     }),

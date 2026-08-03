@@ -25,7 +25,7 @@ export const Route = createFileRoute('/commands/$id')({
     const command = loaderData?.command
     if (!command) return seoHead({ title: 'Commande', path: '/commands' })
     return seoHead({
-      title: `/${command.id} · Commande`,
+      title: `/${command.id} · Commande slash IA`,
       path: `/commands/${command.id}`,
       description: entityDescription(command.description.fr, 'command', command.id),
       type: 'article',
@@ -113,10 +113,10 @@ function CommandDetailPage() {
 
       <div className="mt-[30px] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
         <div className="flex items-center justify-between gap-3.5 border-b border-[var(--border)] bg-[var(--surface-2)] px-[18px] py-[13px]">
-          <div className="flex items-center gap-2.5 font-mono text-[11.5px] font-semibold uppercase tracking-[0.08em] text-[var(--text-3)]">
+          <h2 className="m-0 flex items-center gap-2.5 font-mono text-[11.5px] font-semibold uppercase tracking-[0.08em] text-[var(--text-3)]">
             <Icon name="cursor-text" bold size={14} className="text-[var(--accent)]" />
-            {t.commands.promptTitle}
-          </div>
+            {t.commands.promptHeading(command.id)}
+          </h2>
           <Button variant="copy" size="sm" copied={copied} onClick={handleCopy}>
             <Icon name={copied ? 'check' : 'copy'} size={14} />
             {copied ? t.commands.copied : t.commands.copy}
@@ -131,9 +131,9 @@ function CommandDetailPage() {
       </div>
 
       <aside className="mt-8 max-w-[420px] rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-[18px] shadow-[var(--shadow-card)]">
-        <div className="mb-3.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
-          {t.commands.metaTitle}
-        </div>
+        <h2 className="mb-3.5 font-display text-[15px] font-semibold text-[var(--text-1)]">
+          {t.commands.usageHeading(command.id)}
+        </h2>
         <div className="mb-1.5 text-[12px] text-[var(--text-3)]">{t.commands.compat}</div>
         <div className="mb-4 flex flex-wrap gap-1.5">
           {command.compat.map((name) => (

@@ -1,6 +1,26 @@
 import { isAgentName, type AgentName } from '#/lib/agents'
 import { AGENT_LOGO_PATH, agentLogoColor } from '#/lib/agent-logos'
 
+/** Sprite unique — évite de répéter ~1,5 Mo de paths SVG sur /skills. */
+export function AgentLogoSprite() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+      focusable="false"
+      className="pointer-events-none absolute h-0 w-0 overflow-hidden"
+    >
+      <defs>
+        {(Object.entries(AGENT_LOGO_PATH) as [AgentName, string][]).map(([name, d]) => (
+          <symbol key={name} id={`agent-logo-${name}`} viewBox="0 0 24 24">
+            <path fill="currentColor" d={d} />
+          </symbol>
+        ))}
+      </defs>
+    </svg>
+  )
+}
+
 type AgentLogoProps = {
   agent: AgentName | string
   size?: number
@@ -33,7 +53,7 @@ export default function AgentLogo({ agent, size = 16, className = '', title }: A
       className={`shrink-0 ${className}`}
       style={{ color: agentLogoColor(agent) }}
     >
-      <path fill="currentColor" d={AGENT_LOGO_PATH[agent]} />
+      <use href={`#agent-logo-${agent}`} />
     </svg>
   )
 }

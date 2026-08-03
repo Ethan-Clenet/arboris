@@ -12,7 +12,7 @@ export const Route = createFileRoute('/commands/')({
   loader: () => getCatalog(),
   head: () =>
     seoHead({
-      title: 'Commandes',
+      title: 'Slash commands du catalogue',
       path: '/commands',
       description:
         'Slash commands Arboris installables dans ton agent : commit, rebase, revue PR, audit deps…',
@@ -55,23 +55,28 @@ function CommandsPage() {
           </p>
         </div>
 
-        <div className="relative mb-5 max-w-[360px]">
-          <label htmlFor="commands-search" className="sr-only">
-            {t.commands.searchPh}
-          </label>
-          <Icon
-            name="magnifying-glass"
-            size={16}
-            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-3)]"
-          />
-          <input
-            id="commands-search"
-            type="search"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder={t.commands.searchPh}
-            className="h-10 w-full rounded-[10px] border border-[var(--border)] bg-[var(--surface)] pl-9 pr-3 text-[13.5px] text-[var(--text-1)] outline-none focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_var(--accent-soft)]"
-          />
+        <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
+          <h2 className="font-display text-[18px] font-semibold text-[var(--text-1)]">
+            {t.commands.listHeading}
+          </h2>
+          <div className="relative max-w-[360px] flex-1">
+            <label htmlFor="commands-search" className="sr-only">
+              {t.commands.searchPh}
+            </label>
+            <Icon
+              name="magnifying-glass"
+              size={16}
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-3)]"
+            />
+            <input
+              id="commands-search"
+              type="search"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder={t.commands.searchPh}
+              className="h-10 w-full rounded-[10px] border border-[var(--border)] bg-[var(--surface)] pl-9 pr-3 text-[13.5px] text-[var(--text-1)] outline-none focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_var(--accent-soft)]"
+            />
+          </div>
         </div>
 
         <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">

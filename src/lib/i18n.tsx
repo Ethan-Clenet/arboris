@@ -33,6 +33,7 @@ const fr = {
     example: 'Voir un exemple',
     worksWith: 'Compatible avec',
     indexTitle: "L'index complet",
+    listHeading: 'Skills mis en avant sur Arboris',
     searchPh: 'Filtrer les skills…',
     tabPopular: 'Populaires',
     tabTrending: 'Tendance',
@@ -58,6 +59,7 @@ const fr = {
     kicker: 'Catalogue de skills',
     worksWith: 'Compatible avec',
     title: 'Tous les skills',
+    listHeading: 'Liste des skills du catalogue Arboris',
     subtitle:
       "Des skills prêts à l'emploi — copie le Markdown du skill et colle-le dans ton agent.",
     searchPh: 'Rechercher un skill, une techno…',
@@ -148,6 +150,7 @@ const fr = {
   commands: {
     kicker: 'Slash commands',
     title: 'Commandes',
+    listHeading: 'Liste des slash commands Arboris',
     subtitle:
       'Prompts réutilisables installables dans ton agent. Tape /nom dans le chat pour les lancer.',
     usageBanner:
@@ -164,8 +167,10 @@ const fr = {
     installed: (path: string) => `Commande écrite dans ${path}`,
     usageHint: 'Puis tape /nom-de-la-commande dans le chat de l’agent.',
     promptTitle: 'Contenu de la commande',
+    promptHeading: (id: string) => `Contenu de /${id}`,
     promptHint: 'Ce Markdown est injecté quand tu invoques la commande via /.',
     metaTitle: 'Détails',
+    usageHeading: (id: string) => `Comment utiliser /${id}`,
     compat: 'Compatibilité',
     howItWorks:
       'Contrairement aux skills, une commande ne s’active pas toute seule : tu la lances explicitement avec / dans le chat.',
@@ -181,6 +186,7 @@ const fr = {
   collections: {
     kicker: 'Playlists',
     title: 'Collections',
+    listHeading: 'Liste des collections et packs Arboris',
     subtitle:
       'Packs de skills et slash commands à installer d’un coup — starter, sécu, ops.',
     empty: 'Aucune collection.',
@@ -419,6 +425,7 @@ const en: typeof fr = {
     example: 'See an example',
     worksWith: 'Works with',
     indexTitle: 'The full index',
+    listHeading: 'Featured skills on Arboris',
     searchPh: 'Filter skills…',
     tabPopular: 'Popular',
     tabTrending: 'Trending',
@@ -444,6 +451,7 @@ const en: typeof fr = {
     kicker: 'Skill catalog',
     worksWith: 'Works with',
     title: 'All skills',
+    listHeading: 'Full Arboris skill catalog list',
     subtitle:
       'Ready-to-use skills — copy the skill Markdown and paste it into your agent.',
     searchPh: 'Search a skill, a technology…',
@@ -534,6 +542,7 @@ const en: typeof fr = {
   commands: {
     kicker: 'Slash commands',
     title: 'Commands',
+    listHeading: 'Arboris slash commands list',
     subtitle:
       'Reusable prompts you can install into your agent. Type /name in chat to run them.',
     usageBanner:
@@ -550,8 +559,10 @@ const en: typeof fr = {
     installed: (path: string) => `Command written to ${path}`,
     usageHint: 'Then type /command-name in your agent chat.',
     promptTitle: 'Command content',
+    promptHeading: (id: string) => `Content of /${id}`,
     promptHint: 'This Markdown is injected when you invoke the command via /.',
     metaTitle: 'Details',
+    usageHeading: (id: string) => `How to use /${id}`,
     compat: 'Compatibility',
     howItWorks:
       'Unlike skills, a command never auto-activates: you launch it explicitly with / in chat.',
@@ -567,6 +578,7 @@ const en: typeof fr = {
   collections: {
     kicker: 'Playlists',
     title: 'Collections',
+    listHeading: 'Arboris collections and packs list',
     subtitle: 'Packs of skills and slash commands to install in one go — starter, security, ops.',
     empty: 'No collection.',
     back: 'All collections',

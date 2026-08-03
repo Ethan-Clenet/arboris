@@ -20,7 +20,7 @@ export const Route = createFileRoute('/skills/')({
   loader: () => getCatalog(),
   head: () =>
     seoHead({
-      title: 'Skills',
+      title: 'Catalogue complet des skills IA',
       path: '/skills',
       description:
         'Index complet des skills Arboris : filtre par catégorie, techno, agent compatible et score de sûreté.',
@@ -32,6 +32,12 @@ const SKILL_TABLE_COLS =
   'grid grid-cols-[minmax(0,1.25fr)_minmax(0,1.4fr)_minmax(0,1fr)_5.5rem_7.75rem] items-center gap-x-1.5'
 
 type SecurityFilter = 'all' | SecurityRecommendation
+
+function truncateListing(text: string, max = 140): string {
+  const normalized = text.trim().replace(/\s+/g, ' ')
+  if (normalized.length <= max) return normalized
+  return `${normalized.slice(0, max - 1).trimEnd()}…`
+}
 
 function SkillsPage() {
   const catalog = Route.useLoaderData()
@@ -278,6 +284,9 @@ function SkillsPage() {
         </aside>
 
         <section>
+          <h2 className="mb-3.5 font-display text-[18px] font-semibold text-[var(--text-1)]">
+            {t.skills.listHeading}
+          </h2>
           <div className="mb-3.5 text-[13.5px] text-[var(--text-2)]">
             <span className="font-semibold text-[var(--text-1)]">{rows.length}</span> {resultLabel}
           </div>
@@ -414,7 +423,9 @@ function SkillRow({
         </span>
       </Link>
 
-      <div className="min-w-0 overflow-hidden line-clamp-2 self-center text-[13px] leading-[1.4] text-[var(--text-2)]">{skill.tag[lang]}</div>
+      <div className="min-w-0 overflow-hidden line-clamp-2 self-center text-[13px] leading-[1.4] text-[var(--text-2)]" title={skill.tag[lang]}>
+        {truncateListing(skill.tag[lang], 140)}
+      </div>
 
       <div className="flex min-w-0 items-center overflow-hidden" title={skill.tech.join(', ')}>
         {skill.tech.length > 0 ? (

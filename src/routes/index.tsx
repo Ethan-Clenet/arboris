@@ -140,6 +140,9 @@ function HomePage() {
 
       {/* Index tableau */}
       <section className="pt-6 pb-[70px]">
+        <h2 className="mb-3 font-display text-[18px] font-semibold text-[var(--text-1)]">
+          {t.home.listHeading}
+        </h2>
         <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
           <div className="flex flex-wrap items-end justify-between gap-3 border-b border-[var(--border)] bg-[var(--surface-2)] px-3 pt-2 sm:px-4">
             <div className="flex flex-wrap items-end gap-0.5" role="tablist" aria-label={t.home.indexTitle}>
