@@ -6,7 +6,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'cop
 export type ButtonSize = 'sm' | 'md' | 'lg'
 
 const base =
-  'inline-flex shrink-0 items-center justify-center gap-2 rounded-[5px] border font-medium transition-colors duration-150'
+  'inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-[5px] border font-medium transition-colors duration-150 disabled:cursor-not-allowed'
 
 const variants: Record<ButtonVariant, string> = {
   primary:

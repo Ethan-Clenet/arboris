@@ -79,7 +79,7 @@ function SkillDetailPage() {
     <PageShell className="pt-6 pb-20">
       {/* Fil d'ariane */}
       <nav className="mb-[26px] flex items-center gap-2 text-[13px] text-[var(--text-3)]" aria-label={t.a11y.breadcrumb}>
-        <Link to="/skills" className="text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
+        <Link to="/skills" className="cursor-pointer text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
           {t.skill.back}
         </Link>
         <Icon name="caret-right" size={12} />
@@ -381,7 +381,7 @@ function SkillDetailPage() {
                 key={r.id}
                 to="/skills/$id"
                 params={{ id: r.id }}
-                className="flex flex-col gap-2.5 rounded-[13px] border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)] transition-colors hover:border-[var(--border-2)]"
+                className="flex cursor-pointer flex-col gap-2.5 rounded-[13px] border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)] transition-colors hover:border-[var(--border-2)]"
               >
                 <div className="flex items-center gap-2.5">
                   <span

@@ -52,7 +52,7 @@ function CommandDetailPage() {
   return (
     <PageShell className="pt-6 pb-20">
       <nav className="mb-[26px] flex items-center gap-2 text-[13px] text-[var(--text-3)]" aria-label={t.a11y.breadcrumb}>
-        <Link to="/commands" className="text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
+        <Link to="/commands" className="cursor-pointer text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
           {t.commands.back}
         </Link>
         <Icon name="caret-right" size={12} />

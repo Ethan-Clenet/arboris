@@ -40,7 +40,7 @@ function CollectionDetailPage() {
       <PageShell as="div" className="pt-8 pb-[70px]">
         <Link
           to="/collections"
-          className="mb-6 inline-flex items-center gap-1.5 text-[13px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]"
+          className="mb-6 inline-flex cursor-pointer items-center gap-1.5 text-[13px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]"
         >
           <Icon name="arrow-left" size={14} />
           {t.collections.back}
@@ -82,7 +82,7 @@ function CollectionDetailPage() {
                       key={cmd.id}
                       to="/commands/$id"
                       params={{ id: cmd.id }}
-                      className="flex items-center gap-3 border-b border-[var(--border)] px-4 py-3 last:border-b-0 hover:bg-[var(--surface-hover)]"
+                      className="flex cursor-pointer items-center gap-3 border-b border-[var(--border)] px-4 py-3 last:border-b-0 hover:bg-[var(--surface-hover)]"
                     >
                       <Icon name="terminal-window" size={16} className="text-[var(--accent)]" />
                       <span className="min-w-0 flex-1">
@@ -108,7 +108,7 @@ function CollectionDetailPage() {
                       key={skill.id}
                       to="/skills/$id"
                       params={{ id: skill.id }}
-                      className="flex items-center gap-3 border-b border-[var(--border)] px-4 py-3 last:border-b-0 hover:bg-[var(--surface-hover)]"
+                      className="flex cursor-pointer items-center gap-3 border-b border-[var(--border)] px-4 py-3 last:border-b-0 hover:bg-[var(--surface-hover)]"
                     >
                       <Icon name={skill.icon} size={16} className="text-[var(--accent)]" />
                       <span className="min-w-0 flex-1">

@@ -92,7 +92,7 @@ function CommandRow({ command }: { command: CommandSummary }) {
     <Link
       to="/commands/$id"
       params={{ id: command.id }}
-      className="flex flex-col gap-2 border-b border-[var(--border)] px-4 py-4 transition-colors last:border-b-0 hover:bg-[var(--surface-hover)] sm:flex-row sm:items-center sm:gap-6 sm:px-[18px]"
+      className="flex cursor-pointer flex-col gap-2 border-b border-[var(--border)] px-4 py-4 transition-colors last:border-b-0 hover:bg-[var(--surface-hover)] sm:flex-row sm:items-center sm:gap-6 sm:px-[18px]"
     >
       <div className="flex min-w-0 flex-1 items-start gap-3">
         <span className="grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px] bg-[var(--accent-soft)] text-[var(--accent)]">

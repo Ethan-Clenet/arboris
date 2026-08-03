@@ -62,7 +62,7 @@ function CollectionCard({ collection }: { collection: CollectionSummary }) {
     <Link
       to="/collections/$id"
       params={{ id: collection.id }}
-      className="flex flex-col rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow-card)] transition-colors hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]"
+      className="flex cursor-pointer flex-col rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow-card)] transition-colors hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]"
     >
       <div className="mb-3 flex items-start gap-3">
         <span

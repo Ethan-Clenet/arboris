@@ -8,7 +8,7 @@ import { useI18n } from '#/lib/i18n'
 import { logout } from '#/server/auth.functions'
 import { Route as RootRoute } from '#/routes/__root'
 
-const navBase = 'rounded-lg px-3 py-[7px] text-[13.5px] transition-colors'
+const navBase = 'cursor-pointer rounded-lg px-3 py-[7px] text-[13.5px] transition-colors'
 const navInactive = { className: 'font-medium text-[var(--text-2)] hover:text-[var(--text-1)]' }
 const navActive = { className: 'font-semibold text-[var(--text-1)] bg-[var(--surface-2)]' }
 
@@ -26,7 +26,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--bg)_80%,transparent)] backdrop-blur-[14px] backdrop-saturate-150">
       <div className="page-shell-header flex h-[60px] items-center gap-4 sm:gap-6">
-        <Link to="/" className="flex flex-shrink-0 items-center gap-2.5 text-[var(--text-1)]">
+        <Link to="/" className="flex flex-shrink-0 cursor-pointer items-center gap-2.5 text-[var(--text-1)]">
           <span className="grid h-[30px] w-[30px] place-items-center rounded-lg bg-[var(--accent)] text-white shadow-[0_2px_8px_var(--accent-soft)]">
             <Icon name="tree" bold size={17} />
           </span>
@@ -64,7 +64,7 @@ export default function Header() {
             <button
               type="button"
               onClick={handleLogout}
-              className="rounded-md border border-[var(--border)] px-2.5 py-1.5 text-[12.5px] font-medium text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
+              className="cursor-pointer rounded-md border border-[var(--border)] px-2.5 py-1.5 text-[12.5px] font-medium text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
             >
               {t.nav.signOut}
             </button>
@@ -73,7 +73,7 @@ export default function Header() {
           <Link
             to="/auth"
             search={{ mode: 'login', redirect: '/' }}
-            className="hidden rounded-md border border-[var(--border)] px-2.5 py-1.5 text-[12.5px] font-medium text-[var(--text-1)] transition-colors hover:border-[var(--border-2)] sm:inline-flex"
+            className="hidden cursor-pointer rounded-md border border-[var(--border)] px-2.5 py-1.5 text-[12.5px] font-medium text-[var(--text-1)] transition-colors hover:border-[var(--border-2)] sm:inline-flex"
           >
             {t.nav.signIn}
           </Link>

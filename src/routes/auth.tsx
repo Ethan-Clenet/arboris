@@ -106,7 +106,7 @@ function AuthPage() {
       </a>
       {/* Panneau marque */}
       <aside className="relative flex flex-col justify-between overflow-hidden border-b border-[var(--border)] bg-[var(--surface-2)] p-10 lg:border-b-0 lg:border-r [background-image:radial-gradient(560px_300px_at_12%_6%,var(--accent-soft),transparent_62%)]">
-        <Link to="/" className="flex items-center gap-2.5 text-[var(--text-1)]">
+        <Link to="/" className="flex cursor-pointer items-center gap-2.5 text-[var(--text-1)]">
           <span className="grid h-[34px] w-[34px] place-items-center rounded-[9px] bg-[var(--accent)] text-white">
             <Icon name="tree" bold size={19} />
           </span>
@@ -237,7 +237,7 @@ function AuthPage() {
                   <button
                     type="button"
                     onClick={() => setShowPw((v) => !v)}
-                    className="absolute top-1/2 right-2 grid h-7 w-7 -translate-y-1/2 place-items-center border-0 bg-transparent text-[var(--text-3)]"
+                    className="absolute top-1/2 right-2 grid h-7 w-7 -translate-y-1/2 cursor-pointer place-items-center border-0 bg-transparent text-[var(--text-3)]"
                     aria-label={showPw ? a11y.hidePassword : a11y.showPassword}
                   >
                     <Icon name={showPw ? 'eye-slash' : 'eye'} size={17} />
@@ -249,7 +249,7 @@ function AuthPage() {
                 type="submit"
                 disabled={loading}
                 aria-busy={loading}
-                className="mt-1 flex h-[46px] items-center justify-center gap-2 rounded-[11px] border-0 bg-[var(--accent)] text-[15px] font-semibold text-white transition-colors hover:bg-[var(--accent-press)] disabled:opacity-60"
+                className="mt-1 flex h-[46px] cursor-pointer items-center justify-center gap-2 rounded-[11px] border-0 bg-[var(--accent)] text-[15px] font-semibold text-white transition-colors hover:bg-[var(--accent-press)] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {loading ? a.loading : isSignup ? a.signupSubmit : a.loginSubmit}
                 {!loading && <Icon name="arrow-right" bold size={16} className="!text-white" />}

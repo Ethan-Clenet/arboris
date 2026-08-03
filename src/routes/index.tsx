@@ -152,7 +152,7 @@ function HomePage() {
                     role="tab"
                     aria-selected={active}
                     onClick={() => setTab(item.id)}
-                    className={`inline-flex items-center gap-1.5 rounded-t-[10px] border px-3.5 py-2.5 text-[13px] font-medium transition-colors ${
+                    className={`inline-flex cursor-pointer items-center gap-1.5 rounded-t-[10px] border px-3.5 py-2.5 text-[13px] font-medium transition-colors ${
                       active
                         ? 'relative z-[1] -mb-px border-[var(--border)] border-b-[var(--surface)] bg-[var(--surface)] text-[var(--text-1)]'
                         : 'border-transparent text-[var(--text-3)] hover:text-[var(--text-2)]'
@@ -218,7 +218,7 @@ function HomePage() {
             </span>
             <Link
               to="/skills"
-              className="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)] transition-colors hover:text-[var(--accent)]"
+              className="inline-flex cursor-pointer items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)] transition-colors hover:text-[var(--accent)]"
             >
               {t.home.footerLink}
               <Icon name="arrow-right" size={12} />
@@ -259,7 +259,7 @@ function HomeTableRow({
         <Link
           to="/skills/$id"
           params={{ id: skill.id }}
-          className="min-w-0 truncate font-semibold text-[var(--accent)] transition-colors hover:text-[var(--accent-press)]"
+          className="min-w-0 cursor-pointer truncate font-semibold text-[var(--accent)] transition-colors hover:text-[var(--accent-press)]"
         >
           {skill.id}
         </Link>
@@ -274,7 +274,7 @@ function HomeTableRow({
           onClick={onCopy}
           aria-label={copied ? t.home.copied : t.home.copy}
           title={copied ? t.home.copied : t.home.copy}
-          className={`grid h-6 w-6 shrink-0 place-items-center rounded-md border text-[var(--text-3)] opacity-0 transition-all group-hover:opacity-100 ${
+          className={`grid h-6 w-6 shrink-0 cursor-pointer place-items-center rounded-md border text-[var(--text-3)] opacity-0 transition-all group-hover:opacity-100 ${
             copied
               ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)] opacity-100'
               : 'border-[var(--border)] hover:border-[var(--border-2)] hover:text-[var(--text-1)]'

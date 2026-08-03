@@ -161,7 +161,7 @@ function GettingStartedPage() {
                 type="button"
                 aria-pressed={isActive}
                 onClick={() => pickGroup(group.id)}
-                className={`flex items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
+                className={`flex cursor-pointer items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
                   isActive
                     ? 'border-[var(--accent-border)] bg-[var(--accent-soft)]'
                     : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-2)]'
@@ -219,7 +219,7 @@ function GettingStartedPage() {
                   type="button"
                   aria-pressed={isActive}
                   onClick={() => pickCategory(c.id)}
-                  className={`flex items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
+                  className={`flex cursor-pointer items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
                     isActive
                       ? 'border-[var(--accent-border)] bg-[var(--accent-soft)]'
                       : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-2)]'
@@ -258,7 +258,7 @@ function GettingStartedPage() {
                   type="button"
                   aria-pressed={isActive}
                   onClick={() => pickStack(k.id)}
-                  className={`flex items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
+                  className={`flex cursor-pointer items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
                     isActive
                       ? 'border-[var(--border-2)] bg-[var(--surface-hover)]'
                       : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-2)]'
@@ -358,7 +358,7 @@ function GettingStartedPage() {
                             onMouseDown={(e) => e.preventDefault()}
                             onClick={() => setQuery('')}
                             aria-label={t.a11y.clearSearch}
-                            className="absolute right-2 top-1/2 grid h-[22px] w-[22px] -translate-y-1/2 place-items-center text-[var(--text-3)] hover:text-[var(--text-1)]"
+                            className="absolute right-2 top-1/2 grid h-[22px] w-[22px] -translate-y-1/2 cursor-pointer place-items-center text-[var(--text-3)] hover:text-[var(--text-1)]"
                           >
                             <Icon name="x" size={13} />
                           </button>
@@ -368,7 +368,7 @@ function GettingStartedPage() {
                             onMouseDown={(e) => e.preventDefault()}
                             onClick={() => setSearchOpen(false)}
                             aria-label={t.a11y.clearSearch}
-                            className="absolute right-2 top-1/2 grid h-[22px] w-[22px] -translate-y-1/2 place-items-center text-[var(--text-3)] hover:text-[var(--text-1)]"
+                            className="absolute right-2 top-1/2 grid h-[22px] w-[22px] -translate-y-1/2 cursor-pointer place-items-center text-[var(--text-3)] hover:text-[var(--text-1)]"
                           >
                             <Icon name="x" size={13} />
                           </button>
@@ -379,7 +379,7 @@ function GettingStartedPage() {
                         type="button"
                         onClick={() => setSearchOpen(true)}
                         aria-label={t.a11y.searchSkills}
-                        className="grid h-10 w-10 place-items-center rounded-[10px] border border-[var(--border)] bg-[var(--surface)] text-[var(--text-3)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
+                        className="grid h-10 w-10 cursor-pointer place-items-center rounded-[10px] border border-[var(--border)] bg-[var(--surface)] text-[var(--text-3)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
                       >
                         <Icon name="magnifying-glass" size={16} />
                       </button>
@@ -460,7 +460,7 @@ function StackSkillCard({
         <Link
           to="/skills/$id"
           params={{ id: skill.id }}
-          className="grid h-[38px] w-[38px] flex-none place-items-center rounded-[10px]"
+          className="grid h-[38px] w-[38px] flex-none cursor-pointer place-items-center rounded-[10px]"
           style={{ background: tint, color }}
         >
           <Icon name={skill.icon} bold size={19} />
@@ -469,7 +469,7 @@ function StackSkillCard({
           <Link
             to="/skills/$id"
             params={{ id: skill.id }}
-            className="block truncate font-mono text-[13.5px] font-semibold text-[var(--text-1)]"
+            className="block cursor-pointer truncate font-mono text-[13.5px] font-semibold text-[var(--text-1)]"
           >
             {skill.id}
           </Link>
@@ -486,7 +486,7 @@ function StackSkillCard({
           to="/skills/$id"
           params={{ id: skill.id }}
           aria-label={t.start.detail}
-          className="grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px] border border-[var(--border)] text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
+          className="grid h-[34px] w-[34px] flex-none cursor-pointer place-items-center rounded-[9px] border border-[var(--border)] text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
         >
           <Icon name="arrow-up-right" bold size={14} />
         </Link>

@@ -90,14 +90,14 @@ export default function SkillInstallButtons({
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
-              className="rounded-md border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-[12px] font-medium"
+              className="cursor-pointer rounded-md border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-[12px] font-medium"
               onClick={() => setPendingAgent(null)}
             >
               {t.installConfirmNo}
             </button>
             <button
               type="button"
-              className="rounded-md border border-[color-mix(in_srgb,#E5484D_40%,transparent)] bg-[color-mix(in_srgb,#E5484D_18%,transparent)] px-2.5 py-1 text-[12px] font-semibold text-[var(--danger,#E5484D)]"
+              className="cursor-pointer rounded-md border border-[color-mix(in_srgb,#E5484D_40%,transparent)] bg-[color-mix(in_srgb,#E5484D_18%,transparent)] px-2.5 py-1 text-[12px] font-semibold text-[var(--danger,#E5484D)]"
               onClick={() => runInstall(pendingAgent, true)}
             >
               {t.installConfirmYes}
@@ -118,7 +118,7 @@ export default function SkillInstallButtons({
               title={path}
               aria-label={t.install(agent)}
               onClick={() => handleInstall(agent)}
-              className={`inline-flex items-center justify-center rounded-lg border p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${
+              className={`inline-flex cursor-pointer items-center justify-center rounded-lg border p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${
                 active
                   ? 'border-[var(--accent-border)] bg-[var(--accent-soft)]'
                   : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]'

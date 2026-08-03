@@ -159,7 +159,7 @@ function SkillsPage() {
                 type="button"
                 onClick={() => setQ('')}
                 aria-label={t.a11y.clearSearch}
-                className="absolute right-2 top-1/2 grid h-[22px] w-[22px] -translate-y-1/2 place-items-center text-[var(--text-3)] hover:text-[var(--text-1)]"
+                className="absolute right-2 top-1/2 grid h-[22px] w-[22px] -translate-y-1/2 cursor-pointer place-items-center text-[var(--text-3)] hover:text-[var(--text-1)]"
               >
                 <Icon name="x" size={13} />
               </button>
@@ -251,7 +251,7 @@ function SkillsPage() {
                     type="button"
                     aria-pressed={active}
                     onClick={() => setTechs(toggle(techs, name))}
-                    className={`rounded-md border px-[11px] py-[5px] font-mono text-[11.5px] font-medium transition-colors ${
+                    className={`cursor-pointer rounded-md border px-[11px] py-[5px] font-mono text-[11.5px] font-medium transition-colors ${
                       active
                         ? 'border-[var(--border-2)] bg-[var(--text-1)] text-[var(--bg)]'
                         : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-2)] hover:border-[var(--border-2)]'
@@ -268,7 +268,7 @@ function SkillsPage() {
             <button
               type="button"
               onClick={clearAll}
-              className="flex items-center gap-[7px] p-0.5 text-[13px] font-medium text-[var(--accent)]"
+              className="flex cursor-pointer items-center gap-[7px] p-0.5 text-[13px] font-medium text-[var(--accent)]"
             >
               <Icon name="arrow-counter-clockwise" size={14} />
               {t.skills.clear}
@@ -344,7 +344,7 @@ function CategoryButton({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`flex w-full items-center gap-2.5 rounded-[9px] border px-2.5 py-2 text-left text-[13.5px] transition-colors ${
+      className={`flex w-full cursor-pointer items-center gap-2.5 rounded-[9px] border px-2.5 py-2 text-left text-[13.5px] transition-colors ${
         active
           ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--text-1)]'
           : 'border-transparent text-[var(--text-2)] hover:bg-[var(--surface-hover)]'
@@ -390,7 +390,7 @@ function SkillRow({
 
   return (
     <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] px-4 py-3.5 transition-colors hover:bg-[var(--surface-hover)] sm:px-[18px]`}>
-      <Link to="/skills/$id" params={{ id: skill.id }} className="flex min-w-0 items-center gap-[11px] text-[var(--text-1)]">
+      <Link to="/skills/$id" params={{ id: skill.id }} className="flex min-w-0 cursor-pointer items-center gap-[11px] text-[var(--text-1)]">
         <span
           className="grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px]"
           style={{ background: category ? hexToRgba(category.color, 0.13) : 'var(--surface-2)', color }}

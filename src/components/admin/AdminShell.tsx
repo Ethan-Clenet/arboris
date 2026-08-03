@@ -128,7 +128,7 @@ export default function AdminSidebar({
         <Link
           to="/"
           title={a.viewSite}
-          className="flex h-10 items-center gap-3 rounded-[10px] px-2.5 text-[var(--text-2)] no-underline transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text-1)]"
+          className="flex h-10 cursor-pointer items-center gap-3 rounded-[10px] px-2.5 text-[var(--text-2)] no-underline transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text-1)]"
         >
           <span className="grid h-6 w-6 flex-none place-items-center">
             <Icon name="arrow-square-out" bold size={18} />

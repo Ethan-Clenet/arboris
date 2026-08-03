@@ -63,7 +63,7 @@ export function AgentBadge({ agent, active = false, size = 16, onClick, classNam
         aria-label={label}
         title={label}
         onClick={onClick}
-        className={`${base} ${styles} ${className}`}
+        className={`${base} cursor-pointer ${styles} ${className}`}
       >
         <AgentLogo agent={agent} size={size} />
       </button>

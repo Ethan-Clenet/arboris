@@ -14,13 +14,13 @@ export default function Footer() {
           </span>
           {t.home.footer}
         </div>
-        <Link to="/skills" className="text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
+        <Link to="/skills" className="cursor-pointer text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
           {t.home.browseAll} →
         </Link>
-        <Link to="/commands" className="text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
+        <Link to="/commands" className="cursor-pointer text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
           {t.nav.commands} →
         </Link>
-        <Link to="/collections" className="text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
+        <Link to="/collections" className="cursor-pointer text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
           {t.nav.collections} →
         </Link>
       </div>
