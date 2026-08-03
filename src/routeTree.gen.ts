@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as Google2d4e68e917b5f045DothtmlRouteImport } from './routes/google2d4e68e917b5f045[.]html'
 import { Route as GettingStartedRouteImport } from './routes/getting-started'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -34,6 +35,12 @@ const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
   path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Google2d4e68e917b5f045DothtmlRoute =
+  Google2d4e68e917b5f045DothtmlRouteImport.update({
+    id: '/google2d4e68e917b5f045.html',
+    path: '/google2d4e68e917b5f045.html',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GettingStartedRoute = GettingStartedRouteImport.update({
   id: '/getting-started',
   path: '/getting-started',
@@ -102,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
@@ -118,6 +126,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
@@ -135,6 +144,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/google2d4e68e917b5f045.html'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/collections/$id'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/google2d4e68e917b5f045.html'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/collections/$id'
@@ -185,6 +197,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/google2d4e68e917b5f045.html'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/collections/$id'
@@ -202,6 +215,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   GettingStartedRoute: typeof GettingStartedRoute
+  Google2d4e68e917b5f045DothtmlRoute: typeof Google2d4e68e917b5f045DothtmlRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CollectionsIdRoute: typeof CollectionsIdRoute
@@ -226,6 +240,13 @@ declare module '@tanstack/react-router' {
       path: '/robots.txt'
       fullPath: '/robots.txt'
       preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/google2d4e68e917b5f045.html': {
+      id: '/google2d4e68e917b5f045.html'
+      path: '/google2d4e68e917b5f045.html'
+      fullPath: '/google2d4e68e917b5f045.html'
+      preLoaderRoute: typeof Google2d4e68e917b5f045DothtmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/getting-started': {
@@ -322,6 +343,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   GettingStartedRoute: GettingStartedRoute,
+  Google2d4e68e917b5f045DothtmlRoute: Google2d4e68e917b5f045DothtmlRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   CollectionsIdRoute: CollectionsIdRoute,
