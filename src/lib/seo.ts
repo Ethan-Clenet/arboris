@@ -9,10 +9,29 @@ type SeoInput = {
   image?: string
 }
 
+function truncateMeta(text: string, max = 155): string {
+  const normalized = text.trim().replace(/\s+/g, ' ')
+  if (normalized.length <= max) return normalized
+  return `${normalized.slice(0, max - 1).trimEnd()}…`
+}
+
+/**
+ * Fallback root-only (charset/viewport restent dans __root).
+ * Pas de canonical ni og:url ici — sinon chaque page hérite d'un 2e canonical vers `/`
+ * (les `links` ne sont pas dédupliqués par `rel` comme les meta).
+ */
+export function rootFallbackMeta() {
+  return [
+    { title: pageTitle() },
+    { name: 'description', content: SITE_DESCRIPTION },
+    { name: 'application-name', content: SITE_NAME },
+  ]
+}
+
 /** Meta + links SEO / Open Graph / Twitter pour `route.head()`. */
 export function seoHead(input: SeoInput = {}) {
   const title = input.title ? pageTitle(input.title) : pageTitle()
-  const description = input.description ?? SITE_DESCRIPTION
+  const description = truncateMeta(input.description ?? SITE_DESCRIPTION)
   const url = absoluteUrl(input.path ?? '/')
   const image = input.image ?? absoluteUrl('/og.png')
   const type = input.type ?? 'website'

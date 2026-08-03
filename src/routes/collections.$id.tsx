@@ -20,7 +20,7 @@ export const Route = createFileRoute('/collections/$id')({
     const collection = loaderData?.collection
     if (!collection) return seoHead({ title: 'Collection', path: '/collections' })
     return seoHead({
-      title: collection.label.fr,
+      title: `${collection.label.fr} · Collection`,
       path: `/collections/${collection.id}`,
       description: collection.brief.fr,
       type: 'article',

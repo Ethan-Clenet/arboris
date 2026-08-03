@@ -33,7 +33,6 @@ export default function AgentLogo({ agent, size = 16, className = '', title }: A
       className={`shrink-0 ${className}`}
       style={{ color: agentLogoColor(agent) }}
     >
-      <title>{label}</title>
       <path fill="currentColor" d={AGENT_LOGO_PATH[agent]} />
     </svg>
   )

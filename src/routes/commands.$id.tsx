@@ -25,7 +25,7 @@ export const Route = createFileRoute('/commands/$id')({
     const command = loaderData?.command
     if (!command) return seoHead({ title: 'Commande', path: '/commands' })
     return seoHead({
-      title: `/${command.id}`,
+      title: `/${command.id} · Commande`,
       path: `/commands/${command.id}`,
       description: command.description.fr,
       type: 'article',
