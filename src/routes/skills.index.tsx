@@ -22,7 +22,8 @@ export const Route = createFileRoute('/skills/')({
     seoHead({
       title: 'Skills',
       path: '/skills',
-      description: 'Parcours le catalogue de skills IA : filtre par catégorie, techno, agent et sécurité.',
+      description:
+        'Index complet des skills Arboris : filtre par catégorie, techno, agent compatible et score de sûreté.',
     }),
   component: SkillsPage,
 })

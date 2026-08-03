@@ -41,6 +41,10 @@ if (!migrateUrl) {
       throw deployError
     }
   }
+
+  // Upsert catalogue (nouveaux skills + tags corrigés) sans wipe.
+  console.log('[vercel-build] Sync catalogue…')
+  execSync('npx tsx scripts/sync-catalog.ts', { env, stdio: 'inherit' })
 }
 
 execSync('npm run build', { stdio: 'inherit' })

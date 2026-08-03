@@ -12,7 +12,8 @@ export const Route = createFileRoute('/collections/')({
     seoHead({
       title: 'Collections',
       path: '/collections',
-      description: 'Packs de skills et commandes à installer d’un coup — starter, sécu, ops.',
+      description:
+        'Collections Arboris : packs de skills et commandes à installer d’un coup (starter, sécu, ops).',
     }),
   component: CollectionsPage,
 })

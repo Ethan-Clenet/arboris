@@ -14,7 +14,8 @@ export const Route = createFileRoute('/commands/')({
     seoHead({
       title: 'Commandes',
       path: '/commands',
-      description: 'Slash commands installables : commit, rebase, revue PR, audit deps…',
+      description:
+        'Slash commands Arboris installables dans ton agent : commit, rebase, revue PR, audit deps…',
     }),
   component: CommandsPage,
 })

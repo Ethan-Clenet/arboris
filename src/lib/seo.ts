@@ -15,6 +15,21 @@ function truncateMeta(text: string, max = 155): string {
   return `${normalized.slice(0, max - 1).trimEnd()}…`
 }
 
+/** Meta description unique par entité (évite les doublons SF quand le tag est partagé). */
+export function entityDescription(
+  summary: string,
+  kind: 'skill' | 'command' | 'collection',
+  id: string,
+): string {
+  const base = summary.trim().replace(/\s+/g, ' ')
+  const label =
+    kind === 'skill' ? `Skill ${id}` : kind === 'command' ? `Commande /${id}` : `Collection ${id}`
+  const suffix = `${label} sur Arboris.`
+  if (!base || base === '>' || base === '>-') return truncateMeta(suffix)
+  if (base.toLowerCase().includes(id.toLowerCase())) return truncateMeta(base)
+  return truncateMeta(`${base} — ${suffix}`)
+}
+
 /**
  * Fallback root-only (charset/viewport restent dans __root).
  * Pas de canonical ni og:url ici — sinon chaque page hérite d'un 2e canonical vers `/`
@@ -32,7 +47,8 @@ export function rootFallbackMeta() {
 export function seoHead(input: SeoInput = {}) {
   const title = input.title ? pageTitle(input.title) : pageTitle()
   const description = truncateMeta(input.description ?? SITE_DESCRIPTION)
-  const url = absoluteUrl(input.path ?? '/')
+  const path = (input.path ?? '/').split('?')[0].split('#')[0] || '/'
+  const url = absoluteUrl(path)
   const image = input.image ?? absoluteUrl('/og.png')
   const type = input.type ?? 'website'
 

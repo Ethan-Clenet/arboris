@@ -21,21 +21,41 @@ type ParsedSkill = {
   body: string
 }
 
+/** Extrait `description` YAML (ligne seule, quotes, ou bloc `>` / `|`). */
+function parseYamlDescription(frontmatter: string): string | undefined {
+  const multi = frontmatter.match(
+    /^description:\s*[>|][-+]?\s*\r?\n((?:[ \t]+.+\r?\n?)*)/m,
+  )
+  if (multi) {
+    const folded = multi[1]
+      .split(/\r?\n/)
+      .map((line) => line.replace(/^[ \t]+/, '').trimEnd())
+      .filter((line) => line.length > 0)
+      .join(' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+    return folded || undefined
+  }
+
+  let description = frontmatter.match(/^description:\s*(.+)$/m)?.[1]?.trim()
+  if (!description) return undefined
+  // Ignore les marqueurs de bloc orphelins (`>`, `>-`, …)
+  if (/^[>|][-+]?$/.test(description)) return undefined
+  if (
+    (description.startsWith('"') && description.endsWith('"')) ||
+    (description.startsWith("'") && description.endsWith("'"))
+  ) {
+    description = description.slice(1, -1)
+  }
+  return description.trim() || undefined
+}
+
 function parseFrontmatter(raw: string): ParsedSkill | null {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/)
   if (!match) return null
   const [, frontmatter, body] = match
   const name = frontmatter.match(/^name:\s*(.+)$/m)?.[1]?.trim()
-  let description = frontmatter.match(/^description:\s*(.+)$/m)?.[1]?.trim()
-  if (description) {
-    // Strip YAML single/double quotes wrapping the whole value
-    if (
-      (description.startsWith('"') && description.endsWith('"')) ||
-      (description.startsWith("'") && description.endsWith("'"))
-    ) {
-      description = description.slice(1, -1)
-    }
-  }
+  const description = parseYamlDescription(frontmatter)
   if (!name || !description) return null
   return { id: name, description, body: body.trim() }
 }

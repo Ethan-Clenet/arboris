@@ -5,7 +5,7 @@ import PageShell from '#/components/PageShell'
 import { hexToRgba } from '#/lib/catalog'
 import { useI18n } from '#/lib/i18n'
 import { getCatalog, getCollection } from '#/server/functions'
-import { seoHead } from '#/lib/seo'
+import { entityDescription, seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/collections/$id')({
   loader: async ({ params }) => {
@@ -22,7 +22,7 @@ export const Route = createFileRoute('/collections/$id')({
     return seoHead({
       title: `${collection.label.fr} · Collection`,
       path: `/collections/${collection.id}`,
-      description: collection.brief.fr,
+      description: entityDescription(collection.brief.fr, 'collection', collection.id),
       type: 'article',
     })
   },
@@ -74,7 +74,7 @@ function CollectionDetailPage() {
             {collection.commands.length > 0 ? (
               <section className="mb-6">
                 <h2 className="mb-2.5 text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
-                  {t.collections.commands}
+                  {t.collections.commandsHeading(collection.id)}
                 </h2>
                 <div className="overflow-hidden rounded-[12px] border border-[var(--border)] bg-[var(--surface)]">
                   {collection.commands.map((cmd) => (
@@ -100,7 +100,7 @@ function CollectionDetailPage() {
             {collection.skills.length > 0 ? (
               <section>
                 <h2 className="mb-2.5 text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
-                  {t.collections.skills}
+                  {t.collections.skillsHeading(collection.id)}
                 </h2>
                 <div className="overflow-hidden rounded-[12px] border border-[var(--border)] bg-[var(--surface)]">
                   {collection.skills.map((skill) => (

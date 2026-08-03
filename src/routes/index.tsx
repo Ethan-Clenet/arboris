@@ -22,7 +22,7 @@ export const Route = createFileRoute('/')({
     seoHead({
       path: '/',
       description:
-        "Catalogue de skills et slash commands prêts à l'emploi pour ton agent IA. Zéro config.",
+        'Arboris — index des skills et slash commands pour Cursor, Claude, Codex et Copilot. Zéro config.',
     }),
   component: HomePage,
 })

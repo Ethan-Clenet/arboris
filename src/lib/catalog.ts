@@ -234,7 +234,7 @@ export function buildSkillMarkdown(skill: SkillDetail, lang: Lang): string {
     '',
     tag,
     '',
-    lang === 'fr' ? '## Ce que fait ce skill' : '## What this skill does',
+    lang === 'fr' ? `## Ce que fait ${skill.id}` : `## What ${skill.id} does`,
     ...does.map((item) => `- ${item}`),
     '',
     lang === 'fr' ? '## Instructions' : '## Instructions',

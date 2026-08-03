@@ -11,7 +11,7 @@ import { AgentBadge } from '#/components/AgentLogo'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
 import CliCommandBar from '#/components/CliCommandBar'
 import SecurityBadge from '#/components/SecurityBadge'
-import { seoHead } from '#/lib/seo'
+import { seoHead, entityDescription } from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/$id')({
   loader: async ({ params }) => {
@@ -29,7 +29,7 @@ export const Route = createFileRoute('/skills/$id')({
     return seoHead({
       title: `${skill.id} · Skill IA`,
       path: `/skills/${skill.id}`,
-      description: skill.tag.fr,
+      description: entityDescription(skill.tag.fr, 'skill', skill.id),
       type: 'article',
     })
   },
@@ -183,7 +183,9 @@ function SkillDetailPage() {
       <div className="mt-8 grid items-start gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <div>
           <section className="mb-[34px]">
-            <h2 className="mb-4 font-display text-[19px] font-semibold">{t.skill.doesTitle}</h2>
+            <h2 className="mb-4 font-display text-[19px] font-semibold">
+              {t.skill.doesTitle(skill.id)}
+            </h2>
             <div className="flex flex-col gap-[11px]">
               {skill.does[lang].map((text) => (
                 <div key={text} className="flex items-start gap-[11px]">
@@ -195,7 +197,9 @@ function SkillDetailPage() {
           </section>
 
           <section className="mb-[34px]">
-            <h2 className="mb-4 font-display text-[19px] font-semibold">{t.skill.howTitle}</h2>
+            <h2 className="mb-4 font-display text-[19px] font-semibold">
+              {t.skill.howTitle(skill.id)}
+            </h2>
             <div className="flex flex-col gap-3.5">
               {t.skill.how.map((h, i) => (
                 <div key={h.t} className="flex items-start gap-3.5">
@@ -212,7 +216,9 @@ function SkillDetailPage() {
           </section>
 
           <section>
-            <h2 className="mb-2 font-display text-[19px] font-semibold">{t.skill.triggersTitle}</h2>
+            <h2 className="mb-2 font-display text-[19px] font-semibold">
+              {t.skill.triggersTitle(skill.id)}
+            </h2>
             <p className="mb-3.5 text-[13.5px] text-[var(--text-2)]">{t.skill.triggersHint}</p>
             <div className="flex flex-col gap-2.5">
               {skill.triggers[lang].map((text) => (
@@ -372,7 +378,9 @@ function SkillDetailPage() {
 
       {/* Skills liés */}
       <section className="mt-12">
-        <h2 className="mb-4 font-display text-[18px] font-semibold">{t.skill.related}</h2>
+        <h2 className="mb-4 font-display text-[18px] font-semibold">
+          {t.skill.related(skill.id)}
+        </h2>
         <div className="grid gap-3.5 sm:grid-cols-2 md:grid-cols-3">
           {related.map((r) => {
             const rc = catById.get(r.categoryId)
