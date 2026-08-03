@@ -65,7 +65,10 @@ export default function CommandInstallButtons({
               title={path}
               aria-label={t.install(agent)}
               onClick={() => handleInstall(agent)}
-              className={`inline-flex cursor-pointer items-center justify-center rounded-lg border p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${
+              style={{
+                cursor: loading ? 'wait' : busy !== null ? 'not-allowed' : 'pointer',
+              }}
+              className={`inline-flex items-center justify-center rounded-lg border p-2 transition-colors disabled:opacity-60 ${
                 active
                   ? 'border-[var(--accent-border)] bg-[var(--accent-soft)]'
                   : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]'

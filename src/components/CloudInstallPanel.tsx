@@ -121,9 +121,10 @@ export default function CloudInstallPanel({
               title={t.downloadZip(agent)}
               aria-label={t.downloadZip(agent)}
               onClick={() => handleZip(agent)}
-              className={`inline-flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] px-2.5 py-2 text-[12.5px] font-medium text-[var(--text-1)] transition-colors hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)] disabled:opacity-60 ${
-                loading ? 'cursor-wait' : busy ? 'cursor-not-allowed' : 'cursor-pointer'
-              }`}
+              style={{
+                cursor: loading ? 'wait' : busy !== null ? 'not-allowed' : 'pointer',
+              }}
+              className="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] px-2.5 py-2 text-[12.5px] font-medium text-[var(--text-1)] transition-colors hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)] disabled:opacity-60"
             >
               {loading ? (
                 <span className="text-[var(--text-3)]">…</span>
