@@ -14,9 +14,16 @@ import {
   type SkillSummary,
 } from '#/lib/catalog'
 import type { SecurityRecommendation } from '#/lib/skillspector'
+import { seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/')({
   loader: () => getCatalog(),
+  head: () =>
+    seoHead({
+      title: 'Skills',
+      path: '/skills',
+      description: 'Parcours le catalogue de skills IA : filtre par catégorie, techno, agent et sécurité.',
+    }),
   component: SkillsPage,
 })
 

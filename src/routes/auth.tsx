@@ -8,6 +8,7 @@ import { AgentLogoRow } from '#/components/AgentLogo'
 import { COMPAT_ORDER } from '#/lib/catalog'
 import { useI18n } from '#/lib/i18n'
 import { login, register } from '#/server/auth.functions'
+import { seoHead } from '#/lib/seo'
 
 type AuthMode = 'login' | 'signup'
 
@@ -21,9 +22,13 @@ export const Route = createFileRoute('/auth')({
       throw redirect({ href: search.redirect })
     }
   },
-  head: () => ({
-    meta: [{ title: 'Connexion — Arboris' }],
-  }),
+  head: () =>
+    seoHead({
+      title: 'Connexion',
+      path: '/auth',
+      description: 'Connexion et inscription Arboris.',
+      noIndex: true,
+    }),
   component: AuthPage,
 })
 

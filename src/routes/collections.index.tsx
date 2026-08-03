@@ -4,9 +4,16 @@ import PageShell from '#/components/PageShell'
 import { hexToRgba, type CollectionSummary } from '#/lib/catalog'
 import { useI18n } from '#/lib/i18n'
 import { getCatalog } from '#/server/functions'
+import { seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/collections/')({
   loader: () => getCatalog(),
+  head: () =>
+    seoHead({
+      title: 'Collections',
+      path: '/collections',
+      description: 'Packs de skills et commandes à installer d’un coup — starter, sécu, ops.',
+    }),
   component: CollectionsPage,
 })
 

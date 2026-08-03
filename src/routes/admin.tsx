@@ -39,6 +39,7 @@ import {
 } from '#/server/admin.functions'
 import { getCatalog } from '#/server/functions'
 import { Route as RootRoute } from '#/routes/__root'
+import { seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/admin')({
   beforeLoad: ({ context }) => {
@@ -48,6 +49,12 @@ export const Route = createFileRoute('/admin')({
     }
   },
   loader: () => getCatalog(),
+  head: () =>
+    seoHead({
+      title: 'Admin',
+      path: '/admin',
+      noIndex: true,
+    }),
   component: AdminPage,
 })
 

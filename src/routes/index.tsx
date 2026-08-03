@@ -9,6 +9,7 @@ import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
 import { AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
 import SecurityBadge from '#/components/SecurityBadge'
+import { seoHead } from '#/lib/seo'
 import {
   hexToRgba,
   type Category,
@@ -17,6 +18,12 @@ import {
 
 export const Route = createFileRoute('/')({
   loader: () => getCatalog(),
+  head: () =>
+    seoHead({
+      path: '/',
+      description:
+        "Catalogue de skills et slash commands prêts à l'emploi pour ton agent IA. Zéro config.",
+    }),
   component: HomePage,
 })
 

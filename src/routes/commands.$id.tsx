@@ -10,6 +10,7 @@ import { AgentBadge } from '#/components/AgentLogo'
 import CommandInstallButtons from '#/components/CommandInstallButtons'
 import CloudInstallPanel from '#/components/CloudInstallPanel'
 import { commandInstallContent } from '#/lib/command-types'
+import { seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/commands/$id')({
   loader: async ({ params }) => {
@@ -19,6 +20,16 @@ export const Route = createFileRoute('/commands/$id')({
     ])
     if (!command) throw notFound()
     return { command, catalog }
+  },
+  head: ({ loaderData }) => {
+    const command = loaderData?.command
+    if (!command) return seoHead({ title: 'Commande', path: '/commands' })
+    return seoHead({
+      title: `/${command.id}`,
+      path: `/commands/${command.id}`,
+      description: command.description.fr,
+      type: 'article',
+    })
   },
   component: CommandDetailPage,
 })

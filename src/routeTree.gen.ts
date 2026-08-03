@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as GettingStartedRouteImport } from './routes/getting-started'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -22,6 +24,16 @@ import { Route as SkillsIdRouteImport } from './routes/skills.$id'
 import { Route as CommandsIdRouteImport } from './routes/commands.$id'
 import { Route as CollectionsIdRouteImport } from './routes/collections.$id'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GettingStartedRoute = GettingStartedRouteImport.update({
   id: '/getting-started',
   path: '/getting-started',
@@ -90,6 +102,8 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
   '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
@@ -104,6 +118,8 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
   '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
@@ -119,6 +135,8 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
   '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
@@ -135,6 +153,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/collections/$id'
     | '/commands/$id'
     | '/skills/$id'
@@ -149,6 +169,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/collections/$id'
     | '/commands/$id'
     | '/skills/$id'
@@ -163,6 +185,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/getting-started'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/collections/$id'
     | '/commands/$id'
     | '/skills/$id'
@@ -178,6 +202,8 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   GettingStartedRoute: typeof GettingStartedRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CollectionsIdRoute: typeof CollectionsIdRoute
   CommandsIdRoute: typeof CommandsIdRoute
   SkillsIdRoute: typeof SkillsIdRoute
@@ -188,6 +214,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/getting-started': {
       id: '/getting-started'
       path: '/getting-started'
@@ -282,6 +322,8 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   GettingStartedRoute: GettingStartedRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   CollectionsIdRoute: CollectionsIdRoute,
   CommandsIdRoute: CommandsIdRoute,
   SkillsIdRoute: SkillsIdRoute,

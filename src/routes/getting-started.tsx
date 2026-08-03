@@ -7,6 +7,7 @@ import { useI18n } from '#/lib/i18n'
 import CliCommandBar from '#/components/CliCommandBar'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
+import { seoHead } from '#/lib/seo'
 import {
   CATEGORY_GROUPS,
   categoryIdsInGroup,
@@ -19,6 +20,12 @@ import {
 
 export const Route = createFileRoute('/getting-started')({
   loader: () => getCatalog(),
+  head: () =>
+    seoHead({
+      title: 'Premier pas',
+      path: '/getting-started',
+      description: 'Choisis un domaine, une techno, et récupère les skills recommandés pour ton agent.',
+    }),
   component: GettingStartedPage,
 })
 

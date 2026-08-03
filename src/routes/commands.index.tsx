@@ -6,9 +6,16 @@ import { AgentCompatList } from '#/components/AgentLogo'
 import { useI18n } from '#/lib/i18n'
 import { getCatalog } from '#/server/functions'
 import type { CommandSummary } from '#/lib/command-types'
+import { seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/commands/')({
   loader: () => getCatalog(),
+  head: () =>
+    seoHead({
+      title: 'Commandes',
+      path: '/commands',
+      description: 'Slash commands installables : commit, rebase, revue PR, audit deps…',
+    }),
   component: CommandsPage,
 })
 

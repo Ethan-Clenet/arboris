@@ -11,6 +11,7 @@ import { AgentBadge } from '#/components/AgentLogo'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
 import CliCommandBar from '#/components/CliCommandBar'
 import SecurityBadge from '#/components/SecurityBadge'
+import { seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/$id')({
   loader: async ({ params }) => {
@@ -21,6 +22,16 @@ export const Route = createFileRoute('/skills/$id')({
     ])
     if (!skill) throw notFound()
     return { skill, catalog, fileContent }
+  },
+  head: ({ loaderData }) => {
+    const skill = loaderData?.skill
+    if (!skill) return seoHead({ title: 'Skill', path: '/skills' })
+    return seoHead({
+      title: skill.id,
+      path: `/skills/${skill.id}`,
+      description: skill.tag.fr,
+      type: 'article',
+    })
   },
   component: SkillDetailPage,
 })

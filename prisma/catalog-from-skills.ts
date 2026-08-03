@@ -26,7 +26,16 @@ function parseFrontmatter(raw: string): ParsedSkill | null {
   if (!match) return null
   const [, frontmatter, body] = match
   const name = frontmatter.match(/^name:\s*(.+)$/m)?.[1]?.trim()
-  const description = frontmatter.match(/^description:\s*(.+)$/m)?.[1]?.trim()
+  let description = frontmatter.match(/^description:\s*(.+)$/m)?.[1]?.trim()
+  if (description) {
+    // Strip YAML single/double quotes wrapping the whole value
+    if (
+      (description.startsWith('"') && description.endsWith('"')) ||
+      (description.startsWith("'") && description.endsWith("'"))
+    ) {
+      description = description.slice(1, -1)
+    }
+  }
   if (!name || !description) return null
   return { id: name, description, body: body.trim() }
 }
@@ -190,6 +199,8 @@ function inferStacks(id: string, description: string, body: string, stacks: Stac
     'turso-db': ['turso', 'postgresql'],
     query: ['duckdb'],
     drizzle: ['drizzle', 'ts', 'postgresql', 'mysql', 'prisma'],
+    // Contenu marketing/SEO — évite le faux positif « JavaScript-rendered »
+    'ai-seo': [],
   }
 
   if (overrideStacks[slug]) return overrideStacks[slug]
