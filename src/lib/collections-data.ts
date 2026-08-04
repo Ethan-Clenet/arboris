@@ -16,6 +16,21 @@ export type CollectionSeed = {
 
 export const COLLECTIONS: CollectionSeed[] = [
   {
+    id: 'sonar',
+    icon: 'broadcast',
+    color: '#0D9488',
+    labelFr: 'Sonar',
+    labelEn: 'Sonar',
+    briefFr:
+      'Pack Skill Sonar : commande /sonar + skills de garde (preflight/runtime, safety-guard, gateguard, security-scan).',
+    briefEn:
+      'Skill Sonar pack: /sonar command plus guard skills (preflight/runtime, safety-guard, gateguard, security-scan).',
+    kind: 'pack',
+    skillIds: ['skill-sonar', 'safety-guard', 'gateguard', 'security-scan'],
+    commandIds: ['sonar'],
+    sort: 0,
+  },
+  {
     id: 'command-starter',
     icon: 'terminal-window',
     color: '#43A047',
@@ -37,7 +52,7 @@ export const COLLECTIONS: CollectionSeed[] = [
       'changelog',
       'pr-quality',
     ],
-    sort: 0,
+    sort: 1,
   },
   {
     id: 'ship-safely',
@@ -52,7 +67,7 @@ export const COLLECTIONS: CollectionSeed[] = [
     kind: 'pack',
     skillIds: [],
     commandIds: ['audit-deps', 'security-diff', 'test-coverage', 'owners-review', 'pr-quality'],
-    sort: 1,
+    sort: 2,
   },
   {
     id: 'ops-day-two',
@@ -67,7 +82,7 @@ export const COLLECTIONS: CollectionSeed[] = [
     kind: 'featured',
     skillIds: [],
     commandIds: ['sync-env', 'docker-rebuild', 'db-migrate-smoke', 'hotfix', 'adr'],
-    sort: 2,
+    sort: 3,
   },
 ]
 

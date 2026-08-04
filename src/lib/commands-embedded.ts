@@ -22,6 +22,7 @@ function toDetail(id: string, raw: string): CommandDetail | null {
     description: { fr: parsed.description, en: parsed.description },
     preview: preview || parsed.description,
     compat: ['Claude', 'Cursor', 'Codex', 'Copilot'],
+    skillIds: parsed.skillIds.slice(),
     body: parsed.body,
     raw: parsed.raw,
   }

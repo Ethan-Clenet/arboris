@@ -61,6 +61,8 @@ Exemples:
   npx arboris-cli node
   npx arboris-cli install fastapi-patterns
   npx arboris-cli command review-pr --agent cursor
+  npx arboris-cli command sonar --agent cursor
+  npx arboris-cli collection sonar --agent cursor
   npx arboris-cli collection command-starter --agent cursor
   npx arboris-cli typescript --force
 
@@ -170,17 +172,26 @@ async function runInstallCommand(commandId: string, options: CliOptions) {
     process.exit(1)
   }
 
+  const companions = cmd.skillIds ?? []
   console.log(
     `${options.dryRun ? '[dry-run] ' : ''}Installation de /${cmd.id} → ${options.agent} (${options.cwd})`,
   )
+  if (companions.length > 0) {
+    console.log(`  + ${companions.length} skill(s) compagnon(s): ${companions.join(', ')}`)
+  }
 
-  if (options.dryRun) return
+  if (options.dryRun) {
+    console.log(`  • /${cmd.id}`)
+    for (const id of companions) console.log(`  • skill ${id}`)
+    return
+  }
 
   const result = await installCommandToWorkspace({
     commandId: cmd.id,
     agent: options.agent,
     workspaceRoot: options.cwd,
     commandsDir: COMMANDS_DIR,
+    command: cmd,
     force: options.force,
   })
 
@@ -191,11 +202,43 @@ async function runInstallCommand(commandId: string, options: CliOptions) {
 
   if (result.skipped) {
     console.log(`⊘ Déjà présent: ${result.path}`)
-    return
+  } else {
+    console.log(`✓ ${result.path}`)
   }
 
-  console.log(`✓ ${result.path}`)
+  let skillOk = 0
+  let skillSkipped = 0
+  let skillFailed = 0
+  for (const skillId of companions) {
+    await assertSecurityOk(skillId, options)
+    const skillResult = await installSkillToWorkspace({
+      skillId,
+      agent: options.agent,
+      workspaceRoot: options.cwd,
+      skillsDir: SKILLS_DIR,
+      force: options.force,
+    })
+    if (!skillResult.ok) {
+      console.log(`  ✗ ${skillId} (${skillResult.error})`)
+      skillFailed++
+      continue
+    }
+    if (skillResult.skipped) {
+      console.log(`  ⊘ ${skillId}`)
+      skillSkipped++
+    } else {
+      console.log(`  ✓ ${skillId} → ${skillResult.path}`)
+      skillOk++
+    }
+  }
+
+  if (companions.length > 0) {
+    console.log(
+      `\nSkills: ${skillOk} installés, ${skillSkipped} ignorés, ${skillFailed} échecs.`,
+    )
+  }
   console.log(`→ Dans le chat agent, tape /${cmd.id}`)
+  if (skillFailed > 0) process.exit(1)
 }
 
 async function runListCollections() {

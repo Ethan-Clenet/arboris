@@ -3,6 +3,32 @@ export type ParsedCommandMarkdown = {
   description: string
   body: string
   raw: string
+  /** Skills compagnons installés avec la commande. */
+  skillIds: string[]
+}
+
+function parseSkillsList(frontmatter: string): string[] {
+  const lines = frontmatter.split(/\r?\n/)
+  const skills: string[] = []
+  let inSkills = false
+
+  for (const line of lines) {
+    const trimmed = line.trim()
+    if (!inSkills) {
+      if (trimmed === 'skills:') {
+        inSkills = true
+      }
+      continue
+    }
+    if (!trimmed) continue
+    if (/^[A-Za-z0-9_-]+:/.test(trimmed)) break
+    const match = trimmed.match(/^-\s+(.+)$/)
+    if (!match) break
+    const id = match[1].trim().replace(/^['"]|['"]$/g, '')
+    if (id) skills.push(id)
+  }
+
+  return skills
 }
 
 export function parseCommandMarkdown(raw: string, fallbackId: string): ParsedCommandMarkdown | null {
@@ -15,6 +41,7 @@ export function parseCommandMarkdown(raw: string, fallbackId: string): ParsedCom
       description: body.split(/\r?\n/).find((l) => l.trim())?.trim() ?? fallbackId,
       body,
       raw,
+      skillIds: [],
     }
   }
 
@@ -30,5 +57,6 @@ export function parseCommandMarkdown(raw: string, fallbackId: string): ParsedCom
     description,
     body: body.trim(),
     raw,
+    skillIds: parseSkillsList(frontmatter),
   }
 }

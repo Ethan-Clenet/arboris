@@ -86,7 +86,7 @@ export default function CloudInstallPanel({
         mode === 'collection'
           ? await zipCollectionFn({ data: { collectionId: targetId, agent, lang } })
           : mode === 'command'
-            ? await zipCommandFn({ data: { commandId: targetId, agent } })
+            ? await zipCommandFn({ data: { commandId: targetId, agent, lang } })
             : await zipSkillFn({ data: { skillId: targetId, agent, lang } })
 
       if (!result.ok) {

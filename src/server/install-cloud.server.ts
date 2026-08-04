@@ -93,21 +93,26 @@ export async function buildCollectionZip(input: {
 export async function buildCommandZip(input: {
   commandId: string
   agent: string
+  lang?: 'fr' | 'en'
 }): Promise<{ filename: string; base64: string; fileCount: number } | null> {
   if (!isAgentName(input.agent)) return null
   const cmd = await resolveCommand(input.commandId)
   if (!cmd) return null
+  const lang = input.lang ?? 'fr'
   const entries: ZipEntry[] = [
     {
       path: agentCommandPath(input.agent, cmd.id),
       content: commandInstallContent(cmd),
     },
   ]
+  for (const skillId of cmd.skillIds ?? []) {
+    entries.push(...(await skillZipEntries(input.agent, skillId, lang)))
+  }
   const zip = buildStoreZip(entries)
   return {
     filename: `arboris-command-${cmd.id}-${input.agent.toLowerCase()}.zip`,
     base64: zipToBase64(zip),
-    fileCount: 1,
+    fileCount: entries.length,
   }
 }
 

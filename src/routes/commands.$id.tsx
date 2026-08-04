@@ -80,6 +80,27 @@ function CommandDetailPage() {
             <p className="mb-5 max-w-[640px] text-[14px] leading-relaxed text-[var(--text-2)]">
               {t.commands.aboutBody(command.id)}
             </p>
+            {command.skillIds.length > 0 ? (
+              <div className="mb-5 max-w-[640px]">
+                <h2 className="mb-2 text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
+                  {t.commands.companionSkills}
+                </h2>
+                <ul className="flex flex-wrap gap-2">
+                  {command.skillIds.map((id) => (
+                    <li key={id}>
+                      <Link
+                        to="/skills/$id"
+                        params={{ id }}
+                        className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 font-mono text-[12.5px] text-[var(--text-1)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]"
+                      >
+                        <Icon name="sparkle" size={12} className="text-[var(--accent)]" />
+                        {id}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
             <div className="flex flex-wrap items-center gap-3.5">
               <Button variant="primary" size="lg" copied={copied} onClick={handleCopy}>
                 <Icon name={copied ? 'check' : 'copy'} size={16} />

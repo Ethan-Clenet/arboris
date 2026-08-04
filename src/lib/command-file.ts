@@ -11,6 +11,7 @@ function toDetail(parsed: {
   description: string
   body: string
   raw: string
+  skillIds: string[]
 }): CommandDetail {
   const preview = parsed.body
     .split(/\r?\n/)
@@ -25,6 +26,7 @@ function toDetail(parsed: {
     description: { fr: parsed.description, en: parsed.description },
     preview: preview || parsed.description,
     compat: ['Claude', 'Cursor', 'Codex', 'Copilot'],
+    skillIds: parsed.skillIds.slice(),
     body: parsed.body,
     raw: parsed.raw,
   }

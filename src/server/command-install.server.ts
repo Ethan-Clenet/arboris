@@ -1,6 +1,11 @@
 import type { Lang } from '#/lib/catalog'
 import { installCommandToWorkspace } from '#/lib/command-install-core'
-import { defaultCommandsDir, resolvePackageRoot } from '#/lib/package-root'
+import { installSkillToWorkspace } from '#/lib/skill-install-core'
+import {
+  defaultCommandsDir,
+  defaultSkillsDir,
+  resolvePackageRoot,
+} from '#/lib/package-root'
 import { isAgentName } from '#/lib/agents'
 import { resolveCommand } from '#/server/commands.server'
 import { resolve } from 'node:path'
@@ -11,22 +16,25 @@ function workspaceRoot(): string {
   return resolve(root)
 }
 
-const COMMANDS_DIR = defaultCommandsDir(resolvePackageRoot(import.meta.url))
+const PACKAGE_ROOT = resolvePackageRoot(import.meta.url)
+const COMMANDS_DIR = defaultCommandsDir(PACKAGE_ROOT)
+const SKILLS_DIR = defaultSkillsDir(PACKAGE_ROOT)
 
 export async function installCommandForAgent(input: {
   commandId: string
   agent: string
   lang: Lang
-}): Promise<{ path: string }> {
+}): Promise<{ path: string; skillPaths: string[] }> {
   if (!isAgentName(input.agent)) throw new Error('unknown_agent')
 
   const command = await resolveCommand(input.commandId)
   if (!command) throw new Error('command_not_found')
 
+  const root = workspaceRoot()
   const result = await installCommandToWorkspace({
     commandId: input.commandId,
     agent: input.agent,
-    workspaceRoot: workspaceRoot(),
+    workspaceRoot: root,
     commandsDir: COMMANDS_DIR,
     command,
     force: true,
@@ -38,5 +46,17 @@ export async function installCommandForAgent(input: {
     throw new Error('unknown_agent')
   }
 
-  return { path: result.path }
+  const skillPaths: string[] = []
+  for (const skillId of command.skillIds ?? []) {
+    const skillResult = await installSkillToWorkspace({
+      skillId,
+      agent: input.agent,
+      workspaceRoot: root,
+      skillsDir: SKILLS_DIR,
+      force: true,
+    })
+    if (skillResult.ok) skillPaths.push(skillResult.path)
+  }
+
+  return { path: result.path, skillPaths }
 }

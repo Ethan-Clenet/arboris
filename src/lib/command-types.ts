@@ -6,6 +6,8 @@ export type CommandSummary = {
   /** Premières lignes du corps (aperçu). */
   preview: string
   compat: string[]
+  /** Skills installés automatiquement avec la commande. */
+  skillIds: string[]
 }
 
 export type CommandDetail = CommandSummary & {
@@ -26,5 +28,6 @@ export function toCommandSummary(cmd: CommandDetail): CommandSummary {
     description: cmd.description,
     preview: cmd.preview,
     compat: cmd.compat,
+    skillIds: cmd.skillIds.slice(),
   }
 }

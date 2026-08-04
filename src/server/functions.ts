@@ -116,11 +116,15 @@ export const downloadCollectionZip = createServerFn({ method: 'POST' })
   })
 
 export const downloadCommandZip = createServerFn({ method: 'POST' })
-  .validator((data: { commandId: string; agent: string }) => data)
+  .validator((data: { commandId: string; agent: string; lang?: 'fr' | 'en' }) => data)
   .handler(async ({ data }): Promise<DownloadZipResult> => {
     try {
       const { buildCommandZip } = await import('./install-cloud.server')
-      const zip = await buildCommandZip(data)
+      const zip = await buildCommandZip({
+        commandId: data.commandId,
+        agent: data.agent,
+        lang: data.lang ?? 'fr',
+      })
       if (!zip) return { ok: false, error: 'not_found' }
       return { ok: true, ...zip }
     } catch {
