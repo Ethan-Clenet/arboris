@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-09T07:37:07.349Z",
+  "generatedAt": "2026-08-04T07:25:54.004Z",
   "stacks": [
     {
       "id": "node",
@@ -96,6 +96,7 @@
     "agentic-os",
     "ai-first-engineering",
     "ai-regression-testing",
+    "ai-seo",
     "android-clean-architecture",
     "angular-developer",
     "api-connector-builder",
@@ -338,6 +339,7 @@
     "shadcn",
     "skill-comply",
     "skill-scout",
+    "skill-sonar",
     "skill-stocktake",
     "social-graph-ranker",
     "social-publisher",

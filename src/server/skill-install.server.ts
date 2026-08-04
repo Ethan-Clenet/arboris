@@ -1,9 +1,10 @@
 import type { Lang } from '#/lib/catalog'
+import { agentSkillPath, isAgentName } from '#/lib/agents'
 import { installSkillToWorkspace } from '#/lib/skill-install-core'
 import { needsInstallConfirm } from '#/lib/skillspector'
 import { defaultSkillsDir, resolvePackageRoot } from '#/lib/package-root'
-import { isAgentName } from '#/lib/agents'
-import { resolve } from 'node:path'
+import { mkdir, writeFile } from 'node:fs/promises'
+import { dirname, resolve } from 'node:path'
 import { prisma } from './db'
 
 function workspaceRoot(): string {
@@ -24,7 +25,7 @@ export async function installSkillForAgent(input: {
 
   const skill = await prisma.skill.findUnique({
     where: { id: input.skillId },
-    select: { score: true },
+    select: { score: true, bodyMd: true },
   })
   if (!skill) throw new Error('skill_not_found')
 
@@ -32,19 +33,30 @@ export async function installSkillForAgent(input: {
     throw new Error('security_blocked')
   }
 
+  const root = workspaceRoot()
   const result = await installSkillToWorkspace({
     skillId: input.skillId,
     agent: input.agent,
-    workspaceRoot: workspaceRoot(),
+    workspaceRoot: root,
     skillsDir: SKILLS_DIR,
     force: true,
   })
 
-  if (!result.ok) {
-    if (result.error === 'skill_not_found') throw new Error('skill_not_found')
-    if (result.error === 'invalid_path') throw new Error('invalid_path')
-    throw new Error('unknown_agent')
+  if (result.ok) {
+    return { path: result.path }
   }
 
-  return { path: result.path }
+  // Fallback serverless : pas de package disque → écrire bodyMd (avec frontmatter).
+  if (result.error === 'skill_not_found' && skill.bodyMd?.trim()) {
+    const relativePath = agentSkillPath(input.agent, input.skillId)
+    const absolutePath = resolve(root, relativePath)
+    await mkdir(dirname(absolutePath), { recursive: true })
+    const content = skill.bodyMd.trim()
+    await writeFile(absolutePath, content.endsWith('\n') ? content : `${content}\n`, 'utf-8')
+    return { path: relativePath }
+  }
+
+  if (result.error === 'skill_not_found') throw new Error('skill_not_found')
+  if (result.error === 'invalid_path') throw new Error('invalid_path')
+  throw new Error('unknown_agent')
 }
