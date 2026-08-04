@@ -92,6 +92,7 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
   if (slug === 'shadcn') return 'frontend'
   if (slug === 'query') return 'data'
   if (slug === 'convex-setup-auth' || slug === 'firebase-auth-basics') return 'security'
+  if (slug === 'skill-sonar') return 'security'
   if (
     slug === 'supabase' ||
     slug === 'supabase-postgres-best-practices' ||

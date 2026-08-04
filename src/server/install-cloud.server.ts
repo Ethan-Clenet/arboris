@@ -1,17 +1,44 @@
 import {
   agentCommandPath,
+  agentSkillDir,
   agentSkillPath,
   isAgentName,
   type AgentName,
 } from '#/lib/agents'
 import { commandInstallContent } from '#/lib/command-types'
+import { defaultSkillsDir, resolvePackageRoot } from '#/lib/package-root'
+import {
+  listSkillPackageFiles,
+  skillPackageHasCompanions,
+} from '#/lib/skill-package'
 import { buildStoreZip, zipToBase64, type ZipEntry } from '#/lib/zip-store'
 import { loadCollection, loadSkill } from '#/server/catalog.server'
 import { resolveCommand } from '#/server/commands.server'
 import { loadSkillCopyContent } from '#/server/skill-content.server'
 
+const SKILLS_DIR = defaultSkillsDir(resolvePackageRoot(import.meta.url))
+
 export function isWorkspaceInstallConfigured(): boolean {
   return Boolean(process.env.ARBORIS_WORKSPACE_ROOT?.trim())
+}
+
+async function skillZipEntries(
+  agent: AgentName,
+  skillId: string,
+  lang: 'fr' | 'en',
+): Promise<ZipEntry[]> {
+  const packageFiles = await listSkillPackageFiles(SKILLS_DIR, skillId)
+  if (packageFiles && skillPackageHasCompanions(packageFiles)) {
+    const dir = agentSkillDir(agent, skillId)
+    return packageFiles.map((file) => ({
+      path: `${dir}/${file.relativePath}`,
+      content: file.content,
+    }))
+  }
+
+  const content = await loadSkillCopyContent(skillId, lang)
+  if (!content) return []
+  return [{ path: agentSkillPath(agent, skillId), content }]
 }
 
 async function zipEntriesForAgent(input: {
@@ -32,12 +59,7 @@ async function zipEntriesForAgent(input: {
   }
 
   for (const skillId of input.skillIds) {
-    const content = await loadSkillCopyContent(skillId, input.lang)
-    if (!content) continue
-    entries.push({
-      path: agentSkillPath(input.agent, skillId),
-      content,
-    })
+    entries.push(...(await skillZipEntries(input.agent, skillId, input.lang)))
   }
 
   return entries
@@ -97,18 +119,12 @@ export async function buildSkillZip(input: {
   if (!isAgentName(input.agent)) return null
   const skill = await loadSkill(input.skillId)
   if (!skill) return null
-  const content = await loadSkillCopyContent(input.skillId, input.lang)
-  if (!content) return null
-  const entries: ZipEntry[] = [
-    {
-      path: agentSkillPath(input.agent, skill.id),
-      content,
-    },
-  ]
+  const entries = await skillZipEntries(input.agent, skill.id, input.lang)
+  if (entries.length === 0) return null
   const zip = buildStoreZip(entries)
   return {
     filename: `arboris-skill-${skill.id}-${input.agent.toLowerCase()}.zip`,
     base64: zipToBase64(zip),
-    fileCount: 1,
+    fileCount: entries.length,
   }
 }

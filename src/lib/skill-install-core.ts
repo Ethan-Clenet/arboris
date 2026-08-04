@@ -1,8 +1,12 @@
 import { access, mkdir, writeFile } from 'node:fs/promises'
 import { constants } from 'node:fs'
-import { dirname, resolve } from 'node:path'
-import { agentSkillPath, isAgentName, type AgentName } from '#/lib/agents'
+import { dirname, join, resolve } from 'node:path'
+import { agentSkillDir, agentSkillPath, isAgentName, type AgentName } from '#/lib/agents'
 import { loadSkillFileContent } from '#/lib/skill-file'
+import {
+  listSkillPackageFiles,
+  skillPackageHasCompanions,
+} from '#/lib/skill-package'
 
 function assertInsideWorkspace(root: string, target: string) {
   const normalizedRoot = resolve(root)
@@ -33,8 +37,8 @@ export type InstallSkillOptions = {
 }
 
 export type InstallSkillResult =
-  | { ok: true; path: string; skipped: false }
-  | { ok: true; path: string; skipped: true }
+  | { ok: true; path: string; skipped: false; files?: string[] }
+  | { ok: true; path: string; skipped: true; files?: string[] }
   | { ok: false; error: 'skill_not_found' | 'unknown_agent' | 'invalid_path' }
 
 export async function installSkillToWorkspace(
@@ -44,29 +48,60 @@ export async function installSkillToWorkspace(
     return { ok: false, error: 'unknown_agent' }
   }
 
+  const root = resolve(input.workspaceRoot)
+  const skillMdRelative = agentSkillPath(input.agent, input.skillId)
+  const skillMdAbsolute = resolve(root, skillMdRelative)
+  const skillDirRelative = agentSkillDir(input.agent, input.skillId)
+  const skillDirAbsolute = resolve(root, skillDirRelative)
+
+  try {
+    assertInsideWorkspace(root, skillMdAbsolute)
+    assertInsideWorkspace(root, skillDirAbsolute)
+  } catch {
+    return { ok: false, error: 'invalid_path' }
+  }
+
+  const packageFiles = await listSkillPackageFiles(input.skillsDir, input.skillId)
+  if (!packageFiles) {
+    return { ok: false, error: 'skill_not_found' }
+  }
+
+  // Package multi-fichiers : copie brute (le routeur charge preflight/runtime à la demande).
+  if (skillPackageHasCompanions(packageFiles)) {
+    if (!input.force && (await fileExists(skillMdAbsolute))) {
+      return { ok: true, path: skillMdRelative, skipped: true, files: [skillMdRelative] }
+    }
+
+    const written: string[] = []
+    for (const file of packageFiles) {
+      const relativePath = join(skillDirRelative, file.relativePath).replace(/\\/g, '/')
+      const absolutePath = resolve(root, relativePath)
+      try {
+        assertInsideWorkspace(root, absolutePath)
+      } catch {
+        return { ok: false, error: 'invalid_path' }
+      }
+      await mkdir(dirname(absolutePath), { recursive: true })
+      await writeFile(absolutePath, file.content, 'utf-8')
+      written.push(relativePath)
+    }
+
+    return { ok: true, path: skillMdRelative, skipped: false, files: written }
+  }
+
   const content = await loadSkillFileContent(input.skillsDir, input.skillId)
   if (!content) {
     return { ok: false, error: 'skill_not_found' }
   }
 
-  const root = resolve(input.workspaceRoot)
-  const relativePath = agentSkillPath(input.agent, input.skillId)
-  const absolutePath = resolve(root, relativePath)
-
-  try {
-    assertInsideWorkspace(root, absolutePath)
-  } catch {
-    return { ok: false, error: 'invalid_path' }
+  if (!input.force && (await fileExists(skillMdAbsolute))) {
+    return { ok: true, path: skillMdRelative, skipped: true, files: [skillMdRelative] }
   }
 
-  if (!input.force && (await fileExists(absolutePath))) {
-    return { ok: true, path: relativePath, skipped: true }
-  }
+  await mkdir(dirname(skillMdAbsolute), { recursive: true })
+  await writeFile(skillMdAbsolute, content, 'utf-8')
 
-  await mkdir(dirname(absolutePath), { recursive: true })
-  await writeFile(absolutePath, content, 'utf-8')
-
-  return { ok: true, path: relativePath, skipped: false }
+  return { ok: true, path: skillMdRelative, skipped: false, files: [skillMdRelative] }
 }
 
 export type InstallStackOptions = {
