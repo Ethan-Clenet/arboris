@@ -5,6 +5,8 @@ type SkillFileMeta = {
   dependsOn: string[]
   body: string
   raw: string
+  /** Bloc YAML d’ouverture (`---…---`) s’il existe. */
+  frontmatterBlock: string | null
 }
 
 function parseDependsOn(frontmatter: string): string[] {
@@ -32,16 +34,18 @@ function parseDependsOn(frontmatter: string): string[] {
 }
 
 function parseSkillFile(raw: string): SkillFileMeta {
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/)
+  const match = raw.match(/^(---\r?\n[\s\S]*?\r?\n---)(\r?\n)?([\s\S]*)$/)
   if (!match) {
-    return { dependsOn: [], body: raw.trim(), raw }
+    return { dependsOn: [], body: raw.trim(), raw, frontmatterBlock: null }
   }
 
-  const [, frontmatter, body] = match
+  const [, frontmatterBlock, , body = ''] = match
+  const frontmatter = frontmatterBlock.replace(/^---\r?\n/, '').replace(/\r?\n---$/, '')
   return {
     dependsOn: parseDependsOn(frontmatter),
     body: body.trim(),
     raw,
+    frontmatterBlock,
   }
 }
 
@@ -57,7 +61,32 @@ async function readSkillFileByRef(
   }
 }
 
-/** Compile un SKILL.md et ses dépendances `depends_on`. */
+/** Compile uniquement le corps (sans frontmatter) — pour dépendances incluses. */
+async function compileSkillBody(
+  skillsDir: string,
+  ref: string,
+  seen: Set<string>,
+): Promise<string | null> {
+  if (seen.has(ref)) return null
+  seen.add(ref)
+
+  const parsed = await readSkillFileByRef(skillsDir, ref)
+  if (!parsed) return null
+
+  const sections = [parsed.body]
+  for (const dep of parsed.dependsOn) {
+    const compiled = await compileSkillBody(skillsDir, dep, seen)
+    if (!compiled) continue
+    sections.push(`## Included dependency: ${dep}\n\n${compiled}`)
+  }
+
+  return sections.filter(Boolean).join('\n\n')
+}
+
+/**
+ * Compile un SKILL.md prêt à installer.
+ * Conserve le frontmatter YAML du skill racine (name, description, metadata…).
+ */
 export async function compileSkillFile(
   skillsDir: string,
   ref: string,
@@ -69,14 +98,23 @@ export async function compileSkillFile(
   const parsed = await readSkillFileByRef(skillsDir, ref)
   if (!parsed) return null
 
+  // Cas courant : pas de dépendances → fichier brut intact.
+  if (parsed.dependsOn.length === 0) {
+    return parsed.raw.trim()
+  }
+
   const sections = [parsed.body]
   for (const dep of parsed.dependsOn) {
-    const compiled = await compileSkillFile(skillsDir, dep, seen)
+    const compiled = await compileSkillBody(skillsDir, dep, seen)
     if (!compiled) continue
     sections.push(`## Included dependency: ${dep}\n\n${compiled}`)
   }
 
-  return sections.filter(Boolean).join('\n\n')
+  const body = sections.filter(Boolean).join('\n\n')
+  if (parsed.frontmatterBlock) {
+    return `${parsed.frontmatterBlock}\n\n${body}`.trim()
+  }
+  return body
 }
 
 /** Lit le SKILL.md brut s'il existe. */
@@ -85,7 +123,7 @@ export async function tryLoadSkillFile(skillsDir: string, id: string): Promise<s
   return parsed?.raw ?? null
 }
 
-/** Contenu prêt à installer (fichier compilé). */
+/** Contenu prêt à installer (frontmatter conservé). */
 export async function loadSkillFileContent(
   skillsDir: string,
   id: string,

@@ -3,10 +3,7 @@ import { constants } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { agentSkillDir, agentSkillPath, isAgentName, type AgentName } from '#/lib/agents'
 import { loadSkillFileContent } from '#/lib/skill-file'
-import {
-  listSkillPackageFiles,
-  skillPackageHasCompanions,
-} from '#/lib/skill-package'
+import { listSkillPackageFiles } from '#/lib/skill-package'
 
 function assertInsideWorkspace(root: string, target: string) {
   const normalizedRoot = resolve(root)
@@ -61,17 +58,13 @@ export async function installSkillToWorkspace(
     return { ok: false, error: 'invalid_path' }
   }
 
-  const packageFiles = await listSkillPackageFiles(input.skillsDir, input.skillId)
-  if (!packageFiles) {
-    return { ok: false, error: 'skill_not_found' }
+  if (!input.force && (await fileExists(skillMdAbsolute))) {
+    return { ok: true, path: skillMdRelative, skipped: true, files: [skillMdRelative] }
   }
 
-  // Package multi-fichiers : copie brute (le routeur charge preflight/runtime à la demande).
-  if (skillPackageHasCompanions(packageFiles)) {
-    if (!input.force && (await fileExists(skillMdAbsolute))) {
-      return { ok: true, path: skillMdRelative, skipped: true, files: [skillMdRelative] }
-    }
-
+  // Copie disque préférée : conserve frontmatter + fichiers compagnons.
+  const packageFiles = await listSkillPackageFiles(input.skillsDir, input.skillId)
+  if (packageFiles?.length) {
     const written: string[] = []
     for (const file of packageFiles) {
       const relativePath = join(skillDirRelative, file.relativePath).replace(/\\/g, '/')
@@ -85,21 +78,17 @@ export async function installSkillToWorkspace(
       await writeFile(absolutePath, file.content, 'utf-8')
       written.push(relativePath)
     }
-
     return { ok: true, path: skillMdRelative, skipped: false, files: written }
   }
 
+  // Fallback (skills sans dossier package) : compile avec frontmatter.
   const content = await loadSkillFileContent(input.skillsDir, input.skillId)
   if (!content) {
     return { ok: false, error: 'skill_not_found' }
   }
 
-  if (!input.force && (await fileExists(skillMdAbsolute))) {
-    return { ok: true, path: skillMdRelative, skipped: true, files: [skillMdRelative] }
-  }
-
   await mkdir(dirname(skillMdAbsolute), { recursive: true })
-  await writeFile(skillMdAbsolute, content, 'utf-8')
+  await writeFile(skillMdAbsolute, content.endsWith('\n') ? content : `${content}\n`, 'utf-8')
 
   return { ok: true, path: skillMdRelative, skipped: false, files: [skillMdRelative] }
 }

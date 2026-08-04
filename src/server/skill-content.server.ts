@@ -6,10 +6,13 @@ import { loadSkill } from './catalog.server'
 
 const SKILLS_DIR = defaultSkillsDir(resolvePackageRoot(import.meta.url))
 
-/** Contenu à copier : bodyMd en DB, sinon SKILL.md compilé, sinon markdown généré. */
+/** Contenu à copier : fichier disque (frontmatter inclus), sinon bodyMd DB, sinon markdown généré. */
 export async function loadSkillCopyContent(id: string, lang: Lang): Promise<string | null> {
   const skill = await loadSkill(id)
   if (!skill) return null
+
+  const fromDisk = await readSkillFile(SKILLS_DIR, id)
+  if (fromDisk?.trim()) return fromDisk.trim()
 
   const { prisma } = await import('./db')
   const row = await prisma.skill.findUnique({ where: { id }, select: { bodyMd: true } })
