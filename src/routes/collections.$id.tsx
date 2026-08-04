@@ -5,7 +5,7 @@ import PageShell from '#/components/PageShell'
 import { hexToRgba } from '#/lib/catalog'
 import { useI18n } from '#/lib/i18n'
 import { getCatalog, getCollection } from '#/server/functions'
-import { entityDescription, seoHead } from '#/lib/seo'
+import { collectionSeoTitle, entityDescription, seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/collections/$id')({
   loader: async ({ params }) => {
@@ -20,7 +20,7 @@ export const Route = createFileRoute('/collections/$id')({
     const collection = loaderData?.collection
     if (!collection) return seoHead({ title: 'Collection', path: '/collections' })
     return seoHead({
-      title: `${collection.label.fr} · Collection Arboris`,
+      title: collectionSeoTitle(collection.label.fr),
       path: `/collections/${collection.id}`,
       description: entityDescription(collection.brief.fr, 'collection', collection.id),
       type: 'article',

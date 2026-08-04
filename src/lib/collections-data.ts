@@ -45,8 +45,10 @@ export const COLLECTIONS: CollectionSeed[] = [
     color: '#2E7D32',
     labelFr: 'Ship safely',
     labelEn: 'Ship safely',
-    briefFr: 'Qualité et sécu avant merge : audit deps, diff sécu, couverture, owners.',
-    briefEn: 'Quality and security before merge: dep audit, security diff, coverage, owners.',
+    briefFr:
+      'Qualité et sécu avant merge : audit des dépendances, diff de sécurité, couverture de tests, revue owners et qualité de PR. Pack pour figer un gate de merge fiable dans ton agent.',
+    briefEn:
+      'Quality and security before merge: dependency audit, security diff, test coverage, owners review and PR quality. A pack to lock a reliable merge gate into your agent.',
     kind: 'pack',
     skillIds: [],
     commandIds: ['audit-deps', 'security-diff', 'test-coverage', 'owners-review', 'pr-quality'],
@@ -58,8 +60,10 @@ export const COLLECTIONS: CollectionSeed[] = [
     color: '#1565C0',
     labelFr: 'Ops day-two',
     labelEn: 'Ops day-two',
-    briefFr: 'Le quotidien projet : sync env, docker rebuild, migrations, hotfix, ADR.',
-    briefEn: 'Day-to-day ops: env sync, docker rebuild, migrations, hotfix, ADR.',
+    briefFr:
+      'Le quotidien projet après le go-live : sync d’env, rebuild Docker, smoke migrations, hotfix et ADR. Pack ops day-two pour garder le rythme sans perdre le contexte.',
+    briefEn:
+      'Day-to-day ops after go-live: env sync, Docker rebuild, migration smoke, hotfix and ADR. A day-two ops pack to keep pace without losing context.',
     kind: 'featured',
     skillIds: [],
     commandIds: ['sync-env', 'docker-rebuild', 'db-migrate-smoke', 'hotfix', 'adr'],

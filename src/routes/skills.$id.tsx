@@ -11,7 +11,7 @@ import { AgentBadge } from '#/components/AgentLogo'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
 import CliCommandBar from '#/components/CliCommandBar'
 import SecurityBadge from '#/components/SecurityBadge'
-import { seoHead, entityDescription } from '#/lib/seo'
+import { seoHead, entityDescription, skillSeoTitle } from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/$id')({
   loader: async ({ params }) => {
@@ -27,7 +27,7 @@ export const Route = createFileRoute('/skills/$id')({
     const skill = loaderData?.skill
     if (!skill) return seoHead({ title: 'Skill', path: '/skills' })
     return seoHead({
-      title: `${skill.id} · Skill IA pour agents`,
+      title: skillSeoTitle(skill.id),
       path: `/skills/${skill.id}`,
       description: entityDescription(skill.tag.fr, 'skill', skill.id),
       type: 'article',

@@ -9,22 +9,75 @@ type SeoInput = {
   image?: string
 }
 
-/** ~130 car. pour rester sous ~985 px SERP (approx. SF / Google). */
-const META_MAX = 130
-const META_MIN = 80
+/** Bornes SERP (approx. Screaming Frog / Google). */
+const META_MAX_CHARS = 130
+const META_MIN_CHARS = 80
+const META_MAX_PX = 960
+/** Titre final avec « — Arboris » (~10 car.) : viser ≤60 car. / ≤561 px. */
+const TITLE_CORE_MAX = 45
 
-function truncateMeta(text: string, max = META_MAX): string {
-  const normalized = text.trim().replace(/\s+/g, ' ')
-  if (normalized.length <= max) return normalized
-  return `${normalized.slice(0, max - 1).trimEnd()}…`
+/** Approx. largeur SERP : CJK ~2× latin. */
+function estimateMetaPixels(text: string): number {
+  let px = 0
+  for (const ch of text) {
+    const code = ch.codePointAt(0) ?? 0
+    if (code > 0x2e80) px += 14
+    else if (ch === ' ' || ch === '·' || ch === '—' || ch === '-') px += 4
+    else px += 8
+  }
+  return px
+}
+
+function truncateMeta(text: string, maxChars = META_MAX_CHARS, maxPx = META_MAX_PX): string {
+  let out = text.trim().replace(/\s+/g, ' ')
+  if (out.length > maxChars) {
+    out = `${out.slice(0, maxChars - 1).trimEnd()}…`
+  }
+  while (out.length > 40 && estimateMetaPixels(out) > maxPx) {
+    out = `${out.slice(0, Math.max(20, out.length - 8)).trimEnd()}…`
+  }
+  return out
 }
 
 function padMeta(text: string, filler: string): string {
   let out = text.trim().replace(/\s+/g, ' ')
-  if (out.length >= META_MIN) return truncateMeta(out)
-  const extra = ` ${filler}`.trim()
-  out = `${out} ${extra}`.trim()
+  if (out.length >= META_MIN_CHARS) return truncateMeta(out)
+  out = `${out} ${filler}`.trim()
   return truncateMeta(out)
+}
+
+/**
+ * Titre skill : assez long pour les ids courts (≥30 avec suffixe site),
+ * assez court pour les ids longs (≤60 car. / ≤561 px avec suffixe site).
+ */
+export function skillSeoTitle(id: string): string {
+  const long = `${id} · Skill IA pour agents`
+  if (long.length <= TITLE_CORE_MAX) return long
+  const mid = `${id} · Skill IA`
+  if (mid.length <= TITLE_CORE_MAX) return mid
+  const short = `${id} · Skill`
+  if (short.length <= TITLE_CORE_MAX) return short
+  if (id.length <= TITLE_CORE_MAX) return id
+  return `${id.slice(0, TITLE_CORE_MAX - 1)}…`
+}
+
+/** Titre commande slash — même budget caractère/pixel. */
+export function commandSeoTitle(id: string): string {
+  const long = `/${id} · Commande slash IA`
+  if (long.length <= TITLE_CORE_MAX) return long
+  const mid = `/${id} · Commande`
+  if (mid.length <= TITLE_CORE_MAX) return mid
+  const short = `/${id}`
+  if (short.length <= TITLE_CORE_MAX) return short
+  return `${short.slice(0, TITLE_CORE_MAX - 1)}…`
+}
+
+/** Titre collection — sans « Arboris » (ajouté par pageTitle). */
+export function collectionSeoTitle(label: string): string {
+  const long = `${label} · Collection`
+  if (long.length <= TITLE_CORE_MAX) return long
+  if (label.length <= TITLE_CORE_MAX) return label
+  return `${label.slice(0, TITLE_CORE_MAX - 1)}…`
 }
 
 /** Meta description unique par entité (évite les doublons SF quand le tag est partagé). */
