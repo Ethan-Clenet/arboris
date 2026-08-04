@@ -53,6 +53,8 @@ const fr = {
     copy: 'Copier',
     copied: 'Copié !',
     footer: "Catalogue de skills prêts à l'emploi pour ton agent IA.",
+    aboutBody:
+      'Arboris regroupe des skills et slash commands prêts à coller dans Cursor, Claude, Codex ou Copilot. Chaque fiche explique le rôle du skill, les technos concernées et la compatibilité agents. Tu copies le Markdown, tu l’installes en local ou via la CLI, puis ton agent s’en sert dès que le contexte correspond. Le catalogue couvre backend, frontend, data, sécu, ops et workflows agents — sans compte obligatoire pour parcourir ou copier.',
     browseAll: 'Voir tous les skills',
   },
   skills: {
@@ -174,6 +176,8 @@ const fr = {
     compat: 'Compatibilité',
     howItWorks:
       'Contrairement aux skills, une commande ne s’active pas toute seule : tu la lances explicitement avec / dans le chat.',
+    aboutBody: (id: string) =>
+      `La commande /${id} est une slash command Arboris. Tu l’installes dans ton agent (Cursor, Claude, Codex ou Copilot), puis tu la lances avec /${id} dans le chat. Le prompt Markdown ci-dessous est injecté tel quel : idéal pour des tâches répétables (revue PR, commit, audit deps, migrate). Contrairement à un skill, elle ne s’active pas toute seule — tu gardes le contrôle. Copie le contenu, utilise les boutons d’install ou la CLI arboris pour l’écrire dans ton projet.`,
     installErrors: {
       workspace_not_configured:
         'Définis ARBORIS_WORKSPACE_ROOT dans .env (chemin absolu de ton projet).',
@@ -189,6 +193,10 @@ const fr = {
     listHeading: 'Liste des collections et packs Arboris',
     subtitle:
       'Packs de skills et slash commands à installer d’un coup — starter, sécu, ops.',
+    aboutBody:
+      'Les collections Arboris regroupent skills et slash commands pour un objectif précis : démarrer un projet, durcir la sécu, ou gérer le run du quotidien. Chaque pack s’installe d’un coup (CLI ou ZIP) dans Cursor, Claude, Codex ou Copilot. Parcours les playlists ci-dessous, ouvre une fiche pour voir le détail, puis copie ou télécharge selon ton agent. Moins de friction pour aligner une équipe sur les mêmes prompts et bonnes pratiques.',
+    detailAbout:
+      'Cette collection Arboris assemble skills et commandes autour d’un même thème. Installe le pack via la CLI ou un ZIP, puis ouvre ton agent pour enchaîner les tâches couvertes. Les éléments listés ci-dessous restent accessibles individuellement dans le catalogue si tu préfères une install à la carte. Objectif : gagner du temps et garder une base commune de prompts de qualité.',
     empty: 'Aucune collection.',
     back: 'Toutes les collections',
     pack: 'Pack',
@@ -395,6 +403,8 @@ const fr = {
     copy: 'Copier',
     copied: 'Copié !',
     footHint: "Un skill peut s'appliquer à plusieurs technos — c'est normal.",
+    aboutBody:
+      'Cette page t’aide à trouver les bons skills pour ton stack. Choisis un domaine (dev, ops, qualité…), une spécialité, puis une techno. Arboris te propose ensuite des skills prêts à copier dans Cursor, Claude, Codex ou Copilot. Chaque recommandation reste éditable : tu peux ouvrir la fiche, lire le détail, et installer via les boutons ou la CLI. Trois étapes : choisir, copier, laisser l’agent activer le skill quand le contexte colle.',
     steps: [
       { icon: 'cursor-click', t: 'Copie le prompt', d: "Sur une fiche skill, un clic copie le prompt packagé (ou l'envoie à ton agent)." },
       { icon: 'download-simple', t: "L'agent installe", d: 'Colle-le dans Cursor ou Claude : le skill est ajouté à ton codebase.' },
@@ -445,6 +455,8 @@ const en: typeof fr = {
     copy: 'Copy',
     copied: 'Copied!',
     footer: 'Ready-to-use skills for your AI agent.',
+    aboutBody:
+      'Arboris gathers skills and slash commands ready to paste into Cursor, Claude, Codex, or Copilot. Each page explains what the skill does, which stacks it covers, and which agents it supports. Copy the Markdown, install locally or via the CLI, then let your agent use it when the context matches. The catalog spans backend, frontend, data, security, ops, and agent workflows — no account required to browse or copy.',
     browseAll: 'See all skills',
   },
   skills: {
@@ -566,6 +578,8 @@ const en: typeof fr = {
     compat: 'Compatibility',
     howItWorks:
       'Unlike skills, a command never auto-activates: you launch it explicitly with / in chat.',
+    aboutBody: (id: string) =>
+      `The /${id} command is an Arboris slash command. Install it into your agent (Cursor, Claude, Codex, or Copilot), then run /${id} in chat. The Markdown prompt below is injected as-is — ideal for repeatable tasks (PR review, commit, deps audit, migrate). Unlike a skill, it never auto-activates: you stay in control. Copy the content, use the install buttons, or the arboris CLI to write it into your project.`,
     installErrors: {
       workspace_not_configured:
         'Set ARBORIS_WORKSPACE_ROOT in .env (absolute path to your project).',
@@ -580,6 +594,10 @@ const en: typeof fr = {
     title: 'Collections',
     listHeading: 'Arboris collections and packs list',
     subtitle: 'Packs of skills and slash commands to install in one go — starter, security, ops.',
+    aboutBody:
+      'Arboris collections group skills and slash commands around a clear goal: start a project, harden security, or handle day-two ops. Each pack installs in one shot (CLI or ZIP) into Cursor, Claude, Codex, or Copilot. Browse the playlists below, open a pack for details, then copy or download for your agent. Less friction to align a team on the same prompts and practices.',
+    detailAbout:
+      'This Arboris collection bundles skills and commands around one theme. Install the pack via CLI or ZIP, then open your agent to run through the covered tasks. Items listed below also stay available individually in the catalog if you prefer à la carte installs. Goal: save time and keep a shared base of quality prompts.',
     empty: 'No collection.',
     back: 'All collections',
     pack: 'Pack',
@@ -785,6 +803,8 @@ const en: typeof fr = {
     copy: 'Copy',
     copied: 'Copied!',
     footHint: "A skill can apply to several technologies — that's expected.",
+    aboutBody:
+      'This page helps you find the right skills for your stack. Pick a domain (dev, ops, quality…), a specialty, then a technology. Arboris then suggests skills ready to copy into Cursor, Claude, Codex, or Copilot. Each recommendation stays editable: open the page, read the details, and install via buttons or the CLI. Three steps: choose, copy, let the agent activate the skill when context matches.',
     steps: [
       { icon: 'cursor-click', t: 'Copy the prompt', d: 'On a skill page, one click copies the packaged prompt (or sends it to your agent).' },
       { icon: 'download-simple', t: 'The agent installs', d: 'Paste it into Cursor or Claude: the skill is added to your codebase.' },

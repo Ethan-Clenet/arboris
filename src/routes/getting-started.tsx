@@ -121,6 +121,9 @@ function GettingStartedPage() {
           {t.start.title}
         </h1>
         <p className="text-[17px] text-[var(--text-2)]">{t.start.sub}</p>
+        <p className="mt-4 max-w-[640px] text-[14px] leading-relaxed text-[var(--text-2)]">
+          {t.start.aboutBody}
+        </p>
       </section>
 
       {/* 3 étapes */}

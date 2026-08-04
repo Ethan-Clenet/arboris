@@ -9,10 +9,22 @@ type SeoInput = {
   image?: string
 }
 
-function truncateMeta(text: string, max = 155): string {
+/** ~130 car. pour rester sous ~985 px SERP (approx. SF / Google). */
+const META_MAX = 130
+const META_MIN = 80
+
+function truncateMeta(text: string, max = META_MAX): string {
   const normalized = text.trim().replace(/\s+/g, ' ')
   if (normalized.length <= max) return normalized
   return `${normalized.slice(0, max - 1).trimEnd()}…`
+}
+
+function padMeta(text: string, filler: string): string {
+  let out = text.trim().replace(/\s+/g, ' ')
+  if (out.length >= META_MIN) return truncateMeta(out)
+  const extra = ` ${filler}`.trim()
+  out = `${out} ${extra}`.trim()
+  return truncateMeta(out)
 }
 
 /** Meta description unique par entité (évite les doublons SF quand le tag est partagé). */
@@ -24,10 +36,10 @@ export function entityDescription(
   const base = summary.trim().replace(/\s+/g, ' ')
   const label =
     kind === 'skill' ? `Skill ${id}` : kind === 'command' ? `Commande /${id}` : `Collection ${id}`
-  const suffix = `${label} sur Arboris.`
+  const suffix = `${label} sur Arboris — prêt pour Cursor, Claude, Codex et Copilot.`
   if (!base || base === '>' || base === '>-') return truncateMeta(suffix)
-  if (base.toLowerCase().includes(id.toLowerCase())) return truncateMeta(base)
-  return truncateMeta(`${base} — ${suffix}`)
+  const withId = base.toLowerCase().includes(id.toLowerCase()) ? base : `${base} — ${label}.`
+  return padMeta(withId, 'Catalogue Arboris pour agents IA.')
 }
 
 /**
@@ -46,7 +58,7 @@ export function rootFallbackMeta() {
 /** Meta + links SEO / Open Graph / Twitter pour `route.head()`. */
 export function seoHead(input: SeoInput = {}) {
   const title = input.title ? pageTitle(input.title) : pageTitle()
-  const description = truncateMeta(input.description ?? SITE_DESCRIPTION)
+  const description = padMeta(input.description ?? SITE_DESCRIPTION, 'Catalogue Arboris pour agents IA.')
   const path = (input.path ?? '/').split('?')[0].split('#')[0] || '/'
   const url = absoluteUrl(path)
   const image = input.image ?? absoluteUrl('/og.png')

@@ -27,7 +27,7 @@ export const Route = createFileRoute('/skills/$id')({
     const skill = loaderData?.skill
     if (!skill) return seoHead({ title: 'Skill', path: '/skills' })
     return seoHead({
-      title: `${skill.id} · Skill IA`,
+      title: `${skill.id} · Skill IA pour agents`,
       path: `/skills/${skill.id}`,
       description: entityDescription(skill.tag.fr, 'skill', skill.id),
       type: 'article',

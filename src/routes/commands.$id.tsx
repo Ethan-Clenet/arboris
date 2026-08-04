@@ -77,6 +77,9 @@ function CommandDetailPage() {
               /{command.id}
             </h1>
             <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">{command.description[lang]}</p>
+            <p className="mb-5 max-w-[640px] text-[14px] leading-relaxed text-[var(--text-2)]">
+              {t.commands.aboutBody(command.id)}
+            </p>
             <div className="flex flex-wrap items-center gap-3.5">
               <Button variant="primary" size="lg" copied={copied} onClick={handleCopy}>
                 <Icon name={copied ? 'check' : 'copy'} size={16} />

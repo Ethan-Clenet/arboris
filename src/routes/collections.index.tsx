@@ -37,6 +37,9 @@ function CollectionsPage() {
             {t.collections.title}
           </h1>
           <p className="max-w-[540px] text-[15px] text-[var(--text-2)]">{t.collections.subtitle}</p>
+          <p className="mt-4 max-w-[640px] text-[14px] leading-relaxed text-[var(--text-2)]">
+            {t.collections.aboutBody}
+          </p>
         </div>
 
         <h2 className="mb-4 font-display text-[18px] font-semibold text-[var(--text-1)]">

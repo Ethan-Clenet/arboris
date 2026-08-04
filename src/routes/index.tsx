@@ -110,6 +110,9 @@ function HomePage() {
             </span>
             <AgentLogoRow agents={catalog.compatOrder} size={16} />
           </div>
+          <p className="mt-6 max-w-[540px] text-[14px] leading-relaxed text-[var(--text-2)]">
+            {t.home.aboutBody}
+          </p>
         </div>
 
         {/* Terminal mockup */}

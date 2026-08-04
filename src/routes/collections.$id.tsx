@@ -20,7 +20,7 @@ export const Route = createFileRoute('/collections/$id')({
     const collection = loaderData?.collection
     if (!collection) return seoHead({ title: 'Collection', path: '/collections' })
     return seoHead({
-      title: `${collection.label.fr} · Collection`,
+      title: `${collection.label.fr} · Collection Arboris`,
       path: `/collections/${collection.id}`,
       description: entityDescription(collection.brief.fr, 'collection', collection.id),
       type: 'article',
@@ -65,6 +65,9 @@ function CollectionDetailPage() {
                   </span>
                 </div>
                 <p className="max-w-[520px] text-[15px] text-[var(--text-2)]">{collection.brief[lang]}</p>
+                <p className="mt-3 max-w-[520px] text-[14px] leading-relaxed text-[var(--text-2)]">
+                  {t.collections.detailAbout}
+                </p>
                 <p className="mt-2 font-mono text-[12px] text-[var(--text-3)]">
                   {t.collections.items(count)}
                 </p>
