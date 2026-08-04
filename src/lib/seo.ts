@@ -13,8 +13,10 @@ type SeoInput = {
 const META_MAX_CHARS = 130
 const META_MIN_CHARS = 80
 const META_MAX_PX = 960
-/** Titre final avec « — Arboris » (~10 car.) : viser ≤60 car. / ≤561 px. */
+/** Titre final avec « — Arboris » (~10 car.) : viser 30–60 car. / ≤561 px. */
 const TITLE_CORE_MAX = 45
+/** Core min pour que `pageTitle` (≥ +10 car. « — Arboris ») atteigne 30 car. SERP. */
+const TITLE_CORE_MIN = 22
 
 /** Approx. largeur SERP : CJK ~2× latin. */
 function estimateMetaPixels(text: string): number {
@@ -74,8 +76,21 @@ export function commandSeoTitle(id: string): string {
 
 /** Titre collection — sans « Arboris » (ajouté par pageTitle). */
 export function collectionSeoTitle(label: string): string {
-  const long = `${label} · Collection`
-  if (long.length <= TITLE_CORE_MAX) return long
+  const candidates = [
+    `${label} · Collection de skills`,
+    `${label} · Pack collection`,
+    `${label} · Collection`,
+    label,
+  ]
+  for (const candidate of candidates) {
+    if (candidate.length >= TITLE_CORE_MIN && candidate.length <= TITLE_CORE_MAX) {
+      return candidate
+    }
+  }
+  const padded = candidates[0]
+  if (padded.length < TITLE_CORE_MIN) {
+    return `${padded}${' · catalogue'.slice(0, TITLE_CORE_MIN - padded.length)}`
+  }
   if (label.length <= TITLE_CORE_MAX) return label
   return `${label.slice(0, TITLE_CORE_MAX - 1)}…`
 }
@@ -135,12 +150,15 @@ export function seoHead(input: SeoInput = {}) {
   ]
 
   if (input.noIndex) {
-    meta.push({ name: 'robots', content: 'noindex, nofollow' })
+    // noindex seul : le nofollow combiné bloque le PageRank des liens (warning SF « Directives: Nofollow »).
+    meta.push({ name: 'robots', content: 'noindex' })
   }
 
+  // Pas de canonical sur les pages noindex : évite « Canonisé » + « Version canonique non indexable »
+  // quand des query params (/auth?mode=…) pointent vers une cible noindex.
   return {
     meta,
-    links: [{ rel: 'canonical', href: url }],
+    links: input.noIndex ? [] : [{ rel: 'canonical', href: url }],
   }
 }
 
