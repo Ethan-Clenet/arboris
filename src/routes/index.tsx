@@ -9,6 +9,7 @@ import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
 import { AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
 import SecurityBadge from '#/components/SecurityBadge'
+import HomeTerminal from '#/components/HomeTerminal'
 import { seoHead } from '#/lib/seo'
 import {
   hexToRgba,
@@ -115,30 +116,7 @@ function HomePage() {
           </p>
         </div>
 
-        {/* Terminal mockup */}
-        <div className="rise-in overflow-hidden rounded-[14px] border border-[#20242c] bg-[#0d1117] shadow-[0_22px_60px_rgba(0,0,0,0.4)]">
-          <div className="flex items-center gap-[7px] border-b border-[#20242c] bg-[#161b22] px-3.5 py-[11px]">
-            <span className="h-[11px] w-[11px] rounded-full bg-[#ED6A5E]" />
-            <span className="h-[11px] w-[11px] rounded-full bg-[#F4BF4F]" />
-            <span className="h-[11px] w-[11px] rounded-full bg-[#61C554]" />
-            <span className="ml-2 font-mono text-[11.5px] text-[#6B7280]">agent — zsh</span>
-          </div>
-          <div className="p-5 font-mono text-[13.5px] leading-[1.95] text-[#C9D1D9]">
-            <div>
-              <span className="text-[#30A46C]">$</span> npm i <span className="text-[#9BCB3C]">arboris-cli</span>
-            </div>
-            <div className="text-[#3ECF8E]">✓ {t.home.termInstallOk}</div>
-            <div className="mt-1">
-              <span className="text-[#30A46C]">$</span> npx <span className="text-[#9BCB3C]">arboris-cli</span> list
-            </div>
-            <div className="text-[#6B7280]">{t.home.termListLine1}</div>
-            <div className="text-[#6B7280]">{t.home.termListLine2}</div>
-            <div className="text-[#3ECF8E]">
-              {t.home.termListMore}
-              <span className="ml-[5px] inline-block h-4 w-2 -translate-y-[2px] bg-[#3ECF8E] align-middle [animation:sp-blink_1.1s_steps(1)_infinite]" />
-            </div>
-          </div>
-        </div>
+        <HomeTerminal />
       </section>
 
       {/* Index tableau */}
