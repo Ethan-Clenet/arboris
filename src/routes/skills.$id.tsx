@@ -11,6 +11,7 @@ import { AgentBadge } from '#/components/AgentLogo'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
 import CliCommandBar from '#/components/CliCommandBar'
 import SecurityBadge from '#/components/SecurityBadge'
+import NvidiaLogo from '#/components/NvidiaLogo'
 import { seoHead, entityDescription, skillSeoTitle } from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/$id')({
@@ -251,6 +252,16 @@ function SkillDetailPage() {
                     />
                     <div className="mt-1 text-[11.5px] text-[var(--text-3)]">/ 100</div>
                   </div>
+                  <a
+                    href="https://github.com/NVIDIA/SkillSpector"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={t.skill.securityNvidiaHint}
+                    aria-label={t.skill.securityNvidiaHint}
+                    className="ml-auto grid shrink-0 place-items-center rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2 transition-colors hover:border-[var(--border-2)]"
+                  >
+                    <NvidiaLogo size={26} title="NVIDIA" />
+                  </a>
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-[12px]">
                   <div className="rounded-lg border border-[var(--border)] px-2.5 py-2">
