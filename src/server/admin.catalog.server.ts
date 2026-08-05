@@ -1,4 +1,5 @@
 import { prisma } from '#/server/db'
+import { invalidateCatalogCache } from '#/server/catalog.server'
 
 function listJson(values: string[]): string {
   return JSON.stringify(values)
@@ -34,12 +35,14 @@ export async function createCategory(input: {
       sort: (maxSort._max.sort ?? -1) + 1,
     },
   })
+  invalidateCatalogCache()
 }
 
 export async function deleteCategory(id: string) {
   const skillCount = await prisma.skill.count({ where: { categoryId: id } })
   if (skillCount > 0) throw new Error('category_has_skills')
   await prisma.category.delete({ where: { id } })
+  invalidateCatalogCache()
 }
 
 export async function createStack(input: {
@@ -68,10 +71,12 @@ export async function createStack(input: {
       sort: (maxSort._max.sort ?? -1) + 1,
     },
   })
+  invalidateCatalogCache()
 }
 
 export async function deleteStack(id: string) {
   await prisma.stack.delete({ where: { id } })
+  invalidateCatalogCache()
 }
 
 export async function upsertSkill(input: {
@@ -122,6 +127,7 @@ export async function upsertSkill(input: {
         ...contentData,
       },
     })
+    invalidateCatalogCache()
     return
   }
 
@@ -145,6 +151,7 @@ export async function upsertSkill(input: {
       stacks: { connect: stacks },
     },
   })
+  invalidateCatalogCache()
 }
 
 export async function loadSkillAdminForm(id: string) {
@@ -192,6 +199,7 @@ export async function loadSkillAdminForm(id: string) {
 
 export async function deleteSkill(id: string) {
   await prisma.skill.delete({ where: { id } })
+  invalidateCatalogCache()
 }
 
 export async function toggleSkillStack(skillId: string, stackId: string) {
@@ -211,4 +219,5 @@ export async function toggleSkillStack(skillId: string, stackId: string) {
       stacks: linked ? { disconnect: { id: stackId } } : { connect: { id: stackId } },
     },
   })
+  invalidateCatalogCache()
 }

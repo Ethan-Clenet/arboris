@@ -53,9 +53,22 @@ if (!migrateUrl) {
         execSync('npx prisma migrate deploy', { env, stdio: 'inherit' })
       }
 
-      console.log('[vercel-build] Sync catalogue…')
-      execSync('npx tsx scripts/sync-catalog.ts', { env, stdio: 'inherit' })
-    } catch (error) {
+      // Sync catalogue : production seulement (ou SYNC_CATALOG=1).
+      // Les previews consommaient beaucoup de transfer Neon pour un gain faible.
+      const shouldSync =
+        process.env.SYNC_CATALOG === '1' ||
+        process.env.VERCEL_ENV === 'production' ||
+        (!process.env.VERCEL_ENV && process.env.NODE_ENV !== 'development')
+
+      if (shouldSync) {
+        console.log('[vercel-build] Sync catalogue…')
+        execSync('npx tsx scripts/sync-catalog.ts', { env, stdio: 'inherit' })
+      } else {
+        console.log(
+          `[vercel-build] Sync catalogue ignoré (VERCEL_ENV=${process.env.VERCEL_ENV ?? 'n/a'}). ` +
+            'Force avec SYNC_CATALOG=1.',
+        )
+      }    } catch (error) {
       const msg = `${error.stdout ?? ''}\n${error.stderr ?? ''}\n${error.message ?? ''}`
       if (isDbUnreachable(msg)) {
         console.warn(

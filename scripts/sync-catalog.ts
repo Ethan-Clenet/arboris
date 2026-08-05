@@ -1,14 +1,18 @@
 /**
  * Sync idempotent du catalogue (upsert) — sans wipe.
- * Utilisé au build Vercel pour pousser les nouveaux skills (ex. ai-seo)
- * et corriger les tags YAML sans `prisma db seed` destructif.
+ * Skip les updates si le contenu n’a pas changé (économise le transfer Neon).
  */
+import { createHash } from 'node:crypto'
 import { PrismaClient } from '@prisma/client'
 import { CATEGORIES, STACKS } from '../prisma/catalog-data'
 import { COLLECTIONS } from '../prisma/collections-data'
 import { loadSkillSeeds } from '../prisma/catalog-from-skills'
 
 const prisma = new PrismaClient()
+
+function contentFingerprint(parts: Record<string, unknown>): string {
+  return createHash('sha256').update(JSON.stringify(parts)).digest('hex')
+}
 
 async function ensureCategories() {
   for (const [i, c] of CATEGORIES.entries()) {
@@ -62,9 +66,35 @@ async function syncSkills() {
   const skills = await loadSkillSeeds()
   let created = 0
   let updated = 0
+  let skipped = 0
 
   for (const [i, skill] of skills.entries()) {
-    const existing = await prisma.skill.findUnique({ where: { id: skill.id } })
+    const existing = await prisma.skill.findUnique({
+      where: { id: skill.id },
+      select: {
+        icon: true,
+        score: true,
+        securityRecommendation: true,
+        securityReportJson: true,
+        scannedAt: true,
+        scanMode: true,
+        tagFr: true,
+        tagEn: true,
+        actFr: true,
+        actEn: true,
+        techJson: true,
+        compatJson: true,
+        doesFrJson: true,
+        doesEnJson: true,
+        triggersFrJson: true,
+        triggersEnJson: true,
+        bodyMd: true,
+        sort: true,
+        categoryId: true,
+        stacks: { select: { id: true } },
+      },
+    })
+
     const data = {
       icon: skill.icon,
       score: skill.score,
@@ -87,7 +117,42 @@ async function syncSkills() {
       categoryId: skill.cat,
     }
 
+    const stackIds = [...skill.stacks].sort()
+
     if (existing) {
+      const existingFp = contentFingerprint({
+        icon: existing.icon,
+        score: existing.score,
+        securityRecommendation: existing.securityRecommendation,
+        securityReportJson: existing.securityReportJson,
+        scannedAt: existing.scannedAt?.toISOString() ?? null,
+        scanMode: existing.scanMode,
+        tagFr: existing.tagFr,
+        tagEn: existing.tagEn,
+        actFr: existing.actFr,
+        actEn: existing.actEn,
+        techJson: existing.techJson,
+        compatJson: existing.compatJson,
+        doesFrJson: existing.doesFrJson,
+        doesEnJson: existing.doesEnJson,
+        triggersFrJson: existing.triggersFrJson,
+        triggersEnJson: existing.triggersEnJson,
+        bodyMd: existing.bodyMd,
+        sort: existing.sort,
+        categoryId: existing.categoryId,
+        stacks: existing.stacks.map((s) => s.id).sort(),
+      })
+      const nextFp = contentFingerprint({
+        ...data,
+        scannedAt: data.scannedAt?.toISOString() ?? null,
+        stacks: stackIds,
+      })
+
+      if (existingFp === nextFp) {
+        skipped++
+        continue
+      }
+
       await prisma.skill.update({
         where: { id: skill.id },
         data: {
@@ -108,7 +173,7 @@ async function syncSkills() {
     }
   }
 
-  return { total: skills.length, created, updated }
+  return { total: skills.length, created, updated, skipped }
 }
 
 async function syncCollections(skillIds: Set<string>) {
@@ -158,7 +223,7 @@ async function main() {
   )
   const collections = await syncCollections(skillIdSet)
   console.log(
-    `[sync-catalog] OK — skills ${skills.total} (créés ${skills.created}, maj ${skills.updated}), collections ${collections}.`,
+    `[sync-catalog] OK — skills ${skills.total} (créés ${skills.created}, maj ${skills.updated}, inchangés ${skills.skipped}), collections ${collections}.`,
   )
 }
 

@@ -5,8 +5,8 @@ import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
-import { getCatalog, getSkill, getSkillFileContent } from '#/server/functions'
-import { buildSkillMarkdown, hexToRgba, type Category } from '#/lib/catalog'
+import { getSkillFileContent, getSkillPageContext } from '#/server/functions'
+import { buildSkillMarkdown, hexToRgba } from '#/lib/catalog'
 import { AgentBadge } from '#/components/AgentLogo'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
 import CliCommandBar from '#/components/CliCommandBar'
@@ -15,13 +15,12 @@ import { seoHead, entityDescription, skillSeoTitle } from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/$id')({
   loader: async ({ params }) => {
-    const [skill, catalog, fileContent] = await Promise.all([
-      getSkill({ data: { id: params.id } }),
-      getCatalog(),
+    const [ctx, fileContent] = await Promise.all([
+      getSkillPageContext({ data: { id: params.id } }),
       getSkillFileContent({ data: { id: params.id } }),
     ])
-    if (!skill) throw notFound()
-    return { skill, catalog, fileContent }
+    if (!ctx) throw notFound()
+    return { ...ctx, fileContent }
   },
   head: ({ loaderData }) => {
     const skill = loaderData?.skill
@@ -37,28 +36,10 @@ export const Route = createFileRoute('/skills/$id')({
 })
 
 function SkillDetailPage() {
-  const { skill, catalog, fileContent } = Route.useLoaderData()
+  const { skill, category, related, fileContent } = Route.useLoaderData()
   const { t, lang } = useI18n()
   const { copiedKey, copySkill } = useSkillCopy(1700)
 
-  const catById = useMemo(() => {
-    const map = new Map<string, Category>()
-    for (const c of catalog.categories) map.set(c.id, c)
-    return map
-  }, [catalog.categories])
-
-  const related = useMemo(() => {
-    const same = catalog.skills.filter((x) => x.categoryId === skill.categoryId && x.id !== skill.id)
-    const list = [...same]
-    if (list.length < 3) {
-      for (const x of catalog.skills) {
-        if (x.id !== skill.id && !list.includes(x) && list.length < 3) list.push(x)
-      }
-    }
-    return list.slice(0, 3)
-  }, [catalog.skills, skill])
-
-  const category = catById.get(skill.categoryId)
   const color = category?.color ?? 'var(--text-3)'
   const tint = category ? hexToRgba(category.color, 0.14) : 'var(--surface-2)'
   const copyContent = useMemo(
@@ -383,7 +364,8 @@ function SkillDetailPage() {
         </h2>
         <div className="grid gap-3.5 sm:grid-cols-2 md:grid-cols-3">
           {related.map((r) => {
-            const rc = catById.get(r.categoryId)
+            const rcColor =
+              r.categoryId === skill.categoryId ? category?.color : undefined
             return (
               <Link
                 key={r.id}
@@ -394,7 +376,10 @@ function SkillDetailPage() {
                 <div className="flex items-center gap-2.5">
                   <span
                     className="grid h-[34px] w-[34px] place-items-center rounded-[9px]"
-                    style={{ background: rc ? hexToRgba(rc.color, 0.14) : 'var(--surface-2)', color: rc?.color ?? 'var(--text-3)' }}
+                    style={{
+                      background: rcColor ? hexToRgba(rcColor, 0.14) : 'var(--surface-2)',
+                      color: rcColor ?? 'var(--text-3)',
+                    }}
                   >
                     <Icon name={r.icon} bold size={17} />
                   </span>

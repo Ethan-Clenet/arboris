@@ -4,17 +4,14 @@ import Icon from '#/components/Icon'
 import PageShell from '#/components/PageShell'
 import { hexToRgba } from '#/lib/catalog'
 import { useI18n } from '#/lib/i18n'
-import { getCatalog, getCollection } from '#/server/functions'
+import { getCollection } from '#/server/functions'
 import { collectionSeoTitle, entityDescription, seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/collections/$id')({
   loader: async ({ params }) => {
-    const [collection, catalog] = await Promise.all([
-      getCollection({ data: { id: params.id } }),
-      getCatalog(),
-    ])
+    const collection = await getCollection({ data: { id: params.id } })
     if (!collection) throw notFound()
-    return { collection, catalog }
+    return { collection }
   },
   head: ({ loaderData }) => {
     const collection = loaderData?.collection

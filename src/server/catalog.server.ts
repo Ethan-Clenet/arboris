@@ -18,6 +18,17 @@ import { COLLECTIONS } from '#/lib/collections-data'
 import { resolveAllCommands, resolveCommand } from '#/server/commands.server'
 import { prisma } from './db'
 
+/** TTL cache catalogue (réduit les hits Neon sous trafic / crawls / preloads). */
+const CATALOG_TTL_MS = 180_000
+
+let catalogCache: { value: Catalog; expiresAt: number } | null = null
+let catalogInflight: Promise<Catalog> | null = null
+
+export function invalidateCatalogCache() {
+  catalogCache = null
+  catalogInflight = null
+}
+
 function parseList(json: string): string[] {
   try {
     const value = JSON.parse(json)
@@ -26,6 +37,23 @@ function parseList(json: string): string[] {
     return []
   }
 }
+
+/** Champs summary uniquement — exclut bodyMd / securityReportJson (lourds). */
+const skillSummarySelect = {
+  id: true,
+  categoryId: true,
+  icon: true,
+  score: true,
+  securityRecommendation: true,
+  scannedAt: true,
+  techJson: true,
+  compatJson: true,
+  tagFr: true,
+  tagEn: true,
+  actFr: true,
+  actEn: true,
+  stacks: { select: { id: true } },
+} as const
 
 type SkillRow = {
   id: string
@@ -101,7 +129,7 @@ async function loadCollectionsFromDb(): Promise<CollectionSummary[]> {
   }
 }
 
-export async function loadCatalog(): Promise<Catalog> {
+async function fetchCatalog(): Promise<Catalog> {
   const [categories, stacks, skills, commands, collections] = await Promise.all([
     prisma.category.findMany({ orderBy: { sort: 'asc' } }),
     prisma.stack.findMany({
@@ -110,7 +138,7 @@ export async function loadCatalog(): Promise<Catalog> {
     }),
     prisma.skill.findMany({
       orderBy: { sort: 'asc' },
-      include: { stacks: { select: { id: true } } },
+      select: skillSummarySelect,
     }),
     resolveAllCommands(),
     loadCollectionsFromDb(),
@@ -142,10 +170,36 @@ export async function loadCatalog(): Promise<Catalog> {
   }
 }
 
+export async function loadCatalog(): Promise<Catalog> {
+  const now = Date.now()
+  if (catalogCache && catalogCache.expiresAt > now) {
+    return catalogCache.value
+  }
+  if (catalogInflight) return catalogInflight
+
+  catalogInflight = fetchCatalog()
+    .then((value) => {
+      catalogCache = { value, expiresAt: Date.now() + CATALOG_TTL_MS }
+      return value
+    })
+    .finally(() => {
+      catalogInflight = null
+    })
+
+  return catalogInflight
+}
+
 export async function loadSkill(id: string): Promise<SkillDetail | null> {
   const row = await prisma.skill.findUnique({
     where: { id },
-    include: { stacks: { select: { id: true } } },
+    select: {
+      ...skillSummarySelect,
+      doesFrJson: true,
+      doesEnJson: true,
+      triggersFrJson: true,
+      triggersEnJson: true,
+      securityReportJson: true,
+    },
   })
   if (!row) return null
 
@@ -160,23 +214,115 @@ export async function loadSkill(id: string): Promise<SkillDetail | null> {
   }
 }
 
+/** Contexte léger pour la fiche skill (évite un full catalog). */
+export async function loadSkillPageContext(id: string): Promise<{
+  skill: SkillDetail
+  category: Category | null
+  related: SkillSummary[]
+} | null> {
+  const skill = await loadSkill(id)
+  if (!skill) return null
+
+  const [categoryRow, sameCat, fillers] = await Promise.all([
+    prisma.category.findUnique({ where: { id: skill.categoryId } }),
+    prisma.skill.findMany({
+      where: { categoryId: skill.categoryId, id: { not: id } },
+      orderBy: { sort: 'asc' },
+      take: 3,
+      select: skillSummarySelect,
+    }),
+    prisma.skill.findMany({
+      where: { id: { not: id }, NOT: { categoryId: skill.categoryId } },
+      orderBy: { sort: 'asc' },
+      take: 3,
+      select: skillSummarySelect,
+    }),
+  ])
+
+  const relatedMap = new Map<string, SkillSummary>()
+  for (const row of sameCat) relatedMap.set(row.id, toSummary(row))
+  for (const row of fillers) {
+    if (relatedMap.size >= 3) break
+    if (!relatedMap.has(row.id)) relatedMap.set(row.id, toSummary(row))
+  }
+
+  const category: Category | null = categoryRow
+    ? {
+        id: categoryRow.id,
+        label: { fr: categoryRow.labelFr, en: categoryRow.labelEn },
+        color: categoryRow.color,
+        icon: categoryRow.icon,
+      }
+    : null
+
+  return { skill, category, related: [...relatedMap.values()].slice(0, 3) }
+}
+
 export async function loadCommand(id: string) {
   return resolveCommand(id)
 }
 
 export async function loadCollection(id: string): Promise<CollectionDetail | null> {
-  const catalog = await loadCatalog()
-  const summary = catalog.collections.find((c) => c.id === id)
-  if (!summary) return null
+  try {
+    const row = await prisma.collection.findUnique({
+      where: { id },
+      include: {
+        skills: {
+          orderBy: { sort: 'asc' },
+          select: skillSummarySelect,
+        },
+      },
+    })
 
-  const skillMap = new Map(catalog.skills.map((s) => [s.id, s]))
-  const commandMap = new Map(catalog.commands.map((c) => [c.id, c]))
+    if (row) {
+      const commandIds = parseList(row.commandIdsJson)
+      const commandDetails = (
+        await Promise.all(commandIds.map((cid) => resolveCommand(cid)))
+      ).filter((c): c is NonNullable<typeof c> => Boolean(c))
+
+      return {
+        id: row.id,
+        icon: row.icon,
+        color: row.color,
+        kind: row.kind,
+        label: { fr: row.labelFr, en: row.labelEn },
+        brief: { fr: row.briefFr, en: row.briefEn },
+        skillIds: row.skills.map((s) => s.id),
+        commandIds,
+        skills: row.skills.map(toSummary),
+        commands: commandDetails.map(toCommandSummary),
+      }
+    }
+  } catch {
+    // fallback seed ci-dessous
+  }
+
+  const seed = COLLECTIONS.find((c) => c.id === id)
+  if (!seed) return null
+
+  const [skillRows, commands] = await Promise.all([
+    prisma.skill.findMany({
+      where: { id: { in: seed.skillIds } },
+      select: skillSummarySelect,
+    }),
+    Promise.all(seed.commandIds.map((cid) => resolveCommand(cid))),
+  ])
+
+  const skillMap = new Map(skillRows.map((s) => [s.id, toSummary(s)]))
+  const resolvedCommands = commands.filter(Boolean) as NonNullable<
+    Awaited<ReturnType<typeof resolveCommand>>
+  >[]
 
   return {
-    ...summary,
-    skills: summary.skillIds.map((sid) => skillMap.get(sid)).filter(Boolean) as SkillSummary[],
-    commands: summary.commandIds
-      .map((cid) => commandMap.get(cid))
-      .filter(Boolean) as CollectionDetail['commands'],
+    id: seed.id,
+    icon: seed.icon,
+    color: seed.color,
+    kind: seed.kind,
+    label: { fr: seed.labelFr, en: seed.labelEn },
+    brief: { fr: seed.briefFr, en: seed.briefEn },
+    skillIds: seed.skillIds.slice(),
+    commandIds: seed.commandIds.slice(),
+    skills: seed.skillIds.map((sid) => skillMap.get(sid)).filter(Boolean) as SkillSummary[],
+    commands: resolvedCommands.map(toCommandSummary),
   }
 }

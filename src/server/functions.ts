@@ -19,6 +19,13 @@ export const getSkill = createServerFn({ method: 'GET' })
     return loadSkill(data.id)
   })
 
+export const getSkillPageContext = createServerFn({ method: 'GET' })
+  .validator((data: { id: string }) => data)
+  .handler(async ({ data }) => {
+    const { loadSkillPageContext } = await import('./catalog.server')
+    return loadSkillPageContext(data.id)
+  })
+
 export const getSkillCopyContent = createServerFn({ method: 'GET' })
   .validator((data: { id: string; lang: 'fr' | 'en' }) => data)
   .handler(async ({ data }): Promise<string | null> => {

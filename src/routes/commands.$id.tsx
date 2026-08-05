@@ -5,7 +5,7 @@ import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
-import { getCatalog, getCommand } from '#/server/functions'
+import { getCommand } from '#/server/functions'
 import { AgentBadge } from '#/components/AgentLogo'
 import CommandInstallButtons from '#/components/CommandInstallButtons'
 import CloudInstallPanel from '#/components/CloudInstallPanel'
@@ -14,12 +14,9 @@ import { commandSeoTitle, entityDescription, seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/commands/$id')({
   loader: async ({ params }) => {
-    const [command, catalog] = await Promise.all([
-      getCommand({ data: { id: params.id } }),
-      getCatalog(),
-    ])
+    const command = await getCommand({ data: { id: params.id } })
     if (!command) throw notFound()
-    return { command, catalog }
+    return { command }
   },
   head: ({ loaderData }) => {
     const command = loaderData?.command
