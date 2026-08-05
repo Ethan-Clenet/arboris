@@ -67,6 +67,7 @@ export function normalizePublisher(raw: string): string {
   if (lower === 'ecc' || lower === 'ecc-community' || lower.startsWith('ecc ')) return 'ECC'
   if (lower === 'community') return 'Community'
   if (lower === 'flox') return 'Flox'
+  if (lower === 'brave' || lower.startsWith('brave ')) return 'Brave'
   if (value.includes('/')) {
     const tail = value.split('/').pop()?.trim()
     if (tail) return normalizePublisher(tail)
@@ -137,6 +138,22 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
   if (slug === 'query') return 'data'
   if (slug === 'convex-setup-auth' || slug === 'firebase-auth-basics') return 'security'
   if (slug === 'skill-sonar') return 'security'
+  // Brave Search API skills
+  if (
+    slug === 'bx' ||
+    slug === 'web-search' ||
+    slug === 'news-search' ||
+    slug === 'images-search' ||
+    slug === 'videos-search' ||
+    slug === 'answers' ||
+    slug === 'suggest' ||
+    slug === 'spellcheck' ||
+    slug === 'llm-context' ||
+    slug === 'local-pois' ||
+    slug === 'local-descriptions'
+  ) {
+    return 'agents'
+  }
   if (
     slug === 'supabase' ||
     slug === 'supabase-postgres-best-practices' ||

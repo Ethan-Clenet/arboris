@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type ReactNode } from 'react'
 import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
 import PageShell from '#/components/PageShell'
 import { AgentBadge, AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
 import SecurityBadge from '#/components/SecurityBadge'
+import PublisherLogo from '#/components/PublisherLogo'
+import { hasPublisherLogo, PUBLISHER_LOGO_COLOR } from '#/lib/publisher-logos'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
@@ -33,13 +35,15 @@ const SKILL_TABLE_COLS =
 
 type SecurityFilter = 'all' | SecurityRecommendation
 
-function publisherMeta(name: string): { icon: string; color?: string } {
+function publisherMeta(name: string): { icon: string; color?: string; logo?: boolean } {
   const known: Record<string, { icon: string; color: string }> = {
     ECC: { icon: 'tree', color: '#1f8a50' },
     Community: { icon: 'users', color: '#4F8FF7' },
     Flox: { icon: 'package', color: '#7C3AED' },
+    Brave: { icon: 'shield', color: PUBLISHER_LOGO_COLOR.Brave },
   }
-  return known[name] ?? { icon: 'buildings', color: '#8a909b' }
+  const base = known[name] ?? { icon: 'buildings', color: '#8a909b' }
+  return { ...base, logo: hasPublisherLogo(name) }
 }
 
 function truncateListing(text: string, max = 140): string {
@@ -287,6 +291,7 @@ function SkillsPage() {
                     active={publisher === p.id}
                     icon={meta.icon}
                     color={meta.color}
+                    logo={meta.logo ? <PublisherLogo name={p.id} size={13} /> : undefined}
                     label={p.id}
                     count={p.count}
                     onClick={() => setPublisher(publisher === p.id ? 'all' : p.id)}
@@ -363,6 +368,7 @@ function CategoryButton({
   active,
   icon,
   color,
+  logo,
   label,
   count,
   onClick,
@@ -370,6 +376,7 @@ function CategoryButton({
   active: boolean
   icon: string
   color?: string
+  logo?: ReactNode
   label: string
   count: number
   onClick: () => void
@@ -393,7 +400,7 @@ function CategoryButton({
             : { background: 'var(--surface-2)', color: 'var(--text-2)' }
         }
       >
-        <Icon name={icon} size={13} />
+        {logo ?? <Icon name={icon} size={13} />}
       </span>
       <span className={`flex-1 truncate ${active ? 'font-semibold' : 'font-medium'}`}>{label}</span>
       <span className="font-mono text-[11px] text-[var(--text-3)]">{count}</span>
