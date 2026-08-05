@@ -169,7 +169,7 @@ function SkillsPage() {
       </PageShell>
 
       <PageShell as="div" className="grid items-start gap-7 pt-6 pb-[70px] lg:grid-cols-[248px_minmax(0,1fr)]">
-        <aside className="flex flex-col gap-[22px] lg:sticky lg:top-[78px]">
+        <aside className="flex flex-col gap-[22px] lg:sticky lg:top-[78px] lg:max-h-[calc(100dvh-5.5rem)] lg:overflow-y-auto lg:overscroll-y-contain lg:pr-1">
           <div className="relative">
             <label htmlFor="skills-search" className="sr-only">
               {t.a11y.searchSkills}
@@ -275,7 +275,7 @@ function SkillsPage() {
             <div className="mb-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
               {t.skills.publishers}
             </div>
-            <div className="flex max-h-[320px] flex-col gap-0.5 overflow-y-auto pr-1">
+            <div className="flex flex-col gap-0.5">
               <CategoryButton
                 active={publisher === 'all'}
                 icon="buildings"
