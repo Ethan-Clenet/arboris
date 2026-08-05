@@ -1,0 +1,47 @@
+name: Lighthouse CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: 'URL de base à auditer (prod, preview…)'
+        required: false
+        default: 'https://arboris-three.vercel.app'
+  schedule:
+    # Lundi 06:00 UTC — tendance hebdo sur la prod
+    - cron: '0 6 * * 1'
+  push:
+    branches: [master]
+
+concurrency:
+  group: lighthouse-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lhci:
+    name: Lighthouse
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Run Lighthouse CI
+        run: npm run lighthouse:ci
+        env:
+          LHCI_BASE_URL: ${{ inputs.base_url || 'https://arboris-three.vercel.app' }}
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          retention-days: 30

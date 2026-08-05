@@ -10,6 +10,7 @@ dist-ssr
 .output
 .vercel
 .vinxi
+.lighthouseci
 __unconfig*
 todos.json
 *.tgz
