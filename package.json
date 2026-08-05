@@ -21,7 +21,7 @@
     "generate-routes": "tsr generate",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "lighthouse:ci": "lhci autorun --config=./lighthouserc.cjs",
+    "lighthouse:ci": "node scripts/run-lhci.mjs",
     "cli:manifest": "tsx scripts/generate-cli-manifest.ts",
     "build:cli": "npm run cli:manifest && node scripts/build-cli.mjs",
     "publish:cli": "npm run build:cli && npm publish -w arboris-cli --access public && npm publish -w @rubix0270/arboris --access public",

@@ -11,6 +11,7 @@ dist-ssr
 .vercel
 .vinxi
 .lighthouseci
+.local-browsers
 __unconfig*
 todos.json
 *.tgz
