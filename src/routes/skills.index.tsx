@@ -33,6 +33,15 @@ const SKILL_TABLE_COLS =
 
 type SecurityFilter = 'all' | SecurityRecommendation
 
+function publisherMeta(name: string): { icon: string; color?: string } {
+  const known: Record<string, { icon: string; color: string }> = {
+    ECC: { icon: 'tree', color: '#1f8a50' },
+    Community: { icon: 'users', color: '#4F8FF7' },
+    Flox: { icon: 'package', color: '#7C3AED' },
+  }
+  return known[name] ?? { icon: 'buildings', color: '#8a909b' }
+}
+
 function truncateListing(text: string, max = 140): string {
   const normalized = text.trim().replace(/\s+/g, ' ')
   if (normalized.length <= max) return normalized
@@ -46,8 +55,8 @@ function SkillsPage() {
 
   const [q, setQ] = useState('')
   const [cat, setCat] = useState<string>('all')
-  // "Publishers" dans l'UI = filtre sur les `stacks` associés aux skills.
-  const [publishers, setPublishers] = useState<string[]>([])
+  /** Filtre unique sur l’éditeur (metadata.origin), ex. ECC. */
+  const [publisher, setPublisher] = useState<string>('all')
   const [compat, setCompat] = useState<string[]>([])
   const [security, setSecurity] = useState<SecurityFilter>('all')
 
@@ -56,6 +65,19 @@ function SkillsPage() {
     for (const c of catalog.categories) map.set(c.id, c)
     return map
   }, [catalog.categories])
+
+  const otherPublisher = t.skills.publisherOther
+
+  const publisherList = useMemo(() => {
+    const counts = new Map<string, number>()
+    for (const s of catalog.skills) {
+      const key = s.publisher ?? otherPublisher
+      counts.set(key, (counts.get(key) ?? 0) + 1)
+    }
+    return [...counts.entries()]
+      .map(([id, count]) => ({ id, count }))
+      .sort((a, b) => b.count - a.count || a.id.localeCompare(b.id))
+  }, [catalog.skills, otherPublisher])
 
   const badgeLabels = {
     unscanned: t.skills.securityUnscanned,
@@ -72,9 +94,9 @@ function SkillsPage() {
     const ql = q.trim().toLowerCase()
     const match = (s: SkillSummary) => {
       if (cat !== 'all' && s.categoryId !== cat) return false
-      if (publishers.length) {
-        // Si un skill n'a pas de stack explicite, on le garde compatible avec tous les filtres.
-        if (s.stacks.length && !publishers.every((x) => s.stacks.includes(x))) return false
+      if (publisher !== 'all') {
+        const skillPublisher = s.publisher ?? otherPublisher
+        if (skillPublisher !== publisher) return false
       }
       if (compat.length && !compat.every((x) => s.compat.includes(x))) return false
       if (security !== 'all') {
@@ -83,7 +105,7 @@ function SkillsPage() {
       }
       if (ql) {
         const c = catById.get(s.categoryId)
-        const hay = `${s.id} ${s.tag[lang]} ${s.tech.join(' ')} ${s.stacks.join(' ')} ${
+        const hay = `${s.id} ${s.tag[lang]} ${s.tech.join(' ')} ${s.publisher ?? ''} ${
           c ? c.label[lang] : ''
         }`.toLowerCase()
         if (!hay.includes(ql)) return false
@@ -94,7 +116,7 @@ function SkillsPage() {
     return [...list].sort(
       (a, b) => (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id),
     )
-  }, [q, cat, publishers, compat, security, catalog.skills, catById, lang])
+  }, [q, cat, publisher, compat, security, catalog.skills, catById, lang, otherPublisher])
 
   const securityCounts = useMemo(() => {
     const counts = { SAFE: 0, CAUTION: 0, UNSAFE: 0, UNKNOWN: 0 }
@@ -106,11 +128,11 @@ function SkillsPage() {
   }, [catalog.skills])
 
   const hasFilters =
-    cat !== 'all' || publishers.length > 0 || compat.length > 0 || security !== 'all' || q.trim().length > 0
+    cat !== 'all' || publisher !== 'all' || compat.length > 0 || security !== 'all' || q.trim().length > 0
   const clearAll = () => {
     setQ('')
     setCat('all')
-    setPublishers([])
+    setPublisher('all')
     setCompat([])
     setSecurity('all')
   }
@@ -247,28 +269,27 @@ function SkillsPage() {
 
           <div>
             <div className="mb-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
-              {lang === 'fr' ? 'Éditeurs' : 'Publishers'}
+              {t.skills.publishers}
             </div>
-            <div className="flex flex-col gap-0.5">
+            <div className="flex max-h-[320px] flex-col gap-0.5 overflow-y-auto pr-1">
               <CategoryButton
-                active={publishers.length === 0}
-                icon="stack"
-                label={lang === 'fr' ? 'Tous' : 'All'}
+                active={publisher === 'all'}
+                icon="buildings"
+                label={t.skills.allPublishers}
                 count={catalog.skills.length}
-                onClick={() => setPublishers([])}
+                onClick={() => setPublisher('all')}
               />
-              {catalog.stacks.map((st) => {
-                const active = publishers.includes(st.id)
-                const count = catalog.skills.filter((s) => s.stacks.includes(st.id)).length
+              {publisherList.map((p) => {
+                const meta = publisherMeta(p.id)
                 return (
                   <CategoryButton
-                    key={st.id}
-                    active={active}
-                    icon={st.icon}
-                    color={st.color}
-                    label={st.label}
-                    count={count}
-                    onClick={() => setPublishers(toggle(publishers, st.id))}
+                    key={p.id}
+                    active={publisher === p.id}
+                    icon={meta.icon}
+                    color={meta.color}
+                    label={p.id}
+                    count={p.count}
+                    onClick={() => setPublisher(publisher === p.id ? 'all' : p.id)}
                   />
                 )
               })}

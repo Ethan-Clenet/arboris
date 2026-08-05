@@ -38,6 +38,8 @@ export interface SkillSummary {
   score: number | null
   securityRecommendation: 'SAFE' | 'CAUTION' | 'UNSAFE' | 'UNKNOWN' | null
   scannedAt: string | null
+  /** Éditeur / auteur (metadata.origin), ex. ECC. */
+  publisher: string | null
   tech: string[]
   compat: string[]
   stacks: string[]

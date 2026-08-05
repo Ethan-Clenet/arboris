@@ -87,6 +87,8 @@ model Skill {
   triggersEnJson String @default("[]")
   /// Contenu Markdown du skill (SKILL.md). Prioritaire sur le fichier disque.
   bodyMd        String?
+  /// Éditeur / auteur (metadata.origin du SKILL.md), ex. ECC.
+  publisher     String?
   sort          Int     @default(0)
 
   categoryId String
@@ -100,6 +102,7 @@ model Skill {
 
   @@index([categoryId])
   @@index([score])
+  @@index([publisher])
   @@map("skills")
 }
 

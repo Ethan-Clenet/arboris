@@ -27,6 +27,8 @@ export interface SkillSeed {
   securityReportJson?: string | null
   scannedAt?: string | null
   scanMode?: string | null
+  /** Éditeur / auteur (metadata.origin), ex. ECC. */
+  publisher?: string | null
   stacks: string[]
   tech: string[]
   compat: string[]

@@ -46,6 +46,7 @@ const skillSummarySelect = {
   score: true,
   securityRecommendation: true,
   scannedAt: true,
+  publisher: true,
   techJson: true,
   compatJson: true,
   tagFr: true,
@@ -62,6 +63,7 @@ type SkillRow = {
   score: number | null
   securityRecommendation: string | null
   scannedAt: Date | null
+  publisher: string | null
   techJson: string
   compatJson: string
   tagFr: string
@@ -85,6 +87,7 @@ function toSummary(row: SkillRow): SkillSummary {
     score: row.score,
     securityRecommendation: recommendation,
     scannedAt: row.scannedAt ? row.scannedAt.toISOString() : null,
+    publisher: row.publisher,
     tech: parseList(row.techJson),
     compat: parseList(row.compatJson),
     stacks: row.stacks.map((s) => s.id),

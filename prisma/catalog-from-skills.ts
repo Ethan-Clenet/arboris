@@ -19,6 +19,8 @@ type ParsedSkill = {
   id: string
   description: string
   body: string
+  /** Éditeur / auteur (metadata.origin du SKILL.md). */
+  publisher: string | null
 }
 
 /** Extrait `description` YAML (ligne seule, quotes, ou bloc `>` / `|`). */
@@ -50,6 +52,43 @@ function parseYamlDescription(frontmatter: string): string | undefined {
   return description.trim() || undefined
 }
 
+/** Normalise metadata.origin → label éditeur (ex. ECC). */
+export function normalizePublisher(raw: string): string {
+  let value = raw.trim()
+  if (
+    (value.startsWith('"') && value.endsWith('"')) ||
+    (value.startsWith("'") && value.endsWith("'"))
+  ) {
+    value = value.slice(1, -1).trim()
+  }
+  if (!value) return value
+
+  const lower = value.toLowerCase()
+  if (lower === 'ecc' || lower === 'ecc-community' || lower.startsWith('ecc ')) return 'ECC'
+  if (lower === 'community') return 'Community'
+  if (lower === 'flox') return 'Flox'
+  if (value.includes('/')) {
+    const tail = value.split('/').pop()?.trim()
+    if (tail) return normalizePublisher(tail)
+  }
+  return value
+}
+
+function parseYamlOrigin(frontmatter: string): string | null {
+  const metaBlock = frontmatter.match(/^metadata:\s*\r?\n((?:[ \t]+.+\r?\n?)*)/m)
+  if (metaBlock) {
+    const fromMeta = metaBlock[1].match(/^[ \t]+origin:\s*(.+)$/m)?.[1]
+    if (fromMeta) {
+      const normalized = normalizePublisher(fromMeta)
+      return normalized || null
+    }
+  }
+  const topLevel = frontmatter.match(/^origin:\s*(.+)$/m)?.[1]
+  if (!topLevel) return null
+  const normalized = normalizePublisher(topLevel)
+  return normalized || null
+}
+
 function parseFrontmatter(raw: string): ParsedSkill | null {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/)
   if (!match) return null
@@ -57,7 +96,12 @@ function parseFrontmatter(raw: string): ParsedSkill | null {
   const name = frontmatter.match(/^name:\s*(.+)$/m)?.[1]?.trim()
   const description = parseYamlDescription(frontmatter)
   if (!name || !description) return null
-  return { id: name, description, body: body.trim() }
+  return {
+    id: name,
+    description,
+    body: body.trim(),
+    publisher: parseYamlOrigin(frontmatter),
+  }
 }
 
 function slugTitle(id: string): string {
@@ -299,6 +343,7 @@ export async function loadSkillSeeds(): Promise<SkillSeed[]> {
       securityReportJson: security ? JSON.stringify(security) : null,
       scannedAt: security?.scannedAt ?? null,
       scanMode: security?.scanMode ?? null,
+      publisher: parsed.publisher,
       stacks,
       tech: stacks.length ? stacks.map((stackId) => STACKS.find((stack) => stack.id === stackId)?.label ?? stackId) : [slugTitle(parsed.id)],
       compat: ['Claude', 'Cursor', 'Codex', 'Copilot'],

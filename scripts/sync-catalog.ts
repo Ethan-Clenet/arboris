@@ -89,6 +89,7 @@ async function syncSkills() {
         triggersFrJson: true,
         triggersEnJson: true,
         bodyMd: true,
+        publisher: true,
         sort: true,
         categoryId: true,
         stacks: { select: { id: true } },
@@ -113,6 +114,7 @@ async function syncSkills() {
       triggersFrJson: JSON.stringify(skill.triggers.fr),
       triggersEnJson: JSON.stringify(skill.triggers.en),
       bodyMd: skill.bodyMd ?? null,
+      publisher: skill.publisher ?? null,
       sort: i,
       categoryId: skill.cat,
     }
@@ -138,6 +140,7 @@ async function syncSkills() {
         triggersFrJson: existing.triggersFrJson,
         triggersEnJson: existing.triggersEnJson,
         bodyMd: existing.bodyMd,
+        publisher: existing.publisher,
         sort: existing.sort,
         categoryId: existing.categoryId,
         stacks: existing.stacks.map((s) => s.id).sort(),
