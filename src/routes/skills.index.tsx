@@ -46,7 +46,8 @@ function SkillsPage() {
 
   const [q, setQ] = useState('')
   const [cat, setCat] = useState<string>('all')
-  const [techs, setTechs] = useState<string[]>([])
+  // "Publishers" dans l'UI = filtre sur les `stacks` associés aux skills.
+  const [publishers, setPublishers] = useState<string[]>([])
   const [compat, setCompat] = useState<string[]>([])
   const [security, setSecurity] = useState<SecurityFilter>('all')
 
@@ -55,12 +56,6 @@ function SkillsPage() {
     for (const c of catalog.categories) map.set(c.id, c)
     return map
   }, [catalog.categories])
-
-  const techList = useMemo(() => {
-    const seen: string[] = []
-    for (const s of catalog.skills) for (const x of s.tech) if (!seen.includes(x)) seen.push(x)
-    return seen
-  }, [catalog.skills])
 
   const badgeLabels = {
     unscanned: t.skills.securityUnscanned,
@@ -77,7 +72,10 @@ function SkillsPage() {
     const ql = q.trim().toLowerCase()
     const match = (s: SkillSummary) => {
       if (cat !== 'all' && s.categoryId !== cat) return false
-      if (techs.length && !techs.every((x) => s.tech.includes(x))) return false
+      if (publishers.length) {
+        // Si un skill n'a pas de stack explicite, on le garde compatible avec tous les filtres.
+        if (s.stacks.length && !publishers.every((x) => s.stacks.includes(x))) return false
+      }
       if (compat.length && !compat.every((x) => s.compat.includes(x))) return false
       if (security !== 'all') {
         const tone = s.securityRecommendation ?? 'UNKNOWN'
@@ -85,7 +83,9 @@ function SkillsPage() {
       }
       if (ql) {
         const c = catById.get(s.categoryId)
-        const hay = `${s.id} ${s.tag[lang]} ${s.tech.join(' ')} ${c ? c.label[lang] : ''}`.toLowerCase()
+        const hay = `${s.id} ${s.tag[lang]} ${s.tech.join(' ')} ${s.stacks.join(' ')} ${
+          c ? c.label[lang] : ''
+        }`.toLowerCase()
         if (!hay.includes(ql)) return false
       }
       return true
@@ -94,7 +94,7 @@ function SkillsPage() {
     return [...list].sort(
       (a, b) => (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id),
     )
-  }, [q, cat, techs, compat, security, catalog.skills, catById, lang])
+  }, [q, cat, publishers, compat, security, catalog.skills, catById, lang])
 
   const securityCounts = useMemo(() => {
     const counts = { SAFE: 0, CAUTION: 0, UNSAFE: 0, UNKNOWN: 0 }
@@ -106,11 +106,11 @@ function SkillsPage() {
   }, [catalog.skills])
 
   const hasFilters =
-    cat !== 'all' || techs.length > 0 || compat.length > 0 || security !== 'all' || q.trim().length > 0
+    cat !== 'all' || publishers.length > 0 || compat.length > 0 || security !== 'all' || q.trim().length > 0
   const clearAll = () => {
     setQ('')
     setCat('all')
-    setTechs([])
+    setPublishers([])
     setCompat([])
     setSecurity('all')
   }
@@ -247,25 +247,29 @@ function SkillsPage() {
 
           <div>
             <div className="mb-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
-              {t.skills.tech}
+              {lang === 'fr' ? 'Éditeurs' : 'Publishers'}
             </div>
-            <div className="flex flex-wrap gap-[7px]">
-              {techList.map((name) => {
-                const active = techs.includes(name)
+            <div className="flex flex-col gap-0.5">
+              <CategoryButton
+                active={publishers.length === 0}
+                icon="stack"
+                label={lang === 'fr' ? 'Tous' : 'All'}
+                count={catalog.skills.length}
+                onClick={() => setPublishers([])}
+              />
+              {catalog.stacks.map((st) => {
+                const active = publishers.includes(st.id)
+                const count = catalog.skills.filter((s) => s.stacks.includes(st.id)).length
                 return (
-                  <button
-                    key={name}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => setTechs(toggle(techs, name))}
-                    className={`cursor-pointer rounded-md border px-[11px] py-[5px] font-mono text-[11.5px] font-medium transition-colors ${
-                      active
-                        ? 'border-[var(--border-2)] bg-[var(--text-1)] text-[var(--bg)]'
-                        : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-2)] hover:border-[var(--border-2)]'
-                    }`}
-                  >
-                    {name}
-                  </button>
+                  <CategoryButton
+                    key={st.id}
+                    active={active}
+                    icon={st.icon}
+                    color={st.color}
+                    label={st.label}
+                    count={count}
+                    onClick={() => setPublishers(toggle(publishers, st.id))}
+                  />
                 )
               })}
             </div>
