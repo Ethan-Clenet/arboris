@@ -22,7 +22,8 @@
   --border-2: #dbdfe6;
   --text-1: #14171c;
   --text-2: #5a616c;
-  --text-3: #8a909b;
+  /* accessibilité: --text-3 devait aussi respecter un contraste suffisant (WCAG) */
+  --text-3: #5a616c;
   --accent: #1f8a50;
   --accent-press: #197544;
   --accent-soft: rgba(31, 138, 80, 0.1);
@@ -45,7 +46,8 @@
   --border-2: #2d313a;
   --text-1: #eceef2;
   --text-2: #a2a9b5;
-  --text-3: #6b7280;
+  /* accessibilité: --text-3 devait aussi respecter un contraste suffisant (WCAG) */
+  --text-3: #a2a9b5;
   --accent: #30a46c;
   --accent-press: #2b9a63;
   --accent-soft: rgba(48, 164, 108, 0.13);

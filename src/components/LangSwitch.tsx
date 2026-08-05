@@ -3,11 +3,6 @@ import { useI18n } from '#/lib/i18n'
 
 const LANGS: Lang[] = ['fr', 'en']
 
-const LANG_LABELS: Record<Lang, 'langFr' | 'langEn'> = {
-  fr: 'langFr',
-  en: 'langEn',
-}
-
 export default function LangSwitch({ accent = false }: { accent?: boolean }) {
   const { lang, setLang, t } = useI18n()
 
@@ -25,7 +20,6 @@ export default function LangSwitch({ accent = false }: { accent?: boolean }) {
             type="button"
             onClick={() => setLang(l)}
             aria-pressed={active}
-            aria-label={t.a11y[LANG_LABELS[l]]}
             className={`shrink-0 cursor-pointer rounded-md px-2.5 py-1.5 font-mono text-[11px] font-semibold transition-colors ${
               active
                 ? accent
