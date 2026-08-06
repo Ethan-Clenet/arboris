@@ -1,4 +1,5 @@
 import Icon from '#/components/Icon'
+import Toast from '#/components/Toast'
 import { useCopy } from '#/lib/useCopy'
 
 type CliCommandBarProps = {
@@ -44,25 +45,28 @@ export default function CliCommandBar({ args, copyLabel, copiedLabel, className 
   const copied = copiedKey === command
 
   return (
-    <div
-      className={`flex w-full max-w-[420px] items-center gap-2 rounded-[10px] border border-[#20242c] bg-[#0d1117] px-3 py-2 ${className}`}
-    >
-      <code className="min-w-0 flex-1 truncate font-mono text-[12.5px] leading-none text-[#C9D1D9]">
-        <span className="text-[#30A46C]">$</span> <CommandDisplay args={args} />
-      </code>
-      <button
-        type="button"
-        onClick={() => copy(command, command, copiedLabel)}
-        aria-label={copyLabel}
-        title={copyLabel}
-        className={`grid h-7 w-7 shrink-0 cursor-pointer place-items-center rounded-md border transition-colors ${
-          copied
-            ? 'border-[#3ECF8E]/40 bg-[#3ECF8E]/10 text-[#3ECF8E]'
-            : 'border-[#30363d] text-[#8B949E] hover:border-[#484f58] hover:text-[#C9D1D9]'
-        }`}
+    <>
+      <div
+        className={`flex w-full max-w-[420px] items-center gap-2 rounded-[10px] border border-[#20242c] bg-[#0d1117] px-3 py-2 ${className}`}
       >
-        <Icon name={copied ? 'check' : 'copy'} size={13} />
-      </button>
-    </div>
+        <code className="min-w-0 flex-1 truncate font-mono text-[12.5px] leading-none text-[#C9D1D9]">
+          <span className="text-[#30A46C]">$</span> <CommandDisplay args={args} />
+        </code>
+        <button
+          type="button"
+          onClick={() => copy(command, command, copiedLabel)}
+          aria-label={copyLabel}
+          title={copyLabel}
+          className={`grid h-7 w-7 shrink-0 cursor-pointer place-items-center rounded-md border transition-colors ${
+            copied
+              ? 'border-[#3ECF8E]/40 bg-[#3ECF8E]/10 text-[#3ECF8E]'
+              : 'border-[#30363d] text-[#8B949E] hover:border-[#484f58] hover:text-[#C9D1D9]'
+          }`}
+        >
+          <Icon name={copied ? 'check' : 'copy'} size={13} />
+        </button>
+      </div>
+      <Toast show={copied} text={copiedLabel} />
+    </>
   )
 }

@@ -149,7 +149,7 @@ function SkillDetailPage() {
         <CliCommandBar
           args={`install ${skill.id}`}
           copyLabel={t.skill.copyCommand}
-          copiedLabel={t.skill.copied}
+          copiedLabel={t.skill.copiedCommand}
           className="w-full shrink-0 lg:mt-1 lg:max-w-[440px]"
         />
       </div>
