@@ -315,7 +315,7 @@ function SkillsPage() {
                     active={publisher === p.id}
                     icon={meta.icon}
                     color={meta.color}
-                    logo={meta.logo ? <PublisherLogo name={p.id} size={13} /> : undefined}
+                    logo={meta.logo ? <PublisherLogo name={p.id} size={16} /> : undefined}
                     label={p.id}
                     count={p.count}
                     onClick={() => setPublisher(publisher === p.id ? 'all' : p.id)}
@@ -481,8 +481,8 @@ function SkillRow({
     <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] px-4 py-3.5 transition-colors hover:bg-[var(--surface-hover)] sm:px-[18px]`}>
       <Link to="/skills/$id" params={{ id: skill.id }} className="flex min-w-0 cursor-pointer items-center gap-[11px] text-[var(--text-1)]">
         <span
-          className={`grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px] ${
-            showPublisherLogo ? 'border border-[var(--border)] bg-transparent' : ''
+          className={`grid h-[34px] w-[34px] flex-none place-items-center ${
+            showPublisherLogo ? '' : 'rounded-[9px]'
           }`}
           style={
             showPublisherLogo
@@ -491,7 +491,7 @@ function SkillRow({
           }
         >
           {showPublisherLogo && publisher ? (
-            <PublisherLogo name={publisher} size={18} />
+            <PublisherLogo name={publisher} size={22} />
           ) : (
             <Icon name={skill.icon} bold size={17} />
           )}

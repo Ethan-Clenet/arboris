@@ -78,13 +78,13 @@ function SkillDetailPage() {
       <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
         <div className="flex min-w-0 flex-1 flex-wrap items-start gap-[22px]">
           <div
-            className={`grid h-16 w-16 flex-none place-items-center rounded-2xl ${
-              showPublisherLogo ? 'border border-[var(--border)] bg-transparent' : ''
+            className={`grid h-16 w-16 flex-none place-items-center ${
+              showPublisherLogo ? '' : 'rounded-2xl'
             }`}
             style={showPublisherLogo ? undefined : { background: tint, color }}
           >
             {showPublisherLogo && publisher ? (
-              <PublisherLogo name={publisher} size={30} />
+              <PublisherLogo name={publisher} size={40} />
             ) : (
               <Icon name={skill.icon} bold size={32} />
             )}

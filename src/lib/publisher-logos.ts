@@ -43,6 +43,16 @@ export const PUBLISHER_LOGO_COLOR: Record<string, string> = {
   Vercel: '#F4F4F5',
 }
 
+/** Assets SVG officiels (multicolores) — préférés aux paths monochromes. */
+export const PUBLISHER_LOGO_ASSET: Record<string, string> = {
+  Brave: '/publishers/brave.svg',
+  Auth0: '/publishers/auth0.svg',
+}
+
 export function hasPublisherLogo(name: string): boolean {
-  return name in PUBLISHER_LOGO_PATH
+  return name in PUBLISHER_LOGO_ASSET || name in PUBLISHER_LOGO_PATH
+}
+
+export function publisherLogoAsset(name: string): string | undefined {
+  return PUBLISHER_LOGO_ASSET[name]
 }
