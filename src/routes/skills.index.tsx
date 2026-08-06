@@ -315,7 +315,7 @@ function SkillsPage() {
                     active={publisher === p.id}
                     icon={meta.icon}
                     color={meta.color}
-                    logo={meta.logo ? <PublisherLogo name={p.id} size={14} /> : undefined}
+                    logo={meta.logo ? <PublisherLogo name={p.id} size={16} /> : undefined}
                     label={p.id}
                     count={p.count}
                     onClick={() => setPublisher(publisher === p.id ? 'all' : p.id)}
@@ -434,9 +434,9 @@ function CategoryButton({
           : 'border-transparent text-[var(--text-2)] hover:bg-[var(--surface-hover)]'
       }`}
     >
-      {/* Logos marque : pastille blanche (hors dark). Icônes Phosphor : pastille thème. */}
+      {/* Logos marque : pas de pastille teintée (sale en dark). Icônes Phosphor : pastille légère. */}
       <span
-        className={`grid shrink-0 place-items-center ${logo ? '' : 'h-[22px] w-[22px] rounded-md'}`}
+        className={`grid h-[22px] w-[22px] shrink-0 place-items-center ${logo ? '' : 'rounded-md'}`}
         style={
           logo
             ? undefined
@@ -481,8 +481,8 @@ function SkillRow({
     <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] px-4 py-3.5 transition-colors hover:bg-[var(--surface-hover)] sm:px-[18px]`}>
       <Link to="/skills/$id" params={{ id: skill.id }} className="flex min-w-0 cursor-pointer items-center gap-[11px] text-[var(--text-1)]">
         <span
-          className={`grid flex-none place-items-center ${
-            showPublisherLogo ? '' : 'h-[34px] w-[34px] rounded-[9px]'
+          className={`grid h-[34px] w-[34px] flex-none place-items-center ${
+            showPublisherLogo ? '' : 'rounded-[9px]'
           }`}
           style={
             showPublisherLogo
@@ -491,7 +491,7 @@ function SkillRow({
           }
         >
           {showPublisherLogo && publisher ? (
-            <PublisherLogo name={publisher} size={20} />
+            <PublisherLogo name={publisher} size={22} />
           ) : (
             <Icon name={skill.icon} bold size={17} />
           )}

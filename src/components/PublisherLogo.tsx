@@ -10,73 +10,49 @@ type PublisherLogoProps = {
   className?: string
   /** Remplit avec currentColor (hérité) au lieu de la couleur marque. */
   inherit?: boolean
-  /**
-   * Sans pastille claire (défaut : false).
-   * Les logos sont exclus du dark theme via un fond blanc + color-scheme: light.
-   */
-  bare?: boolean
-}
-
-/** Couleurs adaptées à un fond clair (badge hors dark theme). */
-function fillOnLight(name: string, inherit: boolean): string {
-  if (inherit) return 'currentColor'
-  // Vercel / logos clairs → noir sur pastille blanche
-  if (name === 'Vercel') return '#000000'
-  return PUBLISHER_LOGO_COLOR[name] ?? 'currentColor'
 }
 
 /**
  * Logo marque d’éditeur.
- * Toujours rendu sur pastille blanche (`color-scheme: light`) pour exclure
- * le dark theme — couleurs marque stables quel que soit le thème UI.
+ * Préfère les SVG officiels multicolores (`/publishers/*.svg`) quand dispo
+ * (ex. Brave orange + visage blanc). Sinon path monochrome Simple Icons.
  */
 export default function PublisherLogo({
   name,
   size = 14,
   className = '',
   inherit = false,
-  bare = false,
 }: PublisherLogoProps) {
   const asset = publisherLogoAsset(name)
-  const mark = asset && !inherit ? (
-    <img
-      src={asset}
-      alt=""
-      width={size}
-      height={size}
-      className="block object-contain"
-      draggable={false}
-    />
-  ) : PUBLISHER_LOGO_PATH[name] ? (
+  if (asset && !inherit) {
+    return (
+      <img
+        src={asset}
+        alt=""
+        width={size}
+        height={size}
+        className={`block object-contain ${className}`.trim()}
+        draggable={false}
+      />
+    )
+  }
+
+  const path = PUBLISHER_LOGO_PATH[name]
+  if (!path) return null
+  const fill = inherit ? 'currentColor' : (PUBLISHER_LOGO_COLOR[name] ?? 'currentColor')
+
+  return (
     <svg
       role="img"
       aria-hidden="true"
       viewBox="0 0 24 24"
       width={size}
       height={size}
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
       <title>{name}</title>
-      <path fill={fillOnLight(name, inherit)} d={PUBLISHER_LOGO_PATH[name]} />
+      <path fill={fill} d={path} />
     </svg>
-  ) : null
-
-  if (!mark) return null
-
-  if (bare) {
-    return <span className={className}>{mark}</span>
-  }
-
-  const pad = Math.max(3, Math.round(size * 0.18))
-  const box = size + pad * 2
-
-  return (
-    <span
-      className={`publisher-logo-badge inline-grid shrink-0 place-items-center rounded-[6px] ${className}`.trim()}
-      style={{ width: box, height: box, padding: pad }}
-      title={name}
-    >
-      {mark}
-    </span>
   )
 }

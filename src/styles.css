@@ -125,14 +125,6 @@ button {
   font-family: inherit;
 }
 
-/* Logos éditeurs : exclus du dark theme (fond clair forcé + color-scheme light) */
-.publisher-logo-badge {
-  color-scheme: light;
-  background: #ffffff !important;
-  color: #14171c;
-  box-shadow: inset 0 0 0 1px rgba(16, 24, 40, 0.08);
-}
-
 /* Clicables : pointeur par défaut (hors @layer pour gagner sur le preflight Tailwind) */
 button:not(:disabled),
 a[href],
