@@ -43,10 +43,28 @@ export const PUBLISHER_LOGO_COLOR: Record<string, string> = {
   Vercel: '#F4F4F5',
 }
 
-/** Assets SVG officiels (multicolores) — préférés aux paths monochromes. */
+/** Assets SVG (tous les éditeurs connus) — pastille claire hors dark theme. */
 export const PUBLISHER_LOGO_ASSET: Record<string, string> = {
-  Brave: '/publishers/brave.svg',
+  Angular: '/publishers/angular.svg',
+  Anthropic: '/publishers/anthropic.svg',
+  Apollo: '/publishers/apollo.svg',
   Auth0: '/publishers/auth0.svg',
+  'Better Auth': '/publishers/better-auth.svg',
+  Brave: '/publishers/brave.svg',
+  Browserbase: '/publishers/browserbase.svg',
+  Cloudflare: '/publishers/cloudflare.svg',
+  CodeRabbit: '/publishers/coderabbit.svg',
+  Community: '/publishers/community.svg',
+  Cypress: '/publishers/cypress.svg',
+  ECC: '/publishers/ecc.svg',
+  Figma: '/publishers/figma.svg',
+  Flox: '/publishers/flox.svg',
+  Flutter: '/publishers/flutter.svg',
+  Gemini: '/publishers/gemini.svg',
+  'Google Workspace': '/publishers/google-workspace.svg',
+  Neon: '/publishers/neon.svg',
+  Stitch: '/publishers/stitch.svg',
+  Vercel: '/publishers/vercel.svg',
 }
 
 export function hasPublisherLogo(name: string): boolean {

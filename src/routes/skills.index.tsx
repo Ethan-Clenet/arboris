@@ -6,7 +6,7 @@ import CliCommandBar from '#/components/CliCommandBar'
 import PageShell from '#/components/PageShell'
 import { AgentBadge, AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
 import SecurityBadge from '#/components/SecurityBadge'
-import PublisherLogo from '#/components/PublisherLogo'
+import PublisherLogo, { PublisherLogoFallback } from '#/components/PublisherLogo'
 import { hasPublisherLogo, PUBLISHER_LOGO_COLOR } from '#/lib/publisher-logos'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
@@ -305,6 +305,7 @@ function SkillsPage() {
                 icon="buildings"
                 label={t.skills.allPublishers}
                 count={catalog.skills.length}
+                logo={<PublisherLogoFallback icon="buildings" size={14} />}
                 onClick={() => setPublisher('all')}
               />
               {publisherList.map((p) => {
@@ -315,7 +316,13 @@ function SkillsPage() {
                     active={publisher === p.id}
                     icon={meta.icon}
                     color={meta.color}
-                    logo={meta.logo ? <PublisherLogo name={p.id} size={14} /> : undefined}
+                    logo={
+                      meta.logo ? (
+                        <PublisherLogo name={p.id} size={14} />
+                      ) : (
+                        <PublisherLogoFallback icon={meta.icon} color={meta.color} size={14} />
+                      )
+                    }
                     label={p.id}
                     count={p.count}
                     onClick={() => setPublisher(publisher === p.id ? 'all' : p.id)}

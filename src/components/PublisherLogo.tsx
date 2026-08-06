@@ -3,6 +3,7 @@ import {
   PUBLISHER_LOGO_PATH,
   publisherLogoAsset,
 } from '#/lib/publisher-logos'
+import Icon from '#/components/Icon'
 
 type PublisherLogoProps = {
   name: string
@@ -77,6 +78,30 @@ export default function PublisherLogo({
       title={name}
     >
       {mark}
+    </span>
+  )
+}
+
+/** Icône Phosphor sur pastille claire — même traitement hors dark que les logos marque. */
+export function PublisherLogoFallback({
+  icon,
+  color,
+  size = 14,
+  className = '',
+}: {
+  icon: string
+  color?: string
+  size?: number
+  className?: string
+}) {
+  const pad = Math.max(3, Math.round(size * 0.18))
+  const box = size + pad * 2
+  return (
+    <span
+      className={`publisher-logo-badge inline-grid shrink-0 place-items-center rounded-[6px] ${className}`.trim()}
+      style={{ width: box, height: box, padding: pad, color: color ?? '#5a616c' }}
+    >
+      <Icon name={icon} size={size} />
     </span>
   )
 }
