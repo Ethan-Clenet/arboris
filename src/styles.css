@@ -125,14 +125,6 @@ button {
   font-family: inherit;
 }
 
-/* Logos éditeurs : exclus du dark theme (fond clair forcé + color-scheme light) */
-.publisher-logo-badge {
-  color-scheme: light;
-  background: #ffffff !important;
-  color: #14171c;
-  box-shadow: inset 0 0 0 1px rgba(16, 24, 40, 0.08);
-}
-
 /* Clicables : pointeur par défaut (hors @layer pour gagner sur le preflight Tailwind) */
 button:not(:disabled),
 a[href],
@@ -162,10 +154,30 @@ button:disabled,
   cursor: not-allowed;
 }
 
+/* Logos marque : îlot clair, jamais teinté par le dark theme */
+.publisher-logo-mark {
+  color-scheme: light;
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 7px;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+  color: #14171c;
+  forced-color-adjust: none;
+}
+
+[data-theme='dark'] .publisher-logo-mark {
+  background: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
+}
+
+html[data-arboris-vt="active"]::view-transition-group(root) {
+  animation-duration: var(--arboris-vt-duration);
 }
 
 @keyframes sp-blink {
