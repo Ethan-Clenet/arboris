@@ -36,7 +36,9 @@
     "db:studio": "prisma studio",
     "db:reset": "prisma migrate reset --force",
     "skills:scan": "node scripts/skillspector-scan.mjs",
-    "skills:scan:sample": "node scripts/skillspector-scan.mjs --limit 5"
+    "skills:scan:sample": "node scripts/skillspector-scan.mjs --limit 5",
+    "skills:scan:resolve": "node scripts/skillspector-resolve-version.mjs",
+    "skills:scan:ci": "node scripts/skillspector-scan.mjs --resolve --no-db"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

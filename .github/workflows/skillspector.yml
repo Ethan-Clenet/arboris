@@ -6,23 +6,51 @@ on:
     paths:
       - 'prisma/skills/**'
       - 'scripts/skillspector-scan.mjs'
+      - 'scripts/skillspector-resolve-version.mjs'
+      - 'skillspector-version.json'
 
 jobs:
-  scan-sample:
+  scan:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
-      - name: Build SkillSpector image
-        run: |
-          git clone --depth 1 https://github.com/NVIDIA/SkillSpector.git /tmp/SkillSpector
-          docker build -t skillspector /tmp/SkillSpector
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Scan sample (static)
-        run: node scripts/skillspector-scan.mjs --limit 5 --no-db --force
+
+      - name: Resolve SkillSpector version
+        id: resolve
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/skillspector-resolve-version.mjs
+
+      - name: Build SkillSpector image
+        env:
+          SS_VERSION: ${{ steps.resolve.outputs.version }}
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch "v${SS_VERSION}" https://github.com/NVIDIA/SkillSpector.git /tmp/SkillSpector
+          docker build -t "skillspector:${SS_VERSION}" -t skillspector /tmp/SkillSpector
+
+      - name: Scan catalog (static, skip unchanged)
+        env:
+          SKILLSPECTOR_VERSION: ${{ steps.resolve.outputs.version }}
+          SKILLSPECTOR_IMAGE: skillspector:${{ steps.resolve.outputs.version }}
+        run: node scripts/skillspector-scan.mjs --no-db
+
       - name: Upload reports
         uses: actions/upload-artifact@v4
         with:
           name: skillspector-reports
-          path: prisma/skillspector-reports/*.json
+          path: |
+            prisma/skillspector-reports/*.json
+            skillspector-version.json
+          if-no-files-found: warn
+
+      - name: Major upgrade notice
+        if: steps.resolve.outputs.policy == 'block-major'
+        run: |
+          echo "::warning title=SkillSpector major disponible::${{ steps.resolve.outputs.message }}"

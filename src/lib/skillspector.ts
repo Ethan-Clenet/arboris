@@ -23,6 +23,10 @@ export type SkillSecurityReport = {
   scannedAt: string
   scanMode: 'static' | 'semantic'
   skillName?: string
+  /** Hash du dossier skill au moment du scan (skip si inchangé). */
+  contentHash?: string
+  /** Version SkillSpector utilisée (rescan si le pin change). */
+  scannerVersion?: string
 }
 
 /** Seuil sous lequel l’install affiche un avertissement fort (sûreté). */

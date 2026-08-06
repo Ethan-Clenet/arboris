@@ -8,8 +8,10 @@
  *   node scripts/skillspector-scan.mjs --limit 10
  *   node scripts/skillspector-scan.mjs --force           # rescanner même si rapport frais
  *   node scripts/skillspector-scan.mjs --no-db           # fichiers seulement
+ *   node scripts/skillspector-scan.mjs --resolve         # resolve semver avant scan
  *
- * Prérequis : image Docker `skillspector` (docker build -t skillspector …).
+ * Prérequis : image Docker `skillspector` ou `skillspector:<version>`.
+ * Skip si contentHash + scannerVersion inchangés (sauf --force).
  * Score Arboris = 100 − risk_score SkillSpector.
  */
 import { spawn } from 'node:child_process'
@@ -22,7 +24,7 @@ import { createRequire } from 'node:module'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const skillsDir = join(root, 'prisma', 'skills')
 const reportsDir = join(root, 'prisma', 'skillspector-reports')
-const image = process.env.SKILLSPECTOR_IMAGE || 'skillspector'
+const pinPath = join(root, 'skillspector-version.json')
 const require = createRequire(import.meta.url)
 
 function parseArgs(argv) {
@@ -30,6 +32,7 @@ function parseArgs(argv) {
   let limit = null
   let force = false
   let noDb = false
+  let resolve = false
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i]
     if (arg === '--limit') {
@@ -38,6 +41,8 @@ function parseArgs(argv) {
       force = true
     } else if (arg === '--no-db') {
       noDb = true
+    } else if (arg === '--resolve') {
+      resolve = true
     } else if (arg.startsWith('-')) {
       console.error(`Option inconnue: ${arg}`)
       process.exit(1)
@@ -45,7 +50,7 @@ function parseArgs(argv) {
       skills.push(arg)
     }
   }
-  return { skills, limit, force, noDb }
+  return { skills, limit, force, noDb, resolve }
 }
 
 function riskToSafetyScore(riskScore) {
@@ -92,6 +97,7 @@ function mapSkillspectorJson(raw) {
     scanMode: 'static',
     skillName: typeof skill?.name === 'string' ? skill.name : undefined,
     contentHash: undefined,
+    scannerVersion: undefined,
   }
 }
 
@@ -124,7 +130,53 @@ async function hashSkillDir(skillId) {
   return hash.digest('hex')
 }
 
-function runDockerScan(skillId) {
+function runCmd(command, args, opts = {}) {
+  return new Promise((resolvePromise, reject) => {
+    const child = spawn(command, args, { stdio: opts.stdio ?? ['ignore', 'pipe', 'pipe'] })
+    let stdout = ''
+    let stderr = ''
+    if (child.stdout) child.stdout.on('data', (c) => { stdout += c.toString() })
+    if (child.stderr) child.stderr.on('data', (c) => { stderr += c.toString() })
+    child.on('error', reject)
+    child.on('close', (code) => {
+      if (code !== 0) {
+        reject(new Error(`${command} exit ${code}: ${stderr.trim() || stdout.trim() || 'failed'}`))
+        return
+      }
+      resolvePromise({ stdout, stderr })
+    })
+  })
+}
+
+async function runResolve() {
+  const { stdout } = await runCmd(process.execPath, [join(root, 'scripts', 'skillspector-resolve-version.mjs')], {
+    stdio: ['ignore', 'pipe', 'inherit'],
+  })
+  process.stdout.write(stdout)
+  const match = stdout.match(/^VERSION=(.+)$/m)
+  if (!match) throw new Error('resolve-version n’a pas émis VERSION=')
+  return match[1].trim()
+}
+
+async function readPinnedVersion() {
+  if (process.env.SKILLSPECTOR_VERSION) {
+    return String(process.env.SKILLSPECTOR_VERSION).replace(/^v/i, '').trim()
+  }
+  try {
+    const pin = JSON.parse(await readFile(pinPath, 'utf-8'))
+    return String(pin.version).replace(/^v/i, '').trim()
+  } catch {
+    return null
+  }
+}
+
+function resolveImageName(scannerVersion) {
+  if (process.env.SKILLSPECTOR_IMAGE) return process.env.SKILLSPECTOR_IMAGE
+  if (scannerVersion) return `skillspector:${scannerVersion}`
+  return 'skillspector'
+}
+
+function runDockerScan(image, skillId) {
   return new Promise((resolvePromise, reject) => {
     const outName = `${skillId}.raw.json`
     const args = [
@@ -160,7 +212,6 @@ function runDockerScan(skillId) {
 }
 
 async function upsertDb(skillId, report, safetyScore) {
-  // Prisma via require dynamiquement pour éviter de charger si --no-db
   let PrismaClient
   try {
     ;({ PrismaClient } = require('@prisma/client'))
@@ -191,11 +242,7 @@ async function upsertDb(skillId, report, safetyScore) {
   }
 }
 
-async function main() {
-  const { skills: only, limit, force, noDb } = parseArgs(process.argv.slice(2))
-  await mkdir(reportsDir, { recursive: true })
-
-  // Vérifier l'image Docker
+async function ensureImage(image) {
   await new Promise((resolvePromise, reject) => {
     const child = spawn('docker', ['image', 'inspect', image], { stdio: 'ignore' })
     child.on('error', reject)
@@ -203,7 +250,8 @@ async function main() {
       if (code !== 0) {
         reject(
           new Error(
-            `Image Docker « ${image} » introuvable. Build : cd /path/to/SkillSpector && docker build -t skillspector .`,
+            `Image Docker « ${image} » introuvable. ` +
+              `Build : git clone -b v<ver> https://github.com/NVIDIA/SkillSpector.git && docker build -t ${image} .`,
           ),
         )
         return
@@ -211,11 +259,27 @@ async function main() {
       resolvePromise()
     })
   })
+}
+
+async function main() {
+  const { skills: only, limit, force, noDb, resolve } = parseArgs(process.argv.slice(2))
+  await mkdir(reportsDir, { recursive: true })
+
+  let scannerVersion = await readPinnedVersion()
+  if (resolve) {
+    scannerVersion = await runResolve()
+  }
+  if (!scannerVersion) {
+    throw new Error('Version SkillSpector introuvable (skillspector-version.json ou SKILLSPECTOR_VERSION)')
+  }
+
+  const image = resolveImageName(scannerVersion)
+  await ensureImage(image)
 
   let ids = only.length ? only : await listSkillDirs()
   if (limit != null && Number.isFinite(limit)) ids = ids.slice(0, limit)
 
-  console.log(`🔍 SkillSpector static — ${ids.length} skill(s), image=${image}`)
+  console.log(`🔍 SkillSpector static — ${ids.length} skill(s), image=${image}, scanner=${scannerVersion}`)
 
   let scanned = 0
   let skipped = 0
@@ -238,10 +302,15 @@ async function main() {
     if (!force) {
       try {
         const prev = JSON.parse(await readFile(reportPath, 'utf-8'))
-        if (prev.contentHash === contentHash) {
+        const sameHash = prev.contentHash === contentHash
+        const sameScanner = prev.scannerVersion === scannerVersion
+        if (sameHash && sameScanner) {
           console.log(`· ${skillId} — inchangé, skip`)
           skipped++
           continue
+        }
+        if (sameHash && !sameScanner) {
+          console.log(`· ${skillId} — skill inchangé, scanner ${prev.scannerVersion ?? '?'} → ${scannerVersion}`)
         }
       } catch {
         // pas de rapport précédent
@@ -250,11 +319,12 @@ async function main() {
 
     process.stdout.write(`→ ${skillId} … `)
     try {
-      const rawPath = await runDockerScan(skillId)
+      const rawPath = await runDockerScan(image, skillId)
       const raw = JSON.parse(await readFile(rawPath, 'utf-8'))
       const report = mapSkillspectorJson(raw)
       if (!report) throw new Error('rapport JSON invalide')
       report.contentHash = contentHash
+      report.scannerVersion = scannerVersion
       const safety = riskToSafetyScore(report.riskScore)
       await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`, 'utf-8')
 

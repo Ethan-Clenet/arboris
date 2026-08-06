@@ -1,0 +1,6 @@
+{
+  "version": "2.5.3",
+  "repository": "NVIDIA/SkillSpector",
+  "updatedAt": "2026-08-06T00:00:00.000Z",
+  "note": "Version pinée de SkillSpector. Les bumps minor/patch sont appliqués automatiquement au resolve ; un major est bloqué avec alerte."
+}
