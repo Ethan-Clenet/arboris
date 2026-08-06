@@ -8,7 +8,19 @@ type PublisherLogoProps = {
   inherit?: boolean
 }
 
-/** Logo marque d’un éditeur (ex. Brave) — fallback null si inconnu. */
+function isNearWhite(fill: string): boolean {
+  const f = fill.trim().toLowerCase()
+  return f === '#fff' || f === '#ffffff' || f === '#f4f4f5' || f === '#ededed' || f === 'currentcolor'
+}
+
+/**
+ * Logos marque (Simple Icons / paths custom).
+ *
+ * Sur fond sombre, les découpes SVG (visage Brave, étoile Auth0…) laissent
+ * transparaître le noir et cassent le logo. On pose d’abord une silhouette
+ * claire (nonzero), puis la couleur marque en evenodd — comme sur les sites
+ * qui affichent Brave en orange + blanc.
+ */
 export default function PublisherLogo({
   name,
   size = 14,
@@ -18,6 +30,7 @@ export default function PublisherLogo({
   const path = PUBLISHER_LOGO_PATH[name]
   if (!path) return null
   const fill = inherit ? 'currentColor' : (PUBLISHER_LOGO_COLOR[name] ?? 'currentColor')
+  const cutoutUnderlay = !inherit && !isNearWhite(fill)
 
   return (
     <svg
@@ -30,7 +43,8 @@ export default function PublisherLogo({
       xmlns="http://www.w3.org/2000/svg"
     >
       <title>{name}</title>
-      <path fill={fill} d={path} />
+      {cutoutUnderlay ? <path d={path} fill="#F4F4F5" fillRule="nonzero" /> : null}
+      <path d={path} fill={fill} fillRule="evenodd" />
     </svg>
   )
 }
