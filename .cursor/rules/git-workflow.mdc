@@ -13,3 +13,11 @@ Quand une tâche est terminée et qu’il y a des changements pertinents :
 4. **Merge request / PR** — ouvrir (ou mettre à jour) une PR/MR avec **base `master`**.
 
 Ne pas merger soi-même dans `master` sauf demande explicite.
+
+# Vérification UI
+
+Après des changements front / UX visibles :
+
+1. Lancer l’app en local (`npm run dev`, DB up si besoin).
+2. Ouvrir le site dans le navigateur et **tester le parcours modifié**.
+3. Confirmer le résultat (comportement + éventuelle capture) avant de considérer la tâche terminée.
