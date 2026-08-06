@@ -12,6 +12,8 @@ import SkillInstallButtons from '#/components/SkillInstallButtons'
 import CliCommandBar from '#/components/CliCommandBar'
 import SecurityBadge from '#/components/SecurityBadge'
 import NvidiaLogo from '#/components/NvidiaLogo'
+import PublisherLogo from '#/components/PublisherLogo'
+import { hasPublisherLogo } from '#/lib/publisher-logos'
 import { seoHead, entityDescription, skillSeoTitle } from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/$id')({
@@ -43,6 +45,8 @@ function SkillDetailPage() {
 
   const color = category?.color ?? 'var(--text-3)'
   const tint = category ? hexToRgba(category.color, 0.14) : 'var(--surface-2)'
+  const publisher = skill.publisher
+  const showPublisherLogo = Boolean(publisher && hasPublisherLogo(publisher))
   const copyContent = useMemo(
     () => fileContent ?? buildSkillMarkdown(skill, lang),
     [fileContent, skill, lang],
@@ -73,8 +77,17 @@ function SkillDetailPage() {
       {/* En-tête */}
       <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
         <div className="flex min-w-0 flex-1 flex-wrap items-start gap-[22px]">
-          <div className="grid h-16 w-16 flex-none place-items-center rounded-2xl" style={{ background: tint, color }}>
-            <Icon name={skill.icon} bold size={32} />
+          <div
+            className={`grid h-16 w-16 flex-none place-items-center rounded-2xl ${
+              showPublisherLogo ? 'border border-[var(--border)] bg-transparent' : ''
+            }`}
+            style={showPublisherLogo ? undefined : { background: tint, color }}
+          >
+            {showPublisherLogo && publisher ? (
+              <PublisherLogo name={publisher} size={30} />
+            ) : (
+              <Icon name={skill.icon} bold size={32} />
+            )}
           </div>
           <div className="min-w-[240px] flex-1">
           <div className="mb-2.5 flex flex-wrap items-center gap-2.5">

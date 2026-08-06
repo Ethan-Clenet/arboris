@@ -434,12 +434,15 @@ function CategoryButton({
           : 'border-transparent text-[var(--text-2)] hover:bg-[var(--surface-hover)]'
       }`}
     >
+      {/* Logos marque : pas de pastille teintée (sale en dark). Icônes Phosphor : pastille légère. */}
       <span
-        className="grid h-[22px] w-[22px] place-items-center rounded-md"
+        className={`grid h-[22px] w-[22px] shrink-0 place-items-center ${logo ? '' : 'rounded-md'}`}
         style={
-          color
-            ? { background: hexToRgba(color, 0.14), color }
-            : { background: 'var(--surface-2)', color: 'var(--text-2)' }
+          logo
+            ? undefined
+            : color
+              ? { background: hexToRgba(color, 0.14), color }
+              : { background: 'var(--surface-2)', color: 'var(--text-2)' }
         }
       >
         {logo ?? <Icon name={icon} size={13} />}
@@ -471,15 +474,27 @@ function SkillRow({
 }) {
   const { t, lang } = useI18n()
   const color = category?.color ?? 'var(--text-3)'
+  const publisher = skill.publisher
+  const showPublisherLogo = Boolean(publisher && hasPublisherLogo(publisher))
 
   return (
     <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] px-4 py-3.5 transition-colors hover:bg-[var(--surface-hover)] sm:px-[18px]`}>
       <Link to="/skills/$id" params={{ id: skill.id }} className="flex min-w-0 cursor-pointer items-center gap-[11px] text-[var(--text-1)]">
         <span
-          className="grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px]"
-          style={{ background: category ? hexToRgba(category.color, 0.13) : 'var(--surface-2)', color }}
+          className={`grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px] ${
+            showPublisherLogo ? 'border border-[var(--border)] bg-transparent' : ''
+          }`}
+          style={
+            showPublisherLogo
+              ? undefined
+              : { background: category ? hexToRgba(category.color, 0.13) : 'var(--surface-2)', color }
+          }
         >
-          <Icon name={skill.icon} bold size={17} />
+          {showPublisherLogo && publisher ? (
+            <PublisherLogo name={publisher} size={18} />
+          ) : (
+            <Icon name={skill.icon} bold size={17} />
+          )}
         </span>
         <span className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
           <span className="min-w-0 overflow-hidden">
