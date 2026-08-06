@@ -1,0 +1,15 @@
+---
+description: Flux git — commit, push et MR vers master
+alwaysApply: true
+---
+
+# Flux git
+
+Quand une tâche est terminée et qu’il y a des changements pertinents :
+
+1. **Branche** — travailler sur une branche feature (ne pas committer directement sur `master`).
+2. **Commit** — créer un commit clair, style du repo (pas de `--no-verify`, pas de secrets, pas d’amend sauf cas prévus).
+3. **Push** — pousser la branche vers le remote (`git push -u origin <branche>` si premier push).
+4. **Merge request / PR** — ouvrir (ou mettre à jour) une PR/MR avec **base `master`**.
+
+Ne pas merger soi-même dans `master` sauf demande explicite.

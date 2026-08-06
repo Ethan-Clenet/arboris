@@ -391,7 +391,7 @@ function GettingStartedPage() {
                   <CliCommandBar
                     args={active.id}
                     copyLabel={t.start.copyCommand}
-                    copiedLabel={t.start.copied}
+                    copiedLabel={t.start.copiedCommand}
                     className="w-full shrink-0 sm:max-w-[320px] lg:max-w-[380px]"
                   />
                 </div>
