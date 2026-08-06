@@ -100,15 +100,45 @@ export function resolvePublisherId(input: string, manifest: CliManifest): string
   const byLower = keys.find((key) => key.toLowerCase() === lower)
   if (byLower) return byLower
 
-  // Alias courants alignés sur normalizePublisher (catalogue)
-  if (lower === 'ecc' || lower === 'ecc-community' || lower.startsWith('ecc ')) {
-    return byPublisher.ECC ? 'ECC' : null
+  const aliases: Record<string, string> = {
+    ecc: 'ECC',
+    'ecc-community': 'ECC',
+    community: 'Community',
+    flox: 'Flox',
+    brave: 'Brave',
+    angular: 'Angular',
+    anthropic: 'Anthropic',
+    anthropics: 'Anthropic',
+    apollo: 'Apollo',
+    apollographql: 'Apollo',
+    'better-auth': 'Better Auth',
+    betterauth: 'Better Auth',
+    auth0: 'Auth0',
+    browserbase: 'Browserbase',
+    cloudflare: 'Cloudflare',
+    coderabbit: 'CodeRabbit',
+    coderabbitai: 'CodeRabbit',
+    cypress: 'Cypress',
+    gemini: 'Gemini',
+    stitch: 'Stitch',
+    gws: 'Google Workspace',
+    googleworkspace: 'Google Workspace',
+    'google-workspace': 'Google Workspace',
+    vercel: 'Vercel',
+    nextjs: 'Vercel',
+    'next.js': 'Vercel',
+    neon: 'Neon',
+    neondatabase: 'Neon',
+    flutter: 'Flutter',
+    dart: 'Flutter',
+    figma: 'Figma',
   }
-  if (lower === 'community') return byPublisher.Community ? 'Community' : null
-  if (lower === 'flox') return byPublisher.Flox ? 'Flox' : null
-  if (lower === 'brave' || lower.startsWith('brave ')) {
-    return byPublisher.Brave ? 'Brave' : null
-  }
+  const alias = aliases[lower]
+  if (alias && byPublisher[alias]) return alias
+
+  // Phrases multi-mots
+  if (lower === 'better auth' && byPublisher['Better Auth']) return 'Better Auth'
+  if (lower === 'google workspace' && byPublisher['Google Workspace']) return 'Google Workspace'
 
   return null
 }

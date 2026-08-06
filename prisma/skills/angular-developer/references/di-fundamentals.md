@@ -6,25 +6,23 @@ Dependency Injection (DI) is a design pattern used to organize and share code ac
 
 There are two primary ways code interacts with Angular's DI system:
 
-1. **Providing**: Making values (objects, functions, primitives) available to the DI system.
-2. **Injecting**: Asking the DI system for those values.
+1.  **Providing**: Making values (objects, functions, primitives) available to the DI system.
+2.  **Injecting**: Asking the DI system for those values.
 
 Angular components, directives, and services automatically participate in DI.
 
 ## Services
 
-A **service** is the most common way to share data and functionality across an application. It is a TypeScript class decorated with `@Injectable()`.
+A **service** is the most common way to share data and functionality across an application. It is a TypeScript class decorated with `@Service()`.
 
 ### Creating a Service
 
-Use the `providedIn: 'root'` option in the `@Injectable` decorator to make the service a singleton available throughout the entire application. This is the recommended approach for most services.
+Use the `@Service()` decorator to make the service a singleton available throughout the entire application. This is the recommended approach for most services.
 
 ```ts
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 
-@Injectable({
-  providedIn: 'root', // Makes this a singleton available everywhere
-})
+@Service()
 export class AnalyticsLogger {
   trackEvent(category: string, value: string) {
     console.log('Analytics event logged:', {category, value});
@@ -59,8 +57,8 @@ import {AnalyticsLogger} from './analytics-logger.service';
 })
 export class Navbar {
   // Injecting dependencies using class field initializers
-  private router = inject(Router);
-  private analytics = inject(AnalyticsLogger);
+  private readonly router = inject(Router);
+  private readonly analytics = inject(AnalyticsLogger);
 
   navigateToDetail(event: Event) {
     event.preventDefault();
@@ -76,25 +74,23 @@ You can call `inject()` in an **injection context**. The most common injection c
 
 Valid places to call `inject()`:
 
-1. **Class field initializers** (Recommended)
-2. **Constructor body**
-3. **Route guards and resolvers** (which are executed in an injection context)
-4. **Factory functions** used in providers
+1.  **Class field initializers** (Recommended)
+2.  **Constructor body**
+3.  **Route guards and resolvers** (which are executed in an injection context)
+4.  **Factory functions** used in providers
 
 ```typescript
-import {Component, Directive, Injectable, inject, ElementRef} from '@angular/core';
+import {Component, Directive, Service, inject, ElementRef} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 // 1. In a Component (Field Initializer & Constructor)
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class Example {
-  private service1 = inject(MyService); // Valid field initializer
+  private service1 = inject(MyService); // ✅ Field initializer
 
   private service2: MyService;
   constructor() {
-    this.service2 = inject(MyService); // Valid constructor body
+    this.service2 = inject(MyService); // ✅ Constructor body
   }
 }
 
@@ -103,18 +99,18 @@ export class Example {
   /*...*/
 })
 export class MyDirective {
-  private element = inject(ElementRef); // Valid field initializer
+  private element = inject(ElementRef); // ✅ Field initializer
 }
 
 // 3. In a Service
-@Injectable({providedIn: 'root'})
+@Service()
 export class MyService {
-  private http = inject(HttpClient); // Valid field initializer
+  private http = inject(HttpClient); // ✅ Field initializer
 }
 
 // 4. In a Route Guard (Functional)
 export const authGuard = () => {
-  const auth = inject(AuthService); // Valid route guard
+  const auth = inject(AuthService); // ✅ Route Guard
   return auth.isAuthenticated();
 };
 ```

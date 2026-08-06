@@ -1,0 +1,350 @@
+{
+  "at": "2026-08-06T08:32:57.705Z",
+  "skills": 231,
+  "commands": 2,
+  "summary": [
+    {
+      "repo": "angular/skills",
+      "ok": true,
+      "count": 2,
+      "ids": [
+        "angular-developer",
+        "angular-new-app"
+      ]
+    },
+    {
+      "repo": "anthropics/skills",
+      "ok": true,
+      "count": 17,
+      "ids": [
+        "algorithmic-art",
+        "brand-guidelines",
+        "canvas-design",
+        "claude-api",
+        "doc-coauthoring",
+        "docx",
+        "frontend-design",
+        "internal-comms",
+        "mcp-builder",
+        "pdf",
+        "pptx",
+        "skill-creator",
+        "slack-gif-creator",
+        "theme-factory",
+        "web-artifacts-builder",
+        "webapp-testing",
+        "xlsx"
+      ]
+    },
+    {
+      "repo": "apollographql/skills",
+      "ok": true,
+      "count": 13,
+      "ids": [
+        "apollo-client",
+        "apollo-connectors",
+        "apollo-federation",
+        "apollo-ios",
+        "apollo-kotlin",
+        "apollo-mcp-server",
+        "apollo-router",
+        "apollo-router-plugin-creator",
+        "apollo-server",
+        "graphql-operations",
+        "graphql-schema",
+        "rover",
+        "rust-best-practices"
+      ]
+    },
+    {
+      "repo": "better-auth/skills",
+      "ok": true,
+      "count": 5,
+      "ids": [
+        "best-practices",
+        "create-auth",
+        "emailAndPassword",
+        "organization",
+        "twoFactor"
+      ]
+    },
+    {
+      "repo": "auth0/agent-skills",
+      "ok": true,
+      "count": 1,
+      "ids": [
+        "auth0"
+      ]
+    },
+    {
+      "repo": "browserbase/skills",
+      "ok": true,
+      "count": 16,
+      "ids": [
+        "agent-experience",
+        "autobrowse",
+        "browser",
+        "browser-to-api",
+        "browser-trace",
+        "browser-use-to-stagehand",
+        "company-research",
+        "competitor-analysis",
+        "cookie-sync",
+        "event-prospecting",
+        "fetch",
+        "functions",
+        "safe-browser",
+        "search",
+        "ui-test",
+        "webmcp-gen"
+      ]
+    },
+    {
+      "repo": "cloudflare/skills",
+      "ok": true,
+      "count": 11,
+      "ids": [
+        "agents-sdk",
+        "cloudflare",
+        "cloudflare-email-service",
+        "cloudflare-one",
+        "cloudflare-one-migrations",
+        "durable-objects",
+        "sandbox-sdk",
+        "turnstile-spin",
+        "web-perf",
+        "workers-best-practices",
+        "wrangler"
+      ]
+    },
+    {
+      "repo": "coderabbitai/skills",
+      "ok": true,
+      "count": 2,
+      "ids": [
+        "autofix",
+        "code-review"
+      ]
+    },
+    {
+      "repo": "cypress-io/ai-toolkit",
+      "ok": true,
+      "count": 3,
+      "ids": [
+        "cypress-author",
+        "cypress-docs",
+        "cypress-explain"
+      ]
+    },
+    {
+      "repo": "google-gemini/gemini-skills",
+      "ok": true,
+      "count": 4,
+      "ids": [
+        "gemini-api-dev",
+        "gemini-interactions-api",
+        "gemini-live-api-dev",
+        "gemini-omni-flash-api"
+      ]
+    },
+    {
+      "repo": "google-labs-code/stitch-skills",
+      "ok": true,
+      "count": 15,
+      "ids": [
+        "react-components",
+        "react-native",
+        "react-vite-dashboard",
+        "remotion",
+        "shadcn-ui",
+        "code-to-design",
+        "extract-design-md",
+        "extract-static-html",
+        "generate-design",
+        "manage-design-system",
+        "upload-to-stitch",
+        "design-md",
+        "enhance-prompt",
+        "stitch-loop",
+        "taste-design"
+      ]
+    },
+    {
+      "repo": "googleworkspace/cli",
+      "ok": true,
+      "count": 94,
+      "ids": [
+        "gws-admin-reports",
+        "gws-calendar",
+        "gws-calendar-agenda",
+        "gws-calendar-insert",
+        "gws-chat",
+        "gws-chat-send",
+        "gws-classroom",
+        "gws-docs",
+        "gws-docs-write",
+        "gws-drive",
+        "gws-drive-upload",
+        "gws-events",
+        "gws-events-renew",
+        "gws-events-subscribe",
+        "gws-forms",
+        "gws-gmail",
+        "gws-gmail-forward",
+        "gws-gmail-read",
+        "gws-gmail-reply",
+        "gws-gmail-reply-all",
+        "gws-gmail-send",
+        "gws-gmail-triage",
+        "gws-gmail-watch",
+        "gws-keep",
+        "gws-meet",
+        "gws-modelarmor",
+        "gws-modelarmor-create-template",
+        "gws-modelarmor-sanitize-prompt",
+        "gws-modelarmor-sanitize-response",
+        "gws-people",
+        "gws-script",
+        "gws-script-push",
+        "gws-sheets",
+        "gws-sheets-append",
+        "gws-sheets-read",
+        "gws-slides",
+        "gws-tasks",
+        "gws-workflow",
+        "gws-workflow-email-to-task",
+        "gws-workflow-file-announce",
+        "gws-workflow-meeting-prep",
+        "gws-workflow-standup-report",
+        "gws-workflow-weekly-digest",
+        "persona-content-creator",
+        "persona-customer-support",
+        "persona-event-coordinator",
+        "persona-exec-assistant",
+        "persona-hr-coordinator",
+        "persona-it-admin",
+        "persona-project-manager",
+        "persona-researcher",
+        "persona-sales-ops",
+        "persona-team-lead",
+        "recipe-backup-sheet-as-csv",
+        "recipe-batch-invite-to-event",
+        "recipe-block-focus-time",
+        "recipe-bulk-download-folder",
+        "recipe-collect-form-responses",
+        "recipe-compare-sheet-tabs",
+        "recipe-copy-sheet-for-new-month",
+        "recipe-create-classroom-course",
+        "recipe-create-doc-from-template",
+        "recipe-create-events-from-sheet",
+        "recipe-create-expense-tracker",
+        "recipe-create-feedback-form",
+        "recipe-create-gmail-filter",
+        "recipe-create-meet-space",
+        "recipe-create-presentation",
+        "recipe-create-shared-drive",
+        "recipe-create-task-list",
+        "recipe-create-vacation-responder",
+        "recipe-draft-email-from-doc",
+        "recipe-email-drive-link",
+        "recipe-find-free-time",
+        "recipe-find-large-files",
+        "recipe-forward-labeled-emails",
+        "recipe-generate-report-from-sheet",
+        "recipe-label-and-archive-emails",
+        "recipe-log-deal-update",
+        "recipe-organize-drive-folder",
+        "recipe-plan-weekly-schedule",
+        "recipe-post-mortem-setup",
+        "recipe-reschedule-meeting",
+        "recipe-review-meet-participants",
+        "recipe-review-overdue-tasks",
+        "recipe-save-email-attachments",
+        "recipe-save-email-to-doc",
+        "recipe-schedule-recurring-event",
+        "recipe-send-team-announcement",
+        "recipe-share-doc-and-notify",
+        "recipe-share-event-materials",
+        "recipe-share-folder-with-team",
+        "recipe-sync-contacts-to-sheet",
+        "recipe-watch-drive-changes"
+      ]
+    },
+    {
+      "repo": "vercel/next.js",
+      "ok": true,
+      "count": 4,
+      "ids": [
+        "next-cache-components-adoption",
+        "next-cache-components-optimizer",
+        "next-dev-loop",
+        "next-partial-prefetching-adoption"
+      ]
+    },
+    {
+      "repo": "neondatabase/agent-skills",
+      "ok": true,
+      "count": 8,
+      "ids": [
+        "claimable-postgres",
+        "neon",
+        "neon-ai-gateway",
+        "neon-functions",
+        "neon-object-storage",
+        "neon-postgres",
+        "neon-postgres-branches",
+        "neon-postgres-egress-optimizer"
+      ]
+    },
+    {
+      "repo": "flutter/agent-plugins",
+      "ok": true,
+      "count": 22,
+      "ids": [
+        "dart-add-unit-test",
+        "dart-build-cli-app",
+        "dart-collect-coverage",
+        "dart-fix-runtime-errors",
+        "dart-generate-test-mocks",
+        "dart-migrate-to-checks-package",
+        "dart-resolve-package-conflicts",
+        "dart-run-static-analysis",
+        "dart-setup-ffi-assets",
+        "dart-use-ffigen",
+        "dart-use-pattern-matching",
+        "dart-use-primary-constructors",
+        "flutter-add-integration-test",
+        "flutter-add-widget-preview",
+        "flutter-add-widget-test",
+        "flutter-apply-architecture-best-practices",
+        "flutter-build-responsive-layout",
+        "flutter-fix-layout-issues",
+        "flutter-implement-json-serialization",
+        "flutter-setup-declarative-routing",
+        "flutter-setup-localization",
+        "flutter-use-http-package"
+      ]
+    },
+    {
+      "repo": "figma/mcp-server-guide",
+      "ok": true,
+      "count": 14,
+      "ids": [
+        "figma-code-connect",
+        "figma-create-new-file",
+        "figma-design-to-code",
+        "figma-generate-design",
+        "figma-generate-diagram",
+        "figma-generate-library",
+        "figma-implement-motion",
+        "figma-swiftui",
+        "figma-use",
+        "figma-use-figjam",
+        "figma-use-motion",
+        "figma-use-slides",
+        "generate-project-plan",
+        "video-interaction-mapper"
+      ]
+    }
+  ]
+}

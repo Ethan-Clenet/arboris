@@ -68,6 +68,24 @@ export function normalizePublisher(raw: string): string {
   if (lower === 'community') return 'Community'
   if (lower === 'flox') return 'Flox'
   if (lower === 'brave' || lower.startsWith('brave ')) return 'Brave'
+  if (lower === 'angular' || lower.startsWith('angular ')) return 'Angular'
+  if (lower === 'anthropic' || lower === 'anthropics' || lower.startsWith('anthropic ')) return 'Anthropic'
+  if (lower === 'apollo' || lower === 'apollographql' || lower.startsWith('apollo ')) return 'Apollo'
+  if (lower === 'better auth' || lower === 'better-auth' || lower === 'betterauth') return 'Better Auth'
+  if (lower === 'auth0') return 'Auth0'
+  if (lower === 'browserbase') return 'Browserbase'
+  if (lower === 'cloudflare') return 'Cloudflare'
+  if (lower === 'coderabbit' || lower === 'coderabbitai') return 'CodeRabbit'
+  if (lower === 'cypress' || lower === 'cypress-io') return 'Cypress'
+  if (lower === 'gemini' || lower === 'google-gemini') return 'Gemini'
+  if (lower === 'stitch' || lower === 'google-labs-code' || lower.startsWith('stitch ')) return 'Stitch'
+  if (lower === 'google workspace' || lower === 'googleworkspace' || lower === 'gws') {
+    return 'Google Workspace'
+  }
+  if (lower === 'vercel' || lower === 'next.js' || lower === 'nextjs') return 'Vercel'
+  if (lower === 'neon' || lower === 'neondatabase') return 'Neon'
+  if (lower === 'flutter' || lower === 'dart') return 'Flutter'
+  if (lower === 'figma') return 'Figma'
   if (value.includes('/')) {
     const tail = value.split('/').pop()?.trim()
     if (tail) return normalizePublisher(tail)
@@ -154,6 +172,16 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
   ) {
     return 'agents'
   }
+  if (/^gws-/.test(slug)) return 'ops'
+  if (/^figma-|^stitch-|^frontend-design|^canvas-design|^brand-guidelines/.test(slug)) return 'frontend'
+  if (/^flutter-|^dart-/.test(slug)) return 'frontend'
+  if (/^apollo-|^graphql-/.test(slug)) return 'backend'
+  if (/^better-auth|^auth0$|^create-auth/.test(slug)) return 'security'
+  if (/^neon-|^claimable-postgres|^cloudflare|^durable-objects|^wrangler/.test(slug)) return 'backend'
+  if (/^cypress-|^browserbase-|^webapp-testing/.test(slug)) return 'tests'
+  if (/^gemini-|^claude-api|^next-/.test(slug)) return 'agents'
+  if (/^angular-/.test(slug)) return 'frontend'
+  if (/^coderabbit-/.test(slug)) return 'verification'
   if (
     slug === 'supabase' ||
     slug === 'supabase-postgres-best-practices' ||
@@ -343,16 +371,18 @@ export async function loadSkillSeeds(): Promise<SkillSeed[]> {
     const parsed = parseFrontmatter(raw)
     if (!parsed) continue
 
-    const categoryId = inferCategory(parsed.id, parsed.description)
+    // L’id catalogue = nom du dossier (chemin d’install CLI / fichiers package).
+    const id = entry.name
+    const categoryId = inferCategory(id, parsed.description)
     const activationBullets = sectionBullets(parsed.body, 'When to Activate')
     const generalBullets = linesOfBullets(parsed.body)
     const does = (activationBullets.length ? activationBullets : generalBullets).slice(0, 4)
-    const triggers = genericTriggers(parsed.id)
-    const stacks = inferStacks(parsed.id, parsed.description, parsed.body, STACKS)
-    const security = await loadSecurityReport(parsed.id)
+    const triggers = genericTriggers(id)
+    const stacks = inferStacks(id, parsed.description, parsed.body, STACKS)
+    const security = await loadSecurityReport(id)
 
     seeds.push({
-      id: parsed.id,
+      id,
       cat: categoryId,
       icon: inferIcon(categoryId),
       score: security ? riskToSafetyScore(security.riskScore) : null,
@@ -362,19 +392,19 @@ export async function loadSkillSeeds(): Promise<SkillSeed[]> {
       scanMode: security?.scanMode ?? null,
       publisher: parsed.publisher,
       stacks,
-      tech: stacks.length ? stacks.map((stackId) => STACKS.find((stack) => stack.id === stackId)?.label ?? stackId) : [slugTitle(parsed.id)],
+      tech: stacks.length ? stacks.map((stackId) => STACKS.find((stack) => stack.id === stackId)?.label ?? stackId) : [slugTitle(id)],
       compat: ['Claude', 'Cursor', 'Codex', 'Copilot'],
       tag: {
         fr: parsed.description,
         en: parsed.description,
       },
       act: {
-        fr: `applique le skill ${parsed.id} : ${parsed.description}`,
-        en: `apply the ${parsed.id} skill: ${parsed.description}`,
+        fr: `applique le skill ${id} : ${parsed.description}`,
+        en: `apply the ${id} skill: ${parsed.description}`,
       },
       does: {
-        fr: does.length ? does : [`Applique les pratiques du skill ${parsed.id}.`],
-        en: does.length ? does : [`Apply the ${parsed.id} skill practices.`],
+        fr: does.length ? does : [`Applique les pratiques du skill ${id}.`],
+        en: does.length ? does : [`Apply the ${id} skill practices.`],
       },
       triggers,
       bodyMd: raw.trim() || null,

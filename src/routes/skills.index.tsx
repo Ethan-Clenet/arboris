@@ -42,6 +42,22 @@ function publisherMeta(name: string): { icon: string; color?: string; logo?: boo
     Community: { icon: 'users', color: '#4F8FF7' },
     Flox: { icon: 'package', color: '#7C3AED' },
     Brave: { icon: 'shield', color: PUBLISHER_LOGO_COLOR.Brave },
+    Angular: { icon: 'code', color: PUBLISHER_LOGO_COLOR.Angular },
+    Anthropic: { icon: 'sparkle', color: PUBLISHER_LOGO_COLOR.Anthropic },
+    Apollo: { icon: 'share-network', color: PUBLISHER_LOGO_COLOR.Apollo },
+    'Better Auth': { icon: 'lock-key', color: PUBLISHER_LOGO_COLOR['Better Auth'] },
+    Auth0: { icon: 'shield-check', color: PUBLISHER_LOGO_COLOR.Auth0 },
+    Browserbase: { icon: 'browser', color: PUBLISHER_LOGO_COLOR.Browserbase },
+    Cloudflare: { icon: 'cloud', color: PUBLISHER_LOGO_COLOR.Cloudflare },
+    CodeRabbit: { icon: 'git-pull-request', color: PUBLISHER_LOGO_COLOR.CodeRabbit },
+    Cypress: { icon: 'flask', color: PUBLISHER_LOGO_COLOR.Cypress },
+    Gemini: { icon: 'sparkle', color: PUBLISHER_LOGO_COLOR.Gemini },
+    Stitch: { icon: 'palette', color: PUBLISHER_LOGO_COLOR.Stitch },
+    'Google Workspace': { icon: 'google-logo', color: PUBLISHER_LOGO_COLOR['Google Workspace'] },
+    Vercel: { icon: 'triangle', color: '#EDEDED' },
+    Neon: { icon: 'database', color: PUBLISHER_LOGO_COLOR.Neon },
+    Flutter: { icon: 'device-mobile', color: PUBLISHER_LOGO_COLOR.Flutter },
+    Figma: { icon: 'pen-nib', color: PUBLISHER_LOGO_COLOR.Figma },
   }
   const base = known[name] ?? { icon: 'buildings', color: '#8a909b' }
   return { ...base, logo: hasPublisherLogo(name) }
