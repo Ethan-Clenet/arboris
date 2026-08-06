@@ -6,7 +6,7 @@ import CliCommandBar from '#/components/CliCommandBar'
 import PageShell from '#/components/PageShell'
 import { AgentBadge, AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
 import SecurityBadge from '#/components/SecurityBadge'
-import PublisherLogo from '#/components/PublisherLogo'
+import PublisherLogo, { PublisherLogoFallback } from '#/components/PublisherLogo'
 import { hasPublisherLogo, PUBLISHER_LOGO_COLOR } from '#/lib/publisher-logos'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
@@ -305,6 +305,7 @@ function SkillsPage() {
                 icon="buildings"
                 label={t.skills.allPublishers}
                 count={catalog.skills.length}
+                logo={<PublisherLogoFallback icon="buildings" size={14} />}
                 onClick={() => setPublisher('all')}
               />
               {publisherList.map((p) => {
@@ -315,7 +316,13 @@ function SkillsPage() {
                     active={publisher === p.id}
                     icon={meta.icon}
                     color={meta.color}
-                    logo={meta.logo ? <PublisherLogo name={p.id} size={14} /> : undefined}
+                    logo={
+                      meta.logo ? (
+                        <PublisherLogo name={p.id} size={14} />
+                      ) : (
+                        <PublisherLogoFallback icon={meta.icon} color={meta.color} size={14} />
+                      )
+                    }
                     label={p.id}
                     count={p.count}
                     onClick={() => setPublisher(publisher === p.id ? 'all' : p.id)}
@@ -434,13 +441,9 @@ function CategoryButton({
           : 'border-transparent text-[var(--text-2)] hover:bg-[var(--surface-hover)]'
       }`}
     >
-      {/* Logo marque = pastille claire autonome ; icône Phosphor = pastille teintée */}
+      {/* Logos marque : pastille blanche (hors dark). Icônes Phosphor : pastille thème. */}
       <span
-        className={
-          logo
-            ? 'shrink-0'
-            : 'grid h-[22px] w-[22px] shrink-0 place-items-center rounded-md'
-        }
+        className={`grid shrink-0 place-items-center ${logo ? '' : 'h-[22px] w-[22px] rounded-md'}`}
         style={
           logo
             ? undefined
@@ -485,11 +488,9 @@ function SkillRow({
     <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] px-4 py-3.5 transition-colors hover:bg-[var(--surface-hover)] sm:px-[18px]`}>
       <Link to="/skills/$id" params={{ id: skill.id }} className="flex min-w-0 cursor-pointer items-center gap-[11px] text-[var(--text-1)]">
         <span
-          className={
-            showPublisherLogo
-              ? 'flex h-[34px] w-[34px] flex-none items-center justify-center'
-              : 'grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px]'
-          }
+          className={`grid flex-none place-items-center ${
+            showPublisherLogo ? '' : 'h-[34px] w-[34px] rounded-[9px]'
+          }`}
           style={
             showPublisherLogo
               ? undefined
@@ -497,7 +498,7 @@ function SkillRow({
           }
         >
           {showPublisherLogo && publisher ? (
-            <PublisherLogo name={publisher} size={18} />
+            <PublisherLogo name={publisher} size={20} />
           ) : (
             <Icon name={skill.icon} bold size={17} />
           )}

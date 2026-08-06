@@ -78,11 +78,9 @@ function SkillDetailPage() {
       <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
         <div className="flex min-w-0 flex-1 flex-wrap items-start gap-[22px]">
           <div
-            className={
-              showPublisherLogo
-                ? 'flex h-16 w-16 flex-none items-center justify-center'
-                : 'grid h-16 w-16 flex-none place-items-center rounded-2xl'
-            }
+            className={`grid flex-none place-items-center ${
+              showPublisherLogo ? '' : 'h-16 w-16 rounded-2xl'
+            }`}
             style={showPublisherLogo ? undefined : { background: tint, color }}
           >
             {showPublisherLogo && publisher ? (
