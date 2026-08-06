@@ -168,10 +168,6 @@ button:disabled,
   mix-blend-mode: normal;
 }
 
-html[data-arboris-vt="active"]::view-transition-group(root) {
-  animation-duration: var(--arboris-vt-duration);
-}
-
 @keyframes sp-blink {
   0%,
   49% {

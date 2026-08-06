@@ -1,7 +1,7 @@
 // Gestion du thème clair/sombre d'Arboris.
 // Le thème vit sur <html data-theme="…"> ; les variables CSS en découlent.
-// La bascule utilise l'API View Transitions (révélation en clip-path circulaire)
-// avec repli instantané si l'API ou le mouvement réduit l'empêchent.
+// Bascule instantanée (pas de View Transition) : le catalogue skills a un DOM
+// trop lourd pour snapshotter toute la page sans lag.
 import { useEffect, useState } from 'react'
 
 export type Theme = 'light' | 'dark'
@@ -52,60 +52,10 @@ function swap(theme: Theme) {
   emit(theme)
 }
 
-export function toggleTheme(button?: HTMLElement | null, duration = 480) {
+/** Bascule clair ↔ sombre (instantané — évite le lag View Transition sur pages lourdes). */
+export function toggleTheme(_button?: HTMLElement | null) {
   const next: Theme = getTheme() === 'dark' ? 'light' : 'dark'
-  const reduce =
-    typeof window !== 'undefined' &&
-    window.matchMedia &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-  const doc = document as Document & {
-    startViewTransition?: (cb: () => void) => {
-      ready: Promise<void>
-      finished: Promise<void>
-    }
-  }
-
-  if (typeof doc.startViewTransition !== 'function' || reduce) {
-    swap(next)
-    return
-  }
-
-  const vw = window.visualViewport?.width ?? window.innerWidth
-  const vh = window.visualViewport?.height ?? window.innerHeight
-  let x = vw / 2
-  let y = vh / 2
-  if (button?.getBoundingClientRect) {
-    const r = button.getBoundingClientRect()
-    x = r.left + r.width / 2
-    y = r.top + r.height / 2
-  }
-  const maxR = Math.hypot(Math.max(x, vw - x), Math.max(y, vh - y))
-  const from = `circle(0px at ${x}px ${y}px)`
-  const to = `circle(${maxR}px at ${x}px ${y}px)`
-
-  const root = document.documentElement
-  root.setAttribute('data-arboris-vt', 'active')
-  root.style.setProperty('--arboris-vt-duration', `${duration}ms`)
-
-  const cleanup = () => {
-    root.removeAttribute('data-arboris-vt')
-    root.style.removeProperty('--arboris-vt-duration')
-  }
-
-  const vt = doc.startViewTransition(() => swap(next))
-  vt.finished.finally(cleanup)
-  vt.ready.then(() => {
-    document.documentElement.animate(
-      { clipPath: [from, to] },
-      {
-        duration,
-        easing: 'ease-in-out',
-        fill: 'forwards',
-        pseudoElement: '::view-transition-new(root)',
-      },
-    )
-  })
+  swap(next)
 }
 
 /** Hook React : renvoie le thème courant et se met à jour sur changement. */
