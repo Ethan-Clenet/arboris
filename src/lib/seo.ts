@@ -123,6 +123,31 @@ export function rootFallbackMeta() {
   ]
 }
 
+/** JSON-LD WebSite + Organization (aide Google à identifier la marque / l’URL). */
+export function siteJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        url: `${SITE_URL}/`,
+        name: SITE_NAME,
+        description: SITE_DESCRIPTION,
+        inLanguage: ['fr', 'en'],
+        publisher: { '@id': `${SITE_URL}/#organization` },
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: SITE_NAME,
+        url: `${SITE_URL}/`,
+        logo: absoluteUrl('/favicon.svg'),
+      },
+    ],
+  }
+}
+
 /** Meta + links SEO / Open Graph / Twitter pour `route.head()`. */
 export function seoHead(input: SeoInput = {}) {
   const title = input.title ? pageTitle(input.title) : pageTitle()
@@ -152,13 +177,27 @@ export function seoHead(input: SeoInput = {}) {
   if (input.noIndex) {
     // noindex seul : le nofollow combiné bloque le PageRank des liens (warning SF « Directives: Nofollow »).
     meta.push({ name: 'robots', content: 'noindex' })
+  } else {
+    meta.push({ name: 'robots', content: 'index, follow, max-image-preview:large' })
+    meta.push({ name: 'googlebot', content: 'index, follow' })
   }
 
   // Pas de canonical sur les pages noindex : évite « Canonisé » + « Version canonique non indexable »
   // quand des query params (/auth?mode=…) pointent vers une cible noindex.
+  const scripts =
+    path === '/' && !input.noIndex
+      ? [
+          {
+            type: 'application/ld+json',
+            children: JSON.stringify(siteJsonLd()),
+          },
+        ]
+      : undefined
+
   return {
     meta,
     links: input.noIndex ? [] : [{ rel: 'canonical', href: url }],
+    ...(scripts ? { scripts } : {}),
   }
 }
 

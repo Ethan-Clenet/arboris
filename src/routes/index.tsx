@@ -23,7 +23,7 @@ export const Route = createFileRoute('/')({
     seoHead({
       path: '/',
       description:
-        'Arboris — index des skills et slash commands pour Cursor, Claude, Codex et Copilot. Zéro config.',
+        'Arboris (arboris-three.vercel.app) — catalogue de skills et slash commands pour Cursor, Claude, Codex et Copilot. Zéro config.',
     }),
   component: HomePage,
 })
