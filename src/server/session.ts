@@ -6,6 +6,8 @@ export type AppSessionData = {
   name?: string
 }
 
+export const SESSION_COOKIE = 'arboris-session'
+
 function sessionPassword() {
   const secret = process.env.SESSION_SECRET
   if (!secret || secret.length < 32) {
@@ -16,7 +18,7 @@ function sessionPassword() {
 
 export function useAppSession() {
   return useSession<AppSessionData>({
-    name: 'arboris-session',
+    name: SESSION_COOKIE,
     password: sessionPassword(),
     cookie: {
       secure: process.env.NODE_ENV === 'production',

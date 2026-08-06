@@ -1,5 +1,6 @@
 import { createServerFn } from '@tanstack/react-start'
 import { redirect } from '@tanstack/react-router'
+import { getCookie } from '@tanstack/react-start/server'
 import {
   authenticateUser,
   createUser,
@@ -7,7 +8,7 @@ import {
   findUserById,
   type AuthUser,
 } from '#/server/auth.server'
-import { useAppSession } from '#/server/session'
+import { SESSION_COOKIE, useAppSession } from '#/server/session'
 
 type AuthResult = { ok: true; user: AuthUser } | { ok: false; error: string }
 
@@ -17,6 +18,11 @@ function invalidCredentials(): AuthResult {
 
 export const getCurrentUser = createServerFn({ method: 'GET' }).handler(
   async (): Promise<AuthUser | null> => {
+    // Ne pas ouvrir de session anonyme : useSession pose un Set-Cookie à chaque
+    // requête, ce qui empêche le cache CDN et peut freiner l’indexation Google
+    // (« Explorée, actuellement non indexée »).
+    if (!getCookie(SESSION_COOKIE)) return null
+
     const session = await useAppSession()
     const userId = session.data.userId
     if (!userId) return null
