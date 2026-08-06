@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState, type ReactNode } from 'react'
 import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
+import CliCommandBar from '#/components/CliCommandBar'
 import PageShell from '#/components/PageShell'
 import { AgentBadge, AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
 import SecurityBadge from '#/components/SecurityBadge'
@@ -142,6 +143,13 @@ function SkillsPage() {
   }
 
   const resultLabel = `${rows.length > 1 ? t.skills.resMany : t.skills.resOne} ${t.skills.resTail(catalog.skills.length)}`
+
+  const publisherInstallCount = useMemo(() => {
+    if (publisher === 'all' || publisher === otherPublisher) return 0
+    return catalog.skills.filter((s) => (s.publisher ?? otherPublisher) === publisher).length
+  }, [catalog.skills, publisher, otherPublisher])
+
+  const showPublisherInstall = publisher !== 'all' && publisher !== otherPublisher && publisherInstallCount > 0
 
   return (
     <main id="main-content" className="w-full">
@@ -320,6 +328,24 @@ function SkillsPage() {
           <div className="mb-3.5 text-[13.5px] text-[var(--text-2)]">
             <span className="font-semibold text-[var(--text-1)]">{rows.length}</span> {resultLabel}
           </div>
+
+          {showPublisherInstall ? (
+            <div className="mb-4 rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]">
+              <div className="mb-1 flex items-center gap-2 text-[13px] font-semibold text-[var(--text-1)]">
+                <Icon name="terminal-window" size={16} className="text-[var(--accent)]" />
+                {t.skills.installAllTitle(publisher)}
+              </div>
+              <p className="mb-3 text-[12.5px] text-[var(--text-2)]">
+                {t.skills.installAllHint(publisherInstallCount)}
+              </p>
+              <CliCommandBar
+                args={`publisher ${publisher}`}
+                copyLabel={t.skills.copyCli}
+                copiedLabel={t.skills.copiedCli}
+                className="max-w-none"
+              />
+            </div>
+          ) : null}
 
           <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
             <div className="scroll-x">

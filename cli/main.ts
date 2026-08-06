@@ -7,7 +7,14 @@ import { installCommandToWorkspace } from '../src/lib/command-install-core.ts'
 import { listCommandIds, loadCommandFile } from '../src/lib/command-file.ts'
 import { findCollectionSeed, COLLECTIONS } from '../src/lib/collections-data.ts'
 import { needsInstallConfirm, riskToSafetyScore } from '../src/lib/skillspector.ts'
-import { formatStackList, hasSkillId, loadCliManifest, resolveStackId } from './stack-resolve.ts'
+import {
+  formatPublisherList,
+  formatStackList,
+  hasSkillId,
+  loadCliManifest,
+  resolvePublisherId,
+  resolveStackId,
+} from './stack-resolve.ts'
 
 const PACKAGE_ROOT = resolvePackageRoot(import.meta.url)
 const SKILLS_DIR = defaultSkillsDir(PACKAGE_ROOT)
@@ -53,9 +60,11 @@ Usage:
   npx arboris-cli install <skill-id> [options]
   npx arboris-cli command <command-id> [options]
   npx arboris-cli collection <collection-id> [options]
+  npx arboris-cli publisher <éditeur> [options]
   npx arboris-cli list
   npx arboris-cli list-commands
   npx arboris-cli list-collections
+  npx arboris-cli list-publishers
 
 Exemples:
   npx arboris-cli node
@@ -64,6 +73,8 @@ Exemples:
   npx arboris-cli command sonar --agent cursor
   npx arboris-cli collection sonar --agent cursor
   npx arboris-cli collection command-starter --agent cursor
+  npx arboris-cli publisher ECC
+  npx arboris-cli publisher brave --agent cursor
   npx arboris-cli typescript --force
 
 Technos (alias acceptés: node.js, k8s, spring, postgres…):
@@ -332,6 +343,73 @@ async function runInstallCollection(collectionId: string, options: CliOptions) {
   if (failed > 0) process.exit(1)
 }
 
+async function runListPublishers() {
+  const manifest = await loadCliManifest()
+  console.log('Éditeurs (créateurs) disponibles:\n')
+  console.log(formatPublisherList(manifest))
+  console.log('\nExemple: npx arboris-cli publisher ECC')
+}
+
+async function runInstallPublisher(publisherInput: string, options: CliOptions) {
+  const manifest = await loadCliManifest()
+  const publisher = resolvePublisherId(publisherInput, manifest)
+
+  if (!publisher) {
+    console.error(`Éditeur inconnu: "${publisherInput}"`)
+    console.error('\nÉditeurs disponibles:\n')
+    console.error(formatPublisherList(manifest))
+    process.exit(1)
+  }
+
+  const skillIds = manifest.skillsByPublisher?.[publisher] ?? []
+  if (skillIds.length === 0) {
+    console.error(`Aucun skill associé à l’éditeur ${publisher}.`)
+    process.exit(1)
+  }
+
+  console.log(
+    `${options.dryRun ? '[dry-run] ' : ''}Installation de ${skillIds.length} skills « ${publisher} » → ${options.agent} (${options.cwd})`,
+  )
+
+  if (options.dryRun) {
+    for (const skillId of skillIds) {
+      console.log(`  • ${skillId}`)
+    }
+    return
+  }
+
+  for (const skillId of skillIds) {
+    await assertSecurityOk(skillId, options)
+  }
+
+  const summary = await installStackToWorkspace({
+    skillIds,
+    agent: options.agent,
+    workspaceRoot: options.cwd,
+    skillsDir: SKILLS_DIR,
+    force: options.force,
+    onProgress: ({ index, total, skillId, result }) => {
+      if (!result.ok) {
+        process.stdout.write(`  [${index}/${total}] ✗ ${skillId} (${result.error})\n`)
+        return
+      }
+      if (result.skipped) {
+        process.stdout.write(`  [${index}/${total}] ⊘ ${skillId} (déjà présent)\n`)
+        return
+      }
+      process.stdout.write(`  [${index}/${total}] ✓ ${skillId} → ${result.path}\n`)
+    },
+  })
+
+  console.log(
+    `\nTerminé: ${summary.installed.length} installés, ${summary.skipped.length} ignorés, ${summary.failed.length} échecs.`,
+  )
+
+  if (summary.failed.length > 0) {
+    process.exit(1)
+  }
+}
+
 async function runInstallSkill(skillId: string, options: CliOptions) {
   const manifest = await loadCliManifest()
 
@@ -455,9 +533,20 @@ async function main() {
       return
     }
 
+    if (command === 'list-publishers' || command === 'publishers' || command === 'creators') {
+      await runListPublishers()
+      return
+    }
+
     if (command === 'collection' || command === 'pack') {
       if (!target) throw new Error('Usage: npx arboris-cli collection <collection-id>')
       await runInstallCollection(target, options)
+      return
+    }
+
+    if (command === 'publisher' || command === 'creator') {
+      if (!target) throw new Error('Usage: npx arboris-cli publisher <éditeur>')
+      await runInstallPublisher(target, options)
       return
     }
 

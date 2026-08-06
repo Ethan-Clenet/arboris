@@ -7,6 +7,7 @@ export type CliManifest = {
   stacks: Array<{ id: string; label: string }>
   skills?: string[]
   skillsByStack: Record<string, string[]>
+  skillsByPublisher?: Record<string, string[]>
 }
 
 const PACKAGE_ROOT = resolvePackageRoot(import.meta.url)
@@ -83,4 +84,39 @@ export function formatStackList(manifest: CliManifest): string {
 export function hasSkillId(manifest: CliManifest, skillId: string): boolean {
   if (manifest.skills?.includes(skillId)) return true
   return Object.values(manifest.skillsByStack).some((ids) => ids.includes(skillId))
+}
+
+/** Résout un éditeur (ex. ecc → ECC) via le manifest. */
+export function resolvePublisherId(input: string, manifest: CliManifest): string | null {
+  const byPublisher = manifest.skillsByPublisher ?? {}
+  const keys = Object.keys(byPublisher)
+  if (keys.length === 0) return null
+
+  const trimmed = input.trim()
+  if (!trimmed) return null
+  if (byPublisher[trimmed]) return trimmed
+
+  const lower = trimmed.toLowerCase()
+  const byLower = keys.find((key) => key.toLowerCase() === lower)
+  if (byLower) return byLower
+
+  // Alias courants alignés sur normalizePublisher (catalogue)
+  if (lower === 'ecc' || lower === 'ecc-community' || lower.startsWith('ecc ')) {
+    return byPublisher.ECC ? 'ECC' : null
+  }
+  if (lower === 'community') return byPublisher.Community ? 'Community' : null
+  if (lower === 'flox') return byPublisher.Flox ? 'Flox' : null
+  if (lower === 'brave' || lower.startsWith('brave ')) {
+    return byPublisher.Brave ? 'Brave' : null
+  }
+
+  return null
+}
+
+export function formatPublisherList(manifest: CliManifest): string {
+  const entries = Object.entries(manifest.skillsByPublisher ?? {}).sort(
+    (a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]),
+  )
+  if (entries.length === 0) return '  (aucun éditeur)'
+  return entries.map(([name, ids]) => `  ${name.padEnd(14)} — ${ids.length} skills`).join('\n')
 }

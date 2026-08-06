@@ -20,6 +20,17 @@ function CommandDisplay({ args }: { args: string }) {
     )
   }
 
+  if (args.startsWith('publisher ') || args.startsWith('creator ')) {
+    const [cmd, ...rest] = args.split(' ')
+    const publisher = rest.join(' ')
+    return (
+      <>
+        npx <span className="text-[#9BCB3C]">arboris-cli</span> {cmd}{' '}
+        <span className="text-[#9BCB3C]">{publisher}</span>
+      </>
+    )
+  }
+
   return (
     <>
       npx <span className="text-[#9BCB3C]">arboris-cli</span> <span className="text-[#9BCB3C]">{args}</span>

@@ -94,6 +94,11 @@ const fr = {
     resOne: 'skill',
     resMany: 'skills',
     resTail: (total: number) => `sur ${total}`,
+    installAllTitle: (publisher: string) => `Installer tous les skills ${publisher}`,
+    installAllHint: (count: number) =>
+      `Une commande pour installer les ${count} skills de cet éditeur dans ton projet.`,
+    copyCli: 'Copier la commande CLI',
+    copiedCli: 'Copié !',
   },
   skill: {
     back: 'Tous les skills',
@@ -501,6 +506,11 @@ const en: typeof fr = {
     resOne: 'skill',
     resMany: 'skills',
     resTail: (total: number) => `of ${total}`,
+    installAllTitle: (publisher: string) => `Install all ${publisher} skills`,
+    installAllHint: (count: number) =>
+      `One command to install all ${count} skills from this publisher into your project.`,
+    copyCli: 'Copy CLI command',
+    copiedCli: 'Copied!',
   },
   skill: {
     back: 'All skills',
