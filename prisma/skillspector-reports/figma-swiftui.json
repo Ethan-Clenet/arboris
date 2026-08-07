@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:53:46.518027+00:00",
+  "scanMode": "static",
+  "skillName": "figma-swiftui",
+  "contentHash": "18cebd21b7b58a81a9151dafacc6e010b34f732a1a253a303c18511a2f72f8db"
+}

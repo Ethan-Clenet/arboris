@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:58:58.395167+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-block-focus-time",
+  "contentHash": "81dceb8d010161cc26f9a0ea43cdc89abaa75230e1a4026b40750b16758acedc"
+}

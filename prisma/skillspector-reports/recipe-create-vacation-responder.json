@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:39.660636+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-create-vacation-responder",
+  "contentHash": "4d9be94f5bcf6a6c7df7dbc3d5f8d89ed6fd96cc86de323f3e0fadc0e72c98a7"
+}

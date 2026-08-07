@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:57:49.147037+00:00",
+  "scanMode": "static",
+  "skillName": "news-search",
+  "contentHash": "1cd83542ea33d93f4943f7f7734810cb6e3fead338683fadac231e6c79f65156"
+}

@@ -1,0 +1,96 @@
+{
+  "riskScore": 13,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 6,
+  "issues": [
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "curl -s -X POST \"https://api.browserbase.com/v1/fetch\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"X-BB-API-Key: $BROWSERBASE_API_KEY\" \\\n  -d ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "EXAMPLES.md",
+        "start_line": 54
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "curl -s -X POST \"https://api.browserbase.com/v1/fetch\" \\\n      -H \"Content-Type: application/json\" \\\n      -H \"X-BB-API-Key: $BROWSERBASE_API_KEY\" \\\n      -d ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "EXAMPLES.md",
+        "start_line": 72
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.browserbase.com/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "EXAMPLES.md",
+        "start_line": 54
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.browserbase.com/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "EXAMPLES.md",
+        "start_line": 72
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "cURL or direct HTTP calls.\n\n## Common Options\n\n### Limit number of results\n\n```bash\ncurl -X POST \"https://api.browserbase.com/v1/search\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"X-BB-API-Key: $",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 78
+      }
+    },
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "finding": "NOT LIMITED TO",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "LICENSE.txt",
+        "start_line": 16
+      }
+    }
+  ],
+  "scannedAt": "2026-08-07T05:50:53.683241+00:00",
+  "scanMode": "static",
+  "skillName": "browserbase-search",
+  "contentHash": "46a9a9baf5e4617571fb4744b4f2ca4857db42f79ffb47b829856dca4b64b483"
+}

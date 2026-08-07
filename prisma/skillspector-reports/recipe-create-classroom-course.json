@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:12.415782+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-create-classroom-course",
+  "contentHash": "c1ec49d64abd6258a6b77b2365f91e7a19fc2f7ae5838562621d5bad1cc58495"
+}

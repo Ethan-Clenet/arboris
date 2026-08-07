@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:55:34.599911+00:00",
+  "scanMode": "static",
+  "skillName": "gws-drive-upload",
+  "contentHash": "628a0029f578ff18025bc4d1c50e155eb72b6e2528ae2a2a92ed21dd43221a0c"
+}

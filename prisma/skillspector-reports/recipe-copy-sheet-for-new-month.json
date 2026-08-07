@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:09.822853+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-copy-sheet-for-new-month",
+  "contentHash": "dceca68269d0df7758fbdf2a72a18d82850457491fd6c0c2ba25fc0ca21f6b7b"
+}

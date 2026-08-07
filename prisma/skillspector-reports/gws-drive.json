@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:55:32.078356+00:00",
+  "scanMode": "static",
+  "skillName": "gws-drive",
+  "contentHash": "4e189ed3204ee6f42b755c8ae7f30835e3e652c971e1ae678ef3326abae66314"
+}

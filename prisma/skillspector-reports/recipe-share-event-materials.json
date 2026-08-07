@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:34.620257+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-share-event-materials",
+  "contentHash": "aa7850ae6eb9fe1b536bbb15aa57d1fef8a42c3edddbcac53ba55b1f5ea46e2f"
+}

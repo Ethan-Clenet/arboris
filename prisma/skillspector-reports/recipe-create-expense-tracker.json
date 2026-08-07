@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:20.626876+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-create-expense-tracker",
+  "contentHash": "250abf83b2a63849d898619c490e33e61403ab4c7ac31ddcf4cfae0297171b0a"
+}

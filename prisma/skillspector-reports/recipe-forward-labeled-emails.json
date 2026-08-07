@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:53.571006+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-forward-labeled-emails",
+  "contentHash": "bc769c7e401232f15a85303f8428859096074c95a5dc633b5856b7b0d1735eef"
+}

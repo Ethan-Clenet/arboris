@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:54:07.598870+00:00",
+  "scanMode": "static",
+  "skillName": "figma-use-slides",
+  "contentHash": "e56b4e69b0f4c0184a3835edf1e88f1ca33b7fbda9c43d8429435709d4e0c771"
+}

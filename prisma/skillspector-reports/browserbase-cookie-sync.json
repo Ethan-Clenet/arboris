@@ -1,0 +1,124 @@
+{
+  "riskScore": 46,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 8,
+  "issues": [
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "finding": "NOT LIMITED TO",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "LICENSE.txt",
+        "start_line": 16
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "\"@browserbasehq/stagehand\": \"^3.2.0\"",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "package.json",
+        "start_line": 7
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "\"@browserbasehq/sdk\": \"^2.7.0\"",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "package.json",
+        "start_line": 8
+      }
+    },
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "rme0Eaj+5Y0lftuGBq+jyRu/",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "package-lock.json",
+        "start_line": 1433
+      }
+    },
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'info_stealer': Information stealer patterns (credential harvesting, browser data theft) [malware]",
+      "severity": "HIGH",
+      "confidence": 0.375,
+      "finding": "cookies from Chrome; cookies from Brave instead of Chrome",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "EXAMPLES.md",
+        "start_line": 51
+      }
+    },
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'info_stealer': Information stealer patterns (credential harvesting, browser data theft) [malware]",
+      "severity": "HIGH",
+      "confidence": 0.375,
+      "finding": "cookies are not available. The `chrome://flags` method (Chrome",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "REFERENCE.md",
+        "start_line": 119
+      }
+    },
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'info_stealer': Information stealer patterns (credential harvesting, browser data theft) [malware]",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "cookies from local Chrome; cookies from your local Chrome",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 3
+      }
+    },
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'info_stealer': Information stealer patterns (credential harvesting, browser data theft) [malware]",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "cookies from local Chrome; Cookies.length} cookies from local Chrome; cookies from local Chrome; cookies to sync. Check your domain filters or Chrome",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "scripts/cookie-sync.mjs",
+        "start_line": 2
+      }
+    }
+  ],
+  "scannedAt": "2026-08-07T05:50:40.633831+00:00",
+  "scanMode": "static",
+  "skillName": "browserbase-cookie-sync",
+  "contentHash": "4fd31ec647a10a4072d55198cc1a79349016cb568920d3f19946400f4a1709e6"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:53:25.265699+00:00",
+  "scanMode": "static",
+  "skillName": "figma-create-new-file",
+  "contentHash": "78d4eda65d31ae334bbd32a11a345e26d03c179aeb7123f05d08dc283ad04d97"
+}

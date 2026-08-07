@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:49:19.340981+00:00",
+  "scanMode": "static",
+  "skillName": "apollo-kotlin",
+  "contentHash": "612245afeac67ec69c2214b84f4ca6f8456094153ccb1492ebd58897a524af2c"
+}

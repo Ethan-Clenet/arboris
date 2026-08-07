@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:56:15.503988+00:00",
+  "scanMode": "static",
+  "skillName": "gws-modelarmor",
+  "contentHash": "44954532889c19bff22635492abd0a9ddacb647c152163150d811380d97c282a"
+}

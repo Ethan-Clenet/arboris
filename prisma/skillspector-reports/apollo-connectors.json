@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:49:09.759018+00:00",
+  "scanMode": "static",
+  "skillName": "apollo-connectors",
+  "contentHash": "3be70cf13650a503d802745d49362cb4448304c9b4cb5386f48bb319f2e49251"
+}

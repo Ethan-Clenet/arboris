@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:57:16.359033+00:00",
+  "scanMode": "static",
+  "skillName": "local-pois",
+  "contentHash": "812bd0be69a35db8493a3c50cd71dc61bca1f8ff3d50a54b3f539e93a97744dc"
+}

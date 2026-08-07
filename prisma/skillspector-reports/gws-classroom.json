@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:55:24.021270+00:00",
+  "scanMode": "static",
+  "skillName": "gws-classroom",
+  "contentHash": "6d49d1f9fdd47293fa173db0d4e97a38a40d794f96dc5117283fbbcf1e1908d7"
+}

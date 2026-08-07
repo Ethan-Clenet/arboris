@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:58:15.376743+00:00",
+  "scanMode": "static",
+  "skillName": "persona-event-coordinator",
+  "contentHash": "c6533a3d047d0f8492aa2276f757a0a8a5a844706cc40ea434364149df6622ad"
+}

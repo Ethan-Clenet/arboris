@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:26.532760+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-schedule-recurring-event",
+  "contentHash": "c438afdaa24fbd59bcafb397cf23a81a8c96103746cddc1b744ab2f25e706e71"
+}

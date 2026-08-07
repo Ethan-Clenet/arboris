@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:58:20.911805+00:00",
+  "scanMode": "static",
+  "skillName": "persona-hr-coordinator",
+  "contentHash": "20dff7f91453be4eb83358fdf19648280b8699a270fddc67c3af5feed8c2f7c0"
+}

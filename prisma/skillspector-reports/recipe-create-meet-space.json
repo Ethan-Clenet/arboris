@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:29.133388+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-create-meet-space",
+  "contentHash": "69fcab5041ce1dc616eee5018cf68eabbc75a5bfd520b970bd493c910099bd38"
+}

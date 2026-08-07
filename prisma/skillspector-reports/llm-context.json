@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:57:10.856421+00:00",
+  "scanMode": "static",
+  "skillName": "llm-context",
+  "contentHash": "1f88c7e6b48834cb192d99dd4f9e3bacd85221dbbf336243a6c21c240eb15b8c"
+}

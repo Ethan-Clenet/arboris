@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:59.101284+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-label-and-archive-emails",
+  "contentHash": "6c5951db1a6b53f1bf50b63edeacf2ae7a07442aae27c1483fb268a9229f30fa"
+}

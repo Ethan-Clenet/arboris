@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:55:40.178246+00:00",
+  "scanMode": "static",
+  "skillName": "gws-events-renew",
+  "contentHash": "5399ac479e0e786dd7eb89b61800a653f49627762d02962894f2e4f6f0a0b327"
+}

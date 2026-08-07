@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:51:44.221365+00:00",
+  "scanMode": "static",
+  "skillName": "cloudflare-one-migrations",
+  "contentHash": "4535950d3a9e05c0aa0498d549295d543fa2bb363fa7b4b9b9f314abafef95ec"
+}

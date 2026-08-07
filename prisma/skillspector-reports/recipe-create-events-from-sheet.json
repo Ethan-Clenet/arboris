@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:18.078348+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-create-events-from-sheet",
+  "contentHash": "cd595eed9b05355a07ea4dd61282362b077e57836073b1064d4908e707b895a7"
+}

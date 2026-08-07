@@ -1,8 +1,8 @@
 {
-  "riskScore": 28,
-  "severity": "MEDIUM",
-  "recommendation": "CAUTION",
-  "issueCount": 7,
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
   "issues": [
     {
       "id": "RP1",
@@ -14,7 +14,7 @@
       "remediation": "Pin the version: npx @scope/server@1.2.3",
       "location": {
         "file": "SKILL.md",
-        "start_line": 68
+        "start_line": 23
       }
     },
     {
@@ -27,79 +27,12 @@
       "remediation": "Pin the version: npx @scope/server@1.2.3",
       "location": {
         "file": "SKILL.md",
-        "start_line": 78
-      }
-    },
-    {
-      "id": "RP1",
-      "category": "MCP Rug Pull",
-      "pattern": "",
-      "severity": "MEDIUM",
-      "confidence": 0.7,
-      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
-      "remediation": "Pin the version: npx @scope/server@1.2.3",
-      "location": {
-        "file": "SKILL.md",
-        "start_line": 79
-      }
-    },
-    {
-      "id": "RP1",
-      "category": "MCP Rug Pull",
-      "pattern": "",
-      "severity": "MEDIUM",
-      "confidence": 0.7,
-      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
-      "remediation": "Pin the version: npx @scope/server@1.2.3",
-      "location": {
-        "file": "SKILL.md",
-        "start_line": 180
-      }
-    },
-    {
-      "id": "RP1",
-      "category": "MCP Rug Pull",
-      "pattern": "",
-      "severity": "MEDIUM",
-      "confidence": 0.7,
-      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
-      "remediation": "Pin the version: npx @scope/server@1.2.3",
-      "location": {
-        "file": "SKILL.md",
-        "start_line": 304
-      }
-    },
-    {
-      "id": "AS3",
-      "category": "Agent Snooping",
-      "pattern": "Skill Enumeration",
-      "severity": "MEDIUM",
-      "confidence": 0.8,
-      "finding": "skills/neon-postgres-branches/SKILL.md",
-      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
-      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
-      "location": {
-        "file": "SKILL.md",
-        "start_line": 299
-      }
-    },
-    {
-      "id": "MP2",
-      "category": "Memory Poisoning",
-      "pattern": "Context Window Stuffing",
-      "severity": "MEDIUM",
-      "confidence": 0.8,
-      "finding": "                                            ",
-      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
-      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
-      "location": {
-        "file": "SKILL.md",
-        "start_line": 182
+        "start_line": 87
       }
     }
   ],
-  "scannedAt": "2026-07-21T06:05:17.806893+00:00",
+  "scannedAt": "2026-08-07T05:57:40.174341+00:00",
   "scanMode": "static",
   "skillName": "neon-postgres",
-  "contentHash": "800cc5890f74962e4e0dc15584cc17ea6f4c49f73dda35704f9630981abc3e5d"
+  "contentHash": "81badcfc7c7c43fba50df76cd0f3cfcc6e02b5a067c1dd60ebe8ddecadc10ab3"
 }

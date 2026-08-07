@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:57:00.051933+00:00",
+  "scanMode": "static",
+  "skillName": "ai-seo",
+  "contentHash": "6591b746f201e1f96bccdb7a8d99dfa72466c4d22ee648480a497659557ef3d3"
+}

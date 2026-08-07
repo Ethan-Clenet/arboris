@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:53:28.342380+00:00",
+  "scanMode": "static",
+  "skillName": "figma-design-to-code",
+  "contentHash": "96fc2899b9cb718bb4b2a7b9d046dca11c3c5123b29d817cb496d0696c554cba"
+}

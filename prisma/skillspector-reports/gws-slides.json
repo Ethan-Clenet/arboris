@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:56:43.242484+00:00",
+  "scanMode": "static",
+  "skillName": "gws-slides",
+  "contentHash": "1cd78eccf877be7140b16b025b115465a526bf1d25e998a3c7722b6e912209a7"
+}

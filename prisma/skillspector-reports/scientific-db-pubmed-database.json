@@ -19,8 +19,8 @@
       }
     }
   ],
-  "scannedAt": "2026-07-21T06:08:04.852671+00:00",
+  "scannedAt": "2026-08-07T06:00:55.310015+00:00",
   "scanMode": "static",
-  "skillName": "pubmed-database",
-  "contentHash": "97d4bfb3ff3f1661bd9775e8b62efea1fb470bff3ae294c1bebf42e288785065"
+  "skillName": "scientific-db-pubmed-database",
+  "contentHash": "0940563628b0b58ae1923f54dbed3ab02a741bd3e2d66f7cc9005f1de49f40fe"
 }

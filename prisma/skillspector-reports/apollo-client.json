@@ -1,0 +1,38 @@
+{
+  "riskScore": 10,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "references/integration-react-router.md",
+        "start_line": 46
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "references/integration-tanstack-start.md",
+        "start_line": 5
+      }
+    }
+  ],
+  "scannedAt": "2026-08-07T05:49:06.689183+00:00",
+  "scanMode": "static",
+  "skillName": "apollo-client",
+  "contentHash": "1a6b30cf7ba5a87d8d1d681f5972edc4ce9ab1c745c1e7c622c5c156dfac71c8"
+}

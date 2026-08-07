@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:52:52.148069+00:00",
+  "scanMode": "static",
+  "skillName": "doc-coauthoring",
+  "contentHash": "f73b8930b505b23c206556ed21b4564f5619e6af33a48e48be348696b1fb2b1b"
+}

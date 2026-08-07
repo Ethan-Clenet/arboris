@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:56.138372+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-generate-report-from-sheet",
+  "contentHash": "2d9b681c8f650d245b10383761e9eeb21d0a8ff58f84cee4a496a259562ce9d4"
+}

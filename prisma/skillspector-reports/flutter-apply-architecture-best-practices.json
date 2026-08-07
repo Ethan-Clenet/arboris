@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:54:19.403908+00:00",
+  "scanMode": "static",
+  "skillName": "flutter-apply-architecture-best-practices",
+  "contentHash": "5e885eea6e3ecdeb0b91bea7437e6f10f603571aa92d9abde61f5026b3fef443"
+}

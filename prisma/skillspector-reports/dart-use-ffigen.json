@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:52:43.430471+00:00",
+  "scanMode": "static",
+  "skillName": "dart-use-ffigen",
+  "contentHash": "82bf19ba370726ad493b7dc7f809ea4e35511e46fc41c8359a7413cd403048ae"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:58:34.406550+00:00",
+  "scanMode": "static",
+  "skillName": "persona-team-lead",
+  "contentHash": "7d55b2945a2192fdd43660858ce4482278fa2a9952b5e3b7084832e24378db1c"
+}

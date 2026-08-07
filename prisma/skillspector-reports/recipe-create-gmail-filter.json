@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:26.141237+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-create-gmail-filter",
+  "contentHash": "5d7c151d2f253302625ba26eea9cbecf43da2dff78791d17e1b3a0a0e797a553"
+}

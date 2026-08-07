@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:55:53.946558+00:00",
+  "scanMode": "static",
+  "skillName": "gws-gmail-read",
+  "contentHash": "d4a7e6de0185d717e24ee59ee3be39a21a6064ee1475c326c2d08f621ddd33af"
+}

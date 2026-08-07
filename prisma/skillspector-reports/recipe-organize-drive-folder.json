@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:04.754345+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-organize-drive-folder",
+  "contentHash": "53e4db474dd5dee7a029703feef45bc8c18c06a9f238050e200774984d7d7c84"
+}

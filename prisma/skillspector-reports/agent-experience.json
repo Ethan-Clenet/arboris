@@ -1,0 +1,68 @@
+{
+  "riskScore": 43,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 4,
+  "issues": [
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "finding": "NOT LIMITED TO",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "LICENSE.txt",
+        "start_line": 16
+      }
+    },
+    {
+      "id": "P6",
+      "category": "System Prompt Leakage",
+      "pattern": "Direct Prompt Extraction",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "Show full prompt",
+      "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+      "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 374
+      }
+    },
+    {
+      "id": "P6",
+      "category": "System Prompt Leakage",
+      "pattern": "Direct Prompt Extraction",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "Show full prompt",
+      "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+      "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+      "location": {
+        "file": "assets/report-template.html",
+        "start_line": 137
+      }
+    },
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_destructive_autonomous_actions': Autonomous destructive filesystem, shell history, or repository actions in AI agent skills [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "rm -rf ./; silently",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 429
+      }
+    }
+  ],
+  "scannedAt": "2026-08-07T05:48:42.394709+00:00",
+  "scanMode": "static",
+  "skillName": "agent-experience",
+  "contentHash": "174616de8f070503aa87ed38db0557024c7357701ded14f14235d1abd7079c2b"
+}

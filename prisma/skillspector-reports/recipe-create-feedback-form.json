@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:23.593779+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-create-feedback-form",
+  "contentHash": "de64be9deeffc12bc515ea15248111a3e47e8e2c9f81cc8929c36daf11b85e01"
+}

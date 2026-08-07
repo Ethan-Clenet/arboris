@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:52:31.104674+00:00",
+  "scanMode": "static",
+  "skillName": "dart-migrate-to-checks-package",
+  "contentHash": "8844b507c848b6dc4e21dba7cc67c0b72159fe1596690909b196755230097970"
+}

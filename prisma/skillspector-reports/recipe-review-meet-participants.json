@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:15.295133+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-review-meet-participants",
+  "contentHash": "a344950258c68f8c79eeee47b1396a6c442e0e9b894194fbc82ddc644f02b442"
+}

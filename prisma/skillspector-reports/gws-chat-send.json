@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:55:21.011678+00:00",
+  "scanMode": "static",
+  "skillName": "gws-chat-send",
+  "contentHash": "342961465236676bac4a9de2ac2eb0f657ebd59301d36a2a8aa5420f3aff71b6"
+}

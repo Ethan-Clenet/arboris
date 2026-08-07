@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:52:40.154486+00:00",
+  "scanMode": "static",
+  "skillName": "dart-setup-ffi-assets",
+  "contentHash": "1a8e8eddf31af90f7af9f7315ef8a2fd2fb7cc89574f9635c5192766227b6a49"
+}

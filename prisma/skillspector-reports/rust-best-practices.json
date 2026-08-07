@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:49.723456+00:00",
+  "scanMode": "static",
+  "skillName": "rust-best-practices",
+  "contentHash": "738293437a66dd181b9694d4af8004db31101c525f55c34a0ebd57963a6438f9"
+}

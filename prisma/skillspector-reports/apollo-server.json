@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:49:33.148384+00:00",
+  "scanMode": "static",
+  "skillName": "apollo-server",
+  "contentHash": "74dc4aecc3c15faa93c74aa75b23a5db09f9c11939ccc9eb831d037d733bce7f"
+}

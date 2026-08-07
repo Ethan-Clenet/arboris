@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:00.975110+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-bulk-download-folder",
+  "contentHash": "6241081ece39b4bccd97abcc708c87f24670fe3eb6d1ab69e497aa1ef794c3fa"
+}

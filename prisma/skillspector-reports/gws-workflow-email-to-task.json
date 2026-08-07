@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:56:51.338417+00:00",
+  "scanMode": "static",
+  "skillName": "gws-workflow-email-to-task",
+  "contentHash": "c09f8b006161867719f07c5be2a460d376edce8d1199e3713cfe3b9f5e00963b"
+}

@@ -4,8 +4,8 @@
   "recommendation": "SAFE",
   "issueCount": 0,
   "issues": [],
-  "scannedAt": "2026-07-21T06:08:16.302762+00:00",
+  "scannedAt": "2026-08-07T06:01:06.636335+00:00",
   "scanMode": "static",
-  "skillName": "scholar-evaluation",
-  "contentHash": "1faf1173bee86e415c467eb64a4e8ff52e61b639e2e7a115288fa1bbb3cf333a"
+  "skillName": "scientific-thinking-scholar-evaluation",
+  "contentHash": "5d69a8c08bb1f494973340961bdaa53a3a081486062c53e26fe3eedccdff3b60"
 }

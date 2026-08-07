@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:02:20.146651+00:00",
+  "scanMode": "static",
+  "skillName": "videos-search",
+  "contentHash": "d6a4e081630688f02ca040ed26f110b0307b224be1043f077316a5edc0ab2caa"
+}

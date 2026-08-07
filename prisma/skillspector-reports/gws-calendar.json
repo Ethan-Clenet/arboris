@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:55:09.785370+00:00",
+  "scanMode": "static",
+  "skillName": "gws-calendar",
+  "contentHash": "249c17bb5d8c259041ac0b14f572e57dbaff75ed6eb214190923b002479de8da"
+}

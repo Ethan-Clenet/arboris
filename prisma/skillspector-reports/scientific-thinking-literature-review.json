@@ -4,8 +4,8 @@
   "recommendation": "SAFE",
   "issueCount": 0,
   "issues": [],
-  "scannedAt": "2026-07-21T06:08:13.615162+00:00",
+  "scannedAt": "2026-08-07T06:01:03.994529+00:00",
   "scanMode": "static",
-  "skillName": "literature-review",
-  "contentHash": "b619c0f502c18280f9e7a8b5c5552215a2192c7b8308fe295d866666a12d8cd8"
+  "skillName": "scientific-thinking-literature-review",
+  "contentHash": "00cfd9fc3445e2925a10fee98af8692a42072b15be25c1d0c521ab1e016a41e8"
 }

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:48.059218+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-find-free-time",
+  "contentHash": "e7b9850ceea9cce8d2d6d76af95a72246e3038d75fdf3d188a48aaa280070cf8"
+}

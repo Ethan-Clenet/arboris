@@ -4,8 +4,8 @@
   "recommendation": "SAFE",
   "issueCount": 0,
   "issues": [],
-  "scannedAt": "2026-07-21T06:08:10.454730+00:00",
+  "scannedAt": "2026-08-07T06:01:00.930277+00:00",
   "scanMode": "static",
-  "skillName": "gget",
-  "contentHash": "7145c943c140f767c8b0283bb55b13e3ba0d84c828fd24068dc374646655a338"
+  "skillName": "scientific-pkg-gget",
+  "contentHash": "7e1706965ff3a151c6326cc6be0880a3b5418e6b93a312704da5fcc497cf12ad"
 }

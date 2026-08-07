@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:53:43.406863+00:00",
+  "scanMode": "static",
+  "skillName": "figma-implement-motion",
+  "contentHash": "3a31d02474518809b08ef5297c60f1fabe0c59026bac7191c8383496fa646551"
+}

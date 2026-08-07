@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:01:31.497306+00:00",
+  "scanMode": "static",
+  "skillName": "spellcheck",
+  "contentHash": "4717f53b2ade5483027ffca8f4f27e0569e722f52ece1c595e3ce7367c3c61b1"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:57:04.873792+00:00",
+  "scanMode": "static",
+  "skillName": "images-search",
+  "contentHash": "669009eb8e2b9b50359e86ba8c07b3a9e44384b5dca412faa3fccdfa3014ac6b"
+}

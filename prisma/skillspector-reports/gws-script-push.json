@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:56:32.285186+00:00",
+  "scanMode": "static",
+  "skillName": "gws-script-push",
+  "contentHash": "c715a28ce0bccabb46daa35c162e098d6ed7bfb98a762c44d88b172886b856fb"
+}

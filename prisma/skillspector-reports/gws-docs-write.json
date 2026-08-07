@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:55:29.465714+00:00",
+  "scanMode": "static",
+  "skillName": "gws-docs-write",
+  "contentHash": "f1a2988698dc0f36e67b8b253324178a227e75eaab618bd426752b002a8c92a8"
+}

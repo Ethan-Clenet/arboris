@@ -1,0 +1,26 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "MP2",
+      "category": "Memory Poisoning",
+      "pattern": "Context Window Stuffing",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "                                                              ",
+      "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+      "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 135
+      }
+    }
+  ],
+  "scannedAt": "2026-08-07T05:54:54.811274+00:00",
+  "scanMode": "static",
+  "skillName": "generate-project-plan",
+  "contentHash": "5948934e7202994445be699136d7c9e358433d0fe503f4305effb6011b5fd875"
+}

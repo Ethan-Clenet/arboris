@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:40.157416+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-sync-contacts-to-sheet",
+  "contentHash": "63702646e359e47c2842b7524b77e905ce92c35a17745a5e1b1af9c18ec8ed20"
+}

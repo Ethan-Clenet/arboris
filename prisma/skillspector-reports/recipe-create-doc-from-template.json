@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:14.897140+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-create-doc-from-template",
+  "contentHash": "d015a7ddda50d465679a752ccda540fdf937634083f279963d4a837f344b803a"
+}

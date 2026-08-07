@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:54:44.547022+00:00",
+  "scanMode": "static",
+  "skillName": "gemini-interactions-api",
+  "contentHash": "b90dee3ecb71f40e5f20f6e561afe542599d3a205b705849de2e886fc3796eed"
+}

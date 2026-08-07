@@ -1,8 +1,8 @@
 {
-  "riskScore": 12,
+  "riskScore": 14,
   "severity": "LOW",
   "recommendation": "SAFE",
-  "issueCount": 4,
+  "issueCount": 5,
   "issues": [
     {
       "id": "RP1",
@@ -14,7 +14,7 @@
       "remediation": "Pin the version: npx @scope/server@1.2.3",
       "location": {
         "file": "SKILL.md",
-        "start_line": 41
+        "start_line": 32
       }
     },
     {
@@ -27,7 +27,7 @@
       "remediation": "Pin the version: npx @scope/server@1.2.3",
       "location": {
         "file": "SKILL.md",
-        "start_line": 52
+        "start_line": 43
       }
     },
     {
@@ -40,7 +40,21 @@
       "remediation": "Pin the version: npx @scope/server@1.2.3",
       "location": {
         "file": "references/mcp.md",
-        "start_line": 34
+        "start_line": 32
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Example 2: Select Component (Applied directly to a div trigger) -->\n<div ngCombobox #select=\"ngCombobox\" [(expanded)]=\"selectExpanded\" class=\"select-trigger\">\n  <span class=\"select-text\">{{ selec",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/angular-aria.md",
+        "start_line": 171
       }
     },
     {
@@ -54,12 +68,12 @@
       "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
       "location": {
         "file": "references/signal-forms.md",
-        "start_line": 355
+        "start_line": 365
       }
     }
   ],
-  "scannedAt": "2026-07-21T05:57:12.919990+00:00",
+  "scannedAt": "2026-08-07T05:57:08.231440+00:00",
   "scanMode": "static",
   "skillName": "angular-developer",
-  "contentHash": "426a527c6bbb67cddc3fcad2add109280e364aca5e8b4d4305bbda9538cdaecc"
+  "contentHash": "61125a45933f95ce0d008b6ab2785383b084005d205c82123f8fc224e2e939bd"
 }

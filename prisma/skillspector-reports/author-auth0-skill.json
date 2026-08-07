@@ -1,0 +1,25 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 189
+      }
+    }
+  ],
+  "scannedAt": "2026-08-07T05:49:54.535673+00:00",
+  "scanMode": "static",
+  "skillName": "author-auth0-skill",
+  "contentHash": "4a99e5f50966bf3ca62c5ca26968d30ee4cb70c4925e2d8cd3ea3716e9972602"
+}

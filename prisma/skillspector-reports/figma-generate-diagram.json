@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:53:35.038828+00:00",
+  "scanMode": "static",
+  "skillName": "figma-generate-diagram",
+  "contentHash": "1c9461ffad5c3829f932641b9d4945a9a30319d593bc573d1003141f2b4f0ca3"
+}

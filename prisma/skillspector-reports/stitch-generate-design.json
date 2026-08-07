@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:01:43.108952+00:00",
+  "scanMode": "static",
+  "skillName": "stitch-generate-design",
+  "contentHash": "d099ab4d5bd03ab9a0debdb407c304c2d6f511affcfe74c7163531151cf21982"
+}

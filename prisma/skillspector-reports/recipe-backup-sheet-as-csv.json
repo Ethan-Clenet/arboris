@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:58:52.961004+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-backup-sheet-as-csv",
+  "contentHash": "87c6291b18e3c1a01e458f414dbf88e167eaca0b148e1374ce3b62be271b8685"
+}

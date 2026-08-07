@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:01.614620+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-log-deal-update",
+  "contentHash": "e1b484a5e6f35b22032854c690791670cc397e4384be2292d858fade16e15d8a"
+}

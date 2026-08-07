@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:50.599635+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-find-large-files",
+  "contentHash": "8d15618f3d65dcf2bb9cfa266042be92611d0bedd7c51c1fa7c283215db8b50c"
+}

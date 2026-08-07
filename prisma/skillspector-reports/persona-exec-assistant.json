@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:58:18.388284+00:00",
+  "scanMode": "static",
+  "skillName": "persona-exec-assistant",
+  "contentHash": "2dcbcdf83491a0b155c9a0b00fc29df5dbc96e06483354e31aa4fccc62819d0b"
+}

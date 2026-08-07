@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:50:09.069197+00:00",
+  "scanMode": "static",
+  "skillName": "better-auth-security-best-practices",
+  "contentHash": "ef0054d82c17ab0ddb121a09143398c092119e74500269755557f838ddf9519a"
+}

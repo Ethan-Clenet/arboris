@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:37.692658+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-share-folder-with-team",
+  "contentHash": "7d2156e7b214a08a722166f358210d88d150793cd87c2945f487efc712e5fa09"
+}

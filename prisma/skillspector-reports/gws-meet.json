@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:56:12.955153+00:00",
+  "scanMode": "static",
+  "skillName": "gws-meet",
+  "contentHash": "c989e40c5d242d0bc6b8f7b2cf62e139cd6e86d6cc74797c2aabc8e6630e4065"
+}

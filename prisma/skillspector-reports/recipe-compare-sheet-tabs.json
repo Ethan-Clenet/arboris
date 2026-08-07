@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:06.614272+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-compare-sheet-tabs",
+  "contentHash": "885ba2ad5cdfdf201cd62c6ea1183bc2659c3a08bdbd7e9e671e6b1a2a43568b"
+}

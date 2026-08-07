@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:42.576348+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-draft-email-from-doc",
+  "contentHash": "4da9e4070809c4ee2350e7878ad62d61eb609d1497c864f46b97c4bb5c189df0"
+}

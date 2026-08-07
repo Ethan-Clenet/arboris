@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:09.844175+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-post-mortem-setup",
+  "contentHash": "be45ef6d78bc0c1c2e32e0b21bd70549aa999155a27e95201c93639d67d5ceb6"
+}

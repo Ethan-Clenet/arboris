@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:07.301797+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-plan-weekly-schedule",
+  "contentHash": "9bc1cfe90b198eaf0f7e45886bef4330ab63160a324c17c0960a463787ed3c31"
+}

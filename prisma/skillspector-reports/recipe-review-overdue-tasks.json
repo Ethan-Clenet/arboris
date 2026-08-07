@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:18.455265+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-review-overdue-tasks",
+  "contentHash": "4eaf4e47fdb9a264c973423c24ab71d3ac6a7bd595254a84f0e4d159cbc8a4f5"
+}

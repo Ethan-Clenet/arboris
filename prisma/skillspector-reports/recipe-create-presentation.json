@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:31.729723+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-create-presentation",
+  "contentHash": "02e980c100665822740991a5edd305cdfa0ee3dc832684d8436c9df4e83f9023"
+}

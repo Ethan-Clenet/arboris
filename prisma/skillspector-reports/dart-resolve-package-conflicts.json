@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:52:33.888754+00:00",
+  "scanMode": "static",
+  "skillName": "dart-resolve-package-conflicts",
+  "contentHash": "6befe065d59da4cb6ff9110f1ae8591a2a7f8483c9f07fc3c5684d78940f7948"
+}

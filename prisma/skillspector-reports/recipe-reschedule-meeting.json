@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:12.762899+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-reschedule-meeting",
+  "contentHash": "47492bcd0026f12a3d24ffe975796cbdaaa392f7c41681c8e05824bf32ab3da4"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:54:10.318310+00:00",
+  "scanMode": "static",
+  "skillName": "flutter-add-integration-test",
+  "contentHash": "b24d5f8207358eea0bffc871e612dc599002d826455c50a0bdd94e70fcb6f984"
+}

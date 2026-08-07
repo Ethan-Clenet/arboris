@@ -1,0 +1,26 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "Plist",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 97
+      }
+    }
+  ],
+  "scannedAt": "2026-08-07T05:54:30.165383+00:00",
+  "scanMode": "static",
+  "skillName": "flutter-setup-declarative-routing",
+  "contentHash": "ad64817f45a82d2290349948f5fe8d04f3d0c493945ba1d6ad73a01c5b61a14a"
+}

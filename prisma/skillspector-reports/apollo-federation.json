@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:49:13.097560+00:00",
+  "scanMode": "static",
+  "skillName": "apollo-federation",
+  "contentHash": "bfb4bcd1a8fcccdafc6fce8c619cf36c8ce9278f92dfad36eb4ea651754cbaf6"
+}

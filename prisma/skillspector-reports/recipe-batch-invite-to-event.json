@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:58:55.381001+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-batch-invite-to-event",
+  "contentHash": "b15c9d741646d92b47cdad0802ff8bd4a7288d33f5288f56b1cd06c4c8594b84"
+}

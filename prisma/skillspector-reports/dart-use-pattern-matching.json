@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:52:46.094397+00:00",
+  "scanMode": "static",
+  "skillName": "dart-use-pattern-matching",
+  "contentHash": "971750512958f2bccfd042cf134c26192ebb033823ba91ed7d1545fc67bb0d73"
+}

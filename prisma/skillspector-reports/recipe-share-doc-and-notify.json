@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:32.158887+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-share-doc-and-notify",
+  "contentHash": "621d706cad7026abfee9c6e782f8a06bfcebeb32fbf80ff4c3d7f9d9011acfa6"
+}

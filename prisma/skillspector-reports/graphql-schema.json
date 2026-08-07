@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:55:04.160415+00:00",
+  "scanMode": "static",
+  "skillName": "graphql-schema",
+  "contentHash": "f1872cb06e7c128827660a7e398ee18b5b60b266c02028b9a79f822f5e66fce8"
+}

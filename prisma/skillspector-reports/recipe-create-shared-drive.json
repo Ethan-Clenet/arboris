@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:59:34.694553+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-create-shared-drive",
+  "contentHash": "717fb31d2616be641915e2edd0010b9f89033e155b64301d1068333e2be2159f"
+}

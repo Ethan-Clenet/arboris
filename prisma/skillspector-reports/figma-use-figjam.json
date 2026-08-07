@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:54:00.080830+00:00",
+  "scanMode": "static",
+  "skillName": "figma-use-figjam",
+  "contentHash": "0a683ca9ab46287eabf35f00f62a123208ee20096ac5dea8c463ebb8540c13a5"
+}

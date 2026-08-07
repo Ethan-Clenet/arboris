@@ -1,0 +1,26 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "TM3",
+      "category": "Tool Misuse",
+      "pattern": "Unsafe Defaults",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "sandbox=false",
+      "explanation": "Tool defaults are unsafe or overly permissive (e.g. disabled TLS verification, no authentication, world-writable permissions). Unsafe defaults widen the attack surface.",
+      "remediation": "Override unsafe defaults with secure settings (verify=True, auth required, restrictive permissions). Review and harden all tool configurations.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 202
+      }
+    }
+  ],
+  "scannedAt": "2026-08-07T05:49:26.401068+00:00",
+  "scanMode": "static",
+  "skillName": "apollo-router",
+  "contentHash": "05edc038f7516603a4c775d548805c643528abd25384d6d169eff753668f9994"
+}

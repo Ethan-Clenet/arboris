@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:24.010737+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-save-email-to-doc",
+  "contentHash": "edc5f13cbcd5f4e0882835138513de8c6840c35003341621cfe7050baffd8d2a"
+}

@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:53:15.339923+00:00",
+  "scanMode": "static",
+  "skillName": "extract-design-md",
+  "contentHash": "0591235a5a09839886f22c0656159545ff580179fbcc97748ca4d8f91b4100b4"
+}

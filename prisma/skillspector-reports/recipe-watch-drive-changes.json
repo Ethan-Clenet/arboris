@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T06:00:43.165912+00:00",
+  "scanMode": "static",
+  "skillName": "recipe-watch-drive-changes",
+  "contentHash": "5599522b933b8bed69b2f15876f93d0be1165853a813fd23417448b19e400139"
+}

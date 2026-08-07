@@ -1,0 +1,26 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "MP3",
+      "category": "Memory Poisoning",
+      "pattern": "Memory Manipulation",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "corrupt state",
+      "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+      "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+      "location": {
+        "file": "references/caching.md",
+        "start_line": 204
+      }
+    }
+  ],
+  "scannedAt": "2026-08-07T05:49:16.652343+00:00",
+  "scanMode": "static",
+  "skillName": "apollo-ios",
+  "contentHash": "ff7f642892f59c08361081cd16a83c1e40c192b4f49c3d7175e119b7d42c5e6b"
+}

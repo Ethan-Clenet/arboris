@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:58:26.450847+00:00",
+  "scanMode": "static",
+  "skillName": "persona-project-manager",
+  "contentHash": "e30687f2d0eb6b5095be04943478fd11ff0801f7d90b46a950f146921c69a027"
+}

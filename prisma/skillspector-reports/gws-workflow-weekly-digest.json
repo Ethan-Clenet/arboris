@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:57:02.382143+00:00",
+  "scanMode": "static",
+  "skillName": "gws-workflow-weekly-digest",
+  "contentHash": "3efbd8376584bc78d85d54965d65a9c735d1b13d08f5a952cce6496c5a412778"
+}

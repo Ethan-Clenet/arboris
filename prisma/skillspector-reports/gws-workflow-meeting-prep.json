@@ -1,0 +1,11 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-07T05:56:56.786033+00:00",
+  "scanMode": "static",
+  "skillName": "gws-workflow-meeting-prep",
+  "contentHash": "f5c99267fd2c28a4d8b95f6f92a435b2198ef2a05bd4cb100454e283db525cc0"
+}
