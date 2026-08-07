@@ -21,7 +21,7 @@ function CommandDisplay({ args }: { args: string }) {
     )
   }
 
-  if (args.startsWith('publisher ') || args.startsWith('creator ')) {
+  if (args.startsWith('publisher ') || args.startsWith('creator ') || args.startsWith('collection ')) {
     const [cmd, ...rest] = args.split(' ')
     const publisher = rest.join(' ')
     return (

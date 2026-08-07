@@ -107,11 +107,18 @@ export const CATEGORY_GROUPS: CategoryGroup[] = [
     categoryIds: ['frontend', 'backend', 'language'],
   },
   {
+    id: 'security',
+    label: { fr: 'Sécurité & garde', en: 'Security & guards' },
+    icon: 'shield-check',
+    color: '#0D9488',
+    categoryIds: ['security'],
+  },
+  {
     id: 'devops',
     label: { fr: 'DevOps', en: 'DevOps' },
     icon: 'git-branch',
     color: '#F08A4B',
-    categoryIds: ['ops', 'security'],
+    categoryIds: ['ops'],
   },
   {
     id: 'quality',
@@ -150,6 +157,9 @@ export const CATEGORY_GROUPS: CategoryGroup[] = [
   },
 ]
 
+/** Packs mis en avant sur /getting-started (ordre d’affichage). */
+export const START_PACK_IDS = ['sonar', 'command-starter', 'ship-safely'] as const
+
 export function categoryIdsInGroup(groupId: string): readonly string[] {
   return CATEGORY_GROUPS.find((group) => group.id === groupId)?.categoryIds ?? []
 }
@@ -157,25 +167,25 @@ export function categoryIdsInGroup(groupId: string): readonly string[] {
 /** Catégories pertinentes par techno (page Premier pas). */
 export const STACK_CATEGORY_IDS: Record<string, readonly string[]> = {
   node: ['backend', 'language', 'tests', 'verification', 'ops', 'agents', 'security', 'data', 'product', 'docs'],
-  js: ['frontend', 'language', 'tests', 'verification', 'agents', 'docs', 'product'],
-  ts: ['frontend', 'backend', 'language', 'tests', 'verification', 'agents', 'data', 'docs', 'product'],
+  js: ['frontend', 'language', 'tests', 'verification', 'agents', 'security', 'docs', 'product'],
+  ts: ['frontend', 'backend', 'language', 'tests', 'verification', 'agents', 'security', 'data', 'docs', 'product'],
   fastapi: ['backend', 'language', 'tests', 'verification', 'security', 'data', 'agents', 'docs'],
-  react: ['frontend', 'tests', 'verification', 'language', 'agents', 'docs', 'product'],
-  angular: ['frontend', 'tests', 'verification', 'language', 'product'],
+  react: ['frontend', 'tests', 'verification', 'language', 'agents', 'security', 'docs', 'product'],
+  angular: ['frontend', 'tests', 'verification', 'language', 'security', 'product'],
   java: ['backend', 'language', 'tests', 'verification', 'security', 'data', 'product'],
   'spring-boot': ['backend', 'language', 'tests', 'verification', 'security', 'data', 'product'],
-  docker: ['ops', 'backend', 'tests', 'verification', 'agents', 'product'],
-  k9: ['ops', 'backend', 'tests', 'verification'],
-  postgresql: ['backend', 'data', 'tests', 'verification', 'language', 'docs'],
-  mysql: ['backend', 'data', 'tests', 'verification'],
-  prisma: ['backend', 'data', 'tests', 'verification', 'language', 'docs'],
+  docker: ['ops', 'backend', 'tests', 'verification', 'agents', 'security', 'product'],
+  k9: ['ops', 'backend', 'tests', 'verification', 'security'],
+  postgresql: ['backend', 'data', 'tests', 'verification', 'language', 'security', 'docs'],
+  mysql: ['backend', 'data', 'tests', 'verification', 'security'],
+  prisma: ['backend', 'data', 'tests', 'verification', 'language', 'security', 'docs'],
   supabase: ['backend', 'data', 'security', 'frontend', 'tests', 'verification'],
   firebase: ['backend', 'security', 'frontend', 'tests', 'verification'],
   convex: ['backend', 'security', 'frontend', 'tests', 'verification'],
-  neon: ['backend', 'data', 'tests', 'verification', 'language'],
-  turso: ['backend', 'data', 'tests', 'verification'],
-  duckdb: ['data', 'backend', 'tests', 'verification'],
-  drizzle: ['backend', 'data', 'language', 'tests', 'verification'],
+  neon: ['backend', 'data', 'tests', 'verification', 'language', 'security'],
+  turso: ['backend', 'data', 'tests', 'verification', 'security'],
+  duckdb: ['data', 'backend', 'tests', 'verification', 'security'],
+  drizzle: ['backend', 'data', 'language', 'tests', 'verification', 'security'],
 }
 
 export function stackSupportsCategory(stackId: string, categoryId: string): boolean {

@@ -10,11 +10,13 @@ import { getCatalog } from '#/server/functions'
 import { seoHead } from '#/lib/seo'
 import {
   CATEGORY_GROUPS,
+  START_PACK_IDS,
   categoryIdsInGroup,
   hexToRgba,
   stackSupportsCategory,
   skillsForStackAndCategory,
   type Category,
+  type CollectionSummary,
   type SkillSummary,
 } from '#/lib/catalog'
 
@@ -22,9 +24,10 @@ export const Route = createFileRoute('/getting-started')({
   loader: () => getCatalog(),
   head: () =>
     seoHead({
-      title: 'Premier pas — choisir ses skills',
+      title: 'Premier pas — packs Sonar et skills',
       path: '/getting-started',
-      description: 'Choisis un domaine, une techno, et récupère les skills recommandés pour ton agent.',
+      description:
+        'Installe Skill Sonar, GateGuard et les packs starter, ou filtre par domaine et techno pour ton agent.',
     }),
   component: GettingStartedPage,
 })
@@ -45,6 +48,19 @@ function GettingStartedPage() {
     for (const c of catalog.categories) map.set(c.id, c)
     return map
   }, [catalog.categories])
+
+  const skillById = useMemo(() => {
+    const map = new Map<string, SkillSummary>()
+    for (const s of catalog.skills) map.set(s.id, s)
+    return map
+  }, [catalog.skills])
+
+  const starterPacks = useMemo(() => {
+    const byId = new Map((catalog.collections ?? []).map((c) => [c.id, c]))
+    return START_PACK_IDS.map((id) => byId.get(id)).filter(
+      (c): c is CollectionSummary => Boolean(c),
+    )
+  }, [catalog.collections])
 
   const skillsForSelection = (stack: string, category: string) =>
     skillsForStackAndCategory(catalog.skills, stack, category)
@@ -126,7 +142,6 @@ function GettingStartedPage() {
         </p>
       </section>
 
-      {/* 3 étapes */}
       <section className="pt-[26px] pb-1.5">
         <div className="grid gap-3.5 sm:grid-cols-3">
           {t.start.steps.map((s, i) => (
@@ -147,51 +162,80 @@ function GettingStartedPage() {
         </div>
       </section>
 
-      {/* Choix du domaine */}
-      <section className="pt-[34px]">
-        <div className="mb-4">
-          <h2 className="mb-1 font-display text-[22px] font-semibold">{t.start.pickGroupTitle}</h2>
-          <p className="text-[14px] text-[var(--text-2)]">{t.start.pickGroupSub}</p>
+      {/* Packs recommandés (Sonar + starters) */}
+      {starterPacks.length > 0 ? (
+        <section className="pt-[34px]">
+          <div className="mb-4">
+            <h2 className="mb-1 font-display text-[22px] font-semibold">{t.start.packsTitle}</h2>
+            <p className="text-[14px] text-[var(--text-2)]">{t.start.packsSub}</p>
+          </div>
+          <div className="grid gap-4 lg:grid-cols-3">
+            {starterPacks.map((pack) => (
+              <StarterPackCard
+                key={pack.id}
+                pack={pack}
+                skills={pack.skillIds
+                  .map((id) => skillById.get(id))
+                  .filter((s): s is SkillSummary => Boolean(s))}
+              />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {/* Parcours domaine → spécialité → techno */}
+      <section className="pt-[40px]">
+        <div className="mb-5">
+          <h2 className="mb-1 font-display text-[22px] font-semibold">{t.start.browseTitle}</h2>
+          <p className="text-[14px] text-[var(--text-2)]">{t.start.browseSub}</p>
         </div>
-        <div className="flex flex-wrap gap-2.5">
-          {CATEGORY_GROUPS.map((group) => {
-            const isActive = group.id === groupId
-            const count = catalog.skills.filter((s) => group.categoryIds.includes(s.categoryId)).length
-            if (count === 0) return null
-            return (
-              <button
-                key={group.id}
-                type="button"
-                aria-pressed={isActive}
-                onClick={() => pickGroup(group.id)}
-                className={`flex cursor-pointer items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
-                  isActive
-                    ? 'border-[var(--accent-border)] bg-[var(--accent-soft)]'
-                    : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-2)]'
-                }`}
-              >
-                <span
-                  className="grid h-[30px] w-[30px] place-items-center rounded-lg"
-                  style={{ background: hexToRgba(group.color, 0.15), color: group.color }}
+
+        <div className="mb-4">
+          <h3 className="mb-1 font-display text-[17px] font-semibold text-[var(--text-1)]">
+            {t.start.pickGroupTitle}
+          </h3>
+          <p className="mb-3 text-[13.5px] text-[var(--text-2)]">{t.start.pickGroupSub}</p>
+          <div className="flex flex-wrap gap-2.5">
+            {CATEGORY_GROUPS.map((group) => {
+              const isActive = group.id === groupId
+              const count = catalog.skills.filter((s) => group.categoryIds.includes(s.categoryId)).length
+              if (count === 0) return null
+              return (
+                <button
+                  key={group.id}
+                  type="button"
+                  aria-pressed={isActive}
+                  onClick={() => pickGroup(group.id)}
+                  className={`flex cursor-pointer items-center gap-2.5 rounded-md border py-2 pl-2.5 pr-3.5 text-sm font-medium text-[var(--text-1)] transition-colors ${
+                    isActive
+                      ? 'border-[var(--accent-border)] bg-[var(--accent-soft)]'
+                      : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-2)]'
+                  }`}
                 >
-                  <Icon name={group.icon} bold size={17} />
-                </span>
-                <span className="flex flex-col items-start leading-[1.15]">
-                  <span>{group.label[lang]}</span>
-                  <span className="font-mono text-[10.5px] font-medium text-[var(--text-3)]">{count} skills</span>
-                </span>
-              </button>
-            )
-          })}
+                  <span
+                    className="grid h-[30px] w-[30px] place-items-center rounded-lg"
+                    style={{ background: hexToRgba(group.color, 0.15), color: group.color }}
+                  >
+                    <Icon name={group.icon} bold size={17} />
+                  </span>
+                  <span className="flex flex-col items-start leading-[1.15]">
+                    <span>{group.label[lang]}</span>
+                    <span className="font-mono text-[10.5px] font-medium text-[var(--text-3)]">
+                      {count} skills
+                    </span>
+                  </span>
+                </button>
+              )
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Choix de la spécialité */}
       {groupId ? (
-        <section className="pt-[26px]">
+        <section className="pt-[18px]">
           <div className="mb-4">
-            <h2 className="mb-1 font-display text-[22px] font-semibold">{t.start.pickCategoryTitle}</h2>
-            <p className="text-[14px] text-[var(--text-2)]">
+            <h3 className="mb-1 font-display text-[17px] font-semibold">{t.start.pickCategoryTitle}</h3>
+            <p className="text-[13.5px] text-[var(--text-2)]">
               {activeGroup ? (
                 <>
                   <span
@@ -236,7 +280,9 @@ function GettingStartedPage() {
                   </span>
                   <span className="flex flex-col items-start leading-[1.15]">
                     <span>{c.label[lang]}</span>
-                    <span className="font-mono text-[10.5px] font-medium text-[var(--text-3)]">{count} skills</span>
+                    <span className="font-mono text-[10.5px] font-medium text-[var(--text-3)]">
+                      {count} skills
+                    </span>
                   </span>
                 </button>
               )
@@ -245,12 +291,11 @@ function GettingStartedPage() {
         </section>
       ) : null}
 
-      {/* Choix de la stack */}
       {categoryId ? (
-        <section className="pt-[26px]">
+        <section className="pt-[18px]">
           <div className="mb-4">
-            <h2 className="mb-1 font-display text-[22px] font-semibold">{t.start.pickTitle}</h2>
-            <p className="text-[14px] text-[var(--text-2)]">{t.start.pickSub}</p>
+            <h3 className="mb-1 font-display text-[17px] font-semibold">{t.start.pickTitle}</h3>
+            <p className="text-[13.5px] text-[var(--text-2)]">{t.start.pickSub}</p>
           </div>
           <div className="flex flex-wrap gap-2.5">
             {stacksForCategory.map(({ stack: k, count }) => {
@@ -275,7 +320,9 @@ function GettingStartedPage() {
                   </span>
                   <span className="flex flex-col items-start leading-[1.15]">
                     <span>{k.label}</span>
-                    <span className="font-mono text-[10.5px] font-medium text-[var(--text-3)]">{count} skills</span>
+                    <span className="font-mono text-[10.5px] font-medium text-[var(--text-3)]">
+                      {count} skills
+                    </span>
                   </span>
                 </button>
               )
@@ -284,7 +331,6 @@ function GettingStartedPage() {
         </section>
       ) : null}
 
-      {/* Skills recommandés */}
       <section className="pt-6 pb-[70px]">
         <div className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
           {active && activeCategory ? (
@@ -439,6 +485,99 @@ function GettingStartedPage() {
         </div>
       </section>
     </PageShell>
+  )
+}
+
+function StarterPackCard({
+  pack,
+  skills,
+}: {
+  pack: CollectionSummary
+  skills: SkillSummary[]
+}) {
+  const { t, lang } = useI18n()
+  const itemCount = pack.skillIds.length + pack.commandIds.length
+
+  return (
+    <div className="flex flex-col rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow-card)]">
+      <div className="mb-3 flex items-start gap-3">
+        <span
+          className="grid h-11 w-11 flex-none place-items-center rounded-[11px]"
+          style={{ background: hexToRgba(pack.color, 0.14), color: pack.color }}
+        >
+          <Icon name={pack.icon} bold size={20} />
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="font-display text-[16px] font-semibold text-[var(--text-1)]">
+            {pack.label[lang]}
+          </div>
+          <div className="font-mono text-[11px] text-[var(--text-3)]">
+            {itemCount} · {pack.kind === 'pack' ? t.collections.pack : t.collections.featured}
+          </div>
+        </div>
+      </div>
+      <p className="mb-3 line-clamp-3 flex-1 text-[13px] leading-[1.5] text-[var(--text-2)]">
+        {pack.brief[lang]}
+      </p>
+
+      {skills.length > 0 ? (
+        <div className="mb-3">
+          <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)]">
+            {t.start.packSkills}
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {skills.map((skill) => (
+              <Link
+                key={skill.id}
+                to="/skills/$id"
+                params={{ id: skill.id }}
+                className="inline-flex max-w-full cursor-pointer truncate rounded-md border border-[var(--border)] bg-[var(--bg)] px-2 py-0.5 font-mono text-[11px] text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
+              >
+                {skill.id}
+              </Link>
+            ))}
+          </div>
+        </div>
+      ) : pack.commandIds.length > 0 ? (
+        <div className="mb-3">
+          <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)]">
+            {t.start.packCommands}
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {pack.commandIds.slice(0, 6).map((id) => (
+              <Link
+                key={id}
+                to="/commands/$id"
+                params={{ id }}
+                className="inline-flex cursor-pointer truncate rounded-md border border-[var(--border)] bg-[var(--bg)] px-2 py-0.5 font-mono text-[11px] text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
+              >
+                /{id}
+              </Link>
+            ))}
+            {pack.commandIds.length > 6 ? (
+              <span className="font-mono text-[11px] text-[var(--text-3)]">
+                +{pack.commandIds.length - 6}
+              </span>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+
+      <CliCommandBar
+        args={`collection ${pack.id}`}
+        copyLabel={t.start.copyCommand}
+        copiedLabel={t.start.copiedCommand}
+        className="mb-3 max-w-none"
+      />
+      <Link
+        to="/collections/$id"
+        params={{ id: pack.id }}
+        className="inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-[10px] border border-[var(--border)] px-3 py-2 text-[13px] font-medium text-[var(--text-1)] transition-colors hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]"
+      >
+        {t.start.packsCta}
+        <Icon name="arrow-up-right" size={14} />
+      </Link>
+    </div>
   )
 }
 
