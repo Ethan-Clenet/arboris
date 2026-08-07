@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
 import CliCommandBar from '#/components/CliCommandBar'
@@ -21,6 +21,8 @@ import { seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/')({
   loader: () => getCatalog(),
+  pendingMs: 0,
+  pendingComponent: SkillsPending,
   head: () =>
     seoHead({
       title: 'Catalogue complet des skills IA',
@@ -33,6 +35,10 @@ export const Route = createFileRoute('/skills/')({
 
 const SKILL_TABLE_COLS =
   'grid grid-cols-[minmax(0,1.25fr)_minmax(0,1.4fr)_minmax(0,1fr)_5.5rem_7.75rem] items-center gap-x-1.5'
+
+/** Nombre de lignes rendues par « page » de lazy-load. */
+const SKILLS_PAGE_SIZE = 40
+const SKELETON_ROWS = 6
 
 type SecurityFilter = 'all' | SecurityRecommendation
 
@@ -69,6 +75,34 @@ function truncateListing(text: string, max = 140): string {
   return `${normalized.slice(0, max - 1).trimEnd()}…`
 }
 
+function SkillsPending() {
+  const { t } = useI18n()
+  return (
+    <main id="main-content" className="w-full" aria-busy="true" aria-label={t.skills.loadingMore}>
+      <PageShell as="div" className="pt-9">
+        <div className="max-w-[640px]">
+          <div className="skel mb-3 h-3.5 w-40" />
+          <div className="skel mb-2.5 h-9 w-[280px] max-w-full" />
+          <div className="skel h-4 w-full max-w-[480px]" />
+        </div>
+      </PageShell>
+      <PageShell as="div" className="grid items-start gap-7 pt-6 pb-[70px] lg:grid-cols-[248px_minmax(0,1fr)]">
+        <aside className="flex flex-col gap-3" aria-hidden>
+          <div className="skel h-10 w-full rounded-[10px]" />
+          {Array.from({ length: 8 }, (_, i) => (
+            <div key={i} className="skel h-9 w-full rounded-[9px]" />
+          ))}
+        </aside>
+        <section>
+          <div className="skel mb-3.5 h-5 w-64" />
+          <div className="skel mb-3.5 h-4 w-32" />
+          <SkillsTableSkeleton rows={SKELETON_ROWS} />
+        </section>
+      </PageShell>
+    </main>
+  )
+}
+
 function SkillsPage() {
   const catalog = Route.useLoaderData()
   const { t, lang } = useI18n()
@@ -80,6 +114,8 @@ function SkillsPage() {
   const [publisher, setPublisher] = useState<string>('all')
   const [compat, setCompat] = useState<string[]>([])
   const [security, setSecurity] = useState<SecurityFilter>('all')
+  const [visibleCount, setVisibleCount] = useState(SKILLS_PAGE_SIZE)
+  const sentinelRef = useRef<HTMLDivElement | null>(null)
 
   const catById = useMemo(() => {
     const map = new Map<string, Category>()
@@ -138,6 +174,30 @@ function SkillsPage() {
       (a, b) => (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id),
     )
   }, [q, cat, publisher, compat, security, catalog.skills, catById, lang, otherPublisher])
+
+  const filterKey = `${q}\0${cat}\0${publisher}\0${compat.join(',')}\0${security}`
+
+  useEffect(() => {
+    setVisibleCount(SKILLS_PAGE_SIZE)
+  }, [filterKey])
+
+  const visibleRows = rows.slice(0, visibleCount)
+  const hasMore = visibleCount < rows.length
+
+  useEffect(() => {
+    if (!hasMore) return
+    const el = sentinelRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return
+        setVisibleCount((n) => Math.min(n + SKILLS_PAGE_SIZE, rows.length))
+      },
+      { rootMargin: '320px 0px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [hasMore, rows.length, visibleCount])
 
   const securityCounts = useMemo(() => {
     const counts = { SAFE: 0, CAUTION: 0, UNSAFE: 0, UNKNOWN: 0 }
@@ -363,7 +423,10 @@ function SkillsPage() {
             </div>
           ) : null}
 
-          <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
+          <div
+            className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]"
+            aria-busy={hasMore}
+          >
             <div className="scroll-x">
               <div className="min-w-[720px]">
                 <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] bg-[var(--surface-2)] px-4 py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)] sm:px-[18px]`}>
@@ -374,7 +437,7 @@ function SkillsPage() {
                   <div className="text-right">{t.skills.copy}</div>
                 </div>
 
-                {rows.map((skill) => (
+                {visibleRows.map((skill) => (
                   <SkillRow
                     key={skill.id}
                     skill={skill}
@@ -384,6 +447,16 @@ function SkillsPage() {
                     onCopy={() => copySkill({ id: skill.id, lang, announceMsg: t.skills.copied })}
                   />
                 ))}
+
+                {hasMore ? (
+                  <>
+                    {Array.from({ length: 3 }, (_, i) => (
+                      <SkillRowSkeleton key={`skel-${i}`} />
+                    ))}
+                    <div ref={sentinelRef} className="h-px w-full" aria-hidden />
+                    <p className="sr-only">{t.skills.loadingMore}</p>
+                  </>
+                ) : null}
               </div>
             </div>
 
@@ -403,6 +476,59 @@ function SkillsPage() {
         </section>
       </PageShell>
     </main>
+  )
+}
+
+function SkillsTableSkeleton({ rows }: { rows: number }) {
+  const { t } = useI18n()
+  return (
+    <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
+      <div className="scroll-x">
+        <div className="min-w-[720px]">
+          <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] bg-[var(--surface-2)] px-4 py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)] sm:px-[18px]`}>
+            <div>{t.skills.colSkill}</div>
+            <div>{t.skills.colDesc}</div>
+            <div className="min-w-0">{t.skills.colTech}</div>
+            <div className="border-l border-[var(--border)] pl-2">{t.skills.colCompat}</div>
+            <div className="text-right">{t.skills.copy}</div>
+          </div>
+          {Array.from({ length: rows }, (_, i) => (
+            <SkillRowSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function SkillRowSkeleton() {
+  return (
+    <div
+      className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] px-4 py-3.5 sm:px-[18px]`}
+      aria-hidden
+    >
+      <div className="flex min-w-0 items-center gap-[11px]">
+        <span className="skel h-[34px] w-[34px] shrink-0 rounded-[9px]" />
+        <span className="grid min-w-0 flex-1 gap-1.5">
+          <span className="skel h-3.5 w-[72%] max-w-[160px]" />
+          <span className="skel h-2.5 w-[48%] max-w-[100px]" />
+        </span>
+      </div>
+      <div className="grid gap-1.5 self-center">
+        <span className="skel h-3 w-full" />
+        <span className="skel h-3 w-[78%]" />
+      </div>
+      <div className="flex items-center gap-1.5">
+        <span className="skel h-[22px] w-16 rounded-md" />
+        <span className="skel h-[22px] w-7 rounded-md" />
+      </div>
+      <div className="flex items-center border-l border-[var(--border)] pl-2">
+        <span className="skel h-4 w-14 rounded" />
+      </div>
+      <div className="flex items-center justify-end">
+        <span className="skel h-8 w-[4.5rem] rounded-lg" />
+      </div>
+    </div>
   )
 }
 
