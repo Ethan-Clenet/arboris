@@ -66,6 +66,18 @@ export function normalizePublisher(raw: string): string {
   const lower = value.toLowerCase()
   if (lower === 'ecc' || lower === 'ecc-community' || lower.startsWith('ecc ')) return 'ECC'
   if (lower === 'community') return 'Community'
+  // Contributeurs / origines diverses → Community
+  if (
+    lower.startsWith('health1') ||
+    lower.includes('health1 super speciality') ||
+    lower.includes('ronald skelton') ||
+    lower.includes('rapportscore') ||
+    lower === 'skill-sonar' ||
+    lower === 'skill sonar' ||
+    lower === 'skillsonar'
+  ) {
+    return 'Community'
+  }
   if (lower === 'flox') return 'Flox'
   if (lower === 'brave' || lower.startsWith('brave ')) return 'Brave'
   if (lower === 'angular' || lower.startsWith('angular ')) return 'Angular'
