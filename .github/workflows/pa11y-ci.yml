@@ -1,0 +1,54 @@
+name: Pa11y CI (axe)
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: 'URL de base à auditer (prod, preview…)'
+        required: false
+        default: 'https://arboris-three.vercel.app'
+  schedule:
+    # Lundi 06:30 UTC — juste après Lighthouse
+    - cron: '30 6 * * 1'
+  push:
+    branches: [master]
+    paths:
+      - 'src/**'
+      - '.pa11yci.cjs'
+      - 'scripts/run-pa11y.mjs'
+      - 'package.json'
+      - '.github/workflows/pa11y-ci.yml'
+
+concurrency:
+  group: pa11y-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pa11y:
+    name: Pa11y axe
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Run Pa11y CI (axe / WCAG2AA)
+        run: npm run a11y:ci
+        env:
+          PA11Y_BASE_URL: ${{ inputs.base_url || 'https://arboris-three.vercel.app' }}
+
+      - name: Upload Pa11y reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pa11y-reports
+          path: pa11y-reports/
+          retention-days: 30
+          if-no-files-found: warn
