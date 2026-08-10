@@ -6,18 +6,12 @@ on:
     branches: [master]
     paths:
       - 'src/**'
-      - 'cli/**'
-      - 'scripts/**'
-      - 'packages/**'
       - 'sonar-project.properties'
       - '.github/workflows/sonarcloud.yml'
   pull_request:
     branches: [master]
     paths:
       - 'src/**'
-      - 'cli/**'
-      - 'scripts/**'
-      - 'packages/**'
       - 'sonar-project.properties'
       - '.github/workflows/sonarcloud.yml'
 
