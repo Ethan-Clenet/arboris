@@ -1,0 +1,49 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignoreWorkspaces": ["packages/**"],
+  "entry": [
+    "src/router.tsx",
+    "src/routes/**/*.{ts,tsx}",
+    "src/server/**/*.{ts,tsx}",
+    "cli/main.ts",
+    "scripts/**/*.{ts,mjs,js}",
+    "prisma/seed.ts",
+    "prisma/catalog-from-skills.ts",
+    "vite.config.ts",
+    "lighthouserc.cjs",
+    ".pa11yci.cjs"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx}",
+    "cli/**/*.{ts,tsx}",
+    "scripts/**/*.{ts,mjs,js}",
+    "prisma/**/*.{ts,tsx}",
+    "vite.config.ts",
+    "lighthouserc.cjs",
+    ".pa11yci.cjs"
+  ],
+  "ignore": [
+    "prisma/skills/**",
+    "prisma/skillspector-reports/**",
+    "prisma/migrations/**",
+    "src/routeTree.gen.ts",
+    "src/generated/**",
+    "pa11y-reports/**",
+    ".lighthouseci/**",
+    ".output/**",
+    "dist/**",
+    "coverage/**"
+  ],
+  "ignoreDependencies": [
+    "@tanstack/react-router-devtools",
+    "@tanstack/react-devtools",
+    "@tanstack/devtools-vite",
+    "@tanstack/react-router-ssr-query",
+    "@tanstack/router-plugin",
+    "tailwindcss",
+    "@lhci/cli"
+  ],
+  "ignoreBinaries": ["docker", "vercel", "semgrep"],
+  "vite": true,
+  "vitest": true
+}

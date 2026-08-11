@@ -10,6 +10,8 @@ type PublisherLogoProps = {
   className?: string
   /** Remplit avec currentColor (hérité) au lieu de la couleur marque. */
   inherit?: boolean
+  /** Texte alternatif ; défaut : « Logo {name} ». */
+  alt?: string
 }
 
 /**
@@ -22,13 +24,15 @@ export default function PublisherLogo({
   size = 14,
   className = '',
   inherit = false,
+  alt,
 }: PublisherLogoProps) {
+  const altText = alt ?? `Logo ${name}`
   const asset = publisherLogoAsset(name)
   if (asset && !inherit) {
     return (
       <img
         src={asset}
-        alt=""
+        alt={altText}
         width={size}
         height={size}
         className={`block object-contain ${className}`.trim()}
@@ -44,14 +48,14 @@ export default function PublisherLogo({
   return (
     <svg
       role="img"
-      aria-hidden="true"
+      aria-label={altText}
       viewBox="0 0 24 24"
       width={size}
       height={size}
       className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <title>{name}</title>
+      <title>{altText}</title>
       <path fill={fill} d={path} />
     </svg>
   )
