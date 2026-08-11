@@ -26,10 +26,12 @@ type ToneStyle = {
 }
 
 const TONE_STYLES: Record<SecurityRecommendation, ToneStyle> = {
-  SAFE: { fg: '#16a36b', bg: 'rgba(22, 163, 107, 0.14)', border: 'rgba(22, 163, 107, 0.4)', icon: 'shield-check' },
-  CAUTION: { fg: '#c9851a', bg: 'rgba(201, 133, 26, 0.14)', border: 'rgba(201, 133, 26, 0.45)', icon: 'warning' },
-  UNSAFE: { fg: '#da3b4a', bg: 'rgba(218, 59, 74, 0.14)', border: 'rgba(218, 59, 74, 0.45)', icon: 'shield-warning' },
-  UNKNOWN: { fg: '#8a909b', bg: 'rgba(138, 144, 155, 0.12)', border: 'rgba(138, 144, 155, 0.4)', icon: 'shield' },
+  // Choix de styles "plein" pour garantir un contraste suffisant (WCAG2AA)
+  // sur le texte/icon + le background, y compris en badges compacts.
+  SAFE: { fg: '#ffffff', bg: '#16a36b', border: '#16a36b', icon: 'shield-check' },
+  CAUTION: { fg: '#ffffff', bg: '#c9851a', border: '#c9851a', icon: 'warning' },
+  UNSAFE: { fg: '#ffffff', bg: '#da3b4a', border: '#da3b4a', icon: 'shield-warning' },
+  UNKNOWN: { fg: '#ffffff', bg: '#8a909b', border: '#8a909b', icon: 'shield' },
 }
 
 export function resolveSecurityTone(

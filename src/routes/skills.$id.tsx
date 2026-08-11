@@ -167,7 +167,10 @@ function SkillDetailPage() {
           </Button>
         </div>
         <div className="px-5 py-[18px]">
-          <pre className="max-h-[420px] overflow-auto whitespace-pre-wrap rounded-xl border border-[var(--border)] bg-[var(--bg)] p-4 font-mono text-[12.5px] leading-[1.65] text-[var(--text-1)]">
+          <pre
+            tabIndex={0}
+            className="max-h-[420px] overflow-auto whitespace-pre-wrap rounded-xl border border-[var(--border)] bg-[var(--bg)] p-4 font-mono text-[12.5px] leading-[1.65] text-[var(--text-1)]"
+          >
             {copyContent}
           </pre>
         </div>
