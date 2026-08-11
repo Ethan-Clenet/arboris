@@ -1,0 +1,13 @@
+# Exclusions Semgrep — catalogue embarqué + artefacts.
+prisma/skills/
+prisma/skillspector-reports/
+prisma/migrations/
+node_modules/
+.output/
+dist/
+coverage/
+packages/
+pa11y-reports/
+.lighthouseci/
+src/routeTree.gen.ts
+src/generated/

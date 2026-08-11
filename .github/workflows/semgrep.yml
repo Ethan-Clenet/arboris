@@ -1,0 +1,52 @@
+name: Semgrep
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - 'src/**'
+      - 'cli/**'
+      - 'scripts/**'
+      - 'prisma/**/*.ts'
+      - '.semgrepignore'
+      - '.github/workflows/semgrep.yml'
+  pull_request:
+    branches: [master]
+    paths:
+      - 'src/**'
+      - 'cli/**'
+      - 'scripts/**'
+      - 'prisma/**/*.ts'
+      - '.semgrepignore'
+      - '.github/workflows/semgrep.yml'
+
+concurrency:
+  group: semgrep-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  semgrep:
+    name: SAST (TS/JS/React)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    container:
+      image: semgrep/semgrep
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Semgrep
+        run: |
+          semgrep scan \
+            --error \
+            --metrics=off \
+            --config=p/typescript \
+            --config=p/javascript \
+            --config=p/react \
+            --exclude=prisma/skills \
+            --exclude=prisma/skillspector-reports \
+            --exclude=node_modules \
+            --exclude=.output \
+            --exclude=dist \
+            --exclude=packages \
+            src cli scripts prisma
