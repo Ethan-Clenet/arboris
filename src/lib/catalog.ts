@@ -157,8 +157,24 @@ export const CATEGORY_GROUPS: CategoryGroup[] = [
   },
 ]
 
-/** Packs mis en avant sur /getting-started (ordre d’affichage). */
+/** Packs workflow mis en avant sur /getting-started (ordre d’affichage). */
 export const START_PACK_IDS = ['sonar', 'command-starter', 'ship-safely'] as const
+
+/** Packs « nouveau projet » par techno (section dédiée sur /getting-started). */
+export const TECH_STARTER_PACK_IDS = [
+  'react-ts-starter',
+  'next-react-starter',
+  'node-api-starter',
+  'fastapi-starter',
+  'angular-starter',
+  'spring-boot-starter',
+  'prisma-postgres-starter',
+  'drizzle-starter',
+  'supabase-starter',
+  'firebase-starter',
+  'convex-starter',
+  'docker-ops-starter',
+] as const
 
 export function categoryIdsInGroup(groupId: string): readonly string[] {
   return CATEGORY_GROUPS.find((group) => group.id === groupId)?.categoryIds ?? []

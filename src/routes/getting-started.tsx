@@ -11,6 +11,7 @@ import { seoHead } from '#/lib/seo'
 import {
   CATEGORY_GROUPS,
   START_PACK_IDS,
+  TECH_STARTER_PACK_IDS,
   categoryIdsInGroup,
   hexToRgba,
   stackSupportsCategory,
@@ -24,10 +25,10 @@ export const Route = createFileRoute('/getting-started')({
   loader: () => getCatalog(),
   head: () =>
     seoHead({
-      title: 'Premier pas — packs Sonar et skills',
+      title: 'Premier pas — packs techno et skills',
       path: '/getting-started',
       description:
-        'Installe Skill Sonar, GateGuard et les packs starter, ou filtre par domaine et techno pour ton agent.',
+        'Installe un pack starter par techno (React, Node, FastAPI…), Sonar, ou filtre par domaine pour ton agent.',
     }),
   component: GettingStartedPage,
 })
@@ -55,12 +56,21 @@ function GettingStartedPage() {
     return map
   }, [catalog.skills])
 
+  const collectionsById = useMemo(() => {
+    return new Map((catalog.collections ?? []).map((c) => [c.id, c]))
+  }, [catalog.collections])
+
   const starterPacks = useMemo(() => {
-    const byId = new Map((catalog.collections ?? []).map((c) => [c.id, c]))
-    return START_PACK_IDS.map((id) => byId.get(id)).filter(
+    return START_PACK_IDS.map((id) => collectionsById.get(id)).filter(
       (c): c is CollectionSummary => Boolean(c),
     )
-  }, [catalog.collections])
+  }, [collectionsById])
+
+  const techStarterPacks = useMemo(() => {
+    return TECH_STARTER_PACK_IDS.map((id) => collectionsById.get(id)).filter(
+      (c): c is CollectionSummary => Boolean(c),
+    )
+  }, [collectionsById])
 
   const skillsForSelection = (stack: string, category: string) =>
     skillsForStackAndCategory(catalog.skills, stack, category)
@@ -162,7 +172,7 @@ function GettingStartedPage() {
         </div>
       </section>
 
-      {/* Packs recommandés (Sonar + starters) */}
+      {/* Packs recommandés (Sonar + workflow) */}
       {starterPacks.length > 0 ? (
         <section className="pt-[34px]">
           <div className="mb-4">
@@ -171,6 +181,27 @@ function GettingStartedPage() {
           </div>
           <div className="grid gap-4 lg:grid-cols-3">
             {starterPacks.map((pack) => (
+              <StarterPackCard
+                key={pack.id}
+                pack={pack}
+                skills={pack.skillIds
+                  .map((id) => skillById.get(id))
+                  .filter((s): s is SkillSummary => Boolean(s))}
+              />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {/* Starters nouveau projet par techno */}
+      {techStarterPacks.length > 0 ? (
+        <section className="pt-[40px]">
+          <div className="mb-4">
+            <h2 className="mb-1 font-display text-[22px] font-semibold">{t.start.techPacksTitle}</h2>
+            <p className="text-[14px] text-[var(--text-2)]">{t.start.techPacksSub}</p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {techStarterPacks.map((pack) => (
               <StarterPackCard
                 key={pack.id}
                 pack={pack}
