@@ -167,7 +167,7 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
   if (slug === 'shadcn') return 'frontend'
   if (slug === 'query') return 'data'
   if (slug === 'convex-setup-auth' || slug === 'firebase-auth-basics') return 'security'
-  if (slug === 'skill-sonar' || slug === 'gateguard' || slug === 'safety-guard') return 'security'
+  if (slug === 'skill-sonar' || slug === 'gateguard' || slug === 'safety-guard' || slug === 'cve-scan') return 'security'
   if (slug === 'delivery-gate') return 'verification'
   // Brave Search API skills
   if (
@@ -216,7 +216,7 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
   if (/cisco-ios/.test(slug)) return 'ops'
 
   // Slug (le plus fiable)
-  if (/security|auth|oauth|hipaa|compliance/.test(slug)) return 'security'
+  if (/security|auth|oauth|hipaa|compliance|^cve-/.test(slug)) return 'security'
 
   // Vérification : schémas, gates, eval harness, *-verification
   if (

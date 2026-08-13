@@ -61,12 +61,12 @@ export const COLLECTIONS: CollectionSeed[] = [
     labelFr: 'Ship safely',
     labelEn: 'Ship safely',
     briefFr:
-      'Qualité et sécu avant merge : audit des dépendances, diff de sécurité, couverture de tests, revue owners et qualité de PR. Pack pour figer un gate de merge fiable dans ton agent.',
+      'Qualité et sécu avant merge : scan CVE (OSV), audit des dépendances, diff de sécurité, couverture de tests, revue owners et qualité de PR. Pack pour figer un gate de merge fiable dans ton agent.',
     briefEn:
-      'Quality and security before merge: dependency audit, security diff, test coverage, owners review and PR quality. A pack to lock a reliable merge gate into your agent.',
+      'Quality and security before merge: CVE scan (OSV), dependency audit, security diff, test coverage, owners review and PR quality. A pack to lock a reliable merge gate into your agent.',
     kind: 'pack',
-    skillIds: [],
-    commandIds: ['audit-deps', 'security-diff', 'test-coverage', 'owners-review', 'pr-quality'],
+    skillIds: ['cve-scan', 'security-review'],
+    commandIds: ['cve', 'audit-deps', 'security-diff', 'test-coverage', 'owners-review', 'pr-quality'],
     sort: 2,
   },
   {
