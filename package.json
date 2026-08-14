@@ -14,7 +14,8 @@
     "dev": "vite dev --port 3000",
     "postinstall": "prisma generate",
     "generate:commands": "node scripts/generate-commands-bundle.mjs",
-    "build": "npm run generate:commands && prisma generate && vite build",
+    "generate:phosphor": "tsx scripts/generate-phosphor-sprite.ts",
+    "build": "npm run generate:commands && npm run generate:phosphor && prisma generate && vite build",
     "vercel-build": "node scripts/vercel-build.mjs",
     "start": "node .output/server/index.mjs",
     "preview": "vite preview",
@@ -49,6 +50,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "@phosphor-icons/core": "^2.1.1",
     "@prisma/client": "^6.19.2",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-devtools": "latest",

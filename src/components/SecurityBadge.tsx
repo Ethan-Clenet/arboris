@@ -26,10 +26,10 @@ type ToneStyle = {
 }
 
 const TONE_STYLES: Record<SecurityRecommendation, ToneStyle> = {
-  SAFE: { fg: '#16a36b', bg: 'rgba(22, 163, 107, 0.14)', border: 'rgba(22, 163, 107, 0.4)', icon: 'shield-check' },
-  CAUTION: { fg: '#c9851a', bg: 'rgba(201, 133, 26, 0.14)', border: 'rgba(201, 133, 26, 0.45)', icon: 'warning' },
-  UNSAFE: { fg: '#da3b4a', bg: 'rgba(218, 59, 74, 0.14)', border: 'rgba(218, 59, 74, 0.45)', icon: 'shield-warning' },
-  UNKNOWN: { fg: '#8a909b', bg: 'rgba(138, 144, 155, 0.12)', border: 'rgba(138, 144, 155, 0.4)', icon: 'shield' },
+  SAFE: { fg: 'var(--security-safe-fg)', bg: 'var(--security-safe-bg)', border: 'var(--security-safe-border)', icon: 'shield-check' },
+  CAUTION: { fg: 'var(--security-caution-fg)', bg: 'var(--security-caution-bg)', border: 'var(--security-caution-border)', icon: 'warning' },
+  UNSAFE: { fg: 'var(--security-unsafe-fg)', bg: 'var(--security-unsafe-bg)', border: 'var(--security-unsafe-border)', icon: 'shield-warning' },
+  UNKNOWN: { fg: 'var(--security-unknown-fg)', bg: 'var(--security-unknown-bg)', border: 'var(--security-unknown-border)', icon: 'shield' },
 }
 
 export function resolveSecurityTone(

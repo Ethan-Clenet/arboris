@@ -28,14 +28,6 @@ export const Route = createRootRoute({
       { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
-      {
-        rel: 'stylesheet',
-        href: 'https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css',
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css',
-      },
     ],
   }),
   notFoundComponent: NotFoundPage,

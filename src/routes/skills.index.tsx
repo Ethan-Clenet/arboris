@@ -232,7 +232,7 @@ function SkillsPage() {
       <PageShell as="div" className="pt-9">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-[640px]">
-            <div className="mb-3 flex items-center gap-2.5 font-mono text-[11.5px] font-medium tracking-[0.02em] text-[var(--accent)]">
+            <div className="mb-3 flex items-center gap-2.5 font-mono text-[11.5px] font-medium tracking-[0.02em] text-[var(--text-1)]">
               <Icon name="tree" bold />
               <span>{t.skills.kicker}</span>
               <span className="text-[var(--text-3)]">·</span>
