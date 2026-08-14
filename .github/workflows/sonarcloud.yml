@@ -75,18 +75,18 @@ jobs:
             echo "::warning::API autoscan/activation HTTP ${code}. Si le scan échoue, désactive Automatic Analysis ici : https://sonarcloud.io/project/analysis_method?id=ThePheniX974_arboris"
           fi
 
+      # Sur une PR, l’API ALM show_pullrequest échoue (projet BOUND mais
+      # l’app GitHub ne lit pas la PR). On analyse la branche plutôt que
+      # d’échouer le premier step (annotation rouge) puis de replier.
       - name: SonarCloud Scan
-        id: sonar
-        continue-on-error: true
+        if: github.event_name != 'pull_request'
         uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # L’API ALM show_pullrequest renvoie parfois 500 si l’app GitHub
-      # SonarCloud ne peut pas lire la PR. On republie alors en analyse de branche.
       - name: SonarCloud Scan (branche)
-        if: steps.sonar.outcome == 'failure'
+        if: github.event_name == 'pull_request'
         uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -94,4 +94,4 @@ jobs:
           GITHUB_EVENT_NAME: push
         with:
           args: >
-            -Dsonar.branch.name=${{ github.head_ref || github.ref_name }}
+            -Dsonar.branch.name=${{ github.head_ref }}
