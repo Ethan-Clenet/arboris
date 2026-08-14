@@ -1,0 +1,48 @@
+name: SonarCloud
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - 'src/**'
+      - 'sonar-project.properties'
+      - '.github/workflows/sonarcloud.yml'
+  pull_request:
+    branches: [master]
+    paths:
+      - 'src/**'
+      - 'sonar-project.properties'
+      - '.github/workflows/sonarcloud.yml'
+
+concurrency:
+  group: sonarcloud-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Tests (coverage)
+        continue-on-error: true
+        run: npm test -- --coverage --coverage.reporter=lcov --coverage.reporter=text-summary
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v8
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
