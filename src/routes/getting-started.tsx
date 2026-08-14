@@ -28,6 +28,10 @@ export const Route = createFileRoute('/getting-started')({
       path: '/getting-started',
       description:
         'Installe Skill Sonar, GateGuard et les packs starter, ou filtre par domaine et techno pour ton agent.',
+      breadcrumbs: [
+        { name: 'Accueil', path: '/' },
+        { name: 'Premier pas', path: '/getting-started' },
+      ],
     }),
   component: GettingStartedPage,
 })

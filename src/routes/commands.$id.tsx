@@ -26,6 +26,11 @@ export const Route = createFileRoute('/commands/$id')({
       path: `/commands/${command.id}`,
       description: entityDescription(command.description.fr, 'command', command.id),
       type: 'article',
+      breadcrumbs: [
+        { name: 'Accueil', path: '/' },
+        { name: 'Commandes', path: '/commands' },
+        { name: `/${command.id}`, path: `/commands/${command.id}` },
+      ],
     })
   },
   component: CommandDetailPage,

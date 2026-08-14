@@ -1,5 +1,10 @@
 import { absoluteUrl, pageTitle, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '#/lib/site'
 
+export type BreadcrumbItem = {
+  name: string
+  path: string
+}
+
 type SeoInput = {
   title?: string
   description?: string
@@ -7,6 +12,8 @@ type SeoInput = {
   type?: 'website' | 'article'
   noIndex?: boolean
   image?: string
+  /** Fil d’Ariane (≥ 2 items) — résultat enrichi Search Console. */
+  breadcrumbs?: BreadcrumbItem[]
 }
 
 /** Bornes SERP (approx. Screaming Frog / Google). */
@@ -123,7 +130,7 @@ export function rootFallbackMeta() {
   ]
 }
 
-/** JSON-LD WebSite + Organization (aide Google à identifier la marque / l’URL). */
+/** JSON-LD WebSite + Organization + CLI (marque / Knowledge Graph). */
 export function siteJsonLd() {
   return {
     '@context': 'https://schema.org',
@@ -144,7 +151,31 @@ export function siteJsonLd() {
         url: `${SITE_URL}/`,
         logo: absoluteUrl('/favicon.svg'),
       },
+      {
+        '@type': 'SoftwareApplication',
+        '@id': `${SITE_URL}/#cli`,
+        name: 'arboris-cli',
+        applicationCategory: 'DeveloperApplication',
+        operatingSystem: 'Linux, macOS, Windows',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+        url: SITE_URL,
+        publisher: { '@id': `${SITE_URL}/#organization` },
+      },
     ],
+  }
+}
+
+/** Fil d’Ariane — type de résultat enrichi détecté par l’inspection d’URL. */
+export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
   }
 }
 
@@ -167,6 +198,7 @@ export function seoHead(input: SeoInput = {}) {
     { property: 'og:type', content: type },
     { property: 'og:url', content: url },
     { property: 'og:locale', content: 'fr_FR' },
+    { property: 'og:locale:alternate', content: 'en_US' },
     { property: 'og:image', content: image },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: title },
@@ -184,20 +216,19 @@ export function seoHead(input: SeoInput = {}) {
 
   // Pas de canonical sur les pages noindex : évite « Canonisé » + « Version canonique non indexable »
   // quand des query params (/auth?mode=…) pointent vers une cible noindex.
-  const scripts =
-    path === '/' && !input.noIndex
-      ? [
-          {
-            type: 'application/ld+json',
-            children: JSON.stringify(siteJsonLd()),
-          },
-        ]
-      : undefined
+  const scripts: Array<{ type: string; children: string }> = []
+  if (!input.noIndex && path === '/') {
+    scripts.push({ type: 'application/ld+json', children: JSON.stringify(siteJsonLd()) })
+  }
+  const crumbs = input.breadcrumbs?.filter((item) => item.name && item.path) ?? []
+  if (!input.noIndex && crumbs.length >= 2) {
+    scripts.push({ type: 'application/ld+json', children: JSON.stringify(breadcrumbJsonLd(crumbs)) })
+  }
 
   return {
     meta,
     links: input.noIndex ? [] : [{ rel: 'canonical', href: url }],
-    ...(scripts ? { scripts } : {}),
+    ...(scripts.length ? { scripts } : {}),
   }
 }
 

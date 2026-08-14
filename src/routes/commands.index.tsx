@@ -16,6 +16,10 @@ export const Route = createFileRoute('/commands/')({
       path: '/commands',
       description:
         'Slash commands Arboris installables dans ton agent : commit, rebase, revue PR, audit deps…',
+      breadcrumbs: [
+        { name: 'Accueil', path: '/' },
+        { name: 'Commandes', path: '/commands' },
+      ],
     }),
   component: CommandsPage,
 })
