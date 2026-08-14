@@ -14,6 +14,9 @@ export type CollectionSeed = {
   sort: number
 }
 
+/** Commandes git/PR de base incluses dans les starters techno. */
+const DEV_LOOP_COMMANDS = ['commit', 'ready-pr', 'review-pr', 'explain-code'] as const
+
 export const COLLECTIONS: CollectionSeed[] = [
   {
     id: 'sonar',
@@ -83,6 +86,252 @@ export const COLLECTIONS: CollectionSeed[] = [
     skillIds: [],
     commandIds: ['sync-env', 'docker-rebuild', 'db-migrate-smoke', 'hotfix', 'adr'],
     sort: 3,
+  },
+
+  // ── Starters « nouveau projet » par techno ──────────────────────────────
+
+  {
+    id: 'react-ts-starter',
+    icon: 'atom',
+    color: '#38BDF8',
+    labelFr: 'React + TypeScript',
+    labelEn: 'React + TypeScript',
+    briefFr:
+      'Nouveau front React/TS : patterns UI, best practices Vercel, a11y, Tailwind/shadcn, types avancés, tests — plus le loop git/PR.',
+    briefEn:
+      'New React/TS front: UI patterns, Vercel best practices, a11y, Tailwind/shadcn, advanced types, tests — plus the git/PR loop.',
+    kind: 'pack',
+    skillIds: [
+      'react-patterns',
+      'vercel-react-best-practices',
+      'vercel-composition-patterns',
+      'frontend-patterns',
+      'frontend-a11y',
+      'typescript-advanced-types',
+      'tailwind-design-system',
+      'shadcn',
+      'react-testing',
+      'coding-standards',
+    ],
+    commandIds: [...DEV_LOOP_COMMANDS, 'ncu', 'lighthouse'],
+    sort: 10,
+  },
+  {
+    id: 'next-react-starter',
+    icon: 'lightning',
+    color: '#000000',
+    labelFr: 'Next.js + React',
+    labelEn: 'Next.js + React',
+    briefFr:
+      'App Next.js : boucle de dev, Turbopack, React/Vercel, a11y, TypeScript, shadcn — prêt pour démarrer un produit web.',
+    briefEn:
+      'Next.js app: dev loop, Turbopack, React/Vercel, a11y, TypeScript, shadcn — ready to kick off a web product.',
+    kind: 'pack',
+    skillIds: [
+      'next-dev-loop',
+      'nextjs-turbopack',
+      'vercel-react-best-practices',
+      'react-patterns',
+      'frontend-a11y',
+      'typescript-advanced-types',
+      'shadcn',
+      'coding-standards',
+    ],
+    commandIds: [...DEV_LOOP_COMMANDS, 'ncu', 'lighthouse'],
+    sort: 11,
+  },
+  {
+    id: 'node-api-starter',
+    icon: 'hexagon',
+    color: '#43A047',
+    labelFr: 'API Node / Nest',
+    labelEn: 'Node / Nest API',
+    briefFr:
+      'API backend Node/TS : patterns API, NestJS, erreurs, auth (better-auth), GateGuard — plus commit/PR et audit deps.',
+    briefEn:
+      'Node/TS backend API: API patterns, NestJS, errors, auth (better-auth), GateGuard — plus commit/PR and dep audit.',
+    kind: 'pack',
+    skillIds: [
+      'backend-patterns',
+      'api-design',
+      'nestjs-patterns',
+      'error-handling',
+      'better-auth-best-practices',
+      'better-auth-create-auth',
+      'gateguard',
+      'coding-standards',
+    ],
+    commandIds: [...DEV_LOOP_COMMANDS, 'audit-deps', 'test-coverage', 'ncu'],
+    sort: 12,
+  },
+  {
+    id: 'fastapi-starter',
+    icon: 'lightning',
+    color: '#009688',
+    labelFr: 'FastAPI',
+    labelEn: 'FastAPI',
+    briefFr:
+      'API Python FastAPI : patterns framework, design d’API, backend, standards et garde sécurité — avec le loop PR.',
+    briefEn:
+      'Python FastAPI: framework patterns, API design, backend, standards and security guards — with the PR loop.',
+    kind: 'pack',
+    skillIds: [
+      'fastapi-patterns',
+      'api-design',
+      'backend-patterns',
+      'coding-standards',
+      'gateguard',
+      'security-scan',
+    ],
+    commandIds: [...DEV_LOOP_COMMANDS, 'test-coverage'],
+    sort: 13,
+  },
+  {
+    id: 'angular-starter',
+    icon: 'shield',
+    color: '#E5484D',
+    labelFr: 'Angular',
+    labelEn: 'Angular',
+    briefFr:
+      'Nouveau projet Angular : new-app, patterns développeur, UI/a11y, tests web et standards — plus git/PR.',
+    briefEn:
+      'New Angular project: new-app, developer patterns, UI/a11y, web tests and standards — plus git/PR.',
+    kind: 'pack',
+    skillIds: [
+      'angular-new-app',
+      'angular-developer',
+      'frontend-patterns',
+      'frontend-a11y',
+      'webapp-testing',
+      'coding-standards',
+    ],
+    commandIds: [...DEV_LOOP_COMMANDS, 'ncu'],
+    sort: 14,
+  },
+  {
+    id: 'spring-boot-starter',
+    icon: 'leaf',
+    color: '#6DB33F',
+    labelFr: 'Spring Boot',
+    labelEn: 'Spring Boot',
+    briefFr:
+      'Backend Java Spring Boot : patterns, sécu, TDD, vérification, standards Java et design d’API.',
+    briefEn:
+      'Java Spring Boot backend: patterns, security, TDD, verification, Java standards and API design.',
+    kind: 'pack',
+    skillIds: [
+      'springboot-patterns',
+      'springboot-security',
+      'springboot-tdd',
+      'springboot-verification',
+      'java-coding-standards',
+      'api-design',
+    ],
+    commandIds: [...DEV_LOOP_COMMANDS, 'test-coverage'],
+    sort: 15,
+  },
+  {
+    id: 'prisma-postgres-starter',
+    icon: 'diamonds-four',
+    color: '#2D3748',
+    labelFr: 'Prisma + PostgreSQL',
+    labelEn: 'Prisma + PostgreSQL',
+    briefFr:
+      'Couche data TS : Prisma, Postgres, migrations, Neon — idéal pour démarrer un backend typé avec une vraie DB.',
+    briefEn:
+      'TS data layer: Prisma, Postgres, migrations, Neon — ideal to start a typed backend with a real DB.',
+    kind: 'pack',
+    skillIds: [
+      'prisma-patterns',
+      'postgres',
+      'postgres-patterns',
+      'database-migrations',
+      'neon-postgres',
+      'backend-patterns',
+    ],
+    commandIds: [...DEV_LOOP_COMMANDS, 'db-migrate-smoke'],
+    sort: 16,
+  },
+  {
+    id: 'drizzle-starter',
+    icon: 'diamonds-four',
+    color: '#C5F74F',
+    labelFr: 'Drizzle ORM',
+    labelEn: 'Drizzle ORM',
+    briefFr:
+      'ORM Drizzle type-safe + Postgres/migrations et patterns backend — alternative légère à Prisma.',
+    briefEn:
+      'Type-safe Drizzle ORM + Postgres/migrations and backend patterns — a light Prisma alternative.',
+    kind: 'pack',
+    skillIds: ['drizzle', 'postgres-patterns', 'database-migrations', 'backend-patterns', 'typescript-advanced-types'],
+    commandIds: [...DEV_LOOP_COMMANDS, 'db-migrate-smoke'],
+    sort: 17,
+  },
+  {
+    id: 'supabase-starter',
+    icon: 'database',
+    color: '#3ECF8E',
+    labelFr: 'Supabase',
+    labelEn: 'Supabase',
+    briefFr:
+      'BaaS Supabase : client, best practices Postgres, auth better-auth si besoin — sync env et loop PR inclus.',
+    briefEn:
+      'Supabase BaaS: client, Postgres best practices, better-auth when needed — env sync and PR loop included.',
+    kind: 'pack',
+    skillIds: [
+      'supabase',
+      'supabase-postgres-best-practices',
+      'postgres-patterns',
+      'better-auth-best-practices',
+      'backend-patterns',
+    ],
+    commandIds: [...DEV_LOOP_COMMANDS, 'sync-env'],
+    sort: 18,
+  },
+  {
+    id: 'firebase-starter',
+    icon: 'flame',
+    color: '#FFCA28',
+    labelFr: 'Firebase',
+    labelEn: 'Firebase',
+    briefFr:
+      'Stack Firebase : bases plateforme, Auth et Firestore — pour démarrer une app Google cloud rapidement.',
+    briefEn:
+      'Firebase stack: platform basics, Auth and Firestore — to bootstrap a Google cloud app fast.',
+    kind: 'pack',
+    skillIds: ['firebase-basics', 'firebase-auth-basics', 'firebase-firestore'],
+    commandIds: [...DEV_LOOP_COMMANDS, 'sync-env'],
+    sort: 19,
+  },
+  {
+    id: 'convex-starter',
+    icon: 'hexagon',
+    color: '#FF5C35',
+    labelFr: 'Convex',
+    labelEn: 'Convex',
+    briefFr:
+      'Backend réactif Convex : quickstart + auth, TypeScript — parfait pour une app full-stack TS sans ops DB.',
+    briefEn:
+      'Reactive Convex backend: quickstart + auth, TypeScript — great for a full-stack TS app without DB ops.',
+    kind: 'pack',
+    skillIds: ['convex-quickstart', 'convex-setup-auth', 'typescript-advanced-types', 'react-patterns'],
+    commandIds: [...DEV_LOOP_COMMANDS],
+    sort: 20,
+  },
+  {
+    id: 'docker-ops-starter',
+    icon: 'shipping-container',
+    color: '#2496ED',
+    labelFr: 'Docker & ops',
+    labelEn: 'Docker & ops',
+    briefFr:
+      'Conteneurs et déploiement : patterns Docker/deploy + commandes rebuild, sync env, smoke migrate et hotfix.',
+    briefEn:
+      'Containers and deploy: Docker/deploy patterns plus rebuild, env sync, migrate smoke and hotfix commands.',
+    kind: 'pack',
+    skillIds: ['docker-patterns', 'deployment-patterns', 'architecture-decision-records'],
+    commandIds: ['docker-rebuild', 'sync-env', 'db-migrate-smoke', 'hotfix', 'adr'],
+    sort: 21,
   },
 ]
 

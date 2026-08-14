@@ -10,14 +10,14 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'border-[var(--accent)] bg-[var(--accent)] !text-white hover:border-[var(--accent-press)] hover:bg-[var(--accent-press)] hover:!text-white [&_i]:!text-white',
+    'border-[var(--accent)] bg-[var(--accent)] !text-white hover:border-[var(--accent-press)] hover:bg-[var(--accent-press)] hover:!text-white [&_i]:!text-white [&_span]:!text-white',
   secondary:
-    'border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-1)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]',
+    'border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-1)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)] [&_span]:text-[var(--text-1)] [&_i]:text-[var(--text-1)]',
   outline:
-    'border-[var(--border)] bg-[var(--surface)] text-[var(--text-1)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]',
+    'border-[var(--border)] bg-[var(--surface)] text-[var(--text-1)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)] [&_span]:text-[var(--text-1)] [&_i]:text-[var(--text-1)]',
   ghost:
     'border-transparent bg-transparent text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text-1)]',
-  copy: 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-1)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]',
+  copy: 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-1)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)] [&_span]:text-[var(--text-1)] [&_i]:text-[var(--text-1)]',
 }
 
 const copiedCopy =

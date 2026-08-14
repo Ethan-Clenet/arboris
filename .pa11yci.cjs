@@ -32,7 +32,7 @@ module.exports = {
     },
     // Bootstrap : home / fiches skill ont encore color-contrast + aria-prohibited-attr.
     // Baisser progressivement vers 0 une fois les correctifs UI mergeés.
-    threshold: 20,
+    threshold: 0,
     includeNotices: false,
     includeWarnings: false,
   },

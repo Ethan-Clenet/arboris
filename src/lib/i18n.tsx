@@ -205,9 +205,9 @@ const fr = {
     title: 'Collections',
     listHeading: 'Liste des collections et packs Arboris',
     subtitle:
-      'Packs de skills et slash commands à installer d’un coup — starter, sécu, ops.',
+      'Packs de skills et slash commands à installer d’un coup — starter techno, sécu, ops.',
     aboutBody:
-      'Les collections Arboris regroupent skills et slash commands pour un objectif précis : démarrer un projet, durcir la sécu, ou gérer le run du quotidien. Chaque pack s’installe d’un coup (CLI ou ZIP) dans Cursor, Claude, Codex ou Copilot. Parcours les playlists ci-dessous, ouvre une fiche pour voir le détail, puis copie ou télécharge selon ton agent. Moins de friction pour aligner une équipe sur les mêmes prompts et bonnes pratiques. Tu peux aussi installer les éléments un par un depuis le catalogue si tu préfères composer ton propre set. Les packs évoluent avec le catalogue : reviens ici quand tu ajoutes un agent ou un stack.',
+      'Les collections Arboris regroupent skills et slash commands pour un objectif précis : démarrer un projet sur une techno (React, Node, FastAPI…), durcir la sécu, ou gérer le run du quotidien. Chaque pack s’installe d’un coup (CLI ou ZIP) dans Cursor, Claude, Codex ou Copilot. Parcours les playlists ci-dessous, ouvre une fiche pour voir le détail, puis copie ou télécharge selon ton agent. Moins de friction pour aligner une équipe sur les mêmes prompts et bonnes pratiques. Tu peux aussi installer les éléments un par un depuis le catalogue si tu préfères composer ton propre set. Les packs évoluent avec le catalogue : reviens ici quand tu ajoutes un agent ou un stack.',
     detailAbout:
       'Cette collection Arboris assemble skills et commandes autour d’un même thème. Installe le pack via la CLI ou un ZIP, puis ouvre ton agent pour enchaîner les tâches couvertes. Les éléments listés ci-dessous restent accessibles individuellement dans le catalogue si tu préfères une install à la carte. Objectif : gagner du temps et garder une base commune de prompts de qualité. Chaque skill et chaque commande peut aussi être copié seul, scanné côté sécu, et mis à jour quand le catalogue évolue. Idéal pour standardiser un workflow d’équipe sans imposer un monorepo de prompts.',
     empty: 'Aucune collection.',
@@ -398,9 +398,12 @@ const fr = {
     detail: 'Voir les détails',
     eyebrow: 'Premier pas',
     title: 'Installe un pack, ou affine ton stack.',
-    sub: 'Commence par Skill Sonar et les commandes essentielles, puis filtre par domaine si tu veux du sur-mesure.',
+    sub: 'Choisis un starter techno (React, Node, FastAPI…), Sonar, ou filtre par domaine pour du sur-mesure.',
     packsTitle: 'Packs recommandés',
     packsSub: 'Installables d’un coup — Sonar (garde agent) et starters CLI.',
+    techPacksTitle: 'Nouveau projet par techno',
+    techPacksSub:
+      'Un pack = skills + commandes pour démarrer sur React, Next, Node, FastAPI, Angular, Spring, Prisma, Supabase…',
     packsCta: 'Voir le pack',
     packSkills: 'Skills inclus',
     packCommands: 'Commandes',
@@ -425,9 +428,9 @@ const fr = {
     copied: 'Copié !',
     footHint: "Un skill peut s'appliquer à plusieurs technos — c'est normal.",
     aboutBody:
-      'Arboris propose des packs prêts (Sonar pour sécuriser ton agent, commandes git/PR, gates de merge) et un parcours guidé domaine → spécialité → techno. Installe via CLI ou ZIP, ou copie skill par skill. Compatible Cursor, Claude, Codex et Copilot.',
+      'Arboris propose des packs prêts : starters par techno (React, Node, FastAPI…), Sonar pour sécuriser ton agent, commandes git/PR, gates de merge — plus un parcours guidé domaine → spécialité → techno. Installe via CLI ou ZIP, ou copie skill par skill. Compatible Cursor, Claude, Codex et Copilot.',
     steps: [
-      { icon: 'stack', t: 'Prends un pack', d: 'Sonar pour la garde agent, ou un starter de commandes — une seule install.' },
+      { icon: 'stack', t: 'Prends un pack', d: 'Starter techno (React, Node…) ou Sonar — une seule install pour skills + commandes.' },
       { icon: 'download-simple', t: 'Installe dans l’agent', d: 'CLI `npx arboris-cli collection …` ou boutons sur la fiche pack.' },
       { icon: 'shield-check', t: 'Affine si besoin', d: 'Filtre par domaine / techno ci-dessous pour compléter ton set.' },
     ],
@@ -627,9 +630,9 @@ const en: typeof fr = {
     kicker: 'Playlists',
     title: 'Collections',
     listHeading: 'Arboris collections and packs list',
-    subtitle: 'Packs of skills and slash commands to install in one go — starter, security, ops.',
+    subtitle: 'Packs of skills and slash commands to install in one go — tech starter, security, ops.',
     aboutBody:
-      'Arboris collections group skills and slash commands around a clear goal: start a project, harden security, or handle day-two ops. Each pack installs in one shot (CLI or ZIP) into Cursor, Claude, Codex, or Copilot. Browse the playlists below, open a pack for details, then copy or download for your agent. Less friction to align a team on the same prompts and practices. You can also install items one by one from the catalog if you prefer to build your own set. Packs evolve with the catalog — come back when you add an agent or a stack.',
+      'Arboris collections group skills and slash commands around a clear goal: start a project on a stack (React, Node, FastAPI…), harden security, or handle day-two ops. Each pack installs in one shot (CLI or ZIP) into Cursor, Claude, Codex, or Copilot. Browse the playlists below, open a pack for details, then copy or download for your agent. Less friction to align a team on the same prompts and practices. You can also install items one by one from the catalog if you prefer to build your own set. Packs evolve with the catalog — come back when you add an agent or a stack.',
     detailAbout:
       'This Arboris collection bundles skills and commands around one theme. Install the pack via CLI or ZIP, then open your agent to run through the covered tasks. Items listed below also stay available individually in the catalog if you prefer à la carte installs. Goal: save time and keep a shared base of quality prompts. Each skill and command can also be copied alone, security-scanned, and updated as the catalog evolves. Ideal for standardizing a team workflow without a prompt monorepo.',
     empty: 'No collection.',
@@ -819,9 +822,12 @@ const en: typeof fr = {
     detail: 'View details',
     eyebrow: 'Getting started',
     title: 'Install a pack, or refine your stack.',
-    sub: 'Start with Skill Sonar and essential commands, then filter by domain if you want a custom set.',
+    sub: 'Pick a tech starter (React, Node, FastAPI…), Sonar, or filter by domain for a custom set.',
     packsTitle: 'Recommended packs',
     packsSub: 'One-shot installs — Sonar (agent guards) and CLI starters.',
+    techPacksTitle: 'New project by stack',
+    techPacksSub:
+      'One pack = skills + commands to start on React, Next, Node, FastAPI, Angular, Spring, Prisma, Supabase…',
     packsCta: 'Open pack',
     packSkills: 'Skills included',
     packCommands: 'Commands',
@@ -846,9 +852,9 @@ const en: typeof fr = {
     copied: 'Copied!',
     footHint: "A skill can apply to several technologies — that's expected.",
     aboutBody:
-      'Arboris offers ready packs (Sonar to harden your agent, git/PR commands, merge gates) and a guided domain → specialty → stack path. Install via CLI or ZIP, or copy skills one by one. Works with Cursor, Claude, Codex, and Copilot.',
+      'Arboris offers ready packs: tech starters (React, Node, FastAPI…), Sonar to harden your agent, git/PR commands, merge gates — plus a guided domain → specialty → stack path. Install via CLI or ZIP, or copy skills one by one. Works with Cursor, Claude, Codex, and Copilot.',
     steps: [
-      { icon: 'stack', t: 'Grab a pack', d: 'Sonar for agent guards, or a command starter — one install.' },
+      { icon: 'stack', t: 'Grab a pack', d: 'Tech starter (React, Node…) or Sonar — one install for skills + commands.' },
       { icon: 'download-simple', t: 'Install into the agent', d: 'CLI `npx arboris-cli collection …` or buttons on the pack page.' },
       { icon: 'shield-check', t: 'Refine if needed', d: 'Filter by domain / stack below to complete your set.' },
     ],

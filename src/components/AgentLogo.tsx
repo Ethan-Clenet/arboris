@@ -90,7 +90,9 @@ export function AgentBadge({ agent, active = false, size = 16, onClick, classNam
   }
 
   return (
-    <span className={`${base} ${styles} ${className}`} aria-label={label} title={label}>
+    // Badges non interactifs : pas besoin d’un aria-label sur un <span>
+    // (axe/pa11y remontent une violation "aria-prohibited-attr").
+    <span className={`${base} ${styles} ${className}`} title={label}>
       <AgentLogo agent={agent} size={size} />
     </span>
   )
