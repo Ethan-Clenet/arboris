@@ -51,6 +51,30 @@ jobs:
       - name: Tests (coverage)
         run: npm test -- --coverage --coverage.reporter=lcov --coverage.reporter=text-summary
 
+      # CI et Automatic Analysis sont mutuellement exclusifs.
+      # https://sonarcloud.io/project/analysis_method?id=ThePheniX974_arboris
+      - name: Disable SonarCloud Automatic Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SONAR_TOKEN:-}" ]; then
+            echo "::error::Secret SONAR_TOKEN manquant."
+            exit 1
+          fi
+          code=$(curl -sS -o /tmp/sonar-autoscan.json -w "%{http_code}" \
+            -u "${SONAR_TOKEN}:" \
+            -X POST \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            --data "enable=false&projectKey=ThePheniX974_arboris&organization=thephenix974" \
+            "https://sonarcloud.io/api/autoscan/activation")
+          echo "autoscan/activation HTTP ${code}"
+          cat /tmp/sonar-autoscan.json || true
+          echo
+          if [ "${code}" -ge 400 ]; then
+            echo "::warning::API autoscan/activation HTTP ${code}. Si le scan échoue, désactive Automatic Analysis ici : https://sonarcloud.io/project/analysis_method?id=ThePheniX974_arboris"
+          fi
+
       - name: SonarCloud Scan
         id: sonar
         continue-on-error: true
