@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { COLLECTIONS } from './collections-data'
+import { COLLECTIONS, findCollectionSeed } from './collections-data'
 
 describe('COLLECTIONS', () => {
   it('a des ids uniques et des champs requis', () => {
@@ -19,5 +19,7 @@ describe('COLLECTIONS', () => {
     const sonar = COLLECTIONS.find((c) => c.id === 'sonar')
     expect(sonar?.commandIds).toContain('sonar')
     expect(sonar?.skillIds).toContain('skill-sonar')
+    expect(findCollectionSeed('sonar')?.id).toBe('sonar')
+    expect(findCollectionSeed('__nope__')).toBeUndefined()
   })
 })

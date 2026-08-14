@@ -21,9 +21,11 @@ describe('chemins agents', () => {
     expect(agentSkillPath('Copilot', 'gateguard')).toBe('.github/skills/gateguard/SKILL.md')
   })
 
-  it('place les commandes selon l’agent', () => {
-    expect(agentCommandPath('Cursor', 'commit')).toBe('.cursor/commands/commit.md')
-    expect(agentCommandPath('Copilot', 'commit')).toBe('.github/prompts/commit.md')
+  it('couvre Claude et Codex', () => {
+    expect(agentSkillPath('Claude', 'x')).toBe('.claude/skills/x/SKILL.md')
+    expect(agentSkillPath('Codex', 'x')).toBe('.agents/skills/x/SKILL.md')
+    expect(agentCommandPath('Claude', 'c')).toBe('.claude/commands/c.md')
+    expect(agentCommandPath('Codex', 'c')).toBe('.agents/commands/c.md')
   })
 })
 
