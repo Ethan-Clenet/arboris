@@ -3,6 +3,12 @@
   "buildCommand": "npm run vercel-build",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": null,
+  "git": {
+    "deploymentEnabled": {
+      "*": false,
+      "master": true
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
