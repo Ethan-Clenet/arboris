@@ -1,14 +1,19 @@
 import { readFile, readdir, writeFile } from 'node:fs/promises'
+import { createRequire } from 'node:module'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import '@phosphor-icons/core'
 import { CATEGORIES, STACKS } from '../prisma/catalog-data.ts'
 import { loadSkillSeeds } from '../prisma/catalog-from-skills.ts'
 import { COLLECTIONS } from '../src/lib/collections-data.ts'
 
+const require = createRequire(import.meta.url)
+const phosphorRoot = join(dirname(require.resolve('@phosphor-icons/core')), '..')
+
 const ROOT = dirname(fileURLToPath(import.meta.url))
 const SRC = join(ROOT, '../src')
-const PHOSPHOR_REG = join(ROOT, '../node_modules/@phosphor-icons/core/assets/regular')
-const PHOSPHOR_BOLD = join(ROOT, '../node_modules/@phosphor-icons/core/assets/bold')
+const PHOSPHOR_REG = join(phosphorRoot, 'assets/regular')
+const PHOSPHOR_BOLD = join(phosphorRoot, 'assets/bold')
 const OUT = join(SRC, 'generated/phosphor-sprite.ts')
 
 const STATIC_ICONS = [
