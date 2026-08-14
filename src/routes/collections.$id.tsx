@@ -21,6 +21,11 @@ export const Route = createFileRoute('/collections/$id')({
       path: `/collections/${collection.id}`,
       description: entityDescription(collection.brief.fr, 'collection', collection.id),
       type: 'article',
+      breadcrumbs: [
+        { name: 'Accueil', path: '/' },
+        { name: 'Collections', path: '/collections' },
+        { name: collection.label.fr, path: `/collections/${collection.id}` },
+      ],
     })
   },
   component: CollectionDetailPage,

@@ -2,6 +2,9 @@ import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import type { ReactNode } from 'react'
+import '#/fonts'
+import '@phosphor-icons/web/regular'
+import '@phosphor-icons/web/bold'
 import AppShell from '#/components/AppShell'
 import NotFoundPage from '#/components/NotFoundPage'
 import ServerErrorPage from '#/components/ServerErrorPage'
@@ -19,23 +22,12 @@ export const Route = createRootRoute({
   },
   head: () => ({
     meta: [
-      { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ...rootFallbackMeta(),
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
       { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
-      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
-      {
-        rel: 'stylesheet',
-        href: 'https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css',
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css',
-      },
     ],
   }),
   notFoundComponent: NotFoundPage,
@@ -47,6 +39,7 @@ function RootDocument({ children }: { children: ReactNode }) {
   return (
     <html lang="fr" data-theme="dark" suppressHydrationWarning>
       <head>
+        <meta charSet="utf-8" />
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <HeadContent />
       </head>
@@ -56,15 +49,17 @@ function RootDocument({ children }: { children: ReactNode }) {
             <AppShell>{children}</AppShell>
           </AnnouncerProvider>
         </I18nProvider>
-        <TanStackDevtools
-          config={{ position: 'bottom-right' }}
-          plugins={[
-            {
-              name: 'TanStack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
+        {import.meta.env.DEV ? (
+          <TanStackDevtools
+            config={{ position: 'bottom-right' }}
+            plugins={[
+              {
+                name: 'TanStack Router',
+                render: <TanStackRouterDevtoolsPanel />,
+              },
+            ]}
+          />
+        ) : null}
         <Scripts />
       </body>
     </html>

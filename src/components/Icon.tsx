@@ -9,7 +9,7 @@ interface IconProps {
   style?: CSSProperties
 }
 
-/** Icône Phosphor (chargée via CDN dans <head>). */
+/** Icône Phosphor (webfont auto-hébergée via styles.css). */
 export default function Icon({
   name,
   bold = false,

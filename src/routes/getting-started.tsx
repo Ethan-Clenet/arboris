@@ -29,6 +29,10 @@ export const Route = createFileRoute('/getting-started')({
       path: '/getting-started',
       description:
         'Installe un pack starter par techno (React, Node, FastAPI…), Sonar, ou filtre par domaine pour ton agent.',
+      breadcrumbs: [
+        { name: 'Accueil', path: '/' },
+        { name: 'Premier pas', path: '/getting-started' },
+      ],
     }),
   component: GettingStartedPage,
 })
