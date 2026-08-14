@@ -9,8 +9,6 @@
 @import "@fontsource/jetbrains-mono/latin-400.css";
 @import "@fontsource/jetbrains-mono/latin-500.css";
 @import "@fontsource/jetbrains-mono/latin-600.css";
-@import "@phosphor-icons/web/src/regular/style.css";
-@import "@phosphor-icons/web/src/bold/style.css";
 @import "tailwindcss";
 
 @theme {
@@ -36,10 +34,11 @@
   --text-2: #5a616c;
   /* accessibilité: --text-3 devait aussi respecter un contraste suffisant (WCAG) */
   --text-3: #5a616c;
-  --accent: #1f8a50;
-  --accent-press: #197544;
-  --accent-soft: rgba(31, 138, 80, 0.1);
-  --accent-border: rgba(31, 138, 80, 0.3);
+  /* Couleurs accent : assez contrastées avec le texte blanc (WCAG AA). */
+  --accent: #197544;
+  --accent-press: #165c3a;
+  --accent-soft: rgba(25, 117, 68, 0.1);
+  --accent-border: rgba(25, 117, 68, 0.3);
   --success: #16a36b;
   --danger: #da3b4a;
   --danger-soft: rgba(218, 59, 74, 0.1);
@@ -60,10 +59,11 @@
   --text-2: #a2a9b5;
   /* accessibilité: --text-3 devait aussi respecter un contraste suffisant (WCAG) */
   --text-3: #a2a9b5;
-  --accent: #30a46c;
-  --accent-press: #2b9a63;
-  --accent-soft: rgba(48, 164, 108, 0.13);
-  --accent-border: rgba(48, 164, 108, 0.34);
+  /* Couleurs accent : assez contrastées avec le texte blanc (WCAG AA). */
+  --accent: #197544;
+  --accent-press: #165c3a;
+  --accent-soft: rgba(25, 117, 68, 0.13);
+  --accent-border: rgba(25, 117, 68, 0.34);
   --success: #3ecf8e;
   --danger: #f76c5e;
   --danger-soft: rgba(247, 108, 94, 0.13);

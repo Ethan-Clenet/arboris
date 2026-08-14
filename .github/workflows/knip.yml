@@ -1,0 +1,51 @@
+name: Knip
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - 'src/**'
+      - 'cli/**'
+      - 'scripts/**'
+      - 'prisma/**/*.ts'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'knip.json'
+      - 'vite.config.ts'
+      - '.github/workflows/knip.yml'
+  pull_request:
+    branches: [master]
+    paths:
+      - 'src/**'
+      - 'cli/**'
+      - 'scripts/**'
+      - 'prisma/**/*.ts'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'knip.json'
+      - 'vite.config.ts'
+      - '.github/workflows/knip.yml'
+
+concurrency:
+  group: knip-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  knip:
+    name: Unused code & deps
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Run knip (files + dependencies)
+        run: npm run knip:ci
