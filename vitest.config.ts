@@ -33,8 +33,13 @@ export default defineConfig({
         'src/server/db.ts',
         'src/server/session.ts',
         'src/server/functions.ts',
+        'src/server/auth.functions.ts',
+        'src/server/admin.functions.ts',
         'src/components/DevtoolsPanel.tsx',
         'src/components/DevtoolsGate.tsx',
+        // Animation / CSS / contexte routeur Start (pas pertinents en unitaire)
+        'src/components/HomeTerminal.tsx',
+        'src/components/ui/shimmer-button.tsx',
       ],
     },
   },

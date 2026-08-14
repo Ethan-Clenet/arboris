@@ -22,12 +22,17 @@ describe('LangSwitch', () => {
 })
 
 describe('ThemeToggle', () => {
-  it('affiche le bouton thème', () => {
+  it('affiche le bouton thème et bascule', async () => {
+    const user = userEvent.setup()
+    document.documentElement.setAttribute('data-theme', 'dark')
     render(
       <I18nProvider>
         <ThemeToggle />
       </I18nProvider>,
     )
-    expect(screen.getByLabelText(/thème|theme/i).getAttribute('aria-pressed')).toBe('true')
+    const btn = screen.getByLabelText(/thème|theme/i)
+    expect(btn.getAttribute('aria-pressed')).toBe('true')
+    await user.click(btn)
+    expect(document.documentElement.getAttribute('data-theme')).toBe('light')
   })
 })

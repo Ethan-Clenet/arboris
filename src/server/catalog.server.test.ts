@@ -6,6 +6,7 @@ import {
   loadCollection,
   loadCommand,
   loadSkill,
+  loadSkillPageContext,
 } from './catalog.server'
 
 vi.mock('./db', () => ({
@@ -37,6 +38,7 @@ const skillRow = {
 beforeEach(() => {
   invalidateCatalogCache()
   vi.mocked(prisma.category.findMany).mockReset()
+  vi.mocked(prisma.category.findUnique).mockReset()
   vi.mocked(prisma.stack.findMany).mockReset()
   vi.mocked(prisma.skill.findMany).mockReset()
   vi.mocked(prisma.skill.findUnique).mockReset()
@@ -88,6 +90,22 @@ describe('loadSkill', () => {
     const skill = await loadSkill('gateguard')
     expect(skill).toMatchObject({ id: 'gateguard', does: { fr: ['a'] }, triggers: { fr: [] } })
 
+    vi.mocked(prisma.skill.findUnique).mockResolvedValue({
+      ...skillRow,
+      techJson: '{"not":"array"}',
+      compatJson: '[]',
+      doesFrJson: '[]',
+      doesEnJson: '[]',
+      triggersFrJson: '[]',
+      triggersEnJson: '[]',
+      securityReportJson: null,
+      securityRecommendation: null,
+      score: 40,
+    } as never)
+    const parsed = await loadSkill('gateguard')
+    expect(parsed?.tech).toEqual([])
+    expect(parsed?.securityRecommendation).toBe('UNSAFE')
+
     vi.mocked(prisma.skill.findUnique).mockResolvedValue(null)
     expect(await loadSkill('missing')).toBeNull()
   })
@@ -106,5 +124,65 @@ describe('loadCommand / loadCollection', () => {
     expect(col?.id).toBe('sonar')
     expect(col?.commandIds).toContain('sonar')
     expect(await loadCollection('__nope__')).toBeNull()
+  })
+
+  it('mappe une collection Prisma quand la ligne existe', async () => {
+    vi.mocked(prisma.collection.findUnique).mockResolvedValue({
+      id: 'sonar',
+      icon: 'broadcast',
+      color: '#0D9488',
+      kind: 'pack',
+      labelFr: 'Sonar',
+      labelEn: 'Sonar',
+      briefFr: 'b',
+      briefEn: 'b',
+      commandIdsJson: '["commit","missing-cmd"]',
+      skills: [skillRow],
+    } as never)
+    const col = await loadCollection('sonar')
+    expect(col).toMatchObject({ id: 'sonar', skillIds: ['gateguard'] })
+    expect(col?.commands.some((c) => c.id === 'commit')).toBe(true)
+  })
+})
+
+describe('loadSkillPageContext', () => {
+  it('retourne null ou assemble catégorie + skills liés', async () => {
+    vi.mocked(prisma.skill.findUnique).mockResolvedValue(null)
+    expect(await loadSkillPageContext('missing')).toBeNull()
+
+    vi.mocked(prisma.skill.findUnique).mockResolvedValue({
+      ...skillRow,
+      doesFrJson: '[]',
+      doesEnJson: '[]',
+      triggersFrJson: '[]',
+      triggersEnJson: '[]',
+      securityReportJson: null,
+    } as never)
+    vi.mocked(prisma.category.findUnique).mockResolvedValue({
+      id: 'security',
+      labelFr: 'Sécu',
+      labelEn: 'Sec',
+      color: '#0D9488',
+      icon: 'shield',
+    } as never)
+    vi.mocked(prisma.skill.findMany)
+      .mockResolvedValueOnce([{ ...skillRow, id: 'safety-guard' }] as never)
+      .mockResolvedValueOnce([{ ...skillRow, id: 'other', categoryId: 'ops' }] as never)
+
+    const ctx = await loadSkillPageContext('gateguard')
+    expect(ctx?.category?.id).toBe('security')
+    expect(ctx?.related.map((s) => s.id)).toEqual(['safety-guard', 'other'])
+
+    vi.mocked(prisma.category.findUnique).mockResolvedValue(null)
+    vi.mocked(prisma.skill.findMany)
+      .mockResolvedValueOnce([
+        { ...skillRow, id: 'a' },
+        { ...skillRow, id: 'b' },
+        { ...skillRow, id: 'c' },
+      ] as never)
+      .mockResolvedValueOnce([{ ...skillRow, id: 'd' }] as never)
+    const full = await loadSkillPageContext('gateguard')
+    expect(full?.category).toBeNull()
+    expect(full?.related).toHaveLength(3)
   })
 })

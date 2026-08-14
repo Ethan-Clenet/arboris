@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import PageShell from './PageShell'
 import StatusPage from './StatusPage'
@@ -114,9 +115,12 @@ describe('Icon / logos', () => {
 })
 
 describe('Button / AdminUi / DevtoolsGate', () => {
-  it('Button primary', () => {
+  it('Button primary', async () => {
+    const user = userEvent.setup()
     render(<Button variant="primary">Go</Button>)
-    expect(screen.getByRole('button', { name: 'Go' })).toBeTruthy()
+    const btn = screen.getByRole('button', { name: 'Go' })
+    await user.click(btn)
+    expect(btn).toBeTruthy()
   })
 
   it('AdminCard / AdminIconBtn / AdminToast', () => {
