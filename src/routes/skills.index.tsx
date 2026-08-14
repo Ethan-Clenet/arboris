@@ -29,6 +29,10 @@ export const Route = createFileRoute('/skills/')({
       path: '/skills',
       description:
         'Index complet des skills Arboris : filtre par catégorie, techno, agent compatible et score de sûreté.',
+      breadcrumbs: [
+        { name: 'Accueil', path: '/' },
+        { name: 'Skills', path: '/skills' },
+      ],
     }),
   component: SkillsPage,
 })

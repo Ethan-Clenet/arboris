@@ -38,7 +38,7 @@ export function PhosphorSprite() {
   )
 }
 
-/** Icône Phosphor locale (sprite auto-généré, sans CDN). */
+/** Icône Phosphor locale (sprite auto-généré, sans webfont). */
 export default function Icon({
   name,
   bold = false,

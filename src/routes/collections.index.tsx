@@ -14,6 +14,10 @@ export const Route = createFileRoute('/collections/')({
       path: '/collections',
       description:
         'Collections Arboris : packs de skills et commandes à installer d’un coup (starter, sécu, ops).',
+      breadcrumbs: [
+        { name: 'Accueil', path: '/' },
+        { name: 'Collections', path: '/collections' },
+      ],
     }),
   component: CollectionsPage,
 })

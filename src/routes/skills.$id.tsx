@@ -33,6 +33,11 @@ export const Route = createFileRoute('/skills/$id')({
       path: `/skills/${skill.id}`,
       description: entityDescription(skill.tag.fr, 'skill', skill.id),
       type: 'article',
+      breadcrumbs: [
+        { name: 'Accueil', path: '/' },
+        { name: 'Skills', path: '/skills' },
+        { name: skill.id, path: `/skills/${skill.id}` },
+      ],
     })
   },
   component: SkillDetailPage,

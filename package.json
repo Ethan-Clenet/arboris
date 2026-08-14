@@ -54,6 +54,9 @@
     "packages/*"
   ],
   "dependencies": {
+    "@fontsource/hanken-grotesk": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
     "@phosphor-icons/core": "^2.1.1",
     "@prisma/client": "^6.19.2",
     "@tailwindcss/vite": "^4.1.18",
