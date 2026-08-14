@@ -1,16 +1,15 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import { TanStackDevtools } from '@tanstack/react-devtools'
 import type { ReactNode } from 'react'
 import '#/fonts'
+import DevtoolsGate from '#/components/DevtoolsGate'
 import AppShell from '#/components/AppShell'
 import NotFoundPage from '#/components/NotFoundPage'
 import ServerErrorPage from '#/components/ServerErrorPage'
 import { AnnouncerProvider } from '#/lib/announcer'
+import { fontPreloadLinks } from '#/lib/font-preload'
 import { I18nProvider } from '#/lib/i18n'
 import { rootFallbackMeta } from '#/lib/seo'
 import { getCurrentUser } from '#/server/auth.functions'
-import { THEME_INIT_SCRIPT } from '#/lib/theme'
 import appCss from '#/styles.css?url'
 
 export const Route = createRootRoute({
@@ -24,6 +23,7 @@ export const Route = createRootRoute({
       ...rootFallbackMeta(),
     ],
     links: [
+      ...fontPreloadLinks,
       { rel: 'stylesheet', href: appCss },
       { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
     ],
@@ -38,7 +38,7 @@ function RootDocument({ children }: { children: ReactNode }) {
     <html lang="fr" data-theme="dark" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <script src="/arboris-theme-init.js" />
         <HeadContent />
       </head>
       <body>
@@ -47,17 +47,7 @@ function RootDocument({ children }: { children: ReactNode }) {
             <AppShell>{children}</AppShell>
           </AnnouncerProvider>
         </I18nProvider>
-        {import.meta.env.DEV ? (
-          <TanStackDevtools
-            config={{ position: 'bottom-right' }}
-            plugins={[
-              {
-                name: 'TanStack Router',
-                render: <TanStackRouterDevtoolsPanel />,
-              },
-            ]}
-          />
-        ) : null}
+        <DevtoolsGate />
         <Scripts />
       </body>
     </html>

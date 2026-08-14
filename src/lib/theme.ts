@@ -9,10 +9,6 @@ export type Theme = 'light' | 'dark'
 const KEY = 'sp-theme'
 const EVENT = 'arboris-theme-change'
 
-// Script exécuté avant le premier paint (injecté dans <head>) pour éviter tout
-// flash de thème incorrect au chargement.
-export const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem('${KEY}');if(t!=='light'&&t!=='dark'){t='dark';}document.documentElement.setAttribute('data-theme',t);document.documentElement.style.colorScheme=t;}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`
-
 export function getTheme(): Theme {
   if (typeof document === 'undefined') return 'dark'
   try {
