@@ -84,7 +84,7 @@ function HomePage() {
       {/* Hero */}
       <section className="grid items-center gap-11 pt-14 pb-8 lg:grid-cols-[1fr_470px]">
         <div className="rise-in">
-          <div className="mb-[22px] inline-flex h-7 items-center gap-1.5 rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-3 font-mono text-[11.5px] leading-none text-[var(--accent)]">
+          <div className="mb-[22px] inline-flex h-7 items-center gap-1.5 rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-3 font-mono text-[11.5px] leading-none text-[var(--text-1)]">
             <span className="grid size-[13px] shrink-0 place-items-center">
               <Icon name="leaf" bold size={13} />
             </span>
@@ -243,7 +243,7 @@ function HomeTableRow({
         <Link
           to="/skills/$id"
           params={{ id: skill.id }}
-          className="min-w-0 cursor-pointer truncate font-semibold text-[var(--accent)] transition-colors hover:text-[var(--accent-press)]"
+          className="min-w-0 cursor-pointer truncate font-semibold text-[var(--link)] underline decoration-[var(--link)] decoration-from-font underline-offset-[3px] transition-colors hover:text-[var(--link-hover)] hover:decoration-[var(--link-hover)]"
         >
           {skill.id}
         </Link>

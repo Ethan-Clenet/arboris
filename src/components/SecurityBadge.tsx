@@ -26,12 +26,10 @@ type ToneStyle = {
 }
 
 const TONE_STYLES: Record<SecurityRecommendation, ToneStyle> = {
-  // Choix de styles "plein" pour garantir un contraste suffisant (WCAG2AA)
-  // sur le texte/icon + le background, y compris en badges compacts.
-  SAFE: { fg: '#ffffff', bg: '#16a36b', border: '#16a36b', icon: 'shield-check' },
-  CAUTION: { fg: '#ffffff', bg: '#c9851a', border: '#c9851a', icon: 'warning' },
-  UNSAFE: { fg: '#ffffff', bg: '#da3b4a', border: '#da3b4a', icon: 'shield-warning' },
-  UNKNOWN: { fg: '#ffffff', bg: '#8a909b', border: '#8a909b', icon: 'shield' },
+  SAFE: { fg: 'var(--security-safe-fg)', bg: 'var(--security-safe-bg)', border: 'var(--security-safe-border)', icon: 'shield-check' },
+  CAUTION: { fg: 'var(--security-caution-fg)', bg: 'var(--security-caution-bg)', border: 'var(--security-caution-border)', icon: 'warning' },
+  UNSAFE: { fg: 'var(--security-unsafe-fg)', bg: 'var(--security-unsafe-bg)', border: 'var(--security-unsafe-border)', icon: 'shield-warning' },
+  UNKNOWN: { fg: 'var(--security-unknown-fg)', bg: 'var(--security-unknown-bg)', border: 'var(--security-unknown-border)', icon: 'shield' },
 }
 
 export function resolveSecurityTone(
