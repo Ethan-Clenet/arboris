@@ -15,6 +15,9 @@ export default defineConfig({
       exclude: [
         'src/generated/**',
         'src/routeTree.gen.ts',
+        'src/router.tsx',
+        'src/fonts.ts',
+        'src/routes/**',
         'src/**/*.{test,spec}.{ts,tsx}',
       ],
     },
