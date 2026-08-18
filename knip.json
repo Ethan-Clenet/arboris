@@ -10,8 +10,10 @@
     "prisma/seed.ts",
     "prisma/catalog-from-skills.ts",
     "vite.config.ts",
+    "vitest.config.ts",
     "lighthouserc.cjs",
-    ".pa11yci.cjs"
+    ".pa11yci.cjs",
+    "src/test/setup.ts"
   ],
   "project": [
     "src/**/*.{ts,tsx}",
@@ -19,8 +21,10 @@
     "scripts/**/*.{ts,mjs,js}",
     "prisma/**/*.{ts,tsx}",
     "vite.config.ts",
+    "vitest.config.ts",
     "lighthouserc.cjs",
-    ".pa11yci.cjs"
+    ".pa11yci.cjs",
+    "src/test/setup.ts"
   ],
   "ignore": [
     "prisma/skills/**",

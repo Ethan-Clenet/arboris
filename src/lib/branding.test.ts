@@ -1,0 +1,40 @@
+import { describe, expect, it } from 'vitest'
+import { AGENT_LOGO_PATH, agentLogoColor } from './agent-logos'
+import { hasPublisherLogo, publisherLogoAsset } from './publisher-logos'
+import { fontPreloadLinks } from './font-preload'
+import { findCollectionSeed } from './collections-data'
+
+describe('agentLogoColor', () => {
+  it('couleur Claude vs currentColor', () => {
+    expect(agentLogoColor('Claude')).toBe('#D97757')
+    expect(agentLogoColor('Cursor')).toBe('var(--text-1)')
+    expect(Object.keys(AGENT_LOGO_PATH)).toEqual(['Claude', 'Cursor', 'Codex', 'Copilot'])
+  })
+})
+
+describe('publisher logos', () => {
+  it('détecte assets et paths', () => {
+    expect(hasPublisherLogo('Brave')).toBe(true)
+    expect(publisherLogoAsset('Brave')).toBe('/publishers/brave.svg')
+    expect(hasPublisherLogo('Vercel')).toBe(true)
+    expect(publisherLogoAsset('Vercel')).toBeUndefined()
+    expect(hasPublisherLogo('Inconnu')).toBe(false)
+  })
+})
+
+describe('fontPreloadLinks', () => {
+  it('précharge Space Grotesk 600 et 700', () => {
+    expect(fontPreloadLinks).toHaveLength(2)
+    for (const link of fontPreloadLinks) {
+      expect(link).toMatchObject({ rel: 'preload', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' })
+      expect(link.href).toMatch(/space-grotesk.*\.woff2/)
+    }
+  })
+})
+
+describe('findCollectionSeed', () => {
+  it('trouve un pack et ignore un id inconnu', () => {
+    expect(findCollectionSeed('sonar')?.kind).toBe('pack')
+    expect(findCollectionSeed('nope')).toBeUndefined()
+  })
+})
