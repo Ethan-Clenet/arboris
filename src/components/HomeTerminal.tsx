@@ -154,6 +154,7 @@ export default function HomeTerminal() {
   return (
     <div
       ref={rootRef}
+      aria-hidden="true"
       className="rise-in overflow-hidden rounded-[14px] border border-[#20242c] bg-[#0d1117] shadow-[0_22px_60px_rgba(0,0,0,0.4)]"
     >
       <div className="flex items-center gap-[7px] border-b border-[#20242c] bg-[#161b22] px-3.5 py-[11px]">
@@ -162,10 +163,7 @@ export default function HomeTerminal() {
         <span className="h-[11px] w-[11px] rounded-full bg-[#61C554]" />
         <span className="ml-2 font-mono text-[11.5px] text-[#9CA3AF]">agent — zsh</span>
       </div>
-      <div
-        className="min-h-[168px] p-5 font-mono text-[13.5px] leading-[1.95] text-[#C9D1D9]"
-        aria-live="polite"
-      >
+      <div className="min-h-[168px] p-5 font-mono text-[13.5px] leading-[1.95] text-[#C9D1D9]">
         {lines.map((line, i) => {
           if (i > lineIdx && !(reducedMotion && done)) return null
           if (line.type === 'gap') {

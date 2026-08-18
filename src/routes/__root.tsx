@@ -38,7 +38,11 @@ function RootDocument({ children }: { children: ReactNode }) {
     <html lang="fr" data-theme="dark" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
-        <script src="/arboris-theme-init.js" />
+        {/*
+          Script externe (CSP). Les payloads d’hydratation TanStack Start restent
+          inline : script-src prod doit inclure 'unsafe-inline' (vercel.json).
+        */}
+        <script src="/arboris-theme-init.js"></script>
         <HeadContent />
       </head>
       <body>

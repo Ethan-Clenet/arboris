@@ -126,15 +126,14 @@ function HomePage() {
         </h2>
         <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
           <div className="flex flex-wrap items-end justify-between gap-3 border-b border-[var(--border)] bg-[var(--surface-2)] px-3 pt-2 sm:px-4">
-            <div className="flex flex-wrap items-end gap-0.5" role="tablist" aria-label={t.home.indexTitle}>
+            <div className="flex flex-wrap items-end gap-0.5" role="group" aria-label={t.home.indexTitle}>
               {tabs.map((item) => {
                 const active = tab === item.id
                 return (
                   <button
                     key={item.id}
                     type="button"
-                    role="tab"
-                    aria-selected={active}
+                    aria-pressed={active}
                     onClick={() => setTab(item.id)}
                     className={`inline-flex cursor-pointer items-center gap-1.5 rounded-t-[10px] border px-3.5 py-2.5 text-[13px] font-medium transition-colors ${
                       active
