@@ -97,7 +97,7 @@ export interface CategoryGroup {
   categoryIds: readonly string[]
 }
 
-/** Regroupements de catégories (page Premier pas). */
+/** Regroupements de catégories (parcours catalogue). */
 export const CATEGORY_GROUPS: CategoryGroup[] = [
   {
     id: 'development',
@@ -157,10 +157,10 @@ export const CATEGORY_GROUPS: CategoryGroup[] = [
   },
 ]
 
-/** Packs workflow mis en avant sur /getting-started (ordre d’affichage). */
-export const START_PACK_IDS = ['sonar', 'command-starter', 'ship-safely'] as const
+/** Packs garde mis en avant sur /getting-started (chemin « sécuriser l’agent »). */
+export const GUARD_PACK_IDS = ['sonar', 'ship-safely'] as const
 
-/** Packs « nouveau projet » par techno (section dédiée sur /getting-started). */
+/** Starters techno sur /getting-started (chemin « nouveau projet », 8 packs). */
 export const TECH_STARTER_PACK_IDS = [
   'react-ts-starter',
   'next-react-starter',
@@ -169,12 +169,36 @@ export const TECH_STARTER_PACK_IDS = [
   'angular-starter',
   'spring-boot-starter',
   'prisma-postgres-starter',
-  'drizzle-starter',
-  'supabase-starter',
-  'firebase-starter',
-  'convex-starter',
   'docker-ops-starter',
 ] as const
+
+export type GettingStartedPath = 'new-project' | 'secure-agent'
+
+/** IDs de packs pour un chemin d’onboarding. */
+export function packIdsForStartPath(path: GettingStartedPath): readonly string[] {
+  switch (path) {
+    case 'new-project':
+      return TECH_STARTER_PACK_IDS
+    case 'secure-agent':
+      return GUARD_PACK_IDS
+    default: {
+      const _exhaustive: never = path
+      return _exhaustive
+    }
+  }
+}
+
+/** Collections dans l’ordre des ids (ignore les ids absents). */
+export function collectionsInOrder(
+  collections: CollectionSummary[],
+  ids: readonly string[],
+): CollectionSummary[] {
+  const byId = new Map(collections.map((c) => [c.id, c]))
+  return ids.flatMap((id) => {
+    const found = byId.get(id)
+    return found ? [found] : []
+  })
+}
 
 export function categoryIdsInGroup(groupId: string): readonly string[] {
   return CATEGORY_GROUPS.find((group) => group.id === groupId)?.categoryIds ?? []
