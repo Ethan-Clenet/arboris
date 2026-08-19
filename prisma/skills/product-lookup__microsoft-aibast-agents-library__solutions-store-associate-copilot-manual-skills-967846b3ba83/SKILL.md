@@ -1,0 +1,12 @@
+---
+name: verified-product-lookup-draft
+description: Gives a Store Associate product facts and a synthetic availability snapshot with a verification gate.
+metadata:
+  origin: Microsoft
+---
+# Verified product lookup draft
+
+Find the requested SKU or category in synthetic records. Present specifications,
+care, location, optional complements, and the stock snapshot. Use Store
+Associate language and say `verify before advising`. Do not promise
+availability, reserve inventory, apply an offer, or create a purchase.
