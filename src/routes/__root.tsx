@@ -1,4 +1,5 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { Analytics } from '@vercel/analytics/react'
 import type { ReactNode } from 'react'
 import '#/fonts'
 import DevtoolsGate from '#/components/DevtoolsGate'
@@ -53,6 +54,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         </I18nProvider>
         <DevtoolsGate />
         <Scripts />
+        <Analytics />
       </body>
     </html>
   )
