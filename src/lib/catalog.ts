@@ -160,7 +160,7 @@ export const CATEGORY_GROUPS: CategoryGroup[] = [
 /** Packs garde mis en avant sur /getting-started (chemin « sécuriser l’agent »). */
 export const GUARD_PACK_IDS = ['sonar', 'ship-safely'] as const
 
-/** Starters techno sur /getting-started (chemin « nouveau projet », 8 packs). */
+/** Starters techno sur /getting-started (chemin « nouveau projet »). */
 export const TECH_STARTER_PACK_IDS = [
   'react-ts-starter',
   'next-react-starter',
@@ -170,6 +170,7 @@ export const TECH_STARTER_PACK_IDS = [
   'spring-boot-starter',
   'prisma-postgres-starter',
   'docker-ops-starter',
+  'n8n-starter',
 ] as const
 
 export type GettingStartedPath = 'new-project' | 'secure-agent'
@@ -215,6 +216,7 @@ export const STACK_CATEGORY_IDS: Record<string, readonly string[]> = {
   java: ['backend', 'language', 'tests', 'verification', 'security', 'data', 'product'],
   'spring-boot': ['backend', 'language', 'tests', 'verification', 'security', 'data', 'product'],
   docker: ['ops', 'backend', 'tests', 'verification', 'agents', 'security', 'product'],
+  n8n: ['ops', 'backend', 'agents', 'security', 'data', 'docs'],
   k9: ['ops', 'backend', 'tests', 'verification', 'security'],
   postgresql: ['backend', 'data', 'tests', 'verification', 'language', 'security', 'docs'],
   mysql: ['backend', 'data', 'tests', 'verification', 'security'],

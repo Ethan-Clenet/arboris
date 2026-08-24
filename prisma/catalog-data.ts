@@ -64,6 +64,7 @@ export const STACKS: StackSeed[] = [
   { id: 'java', label: 'Java', icon: 'coffee', color: '#E76F00', briefFr: 'Écosystème entreprise et JVM', briefEn: 'Enterprise and JVM ecosystem' },
   { id: 'spring-boot', label: 'Spring Boot', icon: 'leaf', color: '#6DB33F', briefFr: 'Framework backend Java', briefEn: 'Java backend framework' },
   { id: 'docker', label: 'Docker', icon: 'shipping-container', color: '#2496ED', briefFr: 'Conteneurisation applicative', briefEn: 'Application containerization' },
+  { id: 'n8n', label: 'n8n', icon: 'share-network', color: '#EA4B71', briefFr: 'Automatisation de workflows self-host', briefEn: 'Self-hosted workflow automation' },
   { id: 'k9', label: 'K9', icon: 'cube', color: '#326CE5', briefFr: 'Ops Kubernetes et navigation cluster', briefEn: 'Kubernetes ops and cluster navigation' },
   { id: 'postgresql', label: 'PostgreSQL', icon: 'database', color: '#336791', briefFr: 'Base de données relationnelle avancée', briefEn: 'Advanced relational database' },
   { id: 'mysql', label: 'MySQL', icon: 'database', color: '#4479A1', briefFr: 'Base de données relationnelle populaire', briefEn: 'Popular relational database' },

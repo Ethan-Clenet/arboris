@@ -47,6 +47,7 @@ const ALIASES: Record<string, string> = {
   springboot: 'spring-boot',
   'spring-boot': 'spring-boot',
   docker: 'docker',
+  n8n: 'n8n',
   kubernetes: 'k9',
   k8s: 'k9',
   k9s: 'k9',

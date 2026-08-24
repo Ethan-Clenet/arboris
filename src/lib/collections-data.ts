@@ -333,6 +333,21 @@ export const COLLECTIONS: CollectionSeed[] = [
     commandIds: ['docker-rebuild', 'sync-env', 'db-migrate-smoke', 'hotfix', 'adr'],
     sort: 21,
   },
+  {
+    id: 'n8n-starter',
+    icon: 'share-network',
+    color: '#EA4B71',
+    labelFr: 'n8n',
+    labelEn: 'n8n',
+    briefFr:
+      'Automatisation n8n self-host : workflows, webhooks, credentials, filet d’erreur — plus Docker Compose et le loop git/PR.',
+    briefEn:
+      'Self-hosted n8n automation: workflows, webhooks, credentials, error handling — plus Docker Compose and the git/PR loop.',
+    kind: 'pack',
+    skillIds: ['n8n-patterns', 'docker-patterns', 'api-design', 'error-handling'],
+    commandIds: [...DEV_LOOP_COMMANDS, 'docker-rebuild', 'sync-env'],
+    sort: 22,
+  },
 ]
 
 export function findCollectionSeed(id: string): CollectionSeed | undefined {
