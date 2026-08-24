@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:06:25.451430+00:00",
+  "scanMode": "static",
+  "skillName": "patient-intake-coverage-evidence",
+  "contentHash": "35aaf59f54c1c3d265996285c990bba58d9528da5fc147b28f66c5900faa33ab",
+  "scannerVersion": "2.5.3"
+}

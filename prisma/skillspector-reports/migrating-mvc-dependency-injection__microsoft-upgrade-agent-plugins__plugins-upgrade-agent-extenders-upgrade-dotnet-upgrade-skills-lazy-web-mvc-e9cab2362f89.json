@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:15:36.288930+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-mvc-dependency-injection",
+  "contentHash": "67ea59a83a7aee50e7f308d2dedef5609c9fcbbbfb2fce0bc004d85c8bb9668a",
+  "scannerVersion": "2.5.3"
+}

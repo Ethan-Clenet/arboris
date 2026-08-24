@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:11:51.567001+00:00",
+  "scanMode": "static",
+  "skillName": "privacy-safe-journey-friction-analysis",
+  "contentHash": "99dbfa685527839733e4866cbf0c3c3a42c1000f0c5ab0235dec2e6f0704febf",
+  "scannerVersion": "2.5.3"
+}

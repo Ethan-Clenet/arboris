@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:23:15.107302+00:00",
+  "scanMode": "static",
+  "skillName": "sqlclient-migration",
+  "contentHash": "e8a8f5706b1b5873c1be172c1316a5747cd08c5773fc98c0563d02c2a4b9497e",
+  "scannerVersion": "2.5.3"
+}

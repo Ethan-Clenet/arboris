@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:20:12.479480+00:00",
+  "scanMode": "static",
+  "skillName": "consent-aware-recovery-campaign-draft",
+  "contentHash": "a85371968b5f4e47b6927e5b8d754de50ca9cd0e6165fb9ed50dcdb377f45dfc",
+  "scannerVersion": "2.5.3"
+}

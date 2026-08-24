@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:15:04.057501+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-ef-dbcontext",
+  "contentHash": "bffe1b44cd41ab758086af8c52cd3929b9f4c06f40e6406cb962e1903914efdb",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:17:08.198094+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-webapi-odata",
+  "contentHash": "81155a216d83a43ac4a5836b33f3d5dbaa80bad056161e6fc5a9b48a8107788c",
+  "scannerVersion": "2.5.3"
+}

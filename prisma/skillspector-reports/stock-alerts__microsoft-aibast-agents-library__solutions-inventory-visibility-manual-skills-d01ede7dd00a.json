@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:23:32.045246+00:00",
+  "scanMode": "static",
+  "skillName": "store-stock-review-candidates",
+  "contentHash": "56253016711c0751e60941c98ca2346fc6d7ac74548c9f71329a3867baba44c8",
+  "scannerVersion": "2.5.3"
+}

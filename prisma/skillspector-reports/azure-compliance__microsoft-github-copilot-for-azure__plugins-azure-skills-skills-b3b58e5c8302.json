@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:01:26.599968+00:00",
+  "scanMode": "static",
+  "skillName": "azure-compliance",
+  "contentHash": "5d7625cc785d2e2a1cef37fc991774d422561318e7efe82715ba0616d4d98d37",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:13:12.396585+00:00",
+  "scanMode": "static",
+  "skillName": "managing-winforms-mvvm",
+  "contentHash": "7cb1f7900f3941ed8defce168db94e380539379534ca4657baa1763836b1b657",
+  "scannerVersion": "2.5.3"
+}

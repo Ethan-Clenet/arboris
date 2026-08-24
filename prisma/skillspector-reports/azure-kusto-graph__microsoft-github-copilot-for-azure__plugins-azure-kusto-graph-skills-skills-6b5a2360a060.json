@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:02:03.057862+00:00",
+  "scanMode": "static",
+  "skillName": "azure-kusto-graph",
+  "contentHash": "7d29e56fe5ddc9b3a73825b62d787bbf8b203006e0f49f1db9101a9e74e8f6d1",
+  "scannerVersion": "2.5.3"
+}

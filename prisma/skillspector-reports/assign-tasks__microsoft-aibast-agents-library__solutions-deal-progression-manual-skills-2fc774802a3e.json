@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:00:46.504498+00:00",
+  "scanMode": "static",
+  "skillName": "deal-progression-assign-tasks",
+  "contentHash": "fafe3f017a2d32d8da94cbd7fe33597f9c85a12e1944b1e51fa2dc2610e0acfc",
+  "scannerVersion": "2.5.3"
+}

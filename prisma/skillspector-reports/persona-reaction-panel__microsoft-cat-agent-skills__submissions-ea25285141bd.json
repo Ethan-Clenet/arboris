@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:18:23.694746+00:00",
+  "scanMode": "static",
+  "skillName": "persona-reaction-panel",
+  "contentHash": "e50b7eb6af91c16bb44d46d136ccf39adf2355e5b0a61a5fbf9e3e8a238c84b0",
+  "scannerVersion": "2.5.3"
+}

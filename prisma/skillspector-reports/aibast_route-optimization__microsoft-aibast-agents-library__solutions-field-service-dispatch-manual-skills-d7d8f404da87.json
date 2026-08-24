@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:58:20.988127+00:00",
+  "scanMode": "static",
+  "skillName": "field-service-dispatch-route-optimization",
+  "contentHash": "f867e48969c78330a559a3e041cf6a7c4153da7313101c5bdebe27dfa4c8fd18",
+  "scannerVersion": "2.5.3"
+}

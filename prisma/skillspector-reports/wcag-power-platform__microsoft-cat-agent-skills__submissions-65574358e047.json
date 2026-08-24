@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:24:58.870378+00:00",
+  "scanMode": "static",
+  "skillName": "wcag-power-platform",
+  "contentHash": "7e5ba8db0039aa057fa0052f1da4072bfd25da8e3b12a255bf4cc32ee33000a0",
+  "scannerVersion": "2.5.3"
+}

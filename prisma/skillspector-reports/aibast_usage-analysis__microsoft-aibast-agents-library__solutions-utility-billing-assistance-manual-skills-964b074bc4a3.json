@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:59:43.862211+00:00",
+  "scanMode": "static",
+  "skillName": "utility-billing-assistance-usage-analysis",
+  "contentHash": "62478dddc83e9735b581d3f26879a387400d75faeb37135e3ddcbfaed2d2415e",
+  "scannerVersion": "2.5.3"
+}

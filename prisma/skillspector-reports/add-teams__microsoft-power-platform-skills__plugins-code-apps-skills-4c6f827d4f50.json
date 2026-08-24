@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:52:16.314884+00:00",
+  "scanMode": "static",
+  "skillName": "add-teams",
+  "contentHash": "d729a27681eb9e1fccf10a2a885eba367597abfcf79fd9b5385626380b2f7230",
+  "scannerVersion": "2.5.3"
+}

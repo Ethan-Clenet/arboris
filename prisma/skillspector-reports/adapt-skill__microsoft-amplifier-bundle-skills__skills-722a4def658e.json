@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "Write the SKILL.md\n\nWrite the adapted SKILL.md following Amplifier conventions. Consult skills-assist\nfor the full set of available frontmatter fields and current conventions.\n\nKey principles (illustr",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 132
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T08:48:20.387107+00:00",
+  "scanMode": "static",
+  "skillName": "adapt-skill",
+  "contentHash": "86c85085958185c8eb7f798b86514ad25bfe636ce2c0c3e67fffe85490bfacb1",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:05:09.579608+00:00",
+  "scanMode": "static",
+  "skillName": "account-intelligence-competitive-intel",
+  "contentHash": "1c62bb9f2f13ac2692b568c13a619bf7ecd296d356b2e34b8ba1e4d4e749edb1",
+  "scannerVersion": "2.5.3"
+}

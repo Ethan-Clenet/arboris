@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:05:22.736680+00:00",
+  "scanMode": "static",
+  "skillName": "conditional-chat-reminder",
+  "contentHash": "e4304132a7cd5427743ffbb02f4662a337034bcc0e8eae2c532c10a6a910d88a",
+  "scannerVersion": "2.5.3"
+}

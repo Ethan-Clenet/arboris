@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:35.623185+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-powershell-sdk",
+  "contentHash": "4740464a4a1e19bdc181e7166dde80a77fb4f863481936a6318a2c69425302a5",
+  "scannerVersion": "2.5.3"
+}

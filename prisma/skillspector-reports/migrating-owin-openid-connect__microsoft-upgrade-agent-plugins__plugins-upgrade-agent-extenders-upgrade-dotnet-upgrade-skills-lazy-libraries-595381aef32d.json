@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:28.874587+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-owin-openid-connect",
+  "contentHash": "933489dfbbbeb3fd6fe899897ec432477f236b655c3d530cc8587b4b5ec83f52",
+  "scannerVersion": "2.5.3"
+}

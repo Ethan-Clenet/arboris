@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:20:32.241193+00:00",
+  "scanMode": "static",
+  "skillName": "license-renewal-expansion-renewal-pipeline",
+  "contentHash": "ef621edee1c5caeae3413fc6c83c231753896912078adffd96efa482140284a0",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:06:07.944095+00:00",
+  "scanMode": "static",
+  "skillName": "copilot-studio-topic-blueprint",
+  "contentHash": "3e71a95d1e64bba54719d57989abfda72a8564e6821fb31dbab16b6a72308c08",
+  "scannerVersion": "2.5.3"
+}

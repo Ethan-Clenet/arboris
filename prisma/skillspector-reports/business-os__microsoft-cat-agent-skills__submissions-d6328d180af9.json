@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:56.504855+00:00",
+  "scanMode": "static",
+  "skillName": "business-os",
+  "contentHash": "4870bd1a5cfc388b4e708899982015e4a5bf26bc80cda2d77ac07a03523e3336",
+  "scannerVersion": "2.5.3"
+}

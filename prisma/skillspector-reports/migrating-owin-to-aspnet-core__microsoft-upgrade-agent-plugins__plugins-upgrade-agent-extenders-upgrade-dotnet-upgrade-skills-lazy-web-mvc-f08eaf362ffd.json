@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:32.567291+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-owin-to-aspnet-core",
+  "contentHash": "cb2817b9154a7491346704cc8b42b6bda521ff2dd2b60bb52154ced475c33841",
+  "scannerVersion": "2.5.3"
+}

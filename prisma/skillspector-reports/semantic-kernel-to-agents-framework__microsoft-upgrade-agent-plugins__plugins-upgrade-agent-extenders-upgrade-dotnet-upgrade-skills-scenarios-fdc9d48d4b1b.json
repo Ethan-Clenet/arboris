@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:22:04.964241+00:00",
+  "scanMode": "static",
+  "skillName": "semantic-kernel-to-agents-framework",
+  "contentHash": "2cc9b7b8039470397a8652879d2363e85165968c4f5bf5746f29c9a50cd67d44",
+  "scannerVersion": "2.5.3"
+}

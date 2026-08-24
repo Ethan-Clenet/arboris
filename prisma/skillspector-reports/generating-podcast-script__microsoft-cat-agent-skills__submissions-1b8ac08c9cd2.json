@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:10:19.533517+00:00",
+  "scanMode": "static",
+  "skillName": "generating-podcast-script",
+  "contentHash": "7eb9b756840f220339d26c54dae3010821e62d3b11679e1979cfc17932d49f02",
+  "scannerVersion": "2.5.3"
+}

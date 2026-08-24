@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:14.152982+00:00",
+  "scanMode": "static",
+  "skillName": "billing-close-summary",
+  "contentHash": "7b360b1af06b14cd5fde40bb0dc292a7f9a442c118ebc04dd724538f2687d930",
+  "scannerVersion": "2.5.3"
+}

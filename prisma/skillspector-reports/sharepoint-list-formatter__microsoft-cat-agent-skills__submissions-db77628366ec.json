@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:22:46.048398+00:00",
+  "scanMode": "static",
+  "skillName": "sharepoint-list-formatter",
+  "contentHash": "768a360e37ae85618affdb1e5eddbc0e745af8cfd0e1316eb0453b5f80ea1c7b",
+  "scannerVersion": "2.5.3"
+}

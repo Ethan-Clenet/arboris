@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:06:21.812523+00:00",
+  "scanMode": "static",
+  "skillName": "win-loss-analysis-counter-strategies",
+  "contentHash": "7b0a04ed893bf5c2072e1be900fa347aa8401495abd98c0c4aae86c7985d12f7",
+  "scannerVersion": "2.5.3"
+}

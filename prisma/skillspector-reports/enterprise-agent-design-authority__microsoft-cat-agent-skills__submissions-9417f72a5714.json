@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:09:16.779587+00:00",
+  "scanMode": "static",
+  "skillName": "enterprise-agent-design-authority",
+  "contentHash": "5f7b2a41271ab591c175fc65a4ab5f89f72783cf1d7d803bda6987ffe5146764",
+  "scannerVersion": "2.5.3"
+}

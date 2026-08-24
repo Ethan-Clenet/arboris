@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:13:19.012949+00:00",
+  "scanMode": "static",
+  "skillName": "mass-change",
+  "contentHash": "896c2856873128f64d8f7f9be5a46c971d7c4e32b253d4a3def768f8ad65bec0",
+  "scannerVersion": "2.5.3"
+}

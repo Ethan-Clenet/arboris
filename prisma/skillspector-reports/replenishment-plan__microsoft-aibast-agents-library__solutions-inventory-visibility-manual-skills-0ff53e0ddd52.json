@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:20:35.071104+00:00",
+  "scanMode": "static",
+  "skillName": "draft-replenishment-scenario",
+  "contentHash": "a2e1b15e19b24a76e08f257757ad556b19ad5c5015a245c74dc9bf42ddfefb61",
+  "scannerVersion": "2.5.3"
+}

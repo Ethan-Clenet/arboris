@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:11:44.477233+00:00",
+  "scanMode": "static",
+  "skillName": "approval-gated-invoice-support",
+  "contentHash": "8d07812b657a535ccae81016835a06ee38de11b42223652896a08fd009393ee0",
+  "scannerVersion": "2.5.3"
+}

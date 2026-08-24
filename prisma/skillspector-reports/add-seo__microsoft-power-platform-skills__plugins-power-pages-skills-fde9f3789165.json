@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- not-a-gate: data-gathering — production URL + exclusion list shape the upcoming Phase 3 plan but don't write anything on their own -->\n\nUse `AskUserQuestion` to collect SEO preferences:\n\n#### Cal",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 78
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T08:52:01.892877+00:00",
+  "scanMode": "static",
+  "skillName": "add-seo",
+  "contentHash": "471c6f9f2492ce7bd35386922508cfa0d09ea2dfcd0772a2d10172d70bc8ad31",
+  "scannerVersion": "2.5.3"
+}

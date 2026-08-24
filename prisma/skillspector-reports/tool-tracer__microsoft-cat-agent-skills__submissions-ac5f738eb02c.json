@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:24:09.701343+00:00",
+  "scanMode": "static",
+  "skillName": "tool-tracer",
+  "contentHash": "6d0a3e899e2fd34219f0cba4043cf829fab719e225f29c8eae3f75c0ce9a1031",
+  "scannerVersion": "2.5.3"
+}

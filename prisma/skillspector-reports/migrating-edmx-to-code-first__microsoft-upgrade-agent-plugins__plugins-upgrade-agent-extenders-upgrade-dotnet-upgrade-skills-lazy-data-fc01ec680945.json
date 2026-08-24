@@ -1,0 +1,27 @@
+{
+  "riskScore": 21,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA1",
+      "category": "Rogue Agent",
+      "pattern": "Self-Modification",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "overwrite existing file",
+      "explanation": "Skill modifies its own code, configuration, or behavior at runtime. Self-modification enables an agent to escalate privileges, disable safety constraints, or install persistent backdoors.",
+      "remediation": "Prevent the skill from modifying its own code, SKILL.md, or configuration files. Treat skill files as read-only at runtime.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 89
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:15:00.869119+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-edmx-to-code-first",
+  "contentHash": "408b2794ccae4a9b63916ec2f8eed05932f7283027725e7c444db9a948601d16",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:20:18.975701+00:00",
+  "scanMode": "static",
+  "skillName": "proposal-generation-references-positioning",
+  "contentHash": "b7abed31157e4d986b654261be9414e0442f61656421fb04fd2f8d33e0fb7f16",
+  "scannerVersion": "2.5.3"
+}

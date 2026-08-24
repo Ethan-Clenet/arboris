@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:15:14.593618+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-linq-to-sql-to-ef-core",
+  "contentHash": "2d04736cc401217c7383e3b0460ba6ff0c6d5718e34acd903dee43dc4fb08676",
+  "scannerVersion": "2.5.3"
+}

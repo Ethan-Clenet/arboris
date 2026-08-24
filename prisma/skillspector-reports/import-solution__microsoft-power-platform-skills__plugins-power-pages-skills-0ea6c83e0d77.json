@@ -1,0 +1,69 @@
+{
+  "riskScore": 30,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 4,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: import-solution:0.no-plan | category=intent | cancel-leaves=nothing -->\n> 🚦 **Gate (intent · import-solution:0.no-plan):** Fail-closed entry gate when `check-alm-plan.js` returns `exists:fa",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 65
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: import-solution:3.0.version-skew | category=consent | cancel-leaves=nothing -->\n   > 🚦 **Gate (consent · import-solution:3.0.version-skew):** Zip version is equal-to or lower-than the insta",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 214
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: import-solution:5b.blocked-attachments | category=consent | cancel-leaves=attachment-block-modified -->\n> 🚦 **Gate (consent · import-solution:5b.blocked-attachments):** Reactive `Attachment",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 327
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: import-solution:6c.cloud-flow-register | category=plan | cancel-leaves=nothing -->\n   > 🚦 **Gate (plan · import-solution:6c.cloud-flow-register):** Cloud flows in imported solution need man",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 473
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:10:59.758105+00:00",
+  "scanMode": "static",
+  "skillName": "import-solution",
+  "contentHash": "5946dbe4a7ed06f3ff50dc1161c608e6a1f9ffe1b68f66b0efb5336b1b50af10",
+  "scannerVersion": "2.5.3"
+}

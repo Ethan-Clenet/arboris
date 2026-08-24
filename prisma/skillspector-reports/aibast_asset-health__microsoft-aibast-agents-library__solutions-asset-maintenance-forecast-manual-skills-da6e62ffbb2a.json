@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:53:24.005673+00:00",
+  "scanMode": "static",
+  "skillName": "asset-maintenance-forecast-asset-health",
+  "contentHash": "001b14843038772e4fe38dccc69cc8f55d3601666e1b5466e25f2c9a7953c370",
+  "scannerVersion": "2.5.3"
+}

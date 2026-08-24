@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:01:01.440828+00:00",
+  "scanMode": "static",
+  "skillName": "azure-ai",
+  "contentHash": "128093315b33cea0d90d69f98e4e4bca2c268097c31a3cb051f2f6dae479bf92",
+  "scannerVersion": "2.5.3"
+}

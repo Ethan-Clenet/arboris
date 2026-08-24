@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:09:35.226274+00:00",
+  "scanMode": "static",
+  "skillName": "account-intelligence-executive-briefing",
+  "contentHash": "e44e741238c48aed11ce1f7f5a2b55f04795d37600abe13b3e374e56cec03a9c",
+  "scannerVersion": "2.5.3"
+}

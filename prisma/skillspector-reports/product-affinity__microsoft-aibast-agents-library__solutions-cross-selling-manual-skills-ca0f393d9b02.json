@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:19:38.398134+00:00",
+  "scanMode": "static",
+  "skillName": "cross-selling-product-affinity",
+  "contentHash": "cf2290311c04789cd6366d9cd5f837e0a4045fc7286b462252555f75faaf1371",
+  "scannerVersion": "2.5.3"
+}

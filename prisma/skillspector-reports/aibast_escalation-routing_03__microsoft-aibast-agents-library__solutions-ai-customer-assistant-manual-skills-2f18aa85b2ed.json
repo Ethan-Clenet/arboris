@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:55:17.102116+00:00",
+  "scanMode": "static",
+  "skillName": "escalation-routing",
+  "contentHash": "3419201d3dd6fd64bd328830355b431f760bb1601edf37a6689f297ad77cb09e",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:20:08.841310+00:00",
+  "scanMode": "static",
+  "skillName": "cross-selling-recommendation-engine",
+  "contentHash": "db2182216618d546d149caa85d8c1216e885181b56d2b35ecd09999dad2fdd88",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,26 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:20:25.920774+00:00",
+  "scanMode": "static",
+  "skillName": "regulation-monitor",
+  "contentHash": "7637f60b7869ef42ff300ee57001b71639fb7c00cc0a4eabbbb173f62283d48a",
+  "scannerVersion": "2.5.3"
+}

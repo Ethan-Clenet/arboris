@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:05:19.527826+00:00",
+  "scanMode": "static",
+  "skillName": "contract-policy-screen",
+  "contentHash": "83fae2a4c1339c701d6f9213f934be4fbbd07cac1232035d882662a03761aa9e",
+  "scannerVersion": "2.5.3"
+}

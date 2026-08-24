@@ -1,0 +1,27 @@
+{
+  "riskScore": 5,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- 1. Authentication -->\n        <authentication-managed-identity resource=\"https://cognitiveservices.azure.com\" />\n\n        <!-- 2. Semantic Cache Lookup -->\n        <azure-openai-semantic-cache-lo",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/policies.md",
+        "start_line": 231
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:01:05.537892+00:00",
+  "scanMode": "static",
+  "skillName": "azure-aigateway",
+  "contentHash": "09e66d4b91ec4d5256b0477cce1b42f92467bde9bbc357417b72bc34f996e423",
+  "scannerVersion": "2.5.3"
+}

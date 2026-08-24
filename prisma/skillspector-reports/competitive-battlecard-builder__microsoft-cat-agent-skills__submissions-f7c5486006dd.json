@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:05:06.310910+00:00",
+  "scanMode": "static",
+  "skillName": "competitive-battlecard-builder",
+  "contentHash": "4ebcdccc58498bdc8d2e2a28aaea7c29fe71c5c387292dd062c3511d1380cb0a",
+  "scannerVersion": "2.5.3"
+}

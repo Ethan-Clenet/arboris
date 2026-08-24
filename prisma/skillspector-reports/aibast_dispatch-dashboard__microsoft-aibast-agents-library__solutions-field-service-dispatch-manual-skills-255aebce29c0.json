@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:54:46.889057+00:00",
+  "scanMode": "static",
+  "skillName": "field-service-dispatch-dispatch-dashboard",
+  "contentHash": "d34e5c607d29fa051dfacfe598e4187a1474890103fa8a6e9062b8bb702cb586",
+  "scannerVersion": "2.5.3"
+}

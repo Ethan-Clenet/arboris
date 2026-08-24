@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:11:02.863037+00:00",
+  "scanMode": "static",
+  "skillName": "margin-aware-incentive-scenarios",
+  "contentHash": "6f07474f3ae49789704631be2c15130ba6d8e5254a3aeba7412097cf2f867b52",
+  "scannerVersion": "2.5.3"
+}

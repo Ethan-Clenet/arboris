@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:58:31.087949+00:00",
+  "scanMode": "static",
+  "skillName": "schedule-overview",
+  "contentHash": "b9118b9ebccbf8a596f05d61b808dfcc5b7053cb059877607c08b78d29140060",
+  "scannerVersion": "2.5.3"
+}

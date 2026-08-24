@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:53:20.457380+00:00",
+  "scanMode": "static",
+  "skillName": "approval-routing",
+  "contentHash": "48bb15ad97e67b8f4ac627f775b96a005a243e152c281241f06da01581102cbc",
+  "scannerVersion": "2.5.3"
+}

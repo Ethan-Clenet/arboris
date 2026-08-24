@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:48:29.063213+00:00",
+  "scanMode": "static",
+  "skillName": "add-excel",
+  "contentHash": "f4032103316df289e5f7acb9241363453cd1f0fecef8ebba12dd6acfd5a16e42",
+  "scannerVersion": "2.5.3"
+}

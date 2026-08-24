@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:53:10.144490+00:00",
+  "scanMode": "static",
+  "skillName": "proactive-applicant-updates",
+  "contentHash": "a7c03bcc475c1bbc263f3bd6481ef872f1c88df774aaaaf6416b3e9cbfcaf644",
+  "scannerVersion": "2.5.3"
+}

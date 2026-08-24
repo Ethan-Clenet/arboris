@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:11:19.761949+00:00",
+  "scanMode": "static",
+  "skillName": "patient-intake-intake-readiness",
+  "contentHash": "a94df07792c7e0b56c47a9dff19c831183561530b71e170f000ba96da79b418c",
+  "scannerVersion": "2.5.3"
+}

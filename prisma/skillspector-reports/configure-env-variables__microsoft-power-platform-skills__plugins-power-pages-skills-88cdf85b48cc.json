@@ -1,0 +1,41 @@
+{
+  "riskScore": 25,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/add-server-logic/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 277
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: configure-env-variables:0.no-plan | category=intent | cancel-leaves=nothing -->\n> 🚦 **Gate (intent · configure-env-variables:0.no-plan):** Fail-closed entry gate when `check-alm-plan.js` re",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 76
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:05:36.844832+00:00",
+  "scanMode": "static",
+  "skillName": "configure-env-variables",
+  "contentHash": "46ea9a43577e932200a9a51527568b13022edb660440b41d3beacee79e93daea",
+  "scannerVersion": "2.5.3"
+}

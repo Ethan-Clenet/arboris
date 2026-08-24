@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:54:26.621470+00:00",
+  "scanMode": "static",
+  "skillName": "aibast-cost-analysis",
+  "contentHash": "f453dc562ba509f61acc5b85759402d2b11d30ea33a66abb71e1861b3bfd541c",
+  "scannerVersion": "2.5.3"
+}

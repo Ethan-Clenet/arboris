@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:10:22.717505+00:00",
+  "scanMode": "static",
+  "skillName": "generating-upgrade-test-baseline",
+  "contentHash": "a319782726f8861abfb41e74dbae5a21116cb2447fe0cc77a83c66e502ed698c",
+  "scannerVersion": "2.5.3"
+}

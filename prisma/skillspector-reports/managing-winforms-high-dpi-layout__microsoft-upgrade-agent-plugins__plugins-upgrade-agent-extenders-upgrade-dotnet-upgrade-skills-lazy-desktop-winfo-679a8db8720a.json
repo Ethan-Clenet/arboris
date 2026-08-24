@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:13:08.414708+00:00",
+  "scanMode": "static",
+  "skillName": "managing-winforms-high-dpi-layout",
+  "contentHash": "e1140ac2aa6352aa8751b0fb00a21220db168662392fd1cbf838091c70685cf3",
+  "scannerVersion": "2.5.3"
+}

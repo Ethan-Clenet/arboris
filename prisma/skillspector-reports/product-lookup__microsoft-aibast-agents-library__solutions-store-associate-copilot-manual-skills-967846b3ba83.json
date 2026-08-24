@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:19:48.162194+00:00",
+  "scanMode": "static",
+  "skillName": "verified-product-lookup-draft",
+  "contentHash": "039b6daee82b058223455d5984ce3503d0f3b71bba60d9e2ebe9e303bbea4d6e",
+  "scannerVersion": "2.5.3"
+}

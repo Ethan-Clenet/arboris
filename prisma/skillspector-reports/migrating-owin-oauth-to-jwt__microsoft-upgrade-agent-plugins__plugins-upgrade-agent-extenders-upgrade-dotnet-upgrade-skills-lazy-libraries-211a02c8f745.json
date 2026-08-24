@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:25.596844+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-owin-oauth-to-jwt",
+  "contentHash": "3c952011460af311ce7ee6ee9e56e0341ffdcfed3cafe20693993f3b5b6af54f",
+  "scannerVersion": "2.5.3"
+}

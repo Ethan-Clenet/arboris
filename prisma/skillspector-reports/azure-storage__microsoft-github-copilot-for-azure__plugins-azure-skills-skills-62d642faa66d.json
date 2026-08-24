@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:02:48.548465+00:00",
+  "scanMode": "static",
+  "skillName": "azure-storage",
+  "contentHash": "6ca563967fad0ecb47926bbdf1e4b313f3d1ad559465d2cb90d575592f4dd255",
+  "scannerVersion": "2.5.3"
+}

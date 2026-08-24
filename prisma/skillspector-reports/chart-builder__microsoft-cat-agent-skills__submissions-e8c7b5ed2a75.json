@@ -1,0 +1,27 @@
+{
+  "riskScore": 3,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "AST7",
+      "category": "Dangerous Code Execution",
+      "pattern": "Dynamic attribute access via getattr()",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "    missing = [f\"--{n}\" for n in names if getattr(args, n) in (None, \"\")]",
+      "explanation": "Dynamic getattr() with a non-literal attribute name can access arbitrary object attributes, potentially bypassing access controls.",
+      "remediation": "Replace dynamic getattr() with explicit attribute access or a dictionary lookup with an allowlist of permitted attributes.",
+      "location": {
+        "file": "scripts/charts.py",
+        "start_line": 425
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:04:26.720491+00:00",
+  "scanMode": "static",
+  "skillName": "chart-builder",
+  "contentHash": "2111af0dd51bd50dd942170ff65580037f140eb0508ccd2ea13beffc169dc40b",
+  "scannerVersion": "2.5.3"
+}

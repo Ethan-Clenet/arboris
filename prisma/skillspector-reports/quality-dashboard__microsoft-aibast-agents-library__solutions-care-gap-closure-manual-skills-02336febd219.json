@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:20:02.305432+00:00",
+  "scanMode": "static",
+  "skillName": "care-gap-closure-quality-dashboard",
+  "contentHash": "e2267b9e14e60280207f67edd176c9286eef2dc6db16bbcf0be3695952a14b70",
+  "scannerVersion": "2.5.3"
+}

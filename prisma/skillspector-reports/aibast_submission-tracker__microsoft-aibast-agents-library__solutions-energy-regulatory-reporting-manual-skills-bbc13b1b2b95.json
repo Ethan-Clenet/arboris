@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:59:01.240766+00:00",
+  "scanMode": "static",
+  "skillName": "energy-regulatory-reporting-submission-tracker",
+  "contentHash": "34aebd0d6883646d767313e8c632d385336c9bb872d2d4b1e816c9b05dbcbb2e",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:09:27.778484+00:00",
+  "scanMode": "static",
+  "skillName": "eu-greenwashing-analysis",
+  "contentHash": "be114d63388a1e49fe934f2bbf1aac7c9acad112e86086dee45745bdf39f0df4",
+  "scannerVersion": "2.5.3"
+}

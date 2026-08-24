@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:57:04.710136+00:00",
+  "scanMode": "static",
+  "skillName": "permit-status-and-zoning-detail",
+  "contentHash": "d3cf4ba487d6a67943948abd29d8a693a5f7e2e7a0ad36b09fd9126448d24c5c",
+  "scannerVersion": "2.5.3"
+}

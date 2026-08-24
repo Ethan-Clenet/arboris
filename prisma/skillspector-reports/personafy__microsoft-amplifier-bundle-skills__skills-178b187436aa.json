@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "Write the skill mirroring the siblings exactly: identity (defined by negation — \"not X, not\nY\"), When-to-Use framed as a **cross-stage lens, not a stage-gate**, the tone contract\n(required / disallowe",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 106
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:18:27.761709+00:00",
+  "scanMode": "static",
+  "skillName": "personafy",
+  "contentHash": "126ccf0b2a904f7ea1d2bdc13d90874115df1ed648d5b47a3d732b7b8dca01e0",
+  "scannerVersion": "2.5.3"
+}

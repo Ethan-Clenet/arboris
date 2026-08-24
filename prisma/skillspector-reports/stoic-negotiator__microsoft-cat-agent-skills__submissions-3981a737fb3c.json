@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:23:35.231808+00:00",
+  "scanMode": "static",
+  "skillName": "stoic-negotiator",
+  "contentHash": "9f82c8adb4146703ca5d46eb18c9ab5fa943257d3dada40de31ca09e6de0c7dd",
+  "scannerVersion": "2.5.3"
+}

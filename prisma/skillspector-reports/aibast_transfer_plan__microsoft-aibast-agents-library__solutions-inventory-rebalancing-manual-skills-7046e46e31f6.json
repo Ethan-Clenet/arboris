@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:59:40.925637+00:00",
+  "scanMode": "static",
+  "skillName": "aibast-transfer-plan",
+  "contentHash": "a7e2c97d7985d0a2c0533401a6ae7be87cfc1bbbf6d69719331e79fd004ce40e",
+  "scannerVersion": "2.5.3"
+}

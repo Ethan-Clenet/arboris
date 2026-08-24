@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:48:08.473104+00:00",
+  "scanMode": "static",
+  "skillName": "deal-progression-acceleration",
+  "contentHash": "5ee9f4ce25fbe8bbe829ec80e61d537e96f99c19cb4f67443f44e1410af506a0",
+  "scannerVersion": "2.5.3"
+}

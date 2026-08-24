@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:23:21.596060+00:00",
+  "scanMode": "static",
+  "skillName": "account-intelligence-stakeholder-map",
+  "contentHash": "b28b74222468dc6a899000c0a9ed5be02f0c79b81f4c6841b60a81490369a73a",
+  "scannerVersion": "2.5.3"
+}

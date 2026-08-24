@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:07:37.251922+00:00",
+  "scanMode": "static",
+  "skillName": "creating-winforms-custom-controls",
+  "contentHash": "7ec99b0258de5d45cf0a9b9edb30eede55e4a51a295b9a66bfbe305119a5adde",
+  "scannerVersion": "2.5.3"
+}

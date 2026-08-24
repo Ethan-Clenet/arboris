@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:56:48.836482+00:00",
+  "scanMode": "static",
+  "skillName": "utility-billing-assistance-payment-plan",
+  "contentHash": "4b60552b9e4fb4f803c6952730c1043bd7ce1c78b8a3c832064b1aa4b982fb7c",
+  "scannerVersion": "2.5.3"
+}

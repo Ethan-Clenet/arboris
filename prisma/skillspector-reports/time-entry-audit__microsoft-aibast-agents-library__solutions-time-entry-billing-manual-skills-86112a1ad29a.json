@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:24:06.633758+00:00",
+  "scanMode": "static",
+  "skillName": "time-entry-audit",
+  "contentHash": "6c4a6bbb7c2b733aa61a79e73d4a8f3d9bbe4eec1f8cd3c81d425cc22ee174b9",
+  "scannerVersion": "2.5.3"
+}

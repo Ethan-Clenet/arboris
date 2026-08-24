@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:17:33.502862+00:00",
+  "scanMode": "static",
+  "skillName": "newtonsoft-json-migration",
+  "contentHash": "2a35edfa6e06d302a4a9f8d6086a1b4fd45035c19c17077c9f6dd29e6b224ef0",
+  "scannerVersion": "2.5.3"
+}

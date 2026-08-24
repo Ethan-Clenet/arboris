@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:17:16.268804+00:00",
+  "scanMode": "static",
+  "skillName": "modernizing-csharp-version",
+  "contentHash": "8dbb7a468f27abf5f158e83cd47f43293654ccbf8fae8bcc41824892d5dc98ee",
+  "scannerVersion": "2.5.3"
+}

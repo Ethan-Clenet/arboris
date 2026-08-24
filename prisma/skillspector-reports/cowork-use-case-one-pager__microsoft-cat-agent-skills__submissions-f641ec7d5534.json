@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:06:28.904260+00:00",
+  "scanMode": "static",
+  "skillName": "cowork-use-case-one-pager",
+  "contentHash": "8a8d7feb9d3ad853fb516e6a90f9e65f6985772444ad76448d15dcac114d6990",
+  "scannerVersion": "2.5.3"
+}

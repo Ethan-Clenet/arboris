@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:15:57.146553+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-mvc-razor-views",
+  "contentHash": "a1857a32ede249b6552742f73bab91e68257567021678554097f446de46a6257",
+  "scannerVersion": "2.5.3"
+}

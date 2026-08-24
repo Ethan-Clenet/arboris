@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:02:41.799112+00:00",
+  "scanMode": "static",
+  "skillName": "azure-resource-lookup",
+  "contentHash": "680d14bc95081c1a73851f2b236cc8a07457107f4771e4b675ae359a35d49005",
+  "scannerVersion": "2.5.3"
+}

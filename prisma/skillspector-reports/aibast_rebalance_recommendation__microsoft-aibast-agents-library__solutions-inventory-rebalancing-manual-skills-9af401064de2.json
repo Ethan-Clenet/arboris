@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:57:33.066752+00:00",
+  "scanMode": "static",
+  "skillName": "aibast-rebalance-recommendation",
+  "contentHash": "17939ef9bb1854310a01e8f9211dc15195160f8cb6fc800096989d1ccbe233e5",
+  "scannerVersion": "2.5.3"
+}

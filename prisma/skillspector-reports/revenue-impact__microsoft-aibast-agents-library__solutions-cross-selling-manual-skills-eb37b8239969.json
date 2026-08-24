@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:20:57.162320+00:00",
+  "scanMode": "static",
+  "skillName": "cross-selling-revenue-impact",
+  "contentHash": "aa64b15ef96a5027aae075c4b48af3d2cbcc0a359daee9cc2dcd1aa620b56091",
+  "scannerVersion": "2.5.3"
+}

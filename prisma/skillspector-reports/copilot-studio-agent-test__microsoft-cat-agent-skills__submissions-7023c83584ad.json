@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:46:47.197016+00:00",
+  "scanMode": "static",
+  "skillName": "copilot-studio-agent-test",
+  "contentHash": "d3df2b72bb1410123a849f1ad028e503e097c0d403ad0c3aaf79e7ec3ff09044",
+  "scannerVersion": "2.5.3"
+}

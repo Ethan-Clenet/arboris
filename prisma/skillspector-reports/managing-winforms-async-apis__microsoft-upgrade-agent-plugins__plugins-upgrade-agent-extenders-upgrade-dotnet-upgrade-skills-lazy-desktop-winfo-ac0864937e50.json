@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:12:57.589029+00:00",
+  "scanMode": "static",
+  "skillName": "managing-winforms-async-apis",
+  "contentHash": "18e2d4830f87daf34eb122aeb2867bbb9e47d317cd951b4094ef29db5695f764",
+  "scannerVersion": "2.5.3"
+}

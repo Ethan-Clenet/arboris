@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:04:03.078055+00:00",
+  "scanMode": "static",
+  "skillName": "synthetic-campaign-attribution-review",
+  "contentHash": "a979ebcd48b9fc9d3dd5450b23adfaed49f736b20dc99e131566acdccc48b20c",
+  "scannerVersion": "2.5.3"
+}

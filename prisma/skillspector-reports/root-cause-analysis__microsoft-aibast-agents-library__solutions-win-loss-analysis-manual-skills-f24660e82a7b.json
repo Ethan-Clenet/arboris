@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:21:20.548856+00:00",
+  "scanMode": "static",
+  "skillName": "win-loss-analysis-root-cause-analysis",
+  "contentHash": "a78398d5a286fd95746ac43a1fafccd5f87e14af2a452ed27532cd3b934a4e54",
+  "scannerVersion": "2.5.3"
+}

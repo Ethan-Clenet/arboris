@@ -1,0 +1,27 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "systemd or launchd runs your tool, PATH is minimal. Capture `os.environ.get(\"PATH\")` at install",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 221
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:04:47.879489+00:00",
+  "scanMode": "static",
+  "skillName": "cli-packaging-patterns",
+  "contentHash": "c100a5081bee7c35fd38692c7a757e62fe3a04bcecb519f6bda8d979fd506ccb",
+  "scannerVersion": "2.5.3"
+}

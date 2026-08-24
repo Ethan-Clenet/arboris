@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:22:38.331097+00:00",
+  "scanMode": "static",
+  "skillName": "sales-qualification-setup-tracking",
+  "contentHash": "7d091887fe8f41e7d7f45049dbf242c12255b27b6c9d1e9dc602a59fef45a9b5",
+  "scannerVersion": "2.5.3"
+}

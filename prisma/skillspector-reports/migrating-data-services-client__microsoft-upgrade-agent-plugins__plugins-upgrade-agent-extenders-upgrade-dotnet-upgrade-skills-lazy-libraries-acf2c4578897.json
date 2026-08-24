@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:53.943372+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-data-services-client",
+  "contentHash": "80ffd70b4ff7d248e5b15db5b80805b4c7e26c87bf498a1d9929dabe8262fb69",
+  "scannerVersion": "2.5.3"
+}

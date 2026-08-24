@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:07:11.338339+00:00",
+  "scanMode": "static",
+  "skillName": "create-prompt",
+  "contentHash": "ab7c4f818a91d2a9ed336e680daff843806d43ad910ceb85271f8cdf26cae834",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:16.765118+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-azure-functions-startup",
+  "contentHash": "4d11e5154d503364a377b136fb83562466a4a9548620e919c5fee84d63cad1d8",
+  "scannerVersion": "2.5.3"
+}

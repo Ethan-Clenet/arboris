@@ -14,7 +14,7 @@ import SecurityBadge from '#/components/SecurityBadge'
 import NvidiaLogo from '#/components/NvidiaLogo'
 import PublisherLogo from '#/components/PublisherLogo'
 import { hasPublisherLogo } from '#/lib/publisher-logos'
-import { seoHead, entityDescription, skillSeoTitle } from '#/lib/seo'
+import { seoHead, entityDescription, skillSeoTitle, isIndexableSkill } from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/$id')({
   loader: async ({ params }) => {
@@ -27,12 +27,13 @@ export const Route = createFileRoute('/skills/$id')({
   },
   head: ({ loaderData }) => {
     const skill = loaderData?.skill
-    if (!skill) return seoHead({ title: 'Skill', path: '/skills' })
+    if (!skill) return seoHead({ title: 'Skill', path: '/skills', noIndex: true })
     return seoHead({
       title: skillSeoTitle(skill.id),
       path: `/skills/${skill.id}`,
       description: entityDescription(skill.tag.fr, 'skill', skill.id),
       type: 'article',
+      noIndex: !isIndexableSkill(skill),
       breadcrumbs: [
         { name: 'Accueil', path: '/' },
         { name: 'Skills', path: '/skills' },

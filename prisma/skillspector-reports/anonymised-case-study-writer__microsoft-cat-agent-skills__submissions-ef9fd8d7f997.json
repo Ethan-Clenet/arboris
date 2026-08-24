@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:00:07.404426+00:00",
+  "scanMode": "static",
+  "skillName": "anonymised-case-study-writer",
+  "contentHash": "e5ebce4c0dc5d8fb9879db74939f5a77de8834fa112bc699921f147e050be610",
+  "scannerVersion": "2.5.3"
+}

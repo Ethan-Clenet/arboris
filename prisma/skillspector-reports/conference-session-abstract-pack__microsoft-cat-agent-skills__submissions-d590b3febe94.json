@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:05:26.364586+00:00",
+  "scanMode": "static",
+  "skillName": "conference-session-abstract-pack",
+  "contentHash": "7a89b0b6f284982da8fad9906701e6d1e2834cf109474570901476cf80f9f638",
+  "scannerVersion": "2.5.3"
+}

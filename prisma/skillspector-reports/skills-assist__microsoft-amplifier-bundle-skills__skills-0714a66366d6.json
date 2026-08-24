@@ -1,0 +1,27 @@
+{
+  "riskScore": 21,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA1",
+      "category": "Rogue Agent",
+      "pattern": "Self-Modification",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "Write skill",
+      "explanation": "Skill modifies its own code, configuration, or behavior at runtime. Self-modification enables an agent to escalate privileges, disable safety constraints, or install persistent backdoors.",
+      "remediation": "Prevent the skill from modifying its own code, SKILL.md, or configuration files. Treat skill files as read-only at runtime.",
+      "location": {
+        "file": "testing-guide.md",
+        "start_line": 66
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:23:08.477605+00:00",
+  "scanMode": "static",
+  "skillName": "skills-assist",
+  "contentHash": "eb49ff141f1e78e14244946f5abc2b76ea6ad0e32cc40ac7b615e8df4a45416a",
+  "scannerVersion": "2.5.3"
+}

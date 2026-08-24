@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:18:41.427183+00:00",
+  "scanMode": "static",
+  "skillName": "plugin-discovery-patterns",
+  "contentHash": "6cb44c98bd67258f858ba8a771dbdf424c4244d639057d9979f31a277f89825a",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:19:54.837083+00:00",
+  "scanMode": "static",
+  "skillName": "python-appservice-deploy",
+  "contentHash": "8808081954e927a1b83656ce29f35b25a353f03ea34c760c231f34820408a745",
+  "scannerVersion": "2.5.3"
+}

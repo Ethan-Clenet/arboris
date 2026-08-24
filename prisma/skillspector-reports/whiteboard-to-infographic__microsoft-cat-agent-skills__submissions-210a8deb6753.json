@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:25:08.835408+00:00",
+  "scanMode": "static",
+  "skillName": "whiteboard-to-infographic",
+  "contentHash": "ee7c56f102f91addb51918ad8d39e24d0e6887c6d26aa03b5a43b6a04bdf3fe1",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:35.013474+00:00",
+  "scanMode": "static",
+  "skillName": "brand-voice-pass",
+  "contentHash": "a77622a49957bfa75448f5645d0c802fd2cb84765d8ae4dfe881c8a35e4411d3",
+  "scannerVersion": "2.5.3"
+}

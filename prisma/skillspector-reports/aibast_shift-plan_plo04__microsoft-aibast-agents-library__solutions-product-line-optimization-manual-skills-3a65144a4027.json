@@ -1,0 +1,27 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "never ask the user",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 52
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T08:58:52.132271+00:00",
+  "scanMode": "static",
+  "skillName": "day-swing-night-production-plan",
+  "contentHash": "05eb0db63dcfed06d8ebb3ba5359283a93e952c04213d28b45aeb93fa102eef7",
+  "scannerVersion": "2.5.3"
+}

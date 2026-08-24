@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:00:36.123177+00:00",
+  "scanMode": "static",
+  "skillName": "aspire-version-upgrade",
+  "contentHash": "71f3516151bd27472ee9f0f764f36c04c5e734e74e4a290f06f150c4c4dadefa",
+  "scannerVersion": "2.5.3"
+}

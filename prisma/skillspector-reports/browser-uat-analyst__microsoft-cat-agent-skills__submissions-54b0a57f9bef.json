@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:41.966092+00:00",
+  "scanMode": "static",
+  "skillName": "browser-uat-analyst",
+  "contentHash": "d89e91f56abda41b60f2abb69913a4c5edfe6e91335abbeec222aa61501eecb0",
+  "scannerVersion": "2.5.3"
+}

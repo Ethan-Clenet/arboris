@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:13:36.364498+00:00",
+  "scanMode": "static",
+  "skillName": "microsoft-ai-platform-advisor",
+  "contentHash": "16e7ee5d5e8747caaa9d99e158b65bbf398a78651210f1ba6538a2a09e4db812",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:04:22.884659+00:00",
+  "scanMode": "static",
+  "skillName": "aggregate-channel-performance-review",
+  "contentHash": "a1daa5cb54b3a01e5832e96a293a41354552dfe9c60cdc541960d491f8201250",
+  "scannerVersion": "2.5.3"
+}

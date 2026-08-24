@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:52:26.919869+00:00",
+  "scanMode": "static",
+  "skillName": "agent-evaluation-designer",
+  "contentHash": "fb60c9854415609372ceab1edd96de0e4af39158fbfcd02513b24067db5ef016",
+  "scannerVersion": "2.5.3"
+}

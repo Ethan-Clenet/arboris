@@ -9,6 +9,7 @@
  *   node scripts/skillspector-scan.mjs --force           # rescanner même si rapport frais
  *   node scripts/skillspector-scan.mjs --no-db           # fichiers seulement
  *   node scripts/skillspector-scan.mjs --resolve         # resolve semver avant scan
+ *   node scripts/skillspector-scan.mjs --prefix __microsoft-
  *
  * Prérequis : image Docker `skillspector` ou `skillspector:<version>`.
  * Skip si contentHash + scannerVersion inchangés (sauf --force).
@@ -16,7 +17,9 @@
  */
 import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { readdir, readFile, writeFile, mkdir, stat } from 'node:fs/promises'
+import { existsSync } from 'node:fs'
+import { cp, mkdtemp, readdir, readFile, rm, writeFile, mkdir, stat } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
@@ -33,6 +36,7 @@ function parseArgs(argv) {
   let force = false
   let noDb = false
   let resolve = false
+  let prefix = null
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i]
     if (arg === '--limit') {
@@ -43,6 +47,8 @@ function parseArgs(argv) {
       noDb = true
     } else if (arg === '--resolve') {
       resolve = true
+    } else if (arg === '--prefix') {
+      prefix = argv[++i]
     } else if (arg.startsWith('-')) {
       console.error(`Option inconnue: ${arg}`)
       process.exit(1)
@@ -50,7 +56,7 @@ function parseArgs(argv) {
       skills.push(arg)
     }
   }
-  return { skills, limit, force, noDb, resolve }
+  return { skills, limit, force, noDb, resolve, prefix }
 }
 
 function riskToSafetyScore(riskScore) {
@@ -62,7 +68,7 @@ function normalizeRecommendation(raw) {
   const value = String(raw ?? '').trim().toUpperCase()
   if (value === 'SAFE' || value === 'ALLOW' || value === 'PASS') return 'SAFE'
   if (value === 'CAUTION' || value === 'WARN' || value === 'WARNING') return 'CAUTION'
-  if (value === 'UNSAFE' || value === 'BLOCK' || value === 'FAIL' || value === 'DANGEROUS') return 'UNSAFE'
+  if (value === 'UNSAFE' || value === 'BLOCK' || value === 'FAIL' || value === 'DANGEROUS' || value === 'DO_NOT_INSTALL') return 'UNSAFE'
   return 'UNKNOWN'
 }
 
@@ -176,39 +182,57 @@ function resolveImageName(scannerVersion) {
   return 'skillspector'
 }
 
-function runDockerScan(image, skillId) {
-  return new Promise((resolvePromise, reject) => {
-    const outName = `${skillId}.raw.json`
-    const args = [
-      'run',
-      '--rm',
-      '-v',
-      `${skillsDir}:/scan/skills:ro`,
-      '-v',
-      `${reportsDir}:/scan/out`,
-      image,
-      'scan',
-      `./skills/${skillId}`,
-      '--no-llm',
-      '--format',
-      'json',
-      '--output',
-      `/scan/out/${outName}`,
-    ]
-    const child = spawn('docker', args, { stdio: ['ignore', 'pipe', 'pipe'] })
-    let stderr = ''
-    child.stderr.on('data', (chunk) => {
-      stderr += chunk.toString()
+async function runDockerScan(image, skillId) {
+  const staging = await mkdtemp(join(tmpdir(), 'skillspector-'))
+  const stagedSkill = join(staging, 'skill')
+  const outName = `${skillId}.raw.json`
+  try {
+    await cp(join(skillsDir, skillId), stagedSkill, { recursive: true })
+    await new Promise((resolvePromise, reject) => {
+      const args = [
+        'run',
+        '--rm',
+        '-v',
+        `${stagedSkill}:/scan/skill:ro`,
+        '-v',
+        `${reportsDir}:/scan/out`,
+        image,
+        'scan',
+        './skill',
+        '--no-llm',
+        '--format',
+        'json',
+        '--output',
+        `/scan/out/${outName}`,
+      ]
+      const child = spawn('docker', args, { stdio: ['ignore', 'pipe', 'pipe'] })
+      let stderr = ''
+      let stdout = ''
+      child.stderr.on('data', (chunk) => {
+        stderr += chunk.toString()
+      })
+      child.stdout.on('data', (chunk) => {
+        stdout += chunk.toString()
+      })
+      child.on('error', reject)
+      child.on('close', (code) => {
+        const outPath = join(reportsDir, outName)
+        // SkillSpector exit 1 when risk is high, but still writes a valid JSON report.
+        if (existsSync(outPath)) {
+          resolvePromise()
+          return
+        }
+        if (code !== 0) {
+          reject(new Error(`docker exit ${code}: ${(stderr || stdout).trim() || 'scan failed'}`))
+          return
+        }
+        resolvePromise()
+      })
     })
-    child.on('error', reject)
-    child.on('close', (code) => {
-      if (code !== 0) {
-        reject(new Error(`docker exit ${code}: ${stderr.trim() || 'scan failed'}`))
-        return
-      }
-      resolvePromise(join(reportsDir, outName))
-    })
-  })
+    return join(reportsDir, outName)
+  } finally {
+    await rm(staging, { recursive: true, force: true })
+  }
 }
 
 async function upsertDb(skillId, report, safetyScore) {
@@ -262,7 +286,7 @@ async function ensureImage(image) {
 }
 
 async function main() {
-  const { skills: only, limit, force, noDb, resolve } = parseArgs(process.argv.slice(2))
+  const { skills: only, limit, force, noDb, resolve, prefix } = parseArgs(process.argv.slice(2))
   await mkdir(reportsDir, { recursive: true })
 
   let scannerVersion = await readPinnedVersion()
@@ -277,6 +301,7 @@ async function main() {
   await ensureImage(image)
 
   let ids = only.length ? only : await listSkillDirs()
+  if (prefix) ids = ids.filter((id) => id.includes(prefix))
   if (limit != null && Number.isFinite(limit)) ids = ids.slice(0, limit)
 
   console.log(`🔍 SkillSpector static — ${ids.length} skill(s), image=${image}, scanner=${scannerVersion}`)
@@ -285,6 +310,7 @@ async function main() {
   let skipped = 0
   let failed = 0
   let updatedDb = 0
+  const failedIds = []
 
   for (const skillId of ids) {
     const skillPath = join(skillsDir, skillId)
@@ -293,6 +319,7 @@ async function main() {
     } catch {
       console.warn(`✗ ${skillId} — SKILL.md manquant`)
       failed++
+      failedIds.push(skillId)
       continue
     }
 
@@ -342,12 +369,17 @@ async function main() {
       console.log(`ÉCHEC`)
       console.error(`  ${error.message}`)
       failed++
+      failedIds.push(skillId)
     }
   }
 
   console.log(
     `\n✅ Terminé : ${scanned} scannés, ${skipped} inchangés, ${failed} échecs, ${updatedDb} mis à jour en DB`,
   )
+  if (failedIds.length) {
+    console.log(`✗ Non scannables (${failedIds.length}) :`)
+    for (const id of failedIds) console.log(`  - ${id}`)
+  }
   console.log(`📁 Rapports : ${reportsDir}`)
 }
 

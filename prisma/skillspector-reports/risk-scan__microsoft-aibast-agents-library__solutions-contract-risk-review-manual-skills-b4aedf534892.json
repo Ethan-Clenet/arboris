@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:21:17.252417+00:00",
+  "scanMode": "static",
+  "skillName": "contract-portfolio-risk-scan",
+  "contentHash": "c1341c3139ce835c210542d0f22f3f2adeeeef24864328fb444acbc950510dc5",
+  "scannerVersion": "2.5.3"
+}

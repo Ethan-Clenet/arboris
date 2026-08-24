@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:59:50.804206+00:00",
+  "scanMode": "static",
+  "skillName": "asset-maintenance-forecast-work-order-plan",
+  "contentHash": "0e857a9ec9bf9673e3f8af4661741805ca6f5e041c823de1ea08dd34dfc43da4",
+  "scannerVersion": "2.5.3"
+}

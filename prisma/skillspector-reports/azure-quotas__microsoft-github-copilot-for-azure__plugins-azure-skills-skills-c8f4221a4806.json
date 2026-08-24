@@ -1,0 +1,27 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "auto-approve",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 64
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:02:34.009465+00:00",
+  "scanMode": "static",
+  "skillName": "azure-quotas",
+  "contentHash": "bf334e4f2256cfbfda989f0c7d6120352b3327b7d1280e5ac47e13ee83026a7e",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,124 @@
+{
+  "riskScore": 25,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 8,
+  "issues": [
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    return subprocess.run(cmd, cwd=project_dir).returncode",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "references/languages/java/scripts/upgrade_bom.py",
+        "start_line": 195
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    return subprocess.run(cmd, cwd=project_dir).returncode",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "references/languages/java/scripts/upgrade_bom.py",
+        "start_line": 433
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!--\n  This is the upgrade plan template for Azure SDK migration.\n  RUN_ID should be replaced with the actual run identifier.\n\n  ## PLANNING RULES\n\n  !!! DON'T REMOVE THIS COMMENT BLOCK BEFORE FINAL P",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/languages/java/templates/PLAN_TEMPLATE.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!--\n  This is the upgrade progress tracker for Azure SDK migration.\n  Each step from plan.md should be tracked here with status, changes, verification results, and TODOs.\n\n  ## EXECUTION RULES\n\n  !!!",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/languages/java/templates/PROGRESS_TEMPLATE.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!--\n  This is the upgrade summary generated after successful completion of the Azure SDK migration.\n  It documents the final results, changes made, and lessons learned.\n\n  ## SUMMARY RULES\n\n  !!! DON",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/languages/java/templates/SUMMARY_TEMPLATE.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- replace with actual completion timestamp -->\n- **Plan Location**: `plan.md`\n- **Progress Location**: `progress.md`\n\n## Upgrade Result\n\n<!--\n  Compare final compile/test results against baseline.\n",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/languages/java/templates/SUMMARY_TEMPLATE.md",
+        "start_line": 32
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!--\n  List all commits made during the upgrade with their short IDs and messages.\n\n  SAMPLE:\n  | Commit  | Message                                                                |\n  | ------- | -----",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/languages/java/templates/SUMMARY_TEMPLATE.md",
+        "start_line": 85
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:02:53.772163+00:00",
+  "scanMode": "static",
+  "skillName": "azure-upgrade",
+  "contentHash": "60bc16dbc3515fc1cd3135f24a477a845048a3e330cc15c7df34e6f2e662d2af",
+  "scannerVersion": "2.5.3"
+}

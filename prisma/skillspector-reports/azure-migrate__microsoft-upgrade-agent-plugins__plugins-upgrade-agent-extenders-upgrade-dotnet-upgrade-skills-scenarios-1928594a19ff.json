@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:02:20.324602+00:00",
+  "scanMode": "static",
+  "skillName": "azure-migrate",
+  "contentHash": "1a13ccddcc1e0234207b18f9b57eae6ec5b19b5212ae869fdb5951d0b013f1ad",
+  "scannerVersion": "2.5.3"
+}

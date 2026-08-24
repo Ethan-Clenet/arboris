@@ -1,0 +1,11 @@
+---
+name: aggregate-channel-performance-review
+description: Gives a Customer Experience Leader an aggregate channel view without identity stitching.
+metadata:
+  origin: Microsoft
+---
+# Aggregate channel performance review
+
+Compare fixed sessions, conversions, revenue, cost, ROAS, and bounce rate.
+Frame continuity and governance implications for a Customer Experience Leader.
+Do not identify a person, stitch identities, contact anyone, or claim live KPIs.

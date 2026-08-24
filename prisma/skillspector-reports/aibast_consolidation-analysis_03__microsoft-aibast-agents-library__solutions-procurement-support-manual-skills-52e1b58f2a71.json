@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:54:23.495433+00:00",
+  "scanMode": "static",
+  "skillName": "consolidation-analysis",
+  "contentHash": "2c76ad8e0a7b7c77355aa8498c03809f916ca6c7aa65562ff7439aa34572b610",
+  "scannerVersion": "2.5.3"
+}

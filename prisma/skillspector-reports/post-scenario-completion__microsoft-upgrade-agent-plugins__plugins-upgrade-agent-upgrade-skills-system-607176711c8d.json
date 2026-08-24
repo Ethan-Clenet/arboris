@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:18:52.746193+00:00",
+  "scanMode": "static",
+  "skillName": "post-scenario-completion",
+  "contentHash": "cd2e3acdcdfdd56e83be1b0269888f8fb55949dda2ef892c22cadd5fef525b00",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:20.020170+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-azure-functions-to-v2",
+  "contentHash": "56c3e40274dad3abe02d61f5cc85b5823c65a658239a104cd824b6a1136a6e49",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:48:20.286850+00:00",
+  "scanMode": "static",
+  "skillName": "add-azuredevops",
+  "contentHash": "d287a181e81a948de841b2c182ad9c1ea7c08240bc40b783eb76b4e754936a01",
+  "scannerVersion": "2.5.3"
+}

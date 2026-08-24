@@ -1,0 +1,27 @@
+{
+  "riskScore": 21,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P6",
+      "category": "System Prompt Leakage",
+      "pattern": "Direct Prompt Extraction",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "Output rules",
+      "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+      "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 155
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:10:08.801829+00:00",
+  "scanMode": "static",
+  "skillName": "generate-mcp-app-ui",
+  "contentHash": "b5ad0f1984c27f13b1561c150105cc14b537fa735443a249a2dfe27e99b4c16c",
+  "scannerVersion": "2.5.3"
+}

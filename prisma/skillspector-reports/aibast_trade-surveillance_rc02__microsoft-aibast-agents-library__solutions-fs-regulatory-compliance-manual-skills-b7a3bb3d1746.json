@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:59:34.130836+00:00",
+  "scanMode": "static",
+  "skillName": "trade-reporting-and-execution-surveillance",
+  "contentHash": "2ce8b0ba3dae806dacdb63494c9bfe8e9182d62b8c01bbe4cbe39572b1eeb697",
+  "scannerVersion": "2.5.3"
+}

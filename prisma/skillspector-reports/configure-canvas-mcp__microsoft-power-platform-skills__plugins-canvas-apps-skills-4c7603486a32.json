@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:05:32.796154+00:00",
+  "scanMode": "static",
+  "skillName": "configure-canvas-mcp",
+  "contentHash": "e4bb1b261d77636d1e58e6e04833a3797d001da00040ce5f0241d728fc367af2",
+  "scannerVersion": "2.5.3"
+}

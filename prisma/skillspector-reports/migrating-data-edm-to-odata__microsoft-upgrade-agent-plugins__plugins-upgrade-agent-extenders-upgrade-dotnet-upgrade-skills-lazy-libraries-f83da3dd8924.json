@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:47.570236+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-data-edm-to-odata",
+  "contentHash": "d76d6442e81d877f7410d4c8d14ba2441b67b296ca61ca74d8e8cad423392083",
+  "scannerVersion": "2.5.3"
+}

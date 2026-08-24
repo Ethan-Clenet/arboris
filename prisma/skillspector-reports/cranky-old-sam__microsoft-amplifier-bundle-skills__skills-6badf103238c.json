@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:06:32.177932+00:00",
+  "scanMode": "static",
+  "skillName": "cranky-old-sam",
+  "contentHash": "9749eca9f9d4b3ad51047de2df14cacf76b9f5e188f952ce92b428c1aa0368ac",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: security-review:2.1.goal | category=plan | cancel-leaves=nothing -->\n\n> 🚦 **Gate (plan · security-review:2.1.goal):** Capture the review goal — choice branches into one of three sub-skill s",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 99
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:21:58.390520+00:00",
+  "scanMode": "static",
+  "skillName": "security-review",
+  "contentHash": "e78cc5a49a698a246ac29c4d2cea4c74cf60e70333bd518fe11b1f4fbdc94a52",
+  "scannerVersion": "2.5.3"
+}

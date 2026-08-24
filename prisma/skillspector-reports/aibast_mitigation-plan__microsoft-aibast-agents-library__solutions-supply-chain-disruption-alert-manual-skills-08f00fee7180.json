@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:56:29.080350+00:00",
+  "scanMode": "static",
+  "skillName": "supply-chain-disruption-alert-mitigation-plan",
+  "contentHash": "64fdde634e004f21de0ad1eabab1fb7b20f6924f151d50bfd6a1dbb3e005c546",
+  "scannerVersion": "2.5.3"
+}

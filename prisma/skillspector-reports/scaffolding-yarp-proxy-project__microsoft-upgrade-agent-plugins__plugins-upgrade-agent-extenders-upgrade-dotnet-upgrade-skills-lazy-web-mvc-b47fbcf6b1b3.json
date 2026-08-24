@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:21:34.945964+00:00",
+  "scanMode": "static",
+  "skillName": "scaffolding-yarp-proxy-project",
+  "contentHash": "a66b8dfaf9a996e2f0f3c11c5e855d34edd049630f36643f64ca8d1996f3cf91",
+  "scannerVersion": "2.5.3"
+}

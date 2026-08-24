@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:08:48.448021+00:00",
+  "scanMode": "static",
+  "skillName": "dotnet-version-upgrade",
+  "contentHash": "0b3fe29a9edc2d0d50bc131590a52becbbfee5b3d862c80fcfb4e2d27973aa18",
+  "scannerVersion": "2.5.3"
+}

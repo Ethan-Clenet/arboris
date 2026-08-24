@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:06.720204+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-aspnet-identity",
+  "contentHash": "1d16d821a0a68eb1c7d84d68d85ce21cdb7eb07827934439bd03ee0ff22a7d51",
+  "scannerVersion": "2.5.3"
+}

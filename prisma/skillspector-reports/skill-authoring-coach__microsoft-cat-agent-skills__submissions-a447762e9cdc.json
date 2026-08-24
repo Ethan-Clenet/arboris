@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:23:01.143778+00:00",
+  "scanMode": "static",
+  "skillName": "skill-authoring-coach",
+  "contentHash": "7dc4a454c90f767b83f861c889a657f566ea378c6e8c94cb69b1bf581dbe4d1e",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:25:18.535823+00:00",
+  "scanMode": "static",
+  "skillName": "winforms-feature-adoption",
+  "contentHash": "b4ba2b825f53368769778bd67b010fabef28958537200b021e2f7647ae016eea",
+  "scannerVersion": "2.5.3"
+}

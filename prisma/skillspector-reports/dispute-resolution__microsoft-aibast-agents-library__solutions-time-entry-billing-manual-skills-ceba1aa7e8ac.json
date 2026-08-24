@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:08:32.417511+00:00",
+  "scanMode": "static",
+  "skillName": "disputed-hours-evidence-brief",
+  "contentHash": "898f44317a1a31cad99d522d64eefe25b33db4e2d5de1f181f2ac145a9623f96",
+  "scannerVersion": "2.5.3"
+}

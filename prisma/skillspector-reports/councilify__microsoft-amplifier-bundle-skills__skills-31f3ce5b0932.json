@@ -1,0 +1,237 @@
+{
+  "riskScore": 44,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 16,
+  "issues": [
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/council-here/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "templates/council-here-orchestrator.SKILL.md.tmpl",
+        "start_line": 4
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/purpose-keeper/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "templates/council-native-lens.SKILL.md.tmpl",
+        "start_line": 5
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/council/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "templates/council-orchestrator.SKILL.md.tmpl",
+        "start_line": 5
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/design-council/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "templates/council-orchestrator.SKILL.md.tmpl",
+        "start_line": 6
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\ncouncilify template: council awareness context (thin pointer, not lens content).\nGround truth: amplifier-bundle-design-council/context/design-council-awareness.md\nFill every {{PLACEHOLDER}}, then",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/awareness.md.tmpl",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\ncouncilify template: council behavior.yaml.\nGround truth: amplifier-bundle-design-council/behaviors/design-council.yaml\nFill every {{PLACEHOLDER}}, then delete this instruction block and the\nsurr",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/behavior.yaml.tmpl",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\ncouncilify template: council bundle.md.\nGround truth: amplifier-bundle-design-council/bundle.md\nFill every {{PLACEHOLDER}}, then delete this instruction block.\n-->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/bundle.md.tmpl",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- NOTE (verified byte-level against amplifier-bundle-design-council/bundle.md):\n  this include omits the .yaml extension even though the actual file on disk\n  is behaviors/{{DOMAIN}}-council.yaml -",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/bundle.md.tmpl",
+        "start_line": 17
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\ncouncilify template: inline council-here orchestrator (the pair to\ncouncil-orchestrator.SKILL.md.tmpl). Ground truth:\n  amplifier-bundle-skills/skills/council-here/SKILL.md\n\nKeep this file's \"Orc",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/council-here-orchestrator.SKILL.md.tmpl",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\ncouncilify template: council-native lens skill.\n\nGround truth this is derived from (re-verify against this if it changes):\n  amplifier-bundle-design-council/skills/purpose-keeper/SKILL.md\n\nThis i",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/council-native-lens.SKILL.md.tmpl",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\n  personafy discipline: ground every claim in real evidence. If mined from a\n  real person/archetype's corpus, cite the corpus and weighting (recent vs\n  long-term). If no corpus exists, mark exp",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/council-native-lens.SKILL.md.tmpl",
+        "start_line": 49
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- 2-4 behaviors is typical; don't pad beyond what's load-bearing. -->\n\n## Verdict Protocol\n\nChoose exactly one verdict:\n- **PASS** — {{what fully satisfies this lens's question}}\n- **CONCERN** — {{",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/council-native-lens.SKILL.md.tmpl",
+        "start_line": 86
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\ncouncilify template: fork-mode council orchestrator.\n\nGround truth this is derived from (re-verify against these if either changes):\n  - amplifier-bundle-skills/skills/council/SKILL.md           ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/council-orchestrator.SKILL.md.tmpl",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- ROSTER SHAPE A — mandatory + conditional (use if some lenses only apply to\n     certain target shapes, like /council's user-advocate/tester-breaker). -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/council-orchestrator.SKILL.md.tmpl",
+        "start_line": 94
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- ROSTER SHAPE B — all mandatory (use if every lens applies to every target\n     in this domain and the bench is small, like /design-council). Delete\n     Shape A above if using this shape instead.",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/council-orchestrator.SKILL.md.tmpl",
+        "start_line": 115
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- REUSED_LENSES_NOTE example (only include if any lens is reused\ncross-bundle, the restless-old-brian-from-made-support precedent):\n\"**{{reused-lens}}** currently lives in `{{owning-org}}/{{owning-",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/council-orchestrator.SKILL.md.tmpl",
+        "start_line": 131
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:06:18.644025+00:00",
+  "scanMode": "static",
+  "skillName": "councilify",
+  "contentHash": "6f4c4af4b4d7322ab85f39ccb390b6d9148abfd546f46a66cd98398cf3a64012",
+  "scannerVersion": "2.5.3"
+}

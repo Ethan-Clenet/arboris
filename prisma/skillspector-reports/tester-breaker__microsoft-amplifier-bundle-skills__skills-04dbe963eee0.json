@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:24:00.304007+00:00",
+  "scanMode": "static",
+  "skillName": "tester-breaker",
+  "contentHash": "d140cc1190182e3697fb0cda06d6d5cbcb2468c0db8cef9e4a29883490258004",
+  "scannerVersion": "2.5.3"
+}

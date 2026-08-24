@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:10:44.954434+00:00",
+  "scanMode": "static",
+  "skillName": "client-portfolio-health-dashboard",
+  "contentHash": "0d3a10137aa7cd145e1ad77fb789bf1e294d4165cb8c0d951c1b8272ef12332c",
+  "scannerVersion": "2.5.3"
+}

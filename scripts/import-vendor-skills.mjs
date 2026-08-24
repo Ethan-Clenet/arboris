@@ -3,6 +3,7 @@
  * Importe les skills officiels depuis les repos vendors listés.
  * Usage: node scripts/import-vendor-skills.mjs
  */
+import { createHash } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
 import {
   cpSync,
@@ -27,40 +28,48 @@ const COMMANDS_DIR = join(ROOT, 'prisma', 'commands')
 
 /** @type {Source[]} */
 const SOURCES = [
-  { repo: 'angular/skills', publisher: 'Angular', roots: ['.'] },
-  { repo: 'anthropics/skills', publisher: 'Anthropic', roots: ['skills'] },
-  { repo: 'apollographql/skills', publisher: 'Apollo', roots: ['skills'] },
-  {
-    repo: 'better-auth/skills',
-    publisher: 'Better Auth',
-    roots: ['better-auth', 'security'],
-    commands: ['better-auth/commands'],
-  },
-  { repo: 'auth0/agent-skills', publisher: 'Auth0', roots: ['plugins/auth0/skills'] },
-  { repo: 'browserbase/skills', publisher: 'Browserbase', roots: ['skills'] },
-  { repo: 'cloudflare/skills', publisher: 'Cloudflare', roots: ['skills'] },
-  { repo: 'coderabbitai/skills', publisher: 'CodeRabbit', roots: ['skills'] },
-  { repo: 'cypress-io/ai-toolkit', publisher: 'Cypress', roots: ['skills'] },
-  { repo: 'google-gemini/gemini-skills', publisher: 'Gemini', roots: ['skills'] },
-  {
-    repo: 'google-labs-code/stitch-skills',
-    publisher: 'Stitch',
-    roots: [
-      'plugins/stitch-build/skills',
-      'plugins/stitch-design/skills',
-      'plugins/stitch-utilities/skills',
-    ],
-  },
-  { repo: 'googleworkspace/cli', publisher: 'Google Workspace', roots: ['skills'] },
-  { repo: 'vercel/next.js', publisher: 'Vercel', roots: ['skills'], ref: 'canary' },
-  { repo: 'neondatabase/agent-skills', publisher: 'Neon', roots: ['skills'] },
-  { repo: 'flutter/agent-plugins', publisher: 'Flutter', roots: ['skills'] },
-  {
-    repo: 'figma/mcp-server-guide',
-    publisher: 'Figma',
-    roots: ['skills', 'workflow-skills'],
-  },
+  // Import "top 12" des dépôts Microsoft visibles sur la page créateur.
+  // (Objectif: ajouter un gros pack de skills officiels sans tout le catalogue.)
+  { repo: 'microsoft/aibast-agents-library', publisher: 'Microsoft', roots: ['.'] },
+  { repo: 'microsoft/skills', publisher: 'Microsoft', roots: ['.'] },
+  { repo: 'microsoft/ai-agents-for-beginners', publisher: 'Microsoft', roots: ['.'] },
+  { repo: 'microsoft/upgrade-agent-plugins', publisher: 'Microsoft', roots: ['.'] },
+  { repo: 'microsoft/power-platform-skills', publisher: 'Microsoft', roots: ['.'] },
+  { repo: 'microsoft/cat-agent-skills', publisher: 'Microsoft', roots: ['.'] },
+  { repo: 'microsoft/hve-core', publisher: 'Microsoft', roots: ['.'] },
+  { repo: 'microsoft/vscode', publisher: 'Microsoft', roots: ['.'] },
+  { repo: 'microsoft/amplifier-bundle-skills', publisher: 'Microsoft', roots: ['.'] },
+  { repo: 'microsoft/GitHub-Copilot-for-Azure', publisher: 'Microsoft', roots: ['.'] },
+  { repo: 'microsoft/apm', publisher: 'Microsoft', roots: ['.'] },
+  { repo: 'microsoft/testfx', publisher: 'Microsoft', roots: ['.'] },
 ]
+
+function slugifyForId(input) {
+  return String(input)
+    .trim()
+    .toLowerCase()
+    .replace(/\.md$/i, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+function buildPathBasedSkillId({
+  baseId,
+  repoSlug,
+  relToRepo,
+}) {
+  // Conserve le "baseId" au début (important pour la heuristique de catégorisation),
+  // puis ajoute un suffixe basé sur le chemin relatif pour éviter les collisions (traductions).
+  const relParts = relToRepo.split(/[/\\]/)
+  relParts.pop() // baseId
+  const suffixRaw = relParts.join('/')
+  const suffix = suffixRaw ? slugifyForId(suffixRaw) : ''
+  const hash = createHash('sha256').update(relToRepo).digest('hex').slice(0, 12)
+  const repoChunk = slugifyForId(repoSlug)
+  const suffixChunk = suffix ? `${suffix.slice(0, 80)}-` : ''
+  return `${baseId}__${repoChunk}__${suffixChunk}${hash}`
+}
 
 function sh(cmd, args, opts = {}) {
   execFileSync(cmd, args, { stdio: 'inherit', ...opts })
@@ -182,14 +191,19 @@ function main() {
         const abs = root === '.' ? repoDir : join(repoDir, root)
         const dirs = findSkillDirs(abs)
         for (const dir of dirs) {
-          const id = dir.split(/[/\\]/).pop()
-          if (!id || id.startsWith('.')) continue
+          const baseId = dir.split(/[/\\]/).pop()
+          if (!baseId || baseId.startsWith('.')) continue
           // Meta-outil dupliqué dans plusieurs repos vendors
-          if (id === 'skill-creator' && source.publisher !== 'Anthropic') continue
+          if (baseId === 'skill-creator' && source.publisher !== 'Anthropic') continue
           // Helpers partagés Google Workspace (pas un skill utilisateur)
-          if (id === 'gws-shared') continue
-          copySkillDir(dir, id, source.publisher)
-          imported.push(id)
+          if (baseId === 'gws-shared') continue
+
+          const relToRepo = relative(repoDir, dir)
+          const repoSlug = source.repo // e.g. microsoft/skills
+          const destId = buildPathBasedSkillId({ baseId, repoSlug, relToRepo })
+
+          copySkillDir(dir, destId, source.publisher)
+          imported.push(destId)
           skills++
         }
       }

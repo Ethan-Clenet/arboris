@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:12:51.190226+00:00",
+  "scanMode": "static",
+  "skillName": "managing-package-references",
+  "contentHash": "c0b394cb400aef1b625993ac46cc495dd31fca8a211c3af326ee2d532b08259a",
+  "scannerVersion": "2.5.3"
+}

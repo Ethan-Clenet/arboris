@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:05:40.146007+00:00",
+  "scanMode": "static",
+  "skillName": "container-orchestration-patterns",
+  "contentHash": "8b5551ad394ba9cc598e7afda56c1e074c685e5e3a2c5495d6636b9e4a64b4f6",
+  "scannerVersion": "2.5.3"
+}

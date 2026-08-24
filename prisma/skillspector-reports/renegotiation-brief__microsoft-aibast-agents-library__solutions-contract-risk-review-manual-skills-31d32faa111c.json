@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:20:28.843237+00:00",
+  "scanMode": "static",
+  "skillName": "contract-renegotiation-brief",
+  "contentHash": "4b2899173e7478cbde7b061f390ea0b603545f54e921022b3e01343ac047868d",
+  "scannerVersion": "2.5.3"
+}

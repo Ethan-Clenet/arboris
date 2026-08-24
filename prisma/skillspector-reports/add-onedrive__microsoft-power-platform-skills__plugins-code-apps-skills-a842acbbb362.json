@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:51:55.083876+00:00",
+  "scanMode": "static",
+  "skillName": "add-onedrive",
+  "contentHash": "73aae7a8041d1bcee319b6ed8e7d2c235a36f89b6f05fc8fb54163515cc77f27",
+  "scannerVersion": "2.5.3"
+}

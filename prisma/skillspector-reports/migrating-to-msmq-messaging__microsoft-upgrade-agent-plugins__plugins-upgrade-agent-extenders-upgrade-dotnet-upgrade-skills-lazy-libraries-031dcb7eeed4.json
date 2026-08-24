@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:57.739122+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-to-msmq-messaging",
+  "contentHash": "af3dfec8eef55e70a9aeb21331f86ed5f2b576876727d4ba5c0176fd8982a532",
+  "scannerVersion": "2.5.3"
+}

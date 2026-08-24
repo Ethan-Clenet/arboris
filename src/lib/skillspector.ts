@@ -38,7 +38,7 @@ export function normalizeRecommendation(raw: string | null | undefined): Securit
   const value = (raw ?? '').trim().toUpperCase()
   if (value === 'SAFE' || value === 'ALLOW' || value === 'PASS') return 'SAFE'
   if (value === 'CAUTION' || value === 'WARN' || value === 'WARNING') return 'CAUTION'
-  if (value === 'UNSAFE' || value === 'BLOCK' || value === 'FAIL' || value === 'DANGEROUS') return 'UNSAFE'
+  if (value === 'UNSAFE' || value === 'BLOCK' || value === 'FAIL' || value === 'DANGEROUS' || value === 'DO_NOT_INSTALL') return 'UNSAFE'
   return 'UNKNOWN'
 }
 

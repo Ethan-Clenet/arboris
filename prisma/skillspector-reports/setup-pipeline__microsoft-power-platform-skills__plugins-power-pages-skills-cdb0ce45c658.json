@@ -1,0 +1,55 @@
+{
+  "riskScore": 30,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: setup-pipeline:0.no-plan | category=intent | cancel-leaves=nothing -->\n> 🚦 **Gate (intent · setup-pipeline:0.no-plan):** Fail-closed entry gate when `check-alm-plan.js` returns `exists:fals",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 80
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: setup-pipeline:2.platform | category=plan | cancel-leaves=nothing -->\n> 🚦 **Gate (plan · setup-pipeline:2.platform):** Pick CI/CD platform — PP Pipelines (full) vs GitHub Actions / ADO (com",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 208
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: setup-pipeline:4.4.blocked-attachments | category=consent | cancel-leaves=attachment-block-modified -->\n> 🚦 **Gate (consent · setup-pipeline:4.4.blocked-attachments):** Modify env-level `bl",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 316
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:22:31.055671+00:00",
+  "scanMode": "static",
+  "skillName": "setup-pipeline",
+  "contentHash": "fc06ab8da1d9b9fbbcfec6cc76a979699c7e4b611b3c17ed9531da8c78c09d07",
+  "scannerVersion": "2.5.3"
+}

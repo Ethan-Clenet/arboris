@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:52:19.992743+00:00",
+  "scanMode": "static",
+  "skillName": "add-workiq",
+  "contentHash": "648203affcb45501e5ddba56024d5d93366bfceb600d792ef4efe9083fb049b2",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:15.041229+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-mvc-validation",
+  "contentHash": "069de263efe6a350740535f734ebb1e8c68158dbb368dcfc00f4b808ce754e9d",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:57.671033+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-documentdb-to-cosmos",
+  "contentHash": "f7f400c2feb35394a03c4f0b47ac400ba6ac2fc9f70a52fdc53f61cb93530734",
+  "scannerVersion": "2.5.3"
+}

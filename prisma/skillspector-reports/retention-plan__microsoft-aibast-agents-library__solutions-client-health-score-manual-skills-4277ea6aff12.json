@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:20:50.633765+00:00",
+  "scanMode": "static",
+  "skillName": "client-retention-playbook",
+  "contentHash": "28a9271a309194407439b96ad75aa0b3fc4518031923aa5af9b0c7988281a9dc",
+  "scannerVersion": "2.5.3"
+}

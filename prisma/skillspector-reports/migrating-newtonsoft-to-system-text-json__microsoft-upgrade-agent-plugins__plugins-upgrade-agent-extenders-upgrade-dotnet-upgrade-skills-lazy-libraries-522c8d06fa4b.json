@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:18.446024+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-newtonsoft-to-system-text-json",
+  "contentHash": "1a7001975009b191c8c227146a6ec303d36bb1864f0d9c0b148610311e19ea9e",
+  "scannerVersion": "2.5.3"
+}

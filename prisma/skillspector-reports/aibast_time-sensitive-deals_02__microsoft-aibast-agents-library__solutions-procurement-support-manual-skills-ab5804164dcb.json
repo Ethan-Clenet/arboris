@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:59:30.547999+00:00",
+  "scanMode": "static",
+  "skillName": "time-sensitive-deals",
+  "contentHash": "6eacc6ffde51f89b411cbe70cd8f5d31547745392882f10063fccc7062bfc16b",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:20:47.798196+00:00",
+  "scanMode": "static",
+  "skillName": "restless-old-brian",
+  "contentHash": "88d5dd1b8eb50426367817e695ee0cb353158d638d529e278e79e698922eb6d0",
+  "scannerVersion": "2.5.3"
+}

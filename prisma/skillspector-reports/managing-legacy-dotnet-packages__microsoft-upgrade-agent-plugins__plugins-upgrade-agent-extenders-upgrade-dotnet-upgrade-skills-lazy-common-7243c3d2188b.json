@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:12:47.490874+00:00",
+  "scanMode": "static",
+  "skillName": "managing-legacy-dotnet-packages",
+  "contentHash": "d7dc715e07a16d2f91dea97e19f526869bfcbc02e377891a8541cb4cc7012e43",
+  "scannerVersion": "2.5.3"
+}

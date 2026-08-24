@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:17.520792+00:00",
+  "scanMode": "static",
+  "skillName": "blog-content-auditor",
+  "contentHash": "53d81e4ef4e86fd77883e18ea942473f010f3ff8bb836c5c509e7c8eff4f41aa",
+  "scannerVersion": "2.5.3"
+}

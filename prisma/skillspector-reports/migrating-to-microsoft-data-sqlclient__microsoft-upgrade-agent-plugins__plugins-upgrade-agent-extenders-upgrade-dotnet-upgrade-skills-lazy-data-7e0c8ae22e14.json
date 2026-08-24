@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:53.938345+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-to-microsoft-data-sqlclient",
+  "contentHash": "d1e044f1322371dcd1c1f4d40bb125aa81311f50ecc3e1dcf146ae56c295b235",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:13:04.852705+00:00",
+  "scanMode": "static",
+  "skillName": "managing-winforms-designer-code",
+  "contentHash": "00a4e06ae734a5da8d0c8c727d859e6e2e1a1573e7562794fbb5b98ff558a797",
+  "scannerVersion": "2.5.3"
+}

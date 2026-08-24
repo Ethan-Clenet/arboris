@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:22:49.238144+00:00",
+  "scanMode": "static",
+  "skillName": "sharepoint-list-insight-report-generator",
+  "contentHash": "c478b957b4f5e8f9f1d7bec4bfa997ae2b03a70f05b5307f6c168ebda88fc30a",
+  "scannerVersion": "2.5.3"
+}

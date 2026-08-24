@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:51:44.556380+00:00",
+  "scanMode": "static",
+  "skillName": "add-mcscopilot",
+  "contentHash": "2aad1cb245aba59020f1d13c8822459886e89ecd904db3f8223692809433ec7f",
+  "scannerVersion": "2.5.3"
+}

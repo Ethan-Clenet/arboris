@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:52:40.416780+00:00",
+  "scanMode": "static",
+  "skillName": "ai-first-process-redesign",
+  "contentHash": "87efb2dcdec5cf45218e7bcbac0c7c6286d637e7efdedfaff4e693b9464c70f0",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:53:46.404007+00:00",
+  "scanMode": "static",
+  "skillName": "emission-tracking-carbon-offset-analysis",
+  "contentHash": "57e57353604c4ec29b6319b244e884f600e6fdc2ab88239840137574c921a650",
+  "scannerVersion": "2.5.3"
+}

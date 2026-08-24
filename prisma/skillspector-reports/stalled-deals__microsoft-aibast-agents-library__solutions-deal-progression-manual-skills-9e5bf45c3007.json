@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:23:24.929655+00:00",
+  "scanMode": "static",
+  "skillName": "deal-progression-stalled-deals",
+  "contentHash": "7f141d2dee184a52bd1212a65614a78fd69fa274494326635383bd84ebae7ebc",
+  "scannerVersion": "2.5.3"
+}

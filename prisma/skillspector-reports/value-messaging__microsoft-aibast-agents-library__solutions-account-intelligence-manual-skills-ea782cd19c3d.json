@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:24:45.872290+00:00",
+  "scanMode": "static",
+  "skillName": "account-intelligence-value-messaging",
+  "contentHash": "417e1f0b70a567ecd93ed66e9e2251f37c6c748946a9a762fe3f56d931885ccc",
+  "scannerVersion": "2.5.3"
+}
