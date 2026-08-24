@@ -1,3 +1,4 @@
+import { SECURITY_WARN_SCORE } from '#/lib/skillspector'
 import { absoluteUrl, pageTitle, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '#/lib/site'
 
 export type BreadcrumbItem = {
@@ -117,6 +118,64 @@ export function entityDescription(
   return padMeta(withId, 'Catalogue Arboris pour agents IA.')
 }
 
+/** Aligné sur le seuil « SAFE » SkillSpector (score de sûreté Arboris). */
+export const SEO_INDEX_MIN_SCORE = SECURITY_WARN_SCORE
+
+/**
+ * Éditeurs dont les fiches peuvent entrer dans l’index (marques / first-party).
+ * Community et contributeurs isolés restent noindex.
+ */
+export const SEO_PREMIUM_PUBLISHERS = new Set([
+  'Angular',
+  'Anthropic',
+  'Apollo',
+  'Arboris',
+  'Auth0',
+  'Better Auth',
+  'Brave',
+  'Browserbase',
+  'Cloudflare',
+  'CodeRabbit',
+  'Cypress',
+  'ECC',
+  'Figma',
+  'Flox',
+  'Flutter',
+  'Gemini',
+  'Google Workspace',
+  'Microsoft',
+  'Neon',
+  'Stitch',
+  'Vercel',
+])
+
+export type SkillIndexInput = {
+  id: string
+  score: number | null
+  publisher: string | null
+}
+
+/** Ids issus de l’import vendor (`base__repo__path-hash`), trop pauvres pour la SERP. */
+export function isHashedVendorSkillId(id: string): boolean {
+  return id.includes('__')
+}
+
+export function isPremiumPublisher(publisher: string | null | undefined): boolean {
+  const value = publisher?.trim()
+  if (!value) return true
+  return SEO_PREMIUM_PUBLISHERS.has(value)
+}
+
+/**
+ * Fiche skill indexable : URL propre, score ≥ 70, éditeur premium (ou origin vide).
+ * Le catalogue interne reste complet ; le noindex ne cache rien dans l’UI.
+ */
+export function isIndexableSkill(skill: SkillIndexInput): boolean {
+  if (isHashedVendorSkillId(skill.id)) return false
+  if (skill.score == null || skill.score < SEO_INDEX_MIN_SCORE) return false
+  return isPremiumPublisher(skill.publisher)
+}
+
 /**
  * Fallback root-only (charset/viewport restent dans __root).
  * Pas de canonical ni og:url ici — sinon chaque page hérite d'un 2e canonical vers `/`
@@ -207,8 +266,8 @@ export function seoHead(input: SeoInput = {}) {
   ]
 
   if (input.noIndex) {
-    // noindex seul : le nofollow combiné bloque le PageRank des liens (warning SF « Directives: Nofollow »).
-    meta.push({ name: 'robots', content: 'noindex' })
+    meta.push({ name: 'robots', content: 'noindex, follow' })
+    meta.push({ name: 'googlebot', content: 'noindex, follow' })
   } else {
     meta.push({ name: 'robots', content: 'index, follow, max-image-preview:large' })
     meta.push({ name: 'googlebot', content: 'index, follow' })
