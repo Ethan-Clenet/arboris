@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:13.029151+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-autofac-to-dotnet-di",
+  "contentHash": "e91b449c2b57649962517678bd9f9353fb3adb96f721bee70b4fa209c9831acc",
+  "scannerVersion": "2.5.3"
+}

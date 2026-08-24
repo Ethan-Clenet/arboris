@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:21:03.628206+00:00",
+  "scanMode": "static",
+  "skillName": "win-loss-analysis-revenue-impact",
+  "contentHash": "76d1509e7112bd0a989b7de8f7a783a605165b14244847c19a25129874c774a0",
+  "scannerVersion": "2.5.3"
+}

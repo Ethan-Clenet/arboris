@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:04.603842+00:00",
+  "scanMode": "static",
+  "skillName": "sales-qualification-bant-analysis",
+  "contentHash": "d2264cc9039315f240f620d820ea32903cf408b2282fdba4dd5304242fab91be",
+  "scannerVersion": "2.5.3"
+}

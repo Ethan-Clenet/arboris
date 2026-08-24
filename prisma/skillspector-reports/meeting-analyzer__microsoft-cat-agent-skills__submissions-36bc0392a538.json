@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:13:29.201607+00:00",
+  "scanMode": "static",
+  "skillName": "meeting-analyzer",
+  "contentHash": "b679b28ba1dec6f61b101406ff88de1d2ff161c6c1ff8c614be2d0847f4516fb",
+  "scannerVersion": "2.5.3"
+}

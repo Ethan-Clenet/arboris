@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:18:20.001335+00:00",
+  "scanMode": "static",
+  "skillName": "aggregate-store-coaching-review",
+  "contentHash": "0c76a2c2d70c94a07dd89093383ba2fb3e4e7c9fdfa68d3e50de54f16b55af78",
+  "scannerVersion": "2.5.3"
+}

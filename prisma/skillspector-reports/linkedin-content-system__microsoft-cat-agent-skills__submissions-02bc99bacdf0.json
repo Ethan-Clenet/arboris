@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:12:06.544315+00:00",
+  "scanMode": "static",
+  "skillName": "linkedin-content-system",
+  "contentHash": "1176db64408a298252ff1bc701b6afbd926b42eef179870c191aea7ee66985bd",
+  "scannerVersion": "2.5.3"
+}

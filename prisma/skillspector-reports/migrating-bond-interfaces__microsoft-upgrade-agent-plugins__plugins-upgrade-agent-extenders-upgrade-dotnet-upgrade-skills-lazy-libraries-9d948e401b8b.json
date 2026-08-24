@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:33.287863+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-bond-interfaces",
+  "contentHash": "635e0fa2868ff844724e806143f84dfe8bf54a4540fbee89ccef7fd806436c84",
+  "scannerVersion": "2.5.3"
+}

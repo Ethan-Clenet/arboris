@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:57:25.990817+00:00",
+  "scanMode": "static",
+  "skillName": "purchase-timing",
+  "contentHash": "627a28759a198baf3f6438ef923120aa7a3627cc48e95c296faa2abcdb117690",
+  "scannerVersion": "2.5.3"
+}

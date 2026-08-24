@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:15:29.167296+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-mvc-content-negotiation",
+  "contentHash": "0da2ac336f80b2e95a831d698aae617512c70b2e7fc0ede64b0892cb132953b3",
+  "scannerVersion": "2.5.3"
+}

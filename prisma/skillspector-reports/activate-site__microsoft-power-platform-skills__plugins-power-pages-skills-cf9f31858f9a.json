@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: activate-site:2.2.subdomain | category=plan | cancel-leaves=nothing -->\n> 🚦 **Gate (plan · activate-site:2.2.subdomain):** Confirm or override the generated subdomain. Subdomain is part of ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 151
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T08:48:16.635743+00:00",
+  "scanMode": "static",
+  "skillName": "activate-site",
+  "contentHash": "21896091e5979626e553623f8c2c1223c17f6185d739eb42f347f45230791412",
+  "scannerVersion": "2.5.3"
+}

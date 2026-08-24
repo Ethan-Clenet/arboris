@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:58:14.653311+00:00",
+  "scanMode": "static",
+  "skillName": "risk-dashboard",
+  "contentHash": "d099f647f2bd8a136d07685aa9cde8e89c2cd323cb053fb8b64ee1f59eb212e3",
+  "scannerVersion": "2.5.3"
+}

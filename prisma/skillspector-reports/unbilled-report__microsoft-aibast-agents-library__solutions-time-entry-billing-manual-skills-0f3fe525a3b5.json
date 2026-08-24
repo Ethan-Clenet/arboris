@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:24:30.432438+00:00",
+  "scanMode": "static",
+  "skillName": "month-end-billing-blockers",
+  "contentHash": "d87d1f63aa6938a4f2d1625f2db2cdc59b299af90b309b7db38602b5a23d9975",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:00:28.400958+00:00",
+  "scanMode": "static",
+  "skillName": "patient-intake-appointment-availability",
+  "contentHash": "88040afa39dae362026926c9b78faefcd10bc6268d8e696a5714a09d8336246b",
+  "scannerVersion": "2.5.3"
+}

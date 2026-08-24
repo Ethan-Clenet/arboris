@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:15:07.842940+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-ef6-code-first-to-ef-core",
+  "contentHash": "acc8dc7547a8962cfcbaec93ce23db96be45bcca3894d0ae9a43a1f9cb8f62d2",
+  "scannerVersion": "2.5.3"
+}

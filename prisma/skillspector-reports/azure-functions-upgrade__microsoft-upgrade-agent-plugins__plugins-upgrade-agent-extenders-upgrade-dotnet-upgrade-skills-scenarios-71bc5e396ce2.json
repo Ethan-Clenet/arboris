@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:01:53.551786+00:00",
+  "scanMode": "static",
+  "skillName": "azure-functions-upgrade",
+  "contentHash": "48332a88f53ed322851f1eb6911e5ebb3e22afc7a8b9df136201fc18bbd3865b",
+  "scannerVersion": "2.5.3"
+}

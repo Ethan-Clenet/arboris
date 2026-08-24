@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:13:25.860330+00:00",
+  "scanMode": "static",
+  "skillName": "clinical-notes-summarizer-medication-inventory",
+  "contentHash": "aa846c2742d6a7ecc15b53e8525e0adea2ae9a5fcd8c2811b7e6e3cdfbc6cca1",
+  "scannerVersion": "2.5.3"
+}

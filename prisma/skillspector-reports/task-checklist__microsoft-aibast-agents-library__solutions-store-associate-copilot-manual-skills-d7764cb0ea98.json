@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:23:50.267042+00:00",
+  "scanMode": "static",
+  "skillName": "store-shift-planning-checklist",
+  "contentHash": "bd0b2e0549eb5257edf6125f9906ff2423035bbea60ecbee380a7cb09a108b60",
+  "scannerVersion": "2.5.3"
+}

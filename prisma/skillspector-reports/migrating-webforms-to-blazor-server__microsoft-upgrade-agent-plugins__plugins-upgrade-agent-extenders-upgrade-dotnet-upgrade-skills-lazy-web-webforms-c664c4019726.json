@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Original site stylesheets - preserve BundleConfig.cs order -->\n       <link rel=\"stylesheet\" href=\"css/bootstrap.min.css\" />\n       <link rel=\"stylesheet\" href=\"css/Site.css\" />\n   </head>\n   <bo",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 133
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:17:11.979760+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-webforms-to-blazor-server",
+  "contentHash": "497d894e3ef19da6b87ba6aab680826fce5b85de33a7bc0cf518864409a65d91",
+  "scannerVersion": "2.5.3"
+}

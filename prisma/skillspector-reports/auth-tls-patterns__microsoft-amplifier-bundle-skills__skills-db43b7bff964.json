@@ -1,0 +1,27 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "TM3",
+      "category": "Tool Misuse",
+      "pattern": "Unsafe Defaults",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "world-readable",
+      "explanation": "Tool defaults are unsafe or overly permissive (e.g. disabled TLS verification, no authentication, world-writable permissions). Unsafe defaults widen the attack surface.",
+      "remediation": "Override unsafe defaults with secure settings (verify=True, auth required, restrictive permissions). Review and harden all tool configurations.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 201
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:00:57.870843+00:00",
+  "scanMode": "static",
+  "skillName": "auth-tls-patterns",
+  "contentHash": "fd577a7dbfd941765c28f39092d7a7b80c3ba8caee7dc3eecfb4a6a14c6a2372",
+  "scannerVersion": "2.5.3"
+}

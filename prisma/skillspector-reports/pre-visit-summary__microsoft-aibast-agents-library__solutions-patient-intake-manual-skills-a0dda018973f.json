@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:19:15.259162+00:00",
+  "scanMode": "static",
+  "skillName": "patient-intake-pre-visit-summary",
+  "contentHash": "19a64e8124dca34abb7f50935b753a9d414bd0688a84b69be857db1458697de0",
+  "scannerVersion": "2.5.3"
+}

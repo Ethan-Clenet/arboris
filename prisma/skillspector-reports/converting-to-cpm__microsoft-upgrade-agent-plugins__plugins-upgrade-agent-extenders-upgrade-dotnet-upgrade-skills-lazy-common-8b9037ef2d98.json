@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:05:53.361063+00:00",
+  "scanMode": "static",
+  "skillName": "converting-to-cpm",
+  "contentHash": "6e3f69308c06490e605044d3466f5107e6a35e9924f1d59cdfcf30a18279a7db",
+  "scannerVersion": "2.5.3"
+}

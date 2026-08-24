@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:54:09.787643+00:00",
+  "scanMode": "static",
+  "skillName": "compliance-dashboard-and-audit-readiness",
+  "contentHash": "3280c2d09af19283c70c6b1d543c235934f5f8fe0081b96cbcbdbfdeddb8ce79",
+  "scannerVersion": "2.5.3"
+}

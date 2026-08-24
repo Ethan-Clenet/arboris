@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:59:23.599608+00:00",
+  "scanMode": "static",
+  "skillName": "field-service-dispatch-technician-assignment",
+  "contentHash": "9f621daab757adddbfe96ded29992e2220059887f3776e8d62b332b34c22d0e5",
+  "scannerVersion": "2.5.3"
+}

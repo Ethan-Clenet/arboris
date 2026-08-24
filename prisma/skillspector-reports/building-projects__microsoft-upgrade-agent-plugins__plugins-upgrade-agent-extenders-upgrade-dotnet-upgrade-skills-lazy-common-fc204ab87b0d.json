@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:48.741759+00:00",
+  "scanMode": "static",
+  "skillName": "building-projects",
+  "contentHash": "7b624b1d7e9e5d7f7b9beebfc80a8f0c8a8ceebbfaa9343d9daa3c0916341f94",
+  "scannerVersion": "2.5.3"
+}

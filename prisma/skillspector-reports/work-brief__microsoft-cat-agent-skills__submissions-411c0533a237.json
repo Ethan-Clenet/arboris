@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "create or modify calendar entries.\n\n**Do not @mention anyone.** Name people in plain text. An @mention fires a notification on a colleague who cannot see the brief and has no idea why they were pinged",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 136
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:25:21.823636+00:00",
+  "scanMode": "static",
+  "skillName": "work-brief",
+  "contentHash": "f649567dbaed5a97d812777783dadc8a2226d9ab30878b87b01d7544965c9324",
+  "scannerVersion": "2.5.3"
+}

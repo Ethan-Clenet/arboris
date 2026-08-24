@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:11.531378+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-mvc-system-web-adapters",
+  "contentHash": "efc2eb002ba2ee932ff801943a3eb0dff222c16361660fa436e1c0105b75148c",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:00:04.419748+00:00",
+  "scanMode": "static",
+  "skillName": "proposal-generation-analyze-rfp",
+  "contentHash": "cd9a1aaa6cae665b2349b9c43b3709432fd31d75b2cf3261ec7fe915dab6f0e4",
+  "scannerVersion": "2.5.3"
+}

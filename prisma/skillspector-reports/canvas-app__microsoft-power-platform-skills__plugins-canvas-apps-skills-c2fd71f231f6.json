@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:04:13.197786+00:00",
+  "scanMode": "static",
+  "skillName": "canvas-app",
+  "contentHash": "29037587f24347ced89333d40a86e67e8356eadf9a2d97013f7a37f0a4271857",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:12:22.854263+00:00",
+  "scanMode": "static",
+  "skillName": "manage-desktop-flows",
+  "contentHash": "18d5ab8f879986ac065044c721f13e8e466a0015f7d79a4e1de4e9aa8d286abf",
+  "scannerVersion": "2.5.3"
+}

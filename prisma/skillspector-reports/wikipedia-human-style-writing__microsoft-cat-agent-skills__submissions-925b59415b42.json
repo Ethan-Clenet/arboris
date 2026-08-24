@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:25:11.838062+00:00",
+  "scanMode": "static",
+  "skillName": "wikipedia-human-style-writing",
+  "contentHash": "944646606cafb3c85931b35fbcae322d2e6332897468bbb531c44f1d85d7f9af",
+  "scannerVersion": "2.5.3"
+}

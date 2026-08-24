@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- not-a-gate: ambiguous-intent clarification — sub-prompts under the upcoming Phase 3.4 plan gate; multi-question data-gathering that shapes the recommendation -->\n\nIf the request could map to mult",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 109
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:11:24.035156+00:00",
+  "scanMode": "static",
+  "skillName": "integrate-backend",
+  "contentHash": "f05561e20991546e143cb94e48c3e344ebefdbb4c3696e06f1180815498c6574",
+  "scannerVersion": "2.5.3"
+}

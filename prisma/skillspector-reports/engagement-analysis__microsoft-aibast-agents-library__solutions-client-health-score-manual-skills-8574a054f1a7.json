@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:09:05.719852+00:00",
+  "scanMode": "static",
+  "skillName": "client-engagement-analysis",
+  "contentHash": "5dff86ef03b62968ad58a4ac033b25b9ec6b3333794ddadf147af9baf9ef70a1",
+  "scannerVersion": "2.5.3"
+}

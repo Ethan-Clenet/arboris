@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:00.615777+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-mvc-routing",
+  "contentHash": "672366f5e7235783663c5cb7cb785bc22685384ef1afbbd1c7eebcc517ecdb9c",
+  "scannerVersion": "2.5.3"
+}

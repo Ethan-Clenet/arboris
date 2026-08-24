@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:10:05.301101+00:00",
+  "scanMode": "static",
+  "skillName": "care-gap-closure-gap-analysis",
+  "contentHash": "8722b6e39759421dd4dda4da6760ad62c8e677ee36b03a026232df645c74c2c9",
+  "scannerVersion": "2.5.3"
+}

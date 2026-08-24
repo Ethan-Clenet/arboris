@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:22:53.353596+00:00",
+  "scanMode": "static",
+  "skillName": "sharing-authentication-cookies-katana-interop",
+  "contentHash": "d584b93e2f1b03429afdbb93e1283ee0ef8f7ffd6eacd0f39d637c900b0ec008",
+  "scannerVersion": "2.5.3"
+}

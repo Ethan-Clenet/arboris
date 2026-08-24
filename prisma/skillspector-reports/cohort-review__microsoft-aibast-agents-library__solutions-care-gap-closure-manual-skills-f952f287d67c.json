@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:04:58.342313+00:00",
+  "scanMode": "static",
+  "skillName": "care-gap-closure-cohort-review",
+  "contentHash": "269bff7cc956012a3dfe7b0740338472b982c1cf3aa41269200b4767aad2be2d",
+  "scannerVersion": "2.5.3"
+}

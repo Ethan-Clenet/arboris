@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:58:18.017518+00:00",
+  "scanMode": "static",
+  "skillName": "roadmap-impact",
+  "contentHash": "c3ee06293d349aa89d0ba0dc8db1f13519523ad4b7b66bb14d635f1e3ced8158",
+  "scannerVersion": "2.5.3"
+}

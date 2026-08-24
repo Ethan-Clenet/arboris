@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:17:23.294519+00:00",
+  "scanMode": "static",
+  "skillName": "monitor",
+  "contentHash": "dbcad247dcf7a5841955d1485cd43f333b24cf31712db7b3821ecb54d8113ad0",
+  "scannerVersion": "2.5.3"
+}

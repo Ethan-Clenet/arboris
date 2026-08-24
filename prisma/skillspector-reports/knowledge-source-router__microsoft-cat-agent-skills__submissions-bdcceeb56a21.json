@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:11:59.192108+00:00",
+  "scanMode": "static",
+  "skillName": "knowledge-source-router",
+  "contentHash": "5dbe64d60cd41cb60ece392195b4d53c85f7845d59baa8ab1710e77e4b2017d4",
+  "scannerVersion": "2.5.3"
+}

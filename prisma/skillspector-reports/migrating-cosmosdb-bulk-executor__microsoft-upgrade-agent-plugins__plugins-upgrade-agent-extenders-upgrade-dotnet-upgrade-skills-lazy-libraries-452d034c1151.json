@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:36.940721+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-cosmosdb-bulk-executor",
+  "contentHash": "6e36dee407d1f993f91c2266abac9a5f8b8c359f00e88a7318f5f7216e2f26ba",
+  "scannerVersion": "2.5.3"
+}

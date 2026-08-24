@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:08:04.218800+00:00",
+  "scanMode": "static",
+  "skillName": "proposal-generation-delivery-summary",
+  "contentHash": "bf8b9f1408a3b39eca83b8594ba530b0e67dca10bcb72789b74c15853e2a6056",
+  "scannerVersion": "2.5.3"
+}

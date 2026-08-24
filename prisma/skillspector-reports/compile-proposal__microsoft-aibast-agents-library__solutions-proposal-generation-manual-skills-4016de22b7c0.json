@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:05:12.842001+00:00",
+  "scanMode": "static",
+  "skillName": "proposal-generation-compile-proposal",
+  "contentHash": "a4d225a07881a35ae1e44b3de1ccc71ca45213b264aeed1f350a642c6cd7d6a6",
+  "scannerVersion": "2.5.3"
+}

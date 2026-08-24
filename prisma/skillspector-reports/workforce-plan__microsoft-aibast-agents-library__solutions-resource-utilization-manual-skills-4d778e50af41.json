@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:25:28.588768+00:00",
+  "scanMode": "static",
+  "skillName": "strategic-workforce-plan",
+  "contentHash": "16cff5fdd0c846ca9ab5a414d5f49a166697a75001e3208e312244442d2f9d02",
+  "scannerVersion": "2.5.3"
+}

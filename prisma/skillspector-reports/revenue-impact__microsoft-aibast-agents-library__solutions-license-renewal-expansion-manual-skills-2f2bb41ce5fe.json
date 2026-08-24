@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:21:00.080231+00:00",
+  "scanMode": "static",
+  "skillName": "license-renewal-expansion-revenue-impact",
+  "contentHash": "39e86c635e18bec9f9bcb4e6b4efea0533bbe8af1b61c21440fe81901766d657",
+  "scannerVersion": "2.5.3"
+}

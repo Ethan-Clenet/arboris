@@ -1,0 +1,41 @@
+{
+  "riskScore": 15,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": "kubeconfig",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 68
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.18,
+      "finding": "kubeconfig",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "references/troubleshooting.md",
+        "start_line": 7
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T08:59:57.519992+00:00",
+  "scanMode": "static",
+  "skillName": "airunway-aks-setup",
+  "contentHash": "d112eae5281cd54ed43be9aa4fb3a0671188459686d5fa175512b6ff55b6dd50",
+  "scannerVersion": "2.5.3"
+}

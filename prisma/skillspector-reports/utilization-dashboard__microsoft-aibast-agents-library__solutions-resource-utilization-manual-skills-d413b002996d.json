@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:24:43.008725+00:00",
+  "scanMode": "static",
+  "skillName": "workforce-utilization-dashboard",
+  "contentHash": "db0101e3bc0f272335b79b9f3c2acea8722290528c8c7b25af44606b0b478652",
+  "scannerVersion": "2.5.3"
+}

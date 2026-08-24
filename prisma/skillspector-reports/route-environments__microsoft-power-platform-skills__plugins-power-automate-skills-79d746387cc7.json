@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:21:23.575823+00:00",
+  "scanMode": "static",
+  "skillName": "route-environments",
+  "contentHash": "ea5643c46e586b9a37651023540595b7f507461741a91e2b011d40044d37634a",
+  "scannerVersion": "2.5.3"
+}

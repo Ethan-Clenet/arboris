@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:50.441369+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-system-spatial",
+  "contentHash": "db56c069caf958b8e12cd8f753e11ab6887e59e4ed1a342ff37732766f82c393",
+  "scannerVersion": "2.5.3"
+}

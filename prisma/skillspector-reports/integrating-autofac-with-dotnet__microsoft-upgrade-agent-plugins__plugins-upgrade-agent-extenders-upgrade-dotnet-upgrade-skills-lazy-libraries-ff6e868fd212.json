@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:11:31.316140+00:00",
+  "scanMode": "static",
+  "skillName": "integrating-autofac-with-dotnet",
+  "contentHash": "0be19f3e168d7cd977ea87199ddcf546cb275d2583ca3ba0720f0a011378c0d6",
+  "scannerVersion": "2.5.3"
+}

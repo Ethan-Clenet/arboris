@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:06:35.720838+00:00",
+  "scanMode": "static",
+  "skillName": "create-agent",
+  "contentHash": "dac9e58bad11e563de2718d5fe1da569a4269b4bb62d1f28883a0fe14bf137ea",
+  "scannerVersion": "2.5.3"
+}

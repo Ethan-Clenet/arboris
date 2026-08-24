@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:58:38.440516+00:00",
+  "scanMode": "static",
+  "skillName": "sentiment-analysis",
+  "contentHash": "ac6209df55647b507f940958f9e6feb3a6a431c7386526b69647f8d953fdecbe",
+  "scannerVersion": "2.5.3"
+}

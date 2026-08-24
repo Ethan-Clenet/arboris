@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:13:22.753006+00:00",
+  "scanMode": "static",
+  "skillName": "mct-excellence-iq",
+  "contentHash": "52017e0de829192c84a5fe07632ffa141b759593a04c0565fbe27f92987e19d4",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:25:02.271515+00:00",
+  "scanMode": "static",
+  "skillName": "webforms-to-blazor-upgrade",
+  "contentHash": "114f764ab8b4a5f268b8582357e364fb5200d9dbe2f2abe8e709c57c38f47dbe",
+  "scannerVersion": "2.5.3"
+}

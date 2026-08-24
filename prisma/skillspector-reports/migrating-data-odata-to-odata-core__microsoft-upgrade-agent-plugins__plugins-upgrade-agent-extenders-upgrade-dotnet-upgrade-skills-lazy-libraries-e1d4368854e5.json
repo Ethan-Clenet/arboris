@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:50.761781+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-data-odata-to-odata-core",
+  "contentHash": "b1f81a5574f049d1012957afd7c6805413e7471e43fd4de08a7562403e18e165",
+  "scannerVersion": "2.5.3"
+}

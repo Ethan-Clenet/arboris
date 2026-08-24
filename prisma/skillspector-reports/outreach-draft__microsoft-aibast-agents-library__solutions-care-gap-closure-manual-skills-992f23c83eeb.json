@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:18:01.500672+00:00",
+  "scanMode": "static",
+  "skillName": "care-gap-closure-outreach-draft",
+  "contentHash": "80c5a5cd75a9e4c5d5a26c0a3351e21e4eb257dd77a6be4b6fd65ef77c88b953",
+  "scannerVersion": "2.5.3"
+}

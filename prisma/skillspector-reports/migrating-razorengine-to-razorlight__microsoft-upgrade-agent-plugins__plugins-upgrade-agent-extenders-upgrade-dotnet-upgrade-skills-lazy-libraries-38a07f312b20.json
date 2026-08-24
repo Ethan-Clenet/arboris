@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:38.682888+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-razorengine-to-razorlight",
+  "contentHash": "c43691bf0e4b1ff05fba860c90e9e425ad0082b6bb1ce7f4fd63115b4f8e0b5d",
+  "scannerVersion": "2.5.3"
+}

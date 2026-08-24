@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:13:15.810560+00:00",
+  "scanMode": "static",
+  "skillName": "managing-winforms-rendering",
+  "contentHash": "8696022ec4e55b624f8531afa503da9890cb02baf3d31364d7914c43f6913fab",
+  "scannerVersion": "2.5.3"
+}

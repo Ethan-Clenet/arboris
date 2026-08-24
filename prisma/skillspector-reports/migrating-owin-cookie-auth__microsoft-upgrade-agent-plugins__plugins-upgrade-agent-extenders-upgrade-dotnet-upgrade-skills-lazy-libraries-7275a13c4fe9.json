@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:22.385922+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-owin-cookie-auth",
+  "contentHash": "22373222f83a1cb14474a86ee41904dc788be911b43860a49f1bb09622d10b9e",
+  "scannerVersion": "2.5.3"
+}

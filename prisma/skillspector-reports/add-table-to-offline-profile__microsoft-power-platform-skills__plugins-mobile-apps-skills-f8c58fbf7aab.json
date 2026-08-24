@@ -1,0 +1,27 @@
+{
+  "riskScore": 20,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "DELETE /mobileofflineprofileitems(<itemId>)`",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 200
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T08:52:13.376499+00:00",
+  "scanMode": "static",
+  "skillName": "add-table-to-offline-profile",
+  "contentHash": "e62913f9d6f368eaaff5e5de94bb863b7447218ebf61ceb84dd5cc2b36204cb5",
+  "scannerVersion": "2.5.3"
+}

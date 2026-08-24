@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:17:30.381716+00:00",
+  "scanMode": "static",
+  "skillName": "msgraph-integration-patterns",
+  "contentHash": "92d490217d56cc92afe952e0205c3093bfbec67e7b3389d342558a563ff3c85e",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:00:01.145780+00:00",
+  "scanMode": "static",
+  "skillName": "amplifier-tool-leverage-patterns",
+  "contentHash": "88104a6295a2c026d07ca146ce86741f228049640bff2f8c70e85e42f48fe8c3",
+  "scannerVersion": "2.5.3"
+}

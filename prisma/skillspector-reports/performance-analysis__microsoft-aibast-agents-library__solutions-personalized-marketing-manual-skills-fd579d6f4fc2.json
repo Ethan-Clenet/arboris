@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:18:16.329846+00:00",
+  "scanMode": "static",
+  "skillName": "synthetic-marketing-performance-analysis",
+  "contentHash": "5f29259ffea55fdf8ea81a693813a5ef69a5a61c189b127bf4076b750009852d",
+  "scannerVersion": "2.5.3"
+}

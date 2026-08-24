@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:53:06.425769+00:00",
+  "scanMode": "static",
+  "skillName": "alternative-sourcing",
+  "contentHash": "ec14f713673dcaf9addfc31680597a3702ff895c04c963ea52af48dd83ebd724",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:06:49.247634+00:00",
+  "scanMode": "static",
+  "skillName": "create-flow",
+  "contentHash": "f1d1a63c81ae5dbe651866f3af086afec915507af58716ddbcf1dce3a8fd6b39",
+  "scannerVersion": "2.5.3"
+}

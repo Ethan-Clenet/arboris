@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:59:54.134986+00:00",
+  "scanMode": "static",
+  "skillName": "work-order-plan",
+  "contentHash": "88d3ae2889cf97efbf39f440df0a39a519069f59dac7900e450c60466b0960fc",
+  "scannerVersion": "2.5.3"
+}

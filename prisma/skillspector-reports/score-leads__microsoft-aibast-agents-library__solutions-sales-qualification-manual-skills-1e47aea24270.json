@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:21:46.525595+00:00",
+  "scanMode": "static",
+  "skillName": "sales-qualification-score-leads",
+  "contentHash": "aef1e2fcb8e0c4099ff0ec1ed7dfba7f02fed48b19a3c4e91630088b04ae9fe6",
+  "scannerVersion": "2.5.3"
+}

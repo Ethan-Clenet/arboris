@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:11.067818+00:00",
+  "scanMode": "static",
+  "skillName": "bet-sizer",
+  "contentHash": "7056540004dcf293e82f2737036d763986acb339bd969a797a12e817427be451",
+  "scannerVersion": "2.5.3"
+}

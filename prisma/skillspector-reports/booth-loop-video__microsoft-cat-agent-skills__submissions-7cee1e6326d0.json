@@ -1,0 +1,27 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P4",
+      "category": "Prompt Injection",
+      "pattern": "Behavior Manipulation",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "Never tell the user",
+      "explanation": "Subtle instructions detected that may alter agent decision-making or introduce hidden biases.",
+      "remediation": "Review content for implicit steering or bias. Ensure instructions are explicit and align with the skill's stated purpose.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 19
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:03:27.965583+00:00",
+  "scanMode": "static",
+  "skillName": "booth-loop-video",
+  "contentHash": "2ec93452c7eae3ec980cd7b1c8dec1b3ec6a065dfd86cbb3c8b8a65919386976",
+  "scannerVersion": "2.5.3"
+}

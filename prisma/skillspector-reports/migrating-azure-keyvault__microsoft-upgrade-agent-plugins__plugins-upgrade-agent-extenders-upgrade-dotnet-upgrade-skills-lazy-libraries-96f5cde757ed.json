@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:23.307387+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-azure-keyvault",
+  "contentHash": "f1b52112a4f6a9a603c9320cb830c137e11163e5ebc7d8e0d8962019e383e068",
+  "scannerVersion": "2.5.3"
+}

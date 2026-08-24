@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:08:28.494450+00:00",
+  "scanMode": "static",
+  "skillName": "diagnose-flow",
+  "contentHash": "aa1f17ec771de36a4d9b7708c6d6a40053dd5721d71b75f3e52803c527d586ee",
+  "scannerVersion": "2.5.3"
+}

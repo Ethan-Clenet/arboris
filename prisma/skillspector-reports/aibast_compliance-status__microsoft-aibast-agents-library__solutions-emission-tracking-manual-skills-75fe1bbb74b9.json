@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:54:16.487007+00:00",
+  "scanMode": "static",
+  "skillName": "emission-tracking-compliance-status",
+  "contentHash": "0c4147dba80a8d380a0e7315bffae1f56af2bdf1699dd14f0e28542146c14839",
+  "scannerVersion": "2.5.3"
+}

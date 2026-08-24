@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:01.619100+00:00",
+  "scanMode": "static",
+  "skillName": "b2b-outreach-suite",
+  "contentHash": "4b0886dbe2ca3078ed6e27d4aee0bce51f850b76d92bde74ccbead468d6cb3f9",
+  "scannerVersion": "2.5.3"
+}

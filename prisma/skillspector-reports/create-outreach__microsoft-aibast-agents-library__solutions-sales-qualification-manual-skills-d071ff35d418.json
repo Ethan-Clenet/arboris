@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:07:04.366684+00:00",
+  "scanMode": "static",
+  "skillName": "sales-qualification-create-outreach",
+  "contentHash": "190827ac19c443f370b8d5a600fc632bdc863adfbd4e4714ea00b25437bf5be5",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:24:03.718336+00:00",
+  "scanMode": "static",
+  "skillName": "loyalty-tier-structure-analysis",
+  "contentHash": "b4ef2971c3db027536ea4d5b5b39856f0da9832e7193b139d484a74716cdd158",
+  "scannerVersion": "2.5.3"
+}

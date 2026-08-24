@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:19:58.401061+00:00",
+  "scanMode": "static",
+  "skillName": "sales-qualification-qualification-report",
+  "contentHash": "78f2f4e5a3efecbff3f62a94f3f6a611da1549828ea009b571c559eaaffc8828",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:13:59.528705+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-adal-to-msal",
+  "contentHash": "26a9aea87f86ce7600fd7e18a88af0ea5c052c24d3b1c762af7f35b97ec7ad31",
+  "scannerVersion": "2.5.3"
+}

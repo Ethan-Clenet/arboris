@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:26.979636+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-azure-servicebus",
+  "contentHash": "3ef091cadf74e15e3a42c72eb53cff4e5e6eb489521139624e472bf0e2a41559",
+  "scannerVersion": "2.5.3"
+}

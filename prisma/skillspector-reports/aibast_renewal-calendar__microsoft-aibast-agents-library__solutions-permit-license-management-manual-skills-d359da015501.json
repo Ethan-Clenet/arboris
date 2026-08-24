@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:57:51.467046+00:00",
+  "scanMode": "static",
+  "skillName": "permit-license-management-renewal-calendar",
+  "contentHash": "6cb2067d5fc460496a9c412012b62f23b4f6bb47b4f2bcf081d943437a95230e",
+  "scannerVersion": "2.5.3"
+}

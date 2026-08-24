@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:57:00.693066+00:00",
+  "scanMode": "static",
+  "skillName": "permit-license-management-permit-inventory",
+  "contentHash": "8de23c132b1fdbec0aef894be71803d87c2fbc1fa00d4e0b39ab5d75de4c77e8",
+  "scannerVersion": "2.5.3"
+}

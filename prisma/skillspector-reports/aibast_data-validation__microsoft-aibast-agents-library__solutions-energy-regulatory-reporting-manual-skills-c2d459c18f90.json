@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:54:36.021052+00:00",
+  "scanMode": "static",
+  "skillName": "energy-regulatory-reporting-data-validation",
+  "contentHash": "a1a93e0e106ebe8d8ef7a86abb3b68f5c0ee5605b77462b2ac9a03e8ea7af80b",
+  "scannerVersion": "2.5.3"
+}

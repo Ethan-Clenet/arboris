@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:58:05.143275+00:00",
+  "scanMode": "static",
+  "skillName": "permit-review-checklist",
+  "contentHash": "39c5b0640680ffa27aee8cf25bf804821ead377a6f095f843fa1241c8b1a8510",
+  "scannerVersion": "2.5.3"
+}

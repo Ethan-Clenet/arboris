@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:04:44.593555+00:00",
+  "scanMode": "static",
+  "skillName": "contract-clause-analysis",
+  "contentHash": "7441106434aeaad1cf4877fb15dc0b4772f552ee59e08c4ff3070e39efc54d98",
+  "scannerVersion": "2.5.3"
+}

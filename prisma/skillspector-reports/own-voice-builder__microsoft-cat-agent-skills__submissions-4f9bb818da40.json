@@ -1,0 +1,27 @@
+{
+  "riskScore": 21,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P6",
+      "category": "System Prompt Leakage",
+      "pattern": "Direct Prompt Extraction",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "print rule",
+      "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+      "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 57
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:18:04.962928+00:00",
+  "scanMode": "static",
+  "skillName": "own-voice-builder",
+  "contentHash": "ae42e7ffa2871b0b75d398d6460543cf6232d86f9459e633c2770d400604f5a0",
+  "scannerVersion": "2.5.3"
+}

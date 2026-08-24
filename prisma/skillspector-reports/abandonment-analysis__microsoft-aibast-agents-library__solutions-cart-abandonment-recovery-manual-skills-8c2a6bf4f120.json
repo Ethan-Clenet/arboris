@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:48:08.454098+00:00",
+  "scanMode": "static",
+  "skillName": "anonymous-cart-abandonment-analysis",
+  "contentHash": "7b091f379d950c937578d245c854a7b398428dfeecb1f869e03878754f56a085",
+  "scannerVersion": "2.5.3"
+}

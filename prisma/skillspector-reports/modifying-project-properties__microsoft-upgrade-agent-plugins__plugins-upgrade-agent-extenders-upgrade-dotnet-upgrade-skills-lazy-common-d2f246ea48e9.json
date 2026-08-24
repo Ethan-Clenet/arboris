@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:17:19.490968+00:00",
+  "scanMode": "static",
+  "skillName": "modifying-project-properties",
+  "contentHash": "3e41540d635b2ac44a34c1cbb5573b3848bd1802a685cf9a9428d5c9f48c2866",
+  "scannerVersion": "2.5.3"
+}

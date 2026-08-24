@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:12:37.332090+00:00",
+  "scanMode": "static",
+  "skillName": "managing-blazor-server-authentication",
+  "contentHash": "f5eacf8b227625f83e46010431b8fd9616c30a0d25638647a1981f39d777440b",
+  "scannerVersion": "2.5.3"
+}

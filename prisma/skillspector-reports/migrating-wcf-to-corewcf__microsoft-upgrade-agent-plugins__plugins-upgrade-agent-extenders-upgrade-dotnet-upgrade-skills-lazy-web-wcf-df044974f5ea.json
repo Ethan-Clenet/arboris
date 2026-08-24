@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:17:01.284362+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-wcf-to-corewcf",
+  "contentHash": "d9b15e30c976bfcb481fab5e86ddac5d20f99dfc3c22fad4959a21e61df6cecf",
+  "scannerVersion": "2.5.3"
+}

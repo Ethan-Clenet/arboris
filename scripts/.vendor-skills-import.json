@@ -1,6 +1,6 @@
 {
   "at": "2026-08-19T07:48:01.440Z",
-  "skills": 611,
+  "skills": 585,
   "commands": 0,
   "summary": [
     {
@@ -364,29 +364,20 @@
     {
       "repo": "microsoft/power-platform-skills",
       "ok": true,
-      "count": 91,
+      "count": 76,
       "ids": [
         "add-data-source__microsoft-power-platform-skills__plugins-canvas-apps-skills-d62186618d31",
         "canvas-app__microsoft-power-platform-skills__plugins-canvas-apps-skills-c2fd71f231f6",
         "configure-canvas-mcp__microsoft-power-platform-skills__plugins-canvas-apps-skills-4c7603486a32",
-        "report-issue__microsoft-power-platform-skills__plugins-canvas-apps-skills-598c97faa68a",
         "add-azuredevops__microsoft-power-platform-skills__plugins-code-apps-skills-497649d36afe",
-        "add-connector__microsoft-power-platform-skills__plugins-code-apps-skills-2d77717c4bcf",
-        "add-datasource__microsoft-power-platform-skills__plugins-code-apps-skills-1ea4439fe8c1",
-        "add-dataverse__microsoft-power-platform-skills__plugins-code-apps-skills-1d6699675561",
         "add-excel__microsoft-power-platform-skills__plugins-code-apps-skills-2addbf5c6eeb",
         "add-mcscopilot__microsoft-power-platform-skills__plugins-code-apps-skills-3d1563ad8e3e",
         "add-office365__microsoft-power-platform-skills__plugins-code-apps-skills-a897b14f9c64",
         "add-onedrive__microsoft-power-platform-skills__plugins-code-apps-skills-a842acbbb362",
-        "add-sharepoint__microsoft-power-platform-skills__plugins-code-apps-skills-633065d5c46c",
         "add-teams__microsoft-power-platform-skills__plugins-code-apps-skills-4c6f827d4f50",
         "add-workiq__microsoft-power-platform-skills__plugins-code-apps-skills-820181fedbf9",
         "create-code-app__microsoft-power-platform-skills__plugins-code-apps-skills-499ed7c3b04c",
-        "deploy__microsoft-power-platform-skills__plugins-code-apps-skills-7a9c6241c4b1",
-        "list-connections__microsoft-power-platform-skills__plugins-code-apps-skills-74ae398a5e01",
-        "report-issue__microsoft-power-platform-skills__plugins-code-apps-skills-3376155e2908",
         "generate-mcp-app-ui__microsoft-power-platform-skills__plugins-mcp-apps-skills-0df224dc8aff",
-        "report-issue__microsoft-power-platform-skills__plugins-mcp-apps-skills-883a1088ca94",
         "add-connector__microsoft-power-platform-skills__plugins-mobile-apps-skills-28f66fbad78b",
         "add-datasource__microsoft-power-platform-skills__plugins-mobile-apps-skills-1d16654bdece",
         "add-dataverse__microsoft-power-platform-skills__plugins-mobile-apps-skills-5b7ca5a7319e",
@@ -408,11 +399,9 @@
         "preview-screens__microsoft-power-platform-skills__plugins-mobile-apps-skills-50e7af7edee1",
         "report-issue__microsoft-power-platform-skills__plugins-mobile-apps-skills-aaa647226efe",
         "set-app-registration-native__microsoft-power-platform-skills__plugins-mobile-apps-skills-6b8ed49f1c1d",
-        "setup-datamodel__microsoft-power-platform-skills__plugins-mobile-apps-skills-7bd8dda52150",
         "setup-offline-profile__microsoft-power-platform-skills__plugins-mobile-apps-skills-1aa77a893b84",
         "app-builder__microsoft-power-platform-skills__plugins-model-apps-skills-91cab35f86f7",
         "genpage__microsoft-power-platform-skills__plugins-model-apps-skills-0fa10761bb2e",
-        "report-issue__microsoft-power-platform-skills__plugins-model-apps-skills-7d6d07e40b4a",
         "telemetry__microsoft-power-platform-skills__plugins-model-apps-skills-426ad2a65e58",
         "browse-flows__microsoft-power-platform-skills__plugins-power-automate-skills-be040cc61947",
         "build-flow__microsoft-power-platform-skills__plugins-power-automate-skills-e564321e3b77",
@@ -421,13 +410,11 @@
         "diagnose-flow__microsoft-power-platform-skills__plugins-power-automate-skills-0c29d19c5b3b",
         "manage-desktop-flows__microsoft-power-platform-skills__plugins-power-automate-skills-b7797a3ba3c7",
         "manage-flows__microsoft-power-platform-skills__plugins-power-automate-skills-15113dd0885e",
-        "report-issue__microsoft-power-platform-skills__plugins-power-automate-skills-5eac10da9d38",
         "route-environments__microsoft-power-platform-skills__plugins-power-automate-skills-79d746387cc7",
         "setup__microsoft-power-platform-skills__plugins-power-automate-skills-dcbaf5be6feb",
         "activate-site__microsoft-power-platform-skills__plugins-power-pages-skills-cf9f31858f9a",
         "add-ai-webapi__microsoft-power-platform-skills__plugins-power-pages-skills-d1d5188f5af5",
         "add-cloud-flow__microsoft-power-platform-skills__plugins-power-pages-skills-51a20265afda",
-        "add-sample-data__microsoft-power-platform-skills__plugins-power-pages-skills-7777c524d04d",
         "add-seo__microsoft-power-platform-skills__plugins-power-pages-skills-fde9f3789165",
         "add-server-logic__microsoft-power-platform-skills__plugins-power-pages-skills-81999d020621",
         "audit-permissions__microsoft-power-platform-skills__plugins-power-pages-skills-97a544a349c3",
@@ -447,7 +434,6 @@
         "manage-headers__microsoft-power-platform-skills__plugins-power-pages-skills-41b28f4d77d3",
         "migrate-bootstrap__microsoft-power-platform-skills__plugins-power-pages-skills-1910260ac4a1",
         "plan-alm__microsoft-power-platform-skills__plugins-power-pages-skills-ce7cd3f15978",
-        "report-issue__microsoft-power-platform-skills__plugins-power-pages-skills-3e516c08af10",
         "scan-code__microsoft-power-platform-skills__plugins-power-pages-skills-aa85e1b2e4db",
         "scan-site__microsoft-power-platform-skills__plugins-power-pages-skills-24adbaec6448",
         "security-review__microsoft-power-platform-skills__plugins-power-pages-skills-635c1e1c4546",
@@ -455,16 +441,14 @@
         "setup-datamodel__microsoft-power-platform-skills__plugins-power-pages-skills-8344ed9af71c",
         "setup-pipeline__microsoft-power-platform-skills__plugins-power-pages-skills-cdb0ce45c658",
         "setup-solution__microsoft-power-platform-skills__plugins-power-pages-skills-125f3f2f485e",
-        "telemetry__microsoft-power-platform-skills__plugins-power-pages-skills-90e749513ca8",
         "test-site__microsoft-power-platform-skills__plugins-power-pages-skills-d67f5c6b2f2d"
       ]
     },
     {
       "repo": "microsoft/cat-agent-skills",
       "ok": true,
-      "count": 82,
+      "count": 81,
       "ids": [
-        "_template__microsoft-cat-agent-skills__submissions-88e6f6ec26bf",
         "accessibility-pass__microsoft-cat-agent-skills__submissions-f232b995183a",
         "acroform-writer__microsoft-cat-agent-skills__submissions-e44ef69423b5",
         "agent-evaluation-designer__microsoft-cat-agent-skills__submissions-ccc7ffa72f64",
@@ -557,7 +541,7 @@
     {
       "repo": "microsoft/vscode",
       "ok": true,
-      "count": 26,
+      "count": 22,
       "ids": [
         "agent-customization__microsoft-vscode__extensions-copilot-assets-prompts-skills-8c111438369b",
         "chronicle__microsoft-vscode__extensions-copilot-assets-prompts-skills-a3971f11f4ac",
@@ -569,11 +553,8 @@
         "get-search-view-results__microsoft-vscode__extensions-copilot-assets-prompts-skills-b03785026979",
         "init__microsoft-vscode__extensions-copilot-assets-prompts-skills-b8d2118f56a5",
         "install-vscode-extension__microsoft-vscode__extensions-copilot-assets-prompts-skills-2e7104cc5ce9",
-        "project-setup-info-context7__microsoft-vscode__extensions-copilot-assets-prompts-skills-6f6433bff36c",
-        "project-setup-info-local__microsoft-vscode__extensions-copilot-assets-prompts-skills-7f119c16f79f",
         "troubleshoot__microsoft-vscode__extensions-copilot-assets-prompts-skills-d3f1fd276a88",
         "act-on-feedback__microsoft-vscode__src-vs-sessions-skills-d8fe00d2fd00",
-        "code-review__microsoft-vscode__src-vs-sessions-skills-be9e8fdd1456",
         "commit__microsoft-vscode__src-vs-sessions-skills-990e11dbaf91",
         "create-draft-pr__microsoft-vscode__src-vs-sessions-skills-b0296ae01f40",
         "create-pr__microsoft-vscode__src-vs-sessions-skills-c0229601c02f",
@@ -582,7 +563,6 @@
         "merge__microsoft-vscode__src-vs-sessions-skills-fe65026649d4",
         "sync__microsoft-vscode__src-vs-sessions-skills-3fb472fbc109",
         "sync-upstream__microsoft-vscode__src-vs-sessions-skills-8918bc7a41d4",
-        "troubleshoot__microsoft-vscode__src-vs-sessions-skills-4a2bbd491303",
         "update-pr__microsoft-vscode__src-vs-sessions-skills-76bab0b3415a",
         "update-skills__microsoft-vscode__src-vs-sessions-skills-7765a6bbddde"
       ]
@@ -590,11 +570,8 @@
     {
       "repo": "microsoft/amplifier-bundle-skills",
       "ok": true,
-      "count": 42,
+      "count": 39,
       "ids": [
-        "amplifier-philosophy__microsoft-amplifier-bundle-skills__modules-tool-skills-tests-fixtures-skills-320123d0eebb",
-        "module-development__microsoft-amplifier-bundle-skills__modules-tool-skills-tests-fixtures-skills-49f9ba8674b7",
-        "python-standards__microsoft-amplifier-bundle-skills__modules-tool-skills-tests-fixtures-skills-5f7eb74f8ccd",
         "adapt-skill__microsoft-amplifier-bundle-skills__skills-722a4def658e",
         "amplifier-tool-leverage-patterns__microsoft-amplifier-bundle-skills__skills-10d73d2bc760",
         "auth-tls-patterns__microsoft-amplifier-bundle-skills__skills-db43b7bff964",
@@ -677,15 +654,12 @@
     {
       "repo": "microsoft/apm",
       "ok": true,
-      "count": 7,
+      "count": 4,
       "ids": [
         "apm-review-panel__microsoft-apm__packages-7e36c965fc6e",
         "apm-triage-panel__microsoft-apm__packages-829274c7f407",
         "pr-description-skill__microsoft-apm__packages-31bc9ad613bf",
-        "shepherd-driver__microsoft-apm__packages-6e664fea125e",
-        "hello-world__microsoft-apm__templates-29a06b3068e1",
-        "test-skill__microsoft-apm__tests-fixtures-mock-claude-plugin-skills-f75677fb4ad4",
-        "test-skill__microsoft-apm__tests-fixtures-mock-marketplace-plugin-skills-ece910985e26"
+        "shepherd-driver__microsoft-apm__packages-6e664fea125e"
       ]
     },
     {
@@ -694,5 +668,11 @@
       "count": 0,
       "ids": []
     }
-  ]
+  ],
+  "cleanedAt": "2026-08-24T09:28:33.246Z",
+  "removed": {
+    "rejected": 0,
+    "contentDupes": 0,
+    "nameDupes": 0
+  }
 }

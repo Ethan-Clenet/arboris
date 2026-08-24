@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:55:07.035620+00:00",
+  "scanMode": "static",
+  "skillName": "downtime-analysis",
+  "contentHash": "1bdc16667b28c58a1fd8d9a9220279410958154f82c9f071ffdee290c3ad3851",
+  "scannerVersion": "2.5.3"
+}

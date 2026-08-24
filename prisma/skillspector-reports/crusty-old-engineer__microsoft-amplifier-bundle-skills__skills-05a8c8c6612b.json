@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:07:43.535057+00:00",
+  "scanMode": "static",
+  "skillName": "crusty-old-engineer",
+  "contentHash": "8e912b64b82c57889116304098c2ca93cc2d11c7a9f8d1a900878355ed96c487",
+  "scannerVersion": "2.5.3"
+}

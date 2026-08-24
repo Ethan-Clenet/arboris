@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:00:40.016003+00:00",
+  "scanMode": "static",
+  "skillName": "sales-qualification-assign-leads",
+  "contentHash": "28fb2172aa83946daf38bb399dfaff61256955887d3d6c540a8c82c978ae5b0a",
+  "scannerVersion": "2.5.3"
+}

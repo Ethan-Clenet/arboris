@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:11:12.682274+00:00",
+  "scanMode": "static",
+  "skillName": "instance-storage-patterns",
+  "contentHash": "1f0cf11b93cc27c51c8ee34a3cad9ca0e6b98c779a0b3551113d751c59add45e",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:57:43.624487+00:00",
+  "scanMode": "static",
+  "skillName": "regulatory-correction-and-submission-preparation",
+  "contentHash": "e6be2860fd987a03613ba997fcf1a5e47698ae2dea854e13627e079d007ff51f",
+  "scannerVersion": "2.5.3"
+}

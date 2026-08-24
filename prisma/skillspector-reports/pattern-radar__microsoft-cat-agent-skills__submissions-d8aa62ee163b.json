@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:18:08.521366+00:00",
+  "scanMode": "static",
+  "skillName": "pattern-radar",
+  "contentHash": "e921609254febcb1f92a80ea89fc6497db1a5494add03d0b657bf31835d4c132",
+  "scannerVersion": "2.5.3"
+}

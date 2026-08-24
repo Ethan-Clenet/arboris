@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:04:09.944671+00:00",
+  "scanMode": "static",
+  "skillName": "review-only-campaign-design",
+  "contentHash": "2889067cb71f67fb2a79823ea1c0351218220de8877f828da52b5713e18d6e2a",
+  "scannerVersion": "2.5.3"
+}

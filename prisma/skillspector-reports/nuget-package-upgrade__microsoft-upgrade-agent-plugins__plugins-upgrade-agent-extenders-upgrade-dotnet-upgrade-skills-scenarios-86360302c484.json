@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:17:37.506633+00:00",
+  "scanMode": "static",
+  "skillName": "nuget-package-upgrade",
+  "contentHash": "5859f2c14cdfd8f2494179fa813835cfdd1f00bd7f98202a1214caec2bfc0d1d",
+  "scannerVersion": "2.5.3"
+}

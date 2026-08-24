@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:31.987240+00:00",
+  "scanMode": "static",
+  "skillName": "brand-template-enforcer",
+  "contentHash": "ce8cf899c96ade71842bbf0eb29ce0169eb1a57bb297e14761bd6c509bb6476c",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:12:16.589150+00:00",
+  "scanMode": "static",
+  "skillName": "lookup-dataverse-table",
+  "contentHash": "7db5c1204cb0156a173ca91372049f57a7ab5f7ca54ba592aa6659b5433a4641",
+  "scannerVersion": "2.5.3"
+}

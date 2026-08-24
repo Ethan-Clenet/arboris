@@ -1,0 +1,55 @@
+{
+  "riskScore": 30,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: setup-solution:0.no-plan | category=intent | cancel-leaves=nothing -->\n> 🚦 **Gate (intent · setup-solution:0.no-plan):** Fail-closed entry gate when `check-alm-plan.js` returns `exists:fals",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 65
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: setup-solution:2.publisher-prefix | category=consent | cancel-leaves=nothing -->\n> 🚦 **Gate (consent · setup-solution:2.publisher-prefix):** Publisher prefix is PERMANENT and prefixed to ev",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 166
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: setup-solution:5.4c.credentials | category=consent | cancel-leaves=nothing -->\n> 🚦 **Gate (consent · setup-solution:5.4c.credentials):** Bulk credential handling decision — Secret env var (",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 485
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:22:35.148491+00:00",
+  "scanMode": "static",
+  "skillName": "setup-solution",
+  "contentHash": "6acf30fe1cf61fb4892ff776fb018729bf69ecf56480bbd7cc60519da5b9bd05",
+  "scannerVersion": "2.5.3"
+}

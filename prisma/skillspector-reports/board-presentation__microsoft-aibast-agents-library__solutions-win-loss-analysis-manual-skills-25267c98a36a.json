@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:24.907154+00:00",
+  "scanMode": "static",
+  "skillName": "win-loss-analysis-board-presentation",
+  "contentHash": "bebec86049af4aa29c4dd3526692c441bbeddc596f700b25d54452cfe8bb4d80",
+  "scannerVersion": "2.5.3"
+}

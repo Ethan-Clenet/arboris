@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:54:43.759243+00:00",
+  "scanMode": "static",
+  "skillName": "delay-notification",
+  "contentHash": "69dda019b42973bc1bbb2917150cd0f41989293efebc1812ed3ddbcb0ed09b0e",
+  "scannerVersion": "2.5.3"
+}

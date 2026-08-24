@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:02:16.754498+00:00",
+  "scanMode": "static",
+  "skillName": "azure-messaging",
+  "contentHash": "0f45c664bee9745e3d44c697c082a3b68114da7a1e42c9228f2962e0d2e25e69",
+  "scannerVersion": "2.5.3"
+}

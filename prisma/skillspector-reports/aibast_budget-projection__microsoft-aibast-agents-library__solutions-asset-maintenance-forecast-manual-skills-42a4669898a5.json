@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:53:43.545783+00:00",
+  "scanMode": "static",
+  "skillName": "asset-maintenance-forecast-budget-projection",
+  "contentHash": "3e8829067822f2435bfb8a1352c56abf08b3ac274100ba086f8ee1505732489b",
+  "scannerVersion": "2.5.3"
+}

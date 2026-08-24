@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:56:39.022401+00:00",
+  "scanMode": "static",
+  "skillName": "order-lookup",
+  "contentHash": "052589b80acdf98c396477a3fc624a70516553ddf2d2799266e46170614fb650",
+  "scannerVersion": "2.5.3"
+}

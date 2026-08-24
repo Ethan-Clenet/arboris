@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:19:41.423826+00:00",
+  "scanMode": "static",
+  "skillName": "product-council-here",
+  "contentHash": "ddafd37325c7fc4d64327f83fc6e8cb29b733d21091cf0c8ff3b5f7287bcad69",
+  "scannerVersion": "2.5.3"
+}

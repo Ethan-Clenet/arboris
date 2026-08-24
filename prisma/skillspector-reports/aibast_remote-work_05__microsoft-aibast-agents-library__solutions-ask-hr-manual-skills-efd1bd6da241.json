@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:57:48.143039+00:00",
+  "scanMode": "static",
+  "skillName": "remote-work",
+  "contentHash": "d360bc683e0f64e943419fab1804f7a16cc1cf8afc4876e099fac8bd73fb6ef6",
+  "scannerVersion": "2.5.3"
+}

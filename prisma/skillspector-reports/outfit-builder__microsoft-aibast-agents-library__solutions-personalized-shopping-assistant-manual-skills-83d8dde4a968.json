@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:17:58.009040+00:00",
+  "scanMode": "static",
+  "skillName": "review-only-outfit-builder",
+  "contentHash": "3e47817d86be165a064e399f07f17e13fea15261afa70ccd21d3e81819bf2fd3",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:54:13.259963+00:00",
+  "scanMode": "static",
+  "skillName": "permit-license-management-compliance-gaps",
+  "contentHash": "9952a847fdf6c10a8d67341aadbdb4bd06f32ab3ca66d8f9238902117ab3d88d",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:14:09.893994+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-aspnet-signalr",
+  "contentHash": "a186cb4c363e4b2910c1b0d9d4a45bf8ac4bd05ccd8f68dfe36187d9b54fa51c",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:07:40.359564+00:00",
+  "scanMode": "static",
+  "skillName": "prior-authorization-criteria-evidence",
+  "contentHash": "09ba889ba57a36571dedf6afffc525da0d0cbc892abbe36015729a7774d89ee0",
+  "scannerVersion": "2.5.3"
+}

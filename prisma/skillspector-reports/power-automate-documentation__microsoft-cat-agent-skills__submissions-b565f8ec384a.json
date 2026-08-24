@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:19:03.383375+00:00",
+  "scanMode": "static",
+  "skillName": "power-automate-documentation",
+  "contentHash": "cdb3c3bf7ecc3f37e0ad5a1aa38f48b43a5d743898359aa1b35d7e5b2f844e48",
+  "scannerVersion": "2.5.3"
+}

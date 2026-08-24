@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P1",
+      "category": "Prompt Injection",
+      "pattern": "Instruction Override",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "ignore previous instructions",
+      "explanation": "This pattern attempts to override system instructions or ignore safety constraints. Without LLM analysis, manual review is recommended.",
+      "remediation": "Remove or rewrite any text that instructs the agent to ignore prompts, override safety rules, or trust unverified content. Ensure skill content cannot be injected to alter agent behavior.",
+      "location": {
+        "file": "references/privacy_and_safety_rules.md",
+        "start_line": 31
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T08:52:44.527446+00:00",
+  "scanMode": "static",
+  "skillName": "ai-usecase-assessment",
+  "contentHash": "dc7c8d198e5597d0c718f576a7912738c48fb156b20074d6d7cf39f32b1fcc0e",
+  "scannerVersion": "2.5.3"
+}

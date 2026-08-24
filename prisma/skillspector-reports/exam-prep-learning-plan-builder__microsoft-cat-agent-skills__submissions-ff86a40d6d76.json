@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:09:31.822798+00:00",
+  "scanMode": "static",
+  "skillName": "exam-prep-learning-plan-builder",
+  "contentHash": "382c5a659cfb9a7ed28d2ec993695f35c7eaf4aac0e01b49cbe1922fd0cc0883",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,41 @@
+{
+  "riskScore": 26,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- VSIX settings -->\n    <VSSDKBuildToolsAutoSetup>true</VSSDKBuildToolsAutoSetup>\n    <VsixDeployOnDebug>true</VsixDeployOnDebug>\n    <GeneratePkgDefFile>true</GeneratePkgDefFile>\n    <UseCodebase>",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "ref/vssdk-project-format.md",
+        "start_line": 26
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- VSCT command table (if extension has commands) -->\n  <ItemGroup>\n    <VSCTCompile Include=\"VSCommandTable.vsct\">\n      <ResourceName>Menus.ctmenu</ResourceName>\n      <Generator>VsctGenerator</Ge",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "ref/vssdk-project-format.md",
+        "start_line": 235
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:24:55.300128+00:00",
+  "scanMode": "static",
+  "skillName": "vssdk-sdk-style-conversion",
+  "contentHash": "3537014407e542755c057d7999c36b05b956964498d47b8a1601f9115abe3f49",
+  "scannerVersion": "2.5.3"
+}

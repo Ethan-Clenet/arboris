@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:53:50.322290+00:00",
+  "scanMode": "static",
+  "skillName": "trader-certification-readiness",
+  "contentHash": "8d84f22f5fb0b8752a853216f143d70071fa53d1fc29a42520f8d98a23d1207e",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:17:50.833332+00:00",
+  "scanMode": "static",
+  "skillName": "outcome-cartographer",
+  "contentHash": "f4dd75c0e4a913df9a001ca9f7bbf90eeb7f9f8531515d171696eef46759bc43",
+  "scannerVersion": "2.5.3"
+}

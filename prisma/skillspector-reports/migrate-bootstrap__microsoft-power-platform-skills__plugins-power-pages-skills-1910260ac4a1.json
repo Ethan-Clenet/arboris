@@ -1,0 +1,41 @@
+{
+  "riskScore": 26,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- not-a-gate: data-gathering — free-text environment URL when PAC CLI isn't authenticated; the prompt itself writes nothing -->\n\n3. Run `pac auth who`. If not authenticated, ask for the environment",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 64
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: migrate-bootstrap:4.run-engine | category=consent | cancel-leaves=nothing -->\n\n> 🚦 **Gate (consent · migrate-bootstrap:4.run-engine):** Explicit consent before running `pac pages bootstrap-",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 219
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:13:56.336601+00:00",
+  "scanMode": "static",
+  "skillName": "migrate-bootstrap",
+  "contentHash": "36ded269bc3e75584d414e28cfe3ab6d35e8d92627aa1bf012849e53096780a3",
+  "scannerVersion": "2.5.3"
+}

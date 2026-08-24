@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:55:30.979930+00:00",
+  "scanMode": "static",
+  "skillName": "synthetic-permit-fee-estimate",
+  "contentHash": "d8a4c9e2e7f14587e546f568d9e265aeb2a65dd3932a120e123f389b00ee05e9",
+  "scannerVersion": "2.5.3"
+}

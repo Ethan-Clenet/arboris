@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:04:16.845584+00:00",
+  "scanMode": "static",
+  "skillName": "workforce-capacity-forecast",
+  "contentHash": "b12ed29c127134c801652c841d8b3c2ba167c414800c069fbdd026d6c333c845",
+  "scannerVersion": "2.5.3"
+}

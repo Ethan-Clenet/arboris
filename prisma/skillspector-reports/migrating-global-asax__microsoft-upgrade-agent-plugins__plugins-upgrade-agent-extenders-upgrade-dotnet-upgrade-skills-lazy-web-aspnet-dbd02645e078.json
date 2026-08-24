@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:15:11.103842+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-global-asax",
+  "contentHash": "929efa5530ca5029461578123f9a986fd6cb310585c98153a022ab73fe8b79f4",
+  "scannerVersion": "2.5.3"
+}

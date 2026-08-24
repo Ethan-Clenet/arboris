@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:19:07.281257+00:00",
+  "scanMode": "static",
+  "skillName": "power-bi-model-review",
+  "contentHash": "e2a7a0dab1aacc7a6c2809e6f1a25cd40f0a903cccf1dcfb98b25913fbe4a2e1",
+  "scannerVersion": "2.5.3"
+}

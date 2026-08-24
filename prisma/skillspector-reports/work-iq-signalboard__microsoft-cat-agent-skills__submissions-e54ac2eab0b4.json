@@ -1,0 +1,26 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:25:25.289288+00:00",
+  "scanMode": "static",
+  "skillName": "work-iq-signalboard",
+  "contentHash": "99c4fe446515266d9e77216dc1f223f5ed3d4f0ff57fe4f8dd53fbb28d27e570",
+  "scannerVersion": "2.5.3"
+}

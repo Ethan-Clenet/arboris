@@ -1,0 +1,41 @@
+{
+  "riskScore": 26,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\n  KEYNOTE-STYLE HTML PRESENTATION TEMPLATE\n  ----------------------------------------\n  HOW TO USE:\n  1. Keep the <style> block and ALL FIVE <script> blocks VERBATIM — that is the design system\n ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/template.html",
+        "start_line": 7
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- ============ SLIDE 1 · TITLE (keep title-slide + active) ============ -->\n  <section class=\"slide title-slide active\">\n    <div class=\"content\">\n      <span class=\"eyebrow\">Eyebrow / kicker</span",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/template.html",
+        "start_line": 338
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:21:10.067844+00:00",
+  "scanMode": "static",
+  "skillName": "rich-html-presentation",
+  "contentHash": "c5cacef475e4286978a2b917cb662cb1de6a4ddaa534f40542083740543303a3",
+  "scannerVersion": "2.5.3"
+}

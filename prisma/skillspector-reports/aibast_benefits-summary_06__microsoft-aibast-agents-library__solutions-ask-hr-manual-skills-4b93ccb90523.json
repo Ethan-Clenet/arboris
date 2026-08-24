@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:53:33.747481+00:00",
+  "scanMode": "static",
+  "skillName": "benefits-summary",
+  "contentHash": "c3c6a219cbc88527d6ca3884fbbd655ddf91a37a0416716373c5c2397ee0335b",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:53:30.572139+00:00",
+  "scanMode": "static",
+  "skillName": "energy-regulatory-reporting-audit-readiness",
+  "contentHash": "d4aae857ebd9be0b3973c1ab0fe62a41b48fa4bbadd32041e9c9616c5e1f375d",
+  "scannerVersion": "2.5.3"
+}

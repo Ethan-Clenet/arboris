@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:08:01.122934+00:00",
+  "scanMode": "static",
+  "skillName": "debug-flow",
+  "contentHash": "6419a60a713fd52b24d83d6ae19b2354501229d65bae1c5758dff935043e694a",
+  "scannerVersion": "2.5.3"
+}

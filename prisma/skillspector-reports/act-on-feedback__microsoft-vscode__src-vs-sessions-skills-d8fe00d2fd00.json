@@ -1,0 +1,27 @@
+{
+  "riskScore": 20,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "YR4",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_mcp_tool_poisoning_metadata': MCP/tool metadata poisoning indicators in tool schemas or skill manifests [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "description:; <!-- Customize this skill and select save to override its behavior. Delete that copy to restore the built-in behavior. -->",
+      "explanation": "YARA rule matched a hack tool or exploit indicator (offensive tools, reconnaissance, privilege escalation, or exploit frameworks).",
+      "remediation": "Remove offensive tool references and exploit code. Legitimate agent skills should not contain penetration testing tools, exploit frameworks, or reconnaissance utilities.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 3
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T08:48:12.508729+00:00",
+  "scanMode": "static",
+  "skillName": "act-on-feedback",
+  "contentHash": "e299264ec2a4f3e2c5a57366a61204e5a9da33280646e620c097380e5ba582c5",
+  "scannerVersion": "2.5.3"
+}

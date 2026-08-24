@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:12:44.197387+00:00",
+  "scanMode": "static",
+  "skillName": "managing-dotnet-test-installation",
+  "contentHash": "6b307eddcb968978665cc79f6c4f03144edfe94bf29615c3f39ed65afc8d806d",
+  "scannerVersion": "2.5.3"
+}

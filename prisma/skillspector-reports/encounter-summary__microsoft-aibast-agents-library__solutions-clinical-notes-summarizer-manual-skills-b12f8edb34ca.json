@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:09:02.130549+00:00",
+  "scanMode": "static",
+  "skillName": "clinical-notes-summarizer-encounter-summary",
+  "contentHash": "0b347e2c252f1886a07acbc8cd42a1294a0cca96ff996c166d228cd0c635168a",
+  "scannerVersion": "2.5.3"
+}

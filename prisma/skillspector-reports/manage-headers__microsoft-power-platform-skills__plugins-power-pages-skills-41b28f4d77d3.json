@@ -1,0 +1,27 @@
+{
+  "riskScore": 27,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P6",
+      "category": "System Prompt Leakage",
+      "pattern": "Direct Prompt Extraction",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "return directives",
+      "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+      "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+      "location": {
+        "file": "scripts/transform-headers.js",
+        "start_line": 67
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:12:33.718153+00:00",
+  "scanMode": "static",
+  "skillName": "manage-headers",
+  "contentHash": "5270cfc6871f2afe7371141eb3119045752cdb77fa8d2dd3d6deca4765631688",
+  "scannerVersion": "2.5.3"
+}

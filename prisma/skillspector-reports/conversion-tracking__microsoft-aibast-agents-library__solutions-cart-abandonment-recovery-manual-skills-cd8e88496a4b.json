@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:05:49.921084+00:00",
+  "scanMode": "static",
+  "skillName": "synthetic-recovery-conversion-tracking",
+  "contentHash": "17e5eb921b13f1b75f23e41a2fbaf88688c2a2f0a3de108f5c2f8d9aaf7fb90b",
+  "scannerVersion": "2.5.3"
+}

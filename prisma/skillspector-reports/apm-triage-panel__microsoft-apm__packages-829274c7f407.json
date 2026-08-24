@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nCanonical single-comment template for the APM Triage Panel skill.\n\nLoad this file ONLY at synthesis time, after every panelist has produced\nits findings and the CEO arbiter has resolved the decis",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "assets/triage-template.md",
+        "start_line": 1
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:00:15.020850+00:00",
+  "scanMode": "static",
+  "skillName": "apm-triage-panel",
+  "contentHash": "7fd7d7ce6a98ba1b16e06e0c93b917b15a3e547c6d11d23cc2adae0124a5ad12",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:02:06.604334+00:00",
+  "scanMode": "static",
+  "skillName": "azure-kusto-irql-graph",
+  "contentHash": "f8901a62eec43a8e36370bfbd78209dea5bd1e3f0957c1d9391060470b09a78a",
+  "scannerVersion": "2.5.3"
+}

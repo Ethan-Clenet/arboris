@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:56:12.445080+00:00",
+  "scanMode": "static",
+  "skillName": "leave-balance",
+  "contentHash": "6b9efee5ec7eb2e4977ced9310c15cd280dec0c4162376f1d143d6888fa5f478",
+  "scannerVersion": "2.5.3"
+}

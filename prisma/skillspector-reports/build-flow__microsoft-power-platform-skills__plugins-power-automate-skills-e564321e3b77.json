@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:03:45.347532+00:00",
+  "scanMode": "static",
+  "skillName": "build-flow",
+  "contentHash": "ef2beab93b992250a94d0dde8e6f070460bd11f0f14b7d64a5bb3ccacaf9f819",
+  "scannerVersion": "2.5.3"
+}

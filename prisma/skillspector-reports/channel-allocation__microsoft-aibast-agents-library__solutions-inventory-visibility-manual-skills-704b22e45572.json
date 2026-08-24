@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:04:19.882606+00:00",
+  "scanMode": "static",
+  "skillName": "category-channel-allocation-scenario",
+  "contentHash": "480492104538a8f2de3b43a9d9d3c0a9f8dfc6ce53b8ab2eb971f0493dff28f3",
+  "scannerVersion": "2.5.3"
+}

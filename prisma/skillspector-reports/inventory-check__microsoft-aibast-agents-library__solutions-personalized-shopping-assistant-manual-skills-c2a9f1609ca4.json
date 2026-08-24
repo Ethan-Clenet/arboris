@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:11:37.736774+00:00",
+  "scanMode": "static",
+  "skillName": "read-only-shopping-inventory-check",
+  "contentHash": "19ef449243f5c09e78b99f8d5ffd1238cfbaa155d62e6f13f36a06f752b55a6c",
+  "scannerVersion": "2.5.3"
+}

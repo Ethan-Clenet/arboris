@@ -1,0 +1,55 @@
+{
+  "riskScore": 30,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: export-solution:0.no-plan | category=intent | cancel-leaves=nothing -->\n> 🚦 **Gate (intent · export-solution:0.no-plan):** Fail-closed entry gate when `check-alm-plan.js` returns `exists:fa",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 69
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: export-solution:2.5.completeness | category=progress | cancel-leaves=nothing -->\n  > 🚦 **Gate (progress · export-solution:2.5.completeness):** Source solution incomplete vs live site. Sync ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 185
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- gate: export-solution:3.export-type | category=consent | cancel-leaves=nothing -->\n> 🚦 **Gate (consent · export-solution:3.export-type):** Managed vs Unmanaged — irreversible for the produced zip",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 230
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:09:48.310200+00:00",
+  "scanMode": "static",
+  "skillName": "export-solution",
+  "contentHash": "7ecbc726f65aa056b639285ffa71d7c2cf4604f77834a5840ec583d5986bf82e",
+  "scannerVersion": "2.5.3"
+}

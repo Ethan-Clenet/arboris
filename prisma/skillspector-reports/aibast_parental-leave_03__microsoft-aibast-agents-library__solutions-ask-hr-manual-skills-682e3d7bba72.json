@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:56:42.089240+00:00",
+  "scanMode": "static",
+  "skillName": "parental-leave",
+  "contentHash": "6ba2f645292e9c7aaf839a786569ea99822327eb169c76ea27cb43714ebf056e",
+  "scannerVersion": "2.5.3"
+}

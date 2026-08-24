@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:10:41.781732+00:00",
+  "scanMode": "static",
+  "skillName": "grab-my-files",
+  "contentHash": "3145b5afd3a882210604881cf6b01669bc8166b2779c4eb2c57f6a6e2bc6a6a6",
+  "scannerVersion": "2.5.3"
+}

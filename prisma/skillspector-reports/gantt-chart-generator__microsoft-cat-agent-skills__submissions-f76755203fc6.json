@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:10:02.058256+00:00",
+  "scanMode": "static",
+  "skillName": "gantt-chart-generator",
+  "contentHash": "be8361c43a47b21b8beb79e1c8349dc8c2840a19f47eaba4264c6e2993c2971e",
+  "scannerVersion": "2.5.3"
+}

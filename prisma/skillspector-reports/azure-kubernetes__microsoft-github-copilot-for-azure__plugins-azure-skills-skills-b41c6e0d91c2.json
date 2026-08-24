@@ -1,0 +1,236 @@
+{
+  "riskScore": 92,
+  "severity": "CRITICAL",
+  "recommendation": "UNSAFE",
+  "issueCount": 16,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/knowledge-packs/frameworks/nestjs.md",
+        "start_line": 172
+      }
+    },
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "without asking",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "azure-kubernetes-automatic-readiness/SKILL.md",
+        "start_line": 72
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env\n",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/templates/dockerfiles/dotnet.dockerignore",
+        "start_line": 7
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env\n",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/templates/dockerfiles/go.dockerignore",
+        "start_line": 9
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env\n",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/templates/dockerfiles/java.dockerignore",
+        "start_line": 8
+      }
+    },
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "run as root",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/templates/dockerfiles/node.Dockerfile",
+        "start_line": 61
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env\n",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/templates/dockerfiles/node.dockerignore",
+        "start_line": 4
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env\n",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/templates/dockerfiles/python.dockerignore",
+        "start_line": 8
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env\n",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/templates/dockerfiles/rust.dockerignore",
+        "start_line": 3
+      }
+    },
+    {
+      "id": "PE4",
+      "category": "Privilege Escalation",
+      "pattern": "Docker Socket Access",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "/var/run/docker.sock",
+      "explanation": "Potential security issue detected. Manual review is recommended.",
+      "remediation": "Review the flagged content for security risks. Ensure no credentials, secrets, or sensitive data are exposed.",
+      "location": {
+        "file": "azure-kubernetes-automatic-readiness/references/common-fixes.md",
+        "start_line": 309
+      }
+    },
+    {
+      "id": "TM4",
+      "category": "Tool Misuse",
+      "pattern": "Privileged Kubernetes Workload",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "privileged: true",
+      "explanation": "Code deploys a privileged Kubernetes workload (privileged container, hostPath mount, or host namespaces). This grants root on the node and is a node/cluster takeover vector.",
+      "remediation": "Remove privileged, hostPath, and host-namespace settings from workloads. Use a least-privilege securityContext, drop capabilities, and avoid mounting the host filesystem.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/references/safeguards.md",
+        "start_line": 43
+      }
+    },
+    {
+      "id": "TM4",
+      "category": "Tool Misuse",
+      "pattern": "Privileged Kubernetes Workload",
+      "severity": "HIGH",
+      "confidence": 0.18,
+      "finding": "hostNetwork: true",
+      "explanation": "Code deploys a privileged Kubernetes workload (privileged container, hostPath mount, or host namespaces). This grants root on the node and is a node/cluster takeover vector.",
+      "remediation": "Remove privileged, hostPath, and host-namespace settings from workloads. Use a least-privilege securityContext, drop capabilities, and avoid mounting the host filesystem.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/references/safeguards.md",
+        "start_line": 31
+      }
+    },
+    {
+      "id": "TM4",
+      "category": "Tool Misuse",
+      "pattern": "Privileged Kubernetes Workload",
+      "severity": "HIGH",
+      "confidence": 0.18,
+      "finding": "hostPID: true",
+      "explanation": "Code deploys a privileged Kubernetes workload (privileged container, hostPath mount, or host namespaces). This grants root on the node and is a node/cluster takeover vector.",
+      "remediation": "Remove privileged, hostPath, and host-namespace settings from workloads. Use a least-privilege securityContext, drop capabilities, and avoid mounting the host filesystem.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/references/safeguards.md",
+        "start_line": 35
+      }
+    },
+    {
+      "id": "TM4",
+      "category": "Tool Misuse",
+      "pattern": "Privileged Kubernetes Workload",
+      "severity": "HIGH",
+      "confidence": 0.18,
+      "finding": "hostIPC: true",
+      "explanation": "Code deploys a privileged Kubernetes workload (privileged container, hostPath mount, or host namespaces). This grants root on the node and is a node/cluster takeover vector.",
+      "remediation": "Remove privileged, hostPath, and host-namespace settings from workloads. Use a least-privilege securityContext, drop capabilities, and avoid mounting the host filesystem.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/references/safeguards.md",
+        "start_line": 39
+      }
+    },
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "rm -rf src target/release/deps/app* target/release/",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/templates/dockerfiles/rust.Dockerfile",
+        "start_line": 41
+      }
+    },
+    {
+      "id": "TM2",
+      "category": "Tool Misuse",
+      "pattern": "Chaining Abuse",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "&& rm -",
+      "explanation": "Tool calls are chained to bypass individual safety checks or escalate capabilities beyond what any single tool call would allow.",
+      "remediation": "Limit tool chaining depth and validate the output of each tool before passing it to the next. Require explicit user approval for multi-step chains.",
+      "location": {
+        "file": "azure-kubernetes-app-deploy/templates/dockerfiles/rust.Dockerfile",
+        "start_line": 41
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:26:37.902313+00:00",
+  "scanMode": "static",
+  "skillName": "azure-kubernetes",
+  "contentHash": "648848fd0445ab97c755a91156cdd4f88fd61bb61f1cc6642561e6584a50f1cc",
+  "scannerVersion": "2.5.3"
+}

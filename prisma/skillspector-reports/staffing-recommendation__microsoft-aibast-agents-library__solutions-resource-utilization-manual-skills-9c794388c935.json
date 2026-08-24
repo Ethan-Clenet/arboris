@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:23:18.524485+00:00",
+  "scanMode": "static",
+  "skillName": "pipeline-staffing-recommendation",
+  "contentHash": "91be31d6f0c8041082de6ed79e1052b98ede3d173754e100850761e896822c67",
+  "scannerVersion": "2.5.3"
+}

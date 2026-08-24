@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:09:52.070420+00:00",
+  "scanMode": "static",
+  "skillName": "file-ipc-patterns",
+  "contentHash": "2d9b8293d61a6d3d946771bc26e2c3c0078bd9ebd439db8e8ddabf6a4592ad61",
+  "scannerVersion": "2.5.3"
+}

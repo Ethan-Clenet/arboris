@@ -1,0 +1,27 @@
+{
+  "riskScore": 15,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env.development ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 404
+      }
+    }
+  ],
+  "scannedAt": "2026-08-24T09:16:46.992211+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-spa-services-to-spa-proxy",
+  "contentHash": "132f83803d50c606f4e5480e887870b8e44f8f9f4b80dc4858c3688ac7f85f1d",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T09:16:42.903054+00:00",
+  "scanMode": "static",
+  "skillName": "migrating-semantic-kernel-to-agents",
+  "contentHash": "396bb1c24c80e1f54ce7de1b061e3334759ed13fcd895f7d8bccfc1545eb1531",
+  "scannerVersion": "2.5.3"
+}

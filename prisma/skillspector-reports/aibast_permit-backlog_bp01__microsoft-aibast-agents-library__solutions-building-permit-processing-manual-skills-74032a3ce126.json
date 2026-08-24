@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-08-24T08:56:56.875428+00:00",
+  "scanMode": "static",
+  "skillName": "permit-backlog-and-complaint-risk",
+  "contentHash": "10b2b77e6a63b04dc836c7c304d54684cb29bca84077b7208d69e79968f5576a",
+  "scannerVersion": "2.5.3"
+}
