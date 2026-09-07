@@ -10,8 +10,10 @@
  *   node scripts/skillspector-scan.mjs --no-db           # fichiers seulement
  *   node scripts/skillspector-scan.mjs --resolve         # resolve semver avant scan
  *   node scripts/skillspector-scan.mjs --prefix __microsoft-
+ *   node scripts/skillspector-scan.mjs --jobs 4
  *
- * Prérequis : image Docker `skillspector` ou `skillspector:<version>`.
+ * Prérequis : image Docker `skillspector` ou `skillspector:<version>`,
+ * ou CLI natif via `SKILLSPECTOR_BIN` (ex. venv `skillspector`).
  * Skip si contentHash + scannerVersion inchangés (sauf --force).
  * Score Arboris = 100 − risk_score SkillSpector.
  */
@@ -37,6 +39,7 @@ function parseArgs(argv) {
   let noDb = false
   let resolve = false
   let prefix = null
+  let jobs = 1
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i]
     if (arg === '--limit') {
@@ -49,6 +52,8 @@ function parseArgs(argv) {
       resolve = true
     } else if (arg === '--prefix') {
       prefix = argv[++i]
+    } else if (arg === '--jobs') {
+      jobs = Number(argv[++i])
     } else if (arg.startsWith('-')) {
       console.error(`Option inconnue: ${arg}`)
       process.exit(1)
@@ -56,7 +61,7 @@ function parseArgs(argv) {
       skills.push(arg)
     }
   }
-  return { skills, limit, force, noDb, resolve, prefix }
+  return { skills, limit, force, noDb, resolve, prefix, jobs }
 }
 
 function riskToSafetyScore(riskScore) {
@@ -182,54 +187,77 @@ function resolveImageName(scannerVersion) {
   return 'skillspector'
 }
 
+function nativeBin() {
+  const bin = process.env.SKILLSPECTOR_BIN
+  return bin && bin.trim() ? bin.trim() : null
+}
+
+function waitForScanProcess(command, args, outPath, label) {
+  return new Promise((resolvePromise, reject) => {
+    const child = spawn(command, args, { stdio: ['ignore', 'pipe', 'pipe'] })
+    let stderr = ''
+    let stdout = ''
+    child.stderr.on('data', (chunk) => {
+      stderr += chunk.toString()
+    })
+    child.stdout.on('data', (chunk) => {
+      stdout += chunk.toString()
+    })
+    child.on('error', reject)
+    child.on('close', (code) => {
+      // SkillSpector exit 1 when risk is high, but still writes a valid JSON report.
+      if (existsSync(outPath)) {
+        resolvePromise()
+        return
+      }
+      if (code !== 0) {
+        reject(new Error(`${label} exit ${code}: ${(stderr || stdout).trim() || 'scan failed'}`))
+        return
+      }
+      resolvePromise()
+    })
+  })
+}
+
 async function runDockerScan(image, skillId) {
   const staging = await mkdtemp(join(tmpdir(), 'skillspector-'))
   const stagedSkill = join(staging, 'skill')
   const outName = `${skillId}.raw.json`
+  const outPath = join(reportsDir, outName)
   try {
     await cp(join(skillsDir, skillId), stagedSkill, { recursive: true })
-    await new Promise((resolvePromise, reject) => {
-      const args = [
-        'run',
-        '--rm',
-        '-v',
-        `${stagedSkill}:/scan/skill:ro`,
-        '-v',
-        `${reportsDir}:/scan/out`,
-        image,
-        'scan',
-        './skill',
-        '--no-llm',
-        '--format',
-        'json',
-        '--output',
-        `/scan/out/${outName}`,
-      ]
-      const child = spawn('docker', args, { stdio: ['ignore', 'pipe', 'pipe'] })
-      let stderr = ''
-      let stdout = ''
-      child.stderr.on('data', (chunk) => {
-        stderr += chunk.toString()
-      })
-      child.stdout.on('data', (chunk) => {
-        stdout += chunk.toString()
-      })
-      child.on('error', reject)
-      child.on('close', (code) => {
-        const outPath = join(reportsDir, outName)
-        // SkillSpector exit 1 when risk is high, but still writes a valid JSON report.
-        if (existsSync(outPath)) {
-          resolvePromise()
-          return
-        }
-        if (code !== 0) {
-          reject(new Error(`docker exit ${code}: ${(stderr || stdout).trim() || 'scan failed'}`))
-          return
-        }
-        resolvePromise()
-      })
-    })
-    return join(reportsDir, outName)
+    const bin = nativeBin()
+    if (bin) {
+      await waitForScanProcess(
+        bin,
+        ['scan', stagedSkill, '--no-llm', '--format', 'json', '--output', outPath],
+        outPath,
+        'skillspector',
+      )
+    } else {
+      await waitForScanProcess(
+        'docker',
+        [
+          'run',
+          '--rm',
+          '-v',
+          `${stagedSkill}:/scan/skill:ro`,
+          '-v',
+          `${reportsDir}:/scan/out`,
+          image,
+          'scan',
+          './skill',
+          '--no-llm',
+          '--format',
+          'json',
+          '--output',
+          `/scan/out/${outName}`,
+        ],
+        outPath,
+        'docker',
+      )
+    }
+    return outPath
   } finally {
     await rm(staging, { recursive: true, force: true })
   }
@@ -267,6 +295,13 @@ async function upsertDb(skillId, report, safetyScore) {
 }
 
 async function ensureImage(image) {
+  const bin = nativeBin()
+  if (bin) {
+    if (!existsSync(bin)) {
+      throw new Error(`SKILLSPECTOR_BIN introuvable : ${bin}`)
+    }
+    return
+  }
   await new Promise((resolvePromise, reject) => {
     const child = spawn('docker', ['image', 'inspect', image], { stdio: 'ignore' })
     child.on('error', reject)
@@ -275,7 +310,8 @@ async function ensureImage(image) {
         reject(
           new Error(
             `Image Docker « ${image} » introuvable. ` +
-              `Build : git clone -b v<ver> https://github.com/NVIDIA/SkillSpector.git && docker build -t ${image} .`,
+              `Build : git clone -b v<ver> https://github.com/NVIDIA/SkillSpector.git && docker build -t ${image} . ` +
+              `Ou définir SKILLSPECTOR_BIN vers le CLI natif.`,
           ),
         )
         return
@@ -285,8 +321,20 @@ async function ensureImage(image) {
   })
 }
 
+async function mapPool(items, concurrency, worker) {
+  const jobs = Math.max(1, Math.min(concurrency, items.length || 1))
+  let next = 0
+  async function run() {
+    while (next < items.length) {
+      const index = next++
+      await worker(items[index])
+    }
+  }
+  await Promise.all(Array.from({ length: jobs }, () => run()))
+}
+
 async function main() {
-  const { skills: only, limit, force, noDb, resolve, prefix } = parseArgs(process.argv.slice(2))
+  const { skills: only, limit, force, noDb, resolve, prefix, jobs } = parseArgs(process.argv.slice(2))
   await mkdir(reportsDir, { recursive: true })
 
   let scannerVersion = await readPinnedVersion()
@@ -304,7 +352,11 @@ async function main() {
   if (prefix) ids = ids.filter((id) => id.includes(prefix))
   if (limit != null && Number.isFinite(limit)) ids = ids.slice(0, limit)
 
-  console.log(`🔍 SkillSpector static — ${ids.length} skill(s), image=${image}, scanner=${scannerVersion}`)
+  const concurrency = Number.isFinite(jobs) && jobs > 0 ? Math.floor(jobs) : 1
+  const engine = nativeBin() ? `bin=${nativeBin()}` : `image=${image}`
+  console.log(
+    `🔍 SkillSpector static — ${ids.length} skill(s), ${engine}, scanner=${scannerVersion}, jobs=${concurrency}`,
+  )
 
   let scanned = 0
   let skipped = 0
@@ -312,7 +364,7 @@ async function main() {
   let updatedDb = 0
   const failedIds = []
 
-  for (const skillId of ids) {
+  await mapPool(ids, concurrency, async (skillId) => {
     const skillPath = join(skillsDir, skillId)
     try {
       await stat(join(skillPath, 'SKILL.md'))
@@ -320,7 +372,7 @@ async function main() {
       console.warn(`✗ ${skillId} — SKILL.md manquant`)
       failed++
       failedIds.push(skillId)
-      continue
+      return
     }
 
     const contentHash = await hashSkillDir(skillId)
@@ -334,7 +386,7 @@ async function main() {
         if (sameHash && sameScanner) {
           console.log(`· ${skillId} — inchangé, skip`)
           skipped++
-          continue
+          return
         }
         if (sameHash && !sameScanner) {
           console.log(`· ${skillId} — skill inchangé, scanner ${prev.scannerVersion ?? '?'} → ${scannerVersion}`)
@@ -371,7 +423,7 @@ async function main() {
       failed++
       failedIds.push(skillId)
     }
-  }
+  })
 
   console.log(
     `\n✅ Terminé : ${scanned} scannés, ${skipped} inchangés, ${failed} échecs, ${updatedDb} mis à jour en DB`,
