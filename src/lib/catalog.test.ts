@@ -5,12 +5,14 @@ import {
   categoryIdsInGroup,
   compatDot,
   hexToRgba,
+  packIdsForStartPath,
   promptFor,
   promptForStack,
   scoreColor,
   skillMatchesStack,
   skillsForStackAndCategory,
   stackSupportsCategory,
+  TECH_STARTER_PACK_IDS,
 } from './catalog'
 
 const skill = (over: Partial<SkillSummary> = {}): SkillSummary => ({
@@ -41,6 +43,14 @@ describe('stackSupportsCategory / skillMatchesStack', () => {
     expect(stackSupportsCategory('react', 'frontend')).toBe(true)
     expect(stackSupportsCategory('react', 'backend')).toBe(false)
     expect(stackSupportsCategory('unknown', 'frontend')).toBe(false)
+    expect(stackSupportsCategory('n8n', 'ops')).toBe(true)
+    expect(stackSupportsCategory('docker', 'ops')).toBe(true)
+  })
+
+  it('expose Docker et n8n dans les starters « nouveau projet »', () => {
+    expect(TECH_STARTER_PACK_IDS).toContain('docker-ops-starter')
+    expect(TECH_STARTER_PACK_IDS).toContain('n8n-starter')
+    expect(packIdsForStartPath('new-project')).toEqual(TECH_STARTER_PACK_IDS)
   })
 
   it('un skill sans stack matche toutes les technos', () => {

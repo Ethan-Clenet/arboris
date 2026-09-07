@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-06T08:37:21.938Z",
+  "generatedAt": "2026-08-24T09:32:36.494Z",
   "stacks": [
     {
       "id": "node",
@@ -37,6 +37,10 @@
     {
       "id": "docker",
       "label": "Docker"
+    },
+    {
+      "id": "n8n",
+      "label": "n8n"
     },
     {
       "id": "k9",
@@ -118,6 +122,7 @@
     "architecture-decision-records",
     "article-writing",
     "auth0",
+    "author-auth0-skill",
     "automation-audit-ops",
     "autonomous-agent-harness",
     "autonomous-loops",
@@ -195,6 +200,7 @@
     "csharp-testing",
     "customer-billing-ops",
     "customs-trade-compliance",
+    "cve-scan",
     "cypress-author",
     "cypress-docs",
     "cypress-explain",
@@ -411,6 +417,7 @@
     "motion-ui",
     "mysql",
     "mysql-patterns",
+    "n8n-patterns",
     "nanoclaw-repl",
     "neon",
     "neon-ai-gateway",
@@ -650,6 +657,7 @@
       "competitor-analysis",
       "configure-ecc",
       "cost-tracking",
+      "cve-scan",
       "dart-run-static-analysis",
       "database-migrations",
       "deployment-patterns",
@@ -860,6 +868,7 @@
       "agents-sdk",
       "apollo-client",
       "auth0",
+      "author-auth0-skill",
       "benchmark-methodology",
       "better-auth-best-practices",
       "better-auth-create-auth",
@@ -974,6 +983,7 @@
       "apollo-mcp-server",
       "benchmark",
       "codebase-onboarding",
+      "cve-scan",
       "deployment-patterns",
       "docker-patterns",
       "flox-environments",
@@ -981,6 +991,7 @@
       "homelab-wireguard-vpn",
       "kubernetes-patterns",
       "mle-workflow",
+      "n8n-patterns",
       "production-audit",
       "prompt-optimizer",
       "quarkus-verification",
@@ -988,6 +999,9 @@
       "sandbox-sdk",
       "uncloud",
       "vite-patterns"
+    ],
+    "n8n": [
+      "n8n-patterns"
     ],
     "k9": [
       "cloudflare-one",
@@ -1282,6 +1296,7 @@
       "mle-workflow",
       "motion-ui",
       "mysql-patterns",
+      "n8n-patterns",
       "nanoclaw-repl",
       "nestjs-patterns",
       "nextjs-turbopack",
@@ -1397,6 +1412,10 @@
       "frontend-a11y",
       "frontend-design-direction",
       "gateguard",
+      "healthcare-cdss-patterns",
+      "healthcare-emr-patterns",
+      "healthcare-eval-harness",
+      "healthcare-phi-compliance",
       "homelab-network-readiness",
       "homelab-network-setup",
       "homelab-pihole-dns",
@@ -1415,12 +1434,14 @@
       "prompt-optimizer",
       "recsys-pipeline-architect",
       "repo-scan",
+      "santa-method",
       "scientific-db-pubmed-database",
       "scientific-db-uspto-database",
       "scientific-pkg-gget",
       "scientific-thinking-literature-review",
       "scientific-thinking-scholar-evaluation",
       "skill-scout",
+      "skill-sonar",
       "social-publisher",
       "team-builder",
       "token-budget-advisor",
@@ -1491,7 +1512,8 @@
       "rust-best-practices"
     ],
     "Auth0": [
-      "auth0"
+      "auth0",
+      "author-auth0-skill"
     ],
     "Better Auth": [
       "better-auth-best-practices",
@@ -1514,6 +1536,9 @@
     "CodeRabbit": [
       "coderabbit-autofix",
       "coderabbit-code-review"
+    ],
+    "Arboris": [
+      "cve-scan"
     ],
     "Cypress": [
       "cypress-author",
@@ -1682,23 +1707,11 @@
       "recipe-sync-contacts-to-sheet",
       "recipe-watch-drive-changes"
     ],
-    "Health1 Super Speciality Hospitals — contributed by Dr. Keyur Patel": [
-      "healthcare-cdss-patterns",
-      "healthcare-emr-patterns",
-      "healthcare-eval-harness",
-      "healthcare-phi-compliance"
-    ],
     "Vercel": [
       "next-cache-components-adoption",
       "next-cache-components-optimizer",
       "next-dev-loop",
       "next-partial-prefetching-adoption"
-    ],
-    "Ronald Skelton - Founder, RapportScore.ai": [
-      "santa-method"
-    ],
-    "Skill-Sonar": [
-      "skill-sonar"
     ]
   }
 }

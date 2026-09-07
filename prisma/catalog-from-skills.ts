@@ -214,6 +214,7 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
   if (slug === 'email-ops') return 'ops'
   if (slug === 'ui-demo') return 'frontend'
   if (/cisco-ios/.test(slug)) return 'ops'
+  if (/^n8n-/.test(slug) || slug === 'n8n') return 'ops'
 
   // Slug (le plus fiable)
   if (/security|auth|oauth|hipaa|compliance|^cve-/.test(slug)) return 'security'
@@ -322,6 +323,7 @@ function inferStacks(id: string, description: string, body: string, stacks: Stac
     'turso-db': ['turso', 'postgresql'],
     query: ['duckdb'],
     drizzle: ['drizzle', 'ts', 'postgresql', 'mysql', 'prisma'],
+    'n8n-patterns': ['n8n', 'docker'],
     // Contenu marketing/SEO — évite le faux positif « JavaScript-rendered »
     'ai-seo': [],
   }
@@ -338,6 +340,7 @@ function inferStacks(id: string, description: string, body: string, stacks: Stac
     java: /\bjava\b(?!script)/,
     'spring-boot': /\bspring\s?boot|springboot\b/,
     docker: /\bdocker\b/,
+    n8n: /\bn8n\b/,
     k9: /\bk9\b|\bk9s\b|\bkubernetes\b|\bk8s\b/,
     postgresql: /\bpostgres|postgresql\b/,
     mysql: /\bmysql\b/,
