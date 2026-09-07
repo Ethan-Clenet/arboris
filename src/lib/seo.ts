@@ -143,10 +143,14 @@ export const SEO_PREMIUM_PUBLISHERS = new Set([
   'Flutter',
   'Gemini',
   'Google Workspace',
+  'Hugging Face',
   'Microsoft',
   'Neon',
+  'Nous Research',
+  'Ollama',
   'Stitch',
   'Vercel',
+  'vinta',
 ])
 
 export type SkillIndexInput = {

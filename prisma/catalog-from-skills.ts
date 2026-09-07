@@ -98,6 +98,24 @@ export function normalizePublisher(raw: string): string {
   if (lower === 'neon' || lower === 'neondatabase') return 'Neon'
   if (lower === 'flutter' || lower === 'dart') return 'Flutter'
   if (lower === 'figma') return 'Figma'
+  if (
+    lower === 'huggingface' ||
+    lower === 'hugging-face' ||
+    lower === 'hugging face' ||
+    lower === 'hf'
+  ) {
+    return 'Hugging Face'
+  }
+  if (lower === 'ollama') return 'Ollama'
+  if (
+    lower === 'nousresearch' ||
+    lower === 'nous-research' ||
+    lower === 'nous research' ||
+    lower === 'nous'
+  ) {
+    return 'Nous Research'
+  }
+  if (lower === 'vinta') return 'vinta'
   if (value.includes('/')) {
     const tail = value.split('/').pop()?.trim()
     if (tail) return normalizePublisher(tail)

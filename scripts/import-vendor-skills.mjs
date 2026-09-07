@@ -28,20 +28,40 @@ const COMMANDS_DIR = join(ROOT, 'prisma', 'commands')
 
 /** @type {Source[]} */
 const SOURCES = [
-  // Import "top 12" des dépôts Microsoft visibles sur la page créateur.
-  // (Objectif: ajouter un gros pack de skills officiels sans tout le catalogue.)
-  { repo: 'microsoft/aibast-agents-library', publisher: 'Microsoft', roots: ['.'] },
-  { repo: 'microsoft/skills', publisher: 'Microsoft', roots: ['.'] },
-  { repo: 'microsoft/ai-agents-for-beginners', publisher: 'Microsoft', roots: ['.'] },
-  { repo: 'microsoft/upgrade-agent-plugins', publisher: 'Microsoft', roots: ['.'] },
-  { repo: 'microsoft/power-platform-skills', publisher: 'Microsoft', roots: ['.'] },
-  { repo: 'microsoft/cat-agent-skills', publisher: 'Microsoft', roots: ['.'] },
-  { repo: 'microsoft/hve-core', publisher: 'Microsoft', roots: ['.'] },
-  { repo: 'microsoft/vscode', publisher: 'Microsoft', roots: ['.'] },
-  { repo: 'microsoft/amplifier-bundle-skills', publisher: 'Microsoft', roots: ['.'] },
-  { repo: 'microsoft/GitHub-Copilot-for-Azure', publisher: 'Microsoft', roots: ['.'] },
-  { repo: 'microsoft/apm', publisher: 'Microsoft', roots: ['.'] },
-  { repo: 'microsoft/testfx', publisher: 'Microsoft', roots: ['.'] },
+  // Batch SkillsMP : NousResearch, vinta, Hugging Face, Ollama.
+  // Les skills Microsoft déjà importés restent dans prisma/skills.
+  { repo: 'NousResearch/hermes-agent', publisher: 'Nous Research', roots: ['.'] },
+  { repo: 'NousResearch/Gym', publisher: 'Nous Research', roots: ['.'] },
+  { repo: 'NousResearch/pokemon-agent', publisher: 'Nous Research', roots: ['.'] },
+  { repo: 'vinta/hal-9000', publisher: 'vinta', roots: ['.'] },
+  { repo: 'vinta/awesome-python', publisher: 'vinta', roots: ['.'] },
+  { repo: 'vinta/pangu.js', publisher: 'vinta', roots: ['.'] },
+  { repo: 'vinta/dear-ai', publisher: 'vinta', roots: ['.'] },
+  { repo: 'vinta/laughing-man', publisher: 'vinta', roots: ['.'] },
+  { repo: 'huggingface/skills', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/OpenEnv', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/diffusers', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/kernels', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/physics-intern-skills', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/mlclaw', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/transformers-mlinter', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/trl', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/optimum-intel', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/ai-deadlines', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/physics-intern', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/harbor-hf', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/transformers', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/peft', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/huggingface_hub', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/sentence-transformers', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/research-agent', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/agentcap', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/chat-ui', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/blog', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/transformers.js', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/funes', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'huggingface/inspect_evals', publisher: 'Hugging Face', roots: ['.'] },
+  { repo: 'ollama/ollama', publisher: 'Ollama', roots: ['.'] },
 ]
 
 function slugifyForId(input) {
@@ -75,6 +95,16 @@ function sh(cmd, args, opts = {}) {
   execFileSync(cmd, args, { stdio: 'inherit', ...opts })
 }
 
+const HIDDEN_SKILL_DIRS = new Set([
+  '.ai',
+  '.agents',
+  '.claude',
+  '.codex',
+  '.fast-agent',
+  '.github',
+  '.opencode',
+])
+
 function findSkillDirs(dir, out = []) {
   if (!existsSync(dir)) return out
   if (existsSync(join(dir, 'SKILL.md'))) {
@@ -82,7 +112,8 @@ function findSkillDirs(dir, out = []) {
     return out
   }
   for (const name of readdirSync(dir)) {
-    if (name.startsWith('.')) continue
+    if (name === '.git') continue
+    if (name.startsWith('.') && !HIDDEN_SKILL_DIRS.has(name)) continue
     const full = join(dir, name)
     if (!statSync(full).isDirectory()) continue
     if (existsSync(join(full, 'SKILL.md'))) out.push(full)
@@ -156,15 +187,31 @@ ${raw.trim()}\n`
 
 function sparseClone(repo, ref, workdir) {
   mkdirSync(workdir, { recursive: true })
-  sh('git', ['init', '-q'], { cwd: workdir })
-  sh('git', ['remote', 'add', 'origin', `https://github.com/${repo}.git`], { cwd: workdir })
-  // Prefer sparse later; full shallow is simpler & reliable for skill trees
+  const env = { ...process.env, GIT_LFS_SKIP_SMUDGE: '1' }
+  sh('git', ['init', '-q'], { cwd: workdir, env })
+  sh('git', ['remote', 'add', 'origin', `https://github.com/${repo}.git`], { cwd: workdir, env })
   try {
-    sh('git', ['fetch', '--depth', '1', 'origin', ref], { cwd: workdir })
+    sh('git', ['fetch', '--depth', '1', '--filter=blob:none', 'origin', ref], { cwd: workdir, env })
   } catch {
-    sh('git', ['fetch', '--depth', '1', 'origin', 'HEAD'], { cwd: workdir })
+    sh('git', ['fetch', '--depth', '1', '--filter=blob:none', 'origin', 'HEAD'], { cwd: workdir, env })
   }
-  sh('git', ['checkout', '-q', 'FETCH_HEAD'], { cwd: workdir })
+  sh('git', ['sparse-checkout', 'init', '--no-cone'], { cwd: workdir, env })
+  const tree = execFileSync('git', ['ls-tree', '-r', '--name-only', 'FETCH_HEAD'], {
+    cwd: workdir,
+    env,
+    encoding: 'utf8',
+  })
+  const dirs = new Set()
+  for (const line of tree.split('\n')) {
+    if (!/(^|\/)SKILL\.md$/i.test(line)) continue
+    const parts = line.split('/')
+    parts.pop()
+    if (parts.length === 0) dirs.add('/SKILL.md')
+    else dirs.add(`/${parts.join('/')}/**`)
+  }
+  const patterns = dirs.size ? [...dirs] : ['/**/SKILL.md']
+  writeFileSync(join(workdir, '.git/info/sparse-checkout'), `${patterns.join('\n')}\n`)
+  sh('git', ['checkout', '-q', 'FETCH_HEAD'], { cwd: workdir, env })
 }
 
 function main() {
@@ -199,6 +246,14 @@ function main() {
           if (baseId === 'gws-shared') continue
 
           const relToRepo = relative(repoDir, dir)
+          const relNorm = relToRepo.replace(/\\/g, '/')
+          if (
+            (/\/(tests|test|testdata|fixtures|__tests__|_template)\//i.test(`/${relNorm}/`) ||
+              baseId.startsWith('_template')) &&
+            !(source.publisher === 'Ollama' && baseId === 'release-notes')
+          ) {
+            continue
+          }
           const repoSlug = source.repo // e.g. microsoft/skills
           const destId = buildPathBasedSkillId({ baseId, repoSlug, relToRepo })
 
