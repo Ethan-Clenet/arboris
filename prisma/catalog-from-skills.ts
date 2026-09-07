@@ -116,6 +116,14 @@ export function normalizePublisher(raw: string): string {
     return 'Nous Research'
   }
   if (lower === 'vinta') return 'vinta'
+  if (
+    lower === 'context7' ||
+    lower === 'ctx7' ||
+    lower === 'context-7' ||
+    lower === 'upstash-context7'
+  ) {
+    return 'Context7'
+  }
   if (value.includes('/')) {
     const tail = value.split('/').pop()?.trim()
     if (tail) return normalizePublisher(tail)

@@ -44,6 +44,7 @@ export const PUBLISHER_LOGO_COLOR: Record<string, string> = {
   'Nous Research': '#7C5CFF',
   Ollama: '#F4F4F5',
   vinta: '#2563EB',
+  Context7: '#059669',
   Neon: '#00E699',
   Stitch: '#EA4335',
   Vercel: '#F4F4F5',
@@ -55,6 +56,7 @@ export const PUBLISHER_LOGO_ASSET: Record<string, string> = {
   'Hugging Face': '/publishers/huggingface.svg',
   'Nous Research': '/publishers/nous-research.png',
   vinta: '/publishers/vinta.png',
+  Context7: '/publishers/context7.svg',
   Auth0: '/publishers/auth0.svg',
 }
 

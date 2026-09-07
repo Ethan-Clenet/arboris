@@ -42,6 +42,7 @@ describe('isPremiumPublisher', () => {
     expect(isPremiumPublisher('Ollama')).toBe(true)
     expect(isPremiumPublisher('Nous Research')).toBe(true)
     expect(isPremiumPublisher('vinta')).toBe(true)
+    expect(isPremiumPublisher('Context7')).toBe(true)
   })
 
   it('refuse Community', () => {

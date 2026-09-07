@@ -133,6 +133,9 @@ export function resolvePublisherId(input: string, manifest: CliManifest): string
     flutter: 'Flutter',
     dart: 'Flutter',
     figma: 'Figma',
+    context7: 'Context7',
+    ctx7: 'Context7',
+    'context-7': 'Context7',
   }
   const alias = aliases[lower]
   if (alias && byPublisher[alias]) return alias

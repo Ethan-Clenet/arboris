@@ -25,6 +25,8 @@ describe('publisher logos', () => {
     expect(hasPublisherLogo('Nous Research')).toBe(true)
     expect(publisherLogoAsset('Nous Research')).toBe('/publishers/nous-research.png')
     expect(hasPublisherLogo('vinta')).toBe(true)
+    expect(hasPublisherLogo('Context7')).toBe(true)
+    expect(publisherLogoAsset('Context7')).toBe('/publishers/context7.svg')
     expect(hasPublisherLogo('Inconnu')).toBe(false)
   })
 })
