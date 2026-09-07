@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:07.274439+00:00",
+  "scanMode": "static",
+  "skillName": "project-authorization",
+  "contentHash": "02444e52cc543bef8555ab09a7995b457c5bdfc67c8ba4c0090cf2a515eb64e1",
+  "scannerVersion": "2.5.3"
+}

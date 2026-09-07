@@ -1,0 +1,83 @@
+{
+  "riskScore": 18,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 5,
+  "issues": [
+    {
+      "id": "E4",
+      "category": "Data Exfiltration",
+      "pattern": "Context Leakage",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "send the full\nconversation ",
+      "explanation": "Code or instructions that leak agent conversation context to external services, potentially exposing sensitive user interactions.",
+      "remediation": "Remove any code that sends prompts, responses, or session data externally. Preserve user privacy; never exfiltrate conversation content.",
+      "location": {
+        "file": "references/PIPELINE_OPTIONS.md",
+        "start_line": 242
+      }
+    },
+    {
+      "id": "E4",
+      "category": "Data Exfiltration",
+      "pattern": "Context Leakage",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "send the full conversation ",
+      "explanation": "Code or instructions that leak agent conversation context to external services, potentially exposing sensitive user interactions.",
+      "remediation": "Remove any code that sends prompts, responses, or session data externally. Preserve user privacy; never exfiltrate conversation content.",
+      "location": {
+        "file": "references/PIPELINE_OPTIONS.md",
+        "start_line": 259
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- @generated:start id=typedef:TransformersEnvironment -->\n| Option | Type | Description |\n|--------|------|-------------|\n| `version` | `string` | This version of Transformers.js. |\n| `backends` | ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/CONFIGURATION.md",
+        "start_line": 31
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- @generated:start id=typedef:PretrainedModelOptions -->\n| Option | Type | Description |\n|--------|------|-------------|\n| `progress_callback`? | `ProgressCallback` | If specified, this function is",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/PIPELINE_OPTIONS.md",
+        "start_line": 9
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- @generated:start id=typedef:ProgressInfo -->\n**`InitiateProgressInfo`**\n\n| Option | Type | Description |\n|--------|------|-------------|\n| `status` | `'initiate'` | A file load is about to start.",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/PIPELINE_OPTIONS.md",
+        "start_line": 54
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:33:15.340373+00:00",
+  "scanMode": "static",
+  "skillName": "transformers-js",
+  "contentHash": "879d1400365944a2169da993606bb1dd575bc3bbb26d6be12c0832d68e7bf225",
+  "scannerVersion": "2.5.3"
+}

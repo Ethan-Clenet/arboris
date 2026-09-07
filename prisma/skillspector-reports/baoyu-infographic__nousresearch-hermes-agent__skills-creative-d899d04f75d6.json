@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:03.386278+00:00",
+  "scanMode": "static",
+  "skillName": "baoyu-infographic",
+  "contentHash": "40ccdb4aec760ea7fbbc78f1e9dbbec9253025dc2f0caf72e32db69f0b71e29e",
+  "scannerVersion": "2.5.3"
+}

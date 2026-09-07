@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:49.724874+00:00",
+  "scanMode": "static",
+  "skillName": "hf-space-recovery",
+  "contentHash": "065b4e399257373c39fbb4c426531456e41b67e40ea0016c1a38ced95718941d",
+  "scannerVersion": "2.5.3"
+}

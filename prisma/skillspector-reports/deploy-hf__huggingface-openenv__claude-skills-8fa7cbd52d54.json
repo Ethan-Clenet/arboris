@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:39.656090+00:00",
+  "scanMode": "static",
+  "skillName": "deploy-hf",
+  "contentHash": "2cdeed85d86cd5bc9d8d8e43742c6924d8954c1cc5adee7759d41b4b46af4a07",
+  "scannerVersion": "2.5.3"
+}

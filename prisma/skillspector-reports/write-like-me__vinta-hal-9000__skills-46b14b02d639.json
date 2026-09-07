@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "AS1",
+      "category": "Agent Snooping",
+      "pattern": "Agent Config Directory Access",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "~/.claude/settings.json",
+      "explanation": "Skill reads from agent configuration directories (.claude/, .codex/, .gemini/). These directories may contain API keys, personal settings, and other credentials that the skill has no legitimate need to access.",
+      "remediation": "Remove all code or instructions that access agent configuration directories (.claude/, .codex/, .gemini/). If configuration values are needed, pass them explicitly as parameters or environment variables — never read the agent's own config files.",
+      "location": {
+        "file": "references/exemplars.md",
+        "start_line": 50
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:33:32.923482+00:00",
+  "scanMode": "static",
+  "skillName": "write-like-me",
+  "contentHash": "28b0228cd8e76ab1fe1ae5a0e13b7e5a75ec449e9dc5e1f27685ffbe2c6bb06b",
+  "scannerVersion": "2.5.3"
+}

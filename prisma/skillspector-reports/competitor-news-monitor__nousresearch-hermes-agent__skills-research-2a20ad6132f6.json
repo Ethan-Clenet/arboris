@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "Create a competitor intelligence digest.\"\n- \"Track funding, partnerships, executive moves, and incidents.\"\n- A cron tick fires for an existing competitor watch (steps 3-6).\n\nDon't use for: one-off com",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 23
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:09.639694+00:00",
+  "scanMode": "static",
+  "skillName": "competitor-news-monitor",
+  "contentHash": "bba990bf0e9c97892ef1d8f0b5e168923e0d0a0b6d4a1a605d416e90405b0f1c",
+  "scannerVersion": "2.5.3"
+}

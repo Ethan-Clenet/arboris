@@ -1,0 +1,40 @@
+{
+  "riskScore": 34,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "--no-check",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "scripts/validate_pivot_dataset.py",
+        "start_line": 278
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:46.593063+00:00",
+  "scanMode": "static",
+  "skillName": "nemo-gym-pivot-datasets",
+  "contentHash": "7d8b6ee3b5181b9e5f0918d566c66b89bff7dc740805e61a471050417c49b8f8",
+  "scannerVersion": "2.5.3"
+}

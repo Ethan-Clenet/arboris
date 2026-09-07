@@ -1,0 +1,41 @@
+{
+  "riskScore": 25,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "without checking",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "templates/sanity.md",
+        "start_line": 297
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Paste the Google Fonts <link> from the template's Hermes notes -->\n  <link href=\"https://fonts.googleapis.com/css2?family=...\" rel=\"stylesheet\">\n  <style>\n    /* Apply the template's color palett",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 60
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:05.437911+00:00",
+  "scanMode": "static",
+  "skillName": "popular-web-designs",
+  "contentHash": "9051d3095325c9f8761275ee8f58ad522af1d03a0603641213f40a967a3ebb37",
+  "scannerVersion": "2.5.3"
+}

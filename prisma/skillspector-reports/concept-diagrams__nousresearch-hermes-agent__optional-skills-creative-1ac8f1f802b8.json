@@ -1,0 +1,293 @@
+{
+  "riskScore": 12,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 20,
+  "issues": [
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.65,
+      "finding": "serve as a general-purpose",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 37
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!--\n    Column layout (680px viewBox, safe area x=40–640):\n      Left  col : x=20,  w=190, cx=115  (error / terminal branches)\n      Center col: x=220, w=240, cx=340  (main happy path)\n      Right  c",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/automated-password-reset-flow.md",
+        "start_line": 28
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- D1 \"No\" → left column -->\n  <path d=\"M 240,200 L 115,200 L 115,248\" class=\"arr\" marker-end=\"url(#arrow)\"/>\n  <text class=\"ts\" x=\"178\" y=\"193\" text-anchor=\"middle\" opacity=\".75\">No</text>\n\n  <!-- ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/automated-password-reset-flow.md",
+        "start_line": 61
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- N3 · Generate unique token -->\n  <g class=\"c-purple\">\n    <rect x=\"220\" y=\"248\" width=\"240\" height=\"56\" rx=\"8\"/>\n    <text class=\"th\" x=\"340\" y=\"269\" text-anchor=\"middle\" dominant-baseline=\"centr",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/automated-password-reset-flow.md",
+        "start_line": 92
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- ========================================== -->\n  <!-- SECTION 1: SETUP (Human → program.md → AI) -->\n  <!-- ========================================== -->\n\n  <text class=\"ts\" x=\"40\" y=\"30\" text-a",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/autonomous-llm-research-agent-flow.md",
+        "start_line": 29
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- AI Agent -->\n  <g class=\"node c-purple\">\n    <rect x=\"470\" y=\"42\" width=\"160\" height=\"56\" rx=\"8\" stroke-width=\"0.5\"/>\n    <text class=\"th\" x=\"550\" y=\"62\" text-anchor=\"middle\" dominant-baseline=\"c",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/autonomous-llm-research-agent-flow.md",
+        "start_line": 55
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Step 4: Decision — val_bpb improved? -->\n  <g class=\"node c-gray\">\n    <rect x=\"170\" y=\"430\" width=\"280\" height=\"44\" rx=\"8\" stroke-width=\"0.5\"/>\n    <text class=\"th\" x=\"310\" y=\"452\" text-anchor=\"",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/autonomous-llm-research-agent-flow.md",
+        "start_line": 107
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Phase 1: Development -->\n  <g>\n    <rect x=\"40\" y=\"30\" width=\"600\" height=\"110\" rx=\"16\" stroke-width=\"1\" stroke-dasharray=\"6 4\" fill=\"var(--bg-secondary)\" stroke=\"var(--border)\"/>\n    <text class",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/feature-film-production-pipeline.md",
+        "start_line": 25
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Phase 2: Pre-production -->\n  <g>\n    <rect x=\"40\" y=\"170\" width=\"600\" height=\"110\" rx=\"16\" stroke-width=\"1\" stroke-dasharray=\"6 4\" fill=\"var(--bg-secondary)\" stroke=\"var(--border)\"/>\n    <text c",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/feature-film-production-pipeline.md",
+        "start_line": 47
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Flow arrows within post -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/feature-film-production-pipeline.md",
+        "start_line": 117
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Stage labels -->\n  <text class=\"ts\" x=\"40\" y=\"68\" text-anchor=\"start\" opacity=\".5\">Arrival</text>\n  <text class=\"ts\" x=\"40\" y=\"168\" text-anchor=\"start\" opacity=\".5\">Assessment</text>\n  <text clas",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/hospital-emergency-department-flow.md",
+        "start_line": 25
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- ── 1. LIFELINE DASHED STEMS (drawn first, behind everything) ── -->\n  <line x1=\"90\"  y1=\"76\" x2=\"90\"  y2=\"590\" class=\"lifeline\"/>\n  <line x1=\"190\" y1=\"76\" x2=\"190\" y2=\"590\" class=\"lifeline\"/>\n  <",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/place-order-uml-sequence.md",
+        "start_line": 49
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- :EmailService -->\n  <rect x=\"540\" y=\"20\" width=\"100\" height=\"56\" rx=\"6\" class=\"actor\"/>\n  <text class=\"actor-colon\" x=\"590\" y=\"37\" text-anchor=\"middle\" dominant-baseline=\"central\">:</text>\n  <tex",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/place-order-uml-sequence.md",
+        "start_line": 84
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- EmailService: active during confirmation send -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/place-order-uml-sequence.md",
+        "start_line": 98
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- ── 4. PRE-ALT MESSAGES ── -->\n\n  <!-- ① checkout()  :Customer → :ShoppingCart -->\n  <line x1=\"90\"  y1=\"102\" x2=\"186\" y2=\"102\" class=\"msg-call\" marker-end=\"url(#arr-call)\"/>\n  <text class=\"mlbl\" x",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/place-order-uml-sequence.md",
+        "start_line": 101
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- ⑥ « itemsReserved »  :InventorySystem → :OrderController (dashed return) -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/place-order-uml-sequence.md",
+        "start_line": 137
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- ── 6. PAR COMBINED FRAGMENT (nested inside alt branch 1)  y=266 → y=373 ── -->\n\n  <!-- Inner par rectangle -->\n  <rect x=\"60\" y=\"266\" width=\"560\" height=\"107\" rx=\"3\" class=\"frag-par-bg\"/>\n\n  <!--",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/place-order-uml-sequence.md",
+        "start_line": 141
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- ⑧ « emailQueued »  :EmailService → :OrderController (dashed return) -->\n  <line x1=\"586\" y1=\"318\" x2=\"294\" y2=\"318\" class=\"msg-ret\" marker-end=\"url(#arr-ret)\"/>\n  <text class=\"rlbl\" x=\"442\" y=\"31",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/place-order-uml-sequence.md",
+        "start_line": 156
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- PAR fragment ends at y=373 -->\n\n  <!-- ⑩ « orderPlaced »  :OrderController → :Customer (dashed return, after par) -->\n  <line x1=\"286\" y1=\"395\" x2=\"90\"  y2=\"395\" class=\"msg-ret\" marker-end=\"url(#",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/place-order-uml-sequence.md",
+        "start_line": 169
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Blade gradient for 3D effect -->\n    <linearGradient id=\"bladeGrad\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\">\n      <stop offset=\"0%\" style=\"stop-color:#D3D1C7\"/>\n      <stop offset=\"50%\" style=\"stop-co",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "examples/wind-turbine-structure.md",
+        "start_line": 28
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:12.516828+00:00",
+  "scanMode": "static",
+  "skillName": "concept-diagrams",
+  "contentHash": "a34ac4e5d3f0f4f5a8606b488fd0b0b6e2153759841aea7d5c00b3b922ae82bb",
+  "scannerVersion": "2.5.3"
+}

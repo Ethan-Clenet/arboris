@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:44.263521+00:00",
+  "scanMode": "static",
+  "skillName": "nemo-curator",
+  "contentHash": "648a5fff83bd2535c5410ec6ecc8bc05d925f2ad59383b83c49cdd55f776d8cf",
+  "scannerVersion": "2.5.3"
+}

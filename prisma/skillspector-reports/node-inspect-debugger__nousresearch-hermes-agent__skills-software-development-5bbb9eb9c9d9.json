@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:47.400159+00:00",
+  "scanMode": "static",
+  "skillName": "node-inspect-debugger",
+  "contentHash": "584f55b6b3640f9f3c9a20df4422fb0d7bb34f3fa5f432152cba9fd09c351dc4",
+  "scannerVersion": "2.5.3"
+}

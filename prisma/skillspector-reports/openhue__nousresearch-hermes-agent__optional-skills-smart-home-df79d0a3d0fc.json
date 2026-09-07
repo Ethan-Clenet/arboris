@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:50.331897+00:00",
+  "scanMode": "static",
+  "skillName": "openhue",
+  "contentHash": "c527ab36771fad79d099f7e019ba2bf263c2b2e40106e266ed07b6729add1783",
+  "scannerVersion": "2.5.3"
+}

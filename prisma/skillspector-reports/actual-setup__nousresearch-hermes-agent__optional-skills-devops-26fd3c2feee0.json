@@ -1,0 +1,41 @@
+{
+  "riskScore": 27,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.actual.inc/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 95
+      }
+    },
+    {
+      "id": "SC2",
+      "category": "Supply Chain",
+      "pattern": "External Script Fetching",
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "finding": "curl -fsSL \"https://actual.inc/install\" | bash",
+      "explanation": "Remote code is downloaded and executed. This bypasses code review and could introduce malicious code.",
+      "remediation": "Avoid downloading and executing remote scripts. Use trusted packages from PyPI/npm. If remote fetch is required, verify checksums and use HTTPS.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 42
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:30:53.467326+00:00",
+  "scanMode": "static",
+  "skillName": "actual-setup",
+  "contentHash": "d13fff2efb75ed9ef0c644e72e0a515f28a43281454ae3f933e006e29983316a",
+  "scannerVersion": "2.5.3"
+}

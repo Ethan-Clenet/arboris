@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:34.991695+00:00",
+  "scanMode": "static",
+  "skillName": "check-trajectories-workflow",
+  "contentHash": "b76459343b3a0343a52345855186c8379cdba05db2a5c7daf91d6413a7b7061c",
+  "scannerVersion": "2.5.3"
+}

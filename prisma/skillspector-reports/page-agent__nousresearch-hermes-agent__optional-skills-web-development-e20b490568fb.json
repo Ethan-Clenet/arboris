@@ -1,0 +1,27 @@
+{
+  "riskScore": 5,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.openai.com/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 91
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:53.874754+00:00",
+  "scanMode": "static",
+  "skillName": "page-agent",
+  "contentHash": "196fe5fe8ed5f6d8ec3b02e3ffff2be3f7cb8d8402da92f6ed10a51a4ec01ae8",
+  "scannerVersion": "2.5.3"
+}

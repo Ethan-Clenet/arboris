@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:23.271715+00:00",
+  "scanMode": "static",
+  "skillName": "gif-search",
+  "contentHash": "4f6e948ba875def7d04d3366455404fa6245eea5faed8987681fa25bfc944839",
+  "scannerVersion": "2.5.3"
+}

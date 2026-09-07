@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:39.501280+00:00",
+  "scanMode": "static",
+  "skillName": "cuda-kernels",
+  "contentHash": "48515c96773bc4811e550c7a83286f071bbc9538ba3b3c3618168964dad58e5b",
+  "scannerVersion": "2.5.3"
+}

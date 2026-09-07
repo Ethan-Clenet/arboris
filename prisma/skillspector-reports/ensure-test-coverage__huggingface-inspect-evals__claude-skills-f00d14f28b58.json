@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:40.171970+00:00",
+  "scanMode": "static",
+  "skillName": "ensure-test-coverage",
+  "contentHash": "9f47bfea500c8b4f1d0a9a0f6314fb2aec49087c14606fed03cb2797cf542013",
+  "scannerVersion": "2.5.3"
+}

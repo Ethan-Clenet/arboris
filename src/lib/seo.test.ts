@@ -38,6 +38,10 @@ describe('isPremiumPublisher', () => {
     expect(isPremiumPublisher('Vercel')).toBe(true)
     expect(isPremiumPublisher('ECC')).toBe(true)
     expect(isPremiumPublisher('Microsoft')).toBe(true)
+    expect(isPremiumPublisher('Hugging Face')).toBe(true)
+    expect(isPremiumPublisher('Ollama')).toBe(true)
+    expect(isPremiumPublisher('Nous Research')).toBe(true)
+    expect(isPremiumPublisher('vinta')).toBe(true)
   })
 
   it('refuse Community', () => {

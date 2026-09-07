@@ -1,0 +1,53 @@
+{
+  "riskScore": 29,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "references/export-pipeline.md",
+        "start_line": 548
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "scripts/serve.sh",
+        "start_line": 24
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\n  p5.js Interactive Viewer Template\n  =================================\n  USE THIS AS THE STARTING POINT for interactive generative art sketches.\n\n  FIXED (keep as-is):\n  ✓ Layout structure (side",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/viewer.html",
+        "start_line": 2
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:53.975091+00:00",
+  "scanMode": "static",
+  "skillName": "p5js",
+  "contentHash": "1dcba045a638745356e9bfb7fa6860bafc7705b303134e025a6c50c9cdb479b7",
+  "scannerVersion": "2.5.3"
+}

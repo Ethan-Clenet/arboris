@@ -1,0 +1,41 @@
+{
+  "riskScore": 10,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "SC2",
+      "category": "Supply Chain",
+      "pattern": "External Script Fetching",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "curl -s 'https://llm-prices.llm-prices.workers.dev/api/models?q=claude-sonnet-4-5&mode=chat' | python",
+      "explanation": "Remote code is downloaded and executed. This bypasses code review and could introduce malicious code.",
+      "remediation": "Avoid downloading and executing remote scripts. Use trusted packages from PyPI/npm. If remote fetch is required, verify checksums and use HTTPS.",
+      "location": {
+        "file": "references/frontier-models.md",
+        "start_line": 23
+      }
+    },
+    {
+      "id": "SC2",
+      "category": "Supply Chain",
+      "pattern": "External Script Fetching",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "curl -s 'https://llm-prices.llm-prices.workers.dev/api/models?provider=openai&supports=reasoning&mode=chat' | python",
+      "explanation": "Remote code is downloaded and executed. This bypasses code review and could introduce malicious code.",
+      "remediation": "Avoid downloading and executing remote scripts. Use trusted packages from PyPI/npm. If remote fetch is required, verify checksums and use HTTPS.",
+      "location": {
+        "file": "references/frontier-models.md",
+        "start_line": 26
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:41.229220+00:00",
+  "scanMode": "static",
+  "skillName": "eval-report-workflow",
+  "contentHash": "0f8de5f02440d737bed01e4c5f1f5bc379121f47ed761a1e08f2a497490ae300",
+  "scannerVersion": "2.5.3"
+}

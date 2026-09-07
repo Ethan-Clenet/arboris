@@ -1,0 +1,26 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "TR2",
+      "category": "Trigger Abuse",
+      "pattern": "Shadow Command Trigger",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Shadow Command Trigger: 'start pokemon' conflicts with built-in command 'start'",
+      "remediation": "Choose triggers that do not conflict with built-in commands or other skills. Prefix with a unique namespace if necessary.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 3
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:15.611896+00:00",
+  "scanMode": "static",
+  "skillName": "pokemon-player",
+  "contentHash": "75c5d6cf338c072082de33b8000fb07bbf738e22dc880b8c1b059babfaeea637",
+  "scannerVersion": "2.5.3"
+}

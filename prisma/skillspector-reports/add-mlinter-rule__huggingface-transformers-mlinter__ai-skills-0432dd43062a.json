@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:33.361498+00:00",
+  "scanMode": "static",
+  "skillName": "add-mlinter-rule",
+  "contentHash": "0b15ef2741b4d3619a9a915fd429fb2eeeee89682ded7a58f4ab65d8b4630a38",
+  "scannerVersion": "2.5.3"
+}

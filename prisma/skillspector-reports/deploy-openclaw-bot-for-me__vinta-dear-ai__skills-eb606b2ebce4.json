@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:26.694335+00:00",
+  "scanMode": "static",
+  "skillName": "deploy-openclaw-bot-for-me",
+  "contentHash": "f04053318d700d309389d7cf4f3d0530b6e9e99c9c5783fab913172fab3028d6",
+  "scannerVersion": "2.5.3"
+}

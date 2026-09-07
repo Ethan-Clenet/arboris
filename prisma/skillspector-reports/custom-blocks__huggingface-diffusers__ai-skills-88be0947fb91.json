@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:38.212091+00:00",
+  "scanMode": "static",
+  "skillName": "custom-blocks",
+  "contentHash": "8095c1395b2256085d58a08c2556ab16c0df04de39aed4f687561fe4cbfe9cc8",
+  "scannerVersion": "2.5.3"
+}

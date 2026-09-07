@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:18.458985+00:00",
+  "scanMode": "static",
+  "skillName": "email-inbox-triage",
+  "contentHash": "666c9cf5c4428f09b2a6f08e90c37378e87e18746d470870a6f451107869809f",
+  "scannerVersion": "2.5.3"
+}

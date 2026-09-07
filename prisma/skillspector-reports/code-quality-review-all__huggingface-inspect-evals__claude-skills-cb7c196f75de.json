@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:36.508714+00:00",
+  "scanMode": "static",
+  "skillName": "code-quality-review-all",
+  "contentHash": "ddef1a84105bb50ba809642ae2d21bf008fc9768a1a5e00c17e9f607035d6fc5",
+  "scannerVersion": "2.5.3"
+}

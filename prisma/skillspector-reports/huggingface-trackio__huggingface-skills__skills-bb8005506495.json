@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:59.222820+00:00",
+  "scanMode": "static",
+  "skillName": "huggingface-trackio",
+  "contentHash": "33503baa58aef94f99947f32bbfe42c3da11bac5285214b5a2aa28db758d88d9",
+  "scannerVersion": "2.5.3"
+}

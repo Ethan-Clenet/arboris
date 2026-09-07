@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:05.123391+00:00",
+  "scanMode": "static",
+  "skillName": "openenv-cli",
+  "contentHash": "eeef0f7bea81cfe219ec5db5174555f7ce1275ca2222b78130335fbbc43493a2",
+  "scannerVersion": "2.5.3"
+}

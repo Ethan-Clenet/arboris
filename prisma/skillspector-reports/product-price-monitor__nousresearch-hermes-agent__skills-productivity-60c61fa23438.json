@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:00.288893+00:00",
+  "scanMode": "static",
+  "skillName": "product-price-monitor",
+  "contentHash": "0ecbe5baa5919275747dfb50a6540889c55ed17d79e9459b1b4e90390ed27e74",
+  "scannerVersion": "2.5.3"
+}

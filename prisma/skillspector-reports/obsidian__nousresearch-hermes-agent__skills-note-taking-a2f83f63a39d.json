@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:48.891709+00:00",
+  "scanMode": "static",
+  "skillName": "obsidian",
+  "contentHash": "cee6fb7c2bce49a6c89271b2835cce01afd686225287e651aa0eecb1da24fc51",
+  "scannerVersion": "2.5.3"
+}

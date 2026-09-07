@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:05.520938+00:00",
+  "scanMode": "static",
+  "skillName": "optimum-model-enabler",
+  "contentHash": "3e8ac8561cff42421e9e6975e1990d205f0bc1e406f575cf56c1dfc58b94ee1f",
+  "scannerVersion": "2.5.3"
+}

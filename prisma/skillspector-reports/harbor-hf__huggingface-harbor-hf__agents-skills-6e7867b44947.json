@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:41.701155+00:00",
+  "scanMode": "static",
+  "skillName": "harbor-hf",
+  "contentHash": "e58c51850e046d5b6d23eac38f0d74c0926c7a0c8ffaed3c70bdc5f2bee5f4b7",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,276 @@
+{
+  "riskScore": 100,
+  "severity": "CRITICAL",
+  "recommendation": "UNSAFE",
+  "issueCount": 19,
+  "issues": [
+    {
+      "id": "AST7",
+      "category": "Dangerous Code Execution",
+      "pattern": "Dynamic attribute access via getattr()",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "                rms_fn = getattr(kernel, rms_fn_name)",
+      "explanation": "Dynamic getattr() with a non-literal attribute name can access arbitrary object attributes, potentially bypassing access controls.",
+      "remediation": "Replace dynamic getattr() with explicit attribute access or a dictionary lookup with an allowlist of permitted attributes.",
+      "location": {
+        "file": "scripts/huggingface_kernels_example.py",
+        "start_line": 119
+      }
+    },
+    {
+      "id": "AST7",
+      "category": "Dangerous Code Execution",
+      "pattern": "Dynamic attribute access via getattr()",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "                hub_rms_fn = getattr(hub_kernel, fn_name)",
+      "explanation": "Dynamic getattr() with a non-literal attribute name can access arbitrary object attributes, potentially bypassing access controls.",
+      "remediation": "Replace dynamic getattr() with explicit attribute access or a dictionary lookup with an allowlist of permitted attributes.",
+      "location": {
+        "file": "scripts/huggingface_kernels_example.py",
+        "start_line": 238
+      }
+    },
+    {
+      "id": "AST7",
+      "category": "Dangerous Code Execution",
+      "pattern": "Dynamic attribute access via getattr()",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "                    hub_rms_fn_raw = getattr(hub_kernel, fn_name)",
+      "explanation": "Dynamic getattr() with a non-literal attribute name can access arbitrary object attributes, potentially bypassing access controls.",
+      "remediation": "Replace dynamic getattr() with explicit attribute access or a dictionary lookup with an allowlist of permitted attributes.",
+      "location": {
+        "file": "scripts/huggingface_kernels_example.py",
+        "start_line": 172
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/xpu_profiler.py",
+        "start_line": 891
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "        result = subprocess.run(collect_cmd, capture_output=True, text=True, timeout=timeout)",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/xpu_profiler.py",
+        "start_line": 843
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "        subprocess.run(report_cmd, capture_output=True, text=True, timeout=120)",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/xpu_profiler.py",
+        "start_line": 861
+      }
+    },
+    {
+      "id": "TT2",
+      "category": "Data Flow",
+      "pattern": "Tainted flow: 'collect_cmd' from os.environ.get (line 832, credential/environment) → subprocess.run (code execution)",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "        result = subprocess.run(collect_cmd, capture_output=True, text=True, timeout=timeout)",
+      "explanation": "Data from a source is assigned to a variable that is later passed to a sink, creating a variable-mediated taint flow.",
+      "remediation": "Validate tainted variables before passing them to sinks. Use allowlists, type checks, or sanitization functions on data from external sources.",
+      "location": {
+        "file": "scripts/xpu_profiler.py",
+        "start_line": 843
+      }
+    },
+    {
+      "id": "TT2",
+      "category": "Data Flow",
+      "pattern": "Tainted flow: 'report_cmd' from os.environ.get (line 848, credential/environment) → subprocess.run (code execution)",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "        subprocess.run(report_cmd, capture_output=True, text=True, timeout=120)",
+      "explanation": "Data from a source is assigned to a variable that is later passed to a sink, creating a variable-mediated taint flow.",
+      "remediation": "Validate tainted variables before passing them to sinks. Use allowlists, type checks, or sanitization functions on data from external sources.",
+      "location": {
+        "file": "scripts/xpu_profiler.py",
+        "start_line": 861
+      }
+    },
+    {
+      "id": "LP1",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "explanation": "The skill uses 'env' capability that is not listed in its permissions. This may indicate deceptive intent or missing permission declarations.",
+      "remediation": "Add the 'env' permission to SKILL.md, or remove the code that requires it.",
+      "location": {
+        "file": "scripts/xpu_profiler.py",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "LP1",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "explanation": "The skill uses 'file_write' capability that is not listed in its permissions. This may indicate deceptive intent or missing permission declarations.",
+      "remediation": "Add the 'file_write' permission to SKILL.md, or remove the code that requires it.",
+      "location": {
+        "file": "scripts/trial_manager.py",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "LP1",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "explanation": "The skill uses 'network' capability that is not listed in its permissions. This may indicate deceptive intent or missing permission declarations.",
+      "remediation": "Add the 'network' permission to SKILL.md, or remove the code that requires it.",
+      "location": {
+        "file": "scripts/xpu_profiler.py",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "finding": "not limited to",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "references/xpu_optimizations.yaml",
+        "start_line": 1047
+      }
+    },
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "sudo ",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "scripts/xpu_profiler.py",
+        "start_line": 1090
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "transformers",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "safetensors",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 2
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "huggingface-hub",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 3
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "kernels",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 4
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: transformers has 10 known advisory(ies) (CVE-2023-2800 (transformers has Insecure Temporary File); CVE-2026-4372 (HuggingFace transformers vulnerable to remote code execution); CVE-2025-3933 (Transformers is vulnerable to ReDoS attack through its DonutProcessor class) +7 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "transformers",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "TM2",
+      "category": "Tool Misuse",
+      "pattern": "Chaining Abuse",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "| sudo ",
+      "explanation": "Tool calls are chained to bypass individual safety checks or escalate capabilities beyond what any single tool call would allow.",
+      "remediation": "Limit tool chaining depth and validate the output of each tool before passing it to the next. Require explicit user approval for multi-step chains.",
+      "location": {
+        "file": "scripts/xpu_profiler.py",
+        "start_line": 1090
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:33:23.760218+00:00",
+  "scanMode": "static",
+  "skillName": "xpu-kernels",
+  "contentHash": "52f3c2691ca68e18ae2649609c871413ea219c40da675e754f0b7f86c0952bd5",
+  "scannerVersion": "2.5.3"
+}

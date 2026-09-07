@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:16.987363+00:00",
+  "scanMode": "static",
+  "skillName": "songsee",
+  "contentHash": "fbc69b45d596da3dcd3864eaa47ee2773e80dd371aea6b13c4a7f9b5108d73f8",
+  "scannerVersion": "2.5.3"
+}

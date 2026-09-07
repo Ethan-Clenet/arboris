@@ -1,0 +1,41 @@
+{
+  "riskScore": 10,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_remote_bootstrap_execution': Remote script or code download followed by execution/bootstrap installation [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.425,
+      "finding": "pip install git+https://",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 201
+      }
+    },
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_remote_bootstrap_execution': Remote script or code download followed by execution/bootstrap installation [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.425,
+      "finding": "pip install git+https://",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "references/float8.md",
+        "start_line": 13
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:22.986808+00:00",
+  "scanMode": "static",
+  "skillName": "torchtitan",
+  "contentHash": "2d7a21bc772e764e2daf6cc82ae876f7b102360c8f493e581b96d9ded7147fe5",
+  "scannerVersion": "2.5.3"
+}

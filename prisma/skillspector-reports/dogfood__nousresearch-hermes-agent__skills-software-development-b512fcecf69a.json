@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:16.055948+00:00",
+  "scanMode": "static",
+  "skillName": "dogfood",
+  "contentHash": "3c32d9c955571352c050568f63c90e5b80940dbdd0c6bea7dc0af324c09530f6",
+  "scannerVersion": "2.5.3"
+}

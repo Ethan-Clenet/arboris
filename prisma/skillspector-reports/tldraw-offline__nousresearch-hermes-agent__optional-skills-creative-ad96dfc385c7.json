@@ -1,0 +1,55 @@
+{
+  "riskScore": 34,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "curl -s \"$BASE/api/search\" -X POST -H 'content-type: application/json' \\\n  -H \"Authorization: Bearer $TOKEN\" \\\n  -d ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 70
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "write **document scripts** — JavaScript embedded in a\n`.tldraw` file that runs on load and gives the file durable behavior. The app\nruns a **local HTTP API** (default `localhost:7236`) that a coding a",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 19
+      }
+    },
+    {
+      "id": "SC2",
+      "category": "Supply Chain",
+      "pattern": "External Script Fetching",
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "finding": "curl -s \"$BASE/api/search\" -X POST -H 'content-type: application/json' \\\n  -H \"Authorization: Bearer $TOKEN\" \\\n  -d '{\"code\":\"return (await api.getFocusedDoc()).id\"}' | python",
+      "explanation": "Remote code is downloaded and executed. This bypasses code review and could introduce malicious code.",
+      "remediation": "Avoid downloading and executing remote scripts. Use trusted packages from PyPI/npm. If remote fetch is required, verify checksums and use HTTPS.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 70
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:22.576669+00:00",
+  "scanMode": "static",
+  "skillName": "tldraw-offline",
+  "contentHash": "4248f7cd78d73cb5fda284a7d4de8283afc6b368c47a88f86e87d1ede881602c",
+  "scannerVersion": "2.5.3"
+}

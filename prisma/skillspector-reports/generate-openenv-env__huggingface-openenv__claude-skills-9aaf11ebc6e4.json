@@ -1,0 +1,153 @@
+{
+  "riskScore": 46,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 10,
+  "issues": [
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "openenv>=0.2.2",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "assets/openenv_env_template/server/requirements.txt",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "fastapi>=0.116.0",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "assets/openenv_env_template/server/requirements.txt",
+        "start_line": 2
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "uvicorn>=0.24.0\n",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "assets/openenv_env_template/server/requirements.txt",
+        "start_line": 3
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: pytest has 2 known advisory(ies) (CVE-2025-71176 (pytest has vulnerable tmpdir handling); CVE-2025-71176 (pytest has vulnerable tmpdir handling)), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "pytest",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "assets/openenv_env_template/pyproject.toml",
+        "start_line": 33
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: setuptools has 10 known advisory(ies) (CVE-2013-1633 (Setuptools vulnerable to Man-in-the-middle attacks); CVE-2025-47273 (setuptools has a path traversal vulnerability in PackageIndex.download that lead); CVE-2024-6345 (setuptools vulnerable to Command Injection via package URL) +7 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "setuptools",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "assets/openenv_env_template/pyproject.toml",
+        "start_line": 8
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: wheel has 4 known advisory(ies) (CVE-2026-24049 (Wheel Affected by Arbitrary File Permission Modification via Path Traversal in w); CVE-2022-40898 (pypa/wheel vulnerable to Regular Expression denial of service (ReDoS)); CVE-2022-40898 (An issue discovered in Python Packaging Authority (PyPA) Wheel 0.37.1 and earlie) +1 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "wheel",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "assets/openenv_env_template/pyproject.toml",
+        "start_line": 8
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: fastapi has 3 known advisory(ies) (CVE-2021-32677 (Cross-Site Request Forgery (CSRF) in FastAPI); CVE-2021-32677 (FastAPI is a web framework for building APIs with Python 3.6+ based on standard ); CVE-2024-24762 (FastAPI is a web framework for building APIs with Python 3.8+ based on standard )), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "fastapi",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "assets/openenv_env_template/server/requirements.txt",
+        "start_line": 2
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: uvicorn has 4 known advisory(ies) (CVE-2020-7694 (Log injection in uvicorn); CVE-2020-7695 (HTTP response splitting in uvicorn); CVE-2020-7694 (This affects all versions of package uvicorn. The request logger provided by the) +1 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "uvicorn",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "assets/openenv_env_template/server/requirements.txt",
+        "start_line": 3
+      }
+    },
+    {
+      "id": "SC6",
+      "category": "Supply Chain",
+      "pattern": "Possible Typosquatting: 'uvicorn' resembles popular package 'gunicorn'",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "uvicorn",
+      "explanation": "Package name closely resembles a popular package, suggesting possible typosquatting. Attackers publish malicious packages with similar names to trick developers into installing them.",
+      "remediation": "Verify the package name is correct and not a typosquatting variant. Compare against the official package name on PyPI or npm.",
+      "location": {
+        "file": "assets/openenv_env_template/server/requirements.txt",
+        "start_line": 3
+      }
+    },
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_remote_bootstrap_execution': Remote script or code download followed by execution/bootstrap installation [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "pip install https://",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "references/openenv-docs-environment-builder.md",
+        "start_line": 24
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:44.599772+00:00",
+  "scanMode": "static",
+  "skillName": "generate-openenv-env",
+  "contentHash": "a963db532bc67991530c735fe5a515ccbc51ba92e09772b7646cf01e2365719c",
+  "scannerVersion": "2.5.3"
+}

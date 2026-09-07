@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:01.319775+00:00",
+  "scanMode": "static",
+  "skillName": "ascii-video",
+  "contentHash": "a38d4cc8ea4340a5910e1d6e387ecd3e3e2e5cada40936aee3f7e5438f1d224c",
+  "scannerVersion": "2.5.3"
+}

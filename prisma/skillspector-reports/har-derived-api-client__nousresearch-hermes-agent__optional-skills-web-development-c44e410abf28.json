@@ -1,0 +1,40 @@
+{
+  "riskScore": 16,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "TM3",
+      "category": "Tool Misuse",
+      "pattern": "Unsafe Defaults",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "auth = False",
+      "explanation": "Tool defaults are unsafe or overly permissive (e.g. disabled TLS verification, no authentication, world-writable permissions). Unsafe defaults widen the attack surface.",
+      "remediation": "Override unsafe defaults with secure settings (verify=True, auth required, restrictive permissions). Review and harden all tool configurations.",
+      "location": {
+        "file": "scripts/har_to_client.py",
+        "start_line": 106
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:28.387232+00:00",
+  "scanMode": "static",
+  "skillName": "har-derived-api-client",
+  "contentHash": "e420df19e983fead40decc434008db34ab936577d4cc30060686ea10cef4196d",
+  "scannerVersion": "2.5.3"
+}

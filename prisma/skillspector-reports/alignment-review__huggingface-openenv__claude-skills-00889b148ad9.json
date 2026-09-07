@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:33.579440+00:00",
+  "scanMode": "static",
+  "skillName": "alignment-review",
+  "contentHash": "cfd0a427e61e73bab75e96b33e790c8ae7bb047b97d436000f38ae7a5e7ad4c7",
+  "scannerVersion": "2.5.3"
+}

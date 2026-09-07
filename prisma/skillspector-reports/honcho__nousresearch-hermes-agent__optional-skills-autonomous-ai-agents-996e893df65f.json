@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "Write or delete a persistent conclusion about a peer. Pass `conclusion: \"...\"` to create. Pass `delete_id: \"...\"` to remove a conclusion (for PII removal — Honcho self-heals incorrect conclusions over",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 270
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:31.675378+00:00",
+  "scanMode": "static",
+  "skillName": "honcho",
+  "contentHash": "ada626e2c1fc359c0fc4c2b8708a07d3cef588cc50be79f1fa765e86d29659aa",
+  "scannerVersion": "2.5.3"
+}

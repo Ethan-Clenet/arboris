@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:30:55.179551+00:00",
+  "scanMode": "static",
+  "skillName": "agent-merge-conflict-arbiter",
+  "contentHash": "8645bdaa56bad904d951642578aca32cab3055bbb4032bebfa27214637ad045d",
+  "scannerVersion": "2.5.3"
+}

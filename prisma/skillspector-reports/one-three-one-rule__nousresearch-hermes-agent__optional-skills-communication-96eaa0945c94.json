@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:48.832295+00:00",
+  "scanMode": "static",
+  "skillName": "one-three-one-rule",
+  "contentHash": "0a84f9a575c4f7f96e8c0ffb77ce765b2c7cd02dcd3605cb71db60c41b0375bc",
+  "scannerVersion": "2.5.3"
+}

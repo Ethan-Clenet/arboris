@@ -1,0 +1,40 @@
+{
+  "riskScore": 16,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "            subprocess.run(\n                [\n                    lo,\n                    \"--headless\",\n                    \"--calc\",\n                    \"--convert-to\",\n                    \"xlsx\",\n  ",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/recalc.py",
+        "start_line": 45
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:20.101993+00:00",
+  "scanMode": "static",
+  "skillName": "excel-author",
+  "contentHash": "a9b03ab285458735e53d310ddeb1d4607f790752b8e6de97892bc1e2b952eef4",
+  "scannerVersion": "2.5.3"
+}

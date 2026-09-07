@@ -1,0 +1,40 @@
+{
+  "riskScore": 13,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "explanation": "Docker image references without a specific tag (:latest is implicit) or digest (@sha256:...) can be silently replaced by a malicious image.",
+      "remediation": "Pin the image: image:tag or image@sha256:abc123",
+      "location": {
+        "file": "references/api-evaluation.md",
+        "start_line": 209
+      }
+    },
+    {
+      "id": "OH1",
+      "category": "Output Handling",
+      "pattern": "Unvalidated Output Injection",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "Execute generated code",
+      "explanation": "Model output is used without validation or sanitization. Unvalidated output injected into downstream contexts (SQL, shell, HTML) enables injection attacks and arbitrary code execution.",
+      "remediation": "Validate and sanitize all model output before using it in downstream contexts. Use parameterized queries for SQL, shell quoting for commands, and HTML encoding for web output.",
+      "location": {
+        "file": "references/custom-tasks.md",
+        "start_line": 362
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:19.438136+00:00",
+  "scanMode": "static",
+  "skillName": "evaluating-llms-harness",
+  "contentHash": "10327a26df13457a4a8900718d4b3f5e0ee90e96e48e6a06335df7984da87205",
+  "scannerVersion": "2.5.3"
+}

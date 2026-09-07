@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:10.424276+00:00",
+  "scanMode": "static",
+  "skillName": "comps-analysis",
+  "contentHash": "73d8ffa301c71a6bbae1ececfe3948c7b7e52fb4150e75aa6ce43d57c7246448",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:29.447930+00:00",
+  "scanMode": "static",
+  "skillName": "whisper",
+  "contentHash": "55425cef74826620b95a301042b82b3977701bfa61e194faa4f15e9584ac3b04",
+  "scannerVersion": "2.5.3"
+}

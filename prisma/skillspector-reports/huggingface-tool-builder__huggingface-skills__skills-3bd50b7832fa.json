@@ -1,0 +1,40 @@
+{
+  "riskScore": 65,
+  "severity": "HIGH",
+  "recommendation": "UNSAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "TT3",
+      "category": "Data Flow",
+      "pattern": "Tainted flow: 'req' from os.getenv (line 50, credential/environment) → urllib.request.urlopen (network output)",
+      "severity": "CRITICAL",
+      "confidence": 0.9,
+      "finding": "    with urllib.request.urlopen(req) as resp:",
+      "explanation": "Credentials or environment variables flow to a network sink. This is a high-confidence indicator of credential exfiltration.",
+      "remediation": "Never send credentials or environment variables over the network. Use secure credential stores and avoid transmitting secrets in request bodies or URLs.",
+      "location": {
+        "file": "references/baseline_hf_api.py",
+        "start_line": 51
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:57.674846+00:00",
+  "scanMode": "static",
+  "skillName": "huggingface-tool-builder",
+  "contentHash": "df80b37e241de9dd6a12ddca032cc7f8d75100619ecd83f8685ad91ff921c83d",
+  "scannerVersion": "2.5.3"
+}

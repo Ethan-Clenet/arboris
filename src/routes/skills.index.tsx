@@ -68,6 +68,10 @@ function publisherMeta(name: string): { icon: string; color?: string; logo?: boo
     Neon: { icon: 'database', color: PUBLISHER_LOGO_COLOR.Neon },
     Flutter: { icon: 'device-mobile', color: PUBLISHER_LOGO_COLOR.Flutter },
     Figma: { icon: 'pen-nib', color: PUBLISHER_LOGO_COLOR.Figma },
+    'Hugging Face': { icon: 'robot', color: PUBLISHER_LOGO_COLOR['Hugging Face'] },
+    'Nous Research': { icon: 'sparkle', color: PUBLISHER_LOGO_COLOR['Nous Research'] },
+    Ollama: { icon: 'cpu', color: PUBLISHER_LOGO_COLOR.Ollama },
+    vinta: { icon: 'code', color: PUBLISHER_LOGO_COLOR.vinta },
   }
   const base = known[name] ?? { icon: 'buildings', color: '#8a909b' }
   return { ...base, logo: hasPublisherLogo(name) }

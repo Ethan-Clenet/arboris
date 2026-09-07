@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:55.483170+00:00",
+  "scanMode": "static",
+  "skillName": "pinecone",
+  "contentHash": "e22a207ab1b3dfff39706b6353f117ce8e40acedd937c6c19d6f9e60982cb197",
+  "scannerVersion": "2.5.3"
+}
