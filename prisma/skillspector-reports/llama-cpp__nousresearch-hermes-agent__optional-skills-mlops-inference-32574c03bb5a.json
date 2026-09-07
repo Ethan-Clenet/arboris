@@ -1,0 +1,26 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "explanation": "Docker image references without a specific tag (:latest is implicit) or digest (@sha256:...) can be silently replaced by a malicious image.",
+      "remediation": "Pin the image: image:tag or image@sha256:abc123",
+      "location": {
+        "file": "references/server.md",
+        "start_line": 92
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:37.991656+00:00",
+  "scanMode": "static",
+  "skillName": "llama-cpp",
+  "contentHash": "9012bea99b92f3988a284c199380d445162b3b4b5db247444bb2c2008802eb6f",
+  "scannerVersion": "2.5.3"
+}

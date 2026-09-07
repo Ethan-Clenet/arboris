@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:31.455158+00:00",
+  "scanMode": "static",
+  "skillName": "update-playbooks",
+  "contentHash": "795f274b9570be68c2091c83d965e15cf9f266b9cb0a7f43de91b5464bb62c31",
+  "scannerVersion": "2.5.3"
+}

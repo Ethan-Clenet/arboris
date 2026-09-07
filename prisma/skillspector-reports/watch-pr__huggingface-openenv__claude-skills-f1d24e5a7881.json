@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:18.839710+00:00",
+  "scanMode": "static",
+  "skillName": "watch-pr",
+  "contentHash": "d2494aac00dbcfa5935020e514c9937fc142ad8284be35637f391921e803e061",
+  "scannerVersion": "2.5.3"
+}

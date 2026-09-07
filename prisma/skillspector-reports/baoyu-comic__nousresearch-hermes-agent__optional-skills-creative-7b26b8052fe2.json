@@ -1,0 +1,55 @@
+{
+  "riskScore": 12,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "P6",
+      "category": "System Prompt Leakage",
+      "pattern": "Direct Prompt Extraction",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "Display prompt",
+      "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+      "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+      "location": {
+        "file": "references/workflow.md",
+        "start_line": 284
+      }
+    },
+    {
+      "id": "YR4",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'network_reconnaissance': Network reconnaissance and scanning patterns [hacktools]",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "Fierce",
+      "explanation": "YARA rule matched a hack tool or exploit indicator (offensive tools, reconnaissance, privilege escalation, or exploit frameworks).",
+      "remediation": "Remove offensive tool references and exploit code. Legitimate agent skills should not contain penetration testing tools, exploit frameworks, or reconnaissance utilities.",
+      "location": {
+        "file": "references/presets/wuxia.md",
+        "start_line": 36
+      }
+    },
+    {
+      "id": "YR4",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'network_reconnaissance': Network reconnaissance and scanning patterns [hacktools]",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "Fierce",
+      "explanation": "YARA rule matched a hack tool or exploit indicator (offensive tools, reconnaissance, privilege escalation, or exploit frameworks).",
+      "remediation": "Remove offensive tool references and exploit code. Legitimate agent skills should not contain penetration testing tools, exploit frameworks, or reconnaissance utilities.",
+      "location": {
+        "file": "references/tones/action.md",
+        "start_line": 72
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:03.083642+00:00",
+  "scanMode": "static",
+  "skillName": "baoyu-comic",
+  "contentHash": "afcf0a4e14ff3d29eafbdbc0164ccd9304a53feededcaa0cca9467d542760709",
+  "scannerVersion": "2.5.3"
+}

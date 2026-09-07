@@ -1,0 +1,138 @@
+{
+  "riskScore": 33,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 9,
+  "issues": [
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    result = subprocess.run(\n        [\"claude\", \"-p\", prompt, \"--model\", model, \"--output-format\", \"text\"],\n        capture_output=True,\n        text=True,\n        timeout=60,\n    )",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/classifier.py",
+        "start_line": 46
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    result = subprocess.run(\n        [\n            \"claude\", \"-p\", scenario.prompt,\n            \"--model\", model,\n            \"--max-turns\", str(max_turns),\n            \"--add-dir\", str(sandbox_dir),\n",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/runner.py",
+        "start_line": 49
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    subprocess.run([\"git\", \"init\"], cwd=sandbox_dir, capture_output=True)",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/runner.py",
+        "start_line": 107
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "            subprocess.run(parts, cwd=sandbox_dir, capture_output=True)",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/runner.py",
+        "start_line": 118
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    result = subprocess.run(\n        [\"claude\", \"-p\", prompt, \"--model\", model, \"--output-format\", \"text\"],\n        capture_output=True,\n        text=True,\n        timeout=120,\n    )",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/scenario_generator.py",
+        "start_line": 43
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/search-first/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 39
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: pyyaml has 8 known advisory(ies) (CVE-2019-20477 (Deserialization of Untrusted Data in PyYAML); CVE-2020-1747 (Improper Input Validation in PyYAML); CVE-2020-14343 (Improper Input Validation in PyYAML) +5 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "pyyaml",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "pyproject.toml",
+        "start_line": 6
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: pytest has 2 known advisory(ies) (CVE-2025-71176 (pytest has vulnerable tmpdir handling); CVE-2025-71176 (pytest has vulnerable tmpdir handling)), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "pytest",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "pyproject.toml",
+        "start_line": 14
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:34:11.325793+00:00",
+  "scanMode": "static",
+  "skillName": "skill-comply",
+  "contentHash": "58db9eca39ed3bf62e6903e01ca1c5ee68b91ab991f9f4cc906509cea31d421c",
+  "scannerVersion": "2.5.3"
+}

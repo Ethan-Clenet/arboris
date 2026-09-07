@@ -1,0 +1,41 @@
+{
+  "riskScore": 9,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "write it — the catalog and each sibling's triggers already do that job.\n\n## Required Frontmatter\n\nValidator source of truth: `tools/skill_manager_tool.py::_validate_frontmatter`. Validator hard requir",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 42
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "write parsers or non-trivial logic every call — ship a helper script in `scripts/` and reference it by path.\n\n## Body Structure (modern section order)\n\n```\n# <Skill> Skill\n2-3 sentence intro: what it ",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 111
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:29.918917+00:00",
+  "scanMode": "static",
+  "skillName": "hermes-agent-skill-authoring",
+  "contentHash": "39c5b430ae0bfcd5083bab3c2d8d149f8eac66242789fc463c6a15776ff92954",
+  "scannerVersion": "2.5.3"
+}

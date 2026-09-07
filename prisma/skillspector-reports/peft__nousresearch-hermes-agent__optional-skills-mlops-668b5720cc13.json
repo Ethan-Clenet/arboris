@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:55.643458+00:00",
+  "scanMode": "static",
+  "skillName": "peft",
+  "contentHash": "c83609dbe537647207d39eb032e10cce3e22e2a6af3efe375a6c2218fa947834",
+  "scannerVersion": "2.5.3"
+}

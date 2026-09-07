@@ -1,0 +1,83 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 5,
+  "issues": [
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "os.environ[\"HF_TOKEN\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "references/debugging.md",
+        "start_line": 86
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "os.environ[\"HF_TOKEN\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "references/inference-providers.md",
+        "start_line": 39
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "os.environ[\"HF_TOKEN\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "references/known-errors.md",
+        "start_line": 118
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "os.environ[\"HF_TOKEN\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "references/known-errors.md",
+        "start_line": 207
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: numpy has 10 known advisory(ies) (CVE-2014-1859 (Numpy arbitrary file write via symlink attack); CVE-2021-41495 (NumPy NULL Pointer Dereference); CVE-2021-33430 (NumPy Buffer Overflow (Disputed)) +7 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "numpy",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "references/requirements.md",
+        "start_line": 117
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:58.452095+00:00",
+  "scanMode": "static",
+  "skillName": "huggingface-spaces",
+  "contentHash": "84da494e4253ff1ce446b0c7e5dbe2061c9c1ffc5d3bcc7c98d942e69fc3642f",
+  "scannerVersion": "2.5.3"
+}

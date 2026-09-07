@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:21.037936+00:00",
+  "scanMode": "static",
+  "skillName": "faiss",
+  "contentHash": "025db51d05072d361708e8ed36e37d3bb6c27e7728c788d4c9a11cabae4e546a",
+  "scannerVersion": "2.5.3"
+}

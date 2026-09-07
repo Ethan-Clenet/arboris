@@ -1,0 +1,68 @@
+{
+  "riskScore": 20,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 4,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "explanation": "Docker image references without a specific tag (:latest is implicit) or digest (@sha256:...) can be silently replaced by a malicious image.",
+      "remediation": "Pin the image: image:tag or image@sha256:abc123",
+      "location": {
+        "file": "references/other.md",
+        "start_line": 3082
+      }
+    },
+    {
+      "id": "MP3",
+      "category": "Memory Poisoning",
+      "pattern": "Memory Manipulation",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "swap memory",
+      "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+      "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+      "location": {
+        "file": "references/other.md",
+        "start_line": 1442
+      }
+    },
+    {
+      "id": "MP3",
+      "category": "Memory Poisoning",
+      "pattern": "Memory Manipulation",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "swap memory",
+      "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+      "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+      "location": {
+        "file": "references/other.md",
+        "start_line": 2503
+      }
+    },
+    {
+      "id": "P6",
+      "category": "System Prompt Leakage",
+      "pattern": "Direct Prompt Extraction",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "output prompt",
+      "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+      "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+      "location": {
+        "file": "references/api.md",
+        "start_line": 109
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:02.246994+00:00",
+  "scanMode": "static",
+  "skillName": "axolotl",
+  "contentHash": "07f5367745c98a6756bd833f5c537c745bb5234058c55d8ad7b1d2d55a267ee2",
+  "scannerVersion": "2.5.3"
+}

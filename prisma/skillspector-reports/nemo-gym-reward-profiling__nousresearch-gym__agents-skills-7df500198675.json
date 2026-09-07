@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:46.893844+00:00",
+  "scanMode": "static",
+  "skillName": "nemo-gym-reward-profiling",
+  "contentHash": "5edaca556b68fe9ec443d7899b266af1adcbd7b67083f10e5bb9e0c26183c0ba",
+  "scannerVersion": "2.5.3"
+}

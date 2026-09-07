@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:30:55.507273+00:00",
+  "scanMode": "static",
+  "skillName": "agentmail",
+  "contentHash": "a55f3cb462b36ada2a69de5b51a5e46c41b2499814a06d5eda1a737e7da965ac",
+  "scannerVersion": "2.5.3"
+}

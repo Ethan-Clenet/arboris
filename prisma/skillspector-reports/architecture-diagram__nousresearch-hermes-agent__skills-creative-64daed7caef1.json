@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Header -->\n    <div class=\"header\">\n      <div class=\"header-row\">\n        <div class=\"pulse-dot\"></div>\n        <h1>[PROJECT NAME] Architecture</h1>\n      </div>\n      <p class=\"subtitle\">[Subti",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "templates/template.html",
+        "start_line": 136
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:30:58.140678+00:00",
+  "scanMode": "static",
+  "skillName": "architecture-diagram",
+  "contentHash": "f8d3f7c74e8b253c1a0e5095c5b297a2e3d96b154dd763a29825416a3154b77e",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "Write `diagrams/sequences.md`\n\nPick 2–4 of the most important workflows. Trace each call path through the code (read entry point, follow function calls), then:\n\n````markdown\n# Sequence Diagrams\n\n## Wo",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 284
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:08.194984+00:00",
+  "scanMode": "static",
+  "skillName": "code-wiki",
+  "contentHash": "03697d1e7f0e2d60cb98f56d40348fb035f9989fdfc5a1d32a38ec6410ec2f52",
+  "scannerVersion": "2.5.3"
+}

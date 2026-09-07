@@ -1,0 +1,69 @@
+{
+  "riskScore": 43,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 4,
+  "issues": [
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "curl installer** — `npm install -g\n   @xai-official/grok` avoids the Cloudflare-walled `x.ai` host.\n5. **`--always-approve` is the autonomous-build switch.** Without it, headless\n   runs may stall wai",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 281
+      }
+    },
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "Auto-approve",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 119
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "write tools except the session plan file).\n\n## Config (`~/.grok/config.toml`)\n\n```toml\n[cli]\nauto_update = false          # skip background update checks persistently\n\n[ui]\npermission_mode = \"ask\"    ",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 251
+      }
+    },
+    {
+      "id": "SC2",
+      "category": "Supply Chain",
+      "pattern": "External Script Fetching",
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "finding": "curl -fsSL https://x.ai/cli/install.sh | bash",
+      "explanation": "Remote code is downloaded and executed. This bypasses code review and could introduce malicious code.",
+      "remediation": "Avoid downloading and executing remote scripts. Use trusted packages from PyPI/npm. If remote fetch is required, verify checksums and use HTTPS.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 38
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:27.260189+00:00",
+  "scanMode": "static",
+  "skillName": "grok",
+  "contentHash": "bed736b8ca0c6a078b4f5d61740fb7917583e10fe4c6a52c458b57e518933d88",
+  "scannerVersion": "2.5.3"
+}

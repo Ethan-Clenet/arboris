@@ -1,0 +1,124 @@
+{
+  "riskScore": 30,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 8,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "curl -sS -o \"$tmp\" -w \"%{http_code}\" -X \"$method\" \"$url\" \"${auth_header[@]}\" -H \"content-type: application/json\" -d ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "scripts/drive.sh",
+        "start_line": 128
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "curl -sS -o /dev/null -w \"%{http_code}\" -X PUT \"$upload_url\" -H \"Content-Type: $ct\" --data-binary ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "scripts/drive.sh",
+        "start_line": 221
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "curl -sS -X POST \"$BASE_URL/api/v1/publish/from-drive\" \\\n    -H \"authorization: Bearer $API_KEY\" \\\n    -H \"x-herenow-client: $CLIENT_HEADER_VALUE\" \\\n    -H \"content-type: application/json\" \\\n    -d ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "scripts/publish.sh",
+        "start_line": 137
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "curl -sS -X \"$METHOD\" \"$URL\" \\\n  \"${AUTH_ARGS[@]+\"${AUTH_ARGS[@]}\"}\" \\\n  \"${CLIENT_ARGS[@]+\"${CLIENT_ARGS[@]}\"}\" \\\n  -H \"content-type: application/json\" \\\n  -d ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "scripts/publish.sh",
+        "start_line": 309
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "curl -sS -o /dev/null -w \"%{http_code}\" -X PUT \"$upload_url\" \\\n    \"${ct_args[@]+\"${ct_args[@]}\"}\" \\\n    --data-binary ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "scripts/publish.sh",
+        "start_line": 359
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "curl -sS -X POST \"$FINALIZE_URL\" \\\n  \"${AUTH_ARGS[@]+\"${AUTH_ARGS[@]}\"}\" \\\n  \"${CLIENT_ARGS[@]+\"${CLIENT_ARGS[@]}\"}\" \\\n  -H \"content-type: application/json\" \\\n  -d ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "scripts/publish.sh",
+        "start_line": 373
+      }
+    },
+    {
+      "id": "P4",
+      "category": "Prompt Injection",
+      "pattern": "Behavior Manipulation",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "Never tell the user",
+      "explanation": "Subtle instructions detected that may alter agent decision-making or introduce hidden biases.",
+      "remediation": "Review content for implicit steering or bias. Ensure instructions are explicit and align with the skill's stated purpose.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 188
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:29.527934+00:00",
+  "scanMode": "static",
+  "skillName": "here-now",
+  "contentHash": "c9879e4aa0155f12ef43865e136ed9c484674a405267926fd6e4fd3c44861a3d",
+  "scannerVersion": "2.5.3"
+}

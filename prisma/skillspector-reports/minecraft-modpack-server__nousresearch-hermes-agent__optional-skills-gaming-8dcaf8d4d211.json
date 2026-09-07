@@ -1,0 +1,69 @@
+{
+  "riskScore": 25,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 4,
+  "issues": [
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "sudo ",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 50
+      }
+    },
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "sudo ",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 51
+      }
+    },
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "sudo ",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 52
+      }
+    },
+    {
+      "id": "TM2",
+      "category": "Tool Misuse",
+      "pattern": "Chaining Abuse",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "| xargs rm",
+      "explanation": "Tool calls are chained to bypass individual safety checks or escalate capabilities beyond what any single tool call would allow.",
+      "remediation": "Limit tool chaining depth and validate the output of each tool before passing it to the next. Require explicit user approval for multi-step chains.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 165
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:42.942044+00:00",
+  "scanMode": "static",
+  "skillName": "minecraft-modpack-server",
+  "contentHash": "34ae6b95f1ebc08dfc385af736f8cde38c04c1e1080f7783c94d2dcdc8e12ea1",
+  "scannerVersion": "2.5.3"
+}

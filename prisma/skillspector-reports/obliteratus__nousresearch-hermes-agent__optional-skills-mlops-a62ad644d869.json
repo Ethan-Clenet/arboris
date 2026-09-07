@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:48.577478+00:00",
+  "scanMode": "static",
+  "skillName": "obliteratus",
+  "contentHash": "f3ebb61231dd042c8f54e39eb942fac1f78b53d38eae4fe99d5fef29452c7d5c",
+  "scannerVersion": "2.5.3"
+}

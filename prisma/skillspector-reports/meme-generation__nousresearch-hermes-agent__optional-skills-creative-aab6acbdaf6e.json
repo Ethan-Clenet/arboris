@@ -1,0 +1,40 @@
+{
+  "riskScore": 14,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "https://api.imgflip.com/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "scripts/generate_meme.py",
+        "start_line": 34
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:41.958733+00:00",
+  "scanMode": "static",
+  "skillName": "meme-generation",
+  "contentHash": "f4af362ad28fddd195c9ebbb0a30335ceab84ff4e4eec349e1a293d22fcf77d0",
+  "scannerVersion": "2.5.3"
+}

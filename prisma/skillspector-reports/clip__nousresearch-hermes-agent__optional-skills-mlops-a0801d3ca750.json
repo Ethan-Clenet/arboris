@@ -1,0 +1,27 @@
+{
+  "riskScore": 10,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_remote_bootstrap_execution': Remote script or code download followed by execution/bootstrap installation [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.425,
+      "finding": "pip install git+https://",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 45
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:07.357190+00:00",
+  "scanMode": "static",
+  "skillName": "clip",
+  "contentHash": "835ec63d2f324b9767c3398042b29a156cc160d965314f0bec64e90cc53c177d",
+  "scannerVersion": "2.5.3"
+}

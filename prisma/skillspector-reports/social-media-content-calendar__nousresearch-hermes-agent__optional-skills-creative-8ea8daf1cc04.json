@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:16.226417+00:00",
+  "scanMode": "static",
+  "skillName": "social-media-content-calendar",
+  "contentHash": "d5e479fd87d81bf570e60cf5be6330d2d4fd259b0c1ee04e69e1f0398c783b72",
+  "scannerVersion": "2.5.3"
+}

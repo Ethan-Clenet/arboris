@@ -1,0 +1,27 @@
+{
+  "riskScore": 10,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "YR4",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_prompt_injection_hidden_instructions': Prompt injection or hidden instructions embedded in AI agent skill text [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.4,
+      "finding": "model; model; model; model; model; model; model; model; Model; Model; Model; model; model; model; model; model; model; model; model; model; model; Model; Disable safety",
+      "explanation": "YARA rule matched a hack tool or exploit indicator (offensive tools, reconnaissance, privilege escalation, or exploit frameworks).",
+      "remediation": "Remove offensive tool references and exploit code. Legitimate agent skills should not contain penetration testing tools, exploit frameworks, or reconnaissance utilities.",
+      "location": {
+        "file": "references/troubleshooting.md",
+        "start_line": 58
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:18.835079+00:00",
+  "scanMode": "static",
+  "skillName": "stable-diffusion",
+  "contentHash": "4c067356df7ad1161f1f7b58db92d9f9a0ae371e60963213790960d0ba8635b4",
+  "scannerVersion": "2.5.3"
+}

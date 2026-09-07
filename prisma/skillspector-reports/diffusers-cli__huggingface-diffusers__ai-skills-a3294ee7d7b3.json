@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:39.793571+00:00",
+  "scanMode": "static",
+  "skillName": "diffusers-cli",
+  "contentHash": "ab0bb5bf4802bc4c47714a75c31d18e2c84e0524ae0af22f8394a879323cdd2b",
+  "scannerVersion": "2.5.3"
+}

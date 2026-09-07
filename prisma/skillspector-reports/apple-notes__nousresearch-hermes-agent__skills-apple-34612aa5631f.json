@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:30:56.668109+00:00",
+  "scanMode": "static",
+  "skillName": "apple-notes",
+  "contentHash": "1b1e77ad59a775dfb0fda7f0e93dc27a5ec54eb873caf8812c256f72f02d0fb0",
+  "scannerVersion": "2.5.3"
+}

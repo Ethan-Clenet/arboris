@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:14.387932+00:00",
+  "scanMode": "static",
+  "skillName": "simpo",
+  "contentHash": "df72958beb4aff72518c6f7d9d6a2c0e265e6df8885314b2c6868cc6ba652b62",
+  "scannerVersion": "2.5.3"
+}

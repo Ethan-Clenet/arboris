@@ -1,0 +1,109 @@
+{
+  "riskScore": 32,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 7,
+  "issues": [
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    return subprocess.run(args, capture_output=True, text=True, **kwargs)",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/mirror_image.py",
+        "start_line": 40
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    subprocess.run([docker, \"tag\", public_uri, private_uri])",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/mirror_image.py",
+        "start_line": 133
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "        login = subprocess.run(\n            [docker, \"login\", \"--username\", \"AWS\", \"--password-stdin\", registry_host],\n            input=password, capture_output=True, text=True,\n        )",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/mirror_image.py",
+        "start_line": 113
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    if subprocess.run([docker, \"pull\", public_uri]).returncode != 0:",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/mirror_image.py",
+        "start_line": 130
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    if subprocess.run([docker, \"push\", private_uri]).returncode != 0:",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/mirror_image.py",
+        "start_line": 135
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "explanation": "Docker image references without a specific tag (:latest is implicit) or digest (@sha256:...) can be silently replaced by a malicious image.",
+      "remediation": "Pin the image: image:tag or image@sha256:abc123",
+      "location": {
+        "file": "scripts/mirror_image.py",
+        "start_line": 131
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:47.673715+00:00",
+  "scanMode": "static",
+  "skillName": "hf-cloud-serving-image-selection",
+  "contentHash": "48017b259e8322fcfc7fe5abd780a17b5841b42b9c0aba53c73e02f47db75da2",
+  "scannerVersion": "2.5.3"
+}

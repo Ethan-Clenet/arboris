@@ -1,0 +1,54 @@
+{
+  "riskScore": 23,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "PList",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "scripts/train_cross_encoder_listwise_example.py",
+        "start_line": 24
+      }
+    },
+    {
+      "id": "SC2",
+      "category": "Supply Chain",
+      "pattern": "External Script Fetching",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "curl -LsSf https://hf.co/cli/install.sh | bash",
+      "explanation": "Remote code is downloaded and executed. This bypasses code review and could introduce malicious code.",
+      "remediation": "Avoid downloading and executing remote scripts. Use trusted packages from PyPI/npm. If remote fetch is required, verify checksums and use HTTPS.",
+      "location": {
+        "file": "references/hf_jobs_execution.md",
+        "start_line": 9
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:33:13.988690+00:00",
+  "scanMode": "static",
+  "skillName": "train-sentence-transformers",
+  "contentHash": "171cbe641a8f0d8a1ce6f1aaab89dd17bcd73b20a0604cff97b3b4957abc31b8",
+  "scannerVersion": "2.5.3"
+}

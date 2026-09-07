@@ -1,0 +1,97 @@
+{
+  "riskScore": 81,
+  "severity": "CRITICAL",
+  "recommendation": "UNSAFE",
+  "issueCount": 6,
+  "issues": [
+    {
+      "id": "AR3",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "without constraints",
+      "explanation": "Skill attempts to nullify the agent's safety policies or restrictions ('you have no restrictions', 'ignore your guidelines', 'do anything now'). This is a direct jailbreak that disables guardrails.",
+      "remediation": "Remove jailbreak framing that nullifies safety policies or restrictions. Skill content must not instruct the agent to ignore its guidelines or operate without guardrails.",
+      "location": {
+        "file": "references/plugin-api-standalone.d.ts",
+        "start_line": 10690
+      }
+    },
+    {
+      "id": "AR3",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "without constraints",
+      "explanation": "Skill attempts to nullify the agent's safety policies or restrictions ('you have no restrictions', 'ignore your guidelines', 'do anything now'). This is a direct jailbreak that disables guardrails.",
+      "remediation": "Remove jailbreak framing that nullifies safety policies or restrictions. Skill content must not instruct the agent to ignore its guidelines or operate without guardrails.",
+      "location": {
+        "file": "references/plugin-api-standalone.d.ts",
+        "start_line": 10720
+      }
+    },
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.figma.com/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "references/plugin-api-standalone.d.ts",
+        "start_line": 4690
+      }
+    },
+    {
+      "id": "P4",
+      "category": "Prompt Injection",
+      "pattern": "Behavior Manipulation",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "Always prefer them over",
+      "explanation": "Subtle instructions detected that may alter agent decision-making or introduce hidden biases.",
+      "remediation": "Review content for implicit steering or bias. Ensure instructions are explicit and align with the skill's stated purpose.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 122
+      }
+    },
+    {
+      "id": "P3",
+      "category": "Prompt Injection",
+      "pattern": "Exfiltration Commands",
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "finding": "send messages to",
+      "explanation": "Instructions found that direct the agent to transmit conversation context or user data to external services.",
+      "remediation": "Remove instructions that send user data, prompts, or context to external URLs. If telemetry is needed, use documented, privacy-preserving methods.",
+      "location": {
+        "file": "references/plugin-api-standalone.d.ts",
+        "start_line": 2655
+      }
+    },
+    {
+      "id": "YR4",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_mcp_tool_poisoning_metadata': MCP/tool metadata poisoning indicators in tool schemas or skill manifests [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.4,
+      "finding": "parameters:; parameters:; parameters:; parameters:; parameters:; parameters:; description:; description:; description:; description:; ‍; ‍; ‍; ‍; ‍; ‍",
+      "explanation": "YARA rule matched a hack tool or exploit indicator (offensive tools, reconnaissance, privilege escalation, or exploit frameworks).",
+      "remediation": "Remove offensive tool references and exploit code. Legitimate agent skills should not contain penetration testing tools, exploit frameworks, or reconnaissance utilities.",
+      "location": {
+        "file": "references/plugin-api-standalone.d.ts",
+        "start_line": 237
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:34:05.770547+00:00",
+  "scanMode": "static",
+  "skillName": "figma-use",
+  "contentHash": "c01ac6386c0fce3eee55fe3840f0c450c4715329bf31dc1ebf30523aa925dc07",
+  "scannerVersion": "2.5.3"
+}

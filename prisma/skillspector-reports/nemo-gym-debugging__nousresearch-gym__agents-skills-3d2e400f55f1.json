@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P6",
+      "category": "System Prompt Leakage",
+      "pattern": "Direct Prompt Extraction",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "expose prompt",
+      "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+      "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+      "location": {
+        "file": "references/request-boundary-visibility.md",
+        "start_line": 72
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:45.540015+00:00",
+  "scanMode": "static",
+  "skillName": "nemo-gym-debugging",
+  "contentHash": "349c8ab2ccb6b8925259c1ce8e4c641ea40debabee36aea9b20909b35bb81d6b",
+  "scannerVersion": "2.5.3"
+}

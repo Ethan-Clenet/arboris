@@ -1,0 +1,40 @@
+{
+  "riskScore": 13,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "references/tool-surface.md",
+        "start_line": 273
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "create or\ntune material instances, frame a camera shot, capture screenshots or renders,\nimport assets, inspect the scene or UI, run automation tests, or script the\neditor. Works for single actions (\"m",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 30
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:25.188197+00:00",
+  "scanMode": "static",
+  "skillName": "unreal-mcp",
+  "contentHash": "e3dc62e00d26de3e6cb8b915a7b6b5728627ff6a6c0823a394cc3f42d74e4c8a",
+  "scannerVersion": "2.5.3"
+}

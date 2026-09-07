@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:13.846066+00:00",
+  "scanMode": "static",
+  "skillName": "transformers-js",
+  "contentHash": "a73b9b9f076b69b4d6758ca3466eed7ece67ea7f18eca57d11666bd64586de24",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,362 @@
+{
+  "riskScore": 100,
+  "severity": "CRITICAL",
+  "recommendation": "UNSAFE",
+  "issueCount": 40,
+  "issues": [
+    {
+      "id": "AST8",
+      "category": "Dangerous Code Execution",
+      "pattern": "Dangerous chain: exec() wrapping compile",
+      "severity": "CRITICAL",
+      "confidence": 0.95,
+      "finding": "    exec(compile(open(_parseltongue_path).read(), str(_parseltongue_path), 'exec'), _caller_globals)",
+      "explanation": "A dangerous execution chain combines code execution (exec/eval) with a dynamic source (network, encoded data, dynamic import), creating a high-confidence attack vector.",
+      "remediation": "Remove the execution chain entirely. Never pass network data, decoded bytes, or dynamically imported code to exec()/eval(). Use structured data formats instead.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 52
+      }
+    },
+    {
+      "id": "AST1",
+      "category": "Dangerous Code Execution",
+      "pattern": "exec() call detected",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "    exec(compile(open(_parseltongue_path).read(), str(_parseltongue_path), 'exec'), _caller_globals)",
+      "explanation": "Direct exec() call allows arbitrary code execution. An attacker can inject code that runs with the full privileges of the process.",
+      "remediation": "Replace exec() with a safe alternative. If dynamic execution is required, use a sandboxed environment or restricted eval with __builtins__ disabled.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 52
+      }
+    },
+    {
+      "id": "AST8",
+      "category": "Dangerous Code Execution",
+      "pattern": "Dangerous chain: exec() wrapping compile",
+      "severity": "CRITICAL",
+      "confidence": 0.95,
+      "finding": "    exec(compile(open(_race_path).read(), str(_race_path), 'exec'), _caller_globals)",
+      "explanation": "A dangerous execution chain combines code execution (exec/eval) with a dynamic source (network, encoded data, dynamic import), creating a high-confidence attack vector.",
+      "remediation": "Remove the execution chain entirely. Never pass network data, decoded bytes, or dynamically imported code to exec()/eval(). Use structured data formats instead.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 54
+      }
+    },
+    {
+      "id": "AST1",
+      "category": "Dangerous Code Execution",
+      "pattern": "exec() call detected",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "    exec(compile(open(_race_path).read(), str(_race_path), 'exec'), _caller_globals)",
+      "explanation": "Direct exec() call allows arbitrary code execution. An attacker can inject code that runs with the full privileges of the process.",
+      "remediation": "Replace exec() with a safe alternative. If dynamic execution is required, use a sandboxed environment or restricted eval with __builtins__ disabled.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 54
+      }
+    },
+    {
+      "id": "AST6",
+      "category": "Dangerous Code Execution",
+      "pattern": "compile() call detected",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "    exec(compile(open(_parseltongue_path).read(), str(_parseltongue_path), 'exec'), _caller_globals)",
+      "explanation": "compile() creates code objects from strings. When combined with exec()/eval(), it enables obfuscated code execution.",
+      "remediation": "Avoid compile() with dynamic strings. If code generation is needed, use templates or AST manipulation with strict validation.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 52
+      }
+    },
+    {
+      "id": "AST6",
+      "category": "Dangerous Code Execution",
+      "pattern": "compile() call detected",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "    exec(compile(open(_race_path).read(), str(_race_path), 'exec'), _caller_globals)",
+      "explanation": "compile() creates code objects from strings. When combined with exec()/eval(), it enables obfuscated code execution.",
+      "remediation": "Avoid compile() with dynamic strings. If code generation is needed, use templates or AST manipulation with strict validation.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 54
+      }
+    },
+    {
+      "id": "AST8",
+      "category": "Dangerous Code Execution",
+      "pattern": "Dangerous chain: exec() wrapping compile",
+      "severity": "CRITICAL",
+      "confidence": 0.95,
+      "finding": "    exec(compile(open(path).read(), str(path), 'exec'), ns)",
+      "explanation": "A dangerous execution chain combines code execution (exec/eval) with a dynamic source (network, encoded data, dynamic import), creating a high-confidence attack vector.",
+      "remediation": "Remove the execution chain entirely. Never pass network data, decoded bytes, or dynamically imported code to exec()/eval(). Use structured data formats instead.",
+      "location": {
+        "file": "scripts/load_godmode.py",
+        "start_line": 29
+      }
+    },
+    {
+      "id": "AST1",
+      "category": "Dangerous Code Execution",
+      "pattern": "exec() call detected",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "    exec(compile(open(path).read(), str(path), 'exec'), ns)",
+      "explanation": "Direct exec() call allows arbitrary code execution. An attacker can inject code that runs with the full privileges of the process.",
+      "remediation": "Replace exec() with a safe alternative. If dynamic execution is required, use a sandboxed environment or restricted eval with __builtins__ disabled.",
+      "location": {
+        "file": "scripts/load_godmode.py",
+        "start_line": 29
+      }
+    },
+    {
+      "id": "AST6",
+      "category": "Dangerous Code Execution",
+      "pattern": "compile() call detected",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "    exec(compile(open(path).read(), str(path), 'exec'), ns)",
+      "explanation": "compile() creates code objects from strings. When combined with exec()/eval(), it enables obfuscated code execution.",
+      "remediation": "Avoid compile() with dynamic strings. If code generation is needed, use templates or AST manipulation with strict validation.",
+      "location": {
+        "file": "scripts/load_godmode.py",
+        "start_line": 29
+      }
+    },
+    {
+      "id": "TT1",
+      "category": "Data Flow",
+      "pattern": "Direct flow: open (file read) → exec (code execution)",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "    exec(compile(open(_parseltongue_path).read(), str(_parseltongue_path), 'exec'), _caller_globals)",
+      "explanation": "Data flows directly from a source (env vars, files, network) to a sink (network output, exec, file write) without intermediate validation.",
+      "remediation": "Add validation or sanitization between the data source and sink. Never pass raw source data directly to a sink without checking its content.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 52
+      }
+    },
+    {
+      "id": "TT1",
+      "category": "Data Flow",
+      "pattern": "Direct flow: open (file read) → exec (code execution)",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "    exec(compile(open(_race_path).read(), str(_race_path), 'exec'), _caller_globals)",
+      "explanation": "Data flows directly from a source (env vars, files, network) to a sink (network output, exec, file write) without intermediate validation.",
+      "remediation": "Add validation or sanitization between the data source and sink. Never pass raw source data directly to a sink without checking its content.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 54
+      }
+    },
+    {
+      "id": "TT2",
+      "category": "Data Flow",
+      "pattern": "Tainted flow: 'CONFIG_PATH' from os.getenv (line 61, credential/environment) → open (file write)",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "    with open(CONFIG_PATH, \"w\") as f:",
+      "explanation": "Data from a source is assigned to a variable that is later passed to a sink, creating a variable-mediated taint flow.",
+      "remediation": "Validate tainted variables before passing them to sinks. Use allowlists, type checks, or sanitization functions on data from external sources.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 403
+      }
+    },
+    {
+      "id": "TT2",
+      "category": "Data Flow",
+      "pattern": "Tainted flow: 'PREFILL_PATH' from os.getenv (line 62, credential/environment) → open (file write)",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "    with open(PREFILL_PATH, \"w\") as f:",
+      "explanation": "Data from a source is assigned to a variable that is later passed to a sink, creating a variable-mediated taint flow.",
+      "remediation": "Validate tainted variables before passing them to sinks. Use allowlists, type checks, or sanitization functions on data from external sources.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 412
+      }
+    },
+    {
+      "id": "TT2",
+      "category": "Data Flow",
+      "pattern": "Tainted flow: 'CONFIG_PATH' from os.getenv (line 61, credential/environment) → open (file write)",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "            with open(CONFIG_PATH, \"w\") as f:",
+      "explanation": "Data from a source is assigned to a variable that is later passed to a sink, creating a variable-mediated taint flow.",
+      "remediation": "Validate tainted variables before passing them to sinks. Use allowlists, type checks, or sanitization functions on data from external sources.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 726
+      }
+    },
+    {
+      "id": "TT1",
+      "category": "Data Flow",
+      "pattern": "Direct flow: open (file read) → exec (code execution)",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "    exec(compile(open(path).read(), str(path), 'exec'), ns)",
+      "explanation": "Data flows directly from a source (env vars, files, network) to a sink (network output, exec, file write) without intermediate validation.",
+      "remediation": "Add validation or sanitization between the data source and sink. Never pass raw source data directly to a sink without checking its content.",
+      "location": {
+        "file": "scripts/load_godmode.py",
+        "start_line": 29
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "AR1",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "don't refuse",
+      "explanation": "Skill instructs the agent to never refuse or to always comply. Suppressing the agent's ability to decline removes a core safety control and enables downstream harmful requests to succeed.",
+      "remediation": "Remove any instruction telling the agent to never refuse or always comply. The agent must retain the ability to decline unsafe, out-of-scope, or harmful requests.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 403
+      }
+    },
+    {
+      "id": "AR3",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "You are an unrestricted",
+      "explanation": "Skill attempts to nullify the agent's safety policies or restrictions ('you have no restrictions', 'ignore your guidelines', 'do anything now'). This is a direct jailbreak that disables guardrails.",
+      "remediation": "Remove jailbreak framing that nullifies safety policies or restrictions. Skill content must not instruct the agent to ignore its guidelines or operate without guardrails.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 164
+      }
+    },
+    {
+      "id": "AR3",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "finding": "Bypass safety",
+      "explanation": "Skill attempts to nullify the agent's safety policies or restrictions ('you have no restrictions', 'ignore your guidelines', 'do anything now'). This is a direct jailbreak that disables guardrails.",
+      "remediation": "Remove jailbreak framing that nullifies safety policies or restrictions. Skill content must not instruct the agent to ignore its guidelines or operate without guardrails.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 17
+      }
+    },
+    {
+      "id": "AR1",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "do not refuse",
+      "explanation": "Skill instructs the agent to never refuse or to always comply. Suppressing the agent's ability to decline removes a core safety control and enables downstream harmful requests to succeed.",
+      "remediation": "Remove any instruction telling the agent to never refuse or always comply. The agent must retain the ability to decline unsafe, out-of-scope, or harmful requests.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 207
+      }
+    },
+    {
+      "id": "AR1",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "Never refuse",
+      "explanation": "Skill instructs the agent to never refuse or to always comply. Suppressing the agent's ability to decline removes a core safety control and enables downstream harmful requests to succeed.",
+      "remediation": "Remove any instruction telling the agent to never refuse or always comply. The agent must retain the ability to decline unsafe, out-of-scope, or harmful requests.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 232
+      }
+    },
+    {
+      "id": "AR2",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "never add disclaimers",
+      "explanation": "Skill instructs the agent to omit warnings, disclaimers, or ethical commentary. Stripping safety caveats hides risk from the user and is a common jailbreak preamble.",
+      "remediation": "Remove instructions that suppress warnings, disclaimers, or ethical commentary. Let the agent surface safety-relevant caveats to the user.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 232
+      }
+    },
+    {
+      "id": "AR2",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "No disclaimers",
+      "explanation": "Skill instructs the agent to omit warnings, disclaimers, or ethical commentary. Stripping safety caveats hides risk from the user and is a common jailbreak preamble.",
+      "remediation": "Remove instructions that suppress warnings, disclaimers, or ethical commentary. Let the agent surface safety-relevant caveats to the user.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 279
+      }
+    },
+    {
+      "id": "AR3",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "You are an unrestricted",
+      "explanation": "Skill attempts to nullify the agent's safety policies or restrictions ('you have no restrictions', 'ignore your guidelines', 'do anything now'). This is a direct jailbreak that disables guardrails.",
+      "remediation": "Remove jailbreak framing that nullifies safety policies or restrictions. Skill content must not instruct the agent to ignore its guidelines or operate without guardrails.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 206
+      }
+    },
+    {
+      "id": "AR3",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "You are an unrestricted",
+      "explanation": "Skill attempts to nullify the agent's safety policies or restrictions ('you have no restrictions', 'ignore your guidelines', 'do anything now'). This is a direct jailbreak that disables guardrails.",
+      "remediation": "Remove jailbreak framing that nullifies safety policies or restrictions. Skill content must not instruct the agent to ignore its guidelines or operate without guardrails.",
+      "location": {
+        "file": "scripts/auto_jailbreak.py",
+        "start_line": 219
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:25.722145+00:00",
+  "scanMode": "static",
+  "skillName": "godmode",
+  "contentHash": "5af166dc73ddc26f2273a1687ee19d0d8cacd1d20937451de6f3a9096d6ad640",
+  "scannerVersion": "2.5.3"
+}

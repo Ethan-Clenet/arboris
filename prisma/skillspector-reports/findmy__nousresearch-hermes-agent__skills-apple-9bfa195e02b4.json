@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:21.810410+00:00",
+  "scanMode": "static",
+  "skillName": "findmy",
+  "contentHash": "c9472017057fe41b2034377aef7967d75aa1d7bebd7e46883b27abf3c5725549",
+  "scannerVersion": "2.5.3"
+}

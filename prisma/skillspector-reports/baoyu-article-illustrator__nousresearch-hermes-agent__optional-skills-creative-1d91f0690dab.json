@@ -1,0 +1,27 @@
+{
+  "riskScore": 21,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "AR1",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "DO NOT refuse",
+      "explanation": "Skill instructs the agent to never refuse or to always comply. Suppressing the agent's ability to decline removes a core safety control and enables downstream harmful requests to succeed.",
+      "remediation": "Remove any instruction telling the agent to never refuse or always comply. The agent must retain the ability to decline unsafe, out-of-scope, or harmful requests.",
+      "location": {
+        "file": "prompts/system.md",
+        "start_line": 13
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:02.382442+00:00",
+  "scanMode": "static",
+  "skillName": "baoyu-article-illustrator",
+  "contentHash": "fa3eff93926c5eef9d120b72f9a18870b8b7649b3ddd908f2738f97fb56db00c",
+  "scannerVersion": "2.5.3"
+}

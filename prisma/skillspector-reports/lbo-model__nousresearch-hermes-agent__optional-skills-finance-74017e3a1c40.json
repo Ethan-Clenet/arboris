@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:38.001210+00:00",
+  "scanMode": "static",
+  "skillName": "lbo-model",
+  "contentHash": "e42160f86734ccdfe293054452258926bf71792609862b32bbffdc0db885576e",
+  "scannerVersion": "2.5.3"
+}

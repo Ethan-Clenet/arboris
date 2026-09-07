@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:35.381048+00:00",
+  "scanMode": "static",
+  "skillName": "inference-sh-cli",
+  "contentHash": "6a98c893d71b199c5050da7589614c96cb109c9f5a1f4c171a7ee8c04d288b63",
+  "scannerVersion": "2.5.3"
+}

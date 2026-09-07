@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:02.674488+00:00",
+  "scanMode": "static",
+  "skillName": "pytorch-lightning",
+  "contentHash": "076f382fa8bc69b43186bbaba1593247ac17f1fbf515af4bef6be18d8a03b41a",
+  "scannerVersion": "2.5.3"
+}

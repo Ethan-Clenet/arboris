@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:42.687142+00:00",
+  "scanMode": "static",
+  "skillName": "merger-model",
+  "contentHash": "a25762a8750075af5d48beaf593f4aa3d8114464816ee8a6804b120e7c498730",
+  "scannerVersion": "2.5.3"
+}

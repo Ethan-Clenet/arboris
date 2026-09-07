@@ -1,0 +1,27 @@
+{
+  "riskScore": 19,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "templates/template.sh",
+        "start_line": 98
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:10.844476+00:00",
+  "scanMode": "static",
+  "skillName": "setup-wizard-generator",
+  "contentHash": "1020374c6feaa00d6644a40d6337b9ab912a3f9d0256b4b0d262af3f790ca37c",
+  "scannerVersion": "2.5.3"
+}

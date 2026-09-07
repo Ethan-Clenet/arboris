@@ -1,0 +1,27 @@
+{
+  "riskScore": 10,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/triton-kernels/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "examples/skill_test_layernorm.py",
+        "start_line": 5
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:33:15.967923+00:00",
+  "scanMode": "static",
+  "skillName": "unknown",
+  "contentHash": "2027dc4cb0f08c3b3298c1a1d12aa5d585681dc1188c686b02b40fafa580450d",
+  "scannerVersion": "2.5.3"
+}

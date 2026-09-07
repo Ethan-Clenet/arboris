@@ -1,0 +1,39 @@
+{
+  "riskScore": 14,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "explanation": "Docker image references without a specific tag (:latest is implicit) or digest (@sha256:...) can be silently replaced by a malicious image.",
+      "remediation": "Pin the image: image:tag or image@sha256:abc123",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 134
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:09.268868+00:00",
+  "scanMode": "static",
+  "skillName": "searxng-search",
+  "contentHash": "d5e7928b143ef4bfc792ae6491425a9091ddad951453b1d470c700f5e01dbbfb",
+  "scannerVersion": "2.5.3"
+}

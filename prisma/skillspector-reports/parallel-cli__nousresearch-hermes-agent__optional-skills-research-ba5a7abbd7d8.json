@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:53.872346+00:00",
+  "scanMode": "static",
+  "skillName": "parallel-cli",
+  "contentHash": "b4ac0746781bde84f27dd4a8756d3887a38faa6474196fbca75a5ad8bf2fe5f8",
+  "scannerVersion": "2.5.3"
+}

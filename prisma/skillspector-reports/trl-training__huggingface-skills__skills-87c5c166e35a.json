@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:16.733171+00:00",
+  "scanMode": "static",
+  "skillName": "trl-training",
+  "contentHash": "1db4889b8d78041f78d758296b9d8d2fa800b349b74482dcfa329cd6e5eaa033",
+  "scannerVersion": "2.5.3"
+}

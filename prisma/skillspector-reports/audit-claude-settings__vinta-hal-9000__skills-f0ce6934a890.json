@@ -1,0 +1,41 @@
+{
+  "riskScore": 42,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "AS1",
+      "category": "Agent Snooping",
+      "pattern": "Agent Config Directory Access",
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "finding": "~/.claude/settings.json",
+      "explanation": "Skill reads from agent configuration directories (.claude/, .codex/, .gemini/). These directories may contain API keys, personal settings, and other credentials that the skill has no legitimate need to access.",
+      "remediation": "Remove all code or instructions that access agent configuration directories (.claude/, .codex/, .gemini/). If configuration values are needed, pass them explicitly as parameters or environment variables — never read the agent's own config files.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 32
+      }
+    },
+    {
+      "id": "AR2",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "no warning",
+      "explanation": "Skill instructs the agent to omit warnings, disclaimers, or ethical commentary. Stripping safety caveats hides risk from the user and is a common jailbreak preamble.",
+      "remediation": "Remove instructions that suppress warnings, disclaimers, or ethical commentary. Let the agent surface safety-relevant caveats to the user.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 61
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:33:25.337501+00:00",
+  "scanMode": "static",
+  "skillName": "audit-claude-settings",
+  "contentHash": "6cee291c89f6c94d7ec1ae90c9ff4d022a543866e48bb8e351caf277b0dd013a",
+  "scannerVersion": "2.5.3"
+}

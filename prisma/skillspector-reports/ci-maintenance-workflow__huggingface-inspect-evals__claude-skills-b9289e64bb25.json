@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:35.280797+00:00",
+  "scanMode": "static",
+  "skillName": "ci-maintenance-workflow",
+  "contentHash": "93e1ee29dc2534e468909273ebc0335a9e1c68f66c79a624b462451d3dc2f215",
+  "scannerVersion": "2.5.3"
+}

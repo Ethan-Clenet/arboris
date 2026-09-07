@@ -1,0 +1,27 @@
+{
+  "riskScore": 18,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "TM2",
+      "category": "Tool Misuse",
+      "pattern": "Chaining Abuse",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "; rm -",
+      "explanation": "Tool calls are chained to bypass individual safety checks or escalate capabilities beyond what any single tool call would allow.",
+      "remediation": "Limit tool chaining depth and validate the output of each tool before passing it to the next. Require explicit user approval for multi-step chains.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 42
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:33:31.810264+00:00",
+  "scanMode": "static",
+  "skillName": "verify-before-npm-publish",
+  "contentHash": "8c3450a15478d467571ed661e0ab1c2f108d63d37e2976ab64e36082c7248298",
+  "scannerVersion": "2.5.3"
+}

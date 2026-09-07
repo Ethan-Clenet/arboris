@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "MP3",
+      "category": "Memory Poisoning",
+      "pattern": "Memory Manipulation",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "reset context",
+      "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+      "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+      "location": {
+        "file": "references/context-budget-discipline.md",
+        "start_line": 47
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:20.481798+00:00",
+  "scanMode": "static",
+  "skillName": "subagent-driven-development",
+  "contentHash": "1f8403b44e917777522f6ab78ef5491dc68ab53bb31e63c7bdfe6b2507e70fe6",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:19.262406+00:00",
+  "scanMode": "static",
+  "skillName": "stripe-projects",
+  "contentHash": "6d59b14706baa963b3b2dbc879884896b0fe08f41258c176e403a6c2c4ad4508",
+  "scannerVersion": "2.5.3"
+}

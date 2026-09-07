@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:18.375342+00:00",
+  "scanMode": "static",
+  "skillName": "upload-post-image",
+  "contentHash": "d24ca5c83fcd4ff1bee55ee6031dcbbf32f6597d564e1ba427b673e0892c7624",
+  "scannerVersion": "2.5.3"
+}

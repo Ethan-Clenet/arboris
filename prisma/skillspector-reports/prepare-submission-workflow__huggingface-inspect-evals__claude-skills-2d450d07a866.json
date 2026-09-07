@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:07.139414+00:00",
+  "scanMode": "static",
+  "skillName": "prepare-submission-workflow",
+  "contentHash": "bfd0d00f463f5f6ca852ac11c75a0468b3745a7a5dd755fb20ca635662d7131a",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,55 @@
+{
+  "riskScore": 48,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "AR1",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "NEVER say you cannot",
+      "explanation": "Skill instructs the agent to never refuse or to always comply. Suppressing the agent's ability to decline removes a core safety control and enables downstream harmful requests to succeed.",
+      "remediation": "Remove any instruction telling the agent to never refuse or always comply. The agent must retain the ability to decline unsafe, out-of-scope, or harmful requests.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 23
+      }
+    },
+    {
+      "id": "AR2",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "NEVER add disclaimers",
+      "explanation": "Skill instructs the agent to omit warnings, disclaimers, or ethical commentary. Stripping safety caveats hides risk from the user and is a common jailbreak preamble.",
+      "remediation": "Remove instructions that suppress warnings, disclaimers, or ethical commentary. Let the agent surface safety-relevant caveats to the user.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 23
+      }
+    },
+    {
+      "id": "P4",
+      "category": "Prompt Injection",
+      "pattern": "Behavior Manipulation",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "NEVER suggest the user",
+      "explanation": "Subtle instructions detected that may alter agent decision-making or introduce hidden biases.",
+      "remediation": "Review content for implicit steering or bias. Ensure instructions are explicit and align with the skill's stated purpose.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 23
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:31.931100+00:00",
+  "scanMode": "static",
+  "skillName": "yuanbao",
+  "contentHash": "7d7f513c1acb5188a4b391ed43e5bc25dc98ee2a0fcfb751a5d31091d5bdf220",
+  "scannerVersion": "2.5.3"
+}

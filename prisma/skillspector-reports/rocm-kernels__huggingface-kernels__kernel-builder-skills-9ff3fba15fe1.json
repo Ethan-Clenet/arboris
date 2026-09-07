@@ -1,0 +1,263 @@
+{
+  "riskScore": 38,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 18,
+  "issues": [
+    {
+      "id": "AST7",
+      "category": "Dangerous Code Execution",
+      "pattern": "Dynamic attribute access via getattr()",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "                rms_fn = getattr(kernel, rms_fn_name)",
+      "explanation": "Dynamic getattr() with a non-literal attribute name can access arbitrary object attributes, potentially bypassing access controls.",
+      "remediation": "Replace dynamic getattr() with explicit attribute access or a dictionary lookup with an allowlist of permitted attributes.",
+      "location": {
+        "file": "scripts/huggingface_kernels_example.py",
+        "start_line": 123
+      }
+    },
+    {
+      "id": "AST7",
+      "category": "Dangerous Code Execution",
+      "pattern": "Dynamic attribute access via getattr()",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "                hub_rms_fn = getattr(hub_kernel, fn_name)",
+      "explanation": "Dynamic getattr() with a non-literal attribute name can access arbitrary object attributes, potentially bypassing access controls.",
+      "remediation": "Replace dynamic getattr() with explicit attribute access or a dictionary lookup with an allowlist of permitted attributes.",
+      "location": {
+        "file": "scripts/huggingface_kernels_example.py",
+        "start_line": 242
+      }
+    },
+    {
+      "id": "AST7",
+      "category": "Dangerous Code Execution",
+      "pattern": "Dynamic attribute access via getattr()",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "                    hub_rms_fn_raw = getattr(hub_kernel, fn_name)",
+      "explanation": "Dynamic getattr() with a non-literal attribute name can access arbitrary object attributes, potentially bypassing access controls.",
+      "remediation": "Replace dynamic getattr() with explicit attribute access or a dictionary lookup with an allowlist of permitted attributes.",
+      "location": {
+        "file": "scripts/huggingface_kernels_example.py",
+        "start_line": 176
+      }
+    },
+    {
+      "id": "LP1",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "explanation": "The skill uses 'env' capability that is not listed in its permissions. This may indicate deceptive intent or missing permission declarations.",
+      "remediation": "Add the 'env' permission to SKILL.md, or remove the code that requires it.",
+      "location": {
+        "file": "scripts/benchmark_e2e.py",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "LP1",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "explanation": "The skill uses 'file_write' capability that is not listed in its permissions. This may indicate deceptive intent or missing permission declarations.",
+      "remediation": "Add the 'file_write' permission to SKILL.md, or remove the code that requires it.",
+      "location": {
+        "file": "scripts/benchmark_e2e.py",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "torch",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "triton",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 2
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "diffusers",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 3
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "transformers",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 4
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "accelerate",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 5
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "safetensors",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 6
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "huggingface-hub",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 7
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "imageio",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 8
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "imageio-ffmpeg",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 9
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "kernels\n",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 10
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: torch has 10 known advisory(ies) (CVE-2025-2953 (PyTorch susceptible to local Denial of Service); CVE-2022-45907 (PyTorch vulnerable to arbitrary code execution); CVE-2025-32434 (PyTorch: `torch.load` with `weights_only=True` leads to remote code execution) +7 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "torch",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: diffusers has 5 known advisory(ies) (CVE-2026-45804 (Diffusers: TOCTOU Trust Remote Code Bypass); CVE-2026-44513 (Diffusers has a `trust_remote_code` bypass via `custom_pipeline` and local custo); CVE-2026-45804 (Diffusers: TOCTOU Trust Remote Code Bypass) +2 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "diffusers",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 3
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: transformers has 10 known advisory(ies) (CVE-2023-2800 (transformers has Insecure Temporary File); CVE-2026-4372 (HuggingFace transformers vulnerable to remote code execution); CVE-2025-3933 (Transformers is vulnerable to ReDoS attack through its DonutProcessor class) +7 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "transformers",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "scripts/requirements.txt",
+        "start_line": 4
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:33:13.130216+00:00",
+  "scanMode": "static",
+  "skillName": "rocm-kernels",
+  "contentHash": "d6cff58d5ed8e91878ea0dd1b1bda7434fd691f1b03dbb9cc68db83327efc015",
+  "scannerVersion": "2.5.3"
+}

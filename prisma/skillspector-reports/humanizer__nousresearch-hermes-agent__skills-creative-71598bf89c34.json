@@ -1,0 +1,27 @@
+{
+  "riskScore": 3,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "finding": "NOT LIMITED TO",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "LICENSE",
+        "start_line": 16
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:32.841658+00:00",
+  "scanMode": "static",
+  "skillName": "humanizer",
+  "contentHash": "1de50d4cf5008f5287d0e6b8fdb751cdea63073c232f9e373bb61bc3ceb25b83",
+  "scannerVersion": "2.5.3"
+}

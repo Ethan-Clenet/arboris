@@ -1,0 +1,39 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "explanation": "Docker image references without a specific tag (:latest is implicit) or digest (@sha256:...) can be silently replaced by a malicious image.",
+      "remediation": "Pin the image: image:tag or image@sha256:abc123",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 131
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "explanation": "Docker image references without a specific tag (:latest is implicit) or digest (@sha256:...) can be silently replaced by a malicious image.",
+      "remediation": "Pin the image: image:tag or image@sha256:abc123",
+      "location": {
+        "file": "references/server-deployment.md",
+        "start_line": 30
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:10.783887+00:00",
+  "scanMode": "static",
+  "skillName": "serving-llms-vllm",
+  "contentHash": "3b10937239a4894ec8a9be58ad4ee7c68c175f728894cb98731a16b5b714b281",
+  "scannerVersion": "2.5.3"
+}

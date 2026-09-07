@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "os.environ[\"TOKENIZERS_PARALLELISM\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "references/performance.md",
+        "start_line": 303
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:30:53.846258+00:00",
+  "scanMode": "static",
+  "skillName": "accelerate",
+  "contentHash": "b0d770ecda895a8f17f91a34fcdc6df9f0ca61b90d826096bcf6cdbe58d329cd",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,83 @@
+{
+  "riskScore": 53,
+  "severity": "HIGH",
+  "recommendation": "UNSAFE",
+  "issueCount": 5,
+  "issues": [
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "without confirmation",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 80
+      }
+    },
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.75,
+      "finding": "expand scope",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 50
+      }
+    },
+    {
+      "id": "EA4",
+      "category": "Excessive Agency",
+      "pattern": "Unbounded Resource Access",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "retry indefinitely",
+      "explanation": "Skill allows unbounded resource consumption (API calls, storage, compute). Without rate limits or quotas, a compromised or misbehaving agent can cause denial-of-service or cost overruns.",
+      "remediation": "Set explicit rate limits, timeouts, and resource quotas for API calls, file operations, and compute. Implement circuit breakers for runaway loops.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 92
+      }
+    },
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.65,
+      "finding": "git reset --hard",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 89
+      }
+    },
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_destructive_autonomous_actions': Autonomous destructive filesystem, shell history, or repository actions in AI agent skills [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "git reset --hard; without confirmation; silently; silently; silently",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 89
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:33:26.771469+00:00",
+  "scanMode": "static",
+  "skillName": "commit",
+  "contentHash": "d48a1f559122206677d804c4cc94f4cad88217bda482ec78d78a521a9cfe4f76",
+  "scannerVersion": "2.5.3"
+}

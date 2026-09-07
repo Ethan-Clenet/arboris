@@ -1,0 +1,54 @@
+{
+  "riskScore": 56,
+  "severity": "HIGH",
+  "recommendation": "UNSAFE",
+  "issueCount": 3,
+  "issues": [
+    {
+      "id": "LP1",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "explanation": "The skill uses 'network' capability that is not listed in its permissions. This may indicate deceptive intent or missing permission declarations.",
+      "remediation": "Add the 'network' permission to SKILL.md, or remove the code that requires it.",
+      "location": {
+        "file": "scripts/upload_to_stitch.py",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "AS1",
+      "category": "Agent Snooping",
+      "pattern": "Agent Config Directory Access",
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "finding": "~/.gemini/settings.json",
+      "explanation": "Skill reads from agent configuration directories (.claude/, .codex/, .gemini/). These directories may contain API keys, personal settings, and other credentials that the skill has no legitimate need to access.",
+      "remediation": "Remove all code or instructions that access agent configuration directories (.claude/, .codex/, .gemini/). If configuration values are needed, pass them explicitly as parameters or environment variables — never read the agent's own config files.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 38
+      }
+    },
+    {
+      "id": "OH3",
+      "category": "Output Handling",
+      "pattern": "Unbounded Output",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "no token\n    limit",
+      "explanation": "Output size or generation rate is not bounded. Unbounded output enables denial-of-service through resource exhaustion, log flooding, or context-window stuffing.",
+      "remediation": "Set explicit limits on output length, generation count, and rate. Use max_tokens and truncation to prevent unbounded output.",
+      "location": {
+        "file": "scripts/upload_to_stitch.py",
+        "start_line": 13
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:34:13.992643+00:00",
+  "scanMode": "static",
+  "skillName": "upload-to-stitch",
+  "contentHash": "4bc5d2692adbf9b87997950fbf60effb2eda8425cd23340a813b0053fc1d42cb",
+  "scannerVersion": "2.5.3"
+}

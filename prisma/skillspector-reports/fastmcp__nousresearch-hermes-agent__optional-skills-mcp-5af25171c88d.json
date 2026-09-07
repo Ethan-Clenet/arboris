@@ -1,0 +1,106 @@
+{
+  "riskScore": 43,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 7,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "explanation": "pip install without ==version installs the latest release, which could include malicious changes.",
+      "remediation": "Pin the version: pip install package==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 40
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "explanation": "pip install without ==version installs the latest release, which could include malicious changes.",
+      "remediation": "Pin the version: pip install package==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 272
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "explanation": "pip install without ==version installs the latest release, which could include malicious changes.",
+      "remediation": "Pin the version: pip install package==1.2.3",
+      "location": {
+        "file": "references/fastmcp-cli.md",
+        "start_line": 8
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "explanation": "pip install without ==version installs the latest release, which could include malicious changes.",
+      "remediation": "Pin the version: pip install package==1.2.3",
+      "location": {
+        "file": "references/fastmcp-cli.md",
+        "start_line": 12
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "create a new MCP server in Python\n- wrap an API, database, CLI, or file-processing workflow as MCP tools\n- expose resources or prompts in addition to tools\n- smoke-test a server with the FastMCP CLI b",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 26
+      }
+    },
+    {
+      "id": "RA1",
+      "category": "Rogue Agent",
+      "pattern": "Self-Modification",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "overwrite existing file",
+      "explanation": "Skill modifies its own code, configuration, or behavior at runtime. Self-modification enables an agent to escalate privileges, disable safety constraints, or install persistent backdoors.",
+      "remediation": "Prevent the skill from modifying its own code, SKILL.md, or configuration files. Treat skill files as read-only at runtime.",
+      "location": {
+        "file": "scripts/scaffold_fastmcp.py",
+        "start_line": 47
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:21.847251+00:00",
+  "scanMode": "static",
+  "skillName": "fastmcp",
+  "contentHash": "a6dbec548f814700f4c04c39ec8fe3f9bd340da391d1106dc55d26e29c2a42ce",
+  "scannerVersion": "2.5.3"
+}

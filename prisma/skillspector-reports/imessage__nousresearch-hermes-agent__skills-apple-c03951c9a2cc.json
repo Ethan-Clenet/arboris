@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:34.446900+00:00",
+  "scanMode": "static",
+  "skillName": "imessage",
+  "contentHash": "0e394890684cf875f4fb09a17bcab1af7f31ae6169abd9de67181d146d42f0ec",
+  "scannerVersion": "2.5.3"
+}

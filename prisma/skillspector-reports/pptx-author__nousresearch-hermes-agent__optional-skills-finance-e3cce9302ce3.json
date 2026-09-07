@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:58.794332+00:00",
+  "scanMode": "static",
+  "skillName": "pptx-author",
+  "contentHash": "2d3d20a448e58cc62f11b584d06cf7b06539f96704b61ef5d06ad8f09d5f3ab1",
+  "scannerVersion": "2.5.3"
+}

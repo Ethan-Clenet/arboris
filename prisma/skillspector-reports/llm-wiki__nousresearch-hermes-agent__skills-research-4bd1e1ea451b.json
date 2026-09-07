@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "Write a single log entry covering the batch\n\n### Archiving\n\nWhen content is fully superseded or the domain scope changes:\n1. Create `_archive/` directory if it doesn't exist\n2. Move the page to `_arch",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 395
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:39.495758+00:00",
+  "scanMode": "static",
+  "skillName": "llm-wiki",
+  "contentHash": "8b1a106c2c3e2fe68f73d3381e45b1941619c2e1fa98ad53ad01adeec6ffb4a2",
+  "scannerVersion": "2.5.3"
+}

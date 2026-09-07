@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:17.031518+00:00",
+  "scanMode": "static",
+  "skillName": "draw-your-font",
+  "contentHash": "c85247a8bf4186071cd2f48e8067bb941b07d7930c092539991c1757b596d779",
+  "scannerVersion": "2.5.3"
+}

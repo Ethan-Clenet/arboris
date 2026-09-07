@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:20.854374+00:00",
+  "scanMode": "static",
+  "skillName": "teams-meeting-pipeline",
+  "contentHash": "f5680d6667ce90a5b74536dfe258e93c55ada171bac91fbb07ae3996ad878521",
+  "scannerVersion": "2.5.3"
+}

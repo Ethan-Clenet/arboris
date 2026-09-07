@@ -1,0 +1,125 @@
+{
+  "riskScore": 10,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 8,
+  "issues": [
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "finding": "not limited to",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "LICENSE.txt",
+        "start_line": 56
+      }
+    },
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "finding": "not limited to",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "LICENSE.txt",
+        "start_line": 161
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "pillow>=10.0.0",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "requirements.txt",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "imageio>=2.31.0",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "requirements.txt",
+        "start_line": 2
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "imageio-ffmpeg>=0.4.9",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "requirements.txt",
+        "start_line": 3
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.5,
+      "finding": "numpy>=1.24.0",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "requirements.txt",
+        "start_line": 4
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: pillow has 10 known advisory(ies) (CVE-2016-2533 (Pillow buffer overflow in ImagingPcdDecode); CVE-2023-50447 (Arbitrary Code Execution in Pillow); CVE-2021-27922 (Pillow Uncontrolled Resource Consumption) +7 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "pillow",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "requirements.txt",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: numpy has 10 known advisory(ies) (CVE-2014-1859 (Numpy arbitrary file write via symlink attack); CVE-2021-41495 (NumPy NULL Pointer Dereference); CVE-2021-33430 (NumPy Buffer Overflow (Disputed)) +7 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "numpy",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "requirements.txt",
+        "start_line": 4
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:34:15.522060+00:00",
+  "scanMode": "static",
+  "skillName": "slack-gif-creator",
+  "contentHash": "bd0644aae1ca140ba82e3c2e4cf542d05b31cd6b055d941ba63bf4bea9cbda9c",
+  "scannerVersion": "2.5.3"
+}

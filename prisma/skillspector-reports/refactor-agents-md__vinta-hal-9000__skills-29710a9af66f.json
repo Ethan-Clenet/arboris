@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:28.614502+00:00",
+  "scanMode": "static",
+  "skillName": "refactor-agents-md",
+  "contentHash": "11b1e007b0b478eb720d4a8b691a46567b6a1af4808858618d36d634decac049",
+  "scannerVersion": "2.5.3"
+}

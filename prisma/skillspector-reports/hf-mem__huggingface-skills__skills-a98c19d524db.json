@@ -1,0 +1,130 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 9,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 26
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 32
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 42
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 48
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 56
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 62
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 68
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 74
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 80
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:48.603968+00:00",
+  "scanMode": "static",
+  "skillName": "hf-mem",
+  "contentHash": "04b62a7672008c35c096ccc29c178e3f9387d9c56b263b19c40f40df900adff2",
+  "scannerVersion": "2.5.3"
+}

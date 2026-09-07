@@ -1,0 +1,193 @@
+{
+  "riskScore": 50,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 13,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "explanation": "Docker image references without a specific tag (:latest is implicit) or digest (@sha256:...) can be silently replaced by a malicious image.",
+      "remediation": "Pin the image: image:tag or image@sha256:abc123",
+      "location": {
+        "file": "references/advanced-usage.md",
+        "start_line": 413
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "explanation": "Docker image references without a specific tag (:latest is implicit) or digest (@sha256:...) can be silently replaced by a malicious image.",
+      "remediation": "Pin the image: image:tag or image@sha256:abc123",
+      "location": {
+        "file": "references/advanced-usage.md",
+        "start_line": 418
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "os.environ[\"LAMBDA_API_KEY\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "references/advanced-usage.md",
+        "start_line": 208
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "os.environ[\"WANDB_API_KEY\"]",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "references/advanced-usage.md",
+        "start_line": 474
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.45,
+      "finding": "~/.ssh/authorized_keys",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 309
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "~/.ssh/authorized_keys",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "references/advanced-usage.md",
+        "start_line": 579
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.18,
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "references/advanced-usage.md",
+        "start_line": 606
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.18,
+      "finding": ".env\n",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "references/advanced-usage.md",
+        "start_line": 607
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.135,
+      "finding": "~/.ssh/authorized_keys",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "references/troubleshooting.md",
+        "start_line": 103
+      }
+    },
+    {
+      "id": "SC2",
+      "category": "Supply Chain",
+      "pattern": "External Script Fetching",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "wget -nv -O- https://lambdalabs.com/install-lambda-stack.sh | sh",
+      "explanation": "Remote code is downloaded and executed. This bypasses code review and could introduce malicious code.",
+      "remediation": "Avoid downloading and executing remote scripts. Use trusted packages from PyPI/npm. If remote fetch is required, verify checksums and use HTTPS.",
+      "location": {
+        "file": "references/troubleshooting.md",
+        "start_line": 148
+      }
+    },
+    {
+      "id": "SC2",
+      "category": "Supply Chain",
+      "pattern": "External Script Fetching",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "wget -nv -O- https://lambdalabs.com/install-lambda-stack.sh | sh",
+      "explanation": "Remote code is downloaded and executed. This bypasses code review and could introduce malicious code.",
+      "remediation": "Avoid downloading and executing remote scripts. Use trusted packages from PyPI/npm. If remote fetch is required, verify checksums and use HTTPS.",
+      "location": {
+        "file": "references/troubleshooting.md",
+        "start_line": 196
+      }
+    },
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'backdoor_persistence': Backdoor persistence with malicious payloads (shell commands, SSH key injection, hidden root users) [malware]",
+      "severity": "HIGH",
+      "confidence": 0.375,
+      "finding": "echo 'ssh-rsa AAAA...' >> ~/.ssh/authorized_keys",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 309
+      }
+    },
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'backdoor_persistence': Backdoor persistence with malicious payloads (shell commands, SSH key injection, hidden root users) [malware]",
+      "severity": "HIGH",
+      "confidence": 0.375,
+      "finding": "echo '$(cat ~/.ssh/lambda_key_new.pub)' >> ~/.ssh/authorized_keys; echo 'export HF_TOKEN=\"...\"' >> ~/.bashrc",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "references/advanced-usage.md",
+        "start_line": 582
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:31:37.518309+00:00",
+  "scanMode": "static",
+  "skillName": "lambda-labs",
+  "contentHash": "39788546e343dfcce9ede9b8e5ac0751a4a88b798e801e03c887f664d549e319",
+  "scannerVersion": "2.5.3"
+}

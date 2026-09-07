@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:36.159133+00:00",
+  "scanMode": "static",
+  "skillName": "jupyter-notebook",
+  "contentHash": "a0ee8d3a6ef6278209a97a1c92d35e0f4abe2fecfc5967be0810953933ff149d",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,166 @@
+{
+  "riskScore": 29,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 11,
+  "issues": [
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    proc = subprocess.run(\n        [str(python_path), \"-c\",\n         \"import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')\"],\n        capture_output=True, text=True,\n    )",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/setup_env.py",
+        "start_line": 53
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "        probe = subprocess.run([\"py\", f\"-{version}\", \"--version\"], capture_output=True, text=True)",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/setup_env.py",
+        "start_line": 68
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "        subprocess.run([str(py), \"-m\", \"pip\", \"install\", \"--upgrade\", \"pip\"])",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/setup_env.py",
+        "start_line": 130
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "        rc = subprocess.run(\n            [uv, \"pip\", \"install\", \"--python\", str(py), \"--upgrade\", \"-r\", str(requirements)]\n        ).returncode",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/setup_env.py",
+        "start_line": 126
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "        rc = subprocess.run(\n            [str(py), \"-m\", \"pip\", \"install\", \"--upgrade\", \"-r\", str(requirements)]\n        ).returncode",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/setup_env.py",
+        "start_line": 131
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "            if subprocess.run([uv, \"venv\", \"--python\", python_version, str(venv_dir)]).returncode != 0:",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/setup_env.py",
+        "start_line": 103
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "            if subprocess.run([*base_cmd, \"-m\", \"venv\", str(venv_dir)]).returncode != 0:",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/setup_env.py",
+        "start_line": 113
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "boto3",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "requirements.txt",
+        "start_line": 16
+      }
+    },
+    {
+      "id": "SC1",
+      "category": "Supply Chain",
+      "pattern": "Unpinned Dependencies",
+      "severity": "LOW",
+      "confidence": 0.6,
+      "finding": "awscli\n",
+      "explanation": "Dependencies lack version pinning, allowing potential malicious package updates. Consider pinning versions.",
+      "remediation": "Pin all dependency versions in requirements.txt or pyproject.toml. Use exact versions (==) or compatible ranges. Run pip-audit regularly.",
+      "location": {
+        "file": "requirements.txt",
+        "start_line": 17
+      }
+    },
+    {
+      "id": "SC4",
+      "category": "Supply Chain",
+      "pattern": "Unverifiable Dependency: awscli has 5 known advisory(ies) (GHSA-747p-wmpv-9c78 (AWS CLI: cli_history database does not restrict file permissions on Unix systems); CVE-2026-18654 (AWS CLI: Disabled SSH host key verification in Amazon AWS CLI EMR helper command); CVE-2026-13769 (AWS CLI: Overly permissive File Permissions) +2 more), but the manifest does not pin a version, so it is unknown whether the installed release is affected",
+      "severity": "LOW",
+      "confidence": 0.4,
+      "finding": "awscli",
+      "explanation": "Dependency has known vulnerabilities (CVEs). Using packages with unpatched security flaws exposes the environment to known exploits.",
+      "remediation": "Update the dependency to a patched version that addresses the known CVE. Check OSV (osv.dev) or NVD for details on the vulnerability.",
+      "location": {
+        "file": "requirements.txt",
+        "start_line": 17
+      }
+    }
+  ],
+  "scannedAt": "2026-09-07T21:32:46.474055+00:00",
+  "scanMode": "static",
+  "skillName": "hf-cloud-python-env-setup",
+  "contentHash": "761508ad7f279b83ee7115126fd9564742da56851fc4f22fa9a4f2da4a060612",
+  "scannerVersion": "2.5.3"
+}

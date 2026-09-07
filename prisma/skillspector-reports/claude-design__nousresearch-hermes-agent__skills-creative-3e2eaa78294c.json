@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:31:07.191379+00:00",
+  "scanMode": "static",
+  "skillName": "claude-design",
+  "contentHash": "55f73d537278d23710023bcb8509ef4710ca810021cab9717e77d5dbaded2005",
+  "scannerVersion": "2.5.3"
+}

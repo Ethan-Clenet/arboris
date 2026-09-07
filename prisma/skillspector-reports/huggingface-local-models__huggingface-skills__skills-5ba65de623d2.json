@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:54.343675+00:00",
+  "scanMode": "static",
+  "skillName": "huggingface-local-models",
+  "contentHash": "422c50c272d52b53d221caaf8b6bcfceada7596a9fa13a9f6f786074fca6eb6e",
+  "scannerVersion": "2.5.3"
+}

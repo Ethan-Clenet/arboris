@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:33:11.710899+00:00",
+  "scanMode": "static",
+  "skillName": "sync-models",
+  "contentHash": "3b83fbfcf23d2d24e9ecba813d6ef0c74c6356786fabb511ac54ef91d76fc11a",
+  "scannerVersion": "2.5.3"
+}

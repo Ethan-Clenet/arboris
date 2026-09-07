@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T21:32:47.814124+00:00",
+  "scanMode": "static",
+  "skillName": "hf-mcp",
+  "contentHash": "51053999fa521b59ac90bc9f42fa9e0cf3d3ad8f9e66fd3f6d4c2c47ccaa6dc8",
+  "scannerVersion": "2.5.3"
+}
