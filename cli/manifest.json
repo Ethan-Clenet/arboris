@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-07T19:30:25.544Z",
+  "generatedAt": "2026-09-07T21:39:51.924Z",
   "stacks": [
     {
       "id": "node",
@@ -37,6 +37,10 @@
     {
       "id": "docker",
       "label": "Docker"
+    },
+    {
+      "id": "n8n",
+      "label": "n8n"
     },
     {
       "id": "k9",
@@ -1052,6 +1056,7 @@
     "msgraph-integration-patterns__microsoft-amplifier-bundle-skills__skills-0fbb8d056804",
     "mysql",
     "mysql-patterns",
+    "n8n-patterns",
     "nanoclaw-repl",
     "nemo-curator__nousresearch-hermes-agent__optional-skills-mlops-ca0b934aacd9",
     "nemo-gym-blade-analysis__nousresearch-gym__agents-skills-f5dbbcd5f479",
@@ -2240,6 +2245,7 @@
       "mcp-oauth-remote-gateway__nousresearch-hermes-agent__optional-skills-mcp-a4c9091a18b2",
       "mlclaw__huggingface-mlclaw__agents-skills-48bbceb6af00",
       "mle-workflow",
+      "n8n-patterns",
       "one-line-installer-patterns__microsoft-amplifier-bundle-skills__skills-026929d08b37",
       "production-audit",
       "prompt-optimizer",
@@ -2264,6 +2270,10 @@
       "watchers__nousresearch-hermes-agent__optional-skills-devops-01d31e0a0a92",
       "web-pentest__nousresearch-hermes-agent__optional-skills-security-3b748f0b631e",
       "xurl__nousresearch-hermes-agent__skills-social-media-a94cd9af501e"
+    ],
+    "n8n": [
+      "n8n-patterns",
+      "one-line-installer-patterns__microsoft-amplifier-bundle-skills__skills-026929d08b37"
     ],
     "k9": [
       "airunway-aks-setup__microsoft-github-copilot-for-azure__plugins-azure-skills-skills-dbb17dd8b7e9",
@@ -3398,6 +3408,7 @@
       "mle-workflow",
       "motion-ui",
       "mysql-patterns",
+      "n8n-patterns",
       "nanoclaw-repl",
       "nestjs-patterns",
       "nextjs-turbopack",

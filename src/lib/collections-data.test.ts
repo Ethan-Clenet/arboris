@@ -22,4 +22,18 @@ describe('COLLECTIONS', () => {
     expect(findCollectionSeed('sonar')?.id).toBe('sonar')
     expect(findCollectionSeed('__nope__')).toBeUndefined()
   })
+
+  it('embarque les packs Docker et n8n', () => {
+    const docker = COLLECTIONS.find((c) => c.id === 'docker-ops-starter')
+    expect(docker?.skillIds).toContain('docker-patterns')
+    expect(docker?.commandIds).toContain('docker-rebuild')
+
+    const n8n = COLLECTIONS.find((c) => c.id === 'n8n-starter')
+    expect(n8n?.kind).toBe('pack')
+    expect(n8n?.skillIds).toEqual(
+      expect.arrayContaining(['n8n-patterns', 'docker-patterns', 'api-design', 'error-handling']),
+    )
+    expect(n8n?.commandIds).toContain('docker-rebuild')
+    expect(findCollectionSeed('n8n-starter')?.id).toBe('n8n-starter')
+  })
 })
