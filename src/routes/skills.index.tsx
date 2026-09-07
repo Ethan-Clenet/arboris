@@ -13,6 +13,7 @@ import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getCatalog } from '#/server/functions'
 import {
   hexToRgba,
+  listingPublisher,
   type Category,
   type SkillSummary,
 } from '#/lib/catalog'
@@ -48,7 +49,10 @@ type SecurityFilter = 'all' | SecurityRecommendation
 
 function publisherMeta(name: string): { icon: string; color?: string; logo?: boolean } {
   const known: Record<string, { icon: string; color: string }> = {
-    ECC: { icon: 'tree', color: '#1f8a50' },
+    ECC: { icon: 'tree', color: PUBLISHER_LOGO_COLOR.ECC },
+    'affaan-m': { icon: 'tree', color: PUBLISHER_LOGO_COLOR['affaan-m'] },
+    Arboris: { icon: 'tree', color: PUBLISHER_LOGO_COLOR.Arboris },
+    Microsoft: { icon: 'squares-four', color: PUBLISHER_LOGO_COLOR.Microsoft },
     Community: { icon: 'users', color: '#4F8FF7' },
     Flox: { icon: 'package', color: '#7C3AED' },
     Brave: { icon: 'shield', color: PUBLISHER_LOGO_COLOR.Brave },
@@ -118,7 +122,7 @@ function SkillsPage() {
 
   const [q, setQ] = useState('')
   const [cat, setCat] = useState<string>('all')
-  /** Filtre unique sur l’éditeur (metadata.origin), ex. ECC. */
+  /** Filtre unique sur l’éditeur (metadata.origin). */
   const [publisher, setPublisher] = useState<string>('all')
   const [compat, setCompat] = useState<string[]>([])
   const [security, setSecurity] = useState<SecurityFilter>('all')
@@ -131,18 +135,16 @@ function SkillsPage() {
     return map
   }, [catalog.categories])
 
-  const otherPublisher = t.skills.publisherOther
-
   const publisherList = useMemo(() => {
     const counts = new Map<string, number>()
     for (const s of catalog.skills) {
-      const key = s.publisher ?? otherPublisher
+      const key = listingPublisher(s.publisher)
       counts.set(key, (counts.get(key) ?? 0) + 1)
     }
     return [...counts.entries()]
       .map(([id, count]) => ({ id, count }))
       .sort((a, b) => b.count - a.count || a.id.localeCompare(b.id))
-  }, [catalog.skills, otherPublisher])
+  }, [catalog.skills])
 
   const badgeLabels = {
     unscanned: t.skills.securityUnscanned,
@@ -160,8 +162,7 @@ function SkillsPage() {
     const match = (s: SkillSummary) => {
       if (cat !== 'all' && s.categoryId !== cat) return false
       if (publisher !== 'all') {
-        const skillPublisher = s.publisher ?? otherPublisher
-        if (skillPublisher !== publisher) return false
+        if (listingPublisher(s.publisher) !== publisher) return false
       }
       if (compat.length && !compat.every((x) => s.compat.includes(x))) return false
       if (security !== 'all') {
@@ -181,7 +182,7 @@ function SkillsPage() {
     return [...list].sort(
       (a, b) => (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id),
     )
-  }, [q, cat, publisher, compat, security, catalog.skills, catById, lang, otherPublisher])
+  }, [q, cat, publisher, compat, security, catalog.skills, catById, lang])
 
   const filterKey = `${q}\0${cat}\0${publisher}\0${compat.join(',')}\0${security}`
 
@@ -229,11 +230,11 @@ function SkillsPage() {
   const resultLabel = `${rows.length > 1 ? t.skills.resMany : t.skills.resOne} ${t.skills.resTail(catalog.skills.length)}`
 
   const publisherInstallCount = useMemo(() => {
-    if (publisher === 'all' || publisher === otherPublisher) return 0
-    return catalog.skills.filter((s) => (s.publisher ?? otherPublisher) === publisher).length
-  }, [catalog.skills, publisher, otherPublisher])
+    if (publisher === 'all') return 0
+    return catalog.skills.filter((s) => s.publisher === publisher).length
+  }, [catalog.skills, publisher])
 
-  const showPublisherInstall = publisher !== 'all' && publisher !== otherPublisher && publisherInstallCount > 0
+  const showPublisherInstall = publisher !== 'all' && publisherInstallCount > 0
 
   return (
     <main id="main-content" className="w-full">

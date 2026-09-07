@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-07T21:39:51.924Z",
+  "generatedAt": "2026-09-07T22:24:18.908Z",
   "stacks": [
     {
       "id": "node",
@@ -3275,7 +3275,7 @@
       "work-iq-signalboard__microsoft-cat-agent-skills__submissions-e54ac2eab0b4",
       "workforce-plan__microsoft-aibast-agents-library__solutions-resource-utilization-manual-skills-4d778e50af41"
     ],
-    "ECC": [
+    "affaan-m": [
       "accessibility",
       "agent-eval",
       "agent-harness-construction",

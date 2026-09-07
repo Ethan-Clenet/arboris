@@ -75,7 +75,7 @@ Exemples:
   npx arboris-cli collection command-starter --agent cursor
   npx arboris-cli collection react-ts-starter --agent cursor
   npx arboris-cli collection node-api-starter --agent cursor
-  npx arboris-cli publisher ECC
+  npx arboris-cli publisher affaan-m
   npx arboris-cli publisher brave --agent cursor
   npx arboris-cli typescript --force
 
@@ -349,7 +349,7 @@ async function runListPublishers() {
   const manifest = await loadCliManifest()
   console.log('Éditeurs (créateurs) disponibles:\n')
   console.log(formatPublisherList(manifest))
-  console.log('\nExemple: npx arboris-cli publisher ECC')
+  console.log('\nExemple: npx arboris-cli publisher affaan-m')
 }
 
 async function runInstallPublisher(publisherInput: string, options: CliOptions) {
