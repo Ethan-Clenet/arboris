@@ -320,6 +320,7 @@ export const COMMUNITY_PUBLISHER = 'Community'
 
 export function listingPublisher(publisher: string | null | undefined): string {
   if (!publisher || publisher === COMMUNITY_PUBLISHER) return COMMUNITY_PUBLISHER
+  if (publisher === 'ECC') return 'affaan-m'
   return publisher
 }
 

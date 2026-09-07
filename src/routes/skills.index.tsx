@@ -231,7 +231,7 @@ function SkillsPage() {
 
   const publisherInstallCount = useMemo(() => {
     if (publisher === 'all') return 0
-    return catalog.skills.filter((s) => s.publisher === publisher).length
+    return catalog.skills.filter((s) => s.publisher != null && listingPublisher(s.publisher) === publisher).length
   }, [catalog.skills, publisher])
 
   const showPublisherInstall = publisher !== 'all' && publisherInstallCount > 0

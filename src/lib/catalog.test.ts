@@ -120,6 +120,7 @@ describe('listingPublisher', () => {
     expect(listingPublisher('')).toBe(COMMUNITY_PUBLISHER)
     expect(listingPublisher('Community')).toBe(COMMUNITY_PUBLISHER)
     expect(listingPublisher('Microsoft')).toBe('Microsoft')
+    expect(listingPublisher('ECC')).toBe('affaan-m')
     expect(listingPublisher('affaan-m')).toBe('affaan-m')
   })
 })
