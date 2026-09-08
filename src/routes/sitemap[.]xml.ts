@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { isIndexableSkill } from '#/lib/seo'
+import { isIndexableSkill, SITEMAP_INCLUDE_SKILL_PAGES } from '#/lib/seo'
 import { absoluteUrl } from '#/lib/site'
 
 function urlEntry(path: string, opts?: { changefreq?: string; priority?: string; lastmod?: string }) {
@@ -30,15 +30,15 @@ export const Route = createFileRoute('/sitemap.xml')({
           urlEntry('/collections', { changefreq: 'weekly', priority: '0.8', lastmod: today }),
         ]
 
-        const skillPages = catalog.skills
-          .filter(isIndexableSkill)
-          .map((s) =>
-            urlEntry(`/skills/${encodeURIComponent(s.id)}`, {
-              changefreq: 'weekly',
-              priority: '0.6',
-              lastmod: s.scannedAt?.slice(0, 10) ?? today,
-            }),
-          )
+        const skillPages = SITEMAP_INCLUDE_SKILL_PAGES
+          ? catalog.skills.filter(isIndexableSkill).map((s) =>
+              urlEntry(`/skills/${encodeURIComponent(s.id)}`, {
+                changefreq: 'weekly',
+                priority: '0.6',
+                lastmod: s.scannedAt?.slice(0, 10) ?? today,
+              }),
+            )
+          : []
 
         const commandPages = catalog.commands.map((c) =>
           urlEntry(`/commands/${encodeURIComponent(c.id)}`, {
