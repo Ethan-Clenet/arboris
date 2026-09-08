@@ -28,10 +28,94 @@ const COMMANDS_DIR = join(ROOT, 'prisma', 'commands')
 
 /** @type {Source[]} */
 const SOURCES = [
-  // Skills officiels Context7 (Upstash). Les copies plugins/*/context7-mcp
-  // sont des duplicatas du skill MCP canonique — on n’importe que les
-  // skills/ racine + context7-docs (packages/pi).
-  { repo: 'upstash/context7', publisher: 'Context7', roots: ['skills', 'packages/pi/skills'] },
+  // Batch SkillsMP créateurs :
+  // fastapi, supabase, pytorch, dotnet, storybookjs, alibaba, ansible, prisma
+  // Repos listés sur chaque page créateur SkillsMP (explorateur / schema.org hasPart).
+
+  // fastapi — https://skillsmp.com/fr/creators/fastapi
+  { repo: 'fastapi/fastapi', publisher: 'FastAPI', roots: ['.'] },
+  { repo: 'fastapi/full-stack-fastapi-template', publisher: 'FastAPI', roots: ['.'] },
+  { repo: 'fastapi/typer', publisher: 'FastAPI', roots: ['.'] },
+  { repo: 'fastapi/sqlmodel', publisher: 'FastAPI', roots: ['.'] },
+  { repo: 'fastapi/asyncer', publisher: 'FastAPI', roots: ['.'] },
+
+  // supabase — https://skillsmp.com/fr/creators/supabase
+  { repo: 'supabase/supabase', publisher: 'Supabase', roots: ['.'] },
+  { repo: 'supabase/supabase-js', publisher: 'Supabase', roots: ['.'] },
+  { repo: 'supabase/agent-skills', publisher: 'Supabase', roots: ['.'] },
+  { repo: 'supabase/supabase-swift', publisher: 'Supabase', roots: ['.'] },
+  { repo: 'supabase/middleware', publisher: 'Supabase', roots: ['.'] },
+  { repo: 'supabase/postgres', publisher: 'Supabase', roots: ['.'] },
+  { repo: 'supabase/splinter', publisher: 'Supabase', roots: ['.'] },
+  { repo: 'supabase/server', publisher: 'Supabase', roots: ['.'] },
+  { repo: 'supabase/sdk', publisher: 'Supabase', roots: ['.'] },
+
+  // pytorch — https://skillsmp.com/fr/creators/pytorch
+  { repo: 'pytorch/pytorch', publisher: 'PyTorch', roots: ['.'] },
+  { repo: 'pytorch/test-infra', publisher: 'PyTorch', roots: ['.'] },
+  { repo: 'pytorch/ci-infra', publisher: 'PyTorch', roots: ['.'] },
+  { repo: 'pytorch/executorch', publisher: 'PyTorch', roots: ['.'] },
+  { repo: 'pytorch/torchtitan', publisher: 'PyTorch', roots: ['.'] },
+  { repo: 'pytorch/helion', publisher: 'PyTorch', roots: ['.'] },
+  { repo: 'pytorch/TensorRT', publisher: 'PyTorch', roots: ['.'] },
+  { repo: 'pytorch/tutorials', publisher: 'PyTorch', roots: ['.'] },
+  { repo: 'pytorch/kineto', publisher: 'PyTorch', roots: ['.'] },
+
+  // dotnet — https://skillsmp.com/fr/creators/dotnet (top repos SkillsMP)
+  { repo: 'dotnet/skills', publisher: '.NET', roots: ['.'] },
+  { repo: 'dotnet/maui-labs', publisher: '.NET', roots: ['.'] },
+  { repo: 'dotnet/maui', publisher: '.NET', roots: ['.'] },
+  { repo: 'dotnet/runtime', publisher: '.NET', roots: ['.'] },
+  { repo: 'dotnet/msbuild', publisher: '.NET', roots: ['.'] },
+  { repo: 'dotnet/efcore', publisher: '.NET', roots: ['.'] },
+  { repo: 'dotnet/dotnet', publisher: '.NET', roots: ['.'] },
+  { repo: 'dotnet/core', publisher: '.NET', roots: ['.'] },
+  { repo: 'dotnet/fsharp', publisher: '.NET', roots: ['.'] },
+  { repo: 'dotnet/sdk', publisher: '.NET', roots: ['.'] },
+  { repo: 'dotnet/roslyn', publisher: '.NET', roots: ['.'] },
+  { repo: 'dotnet/arcade-skills', publisher: '.NET', roots: ['.'] },
+
+  // storybookjs — https://skillsmp.com/fr/creators/storybookjs
+  { repo: 'storybookjs/storybook', publisher: 'Storybook', roots: ['.'] },
+  { repo: 'storybookjs/mcp', publisher: 'Storybook', roots: ['.'] },
+  { repo: 'storybookjs/react-native', publisher: 'Storybook', roots: ['.'] },
+
+  // alibaba — https://skillsmp.com/fr/creators/alibaba (top repos SkillsMP)
+  { repo: 'alibaba/anolisa', publisher: 'Alibaba', roots: ['.'] },
+  { repo: 'alibaba/skill-up', publisher: 'Alibaba', roots: ['.'] },
+  { repo: 'alibaba/loongcollector', publisher: 'Alibaba', roots: ['.'] },
+  { repo: 'alibaba/obz-cli', publisher: 'Alibaba', roots: ['.'] },
+  { repo: 'alibaba/MNN', publisher: 'Alibaba', roots: ['.'] },
+  { repo: 'alibaba/xquic', publisher: 'Alibaba', roots: ['.'] },
+  { repo: 'alibaba/druid', publisher: 'Alibaba', roots: ['.'] },
+  { repo: 'alibaba/neug', publisher: 'Alibaba', roots: ['.'] },
+  { repo: 'alibaba/opc-starter', publisher: 'Alibaba', roots: ['.'] },
+  { repo: 'alibaba/PyFlightProfiler', publisher: 'Alibaba', roots: ['.'] },
+  { repo: 'alibaba/spring-ai-alibaba', publisher: 'Alibaba', roots: ['.'] },
+  { repo: 'alibaba/atrex-kernel-agent', publisher: 'Alibaba', roots: ['.'] },
+
+  // ansible — https://skillsmp.com/fr/creators/ansible
+  { repo: 'ansible/apme', publisher: 'Ansible', roots: ['.'] },
+  { repo: 'ansible/team-devtools', publisher: 'Ansible', roots: ['.'] },
+  { repo: 'ansible/apme-operator', publisher: 'Ansible', roots: ['.'] },
+  { repo: 'ansible/ansible', publisher: 'Ansible', roots: ['.'] },
+  { repo: 'ansible/ansible-ui', publisher: 'Ansible', roots: ['.'] },
+  { repo: 'ansible/tox-ansible', publisher: 'Ansible', roots: ['.'] },
+  { repo: 'ansible/vscode-ansible', publisher: 'Ansible', roots: ['.'] },
+  { repo: 'ansible/ansible.platform', publisher: 'Ansible', roots: ['.'] },
+
+  // prisma — https://skillsmp.com/fr/creators/prisma
+  { repo: 'prisma/cursor-plugin', publisher: 'Prisma', roots: ['.'] },
+  { repo: 'prisma/prisma-next', publisher: 'Prisma', roots: ['.'] },
+  { repo: 'prisma/orm', publisher: 'Prisma', roots: ['.'] },
+  { repo: 'prisma/prisma', publisher: 'Prisma', roots: ['.'] },
+  { repo: 'prisma/open-chat', publisher: 'Prisma', roots: ['.'] },
+  { repo: 'prisma/web', publisher: 'Prisma', roots: ['.'] },
+  { repo: 'prisma/skills', publisher: 'Prisma', roots: ['.'] },
+  { repo: 'prisma/composer', publisher: 'Prisma', roots: ['.'] },
+  { repo: 'prisma/mrkdwn', publisher: 'Prisma', roots: ['.'] },
+  { repo: 'prisma/studio', publisher: 'Prisma', roots: ['.'] },
+  { repo: 'prisma/prisma-cli', publisher: 'Prisma', roots: ['.'] },
 ]
 
 function slugifyForId(input) {
@@ -166,13 +250,17 @@ function sparseClone(repo, ref, workdir) {
     sh('git', ['fetch', '--depth', '1', '--filter=blob:none', 'origin', 'HEAD'], { cwd: workdir, env })
   }
   sh('git', ['sparse-checkout', 'init', '--no-cone'], { cwd: workdir, env })
-  const tree = execFileSync('git', ['ls-tree', '-r', '--name-only', 'FETCH_HEAD'], {
+  // Gros monorepos : écrire ls-tree sur disque (évite ENOBUFS sur stdout).
+  const treeFile = join(workdir, '.git', 'arboris-ls-tree.txt')
+  const treeOut = execFileSync('git', ['ls-tree', '-r', '--name-only', 'FETCH_HEAD'], {
     cwd: workdir,
     env,
     encoding: 'utf8',
+    maxBuffer: 64 * 1024 * 1024,
   })
+  writeFileSync(treeFile, treeOut)
   const dirs = new Set()
-  for (const line of tree.split('\n')) {
+  for (const line of treeOut.split('\n')) {
     if (!/(^|\/)SKILL\.md$/i.test(line)) continue
     const parts = line.split('/')
     parts.pop()

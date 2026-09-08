@@ -45,4 +45,27 @@ describe('COLLECTIONS', () => {
     )
     expect(findCollectionSeed('ship-safely')?.id).toBe('ship-safely')
   })
+
+  it('embarque Ansible, .NET et Supabase officiels', () => {
+    const ansible = COLLECTIONS.find((c) => c.id === 'ansible-starter')
+    expect(ansible?.kind).toBe('pack')
+    expect(ansible?.skillIds.some((id) => id.includes('td-ansible-creator'))).toBe(true)
+
+    const dotnet = COLLECTIONS.find((c) => c.id === 'dotnet-starter')
+    expect(dotnet?.kind).toBe('pack')
+    expect(dotnet?.skillIds.some((id) => id.includes('dotnet-webapi'))).toBe(true)
+
+    const supabase = COLLECTIONS.find((c) => c.id === 'supabase-starter')
+    expect(supabase?.skillIds.some((id) => id.includes('supabase-agent-skills'))).toBe(true)
+  })
+
+  it('ajoute Prisma au pack Node et Storybook au pack React', () => {
+    const node = COLLECTIONS.find((c) => c.id === 'node-api-starter')
+    expect(node?.skillIds).toEqual(expect.arrayContaining(['prisma-patterns']))
+    expect(node?.skillIds.some((id) => id.includes('prisma-client-api'))).toBe(true)
+
+    const react = COLLECTIONS.find((c) => c.id === 'react-ts-starter')
+    expect(react?.skillIds.some((id) => id.includes('storybook-init'))).toBe(true)
+    expect(react?.skillIds.some((id) => id.includes('storybookjs-mcp'))).toBe(true)
+  })
 })

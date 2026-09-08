@@ -128,6 +128,14 @@ export function normalizePublisher(raw: string): string {
   ) {
     return 'Context7'
   }
+  if (lower === 'fastapi') return 'FastAPI'
+  if (lower === 'supabase') return 'Supabase'
+  if (lower === 'pytorch' || lower === 'torch') return 'PyTorch'
+  if (lower === 'dotnet' || lower === '.net' || lower === 'net' || lower === 'aspnet') return '.NET'
+  if (lower === 'storybook' || lower === 'storybookjs') return 'Storybook'
+  if (lower === 'alibaba' || lower === 'alibabacloud' || lower === 'aliyun') return 'Alibaba'
+  if (lower === 'ansible' || lower === 'ansible-community') return 'Ansible'
+  if (lower === 'prisma') return 'Prisma'
   if (value.includes('/')) {
     const tail = value.split('/').pop()?.trim()
     if (tail) return normalizePublisher(tail)
