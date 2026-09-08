@@ -5,6 +5,7 @@ import { needsInstallConfirm } from '#/lib/skillspector'
 import { defaultSkillsDir, resolvePackageRoot } from '#/lib/package-root'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
+import { assertInstallToken } from './install-auth.server'
 import { prisma } from './db'
 
 function workspaceRoot(): string {
@@ -20,6 +21,7 @@ export async function installSkillForAgent(input: {
   agent: string
   lang: Lang
   acknowledgeRisk?: boolean
+  installToken?: string
 }): Promise<{ path: string }> {
   if (!isAgentName(input.agent)) throw new Error('unknown_agent')
 
@@ -33,6 +35,7 @@ export async function installSkillForAgent(input: {
     throw new Error('security_blocked')
   }
 
+  assertInstallToken(input.installToken)
   const root = workspaceRoot()
   const result = await installSkillToWorkspace({
     skillId: input.skillId,

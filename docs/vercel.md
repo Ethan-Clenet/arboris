@@ -10,12 +10,19 @@
 | Variable | Description |
 |----------|-------------|
 | `DATABASE_URL` | URL PostgreSQL (pooler Neon recommandé) |
-| `SESSION_SECRET` | Secret ≥ 32 caractères (sessions auth) |
-| `ADMIN_EMAIL` | E-mail admin (seed initial) |
-| `ADMIN_PASSWORD` | Mot de passe admin (seed initial) |
-| `ADMIN_NAME` | Nom affiché admin |
 
-Optionnel : `ARBORIS_WORKSPACE_ROOT` (install skills côté serveur).
+Optionnel : `SITE_URL` / `VITE_SITE_URL`.
+
+### Install workspace (écriture disque)
+
+**Ne pas** définir sur le déploiement public :
+
+- `ARBORIS_WORKSPACE_ROOT`
+- `ARBORIS_INSTALL_TOKEN`
+- `VITE_ARBORIS_INSTALL_TOKEN`
+
+Sur le site public, l’UI propose ZIP + CLI. L’écriture FS est réservée au
+`npm run dev` / Cloud Agent local, avec root + jeton dans `.env` (voir `.env.example`).
 
 ## Déploiement CLI
 
@@ -23,9 +30,8 @@ Optionnel : `ARBORIS_WORKSPACE_ROOT` (install skills côté serveur).
 npm install --legacy-peer-deps
 npx vercel login
 npx vercel link
-# Ajouter DATABASE_URL et SESSION_SECRET dans le dashboard ou :
+# Ajouter DATABASE_URL dans le dashboard ou :
 npx vercel env add DATABASE_URL production
-npx vercel env add SESSION_SECRET production
 npx vercel --prod
 ```
 
@@ -33,7 +39,7 @@ Après le premier déploiement, peupler le catalogue :
 
 ```bash
 npx vercel env pull .env.production.local
-DATABASE_URL="..." SESSION_SECRET="..." npm run db:seed
+DATABASE_URL="..." npm run db:seed
 ```
 
 Ou depuis le dashboard Vercel → Settings → run une commande one-off avec `npx prisma db seed`.

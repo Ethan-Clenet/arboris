@@ -30,6 +30,7 @@ import {
 } from './install-cloud.server'
 
 const envKey = 'ARBORIS_WORKSPACE_ROOT'
+const tokenKey = 'ARBORIS_INSTALL_TOKEN'
 
 const command = {
   id: 'commit',
@@ -57,6 +58,7 @@ const collection = {
 beforeEach(() => {
   vi.clearAllMocks()
   delete process.env[envKey]
+  delete process.env[tokenKey]
   vi.mocked(listSkillPackageFiles).mockResolvedValue(null)
   vi.mocked(skillPackageHasCompanions).mockReturnValue(false)
   vi.mocked(loadSkillCopyContent).mockResolvedValue('# skill')
@@ -65,12 +67,15 @@ beforeEach(() => {
 
 afterEach(() => {
   delete process.env[envKey]
+  delete process.env[tokenKey]
 })
 
 describe('isWorkspaceInstallConfigured', () => {
-  it('dépend de ARBORIS_WORKSPACE_ROOT', () => {
+  it('exige ARBORIS_WORKSPACE_ROOT et ARBORIS_INSTALL_TOKEN', () => {
     expect(isWorkspaceInstallConfigured()).toBe(false)
     process.env[envKey] = '  /tmp/ws  '
+    expect(isWorkspaceInstallConfigured()).toBe(false)
+    process.env[tokenKey] = 'secret'
     expect(isWorkspaceInstallConfigured()).toBe(true)
   })
 })

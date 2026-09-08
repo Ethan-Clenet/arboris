@@ -10,14 +10,9 @@ import { AnnouncerProvider } from '#/lib/announcer'
 import { fontPreloadLinks } from '#/lib/font-preload'
 import { I18nProvider } from '#/lib/i18n'
 import { rootFallbackMeta } from '#/lib/seo'
-import { getCurrentUser } from '#/server/auth.functions'
 import appCss from '#/styles.css?url'
 
 export const Route = createRootRoute({
-  beforeLoad: async () => {
-    const user = await getCurrentUser()
-    return { auth: { user } }
-  },
   head: () => ({
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

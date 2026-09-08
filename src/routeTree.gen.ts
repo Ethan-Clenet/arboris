@@ -13,8 +13,6 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as Google2d4e68e917b5f045DothtmlRouteImport } from './routes/google2d4e68e917b5f045[.]html'
 import { Route as GettingStartedRouteImport } from './routes/getting-started'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as R500RouteImport } from './routes/500'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
@@ -44,16 +42,6 @@ const Google2d4e68e917b5f045DothtmlRoute =
 const GettingStartedRoute = GettingStartedRouteImport.update({
   id: '/getting-started',
   path: '/getting-started',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const R500Route = R500RouteImport.update({
@@ -106,8 +94,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/500': typeof R500Route
-  '/admin': typeof AdminRoute
-  '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -123,8 +109,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/500': typeof R500Route
-  '/admin': typeof AdminRoute
-  '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -141,8 +125,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/500': typeof R500Route
-  '/admin': typeof AdminRoute
-  '/auth': typeof AuthRoute
   '/getting-started': typeof GettingStartedRoute
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -160,8 +142,6 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/500'
-    | '/admin'
-    | '/auth'
     | '/getting-started'
     | '/google2d4e68e917b5f045.html'
     | '/robots.txt'
@@ -177,8 +157,6 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/500'
-    | '/admin'
-    | '/auth'
     | '/getting-started'
     | '/google2d4e68e917b5f045.html'
     | '/robots.txt'
@@ -194,8 +172,6 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/500'
-    | '/admin'
-    | '/auth'
     | '/getting-started'
     | '/google2d4e68e917b5f045.html'
     | '/robots.txt'
@@ -212,8 +188,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   R500Route: typeof R500Route
-  AdminRoute: typeof AdminRoute
-  AuthRoute: typeof AuthRoute
   GettingStartedRoute: typeof GettingStartedRoute
   Google2d4e68e917b5f045DothtmlRoute: typeof Google2d4e68e917b5f045DothtmlRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
@@ -254,20 +228,6 @@ declare module '@tanstack/react-router' {
       path: '/getting-started'
       fullPath: '/getting-started'
       preLoaderRoute: typeof GettingStartedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/500': {
@@ -340,8 +300,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
   R500Route: R500Route,
-  AdminRoute: AdminRoute,
-  AuthRoute: AuthRoute,
   GettingStartedRoute: GettingStartedRoute,
   Google2d4e68e917b5f045DothtmlRoute: Google2d4e68e917b5f045DothtmlRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,

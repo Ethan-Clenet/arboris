@@ -14,12 +14,18 @@ import {
 import { buildStoreZip, zipToBase64, type ZipEntry } from '#/lib/zip-store'
 import { loadCollection, loadSkill } from '#/server/catalog.server'
 import { resolveCommand } from '#/server/commands.server'
+import { isWorkspaceInstallConfigured } from '#/server/install-auth.server'
+import { MAX_ZIP_ENTRIES } from '#/server/rate-limit.server'
 import { loadSkillCopyContent } from '#/server/skill-content.server'
 
 const SKILLS_DIR = defaultSkillsDir(resolvePackageRoot(import.meta.url))
 
-export function isWorkspaceInstallConfigured(): boolean {
-  return Boolean(process.env.ARBORIS_WORKSPACE_ROOT?.trim())
+export { isWorkspaceInstallConfigured }
+
+function assertZipBudget(entries: ZipEntry[]): void {
+  if (entries.length > MAX_ZIP_ENTRIES) {
+    throw new Error('zip_too_large')
+  }
 }
 
 async function skillZipEntries(
@@ -56,10 +62,12 @@ async function zipEntriesForAgent(input: {
       path: agentCommandPath(input.agent, cmd.id),
       content: commandInstallContent(cmd),
     })
+    assertZipBudget(entries)
   }
 
   for (const skillId of input.skillIds) {
     entries.push(...(await skillZipEntries(input.agent, skillId, input.lang)))
+    assertZipBudget(entries)
   }
 
   return entries
@@ -107,6 +115,7 @@ export async function buildCommandZip(input: {
   ]
   for (const skillId of cmd.skillIds ?? []) {
     entries.push(...(await skillZipEntries(input.agent, skillId, lang)))
+    assertZipBudget(entries)
   }
   const zip = buildStoreZip(entries)
   return {
@@ -126,6 +135,7 @@ export async function buildSkillZip(input: {
   if (!skill) return null
   const entries = await skillZipEntries(input.agent, skill.id, input.lang)
   if (entries.length === 0) return null
+  assertZipBudget(entries)
   const zip = buildStoreZip(entries)
   return {
     filename: `arboris-skill-${skill.id}-${input.agent.toLowerCase()}.zip`,

@@ -3,6 +3,7 @@ import { useServerFn } from '@tanstack/react-start'
 import AgentLogo from '#/components/AgentLogo'
 import { agentCommandPath, isAgentName } from '#/lib/agents'
 import type { Lang } from '#/lib/catalog'
+import { clientInstallToken } from '#/lib/install-token'
 import { installCommand, type InstallCommandError } from '#/server/functions'
 
 interface CommandInstallButtonsProps {
@@ -38,7 +39,9 @@ export default function CommandInstallButtons({
     setError(null)
     setDone(null)
     try {
-      const result = await installFn({ data: { commandId, agent, lang } })
+      const result = await installFn({
+        data: { commandId, agent, lang, installToken: clientInstallToken() },
+      })
       if (!result.ok) {
         setError(t.errors[result.error] ?? t.errors.generic)
         return

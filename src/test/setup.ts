@@ -62,22 +62,6 @@ vi.mock('#/server/functions', async () => {
   }
 })
 
-vi.mock('#/server/auth.functions', async () => {
-  const { serverFns } = await import('./harness')
-  return {
-    logout: (...args: unknown[]) => serverFns.logout(...args),
-  }
-})
-
-vi.mock('#/routes/__root', async () => {
-  const { testRouter } = await import('./harness')
-  return {
-    Route: {
-      useRouteContext: () => ({ auth: { user: testRouter.authUser } }),
-    },
-  }
-})
-
 if (typeof window !== 'undefined' && typeof window.matchMedia !== 'function') {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,

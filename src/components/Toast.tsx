@@ -5,7 +5,7 @@ type ToastProps = {
   text: string
 }
 
-/** Toast flottant de confirmation (copie, actions admin, etc.). */
+/** Toast flottant de confirmation (copie, actions UI, etc.). */
 export default function Toast({ show, text }: ToastProps) {
   if (!show) return null
 

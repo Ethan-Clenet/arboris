@@ -22,7 +22,6 @@ export default defineConfig({
         'src/**/*.{test,spec}.{ts,tsx}',
         // Données / types / config (pas de logique métier)
         'src/lib/i18n.tsx',
-        'src/lib/auth.ts',
         'src/lib/agent-logos.ts',
         'src/lib/publisher-logos.ts',
         'src/lib/collections-data.ts',
@@ -31,10 +30,7 @@ export default defineConfig({
         'src/components/Footer.tsx',
         // Infra / glue (wrappers TanStack, Prisma, devtools)
         'src/server/db.ts',
-        'src/server/session.ts',
         'src/server/functions.ts',
-        'src/server/auth.functions.ts',
-        'src/server/admin.functions.ts',
         'src/components/DevtoolsPanel.tsx',
         'src/components/DevtoolsGate.tsx',
         // Animation / CSS / contexte routeur Start (pas pertinents en unitaire)

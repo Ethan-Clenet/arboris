@@ -7,8 +7,6 @@ export const Route = createFileRoute('/robots.txt')({
       GET: async () => {
         const body = `User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /auth
 
 # Indexation : soumettre le sitemap dans Google Search Console
 # https://search.google.com/search-console
