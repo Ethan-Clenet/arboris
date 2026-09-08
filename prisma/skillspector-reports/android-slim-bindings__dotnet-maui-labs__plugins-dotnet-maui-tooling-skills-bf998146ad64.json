@@ -1,0 +1,209 @@
+{
+  "riskScore": 9,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 14,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- AAR/JAR files in project folder are auto-detected -->\n  <!-- Use Update to modify auto-detected files -->\n  <ItemGroup>\n    <AndroidLibrary Update=\"mylibrary.aar\" />\n  </ItemGroup>\n</Project>\n```",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-bindings-guide.md",
+        "start_line": 330
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Kotlin -->\n  <PackageReference Include=\"Xamarin.Kotlin.StdLib\" Version=\"1.9.22\" />\n  \n  <!-- Google Play Services -->\n  <PackageReference Include=\"Xamarin.GooglePlayServices.Base\" Version=\"118.2.",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-bindings-guide.md",
+        "start_line": 422
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Can ignore multiple versions -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-bindings-guide.md",
+        "start_line": 496
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Compile-time only dependencies -->\n  <ItemGroup>\n    <AndroidIgnoredJavaDependency \n      Include=\"org.jetbrains:annotations:23.0.0\" />\n  </ItemGroup>\n</Project>\n```\n\n---\n\n## Customizing Bindings",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-bindings-guide.md",
+        "start_line": 556
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Remove specific classes -->\n  <remove-node path=\"/api/package[@name='com.example']/class[@name='InternalHelper']\" />\n  \n  <!-- Remove classes with $ (often internal/anonymous) -->\n  <remove-node ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-bindings-guide.md",
+        "start_line": 587
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Dependencies required by your wrapper -->\n  <ItemGroup Condition=\"$(TargetFramework.Contains('android'))\">\n    <!-- The library you're wrapping - don't bind, just include -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-bindings-guide.md",
+        "start_line": 876
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- NuGet packages for common dependencies -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-bindings-guide.md",
+        "start_line": 884
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Metadata transforms -->\n  <ItemGroup>\n    <TransformFile Include=\"Transforms\\Metadata.xml\" />\n  </ItemGroup>\n</Project>\n```\n\n### Step 5: Optional Metadata Customization\n\n`Transforms/Metadata.xml`",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-bindings-guide.md",
+        "start_line": 889
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Your wrapper AAR -->\n  <ItemGroup>\n    <AndroidLibrary Include=\"../native/app/build/outputs/aar/app-release.aar\" />\n  </ItemGroup>\n\n  <!-- Dependencies: NuGet packages for common libraries -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-slim-bindings-implementation.md",
+        "start_line": 421
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Dependencies without NuGet: Include but don't bind -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-slim-bindings-implementation.md",
+        "start_line": 432
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- <AndroidMavenLibrary Include=\"com.thirdparty:awesomelib\" Version=\"1.0.0\" Bind=\"false\" /> -->\n  </ItemGroup>\n\n  <!-- Compile-time only dependencies to ignore -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-slim-bindings-implementation.md",
+        "start_line": 434
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Dependencies satisfied by NuGet (preferred) -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-slim-bindings-implementation.md",
+        "start_line": 488
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- The library being wrapped - include but don't bind -->\n  <ItemGroup>\n    <AndroidMavenLibrary Include=\"com.thirdparty:awesomelib\" Version=\"1.0.0\" Bind=\"false\" />\n  </ItemGroup>\n\n  <!-- Dependenci",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-slim-bindings-implementation.md",
+        "start_line": 496
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Compile-time only dependencies to ignore -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/android-slim-bindings-implementation.md",
+        "start_line": 506
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:42:50.031668+00:00",
+  "scanMode": "static",
+  "skillName": "android-slim-bindings",
+  "contentHash": "30ac0cb74d58ab9b2d836056206093ed7ba8ef225c6927f2a2e2af5035c609e2",
+  "scannerVersion": "2.5.3"
+}

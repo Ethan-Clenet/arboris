@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:51:08.208360+00:00",
+  "scanMode": "static",
+  "skillName": "writing-mstest-tests",
+  "contentHash": "a1e24a02fd006d6524a432f48a5f1b58a1e54b3474a974def85d81af278d87a3",
+  "scannerVersion": "2.5.3"
+}

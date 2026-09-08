@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:51:07.355378+00:00",
+  "scanMode": "static",
+  "skillName": "writing-migration-guides",
+  "contentHash": "1e3171a316a4e492f6a642681602b2fb8d7ae76cd30dc1483f640e3b328985ce",
+  "scannerVersion": "2.5.3"
+}

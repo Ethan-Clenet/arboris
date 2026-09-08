@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:51.192574+00:00",
+  "scanMode": "static",
+  "skillName": "r2-outage-toggle",
+  "contentHash": "b7f797ac74d8dbf4c08331f83db5255e9994dbbeaa1c6d934b91ac131ec452f1",
+  "scannerVersion": "2.5.3"
+}

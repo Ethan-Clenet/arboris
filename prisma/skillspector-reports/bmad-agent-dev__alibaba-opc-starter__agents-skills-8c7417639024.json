@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:11.504754+00:00",
+  "scanMode": "static",
+  "skillName": "bmad-agent-dev",
+  "contentHash": "9b5c32a4b0e2e43086a6a887f887ffbf32fdb7611e2d68fd2f351d6befa26a87",
+  "scannerVersion": "2.5.3"
+}

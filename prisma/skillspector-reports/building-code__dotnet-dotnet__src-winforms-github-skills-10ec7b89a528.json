@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:03.711445+00:00",
+  "scanMode": "static",
+  "skillName": "building-code",
+  "contentHash": "431eb96f9f524fa41582c47617dc4c95f4f0e34ae477db1544c6203502fbc0b6",
+  "scannerVersion": "2.5.3"
+}

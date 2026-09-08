@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:09.222989+00:00",
+  "scanMode": "static",
+  "skillName": "creating-backports",
+  "contentHash": "02ba2fcbbf7e83a211b45ed0ecee359d5382ab7885d7e43214d75a38cd94cb7e",
+  "scannerVersion": "2.5.3"
+}

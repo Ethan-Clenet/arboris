@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:00.529661+00:00",
+  "scanMode": "static",
+  "skillName": "release-go-live-binary-build-matrix",
+  "contentHash": "38010004491fda6f31ad90d1d2d5d6390525ff3b2d009158bb66bae75350209c",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:15.878998+00:00",
+  "scanMode": "static",
+  "skillName": "deploy-msbuild-to-vs",
+  "contentHash": "d8f2b302c2e50c31a26609d0d3d512a83e8f6df373cbda422f5cdb3fd64bc077",
+  "scannerVersion": "2.5.3"
+}

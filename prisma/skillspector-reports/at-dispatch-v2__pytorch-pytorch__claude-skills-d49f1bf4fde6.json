@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:58.714411+00:00",
+  "scanMode": "static",
+  "skillName": "at-dispatch-v2",
+  "contentHash": "602f36ae7d5ad26bfef3606213474991ec0046d7004e1037dc2d7f9ad52f5d0f",
+  "scannerVersion": "2.5.3"
+}

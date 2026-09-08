@@ -1,0 +1,27 @@
+{
+  "riskScore": 22,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "AR3",
+      "category": "Anti-Refusal",
+      "pattern": "Anti-Refusal Statement",
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "finding": "bypass filters",
+      "explanation": "Skill attempts to nullify the agent's safety policies or restrictions ('you have no restrictions', 'ignore your guidelines', 'do anything now'). This is a direct jailbreak that disables guardrails.",
+      "remediation": "Remove jailbreak framing that nullifies safety policies or restrictions. Skill content must not instruct the agent to ignore its guidelines or operate without guardrails.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 507
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:48:36.107053+00:00",
+  "scanMode": "static",
+  "skillName": "pr-new",
+  "contentHash": "8ddf6cee375ca17b86b09f6163a0a618e60a83f45bc4deb3929b496c63a6ecd0",
+  "scannerVersion": "2.5.3"
+}

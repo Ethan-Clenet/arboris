@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:27.116446+00:00",
+  "scanMode": "static",
+  "skillName": "test-gap-analysis",
+  "contentHash": "98e66185bc45f960f81b668f56b73513078f5053261d2a67795b232964410f7e",
+  "scannerVersion": "2.5.3"
+}

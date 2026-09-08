@@ -1,0 +1,27 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "sudo ",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 110
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:46:23.524585+00:00",
+  "scanMode": "static",
+  "skillName": "ktuner",
+  "contentHash": "5ee91f83fe219fa67b597ead3bd4a7b0da6d7adee0e3165f9ac0fbf323f8de0d",
+  "scannerVersion": "2.5.3"
+}

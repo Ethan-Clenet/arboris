@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:04.559413+00:00",
+  "scanMode": "static",
+  "skillName": "create-datadriven-aspnetcore",
+  "contentHash": "0b56d21ac40d24471fae3ef5e30f185b95498f738037c0024446f2624ad0fbaa",
+  "scannerVersion": "2.5.3"
+}

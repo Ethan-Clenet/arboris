@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:20.702011+00:00",
+  "scanMode": "static",
+  "skillName": "obz-prometheus",
+  "contentHash": "99c6c74bb39717eedabb4241230f8151d69ac38c3f2213c5c54c9461c2838d77",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:49.148895+00:00",
+  "scanMode": "static",
+  "skillName": "maui-theming",
+  "contentHash": "2e3e6e59782f2f0b1bc6e0ecca00bfb10b0497faa871602aff29c0213e3d1e90",
+  "scannerVersion": "2.5.3"
+}

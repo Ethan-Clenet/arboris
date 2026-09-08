@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:41.944702+00:00",
+  "scanMode": "static",
+  "skillName": "maui-devflow-onboard",
+  "contentHash": "94d38b0a80c783fa5ac0b0ae682c6eca9d137a598e0e6441e04d417a6c636e39",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:37.331947+00:00",
+  "scanMode": "static",
+  "skillName": "extension-points",
+  "contentHash": "03a38a16c3d4225dda44812d2b078295b1db5bbb63cfc52657e3e5fc1cdb7deb",
+  "scannerVersion": "2.5.3"
+}

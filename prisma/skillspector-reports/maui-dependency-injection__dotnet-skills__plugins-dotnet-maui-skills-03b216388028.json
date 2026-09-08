@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:40.162707+00:00",
+  "scanMode": "static",
+  "skillName": "maui-dependency-injection",
+  "contentHash": "afcb486a2eb8853e32f087a289a8b240f240c13acb76cec9ea1f775f31498d39",
+  "scannerVersion": "2.5.3"
+}

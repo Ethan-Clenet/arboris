@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:24.500103+00:00",
+  "scanMode": "static",
+  "skillName": "open-pr",
+  "contentHash": "418fc13d76bd7e9480f3a96d56f132b7a76c671aec6edd02ea3239cd6735f5b7",
+  "scannerVersion": "2.5.3"
+}

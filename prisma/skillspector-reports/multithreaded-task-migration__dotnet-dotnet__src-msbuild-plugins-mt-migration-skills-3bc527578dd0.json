@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:08.920802+00:00",
+  "scanMode": "static",
+  "skillName": "multithreaded-task-migration",
+  "contentHash": "9ce10032131ba083c6c4bbe1eee9bf6329cf134b1844d569f989705b752b4f1c",
+  "scannerVersion": "2.5.3"
+}

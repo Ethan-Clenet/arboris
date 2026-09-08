@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:03.866729+00:00",
+  "scanMode": "static",
+  "skillName": "harness-review",
+  "contentHash": "ef342ded84001a05069975f3f8aaed2de3b307e10acb5215255d591e358d7fd0",
+  "scannerVersion": "2.5.3"
+}

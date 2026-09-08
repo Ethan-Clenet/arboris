@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:59.459118+00:00",
+  "scanMode": "static",
+  "skillName": "copywriting",
+  "contentHash": "4febd86634fcd72f81267460ccb3dc028870cc0d86388b63423bb274fbcf72c6",
+  "scannerVersion": "2.5.3"
+}

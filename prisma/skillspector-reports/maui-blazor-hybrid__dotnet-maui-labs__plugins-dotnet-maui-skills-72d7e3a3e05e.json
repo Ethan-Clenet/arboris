@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:37.079785+00:00",
+  "scanMode": "static",
+  "skillName": "maui-blazor-hybrid",
+  "contentHash": "9d198dcf9334ed3c3a5e648d51acdf247482356a209c6951bf298f0ba58e5406",
+  "scannerVersion": "2.5.3"
+}

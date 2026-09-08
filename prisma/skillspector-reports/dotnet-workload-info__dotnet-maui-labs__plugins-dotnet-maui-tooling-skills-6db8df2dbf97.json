@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:27.296715+00:00",
+  "scanMode": "static",
+  "skillName": "dotnet-workload-info",
+  "contentHash": "1c6dc04b5836f0abd4b9b0a97ff4ebe8700a76134fd09ef8cb7b5b09d4fda95d",
+  "scannerVersion": "2.5.3"
+}

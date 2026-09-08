@@ -1,0 +1,139 @@
+{
+  "riskScore": 24,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 9,
+  "issues": [
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 59
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "169.254.169.254",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/metadata-api.md",
+        "start_line": 15
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/metadata-api.md",
+        "start_line": 13
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/metadata-api.md",
+        "start_line": 14
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/metadata-api.md",
+        "start_line": 27
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/metadata-api.md",
+        "start_line": 28
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/metadata-api.md",
+        "start_line": 29
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/metadata-api.md",
+        "start_line": 30
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/metadata-api.md",
+        "start_line": 42
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:42:46.311395+00:00",
+  "scanMode": "static",
+  "skillName": "aliyun-ecs",
+  "contentHash": "92678063a5ebbec46157cddbfa5c4b508ed27a75f6ed6f654860297634963250",
+  "scannerVersion": "2.5.3"
+}

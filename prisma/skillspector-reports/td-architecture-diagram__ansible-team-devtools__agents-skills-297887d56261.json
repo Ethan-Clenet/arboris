@@ -1,0 +1,109 @@
+{
+  "riskScore": 56,
+  "severity": "HIGH",
+  "recommendation": "UNSAFE",
+  "issueCount": 7,
+  "issues": [
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "            subprocess.run(\n                [\"git\", \"clone\", \"--depth\", \"1\", \"--quiet\", entry.clone_url, str(dest)],\n                check=True,\n                capture_output=True,\n                te",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/crawl_repos.py",
+        "start_line": 74
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "        proc = subprocess.run(\n            cmd,\n            capture_output=True,\n            timeout=120,\n            env=env,\n            check=False,\n        )",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/render.py",
+        "start_line": 106
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "E2",
+      "category": "Data Exfiltration",
+      "pattern": "Env Variable Harvesting",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": "os.environ.copy()",
+      "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+      "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+      "location": {
+        "file": "scripts/render.py",
+        "start_line": 101
+      }
+    },
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "sudo ",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "scripts/render.py",
+        "start_line": 63
+      }
+    },
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "sudo ",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "scripts/render.py",
+        "start_line": 65
+      }
+    },
+    {
+      "id": "TR2",
+      "category": "Trigger Abuse",
+      "pattern": "Shadow Command Trigger",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Shadow Command Trigger: 'update architecture' conflicts with built-in command 'update'",
+      "remediation": "Choose triggers that do not conflict with built-in commands or other skills. Prefix with a unique namespace if necessary.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 4
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:12.684833+00:00",
+  "scanMode": "static",
+  "skillName": "td-architecture-diagram",
+  "contentHash": "9aa1431efaede28d159ae73e68c0bfba8dbacd71b2939d99d9d8295c87d5819b",
+  "scannerVersion": "2.5.3"
+}

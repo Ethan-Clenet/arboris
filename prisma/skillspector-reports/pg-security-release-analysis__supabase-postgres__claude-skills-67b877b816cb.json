@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:35.390702+00:00",
+  "scanMode": "static",
+  "skillName": "pg-security-release-analysis",
+  "contentHash": "7d62ddd5c793bbfc46e8a4556dcfa6b7c5caaaf809a9e6dc45bdaa91d6d268d1",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:51:03.643128+00:00",
+  "scanMode": "static",
+  "skillName": "workflow",
+  "contentHash": "fa1cfa6f69842a65146b3cc2918e12534111c6f1cc707aa6b6b47b1b0e94e0dd",
+  "scannerVersion": "2.5.3"
+}

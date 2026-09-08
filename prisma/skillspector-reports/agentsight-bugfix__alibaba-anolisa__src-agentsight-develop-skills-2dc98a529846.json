@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:44.402769+00:00",
+  "scanMode": "static",
+  "skillName": "agentsight-bugfix",
+  "contentHash": "0ad4256eaf48d3c8e1306256cc065e6c7e01799523be1d0db844c2bd86af91d2",
+  "scannerVersion": "2.5.3"
+}

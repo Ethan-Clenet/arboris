@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:52.354459+00:00",
+  "scanMode": "static",
+  "skillName": "mermaid",
+  "contentHash": "7c134236ba5789c144daf6def1034eb0ebfc3a582604dbc917baea7a076dccad",
+  "scannerVersion": "2.5.3"
+}

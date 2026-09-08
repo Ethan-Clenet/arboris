@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:19.590952+00:00",
+  "scanMode": "static",
+  "skillName": "distributed-triage",
+  "contentHash": "d4e30d4d9994ce594dc1180b56c9dbfe6c58c3cf8ea90debf700f88950636110",
+  "scannerVersion": "2.5.3"
+}

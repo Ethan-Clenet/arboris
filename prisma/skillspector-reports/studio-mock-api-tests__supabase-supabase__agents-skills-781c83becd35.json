@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:56.120539+00:00",
+  "scanMode": "static",
+  "skillName": "studio-mock-api-tests",
+  "contentHash": "c9d1c9ed856321b62d1f09c4d3dac5e31fec9c964807380038184311f4718667",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,27 @@
+{
+  "riskScore": 3,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.75,
+      "finding": "expand the scope",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 24
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:49:24.816916+00:00",
+  "scanMode": "static",
+  "skillName": "run-tests",
+  "contentHash": "b3f9eb2b3e3c0b07471958f0fe97bf3f24c03e389413c8fc140bb95f96a10469",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:33.390504+00:00",
+  "scanMode": "static",
+  "skillName": "otel-queries",
+  "contentHash": "13cdc61063ea2653168617c8eac61fafedc3744b5c017f909c68042d650efa8f",
+  "scannerVersion": "2.5.3"
+}

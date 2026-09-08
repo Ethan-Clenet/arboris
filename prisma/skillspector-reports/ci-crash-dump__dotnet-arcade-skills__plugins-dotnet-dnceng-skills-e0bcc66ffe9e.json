@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:12.751114+00:00",
+  "scanMode": "static",
+  "skillName": "ci-crash-dump",
+  "contentHash": "0521ee2709dc57100cb002ffdaa6a5e92e3dd8e309d7414b75ec9c7bcfcc4236",
+  "scannerVersion": "2.5.3"
+}

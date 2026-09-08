@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:40.517436+00:00",
+  "scanMode": "static",
+  "skillName": "adr-new",
+  "contentHash": "e89fa0863e6995b312c50732b9405b04b6001564211dfbbf52df86f1674ffb38",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,27 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "plist",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 128
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:51:09.375386+00:00",
+  "scanMode": "static",
+  "skillName": "xamarin-forms-migration",
+  "contentHash": "0f8e497dc94da4a5084dc03df16555c08792fa1796a4f7d9c03e522d0d0ec2d8",
+  "scannerVersion": "2.5.3"
+}

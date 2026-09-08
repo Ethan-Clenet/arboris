@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:17.588584+00:00",
+  "scanMode": "static",
+  "skillName": "devflow-connect",
+  "contentHash": "abc3511a1d953555ca059a7692566631e604e66e88fc9394e3aba5b66241e0d0",
+  "scannerVersion": "2.5.3"
+}

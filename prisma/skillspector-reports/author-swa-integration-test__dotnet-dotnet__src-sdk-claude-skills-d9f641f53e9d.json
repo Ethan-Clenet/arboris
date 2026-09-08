@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:00.896581+00:00",
+  "scanMode": "static",
+  "skillName": "author-swa-integration-test",
+  "contentHash": "51d1d23227fd1630698f288738905a0db8dde38ed029988e1760811263568f3d",
+  "scannerVersion": "2.5.3"
+}

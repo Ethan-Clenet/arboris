@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:58.233902+00:00",
+  "scanMode": "static",
+  "skillName": "studio-ui-patterns",
+  "contentHash": "004b74cfc050fa6c5e87371a7dd30506401470d6fd35c882e262fc288bbf9635",
+  "scannerVersion": "2.5.3"
+}

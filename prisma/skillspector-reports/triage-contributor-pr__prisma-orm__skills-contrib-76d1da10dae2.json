@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:34.657090+00:00",
+  "scanMode": "static",
+  "skillName": "triage-contributor-pr",
+  "contentHash": "718fd993fcc8d7c40aecbfe04b299ddcd407bbe950d5135c5d034ea0ce7ac80e",
+  "scannerVersion": "2.5.3"
+}

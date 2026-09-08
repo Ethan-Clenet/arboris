@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:51.139944+00:00",
+  "scanMode": "static",
+  "skillName": "bmad-review-edge-case-hunter",
+  "contentHash": "2e00f83fcbe6c239bd10ba07ec3e075a812e97f389c5ebdaeb6f63469c108e6e",
+  "scannerVersion": "2.5.3"
+}

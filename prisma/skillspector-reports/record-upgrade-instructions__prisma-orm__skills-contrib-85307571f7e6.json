@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:55.591990+00:00",
+  "scanMode": "static",
+  "skillName": "record-upgrade-instructions",
+  "contentHash": "a871d7364a7d0df99f089df9f52acd72d67b3c80b95098112b4913bf393c58a5",
+  "scannerVersion": "2.5.3"
+}

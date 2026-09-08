@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:19.311859+00:00",
+  "scanMode": "static",
+  "skillName": "obz-loki",
+  "contentHash": "6ecb5e06eb7d986f226d28a9b2bd822a3903c41e6a2d7b593bc81a5577fa3285",
+  "scannerVersion": "2.5.3"
+}

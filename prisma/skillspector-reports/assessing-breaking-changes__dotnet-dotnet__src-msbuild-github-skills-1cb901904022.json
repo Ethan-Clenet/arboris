@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:55.479285+00:00",
+  "scanMode": "static",
+  "skillName": "assessing-breaking-changes",
+  "contentHash": "965471e6ec6526c139bc8b8398548679256ee804f2185295653ded18077b4b20",
+  "scannerVersion": "2.5.3"
+}

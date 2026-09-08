@@ -1,0 +1,69 @@
+{
+  "riskScore": 29,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 4,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- ALSO BAD: Condition on the property itself has the same problem -->\n<PropertyGroup>\n  <DefineConstants Condition=\"'$(TargetFramework)' == 'net8.0'\">$(DefineConstants);MY_FEATURE</DefineConstants>",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/targetframework-props-pitfall.md",
+        "start_line": 15
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- ALSO GOOD: In the project file itself -->\n<!-- MyProject.csproj -->\n<PropertyGroup Condition=\"'$(TargetFramework)' == 'net8.0'\">\n  <DefineConstants>$(DefineConstants);MY_FEATURE</DefineConstants>",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/targetframework-props-pitfall.md",
+        "start_line": 25
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- OK in Directory.Packages.props — PackageVersion items evaluate late -->\n<ItemGroup Condition=\"'$(TargetFramework)' == 'net8.0'\">\n  <PackageVersion Include=\"Microsoft.AspNetCore.Mvc.Testing\" Versi",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/targetframework-props-pitfall.md",
+        "start_line": 42
+      }
+    },
+    {
+      "id": "YR4",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_mcp_tool_poisoning_metadata': MCP/tool metadata poisoning indicators in tool schemas or skill manifests [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "description:; Parameters:; <!-- Inner-level overrides go here -->",
+      "explanation": "YARA rule matched a hack tool or exploit indicator (offensive tools, reconnaissance, privilege escalation, or exploit frameworks).",
+      "remediation": "Remove offensive tool references and exploit code. Legitimate agent skills should not contain penetration testing tools, exploit frameworks, or reconnaissance utilities.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 3
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:45:19.331758+00:00",
+  "scanMode": "static",
+  "skillName": "directory-build-organization",
+  "contentHash": "9a4b867e4b21eadaa86fa43c8767dd6d2df185b0cd10a1032ed304ec5da0d770",
+  "scannerVersion": "2.5.3"
+}

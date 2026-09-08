@@ -1,0 +1,27 @@
+{
+  "riskScore": 5,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Optional: Override defaults -->\n      <!-- <Kind>Framework</Kind> -->\n      <!-- <SmartLink>true</SmartLink> -->\n    </XcodeProject>\n  </ItemGroup>\n\n  <ItemGroup>\n    <ObjcBindingApiDefinition In",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/ios-bindings-guide.md",
+        "start_line": 334
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:46:16.570129+00:00",
+  "scanMode": "static",
+  "skillName": "ios-slim-bindings",
+  "contentHash": "25cd3b646847d02c4f4e8b688a8e68ac4e1989237b6a6731c6f9f0d584e49a2e",
+  "scannerVersion": "2.5.3"
+}

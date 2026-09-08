@@ -1,0 +1,41 @@
+{
+  "riskScore": 36,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "MP3",
+      "category": "Memory Poisoning",
+      "pattern": "Memory Manipulation",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "reset state",
+      "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+      "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 560
+      }
+    },
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.65,
+      "finding": "git reset --hard",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "tests/eval.restore.vally.yaml",
+        "start_line": 69
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:38.552092+00:00",
+  "scanMode": "static",
+  "skillName": "try-fix",
+  "contentHash": "346e94654110e091cb874831d99b226d0a2a166ce91b191c3909a49f11c58414",
+  "scannerVersion": "2.5.3"
+}

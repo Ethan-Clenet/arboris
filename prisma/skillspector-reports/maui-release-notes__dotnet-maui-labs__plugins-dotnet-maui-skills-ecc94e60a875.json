@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:47.549511+00:00",
+  "scanMode": "static",
+  "skillName": "maui-release-notes",
+  "contentHash": "8f05d78a1e05a291909f30b510dcfba4a2d217f708b0e8b239ce59422b2b797b",
+  "scannerVersion": "2.5.3"
+}

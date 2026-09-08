@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:04.242278+00:00",
+  "scanMode": "static",
+  "skillName": "swa-pack-format",
+  "contentHash": "b7390d72c24fcdb031b0500d36f54b6f7daa0ad79ad0f1b1746f0ee7a5f7c168",
+  "scannerVersion": "2.5.3"
+}

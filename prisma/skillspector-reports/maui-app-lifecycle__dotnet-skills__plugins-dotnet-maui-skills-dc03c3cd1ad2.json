@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:36.129816+00:00",
+  "scanMode": "static",
+  "skillName": "maui-app-lifecycle",
+  "contentHash": "4104cd09758fae66d4ffa38e05715fa017eb8837351bff9fd38ada6f6e949171",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:49.623766+00:00",
+  "scanMode": "static",
+  "skillName": "bmad-retrospective",
+  "contentHash": "316090f53038d2a42d841602126b018ca93eabb1827339c5046daec325e32314",
+  "scannerVersion": "2.5.3"
+}

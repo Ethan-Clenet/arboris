@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:59.706658+00:00",
+  "scanMode": "static",
+  "skillName": "cortex-m",
+  "contentHash": "01c7c91b88b616f8739ea0b33846e54260d08f4ea07fde376e3048b31695741b",
+  "scannerVersion": "2.5.3"
+}

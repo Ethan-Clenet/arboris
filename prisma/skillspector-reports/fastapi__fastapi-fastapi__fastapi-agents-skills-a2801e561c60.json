@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:39.008720+00:00",
+  "scanMode": "static",
+  "skillName": "fastapi",
+  "contentHash": "48f2e922cfe7e219a08416fa852f24a1d2a50e39c14a5580cce22b01e98c12fd",
+  "scannerVersion": "2.5.3"
+}

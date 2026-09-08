@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:21.466730+00:00",
+  "scanMode": "static",
+  "skillName": "run-helix-tests",
+  "contentHash": "93cea8484887a12260de9b356108ef9bb224dd736fa67dd8dc26cb69b12a1f93",
+  "scannerVersion": "2.5.3"
+}

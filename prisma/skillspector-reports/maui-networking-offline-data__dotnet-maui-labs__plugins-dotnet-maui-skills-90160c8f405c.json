@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:44.786612+00:00",
+  "scanMode": "static",
+  "skillName": "maui-networking-offline-data",
+  "contentHash": "01c5e73d7d2518a4d622047341ac5d25b48e5afbfd86b8febc84290ed644eeb9",
+  "scannerVersion": "2.5.3"
+}

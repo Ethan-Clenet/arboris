@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:01.006920+00:00",
+  "scanMode": "static",
+  "skillName": "gpu-kernel-baseline",
+  "contentHash": "d1a7a1351fa03e951fb089e23a186c07685f8c775419c8ceb866cfa4531656aa",
+  "scannerVersion": "2.5.3"
+}

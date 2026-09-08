@@ -1,0 +1,41 @@
+{
+  "riskScore": 40,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "rm -rf .dotnet/`",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 27
+      }
+    },
+    {
+      "id": "TM2",
+      "category": "Tool Misuse",
+      "pattern": "Chaining Abuse",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "&& rm -",
+      "explanation": "Tool calls are chained to bypass individual safety checks or escalate capabilities beyond what any single tool call would allow.",
+      "remediation": "Limit tool chaining depth and validate the output of each tool before passing it to the next. Require explicit user approval for multi-step chains.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 233
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:49:35.107657+00:00",
+  "scanMode": "static",
+  "skillName": "setup-local-sdk",
+  "contentHash": "944f59fe7ec2ddce2cd6c878f86dc1197115675cea8a6cfbca87b6e3bfb140ba",
+  "scannerVersion": "2.5.3"
+}

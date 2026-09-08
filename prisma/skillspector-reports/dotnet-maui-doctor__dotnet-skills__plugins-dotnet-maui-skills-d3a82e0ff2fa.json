@@ -1,0 +1,27 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "sudo ",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 45
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:45:25.615485+00:00",
+  "scanMode": "static",
+  "skillName": "dotnet-maui-doctor",
+  "contentHash": "e1e3d0c09dfd33c2b3b1350c5075cc88226d28e9727077e1f21df4b0b446dab3",
+  "scannerVersion": "2.5.3"
+}

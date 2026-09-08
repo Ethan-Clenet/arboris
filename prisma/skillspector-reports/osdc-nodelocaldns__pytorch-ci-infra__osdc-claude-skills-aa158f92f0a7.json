@@ -1,0 +1,41 @@
+{
+  "riskScore": 25,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "TM4",
+      "category": "Tool Misuse",
+      "pattern": "Privileged Kubernetes Workload",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "privileged: true",
+      "explanation": "Code deploys a privileged Kubernetes workload (privileged container, hostPath mount, or host namespaces). This grants root on the node and is a node/cluster takeover vector.",
+      "remediation": "Remove privileged, hostPath, and host-namespace settings from workloads. Use a least-privilege securityContext, drop capabilities, and avoid mounting the host filesystem.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 34
+      }
+    },
+    {
+      "id": "TM4",
+      "category": "Tool Misuse",
+      "pattern": "Privileged Kubernetes Workload",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": "hostNetwork: true",
+      "explanation": "Code deploys a privileged Kubernetes workload (privileged container, hostPath mount, or host namespaces). This grants root on the node and is a node/cluster takeover vector.",
+      "remediation": "Remove privileged, hostPath, and host-namespace settings from workloads. Use a least-privilege securityContext, drop capabilities, and avoid mounting the host filesystem.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 34
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:30.151772+00:00",
+  "scanMode": "static",
+  "skillName": "osdc-nodelocaldns",
+  "contentHash": "40cdc02145166c3679faf60e9424171f6405f369bef3fa441212e6dcb0c26c3b",
+  "scannerVersion": "2.5.3"
+}

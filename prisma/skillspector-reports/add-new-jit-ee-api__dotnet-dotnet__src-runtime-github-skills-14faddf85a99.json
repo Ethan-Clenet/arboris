@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:36.714191+00:00",
+  "scanMode": "static",
+  "skillName": "add-new-jit-ee-api",
+  "contentHash": "94fcdcab68a3ae612e697ad59f581d1c69f8838402bd7427ed040844322f70f3",
+  "scannerVersion": "2.5.3"
+}

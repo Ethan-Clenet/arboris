@@ -1,0 +1,41 @@
+{
+  "riskScore": 25,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "without confirmation",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "assets/prd-template.md",
+        "start_line": 64
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\n  PRD Validation Report — skeleton template.\n\n  This file is a starter the synthesis pass fills in directly. There is no\n  substitution engine. The LLM:\n    1. Reads {doc_workspace}/review-rubric",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "assets/validation-report-template.html",
+        "start_line": 2
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:43:44.384873+00:00",
+  "scanMode": "static",
+  "skillName": "bmad-prd",
+  "contentHash": "6eb6171a9a94e92ed4a86e447e5b0ea6054d8ba955905bf9a40fa35e46f7c080",
+  "scannerVersion": "2.5.3"
+}

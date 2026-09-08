@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:47.310471+00:00",
+  "scanMode": "static",
+  "skillName": "bmad-qa-generate-e2e-tests",
+  "contentHash": "29d0cde476035d04bb7a9fdcdf7636777be8ac25e0253f530da7cfec463780a8",
+  "scannerVersion": "2.5.3"
+}

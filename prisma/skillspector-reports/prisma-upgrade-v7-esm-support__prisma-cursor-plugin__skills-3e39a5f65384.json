@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:34.099057+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-upgrade-v7-esm-support",
+  "contentHash": "f958f6d1b15fd21f5947d697e4d732572ac96e3e4312061df07f86bd0957bc7b",
+  "scannerVersion": "2.5.3"
+}

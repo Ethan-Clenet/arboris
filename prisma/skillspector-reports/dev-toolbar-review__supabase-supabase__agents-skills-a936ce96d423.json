@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:17.841961+00:00",
+  "scanMode": "static",
+  "skillName": "dev-toolbar-review",
+  "contentHash": "d3cae8bd11ef4660c71226e300b86f1553e70fa57446fb4145863512430dd303",
+  "scannerVersion": "2.5.3"
+}

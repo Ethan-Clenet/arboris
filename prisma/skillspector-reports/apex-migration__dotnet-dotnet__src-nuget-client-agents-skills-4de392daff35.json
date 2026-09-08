@@ -1,0 +1,27 @@
+{
+  "riskScore": 21,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA1",
+      "category": "Rogue Agent",
+      "pattern": "Self-Modification",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "Update this skill",
+      "explanation": "Skill modifies its own code, configuration, or behavior at runtime. Self-modification enables an agent to escalate privileges, disable safety constraints, or install persistent backdoors.",
+      "remediation": "Prevent the skill from modifying its own code, SKILL.md, or configuration files. Treat skill files as read-only at runtime.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 27
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:42:51.997905+00:00",
+  "scanMode": "static",
+  "skillName": "apex-migration",
+  "contentHash": "ba5594ae53d59a4355aaade63e2ee1239e515e1530c6785d95d3df12231a546c",
+  "scannerVersion": "2.5.3"
+}

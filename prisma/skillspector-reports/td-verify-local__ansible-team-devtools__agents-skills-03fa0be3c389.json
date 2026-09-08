@@ -1,0 +1,39 @@
+{
+  "riskScore": 10,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 146
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 162
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:20.320371+00:00",
+  "scanMode": "static",
+  "skillName": "td-verify-local",
+  "contentHash": "9ec563c042f2d8942136112c23f76faad521e3a1ea66d1338147d90746890717",
+  "scannerVersion": "2.5.3"
+}

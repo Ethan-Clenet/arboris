@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:06.454688+00:00",
+  "scanMode": "static",
+  "skillName": "binlog-failure-analysis",
+  "contentHash": "4d2425b6f875be8cd400f0d9ce7bd1772437bc3f53868ba9a1fe808c0fc48f43",
+  "scannerVersion": "2.5.3"
+}

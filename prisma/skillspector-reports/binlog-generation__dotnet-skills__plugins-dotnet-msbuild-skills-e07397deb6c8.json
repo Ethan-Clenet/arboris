@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:06.847302+00:00",
+  "scanMode": "static",
+  "skillName": "binlog-generation",
+  "contentHash": "157e47da45abd4ca19b4266d644fc27c2f1544bbc733820c3ed58397b3b5a04d",
+  "scannerVersion": "2.5.3"
+}

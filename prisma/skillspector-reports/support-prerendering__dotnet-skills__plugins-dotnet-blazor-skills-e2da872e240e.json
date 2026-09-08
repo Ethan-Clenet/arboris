@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:02.168477+00:00",
+  "scanMode": "static",
+  "skillName": "support-prerendering",
+  "contentHash": "78fbb995155fbe4eb4f3dac43076a844fc85a572270daf4070fb8f3d633eaebf",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:18.810118+00:00",
+  "scanMode": "static",
+  "skillName": "obz-elasticsearch",
+  "contentHash": "beeefd3ae1d4ac56553b3fad9e41848bf53ee2e7c06920cd933ca9f6cea56bf4",
+  "scannerVersion": "2.5.3"
+}

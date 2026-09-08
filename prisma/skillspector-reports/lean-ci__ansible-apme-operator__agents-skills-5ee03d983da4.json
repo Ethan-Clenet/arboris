@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:23.913066+00:00",
+  "scanMode": "static",
+  "skillName": "lean-ci",
+  "contentHash": "275a5aa29b5518f3207b2193298c5363c3f3a55024f8257f2ee087b8b820c66e",
+  "scannerVersion": "2.5.3"
+}

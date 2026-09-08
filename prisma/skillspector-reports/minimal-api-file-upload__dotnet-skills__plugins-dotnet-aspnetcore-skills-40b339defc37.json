@@ -1,0 +1,27 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.3,
+      "finding": "/etc/passwd",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 156
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:02.101422+00:00",
+  "scanMode": "static",
+  "skillName": "minimal-api-file-upload",
+  "contentHash": "3cb95aa3f633937a17404dc6f57ee7d819f0365df2484a447946c40b5fc0a773",
+  "scannerVersion": "2.5.3"
+}

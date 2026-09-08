@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:31.649796+00:00",
+  "scanMode": "static",
+  "skillName": "content-seo-geo",
+  "contentHash": "b68de0029c9b8cf4f2bbbb94b618f8de3619877fc951217162de02c9f604b142",
+  "scannerVersion": "2.5.3"
+}

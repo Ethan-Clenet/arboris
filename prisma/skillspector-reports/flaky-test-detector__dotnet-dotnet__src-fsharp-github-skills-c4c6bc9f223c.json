@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:43.663435+00:00",
+  "scanMode": "static",
+  "skillName": "flaky-test-detector",
+  "contentHash": "98e4ad8c34e5229694b5f59ef64f40689b822e8150c70bd5586dcfdef5931071",
+  "scannerVersion": "2.5.3"
+}

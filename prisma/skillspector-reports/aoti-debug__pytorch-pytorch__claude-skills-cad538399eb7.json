@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:51.685211+00:00",
+  "scanMode": "static",
+  "skillName": "aoti-debug",
+  "contentHash": "ac523d6ed0f26cfa1da46994a0f5b261637984b79ae1a95500450e9cbd01cd98",
+  "scannerVersion": "2.5.3"
+}

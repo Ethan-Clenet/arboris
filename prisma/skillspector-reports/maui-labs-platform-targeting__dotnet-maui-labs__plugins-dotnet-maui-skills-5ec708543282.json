@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:43.927698+00:00",
+  "scanMode": "static",
+  "skillName": "maui-labs-platform-targeting",
+  "contentHash": "f1403beadd284f8ae7efb874975fb7b673fa3939b53ed2a7c0c22b30e3752e64",
+  "scannerVersion": "2.5.3"
+}

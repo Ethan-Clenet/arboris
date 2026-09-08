@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:18.697472+00:00",
+  "scanMode": "static",
+  "skillName": "obz-greptimedb",
+  "contentHash": "38df8160d370acdc5b35090643960726559a025f7a98b99874ca89460672d3c3",
+  "scannerVersion": "2.5.3"
+}

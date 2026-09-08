@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:37.400366+00:00",
+  "scanMode": "static",
+  "skillName": "plan-ui-change",
+  "contentHash": "a9ee3af9a475c9d171db16f7d0dbeb8736a177096c090edd80e76cd047d46fe5",
+  "scannerVersion": "2.5.3"
+}

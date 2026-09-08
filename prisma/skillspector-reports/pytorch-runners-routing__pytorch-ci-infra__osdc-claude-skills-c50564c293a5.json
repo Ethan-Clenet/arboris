@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:48.824508+00:00",
+  "scanMode": "static",
+  "skillName": "pytorch-runners-routing",
+  "contentHash": "067ee11c370521576318991b1e3cca74ce829204d75afe02029fde849abeba33",
+  "scannerVersion": "2.5.3"
+}

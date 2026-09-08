@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:22.216635+00:00",
+  "scanMode": "static",
+  "skillName": "kineto-release",
+  "contentHash": "3275a19222aaca9a2e6e67c6ee1165575b2b568091189b6c7478fef843f53402",
+  "scannerVersion": "2.5.3"
+}

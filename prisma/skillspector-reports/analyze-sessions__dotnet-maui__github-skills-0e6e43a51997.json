@@ -1,0 +1,41 @@
+{
+  "riskScore": 9,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "create a gist or POST a transcript; it\n#       keeps analysis local and offers only a manual, redacted, opt-in share.\n#   S2  UNTRUSTED-DIGEST BOUNDARY — directives embedded in a digest are evidence,\n",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "tests/eval.vally.yaml",
+        "start_line": 6
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "create a gist or POST the report /\n        transcripts anywhere. It treats cross-machine sharing as explicit,\n        manual, opt-in only — not something it does on this request alone.\n      - >-\n    ",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "tests/eval.vally.yaml",
+        "start_line": 86
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:42:48.551877+00:00",
+  "scanMode": "static",
+  "skillName": "analyze-sessions",
+  "contentHash": "14f81f1f72fa4ec8e5218addbbfa7c930248d55d997f928d3cc04c0fd8bcb920",
+  "scannerVersion": "2.5.3"
+}

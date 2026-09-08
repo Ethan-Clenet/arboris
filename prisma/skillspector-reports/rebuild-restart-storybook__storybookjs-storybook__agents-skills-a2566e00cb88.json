@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:53.615386+00:00",
+  "scanMode": "static",
+  "skillName": "rebuild-restart-storybook",
+  "contentHash": "f137edc39f8223704180613e65df007fcd000c932f52523261b5f8d0e8df66c7",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,110 @@
+{
+  "riskScore": 36,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 7,
+  "issues": [
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "        result = subprocess.run(cmd, capture_output=True, check=False)",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/add_bot_triaged.py",
+        "start_line": 63
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    result = subprocess.run(\n        [\n            \"gh\",\n            \"issue\",\n            \"view\",\n            str(issue_number),\n            \"--repo\",\n            f\"{owner}/{repo}\",\n            \"--jso",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/validate_labels.py",
+        "start_line": 114
+      }
+    },
+    {
+      "id": "TT2",
+      "category": "Data Flow",
+      "pattern": "Tainted flow: 'DEBUG_LOG' from os.environ.get (line 19, credential/environment) → open (file write)",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "        with open(DEBUG_LOG, \"a\") as f:",
+      "explanation": "Data from a source is assigned to a variable that is later passed to a sink, creating a variable-mediated taint flow.",
+      "remediation": "Validate tainted variables before passing them to sinks. Use allowlists, type checks, or sanitization functions on data from external sources.",
+      "location": {
+        "file": "scripts/add_bot_triaged.py",
+        "start_line": 28
+      }
+    },
+    {
+      "id": "TT2",
+      "category": "Data Flow",
+      "pattern": "Tainted flow: 'DEBUG_LOG' from os.environ.get (line 10, credential/environment) → open (file write)",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "        with open(DEBUG_LOG, \"a\") as log:",
+      "explanation": "Data from a source is assigned to a variable that is later passed to a sink, creating a variable-mediated taint flow.",
+      "remediation": "Validate tainted variables before passing them to sinks. Use allowlists, type checks, or sanitization functions on data from external sources.",
+      "location": {
+        "file": "scripts/validate_issue_target.py",
+        "start_line": 20
+      }
+    },
+    {
+      "id": "TT2",
+      "category": "Data Flow",
+      "pattern": "Tainted flow: 'DEBUG_LOG' from os.environ.get (line 26, credential/environment) → open (file write)",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "        with open(DEBUG_LOG, \"a\") as f:",
+      "explanation": "Data from a source is assigned to a variable that is later passed to a sink, creating a variable-mediated taint flow.",
+      "remediation": "Validate tainted variables before passing them to sinks. Use allowlists, type checks, or sanitization functions on data from external sources.",
+      "location": {
+        "file": "scripts/validate_labels.py",
+        "start_line": 61
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "finding": "not limited to",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 227
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:37.365991+00:00",
+  "scanMode": "static",
+  "skillName": "triaging-issues",
+  "contentHash": "25940259fb8d945752f5b89e5ff2009b1b2171cd334475ac8fe964b7794436a5",
+  "scannerVersion": "2.5.3"
+}

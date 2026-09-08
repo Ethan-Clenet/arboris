@@ -1,0 +1,26 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 148
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:48:35.806410+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-upgrade-v7-schema-changes",
+  "contentHash": "6ee602ab073001e91b496a70965fe14dc8a68b1e45aae5a4af92c9077ed2411b",
+  "scannerVersion": "2.5.3"
+}

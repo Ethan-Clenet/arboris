@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:03.084860+00:00",
+  "scanMode": "static",
+  "skillName": "greenlight-review",
+  "contentHash": "935a7cce88bfe9a714be407a8a0be037f6fb030e782ca4bbcb7713f863631ad7",
+  "scannerVersion": "2.5.3"
+}

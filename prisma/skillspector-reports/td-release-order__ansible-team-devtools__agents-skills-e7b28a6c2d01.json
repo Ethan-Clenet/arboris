@@ -1,0 +1,39 @@
+{
+  "riskScore": 10,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "TR2",
+      "category": "Trigger Abuse",
+      "pattern": "Shadow Command Trigger",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Shadow Command Trigger: 'release order' conflicts with built-in command 'release'",
+      "remediation": "Choose triggers that do not conflict with built-in commands or other skills. Prefix with a unique namespace if necessary.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "TR2",
+      "category": "Trigger Abuse",
+      "pattern": "Shadow Command Trigger",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Shadow Command Trigger: 'release plan' conflicts with built-in command 'release'",
+      "remediation": "Choose triggers that do not conflict with built-in commands or other skills. Prefix with a unique namespace if necessary.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 4
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:15.048425+00:00",
+  "scanMode": "static",
+  "skillName": "td-release-order",
+  "contentHash": "f464e3cdd62b55cb4ebf456cf4e9fad18ecea19ddb4320fbe3df46483eae8c7c",
+  "scannerVersion": "2.5.3"
+}

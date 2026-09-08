@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:41.135304+00:00",
+  "scanMode": "static",
+  "skillName": "find-reviewable-pr",
+  "contentHash": "6abb36fa774d9549d22b652c0e24f384acbd3e7227d8b6a5e369ce8e118394a5",
+  "scannerVersion": "2.5.3"
+}

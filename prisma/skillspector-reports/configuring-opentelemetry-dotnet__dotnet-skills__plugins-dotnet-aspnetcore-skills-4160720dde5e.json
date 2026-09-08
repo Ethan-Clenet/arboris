@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:30.747564+00:00",
+  "scanMode": "static",
+  "skillName": "configuring-opentelemetry-dotnet",
+  "contentHash": "2196d31d8f2e879acf202549195c5377de7d1ed4f74763a23f61b6a2db19baf8",
+  "scannerVersion": "2.5.3"
+}

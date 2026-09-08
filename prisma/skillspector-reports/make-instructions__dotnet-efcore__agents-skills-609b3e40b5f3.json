@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:30.788838+00:00",
+  "scanMode": "static",
+  "skillName": "make-instructions",
+  "contentHash": "58bbc6474a9af25168ce7b133a1baf7c259966d8ffc08757839783a04192dbec",
+  "scannerVersion": "2.5.3"
+}

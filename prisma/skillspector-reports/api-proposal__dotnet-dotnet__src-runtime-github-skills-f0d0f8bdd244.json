@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:53.648375+00:00",
+  "scanMode": "static",
+  "skillName": "api-proposal",
+  "contentHash": "e8461a69ed73f55690bf5cd727bf9b0cfbab53f6082d0e1e128e46964d8e7242",
+  "scannerVersion": "2.5.3"
+}

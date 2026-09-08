@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:20.511342+00:00",
+  "scanMode": "static",
+  "skillName": "obz-mimir",
+  "contentHash": "bd1a57a4d9663081376dafe50d83ec6decd0c21cb93a658540aceffc764e7d23",
+  "scannerVersion": "2.5.3"
+}

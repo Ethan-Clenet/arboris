@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:46.759500+00:00",
+  "scanMode": "static",
+  "skillName": "standalone-test-repro-method",
+  "contentHash": "8bfae1604800ff276df7565473b4199e5ecac06c823abeb46719225f4b1de724",
+  "scannerVersion": "2.5.3"
+}

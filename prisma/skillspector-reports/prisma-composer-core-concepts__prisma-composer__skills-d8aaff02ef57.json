@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:04.023497+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-composer-core-concepts",
+  "contentHash": "8cadaffa6ccfc4a1beee3162a66ee2376948ff93874ef311115407902410adf1",
+  "scannerVersion": "2.5.3"
+}

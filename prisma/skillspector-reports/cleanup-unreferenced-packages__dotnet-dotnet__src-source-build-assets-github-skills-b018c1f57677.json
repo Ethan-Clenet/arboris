@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:18.117528+00:00",
+  "scanMode": "static",
+  "skillName": "cleanup-unreferenced-packages",
+  "contentHash": "ce8db0c1d40ef61568aa5eb15ec79b44bdcb097094be438e229976da894da472",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:31.968551+00:00",
+  "scanMode": "static",
+  "skillName": "thread-abort-migration",
+  "contentHash": "68788e250cdd78991fe1c04462ad9f651f38aa73d8fc8b22f5f7de6c5d106ef7",
+  "scannerVersion": "2.5.3"
+}

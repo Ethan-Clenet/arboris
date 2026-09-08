@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:00.459608+00:00",
+  "scanMode": "static",
+  "skillName": "migrate-xunit-to-mstest",
+  "contentHash": "997dbc07545f234c82b6b8162ae3d8583bab0366ea4d4c0d56489cd409581d94",
+  "scannerVersion": "2.5.3"
+}

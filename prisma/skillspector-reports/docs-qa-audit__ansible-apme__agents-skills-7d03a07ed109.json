@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:19.827171+00:00",
+  "scanMode": "static",
+  "skillName": "docs-qa-audit",
+  "contentHash": "a51f77ccd280fa7b9e33fe46b37a6e843a1262711397bf9e0d828d3baaee1655",
+  "scannerVersion": "2.5.3"
+}

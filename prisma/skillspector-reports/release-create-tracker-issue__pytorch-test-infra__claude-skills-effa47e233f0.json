@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:58.842317+00:00",
+  "scanMode": "static",
+  "skillName": "release-create-tracker-issue",
+  "contentHash": "aecb64e120a38510575f6b9e4c111691d06f35503c4ad77f3a578c42684a6302",
+  "scannerVersion": "2.5.3"
+}

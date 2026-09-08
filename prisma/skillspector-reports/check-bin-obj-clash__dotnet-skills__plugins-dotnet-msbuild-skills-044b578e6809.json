@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:10.799086+00:00",
+  "scanMode": "static",
+  "skillName": "check-bin-obj-clash",
+  "contentHash": "0ecb171e62cf72d212d4028dfd0f216f9325e29ebe03aef1f032f461e5653fd5",
+  "scannerVersion": "2.5.3"
+}

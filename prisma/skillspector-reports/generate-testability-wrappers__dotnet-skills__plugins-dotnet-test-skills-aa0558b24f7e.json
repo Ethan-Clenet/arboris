@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:56.598306+00:00",
+  "scanMode": "static",
+  "skillName": "generate-testability-wrappers",
+  "contentHash": "b9a77069943e50ab21c9d8d30ef5b9660e5c0049bc953f578bbb02bd5dad94ae",
+  "scannerVersion": "2.5.3"
+}

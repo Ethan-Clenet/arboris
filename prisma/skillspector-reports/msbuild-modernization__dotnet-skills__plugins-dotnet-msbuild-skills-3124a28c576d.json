@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- DELETE: default Configuration/Platform (SDK provides these) -->\n<PropertyGroup>\n  <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>\n  <Platform Condition=\" '$(Platform)'",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 228
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:05.988687+00:00",
+  "scanMode": "static",
+  "skillName": "msbuild-modernization",
+  "contentHash": "89554528609da6ec7808237fe4c2c850d5efaf1d4f4ffbae1240cf171b506f84",
+  "scannerVersion": "2.5.3"
+}

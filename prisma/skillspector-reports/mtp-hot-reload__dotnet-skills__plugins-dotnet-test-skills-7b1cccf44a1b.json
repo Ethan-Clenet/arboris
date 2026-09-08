@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:06.371637+00:00",
+  "scanMode": "static",
+  "skillName": "mtp-hot-reload",
+  "contentHash": "dc574a2ae14309e77636f01a71c89c5d816bb04285ecfc82fd39bd5851c670f0",
+  "scannerVersion": "2.5.3"
+}

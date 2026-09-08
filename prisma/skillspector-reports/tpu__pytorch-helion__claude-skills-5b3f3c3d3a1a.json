@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:34.319977+00:00",
+  "scanMode": "static",
+  "skillName": "tpu",
+  "contentHash": "3c7ab5aa1ffb04b53b3c4d68e68e0b888963329e935d19e7be7f2dc906fca51f",
+  "scannerVersion": "2.5.3"
+}

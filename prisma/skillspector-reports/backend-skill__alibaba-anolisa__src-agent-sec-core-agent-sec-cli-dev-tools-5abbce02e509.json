@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:03.403009+00:00",
+  "scanMode": "static",
+  "skillName": "add-backend",
+  "contentHash": "76804586f4cd5d2c5d2d48d2bf3465c473accb1c2ece8bba3cbb7aa6ea9ba756",
+  "scannerVersion": "2.5.3"
+}

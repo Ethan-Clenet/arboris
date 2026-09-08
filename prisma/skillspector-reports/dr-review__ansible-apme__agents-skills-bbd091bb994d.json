@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:30.502137+00:00",
+  "scanMode": "static",
+  "skillName": "dr-review",
+  "contentHash": "c4e6c6f0511d90c610372c50acdb1046287a7c8383423bf83e609256edc1287d",
+  "scannerVersion": "2.5.3"
+}

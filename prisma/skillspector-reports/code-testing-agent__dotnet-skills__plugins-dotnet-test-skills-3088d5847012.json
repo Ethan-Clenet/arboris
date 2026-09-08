@@ -1,0 +1,27 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA4",
+      "category": "Excessive Agency",
+      "pattern": "Unbounded Resource Access",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "maxRetries=0",
+      "explanation": "Skill allows unbounded resource consumption (API calls, storage, compute). Without rate limits or quotas, a compromised or misbehaving agent can cause denial-of-service or cost overruns.",
+      "remediation": "Set explicit rate limits, timeouts, and resource quotas for API calls, file operations, and compute. Implement circuit breakers for runaway loops.",
+      "location": {
+        "file": "unit-test-generation.prompt.md",
+        "start_line": 66
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:44:26.968671+00:00",
+  "scanMode": "static",
+  "skillName": "code-testing-agent",
+  "contentHash": "2bdfd87c84281817d0763b0abc9f9834ec9ae807bd6db16d5bf7bc5f588c37a3",
+  "scannerVersion": "2.5.3"
+}

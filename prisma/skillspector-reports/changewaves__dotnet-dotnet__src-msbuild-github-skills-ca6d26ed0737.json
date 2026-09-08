@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:09.417693+00:00",
+  "scanMode": "static",
+  "skillName": "changewaves",
+  "contentHash": "6257701aa5cdf3323dfcacca5df328d22dddaa72459f744cde536270481696d7",
+  "scannerVersion": "2.5.3"
+}

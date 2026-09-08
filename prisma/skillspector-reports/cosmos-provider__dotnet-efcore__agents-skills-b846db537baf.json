@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:01.306612+00:00",
+  "scanMode": "static",
+  "skillName": "cosmos-provider",
+  "contentHash": "4a5e78ba40f4715d88996954b6ede9ad1a81b41531ebdff2738d5dcab9a56341",
+  "scannerVersion": "2.5.3"
+}

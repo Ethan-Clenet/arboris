@@ -1,0 +1,27 @@
+{
+  "riskScore": 21,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA1",
+      "category": "Rogue Agent",
+      "pattern": "Self-Modification",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "Overwrite existing file",
+      "explanation": "Skill modifies its own code, configuration, or behavior at runtime. Self-modification enables an agent to escalate privileges, disable safety constraints, or install persistent backdoors.",
+      "remediation": "Prevent the skill from modifying its own code, SKILL.md, or configuration files. Treat skill files as read-only at runtime.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 78
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:10.170926+00:00",
+  "scanMode": "static",
+  "skillName": "td-ansible-creator",
+  "contentHash": "e005cec8d79243ba609ae6ab5ab5214eee6f8be00a85611d8ad9cf945a5208bf",
+  "scannerVersion": "2.5.3"
+}

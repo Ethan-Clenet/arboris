@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:30.262681+00:00",
+  "scanMode": "static",
+  "skillName": "test-smell-detection",
+  "contentHash": "10051bf0fc18cbebbd275e7f6b3866d17b73c38fe72c17fbf9114953a3d350ec",
+  "scannerVersion": "2.5.3"
+}

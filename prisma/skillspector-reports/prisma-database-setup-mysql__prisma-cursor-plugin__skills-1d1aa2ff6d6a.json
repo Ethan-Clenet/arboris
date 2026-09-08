@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:05.722644+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-database-setup-mysql",
+  "contentHash": "3da8e662decb2760735bd2a5cb8c789a5158fb3cef0f20cb9d0d21c7d3c9551c",
+  "scannerVersion": "2.5.3"
+}

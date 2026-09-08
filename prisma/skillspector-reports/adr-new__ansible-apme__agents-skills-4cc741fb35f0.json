@@ -1,0 +1,27 @@
+{
+  "riskScore": 18,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "E4",
+      "category": "Data Exfiltration",
+      "pattern": "Context Leakage",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "Extract context",
+      "explanation": "Code or instructions that leak agent conversation context to external services, potentially exposing sensitive user interactions.",
+      "remediation": "Remove any code that sends prompts, responses, or session data externally. Preserve user privacy; never exfiltrate conversation content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 224
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:42:39.263694+00:00",
+  "scanMode": "static",
+  "skillName": "adr-new",
+  "contentHash": "62f9aefffce01fdaf163716539ed2af656ec0c23595fbb886ec174eb5e89b1b0",
+  "scannerVersion": "2.5.3"
+}

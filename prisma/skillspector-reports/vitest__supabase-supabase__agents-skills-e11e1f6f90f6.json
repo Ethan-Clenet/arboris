@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "MP3",
+      "category": "Memory Poisoning",
+      "pattern": "Memory Manipulation",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "Clear history",
+      "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+      "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+      "location": {
+        "file": "references/features-mocking.md",
+        "start_line": 212
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:58.711945+00:00",
+  "scanMode": "static",
+  "skillName": "vitest",
+  "contentHash": "0b214b9bf5cdd48a45a7dd5e3feffd4960333c5724623af38f98eb5e7529090f",
+  "scannerVersion": "2.5.3"
+}

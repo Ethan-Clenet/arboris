@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:54.918138+00:00",
+  "scanMode": "static",
+  "skillName": "metal-optimize",
+  "contentHash": "b8ece2d9a0f79a8b1129ff98f4bd53048f0cf4a014959bf233bf9d48927bfb2a",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,97 @@
+{
+  "riskScore": 19,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 6,
+  "issues": [
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "~/.ssh/authorized_keys",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "references/user.md",
+        "start_line": 194
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/aliyun-snapshot.md",
+        "start_line": 43
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/aliyun-snapshot.md",
+        "start_line": 44
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/aliyun-snapshot.md",
+        "start_line": 144
+      }
+    },
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.255,
+      "finding": "100.100.100.200",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/aliyun-snapshot.md",
+        "start_line": 145
+      }
+    },
+    {
+      "id": "SC2",
+      "category": "Supply Chain",
+      "pattern": "External Script Fetching",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "curl -s http://100.100.100.200/latest/meta-data/region-id)\nINSTANCE_ID=$(curl -s http://100.100.100.200/latest/meta-data/instance-id)\nTIMESTAMP=$(date +%Y%m%d-%H%M%S)\n\n# 获取所有云盘 ID\nDISK_IDS=$(aliyun ec",
+      "explanation": "Remote code is downloaded and executed. This bypasses code review and could introduce malicious code.",
+      "remediation": "Avoid downloading and executing remote scripts. Use trusted packages from PyPI/npm. If remote fetch is required, verify checksums and use HTTPS.",
+      "location": {
+        "file": "references/aliyun-snapshot.md",
+        "start_line": 144
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:43:04.390022+00:00",
+  "scanMode": "static",
+  "skillName": "backup-restore",
+  "contentHash": "8a11c58182b655d72b13ee2e6df183cf9bd9e8484d3ec2a2402b5280c562c7c4",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,26 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "TR2",
+      "category": "Trigger Abuse",
+      "pattern": "Shadow Command Trigger",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Shadow Command Trigger: 'rebase PR' conflicts with built-in command 'rebase'",
+      "remediation": "Choose triggers that do not conflict with built-in commands or other skills. Prefix with a unique namespace if necessary.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:14.933765+00:00",
+  "scanMode": "static",
+  "skillName": "td-rebase-pr",
+  "contentHash": "b58a05dc56721c589197749fb6ecb22c2ce8c7e42a5513f103d0118a77ed4db6",
+  "scannerVersion": "2.5.3"
+}

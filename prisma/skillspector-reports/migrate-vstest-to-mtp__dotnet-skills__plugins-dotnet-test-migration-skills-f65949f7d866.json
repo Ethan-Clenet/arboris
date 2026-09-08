@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:58.338379+00:00",
+  "scanMode": "static",
+  "skillName": "migrate-vstest-to-mtp",
+  "contentHash": "89e24775f5d1c296f40f7841769b22246860f22c2e3dd1dca77d8f4615cc7d17",
+  "scannerVersion": "2.5.3"
+}

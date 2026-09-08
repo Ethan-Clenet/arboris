@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:22.574911+00:00",
+  "scanMode": "static",
+  "skillName": "obz-vm",
+  "contentHash": "3e99dd4a6d00bc948a01b1ccdb8ea7a9c6f590da1b67ca2d0b6b9bb173b301a9",
+  "scannerVersion": "2.5.3"
+}

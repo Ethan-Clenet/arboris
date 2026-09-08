@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:24.626304+00:00",
+  "scanMode": "static",
+  "skillName": "runpod",
+  "contentHash": "b94b8acf6f59baa688953677067d1d339bc7cccd2b2a9fc7a24f74a62ae49069",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:58.462728+00:00",
+  "scanMode": "static",
+  "skillName": "migrate-workflow-ec2-to-osdc",
+  "contentHash": "4a312c3ffea6106413c4b2be21b4b1a3f0e346f3898d5ac5c61986d212b880d4",
+  "scannerVersion": "2.5.3"
+}

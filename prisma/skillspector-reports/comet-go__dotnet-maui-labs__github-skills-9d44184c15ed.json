@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:28.809830+00:00",
+  "scanMode": "static",
+  "skillName": "comet-go",
+  "contentHash": "6092edae828a6b42c1c7f5ab6778083b7fae30352cac6eb54391f6410a16d1c3",
+  "scannerVersion": "2.5.3"
+}

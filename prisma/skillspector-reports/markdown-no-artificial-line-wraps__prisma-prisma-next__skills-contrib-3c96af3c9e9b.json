@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:32.664455+00:00",
+  "scanMode": "static",
+  "skillName": "markdown-no-artificial-line-wraps",
+  "contentHash": "6df9cce31f2911fcda3f3029c252860376c16cf2f011d2570d64501459a1863d",
+  "scannerVersion": "2.5.3"
+}

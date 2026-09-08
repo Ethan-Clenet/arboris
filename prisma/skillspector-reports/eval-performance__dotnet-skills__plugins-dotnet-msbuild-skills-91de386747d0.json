@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "E3",
+      "category": "Data Exfiltration",
+      "pattern": "File System Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "walk the entire directory",
+      "explanation": "Code scans file system directories looking for sensitive files. This could be reconnaissance for credential theft.",
+      "remediation": "Remove unnecessary filesystem scanning. If file access is needed, use explicit, scoped paths. Avoid reading ~/.ssh, ~/.aws, or credential directories.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 85
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:45:33.438650+00:00",
+  "scanMode": "static",
+  "skillName": "eval-performance",
+  "contentHash": "7248471f4b5cfca676aa09dba2855341e238e5e1adcf8a0662500e861ac1be65",
+  "scannerVersion": "2.5.3"
+}

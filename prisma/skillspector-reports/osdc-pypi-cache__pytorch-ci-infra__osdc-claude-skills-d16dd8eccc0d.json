@@ -1,0 +1,41 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "E5",
+      "category": "Data Exfiltration",
+      "pattern": "Cloud Storage Exfiltration",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "aws s3 cp",
+      "explanation": "Data is uploaded to cloud storage (S3 / GCS / Azure Blob). This may be a legitimate backup or exfiltration to an external bucket. Manual review is recommended.",
+      "remediation": "Verify the destination bucket is trusted and owned by you. Never upload credentials, secrets, or workspace contents to external or unverified cloud storage.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 123
+      }
+    },
+    {
+      "id": "E5",
+      "category": "Data Exfiltration",
+      "pattern": "Cloud Storage Exfiltration",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "aws s3 cp",
+      "explanation": "Data is uploaded to cloud storage (S3 / GCS / Azure Blob). This may be a legitimate backup or exfiltration to an external bucket. Manual review is recommended.",
+      "remediation": "Verify the destination bucket is trusted and owned by you. Never upload credentials, secrets, or workspace contents to external or unverified cloud storage.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 151
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:31.942448+00:00",
+  "scanMode": "static",
+  "skillName": "osdc-pypi-cache",
+  "contentHash": "3575b668310fce80315ee30f44fa533f279c1610938e440e9ff02659c77dff5c",
+  "scannerVersion": "2.5.3"
+}
