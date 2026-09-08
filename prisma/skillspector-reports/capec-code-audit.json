@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "SSRF1",
+      "category": "Server-Side Request Forgery",
+      "pattern": "Cloud Metadata Access",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "169.254.169.254",
+      "explanation": "Code accesses a cloud instance metadata endpoint (e.g. 169.254.169.254). A single request can return temporary IAM credentials, making this a high-value SSRF target for credential theft.",
+      "remediation": "Remove access to cloud metadata endpoints unless strictly required. If metadata is needed, restrict it (e.g. IMDSv2 with hop limit) and never expose returned credentials.",
+      "location": {
+        "file": "references/04-timing-state-abuse.md",
+        "start_line": 21
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T11:33:35.766111+00:00",
+  "scanMode": "static",
+  "skillName": "capec-code-audit",
+  "contentHash": "fc04904b44e5361856a1ce7428c67df2b041d2192a02ddf4297bf8c8b231314c",
+  "scannerVersion": "2.5.3"
+}

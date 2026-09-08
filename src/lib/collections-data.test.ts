@@ -36,4 +36,13 @@ describe('COLLECTIONS', () => {
     expect(n8n?.commandIds).toContain('docker-rebuild')
     expect(findCollectionSeed('n8n-starter')?.id).toBe('n8n-starter')
   })
+
+  it('embarque le pack Ship safely avec les audits CWE/CAPEC', () => {
+    const pack = COLLECTIONS.find((c) => c.id === 'ship-safely')
+    expect(pack?.kind).toBe('pack')
+    expect(pack?.skillIds).toEqual(
+      expect.arrayContaining(['cve-scan', 'cwe-code-audit', 'capec-code-audit', 'security-review']),
+    )
+    expect(findCollectionSeed('ship-safely')?.id).toBe('ship-safely')
+  })
 })

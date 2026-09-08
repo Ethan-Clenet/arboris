@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-08T05:22:17.459Z",
+  "generatedAt": "2026-09-08T11:34:00.490Z",
   "stacks": [
     {
       "id": "node",
@@ -423,6 +423,7 @@
     "canvas-app__microsoft-power-platform-skills__plugins-canvas-apps-skills-c2fd71f231f6",
     "canvas-design",
     "capacity-forecast__microsoft-aibast-agents-library__solutions-resource-utilization-manual-skills-282cf758f764",
+    "capec-code-audit",
     "carrier-relationship-management",
     "channel-allocation__microsoft-aibast-agents-library__solutions-inventory-visibility-manual-skills-704b22e45572",
     "channel-performance__microsoft-aibast-agents-library__solutions-omnichannel-engagement-manual-skills-541f68939c71",
@@ -554,6 +555,7 @@
     "customer-segmentation__microsoft-aibast-agents-library__solutions-personalized-marketing-manual-skills-39520b2038ec",
     "customs-trade-compliance",
     "cve-scan",
+    "cwe-code-audit",
     "cypress-author",
     "cypress-docs",
     "cypress-explain",
@@ -3777,6 +3779,11 @@
       "better-auth-security-best-practices",
       "better-auth-two-factor"
     ],
+    "Arboris": [
+      "capec-code-audit",
+      "cve-scan",
+      "cwe-code-audit"
+    ],
     "Neon": [
       "claimable-postgres",
       "neon",
@@ -3796,9 +3803,6 @@
       "context7-docs__upstash-context7__packages-pi-skills-8870c946f485",
       "context7-mcp__upstash-context7__skills-4bd9b07b8b1f",
       "find-docs__upstash-context7__skills-8e15aabd3565"
-    ],
-    "Arboris": [
-      "cve-scan"
     ],
     "Cypress": [
       "cypress-author",
