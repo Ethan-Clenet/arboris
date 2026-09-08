@@ -39,6 +39,11 @@ description: Commit propre.
   it('renvoie null si absent', async () => {
     expect(await loadCommandFile(commandsDir, 'missing')).toBeNull()
   })
+
+  it('refuse un commandId traversal', async () => {
+    await writeFile(join(commandsDir, 'commit.md'), '---\nname: commit\n---\n\n# ok\n', 'utf-8')
+    expect(await loadCommandFile(commandsDir, '../commit')).toBeNull()
+  })
 })
 
 describe('listCommandIds / loadAllCommands', () => {

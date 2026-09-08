@@ -1,7 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises'
-import { join } from 'node:path'
 import type { CommandDetail, CommandSummary } from '#/lib/command-types'
 import { parseCommandMarkdown } from '#/lib/command-parse'
+import { isSafeCatalogId, resolveInsideRoot } from '#/lib/safe-path'
 
 export type { CommandDetail, CommandSummary }
 export { toCommandSummary } from '#/lib/command-types'
@@ -38,6 +38,7 @@ export async function listCommandIds(commandsDir: string): Promise<string[]> {
     return entries
       .filter((e) => e.isFile() && e.name.endsWith('.md'))
       .map((e) => e.name.replace(/\.md$/i, ''))
+      .filter(isSafeCatalogId)
       .sort()
   } catch {
     return []
@@ -48,8 +49,11 @@ export async function loadCommandFile(
   commandsDir: string,
   commandId: string,
 ): Promise<CommandDetail | null> {
+  if (!isSafeCatalogId(commandId)) return null
+  const abs = resolveInsideRoot(commandsDir, `${commandId}.md`)
+  if (!abs) return null
   try {
-    const raw = await readFile(join(commandsDir, `${commandId}.md`), 'utf-8')
+    const raw = await readFile(abs, 'utf-8')
     const parsed = parseCommandMarkdown(raw, commandId)
     if (!parsed) return null
     return toDetail(parsed)

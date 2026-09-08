@@ -32,6 +32,13 @@ describe('listSkillPackageFiles', () => {
   it('renvoie null si le dossier n’existe pas', async () => {
     expect(await listSkillPackageFiles(skillsDir, 'missing')).toBeNull()
   })
+
+  it('refuse un skillId traversal', async () => {
+    const root = join(skillsDir, 'pack')
+    await mkdir(root, { recursive: true })
+    await writeFile(join(root, 'SKILL.md'), '# skill\n', 'utf-8')
+    expect(await listSkillPackageFiles(skillsDir, '../pack')).toBeNull()
+  })
 })
 
 describe('skillPackageHasCompanions', () => {

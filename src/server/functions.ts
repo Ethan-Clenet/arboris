@@ -47,6 +47,7 @@ export type InstallSkillError =
   | 'skill_not_found'
   | 'invalid_path'
   | 'security_blocked'
+  | 'rate_limited'
   | 'generic'
 
 export type InstallSkillResult =
@@ -65,6 +66,8 @@ export const installSkill = createServerFn({ method: 'POST' })
   )
   .handler(async ({ data }): Promise<InstallSkillResult> => {
     try {
+      const { assertRateLimit, INSTALL_RATE_LIMIT } = await import('./rate-limit.server')
+      assertRateLimit('install:skill', INSTALL_RATE_LIMIT)
       const { installSkillForAgent } = await import('./skill-install.server')
       const result = await installSkillForAgent(data)
       return { ok: true, path: result.path }
@@ -76,7 +79,8 @@ export const installSkill = createServerFn({ method: 'POST' })
           err.message === 'unknown_agent' ||
           err.message === 'skill_not_found' ||
           err.message === 'invalid_path' ||
-          err.message === 'security_blocked')
+          err.message === 'security_blocked' ||
+          err.message === 'rate_limited')
           ? (err.message as InstallSkillError)
           : 'generic'
       return { ok: false, error: code }
@@ -89,6 +93,7 @@ export type InstallCommandError =
   | 'unknown_agent'
   | 'command_not_found'
   | 'invalid_path'
+  | 'rate_limited'
   | 'generic'
 
 export type InstallCommandResult =
@@ -118,17 +123,28 @@ export const getWorkspaceInstallAvailable = createServerFn({ method: 'GET' }).ha
 
 export type DownloadZipResult =
   | { ok: true; filename: string; base64: string; fileCount: number }
-  | { ok: false; error: 'not_found' | 'unknown_agent' | 'empty' | 'generic' }
+  | {
+      ok: false
+      error: 'not_found' | 'unknown_agent' | 'empty' | 'rate_limited' | 'too_large' | 'generic'
+    }
 
 export const downloadCollectionZip = createServerFn({ method: 'POST' })
   .validator((data: { collectionId: string; agent: string; lang: 'fr' | 'en' }) => data)
   .handler(async ({ data }): Promise<DownloadZipResult> => {
     try {
+      const { assertRateLimit, ZIP_RATE_LIMIT } = await import('./rate-limit.server')
+      assertRateLimit('zip:collection', ZIP_RATE_LIMIT)
       const { buildCollectionZip } = await import('./install-cloud.server')
       const zip = await buildCollectionZip(data)
       if (!zip) return { ok: false, error: 'not_found' }
       return { ok: true, ...zip }
-    } catch {
+    } catch (err) {
+      if (err instanceof Error && err.message === 'rate_limited') {
+        return { ok: false, error: 'rate_limited' }
+      }
+      if (err instanceof Error && err.message === 'zip_too_large') {
+        return { ok: false, error: 'too_large' }
+      }
       return { ok: false, error: 'generic' }
     }
   })
@@ -137,6 +153,8 @@ export const downloadCommandZip = createServerFn({ method: 'POST' })
   .validator((data: { commandId: string; agent: string; lang?: 'fr' | 'en' }) => data)
   .handler(async ({ data }): Promise<DownloadZipResult> => {
     try {
+      const { assertRateLimit, ZIP_RATE_LIMIT } = await import('./rate-limit.server')
+      assertRateLimit('zip:command', ZIP_RATE_LIMIT)
       const { buildCommandZip } = await import('./install-cloud.server')
       const zip = await buildCommandZip({
         commandId: data.commandId,
@@ -145,7 +163,13 @@ export const downloadCommandZip = createServerFn({ method: 'POST' })
       })
       if (!zip) return { ok: false, error: 'not_found' }
       return { ok: true, ...zip }
-    } catch {
+    } catch (err) {
+      if (err instanceof Error && err.message === 'rate_limited') {
+        return { ok: false, error: 'rate_limited' }
+      }
+      if (err instanceof Error && err.message === 'zip_too_large') {
+        return { ok: false, error: 'too_large' }
+      }
       return { ok: false, error: 'generic' }
     }
   })
@@ -154,11 +178,19 @@ export const downloadSkillZip = createServerFn({ method: 'POST' })
   .validator((data: { skillId: string; agent: string; lang: 'fr' | 'en' }) => data)
   .handler(async ({ data }): Promise<DownloadZipResult> => {
     try {
+      const { assertRateLimit, ZIP_RATE_LIMIT } = await import('./rate-limit.server')
+      assertRateLimit('zip:skill', ZIP_RATE_LIMIT)
       const { buildSkillZip } = await import('./install-cloud.server')
       const zip = await buildSkillZip(data)
       if (!zip) return { ok: false, error: 'not_found' }
       return { ok: true, ...zip }
-    } catch {
+    } catch (err) {
+      if (err instanceof Error && err.message === 'rate_limited') {
+        return { ok: false, error: 'rate_limited' }
+      }
+      if (err instanceof Error && err.message === 'zip_too_large') {
+        return { ok: false, error: 'too_large' }
+      }
       return { ok: false, error: 'generic' }
     }
   })
@@ -169,6 +201,8 @@ export const installCommand = createServerFn({ method: 'POST' })
   )
   .handler(async ({ data }): Promise<InstallCommandResult> => {
     try {
+      const { assertRateLimit, INSTALL_RATE_LIMIT } = await import('./rate-limit.server')
+      assertRateLimit('install:command', INSTALL_RATE_LIMIT)
       const { installCommandForAgent } = await import('./command-install.server')
       const result = await installCommandForAgent(data)
       return { ok: true, path: result.path }
@@ -179,7 +213,8 @@ export const installCommand = createServerFn({ method: 'POST' })
           err.message === 'install_unauthorized' ||
           err.message === 'unknown_agent' ||
           err.message === 'command_not_found' ||
-          err.message === 'invalid_path')
+          err.message === 'invalid_path' ||
+          err.message === 'rate_limited')
           ? (err.message as InstallCommandError)
           : 'generic'
       return { ok: false, error: code }

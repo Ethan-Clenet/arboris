@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { resolveCatalogPath } from '#/lib/safe-path'
 
 type SkillFileMeta = {
   dependsOn: string[]
@@ -53,8 +53,10 @@ async function readSkillFileByRef(
   skillsDir: string,
   ref: string,
 ): Promise<SkillFileMeta | null> {
+  const filePath = resolveCatalogPath(skillsDir, ref, 'SKILL.md')
+  if (!filePath) return null
   try {
-    const content = await readFile(join(skillsDir, ref, 'SKILL.md'), 'utf-8')
+    const content = await readFile(filePath, 'utf-8')
     return content.trim() ? parseSkillFile(content) : null
   } catch {
     return null

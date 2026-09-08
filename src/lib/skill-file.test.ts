@@ -87,4 +87,10 @@ depends_on:
     expect(await compileSkillFile(skillsDir, 'missing')).toBeNull()
     expect(await tryLoadSkillFile(skillsDir, 'missing')).toBeNull()
   })
+
+  it('refuse un ID path-traversal', async () => {
+    await writeSkill('legit', '# ok\n')
+    expect(await tryLoadSkillFile(skillsDir, '../legit')).toBeNull()
+    expect(await compileSkillFile(skillsDir, 'foo/../../legit')).toBeNull()
+  })
 })

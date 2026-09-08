@@ -25,6 +25,7 @@ const skillT = {
     skill_not_found: 'Skill introuvable',
     invalid_path: 'Chemin invalide',
     security_blocked: 'Bloqué',
+    rate_limited: 'Trop de tentatives',
     generic: 'Erreur générique',
   },
 }
@@ -40,6 +41,7 @@ const commandT = {
     unknown_agent: 'Agent inconnu',
     command_not_found: 'Commande introuvable',
     invalid_path: 'Chemin invalide',
+    rate_limited: 'Trop de tentatives',
     generic: 'Erreur générique',
   },
 }

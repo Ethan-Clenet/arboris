@@ -68,6 +68,16 @@ Format `DATABASE_URL` dans `.env` :
 postgresql://arboris:arboris@localhost:5433/arboris
 ```
 
+Pour les boutons **Installer** (écriture locale), définir aussi dans `.env` :
+
+```
+ARBORIS_WORKSPACE_ROOT="/chemin/absolu/du/projet"
+ARBORIS_INSTALL_TOKEN="…secret…"
+VITE_ARBORIS_INSTALL_TOKEN="…même secret…"
+```
+
+Sur le site public (Vercel), ne pas définir ces variables : ZIP + CLI restent disponibles.
+
 Commandes utiles :
 
 ```bash
