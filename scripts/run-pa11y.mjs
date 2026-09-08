@@ -47,7 +47,7 @@ mkdirSync(reportsDir, { recursive: true })
 const base = (
   process.env.PA11Y_BASE_URL ||
   process.env.LHCI_BASE_URL ||
-  'https://arboris-three.vercel.app'
+  'https://arboristhree.xyz'
 ).replace(/\/$/, '')
 
 console.log(`[pa11y] base=${base}`)

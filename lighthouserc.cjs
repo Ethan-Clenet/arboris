@@ -1,4 +1,4 @@
-const base = (process.env.LHCI_BASE_URL || 'https://arboris-three.vercel.app').replace(
+const base = (process.env.LHCI_BASE_URL || 'https://arboristhree.xyz').replace(
   /\/$/,
   '',
 )

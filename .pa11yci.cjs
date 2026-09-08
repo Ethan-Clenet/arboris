@@ -1,11 +1,11 @@
 /**
  * Pa11y CI — audit accessibilité (axe-core, WCAG 2 AA) sur le catalogue.
- * Base URL : PA11Y_BASE_URL ou LHCI_BASE_URL (défaut prod Vercel).
+ * Base URL : PA11Y_BASE_URL ou LHCI_BASE_URL (défaut prod).
  */
 const base = (
   process.env.PA11Y_BASE_URL ||
   process.env.LHCI_BASE_URL ||
-  'https://arboris-three.vercel.app'
+  'https://arboristhree.xyz'
 ).replace(/\/$/, '')
 
 /** Pages catalogue à auditer (alignées Lighthouse + packs Sonar). */
