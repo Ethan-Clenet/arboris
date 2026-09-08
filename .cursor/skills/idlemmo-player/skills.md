@@ -732,6 +732,11 @@ Ne jamais inventer des drop rates / prix : vérifier market in-game ou wiki.
 - Computer Use réservé aux parcours inconnus
 - Labels UI en **anglais**
 
+### Timers actifs
+| Nom | Déclenchement | Action |
+|-----|---------------|--------|
+| idlemmo-relaunch-mining | ~2026-09-08 20:24 UTC (posé 14:59 UTC, délai 5h25) | Relancer Coal Ore → Start (coords 913,422 / 992,739) |
+
 ### Découvertes
 | Date | Note |
 |------|------|
