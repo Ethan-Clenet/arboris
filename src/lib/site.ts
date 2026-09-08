@@ -2,7 +2,7 @@
 export const SITE_URL = (
   process.env.VITE_SITE_URL ??
   process.env.SITE_URL ??
-  'https://arboris-three.vercel.app'
+  'https://arboristhree.xyz'
 ).replace(/\/$/, '')
 
 export const SITE_NAME = 'Arboris'

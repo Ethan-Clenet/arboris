@@ -6,7 +6,7 @@ on:
       base_url:
         description: 'URL de base à auditer (prod, preview…)'
         required: false
-        default: 'https://arboris-three.vercel.app'
+        default: 'https://arboristhree.xyz'
   schedule:
     # Lundi 06:30 UTC — juste après Lighthouse
     - cron: '30 6 * * 1'
@@ -42,7 +42,7 @@ jobs:
       - name: Run Pa11y CI (axe / WCAG2AA)
         run: npm run a11y:ci
         env:
-          PA11Y_BASE_URL: ${{ inputs.base_url || 'https://arboris-three.vercel.app' }}
+          PA11Y_BASE_URL: ${{ inputs.base_url || 'https://arboristhree.xyz' }}
 
       - name: Upload Pa11y reports
         if: always()

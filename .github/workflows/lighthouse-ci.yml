@@ -6,7 +6,7 @@ on:
       base_url:
         description: 'URL de base à auditer (prod, preview…)'
         required: false
-        default: 'https://arboris-three.vercel.app'
+        default: 'https://arboristhree.xyz'
   schedule:
     # Lundi 06:00 UTC — tendance hebdo sur la prod
     - cron: '0 6 * * 1'
@@ -36,7 +36,7 @@ jobs:
       - name: Run Lighthouse CI
         run: npm run lighthouse:ci
         env:
-          LHCI_BASE_URL: ${{ inputs.base_url || 'https://arboris-three.vercel.app' }}
+          LHCI_BASE_URL: ${{ inputs.base_url || 'https://arboristhree.xyz' }}
 
       - name: Upload Lighthouse reports
         if: always()
