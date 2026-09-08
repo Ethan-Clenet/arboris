@@ -183,6 +183,14 @@ export function isIndexableSkill(skill: SkillIndexInput): boolean {
 }
 
 /**
+ * Hub-first : les fiches `/skills/:id` restent hors sitemap le temps que le
+ * nouveau domaine prenne de l’autorité. Les pages restent crawlables via
+ * `/skills` ; le noindex par fiche (`isIndexableSkill`) ne change pas.
+ * Remettre à `true` pour republier les URLs skills dans le sitemap.
+ */
+export const SITEMAP_INCLUDE_SKILL_PAGES = false
+
+/**
  * Fallback root-only (charset/viewport restent dans __root).
  * Pas de canonical ni og:url ici — sinon chaque page hérite d'un 2e canonical vers `/`
  * (les `links` ne sont pas dédupliqués par `rel` comme les meta).

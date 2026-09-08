@@ -7,6 +7,7 @@ import {
   isHashedVendorSkillId,
   isIndexableSkill,
   isPremiumPublisher,
+  SITEMAP_INCLUDE_SKILL_PAGES,
   rootFallbackMeta,
   SEO_INDEX_MIN_SCORE,
   seoHead,
@@ -76,6 +77,12 @@ describe('isIndexableSkill', () => {
         publisher: 'Microsoft',
       }),
     ).toBe(false)
+  })
+})
+
+describe('SITEMAP_INCLUDE_SKILL_PAGES', () => {
+  it('exclut les fiches skills du sitemap (hub-first)', () => {
+    expect(SITEMAP_INCLUDE_SKILL_PAGES).toBe(false)
   })
 })
 
