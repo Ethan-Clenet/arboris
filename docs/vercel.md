@@ -11,7 +11,18 @@
 |----------|-------------|
 | `DATABASE_URL` | URL PostgreSQL (pooler Neon recommandé) |
 
-Optionnel : `ARBORIS_WORKSPACE_ROOT` (install skills côté serveur), `SITE_URL` / `VITE_SITE_URL`.
+Optionnel : `SITE_URL` / `VITE_SITE_URL`.
+
+### Install workspace (écriture disque)
+
+**Ne pas** définir sur le déploiement public :
+
+- `ARBORIS_WORKSPACE_ROOT`
+- `ARBORIS_INSTALL_TOKEN`
+- `VITE_ARBORIS_INSTALL_TOKEN`
+
+Sur le site public, l’UI propose ZIP + CLI. L’écriture FS est réservée au
+`npm run dev` / Cloud Agent local, avec root + jeton dans `.env` (voir `.env.example`).
 
 ## Déploiement CLI
 

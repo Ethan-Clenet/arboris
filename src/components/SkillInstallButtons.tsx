@@ -4,6 +4,7 @@ import AgentLogo from '#/components/AgentLogo'
 import { agentSkillPath, isAgentName } from '#/lib/agents'
 import type { Lang } from '#/lib/catalog'
 import { needsInstallConfirm, needsInstallWarning } from '#/lib/skillspector'
+import { clientInstallToken } from '#/lib/install-token'
 import { installSkill, type InstallSkillError } from '#/server/functions'
 
 interface SkillInstallButtonsProps {
@@ -49,7 +50,13 @@ export default function SkillInstallButtons({
     setDone(null)
     try {
       const result = await installFn({
-        data: { skillId, agent, lang, acknowledgeRisk: acknowledged },
+        data: {
+          skillId,
+          agent,
+          lang,
+          acknowledgeRisk: acknowledged,
+          installToken: clientInstallToken(),
+        },
       })
       if (!result.ok) {
         if (result.error === 'security_blocked') {

@@ -42,6 +42,7 @@ export const getSkillFileContent = createServerFn({ method: 'GET' })
 
 export type InstallSkillError =
   | 'workspace_not_configured'
+  | 'install_unauthorized'
   | 'unknown_agent'
   | 'skill_not_found'
   | 'invalid_path'
@@ -53,7 +54,15 @@ export type InstallSkillResult =
   | { ok: false; error: InstallSkillError }
 
 export const installSkill = createServerFn({ method: 'POST' })
-  .validator((data: { skillId: string; agent: string; lang: 'fr' | 'en'; acknowledgeRisk?: boolean }) => data)
+  .validator(
+    (data: {
+      skillId: string
+      agent: string
+      lang: 'fr' | 'en'
+      acknowledgeRisk?: boolean
+      installToken?: string
+    }) => data,
+  )
   .handler(async ({ data }): Promise<InstallSkillResult> => {
     try {
       const { installSkillForAgent } = await import('./skill-install.server')
@@ -63,6 +72,7 @@ export const installSkill = createServerFn({ method: 'POST' })
       const code =
         err instanceof Error &&
         (err.message === 'workspace_not_configured' ||
+          err.message === 'install_unauthorized' ||
           err.message === 'unknown_agent' ||
           err.message === 'skill_not_found' ||
           err.message === 'invalid_path' ||
@@ -75,6 +85,7 @@ export const installSkill = createServerFn({ method: 'POST' })
 
 export type InstallCommandError =
   | 'workspace_not_configured'
+  | 'install_unauthorized'
   | 'unknown_agent'
   | 'command_not_found'
   | 'invalid_path'
@@ -153,7 +164,9 @@ export const downloadSkillZip = createServerFn({ method: 'POST' })
   })
 
 export const installCommand = createServerFn({ method: 'POST' })
-  .validator((data: { commandId: string; agent: string; lang: 'fr' | 'en' }) => data)
+  .validator(
+    (data: { commandId: string; agent: string; lang: 'fr' | 'en'; installToken?: string }) => data,
+  )
   .handler(async ({ data }): Promise<InstallCommandResult> => {
     try {
       const { installCommandForAgent } = await import('./command-install.server')
@@ -163,6 +176,7 @@ export const installCommand = createServerFn({ method: 'POST' })
       const code =
         err instanceof Error &&
         (err.message === 'workspace_not_configured' ||
+          err.message === 'install_unauthorized' ||
           err.message === 'unknown_agent' ||
           err.message === 'command_not_found' ||
           err.message === 'invalid_path')

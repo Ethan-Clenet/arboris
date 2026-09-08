@@ -20,6 +20,7 @@ const skillT = {
   installConfirmNo: 'Annuler',
   errors: {
     workspace_not_configured: 'Pas de workspace',
+    install_unauthorized: 'Jeton invalide',
     unknown_agent: 'Agent inconnu',
     skill_not_found: 'Skill introuvable',
     invalid_path: 'Chemin invalide',
@@ -35,6 +36,7 @@ const commandT = {
   usageHint: 'Tape /nom',
   errors: {
     workspace_not_configured: 'Pas de workspace',
+    install_unauthorized: 'Jeton invalide',
     unknown_agent: 'Agent inconnu',
     command_not_found: 'Commande introuvable',
     invalid_path: 'Chemin invalide',

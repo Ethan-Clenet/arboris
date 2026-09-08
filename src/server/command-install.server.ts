@@ -7,6 +7,7 @@ import {
   resolvePackageRoot,
 } from '#/lib/package-root'
 import { isAgentName } from '#/lib/agents'
+import { assertInstallToken } from '#/server/install-auth.server'
 import { resolveCommand } from '#/server/commands.server'
 import { resolve } from 'node:path'
 
@@ -24,12 +25,14 @@ export async function installCommandForAgent(input: {
   commandId: string
   agent: string
   lang: Lang
+  installToken?: string
 }): Promise<{ path: string; skillPaths: string[] }> {
   if (!isAgentName(input.agent)) throw new Error('unknown_agent')
 
   const command = await resolveCommand(input.commandId)
   if (!command) throw new Error('command_not_found')
 
+  assertInstallToken(input.installToken)
   const root = workspaceRoot()
   const result = await installCommandToWorkspace({
     commandId: input.commandId,

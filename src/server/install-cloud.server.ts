@@ -14,13 +14,12 @@ import {
 import { buildStoreZip, zipToBase64, type ZipEntry } from '#/lib/zip-store'
 import { loadCollection, loadSkill } from '#/server/catalog.server'
 import { resolveCommand } from '#/server/commands.server'
+import { isWorkspaceInstallConfigured } from '#/server/install-auth.server'
 import { loadSkillCopyContent } from '#/server/skill-content.server'
 
 const SKILLS_DIR = defaultSkillsDir(resolvePackageRoot(import.meta.url))
 
-export function isWorkspaceInstallConfigured(): boolean {
-  return Boolean(process.env.ARBORIS_WORKSPACE_ROOT?.trim())
-}
+export { isWorkspaceInstallConfigured }
 
 async function skillZipEntries(
   agent: AgentName,

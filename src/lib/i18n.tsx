@@ -118,7 +118,9 @@ const fr = {
     installConfirmNo: 'Annuler',
     installErrors: {
       workspace_not_configured:
-        'Définis ARBORIS_WORKSPACE_ROOT dans .env (chemin absolu de ton projet).',
+        'Définis ARBORIS_WORKSPACE_ROOT et ARBORIS_INSTALL_TOKEN dans .env.',
+      install_unauthorized:
+        'Jeton d’install invalide. Vérifie ARBORIS_INSTALL_TOKEN / VITE_ARBORIS_INSTALL_TOKEN.',
       unknown_agent: 'Agent non reconnu.',
       skill_not_found: 'Skill introuvable.',
       invalid_path: 'Chemin d’installation invalide.',
@@ -189,7 +191,9 @@ const fr = {
       `La commande /${id} est une slash command Arboris. Tu l’installes dans ton agent (Cursor, Claude, Codex ou Copilot), puis tu la lances avec /${id} dans le chat. Le prompt Markdown ci-dessous est injecté tel quel : idéal pour des tâches répétables (revue PR, commit, audit deps, migrate). Contrairement à un skill, elle ne s’active pas toute seule — tu gardes le contrôle. Copie le contenu, utilise les boutons d’install ou la CLI arboris pour l’écrire dans ton projet.`,
     installErrors: {
       workspace_not_configured:
-        'Définis ARBORIS_WORKSPACE_ROOT dans .env (chemin absolu de ton projet).',
+        'Définis ARBORIS_WORKSPACE_ROOT et ARBORIS_INSTALL_TOKEN dans .env.',
+      install_unauthorized:
+        'Jeton d’install invalide. Vérifie ARBORIS_INSTALL_TOKEN / VITE_ARBORIS_INSTALL_TOKEN.',
       unknown_agent: 'Agent non reconnu.',
       command_not_found: 'Commande introuvable.',
       invalid_path: 'Chemin d’installation invalide.',
@@ -383,7 +387,9 @@ const en: typeof fr = {
     installConfirmNo: 'Cancel',
     installErrors: {
       workspace_not_configured:
-        'Set ARBORIS_WORKSPACE_ROOT in .env (absolute path to your project).',
+        'Set ARBORIS_WORKSPACE_ROOT and ARBORIS_INSTALL_TOKEN in .env.',
+      install_unauthorized:
+        'Invalid install token. Check ARBORIS_INSTALL_TOKEN / VITE_ARBORIS_INSTALL_TOKEN.',
       unknown_agent: 'Unknown agent.',
       skill_not_found: 'Skill not found.',
       invalid_path: 'Invalid install path.',
@@ -454,7 +460,9 @@ const en: typeof fr = {
       `The /${id} command is an Arboris slash command. Install it into your agent (Cursor, Claude, Codex, or Copilot), then run /${id} in chat. The Markdown prompt below is injected as-is — ideal for repeatable tasks (PR review, commit, deps audit, migrate). Unlike a skill, it never auto-activates: you stay in control. Copy the content, use the install buttons, or the arboris CLI to write it into your project.`,
     installErrors: {
       workspace_not_configured:
-        'Set ARBORIS_WORKSPACE_ROOT in .env (absolute path to your project).',
+        'Set ARBORIS_WORKSPACE_ROOT and ARBORIS_INSTALL_TOKEN in .env.',
+      install_unauthorized:
+        'Invalid install token. Check ARBORIS_INSTALL_TOKEN / VITE_ARBORIS_INSTALL_TOKEN.',
       unknown_agent: 'Unknown agent.',
       command_not_found: 'Command not found.',
       invalid_path: 'Invalid install path.',
