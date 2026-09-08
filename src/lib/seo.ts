@@ -296,7 +296,7 @@ export function seoHead(input: SeoInput = {}) {
   }
 
   // Pas de canonical sur les pages noindex : évite « Canonisé » + « Version canonique non indexable »
-  // quand des query params (/auth?mode=…) pointent vers une cible noindex.
+  // quand des query params pointent vers une cible noindex.
   const scripts: Array<{ type: string; children: string }> = []
   if (!input.noIndex && path === '/') {
     scripts.push({ type: 'application/ld+json', children: JSON.stringify(siteJsonLd()) })

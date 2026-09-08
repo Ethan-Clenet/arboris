@@ -11,7 +11,6 @@ import NvidiaLogo from './NvidiaLogo'
 import PublisherLogo from './PublisherLogo'
 import AgentLogo, { AgentBadge, AgentCompatList, AgentLogoRow, AgentLogoSprite } from './AgentLogo'
 import { Button } from './Button'
-import AdminToast, { AdminCard, AdminIconBtn } from './admin/AdminUi'
 import DevtoolsGate from './DevtoolsGate'
 
 const labels = {
@@ -114,26 +113,13 @@ describe('Icon / logos', () => {
   })
 })
 
-describe('Button / AdminUi / DevtoolsGate', () => {
+describe('Button / DevtoolsGate', () => {
   it('Button primary', async () => {
     const user = userEvent.setup()
     render(<Button variant="primary">Go</Button>)
     const btn = screen.getByRole('button', { name: 'Go' })
     await user.click(btn)
     expect(btn).toBeTruthy()
-  })
-
-  it('AdminCard / AdminIconBtn / AdminToast', () => {
-    const { rerender } = render(
-      <AdminCard>
-        <AdminIconBtn title="Supprimer" danger onClick={() => {}}>
-          x
-        </AdminIconBtn>
-      </AdminCard>,
-    )
-    expect(screen.getByRole('button', { name: 'Supprimer' })).toBeTruthy()
-    rerender(<AdminToast show text="Enregistré" />)
-    expect(screen.getByRole('status').textContent).toContain('Enregistré')
   })
 
   it('DevtoolsGate ne rend rien en production', () => {

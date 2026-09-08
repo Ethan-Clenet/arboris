@@ -156,7 +156,7 @@ describe('seoHead', () => {
   })
 
   it('retire canonical et noindex les pages privées', () => {
-    const head = seoHead({ path: '/auth', noIndex: true })
+    const head = seoHead({ path: '/internal', noIndex: true })
     expect(head.links).toEqual([])
     expect(head.meta.some((m) => m.name === 'robots' && m.content === 'noindex, follow')).toBe(true)
     expect(head.scripts).toBeUndefined()

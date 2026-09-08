@@ -77,8 +77,6 @@ npm run db:studio  # explorateur Prisma Studio
 npm run db:reset   # réinitialise la base + reseed
 ```
 
-> `SESSION_SECRET` (min. 32 caractères) est requis pour l'authentification.
-
 ## 📜 Scripts npm
 
 | Script                  | Description                                            |
@@ -102,7 +100,7 @@ npm run db:reset   # réinitialise la base + reseed
 arboris/
 ├── docker-compose.yml       # PostgreSQL 16 (port 5433)
 ├── prisma/
-│   ├── schema.prisma        # Modèles Category, Stack, Skill, User
+│   ├── schema.prisma        # Modèles Category, Stack, Skill, Collection
 │   ├── catalog-data.ts      # Données source du catalogue (pour le seed)
 │   ├── seed.ts              # Script de seed (prisma db seed)
 │   └── migrations/          # Historique des migrations PostgreSQL
@@ -110,14 +108,12 @@ arboris/
 │   ├── routes/
 │   │   ├── __root.tsx           # Shell HTML (head, providers, Header/Footer)
 │   │   ├── index.tsx            # Accueil (hero + index rapide)
-│   │   ├── auth.tsx             # Connexion / inscription
 │   │   ├── skills.index.tsx     # /skills — catalogue filtrable
 │   │   ├── skills.$id.tsx       # /skills/:id — fiche d'un skill
 │   │   └── getting-started.tsx  # /getting-started — premier pas par stack
 │   ├── server/
 │   │   ├── db.ts                # Singleton PrismaClient (serveur uniquement)
 │   │   ├── catalog.server.ts    # Requêtes Prisma → objets UI
-│   │   ├── auth.functions.ts    # Login, register, logout, session
 │   │   └── functions.ts         # Server functions (getCatalog, getSkill)
 │   ├── components/              # Header, Footer, ThemeToggle, LangSwitch, Icon
 │   ├── lib/
@@ -136,11 +132,9 @@ arboris/
   server functions, donc il ne finit jamais dans le bundle navigateur. Les pages
   appellent ces fonctions via leur `loader`.
 - **Modèle de données.** `Category (1) — (N) Skill`, `Skill (N) — (N) Stack`
-  (relation many-to-many implicite), `User` pour l'authentification. Les listes
-  bilingues et les tableaux (`tech`, `compat`, `does`, `triggers`) sont stockés
-  en JSON sérialisé (colonnes `*Json`) et désérialisés dans `catalog.server.ts`.
-- **Sessions.** Cookies HTTP-only chiffrés via `@tanstack/react-start/server`
-  (`useSession`), secret `SESSION_SECRET` dans `.env`.
+  (relation many-to-many implicite). Les listes bilingues et les tableaux
+  (`tech`, `compat`, `does`, `triggers`) sont stockés en JSON sérialisé
+  (colonnes `*Json`) et désérialisés dans `catalog.server.ts`.
 - **i18n sans flash de contenu.** Le serveur rend le français par défaut ; la
   langue mémorisée (localStorage) est appliquée au montage côté client.
 - **Thème sans flash.** Un court script inline (`THEME_INIT_SCRIPT`) applique

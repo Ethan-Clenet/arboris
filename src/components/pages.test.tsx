@@ -1,11 +1,11 @@
 // @vitest-environment jsdom
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { ReactNode } from 'react'
 import { describe, expect, it } from 'vitest'
 import { I18nProvider } from '#/lib/i18n'
 import { AnnouncerProvider } from '#/lib/announcer'
-import { serverFns, testRouter } from '#/test/harness'
+import { testRouter } from '#/test/harness'
 import AppShell from './AppShell'
 import NotFoundPage from './NotFoundPage'
 import ServerErrorPage from './ServerErrorPage'
@@ -20,18 +20,7 @@ function wrap(ui: ReactNode) {
 }
 
 describe('AppShell', () => {
-  it('masque header/footer sur /auth et /admin', () => {
-    testRouter.pathname = '/auth'
-    const { rerender } = render(wrap(<AppShell>auth</AppShell>))
-    expect(screen.queryByRole('banner')).toBeNull()
-    expect(screen.getByText('auth')).toBeTruthy()
-
-    testRouter.pathname = '/admin/skills'
-    rerender(wrap(<AppShell>admin</AppShell>))
-    expect(screen.queryByRole('banner')).toBeNull()
-  })
-
-  it('affiche skip-link, header et footer ailleurs', () => {
+  it('affiche skip-link, header et footer', () => {
     testRouter.pathname = '/'
     render(wrap(<AppShell>page</AppShell>))
     expect(screen.getByRole('link', { name: /aller au contenu/i })).toBeTruthy()
@@ -58,27 +47,10 @@ describe('NotFoundPage / ServerErrorPage', () => {
 })
 
 describe('Header', () => {
-  it('propose la connexion sans utilisateur', () => {
+  it('affiche la navigation principale sans auth', () => {
     render(wrap(<Header />))
-    expect(screen.getByRole('link', { name: 'Connexion' })).toBeTruthy()
     expect(screen.getByRole('navigation', { name: /navigation principale/i })).toBeTruthy()
-  })
-
-  it('affiche admin + logout pour un ADMIN', async () => {
-    const user = userEvent.setup()
-    testRouter.authUser = {
-      id: 'u1',
-      name: 'Ada Lovelace',
-      email: 'ada@example.com',
-      role: 'ADMIN',
-    }
-    render(wrap(<Header />))
-    expect(screen.getByText('Ada Lovelace')).toBeTruthy()
-    expect(screen.getByRole('link', { name: /admin/i })).toBeTruthy()
-    await user.click(screen.getByRole('button', { name: 'Déconnexion' }))
-    await waitFor(() => {
-      expect(serverFns.logout).toHaveBeenCalled()
-      expect(testRouter.invalidate).toHaveBeenCalled()
-    })
+    expect(screen.getByRole('link', { name: 'Skills' })).toBeTruthy()
+    expect(screen.queryByRole('link', { name: 'Connexion' })).toBeNull()
   })
 })

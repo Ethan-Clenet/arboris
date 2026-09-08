@@ -1,12 +1,8 @@
-import { Link, useRouter } from '@tanstack/react-router'
-import { useServerFn } from '@tanstack/react-start'
+import { Link } from '@tanstack/react-router'
 import Icon from './Icon'
 import LangSwitch from './LangSwitch'
 import ThemeToggle from './ThemeToggle'
-import { ButtonLink } from './Button'
 import { useI18n } from '#/lib/i18n'
-import { logout } from '#/server/auth.functions'
-import { Route as RootRoute } from '#/routes/__root'
 
 const navBase = 'cursor-pointer rounded-lg px-3 py-[7px] text-[13.5px] transition-colors'
 const navInactive = { className: 'font-medium text-[var(--text-2)] hover:text-[var(--text-1)]' }
@@ -14,14 +10,6 @@ const navActive = { className: 'font-semibold text-[var(--text-1)] bg-[var(--sur
 
 export default function Header() {
   const { t } = useI18n()
-  const { auth } = RootRoute.useRouteContext()
-  const router = useRouter()
-  const logoutFn = useServerFn(logout)
-
-  const handleLogout = async () => {
-    await logoutFn()
-    await router.invalidate()
-  }
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--bg)_80%,transparent)] backdrop-blur-[14px] backdrop-saturate-150">
@@ -49,35 +37,6 @@ export default function Header() {
         </nav>
 
         <div className="flex-1" />
-
-        {auth.user ? (
-          <div className="hidden items-center gap-2 sm:flex">
-            {auth.user.role === 'ADMIN' ? (
-              <ButtonLink to="/admin" variant="secondary" size="sm" className="gap-1.5">
-                <Icon name="shield-check" size={14} />
-                {t.nav.admin}
-              </ButtonLink>
-            ) : null}
-            <span className="max-w-[140px] truncate font-mono text-[12px] text-[var(--text-2)]">
-              {auth.user.name}
-            </span>
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="cursor-pointer rounded-md border border-[var(--border)] px-2.5 py-1.5 text-[12.5px] font-medium text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
-            >
-              {t.nav.signOut}
-            </button>
-          </div>
-        ) : (
-          <Link
-            to="/auth"
-            search={{ mode: 'login', redirect: '/' }}
-            className="hidden cursor-pointer rounded-md border border-[var(--border)] px-2.5 py-1.5 text-[12.5px] font-medium text-[var(--text-1)] transition-colors hover:border-[var(--border-2)] sm:inline-flex"
-          >
-            {t.nav.signIn}
-          </Link>
-        )}
 
         <LangSwitch />
         <ThemeToggle />
