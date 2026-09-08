@@ -1,5 +1,6 @@
 import {
   COMPAT_ORDER,
+  isVendorSkill,
   withSkillTitles,
   type Catalog,
   type Category,
@@ -97,12 +98,12 @@ function toSummary(row: SkillRow): SkillSummary {
   }
 }
 
-async function microsoftTitleUniverse(
+async function vendorTitleUniverse(
   skills: Array<{ id: string; publisher: string | null }>,
 ): Promise<Array<{ id: string; publisher: string | null }>> {
   const prefixes = new Set<string>()
   for (const skill of skills) {
-    if (!skill.id.includes('__microsoft-')) continue
+    if (!isVendorSkill(skill.id, skill.publisher)) continue
     const segs = skill.id.split('__')
     if (segs.length >= 2) prefixes.add(`${segs[0]}__${segs[1]}__`)
   }
@@ -120,7 +121,7 @@ async function titledSummaries(
   const summaries = rows.map(toSummary)
   if (summaries.length === 0) return summaries
   if (opts?.complete) return withSkillTitles(summaries)
-  const universe = await microsoftTitleUniverse(summaries)
+  const universe = await vendorTitleUniverse(summaries)
   return withSkillTitles(summaries, universe)
 }
 
@@ -289,7 +290,7 @@ export async function loadSkillPageContext(id: string): Promise<{
     : null
 
   const relatedList = [...relatedMap.values()]
-  const universe = await microsoftTitleUniverse([skill, ...relatedList])
+  const universe = await vendorTitleUniverse([skill, ...relatedList])
 
   return { skill, category, related: withSkillTitles(relatedList, universe) }
 }

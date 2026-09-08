@@ -328,8 +328,11 @@ export function listingPublisher(publisher: string | null | undefined): string {
   return publisher
 }
 
-const VENDOR_HASH_SUFFIX = /-[a-f0-9]{12}$/i
-const MICROSOFT_VENDOR_RE = /(^|__)microsoft-/i
+// Hash technique (12 caractères hex) en fin d'id vendor, précédé d'un tiret,
+// underscore, slash, ou collé au segment (`base__repo__<hash>`).
+const VENDOR_HASH_SUFFIX = /(?:^|[-_/])[a-f0-9]{12}$/i
+// Un token isolé qui est exactement un hash 12 caractères.
+const HASH_TOKEN = /^[a-f0-9]{12}$/i
 const PATH_NOISE = new Set([
   'solutions',
   'skills',
@@ -360,19 +363,22 @@ function parseVendorSkillId(id: string): { base: string; repo: string; path: str
   return { base, repo, path }
 }
 
-/** Skill vendor Microsoft (id `base__microsoft-…__hash`). */
-export function isMicrosoftVendorSkill(id: string, publisher?: string | null): boolean {
-  if (MICROSOFT_VENDOR_RE.test(id)) return true
-  return publisher === 'Microsoft' && id.includes('__')
+/**
+ * Skill « vendor » importé : id structuré `base__repo__…` terminé par un hash
+ * technique de 12 caractères (imports Microsoft, Hugging Face, Nous Research,
+ * upstash, vinta, …). Ce sont ceux dont l'id brut est illisible.
+ */
+export function isVendorSkill(id: string, _publisher?: string | null): boolean {
+  return id.includes('__') && VENDOR_HASH_SUFFIX.test(id)
 }
 
-function microsoftCoreTitle(id: string): string | null {
+function vendorCoreTitle(id: string): string | null {
   const parts = parseVendorSkillId(id)
   if (!parts) return null
   return `${humanizeSlug(parts.base)} ${humanizeSlug(parts.repo)}`.trim()
 }
 
-function microsoftPathHint(id: string): string {
+function vendorPathHint(id: string): string {
   const parts = parseVendorSkillId(id)
   if (!parts?.path) return ''
   const tokens = parts.path
@@ -380,14 +386,14 @@ function microsoftPathHint(id: string): string {
     .filter((token) => {
       if (!token) return false
       if (PATH_NOISE.has(token.toLowerCase())) return false
-      if (VENDOR_HASH_SUFFIX.test(`-${token}`) && /^[a-f0-9]{12}$/i.test(token)) return false
+      if (HASH_TOKEN.test(token)) return false
       return true
     })
   return humanizeSlug(tokens.join('-'))
 }
 
 /**
- * Titres uniques pour l’UI : Microsoft = « nom repo » sans hash ;
+ * Titres uniques pour l’UI : skill vendor = « nom repo » sans hash ;
  * en cas de collision, suffixe le chemin (sans le hash 12 caractères).
  */
 export function uniqueSkillTitles(
@@ -397,11 +403,11 @@ export function uniqueSkillTitles(
   const groups = new Map<string, string[]>()
 
   for (const skill of skills) {
-    if (!isMicrosoftVendorSkill(skill.id, skill.publisher)) {
+    if (!isVendorSkill(skill.id, skill.publisher)) {
       out.set(skill.id, skill.id)
       continue
     }
-    const core = microsoftCoreTitle(skill.id) ?? skill.id
+    const core = vendorCoreTitle(skill.id) ?? skill.id
     const list = groups.get(core) ?? []
     list.push(skill.id)
     groups.set(core, list)
@@ -414,7 +420,7 @@ export function uniqueSkillTitles(
     }
     const used = new Set<string>()
     for (const id of ids) {
-      const hint = microsoftPathHint(id)
+      const hint = vendorPathHint(id)
       let title = hint ? `${core} ${hint}` : core
       if (used.has(title)) {
         let n = 2
