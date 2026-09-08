@@ -11,7 +11,12 @@ if ! command -v docker >/dev/null 2>&1 \
   || ! docker compose version >/dev/null 2>&1 \
   || ! command -v fuse-overlayfs >/dev/null 2>&1; then
   sudo apt-get update -qq
+  # `--force-conf{old,def}` keeps existing conffiles (e.g. /etc/fuse.conf that the
+  # base image already ships) instead of triggering an interactive dpkg prompt,
+  # which would abort the non-interactive install.
   sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
+    -o Dpkg::Options::="--force-confold" \
+    -o Dpkg::Options::="--force-confdef" \
     docker.io docker-compose-v2 fuse-overlayfs
 fi
 
