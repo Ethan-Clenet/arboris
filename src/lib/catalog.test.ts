@@ -11,6 +11,8 @@ import {
   scoreColor,
   listingPublisher,
   COMMUNITY_PUBLISHER,
+  skillLabel,
+  uniqueSkillTitles,
   skillMatchesStack,
   skillsForStackAndCategory,
   stackSupportsCategory,
@@ -136,5 +138,38 @@ describe('scoreColor / compatDot', () => {
   it('pastille de compat', () => {
     expect(compatDot('Cursor')).toBe('#4F8FF7')
     expect(compatDot('x')).toBe('var(--text-3)')
+  })
+})
+
+describe('uniqueSkillTitles (Microsoft)', () => {
+  it('simplifie un id vendor Microsoft sans hash ni chemin', () => {
+    const id =
+      'abandonment-analysis__microsoft-aibast-agents-library__solutions-cart-abandonment-recovery-manual-skills-8c2a6bf4f120'
+    const titles = uniqueSkillTitles([{ id, publisher: 'Microsoft' }])
+    expect(titles.get(id)).toBe('abandonment analysis microsoft aibast agents library')
+    expect(skillLabel({ id, title: titles.get(id) })).toBe(
+      'abandonment analysis microsoft aibast agents library',
+    )
+  })
+
+  it('laisse inchangé un id hors Microsoft', () => {
+    const id = 'context7-mcp__upstash-context7__skills-4bd9b07b8b1f'
+    const titles = uniqueSkillTitles([{ id, publisher: 'Context7' }])
+    expect(titles.get(id)).toBe(id)
+  })
+
+  it('désambiguïse les doublons via le chemin, sans le hash', () => {
+    const a =
+      'revenue-impact__microsoft-aibast-agents-library__solutions-win-loss-analysis-manual-skills-2e4bfc90bbff'
+    const b =
+      'revenue-impact__microsoft-aibast-agents-library__solutions-cross-selling-manual-skills-eb37b8239969'
+    const titles = uniqueSkillTitles([
+      { id: a, publisher: 'Microsoft' },
+      { id: b, publisher: 'Microsoft' },
+    ])
+    expect(titles.get(a)).toBe('revenue impact microsoft aibast agents library win loss analysis')
+    expect(titles.get(b)).toBe('revenue impact microsoft aibast agents library cross selling')
+    expect(titles.get(a)).not.toBe(titles.get(b))
+    expect(new Set(titles.values()).size).toBe(2)
   })
 })

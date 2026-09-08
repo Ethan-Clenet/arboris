@@ -1,13 +1,14 @@
-import type {
-  Catalog,
-  Category,
-  CollectionDetail,
-  CollectionSummary,
-  SkillDetail,
-  SkillSummary,
-  Stack,
+import {
+  COMPAT_ORDER,
+  withSkillTitles,
+  type Catalog,
+  type Category,
+  type CollectionDetail,
+  type CollectionSummary,
+  type SkillDetail,
+  type SkillSummary,
+  type Stack,
 } from '#/lib/catalog'
-import { COMPAT_ORDER } from '#/lib/catalog'
 import {
   normalizeRecommendation,
   parseSecurityReport,
@@ -96,6 +97,33 @@ function toSummary(row: SkillRow): SkillSummary {
   }
 }
 
+async function microsoftTitleUniverse(
+  skills: Array<{ id: string; publisher: string | null }>,
+): Promise<Array<{ id: string; publisher: string | null }>> {
+  const prefixes = new Set<string>()
+  for (const skill of skills) {
+    if (!skill.id.includes('__microsoft-')) continue
+    const segs = skill.id.split('__')
+    if (segs.length >= 2) prefixes.add(`${segs[0]}__${segs[1]}__`)
+  }
+  if (prefixes.size === 0) return skills
+  return prisma.skill.findMany({
+    where: { OR: [...prefixes].map((prefix) => ({ id: { startsWith: prefix } })) },
+    select: { id: true, publisher: true },
+  })
+}
+
+async function titledSummaries(
+  rows: SkillRow[],
+  opts?: { complete?: boolean },
+): Promise<SkillSummary[]> {
+  const summaries = rows.map(toSummary)
+  if (summaries.length === 0) return summaries
+  if (opts?.complete) return withSkillTitles(summaries)
+  const universe = await microsoftTitleUniverse(summaries)
+  return withSkillTitles(summaries, universe)
+}
+
 function seedCollections(): CollectionSummary[] {
   return COLLECTIONS.map((c) => ({
     id: c.id,
@@ -166,7 +194,7 @@ async function fetchCatalog(): Promise<Catalog> {
         skillIds: s.skills.map((sk) => sk.id),
       }),
     ),
-    skills: skills.map(toSummary),
+    skills: withSkillTitles(skills.map(toSummary)),
     commands: commands.map(toCommandSummary),
     collections,
     compatOrder: [...COMPAT_ORDER],
@@ -206,8 +234,10 @@ export async function loadSkill(id: string): Promise<SkillDetail | null> {
   })
   if (!row) return null
 
+  const [summary] = await titledSummaries([row])
+
   return {
-    ...toSummary(row),
+    ...summary,
     does: { fr: parseList(row.doesFrJson), en: parseList(row.doesEnJson) },
     triggers: {
       fr: parseList(row.triggersFrJson),
@@ -258,7 +288,10 @@ export async function loadSkillPageContext(id: string): Promise<{
       }
     : null
 
-  return { skill, category, related: [...relatedMap.values()].slice(0, 3) }
+  const relatedList = [...relatedMap.values()]
+  const universe = await microsoftTitleUniverse([skill, ...relatedList])
+
+  return { skill, category, related: withSkillTitles(relatedList, universe) }
 }
 
 export async function loadCommand(id: string) {
@@ -292,7 +325,7 @@ export async function loadCollection(id: string): Promise<CollectionDetail | nul
         brief: { fr: row.briefFr, en: row.briefEn },
         skillIds: row.skills.map((s) => s.id),
         commandIds,
-        skills: row.skills.map(toSummary),
+        skills: await titledSummaries(row.skills),
         commands: commandDetails.map(toCommandSummary),
       }
     }
@@ -311,7 +344,8 @@ export async function loadCollection(id: string): Promise<CollectionDetail | nul
     Promise.all(seed.commandIds.map((cid) => resolveCommand(cid))),
   ])
 
-  const skillMap = new Map(skillRows.map((s) => [s.id, toSummary(s)]))
+  const titled = await titledSummaries(skillRows)
+  const skillMap = new Map(titled.map((s) => [s.id, s]))
   const resolvedCommands = commands.filter(Boolean) as NonNullable<
     Awaited<ReturnType<typeof resolveCommand>>
   >[]

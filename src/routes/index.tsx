@@ -13,6 +13,7 @@ import HomeTerminal from '#/components/HomeTerminal'
 import { seoHead } from '#/lib/seo'
 import {
   hexToRgba,
+  skillLabel,
   type Category,
   type SkillSummary,
 } from '#/lib/catalog'
@@ -244,7 +245,7 @@ function HomeTableRow({
           params={{ id: skill.id }}
           className="min-w-0 cursor-pointer truncate font-semibold text-[var(--link)] underline decoration-[var(--link)] decoration-from-font underline-offset-[3px] transition-colors hover:text-[var(--link-hover)] hover:decoration-[var(--link-hover)]"
         >
-          {skill.id}
+          {skillLabel(skill)}
         </Link>
         <SecurityBadge
           score={skill.score}

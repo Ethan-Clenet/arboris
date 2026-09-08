@@ -14,6 +14,7 @@ import { getCatalog } from '#/server/functions'
 import {
   hexToRgba,
   listingPublisher,
+  skillLabel,
   type Category,
   type SkillSummary,
 } from '#/lib/catalog'
@@ -172,7 +173,7 @@ function SkillsPage() {
       }
       if (ql) {
         const c = catById.get(s.categoryId)
-        const hay = `${s.id} ${s.tag[lang]} ${s.tech.join(' ')} ${s.publisher ?? ''} ${
+        const hay = `${s.id} ${skillLabel(s)} ${s.tag[lang]} ${s.tech.join(' ')} ${s.publisher ?? ''} ${
           c ? c.label[lang] : ''
         }`.toLowerCase()
         if (!hay.includes(ql)) return false
@@ -634,7 +635,7 @@ function SkillRow({
         </span>
         <span className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
           <span className="min-w-0 overflow-hidden">
-            <span className="block truncate font-mono text-[13.5px] font-semibold leading-tight">{skill.id}</span>
+            <span className={`block truncate text-[13.5px] font-semibold leading-tight ${skillLabel(skill) === skill.id ? 'font-mono' : ''}`}>{skillLabel(skill)}</span>
             <span className="block truncate text-[11.5px] leading-tight text-[var(--text-3)]">
               {category ? category.label[lang] : ''}
             </span>
