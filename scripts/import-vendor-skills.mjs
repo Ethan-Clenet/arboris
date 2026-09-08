@@ -28,40 +28,10 @@ const COMMANDS_DIR = join(ROOT, 'prisma', 'commands')
 
 /** @type {Source[]} */
 const SOURCES = [
-  // Batch SkillsMP : NousResearch, vinta, Hugging Face, Ollama.
-  // Les skills Microsoft déjà importés restent dans prisma/skills.
-  { repo: 'NousResearch/hermes-agent', publisher: 'Nous Research', roots: ['.'] },
-  { repo: 'NousResearch/Gym', publisher: 'Nous Research', roots: ['.'] },
-  { repo: 'NousResearch/pokemon-agent', publisher: 'Nous Research', roots: ['.'] },
-  { repo: 'vinta/hal-9000', publisher: 'vinta', roots: ['.'] },
-  { repo: 'vinta/awesome-python', publisher: 'vinta', roots: ['.'] },
-  { repo: 'vinta/pangu.js', publisher: 'vinta', roots: ['.'] },
-  { repo: 'vinta/dear-ai', publisher: 'vinta', roots: ['.'] },
-  { repo: 'vinta/laughing-man', publisher: 'vinta', roots: ['.'] },
-  { repo: 'huggingface/skills', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/OpenEnv', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/diffusers', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/kernels', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/physics-intern-skills', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/mlclaw', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/transformers-mlinter', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/trl', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/optimum-intel', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/ai-deadlines', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/physics-intern', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/harbor-hf', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/transformers', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/peft', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/huggingface_hub', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/sentence-transformers', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/research-agent', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/agentcap', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/chat-ui', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/blog', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/transformers.js', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/funes', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'huggingface/inspect_evals', publisher: 'Hugging Face', roots: ['.'] },
-  { repo: 'ollama/ollama', publisher: 'Ollama', roots: ['.'] },
+  // Skills officiels Context7 (Upstash). Les copies plugins/*/context7-mcp
+  // sont des duplicatas du skill MCP canonique — on n’importe que les
+  // skills/ racine + context7-docs (packages/pi).
+  { repo: 'upstash/context7', publisher: 'Context7', roots: ['skills', 'packages/pi/skills'] },
 ]
 
 function slugifyForId(input) {

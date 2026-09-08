@@ -76,6 +76,7 @@ function publisherMeta(name: string): { icon: string; color?: string; logo?: boo
     'Nous Research': { icon: 'sparkle', color: PUBLISHER_LOGO_COLOR['Nous Research'] },
     Ollama: { icon: 'cpu', color: PUBLISHER_LOGO_COLOR.Ollama },
     vinta: { icon: 'code', color: PUBLISHER_LOGO_COLOR.vinta },
+    Context7: { icon: 'book-open-text', color: PUBLISHER_LOGO_COLOR.Context7 },
   }
   const base = known[name] ?? { icon: 'buildings', color: '#8a909b' }
   return { ...base, logo: hasPublisherLogo(name) }

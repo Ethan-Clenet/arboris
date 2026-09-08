@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-07T22:24:18.908Z",
+  "generatedAt": "2026-09-08T05:22:17.459Z",
   "stacks": [
     {
       "id": "node",
@@ -497,6 +497,9 @@
     "content-personalization__microsoft-aibast-agents-library__solutions-personalized-marketing-manual-skills-855fa1d24707",
     "content-quality-auditor__microsoft-cat-agent-skills__submissions-e179b488fe61",
     "context-budget",
+    "context7-cli__upstash-context7__skills-62a13b5ff59c",
+    "context7-docs__upstash-context7__packages-pi-skills-8870c946f485",
+    "context7-mcp__upstash-context7__skills-4bd9b07b8b1f",
     "continuous-agent-loop",
     "continuous-learning",
     "continuous-learning-v2",
@@ -678,6 +681,7 @@
     "figma-use-slides",
     "file-ipc-patterns__microsoft-amplifier-bundle-skills__skills-25aa087117a7",
     "finance-billing-ops",
+    "find-docs__upstash-context7__skills-8e15aabd3565",
     "findmy__nousresearch-hermes-agent__skills-apple-9bfa195e02b4",
     "firebase-auth-basics",
     "firebase-basics",
@@ -2033,6 +2037,9 @@
       "coding-standards",
       "company-research",
       "configure-ecc",
+      "context7-cli__upstash-context7__skills-62a13b5ff59c",
+      "context7-docs__upstash-context7__packages-pi-skills-8870c946f485",
+      "context7-mcp__upstash-context7__skills-4bd9b07b8b1f",
       "continuous-learning-v2",
       "convex-quickstart",
       "create-code-app__microsoft-power-platform-skills__plugins-code-apps-skills-499ed7c3b04c",
@@ -2057,6 +2064,7 @@
       "figma-generate-design",
       "figma-implement-motion",
       "figma-swiftui",
+      "find-docs__upstash-context7__skills-8e15aabd3565",
       "frontend-a11y",
       "frontend-patterns",
       "gan-style-harness",
@@ -2195,6 +2203,8 @@
       "auth0",
       "azure-cloud-migrate__microsoft-github-copilot-for-azure__plugins-azure-skills-skills-dda4544b9abf",
       "configure-ecc",
+      "context7-docs__upstash-context7__packages-pi-skills-8870c946f485",
+      "find-docs__upstash-context7__skills-8e15aabd3565",
       "java-coding-standards",
       "jpa-patterns",
       "prompt-optimizer",
@@ -2387,10 +2397,13 @@
       "claimable-postgres",
       "cloudflare-one-migrations",
       "codebase-onboarding",
+      "context7-docs__upstash-context7__packages-pi-skills-8870c946f485",
+      "context7-mcp__upstash-context7__skills-4bd9b07b8b1f",
       "database-migrations",
       "deployment-patterns",
       "documentation-lookup",
       "drizzle",
+      "find-docs__upstash-context7__skills-8e15aabd3565",
       "neon-functions",
       "neon-postgres",
       "nestjs-patterns",
@@ -2405,6 +2418,7 @@
       "cli-packaging-patterns__microsoft-amplifier-bundle-skills__skills-aab60ec020a0",
       "coding-standards",
       "context-budget",
+      "context7-mcp__upstash-context7__skills-4bd9b07b8b1f",
       "data-scraper-agent",
       "documentation-lookup",
       "knowledge-ops",
@@ -3776,6 +3790,12 @@
     "CodeRabbit": [
       "coderabbit-autofix",
       "coderabbit-code-review"
+    ],
+    "Context7": [
+      "context7-cli__upstash-context7__skills-62a13b5ff59c",
+      "context7-docs__upstash-context7__packages-pi-skills-8870c946f485",
+      "context7-mcp__upstash-context7__skills-4bd9b07b8b1f",
+      "find-docs__upstash-context7__skills-8e15aabd3565"
     ],
     "Arboris": [
       "cve-scan"

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-07T23:02:49.712012+00:00",
+  "scanMode": "static",
+  "skillName": "context7-mcp",
+  "contentHash": "06e57b16a8cc3b949cac61e451a34970371d86786855aeef2bbb718fcaaa107d",
+  "scannerVersion": "2.5.3"
+}
