@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:07.147838+00:00",
+  "scanMode": "static",
+  "skillName": "review-fetch-phase",
+  "contentHash": "1f8cab7b6554952a6341ce0eb5b29bad76b6b971547172dc02107eb427fa5ca7",
+  "scannerVersion": "2.5.3"
+}

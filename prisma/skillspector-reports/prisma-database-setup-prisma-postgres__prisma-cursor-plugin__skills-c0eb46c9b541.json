@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:07.483680+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-database-setup-prisma-postgres",
+  "contentHash": "f4594548bf25695d22e445b0710b6562c15abed424c9853d30888a09459bcdc0",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:55.421286+00:00",
+  "scanMode": "static",
+  "skillName": "studio-e2e-tests",
+  "contentHash": "5d73985134c7f64a3e0ecc1f0401a1f7b76c2c87e2874faaf93cb6d08f6c4157",
+  "scannerVersion": "2.5.3"
+}

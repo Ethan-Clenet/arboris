@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:35.265108+00:00",
+  "scanMode": "static",
+  "skillName": "expert-reviewing",
+  "contentHash": "c611dd902e67cf6aeddc2de8bf1ac6846eca4cb7b0aec7f9a17d8adf3f58c909",
+  "scannerVersion": "2.5.3"
+}

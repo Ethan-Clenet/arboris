@@ -1,0 +1,27 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "Do not ask the user",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 47
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:00.215589+00:00",
+  "scanMode": "static",
+  "skillName": "migrate-xunit-to-xunit-v3",
+  "contentHash": "48fccd1e15870adaaed13b57ed7a74c2ea07d93e9ee87c971f5daf2cf5646f02",
+  "scannerVersion": "2.5.3"
+}

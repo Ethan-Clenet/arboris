@@ -1,0 +1,39 @@
+{
+  "riskScore": 10,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "references/from-6-5-to-7-6.md",
+        "start_line": 199
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "references/from-7-6-to-8-3.md",
+        "start_line": 52
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:49.442084+00:00",
+  "scanMode": "static",
+  "skillName": "upgrading-react-native-storybook",
+  "contentHash": "6e65ed735977ccdb6e4ffbd305e7e9d300915a1bab714d2eab0b95f20ec5db84",
+  "scannerVersion": "2.5.3"
+}

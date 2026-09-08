@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Stops repo-level Directory.Build.props traversal (this file is the first found).\n       Also blocks Directory.Build.targets import. -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "server/Directory.Build.props",
+        "start_line": 2
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:45:51.936496+00:00",
+  "scanMode": "static",
+  "skillName": "fsharp-diagnostics",
+  "contentHash": "f2a5c36b1881e0da4a61ed39f9ba04aaf4e9357ac4d710ba114ab05e838230b2",
+  "scannerVersion": "2.5.3"
+}

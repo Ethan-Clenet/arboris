@@ -1,0 +1,195 @@
+{
+  "riskScore": 50,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 13,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- GOOD -->\n<PropertyGroup>\n  <ToolPath>$(MSBuildThisFileDirectory)tools\\mytool\\mytool.exe</ToolPath>\n</PropertyGroup>\n<Import Project=\"$(RepoRoot)eng\\common.props\" />\n```\n\n**Preferred path properti",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 92
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- matches project name -->\n  <AssemblyName>MyLib</AssemblyName>         <!-- matches project name -->\n  <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>\n</PropertyGroup>\n",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 122
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- GOOD -->\n<ItemGroup>\n  <PackageReference Include=\"Newtonsoft.Json\" Version=\"13.0.3\" />\n</ItemGroup>\n```\n\n**Note**: `<Reference>` without HintPath is still valid for .NET Framework GAC assemblies ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 176
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- ... 30 more lines ... -->\n</Target>\n\n<!-- GOOD: Single-responsibility targets -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 258
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- GOOD: Split into .props (defaults) + .targets (logic) -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 306
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- custom.props (imported early) -->\n<PropertyGroup>\n  <MyToolVersion Condition=\"'$(MyToolVersion)' == ''\">2.0</MyToolVersion>\n</PropertyGroup>\n\n<!-- custom.targets (imported late) -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 307
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- GOOD: Path operations -->\n<PropertyGroup>\n  <NormalizedOutput>$([MSBuild]::NormalizeDirectory($(OutputPath)))</NormalizedOutput>\n  <ToolPath>$([System.IO.Path]::Combine($(MSBuildThisFileDirectory",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/additional-antipatterns.md",
+        "start_line": 20
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- GOOD -->\n<ItemGroup>\n  <Compile Include=\"Generated\\Extra.cs\" />\n</ItemGroup>\n<ItemGroup>\n  <Compile Update=\"Generated\\Extra.cs\" CopyToOutputDirectory=\"Always\" />\n</ItemGroup>\n```\n\n---\n\n## AP-18: ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/additional-antipatterns.md",
+        "start_line": 42
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- ALSO BAD: Condition on the property itself has the same problem -->\n<PropertyGroup>\n  <DefineConstants Condition=\"'$(TargetFramework)' == 'net8.0'\">$(DefineConstants);MY_FEATURE</DefineConstants>",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/additional-antipatterns.md",
+        "start_line": 131
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- ALSO GOOD: In the project file itself -->\n<!-- MyProject.csproj -->\n<PropertyGroup Condition=\"'$(TargetFramework)' == 'net8.0'\">\n  <DefineConstants>$(DefineConstants);MY_FEATURE</DefineConstants>",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/additional-antipatterns.md",
+        "start_line": 141
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- OK in Directory.Packages.props — PackageVersion items evaluate late -->\n<ItemGroup Condition=\"'$(TargetFramework)' == 'net8.0'\">\n  <PackageVersion Include=\"Microsoft.AspNetCore.Mvc.Testing\" Versi",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/additional-antipatterns.md",
+        "start_line": 158
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- GOOD (b): make B publish as part of its OWN build (the (a) fix in tool.csproj), then have A\n     just sequence B and consume B's already-produced publish output — never re-publish it. -->\n<ItemGr",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/additional-antipatterns.md",
+        "start_line": 216
+      }
+    },
+    {
+      "id": "YR4",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_mcp_tool_poisoning_metadata': MCP/tool metadata poisoning indicators in tool schemas or skill manifests [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "description:; <!-- BAD: Directory.Build.props sets it, csproj silently overrides -->; <!-- GOOD: Use a condition so overrides are intentional -->; <!-- MyProject.csproj can now intentionally override ",
+      "explanation": "YARA rule matched a hack tool or exploit indicator (offensive tools, reconnaissance, privilege escalation, or exploit frameworks).",
+      "remediation": "Remove offensive tool references and exploit code. Legitimate agent skills should not contain penetration testing tools, exploit frameworks, or reconnaissance utilities.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 3
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:05.886582+00:00",
+  "scanMode": "static",
+  "skillName": "msbuild-antipatterns",
+  "contentHash": "c0dcd07c610c1e560f7de8c8b77bdb3865b02b7b816cd6bda091fd391ca775e3",
+  "scannerVersion": "2.5.3"
+}

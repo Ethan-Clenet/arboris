@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:19.021358+00:00",
+  "scanMode": "static",
+  "skillName": "riper5-protocol",
+  "contentHash": "5121e5ba437505c5c6d70259853c8c74c0b32e570de248792f47940e8fc0dfff",
+  "scannerVersion": "2.5.3"
+}

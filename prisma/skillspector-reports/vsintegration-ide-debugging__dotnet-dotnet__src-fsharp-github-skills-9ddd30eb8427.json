@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:51:01.888541+00:00",
+  "scanMode": "static",
+  "skillName": "vsintegration-ide-debugging",
+  "contentHash": "43d1ce487a7e95d663867d8f2f0b19fce91bfc00e7264a71741309d792a2d408",
+  "scannerVersion": "2.5.3"
+}

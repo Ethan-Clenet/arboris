@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:39.251495+00:00",
+  "scanMode": "static",
+  "skillName": "update-agent-docs",
+  "contentHash": "c0ee820cb6410a9759f5219c0d749781b1422741266a5ecc540757efa0d03ecb",
+  "scannerVersion": "2.5.3"
+}

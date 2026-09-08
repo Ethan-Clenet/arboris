@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:05.408857+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-database-setup-mongodb",
+  "contentHash": "a5a6091477478e9ba111cd816ddea3bf23f855e48d87190ca4eabc2f533d2db9",
+  "scannerVersion": "2.5.3"
+}

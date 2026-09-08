@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:49.446929+00:00",
+  "scanMode": "static",
+  "skillName": "qualcomm",
+  "contentHash": "2dbd0ecb3689c89f0d3be7c8a387307c5223e752ea0693e2fdceee673ac5e9ed",
+  "scannerVersion": "2.5.3"
+}

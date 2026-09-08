@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:51:04.278620+00:00",
+  "scanMode": "static",
+  "skillName": "write-architecture-docs",
+  "contentHash": "28e6b79dc99893cc0b00d0e8d3c5bc0c4ab34f92085c90b38beb03bee639f249",
+  "scannerVersion": "2.5.3"
+}

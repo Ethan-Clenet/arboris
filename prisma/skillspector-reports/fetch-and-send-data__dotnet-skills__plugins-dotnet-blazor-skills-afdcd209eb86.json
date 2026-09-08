@@ -1,0 +1,27 @@
+{
+  "riskScore": 5,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.example.com/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 30
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:45:38.978977+00:00",
+  "scanMode": "static",
+  "skillName": "fetch-and-send-data",
+  "contentHash": "6fcd345ebf332f50c2a45c30ae893244d2f49a397a9c43ae039f269fcdaf826c",
+  "scannerVersion": "2.5.3"
+}

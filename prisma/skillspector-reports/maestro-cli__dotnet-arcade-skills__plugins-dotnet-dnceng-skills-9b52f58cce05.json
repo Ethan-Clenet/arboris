@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:26.464328+00:00",
+  "scanMode": "static",
+  "skillName": "maestro-cli",
+  "contentHash": "be9d855767f052b5e60cc94356843579c7252f8fe14e1a49fa95b3e456e66878",
+  "scannerVersion": "2.5.3"
+}

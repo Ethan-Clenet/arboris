@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:55.255901+00:00",
+  "scanMode": "static",
+  "skillName": "vectorization",
+  "contentHash": "2f67baf95988609ea1a50880313eab8facf66601014492dda8cb92b661d0c628",
+  "scannerVersion": "2.5.3"
+}

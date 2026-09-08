@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:51:06.385847+00:00",
+  "scanMode": "static",
+  "skillName": "write-xaml-tests",
+  "contentHash": "1bceb2c4d40b8f3aff57d81c900492ff85259d7e5c0c5e36a23ffae18cb49488",
+  "scannerVersion": "2.5.3"
+}

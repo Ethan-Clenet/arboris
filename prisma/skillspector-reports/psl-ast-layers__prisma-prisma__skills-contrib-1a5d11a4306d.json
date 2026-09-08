@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:43.541634+00:00",
+  "scanMode": "static",
+  "skillName": "psl-ast-layers",
+  "contentHash": "cc81ee9e60cfa21820be58c460216228fd52e26a41793a6cd558b256f93d5db1",
+  "scannerVersion": "2.5.3"
+}

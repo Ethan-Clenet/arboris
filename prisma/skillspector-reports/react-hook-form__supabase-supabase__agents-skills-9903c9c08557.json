@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:52.194586+00:00",
+  "scanMode": "static",
+  "skillName": "react-hook-form",
+  "contentHash": "788610cfd72af240373eec8f9d4a91ca90195aff2b103d7384bd41f5f490dadb",
+  "scannerVersion": "2.5.3"
+}

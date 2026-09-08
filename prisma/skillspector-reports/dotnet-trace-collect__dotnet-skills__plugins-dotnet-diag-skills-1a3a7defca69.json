@@ -1,0 +1,96 @@
+{
+  "riskScore": 32,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 6,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "explanation": "Docker image references without a specific tag (:latest is implicit) or digest (@sha256:...) can be silently replaced by a malicious image.",
+      "remediation": "Pin the image: image:tag or image@sha256:abc123",
+      "location": {
+        "file": "references/perfcollect.md",
+        "start_line": 38
+      }
+    },
+    {
+      "id": "PE5",
+      "category": "Privilege Escalation",
+      "pattern": "Privileged Container / Container Escape",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "--privileged",
+      "explanation": "Potential security issue detected. Manual review is recommended.",
+      "remediation": "Review the flagged content for security risks. Ensure no credentials, secrets, or sensitive data are exposed.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 118
+      }
+    },
+    {
+      "id": "PE5",
+      "category": "Privilege Escalation",
+      "pattern": "Privileged Container / Container Escape",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "--privileged",
+      "explanation": "Potential security issue detected. Manual review is recommended.",
+      "remediation": "Review the flagged content for security risks. Ensure no credentials, secrets, or sensitive data are exposed.",
+      "location": {
+        "file": "references/perfcollect.md",
+        "start_line": 11
+      }
+    },
+    {
+      "id": "PE5",
+      "category": "Privilege Escalation",
+      "pattern": "Privileged Container / Container Escape",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "--privileged",
+      "explanation": "Potential security issue detected. Manual review is recommended.",
+      "remediation": "Review the flagged content for security risks. Ensure no credentials, secrets, or sensitive data are exposed.",
+      "location": {
+        "file": "references/perfcollect.md",
+        "start_line": 177
+      }
+    },
+    {
+      "id": "TM4",
+      "category": "Tool Misuse",
+      "pattern": "Privileged Kubernetes Workload",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "privileged: true",
+      "explanation": "Code deploys a privileged Kubernetes workload (privileged container, hostPath mount, or host namespaces). This grants root on the node and is a node/cluster takeover vector.",
+      "remediation": "Remove privileged, hostPath, and host-namespace settings from workloads. Use a least-privilege securityContext, drop capabilities, and avoid mounting the host filesystem.",
+      "location": {
+        "file": "references/perfcollect.md",
+        "start_line": 54
+      }
+    },
+    {
+      "id": "TM4",
+      "category": "Tool Misuse",
+      "pattern": "Privileged Kubernetes Workload",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "privileged: true",
+      "explanation": "Code deploys a privileged Kubernetes workload (privileged container, hostPath mount, or host namespaces). This grants root on the node and is a node/cluster takeover vector.",
+      "remediation": "Remove privileged, hostPath, and host-namespace settings from workloads. Use a least-privilege securityContext, drop capabilities, and avoid mounting the host filesystem.",
+      "location": {
+        "file": "references/perfcollect.md",
+        "start_line": 157
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:45:27.048547+00:00",
+  "scanMode": "static",
+  "skillName": "dotnet-trace-collect",
+  "contentHash": "34ce09d15ba9612338da90350a104435c63cb0ad2f207dfb05d15c7a39f10d01",
+  "scannerVersion": "2.5.3"
+}

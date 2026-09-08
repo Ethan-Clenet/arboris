@@ -1,0 +1,41 @@
+{
+  "riskScore": 9,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "OH3",
+      "category": "Output Handling",
+      "pattern": "Unbounded Output",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "no truncation",
+      "explanation": "Output size or generation rate is not bounded. Unbounded output enables denial-of-service through resource exhaustion, log flooding, or context-window stuffing.",
+      "remediation": "Set explicit limits on output length, generation count, and rate. Use max_tokens and truncation to prevent unbounded output.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 45
+      }
+    },
+    {
+      "id": "OH3",
+      "category": "Output Handling",
+      "pattern": "Unbounded Output",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "without truncation",
+      "explanation": "Output size or generation rate is not bounded. Unbounded output enables denial-of-service through resource exhaustion, log flooding, or context-window stuffing.",
+      "remediation": "Set explicit limits on output length, generation count, and rate. Use max_tokens and truncation to prevent unbounded output.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 428
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:45:48.240220+00:00",
+  "scanMode": "static",
+  "skillName": "flight-profiler-watch",
+  "contentHash": "31471ddd597f18de48d45b9a389d1be276eb4c147e6e987e9015e4890b5eb2a0",
+  "scannerVersion": "2.5.3"
+}

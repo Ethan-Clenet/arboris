@@ -1,0 +1,27 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "without confirmation",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 38
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:13.427000+00:00",
+  "scanMode": "static",
+  "skillName": "nuget-trusted-publishing",
+  "contentHash": "1eac8999ffd73b1597384f4279d026204a7da3758fe2d712ef36a0e566c7b5a6",
+  "scannerVersion": "2.5.3"
+}

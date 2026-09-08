@@ -1,0 +1,40 @@
+{
+  "riskScore": 16,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "        import subprocess; subprocess.check_call([sys.executable,\"-m\",\"pip\",\"install\",\"-q\",\"PyMuPDF\"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/read_pdf.py",
+        "start_line": 8
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:33.770641+00:00",
+  "scanMode": "static",
+  "skillName": "pdf-reader",
+  "contentHash": "260ab6ea3ef88be88b3ea76d09cebb90d57a79c8eb8717d00c6a97a20df53291",
+  "scannerVersion": "2.5.3"
+}

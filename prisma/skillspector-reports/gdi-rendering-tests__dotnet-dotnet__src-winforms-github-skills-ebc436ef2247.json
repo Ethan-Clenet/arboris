@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:53.848436+00:00",
+  "scanMode": "static",
+  "skillName": "gdi-rendering-tests",
+  "contentHash": "761115419f71327fdcc32664ca813b36ca3a9c7e815a4abeacf117d212a42a59",
+  "scannerVersion": "2.5.3"
+}

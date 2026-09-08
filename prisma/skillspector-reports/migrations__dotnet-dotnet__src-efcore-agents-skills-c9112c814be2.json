@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:01.274728+00:00",
+  "scanMode": "static",
+  "skillName": "migrations",
+  "contentHash": "e1c4e6607b5ba6bf6a642bb867978977057a7b52e82ccca1bd5bef9d17947118",
+  "scannerVersion": "2.5.3"
+}

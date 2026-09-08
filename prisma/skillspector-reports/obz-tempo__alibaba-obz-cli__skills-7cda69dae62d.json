@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:22.357087+00:00",
+  "scanMode": "static",
+  "skillName": "obz-tempo",
+  "contentHash": "0ce2535e133691199901c0cf0db5053d73f9f7e74c7e0dddc4afce869c2b5076",
+  "scannerVersion": "2.5.3"
+}

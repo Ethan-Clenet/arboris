@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:00.581707+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-cli-migrate-dev",
+  "contentHash": "1eecfd0a3d09626fdedabb02f713fde86dd8ae0dc164401cfefd69b14af7283f",
+  "scannerVersion": "2.5.3"
+}

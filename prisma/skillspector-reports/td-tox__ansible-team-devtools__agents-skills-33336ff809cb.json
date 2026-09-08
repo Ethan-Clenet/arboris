@@ -1,0 +1,26 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "explanation": "uvx/uv tool run commands without ==version create a rug-pull risk.",
+      "remediation": "Pin the version: uvx package-name==1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 41
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:20.378381+00:00",
+  "scanMode": "static",
+  "skillName": "td-tox",
+  "contentHash": "9ffb34ff7e4f8db2b1090e2340541d753efe8802bc0b21b7189f28f4592c56c7",
+  "scannerVersion": "2.5.3"
+}

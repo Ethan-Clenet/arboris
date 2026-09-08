@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:17.298308+00:00",
+  "scanMode": "static",
+  "skillName": "clawhub-skill-mng",
+  "contentHash": "78e2f317994f6c37d5d2d42cd5f820f770fcea90c66c8b6455d80fed83cdfd8f",
+  "scannerVersion": "2.5.3"
+}

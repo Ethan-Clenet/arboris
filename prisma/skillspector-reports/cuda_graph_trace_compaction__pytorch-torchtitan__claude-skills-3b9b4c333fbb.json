@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:14.205593+00:00",
+  "scanMode": "static",
+  "skillName": "cuda_graph_trace_compaction",
+  "contentHash": "118d708110c0e8d61ea876ee0e27b9846336d28517d617be6cd2598001ee0b48",
+  "scannerVersion": "2.5.3"
+}

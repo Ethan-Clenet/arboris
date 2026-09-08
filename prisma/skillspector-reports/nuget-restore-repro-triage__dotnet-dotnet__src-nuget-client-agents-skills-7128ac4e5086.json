@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:13.415764+00:00",
+  "scanMode": "static",
+  "skillName": "nuget-restore-repro-triage",
+  "contentHash": "bbce79897f097d1895939571a0766c22c7acbd07cb48b3a787fb79f0377f54f0",
+  "scannerVersion": "2.5.3"
+}

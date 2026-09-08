@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:52.270210+00:00",
+  "scanMode": "static",
+  "skillName": "api-diff",
+  "contentHash": "2426c2701ca36a5de2f22e963f354070f0517d5ac2c7cdb625206c18478f4482",
+  "scannerVersion": "2.5.3"
+}

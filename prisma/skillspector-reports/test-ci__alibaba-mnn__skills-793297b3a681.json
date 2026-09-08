@@ -1,0 +1,27 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "finding": "plist",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "ios-llm-bench.md",
+        "start_line": 74
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:26.427128+00:00",
+  "scanMode": "static",
+  "skillName": "test-ci",
+  "contentHash": "e3402ee368e38207e9c08b3e874e47a0ef282465b0c483392cd77a9200934ee0",
+  "scannerVersion": "2.5.3"
+}

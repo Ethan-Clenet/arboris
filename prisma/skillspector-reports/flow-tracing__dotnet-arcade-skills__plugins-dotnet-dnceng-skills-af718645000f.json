@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:49.154540+00:00",
+  "scanMode": "static",
+  "skillName": "flow-tracing",
+  "contentHash": "55b4966f19dd58dd4ef102866ad3b10782aa39e6101bed02c59474d4e156a9c9",
+  "scannerVersion": "2.5.3"
+}

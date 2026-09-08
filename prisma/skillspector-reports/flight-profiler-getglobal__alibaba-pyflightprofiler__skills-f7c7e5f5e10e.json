@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "OH3",
+      "category": "Output Handling",
+      "pattern": "Unbounded Output",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "without truncation",
+      "explanation": "Output size or generation rate is not bounded. Unbounded output enables denial-of-service through resource exhaustion, log flooding, or context-window stuffing.",
+      "remediation": "Set explicit limits on output length, generation count, and rate. Use max_tokens and truncation to prevent unbounded output.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 40
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:45:45.172615+00:00",
+  "scanMode": "static",
+  "skillName": "flight-profiler-getglobal",
+  "contentHash": "f886e33c2722d8f2f9f0fc202695573f2c8b80da3e174e6176ce0fe92119ead5",
+  "scannerVersion": "2.5.3"
+}

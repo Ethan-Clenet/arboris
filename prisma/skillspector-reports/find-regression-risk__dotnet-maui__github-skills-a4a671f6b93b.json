@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:40.602217+00:00",
+  "scanMode": "static",
+  "skillName": "find-regression-risk",
+  "contentHash": "ef49e483649eaa6e7fdaf27bd7fc0e4e6faf1c2ba6739faad067a31a30b355b4",
+  "scannerVersion": "2.5.3"
+}

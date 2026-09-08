@@ -1,0 +1,41 @@
+{
+  "riskScore": 14,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.85,
+      "finding": "ls\n\n**Project Skills** (`.claude/skills",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 44
+      }
+    },
+    {
+      "id": "RA2",
+      "category": "Rogue Agent",
+      "pattern": "Session Persistence",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "create well-structured Agent Skills for Claude Code that follow best practices and validation requirements.\n\n## When to use this Skill\n\nUse this Skill when:\n- Creating a new Agent Skill\n- Writing or u",
+      "explanation": "Skill establishes unauthorized persistence across sessions via cron jobs, startup scripts, or state files. Session persistence allows an attacker to maintain access beyond the current interaction.",
+      "remediation": "Remove any persistence mechanisms (cron jobs, startup scripts, state files). Skills should not maintain state across sessions without explicit user consent.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 10
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:49:42.214781+00:00",
+  "scanMode": "static",
+  "skillName": "skill-writer",
+  "contentHash": "f32c6f8313aedda816b71ad0179dc111650ca1090bd47b8936d6a268e5224f5e",
+  "scannerVersion": "2.5.3"
+}

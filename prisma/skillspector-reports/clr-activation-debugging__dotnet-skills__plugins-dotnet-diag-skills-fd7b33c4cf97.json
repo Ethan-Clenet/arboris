@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:19.683167+00:00",
+  "scanMode": "static",
+  "skillName": "clr-activation-debugging",
+  "contentHash": "74c965481f7fc8b3912fcedcf09fa80db6d3cc13043719a2b1626f5813417694",
+  "scannerVersion": "2.5.3"
+}

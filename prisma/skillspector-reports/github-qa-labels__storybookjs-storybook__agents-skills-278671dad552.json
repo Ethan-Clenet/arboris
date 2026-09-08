@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:59.111778+00:00",
+  "scanMode": "static",
+  "skillName": "github-qa-labels",
+  "contentHash": "f52b7e98a90ef267d503fe60ee61b770aa281ae1041b2f30f0b90f6da18289bd",
+  "scannerVersion": "2.5.3"
+}

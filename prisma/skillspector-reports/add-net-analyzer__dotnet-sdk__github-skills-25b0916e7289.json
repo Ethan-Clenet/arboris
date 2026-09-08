@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:37.369374+00:00",
+  "scanMode": "static",
+  "skillName": "add-net-analyzer",
+  "contentHash": "9d6f041472baf5683f3748a5a14177ad5db36723491fffeeee2b0df6b276b3a4",
+  "scannerVersion": "2.5.3"
+}

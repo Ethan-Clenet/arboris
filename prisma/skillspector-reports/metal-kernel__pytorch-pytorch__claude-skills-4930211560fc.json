@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:52.479073+00:00",
+  "scanMode": "static",
+  "skillName": "metal-kernel",
+  "contentHash": "cf10017fc4a0f054df208a4faf5bea193a160857524c8b7f44aa1e148f8f9491",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,41 @@
+{
+  "riskScore": 37,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "MP3",
+      "category": "Memory Poisoning",
+      "pattern": "Memory Manipulation",
+      "severity": "HIGH",
+      "confidence": 0.8,
+      "finding": "clear context",
+      "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+      "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 29
+      }
+    },
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "git push <remote> <local-branch>:<their-branch> --force-with-lease`.\n\n- After pushing, the PR will update automatically. Optionally update the PR\n  description to mention the new commits.\n\n### 5a. Com",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 102
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:43.897911+00:00",
+  "scanMode": "static",
+  "skillName": "pr-contributor-review",
+  "contentHash": "b07fc2125d2c17771d71b225973ae7ad74bd7752916e891ce6a93b64586d6507",
+  "scannerVersion": "2.5.3"
+}

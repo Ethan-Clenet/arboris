@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:20.994936+00:00",
+  "scanMode": "static",
+  "skillName": "code-modernization",
+  "contentHash": "831bfb2133dd02e50bff369a996f8a9c1e459368ef0ade915d526ad0c8f0f59a",
+  "scannerVersion": "2.5.3"
+}

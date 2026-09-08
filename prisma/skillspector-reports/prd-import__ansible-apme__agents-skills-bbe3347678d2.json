@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:45.471765+00:00",
+  "scanMode": "static",
+  "skillName": "prd-import",
+  "contentHash": "958422259781414a560a2780c30c9fc78d8cb42030bba432bb5c74bbc11986cf",
+  "scannerVersion": "2.5.3"
+}

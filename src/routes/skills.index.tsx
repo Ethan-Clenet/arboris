@@ -78,6 +78,14 @@ function publisherMeta(name: string): { icon: string; color?: string; logo?: boo
     Ollama: { icon: 'cpu', color: PUBLISHER_LOGO_COLOR.Ollama },
     vinta: { icon: 'code', color: PUBLISHER_LOGO_COLOR.vinta },
     Context7: { icon: 'book-open-text', color: PUBLISHER_LOGO_COLOR.Context7 },
+    FastAPI: { icon: 'lightning', color: PUBLISHER_LOGO_COLOR.FastAPI },
+    Supabase: { icon: 'database', color: PUBLISHER_LOGO_COLOR.Supabase },
+    PyTorch: { icon: 'flame', color: PUBLISHER_LOGO_COLOR.PyTorch },
+    '.NET': { icon: 'code', color: PUBLISHER_LOGO_COLOR['.NET'] },
+    Storybook: { icon: 'book-open-text', color: PUBLISHER_LOGO_COLOR.Storybook },
+    Alibaba: { icon: 'cloud', color: PUBLISHER_LOGO_COLOR.Alibaba },
+    Ansible: { icon: 'gear-six', color: PUBLISHER_LOGO_COLOR.Ansible },
+    Prisma: { icon: 'diamonds-four', color: PUBLISHER_LOGO_COLOR.Prisma },
   }
   const base = known[name] ?? { icon: 'buildings', color: '#8a909b' }
   return { ...base, logo: hasPublisherLogo(name) }

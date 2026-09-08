@@ -1,0 +1,27 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "TM3",
+      "category": "Tool Misuse",
+      "pattern": "Unsafe Defaults",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "world-readable",
+      "explanation": "Tool defaults are unsafe or overly permissive (e.g. disabled TLS verification, no authentication, world-writable permissions). Unsafe defaults widen the attack surface.",
+      "remediation": "Override unsafe defaults with secure settings (verify=True, auth required, restrictive permissions). Review and harden all tool configurations.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 37
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:48:17.990490+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-next-feedback",
+  "contentHash": "e1bdf9463a865e65425221c042cdb477753f860a790670d4be4f29b533ab4112",
+  "scannerVersion": "2.5.3"
+}

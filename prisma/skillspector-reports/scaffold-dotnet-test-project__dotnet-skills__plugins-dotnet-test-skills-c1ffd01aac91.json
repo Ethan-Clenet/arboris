@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:28.583651+00:00",
+  "scanMode": "static",
+  "skillName": "scaffold-dotnet-test-project",
+  "contentHash": "f6c5717609fcf17fd5e175bb57275bfe8e35b13d0aaa3f3d159c89e83979f0f8",
+  "scannerVersion": "2.5.3"
+}

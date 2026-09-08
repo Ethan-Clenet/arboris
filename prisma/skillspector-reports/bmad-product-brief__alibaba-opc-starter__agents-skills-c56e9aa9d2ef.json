@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:46.138717+00:00",
+  "scanMode": "static",
+  "skillName": "bmad-product-brief",
+  "contentHash": "78c5939215642a45d4fc14a53bdb3825ce20503e47df83e0dc859e635e209141",
+  "scannerVersion": "2.5.3"
+}

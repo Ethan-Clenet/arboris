@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:26.423524+00:00",
+  "scanMode": "static",
+  "skillName": "optimizing-msbuild-performance",
+  "contentHash": "204241126152d9d144942573632b01b76dfc62dbd8a19a1c42f57fe8fc29177a",
+  "scannerVersion": "2.5.3"
+}

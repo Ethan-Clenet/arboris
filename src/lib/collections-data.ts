@@ -97,9 +97,9 @@ export const COLLECTIONS: CollectionSeed[] = [
     labelFr: 'React + TypeScript',
     labelEn: 'React + TypeScript',
     briefFr:
-      'Nouveau front React/TS : patterns UI, best practices Vercel, a11y, Tailwind/shadcn, types avancés, tests — plus le loop git/PR.',
+      'Nouveau front React/TS : patterns UI, best practices Vercel, a11y, Tailwind/shadcn, Storybook, types avancés, tests — plus le loop git/PR.',
     briefEn:
-      'New React/TS front: UI patterns, Vercel best practices, a11y, Tailwind/shadcn, advanced types, tests — plus the git/PR loop.',
+      'New React/TS front: UI patterns, Vercel best practices, a11y, Tailwind/shadcn, Storybook, advanced types, tests — plus the git/PR loop.',
     kind: 'pack',
     skillIds: [
       'react-patterns',
@@ -111,6 +111,9 @@ export const COLLECTIONS: CollectionSeed[] = [
       'tailwind-design-system',
       'shadcn',
       'react-testing',
+      'storybook-init__storybookjs-mcp__packages-claude-plugin-skills-a2bc33b421a7',
+      'storybook-setup__storybookjs-mcp__packages-claude-plugin-skills-1177ad52aa1e',
+      'stories__storybookjs-mcp__packages-claude-plugin-skills-3349d1fff05a',
       'coding-standards',
     ],
     commandIds: [...DEV_LOOP_COMMANDS, 'ncu', 'lighthouse'],
@@ -147,9 +150,9 @@ export const COLLECTIONS: CollectionSeed[] = [
     labelFr: 'API Node / Nest',
     labelEn: 'Node / Nest API',
     briefFr:
-      'API backend Node/TS : patterns API, NestJS, erreurs, auth (better-auth), GateGuard — plus commit/PR et audit deps.',
+      'API backend Node/TS : patterns API, NestJS, Prisma, erreurs, auth (better-auth), GateGuard — plus commit/PR et audit deps.',
     briefEn:
-      'Node/TS backend API: API patterns, NestJS, errors, auth (better-auth), GateGuard — plus commit/PR and dep audit.',
+      'Node/TS backend API: API patterns, NestJS, Prisma, errors, auth (better-auth), GateGuard — plus commit/PR and dep audit.',
     kind: 'pack',
     skillIds: [
       'backend-patterns',
@@ -159,6 +162,10 @@ export const COLLECTIONS: CollectionSeed[] = [
       'better-auth-best-practices',
       'better-auth-create-auth',
       'gateguard',
+      'prisma-patterns',
+      'prisma-client-api__prisma-skills__666072967005',
+      'prisma-database-setup__prisma-skills__84adae33e694',
+      'prisma-postgres-setup__prisma-skills__a597e30d6752',
       'coding-standards',
     ],
     commandIds: [...DEV_LOOP_COMMANDS, 'audit-deps', 'test-coverage', 'ncu'],
@@ -274,19 +281,66 @@ export const COLLECTIONS: CollectionSeed[] = [
     labelFr: 'Supabase',
     labelEn: 'Supabase',
     briefFr:
-      'BaaS Supabase : client, best practices Postgres, auth better-auth si besoin — sync env et loop PR inclus.',
+      'BaaS Supabase officiel : client, Postgres best practices, middleware Edge, serveur — sync env et loop PR inclus.',
     briefEn:
-      'Supabase BaaS: client, Postgres best practices, better-auth when needed — env sync and PR loop included.',
+      'Official Supabase BaaS: client, Postgres best practices, Edge middleware, server — env sync and PR loop included.',
     kind: 'pack',
     skillIds: [
-      'supabase',
-      'supabase-postgres-best-practices',
+      'supabase__supabase-agent-skills__skills-10d811f18c48',
+      'supabase-postgres-best-practices__supabase-agent-skills__skills-c56857f8a6dd',
+      'supabase-middleware__supabase-middleware__skills-0ecdd475164e',
+      'supabase-server__supabase-server__skills-3c7d3842e12d',
       'postgres-patterns',
-      'better-auth-best-practices',
       'backend-patterns',
     ],
     commandIds: [...DEV_LOOP_COMMANDS, 'sync-env'],
     sort: 18,
+  },
+  {
+    id: 'dotnet-starter',
+    icon: 'code',
+    color: '#512BD4',
+    labelFr: '.NET',
+    labelEn: '.NET',
+    briefFr:
+      'Stack .NET officielle : Web API, Blazor, auth, tests et data-driven ASP.NET — plus le loop git/PR.',
+    briefEn:
+      'Official .NET stack: Web API, Blazor, auth, tests and data-driven ASP.NET — plus the git/PR loop.',
+    kind: 'pack',
+    skillIds: [
+      'dotnet-webapi__dotnet-skills__plugins-dotnet-aspnetcore-skills-980a8c0e5ab1',
+      'create-blazor-project__dotnet-skills__plugins-dotnet-blazor-skills-905dac4cdbdc',
+      'configure-auth__dotnet-skills__plugins-dotnet-blazor-skills-44ccaf0886cf',
+      'create-datadriven-aspnetcore__dotnet-skills__plugins-dotnet-data-skills-20243398b6ad',
+      'run-tests__dotnet-skills__plugins-dotnet-test-skills-cc92a5813bcc',
+      'find-untested-sources__dotnet-skills__plugins-dotnet-test-skills-a09f7d2b9fbf',
+      'platform-detection__dotnet-skills__plugins-dotnet-test-skills-964af918aeee',
+      'dotnet-maui-doctor__dotnet-skills__plugins-dotnet-maui-skills-d3a82e0ff2fa',
+    ],
+    commandIds: [...DEV_LOOP_COMMANDS, 'test-coverage'],
+    sort: 23,
+  },
+  {
+    id: 'ansible-starter',
+    icon: 'gear-six',
+    color: '#EE0000',
+    labelFr: 'Ansible',
+    labelEn: 'Ansible',
+    briefFr:
+      'Automatisation Ansible : creator, lint, ade, contexte projet, revue PR et onboarding platform — avec le loop git/PR.',
+    briefEn:
+      'Ansible automation: creator, lint, ade, project context, PR review and platform onboarding — with the git/PR loop.',
+    kind: 'pack',
+    skillIds: [
+      'td-ansible-creator__ansible-team-devtools__agents-skills-1312d9abdef1',
+      'td-ansible-lint__ansible-team-devtools__agents-skills-ef110ba9bbdc',
+      'td-ade__ansible-team-devtools__agents-skills-c4b175e686f1',
+      'context__ansible-ansible__claude-skills-8f4e1e2f5c42',
+      'review__ansible-ansible__claude-skills-9734495d581c',
+      'platform-onboarding__ansible-ansible-platform__claude-skills-a970fda7a9f5',
+    ],
+    commandIds: [...DEV_LOOP_COMMANDS],
+    sort: 24,
   },
   {
     id: 'firebase-starter',

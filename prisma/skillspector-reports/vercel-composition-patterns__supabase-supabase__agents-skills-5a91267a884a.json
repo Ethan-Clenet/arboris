@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:56.512399+00:00",
+  "scanMode": "static",
+  "skillName": "vercel-composition-patterns",
+  "contentHash": "daf3b563e9bd6d8b33a21e883c10f02e05f4cbb3f719fec08b0ef68f1197e517",
+  "scannerVersion": "2.5.3"
+}

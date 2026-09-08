@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:43.093171+00:00",
+  "scanMode": "static",
+  "skillName": "update-os-coverage",
+  "contentHash": "77e438dce20eb419c41cbc9f72079a391029e380b484d6112b5e5acff594cb19",
+  "scannerVersion": "2.5.3"
+}

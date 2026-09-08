@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:24.600903+00:00",
+  "scanMode": "static",
+  "skillName": "opencl-optimize",
+  "contentHash": "40caa148fc37c8515608d1922cdb6a4e90ba5a2b1ef0816a06572f570328a1ac",
+  "scannerVersion": "2.5.3"
+}

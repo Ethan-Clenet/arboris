@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:42.441579+00:00",
+  "scanMode": "static",
+  "skillName": "fix-linting-types-on-pr",
+  "contentHash": "25dcf32fbe9dd185d9c2122701bf58f7baf56062ad67d629f4620410c93ee4b6",
+  "scannerVersion": "2.5.3"
+}

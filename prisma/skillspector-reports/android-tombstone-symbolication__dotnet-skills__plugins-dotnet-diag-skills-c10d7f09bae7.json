@@ -1,0 +1,41 @@
+{
+  "riskScore": 23,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.5,
+      "finding": "https://api.nuget.org/",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "scripts/Symbolicate-Tombstone.ps1",
+        "start_line": 364
+      }
+    },
+    {
+      "id": "E4",
+      "category": "Data Exfiltration",
+      "pattern": "Context Leakage",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "Extract thread",
+      "explanation": "Code or instructions that leak agent conversation context to external services, potentially exposing sensitive user interactions.",
+      "remediation": "Remove any code that sends prompts, responses, or session data externally. Preserve user privacy; never exfiltrate conversation content.",
+      "location": {
+        "file": "scripts/Symbolicate-Tombstone.ps1",
+        "start_line": 140
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:42:49.960933+00:00",
+  "scanMode": "static",
+  "skillName": "android-tombstone-symbolication",
+  "contentHash": "c54e8294fad20f11bfc90b9494f5cd66778fe296f90a213529666e57a84a158c",
+  "scannerVersion": "2.5.3"
+}

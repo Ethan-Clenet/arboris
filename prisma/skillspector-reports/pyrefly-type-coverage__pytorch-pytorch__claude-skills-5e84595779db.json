@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:47.275933+00:00",
+  "scanMode": "static",
+  "skillName": "pyrefly-type-coverage",
+  "contentHash": "fb206694829da91ec8446e550f31b2eff420f72f204e4d62891d21baab0ce1fe",
+  "scannerVersion": "2.5.3"
+}

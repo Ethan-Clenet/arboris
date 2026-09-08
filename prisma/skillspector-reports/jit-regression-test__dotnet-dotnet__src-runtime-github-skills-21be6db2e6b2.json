@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:20.300407+00:00",
+  "scanMode": "static",
+  "skillName": "jit-regression-test",
+  "contentHash": "a7796db4814bfe628fab39d402d3cfeee4874b0e65401fb137547f7d638133ef",
+  "scannerVersion": "2.5.3"
+}

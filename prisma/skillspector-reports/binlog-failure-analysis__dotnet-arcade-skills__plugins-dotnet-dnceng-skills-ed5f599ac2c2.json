@@ -1,0 +1,41 @@
+{
+  "riskScore": 23,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "curl -fsSL ${AZDO_TOKEN:+ -H \"Authorization: Bearer $AZDO_TOKEN\"} -o /tmp/azdo-artifact.zip \"$DOWNLOAD_URL\"\nunzip -q -o /tmp/azdo-artifact.zip -d ",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 108
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- binlog-failure-analysis -->` so later runs can supersede the previous one.\n\nTemplate (keep under 400 lines total):\n\n```markdown\n<!-- binlog-failure-analysis -->\n## 🔍 Build Failure Analysis\n\n**Sum",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 171
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:43:06.292343+00:00",
+  "scanMode": "static",
+  "skillName": "binlog-failure-analysis",
+  "contentHash": "61f32ab3006cf2c8162ea983359e13961163df388e16bdf3e2a8f489c30bd99e",
+  "scannerVersion": "2.5.3"
+}

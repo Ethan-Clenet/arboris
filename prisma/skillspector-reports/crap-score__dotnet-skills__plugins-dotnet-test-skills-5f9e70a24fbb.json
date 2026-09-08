@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:02.735674+00:00",
+  "scanMode": "static",
+  "skillName": "crap-score",
+  "contentHash": "612f63991a1dc6a316a1d4721afac375466fc6cf19ce92b3e5a685a3e9a9bb66",
+  "scannerVersion": "2.5.3"
+}

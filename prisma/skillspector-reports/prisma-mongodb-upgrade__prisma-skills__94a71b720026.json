@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:09.990940+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-mongodb-upgrade",
+  "contentHash": "383f0f713eb38bba6c2d35695b144f34d7287701ee2786b8b40fade66c6caa24",
+  "scannerVersion": "2.5.3"
+}

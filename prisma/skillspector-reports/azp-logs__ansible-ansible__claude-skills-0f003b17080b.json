@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:02.822130+00:00",
+  "scanMode": "static",
+  "skillName": "azp-logs",
+  "contentHash": "ee1f2657660d91338dfca02d37acc17a7dd855bcacad5a4da71effbae78ef3f1",
+  "scannerVersion": "2.5.3"
+}

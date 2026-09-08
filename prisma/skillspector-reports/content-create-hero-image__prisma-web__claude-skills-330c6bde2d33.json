@@ -1,0 +1,138 @@
+{
+  "riskScore": 57,
+  "severity": "HIGH",
+  "recommendation": "UNSAFE",
+  "issueCount": 9,
+  "issues": [
+    {
+      "id": "TT2",
+      "category": "Data Flow",
+      "pattern": "Tainted flow: 'svg' from pathlib.Path.read_text (line 106, file read) → pathlib.Path.write_text (file write)",
+      "severity": "MEDIUM",
+      "confidence": 0.65,
+      "finding": "    svg_path.write_text(svg)",
+      "explanation": "Data from a source is assigned to a variable that is later passed to a sink, creating a variable-mediated taint flow.",
+      "remediation": "Validate tainted variables before passing them to sinks. Use allowlists, type checks, or sanitization functions on data from external sources.",
+      "location": {
+        "file": "scripts/embed-fonts.py",
+        "start_line": 107
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.175,
+      "finding": "<!-- Example: \"Prisma 8 is ~87% as fast as raw Postgres.\" Comparison-card aesthetic\n     (ref: prisma-next-performance \"Ceiling\"): eyebrow + headline top-left, then a rounded\n     card with horizontal",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "assets/examples/prisma-next-benchmark/hero.svg",
+        "start_line": 2
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- background -->\n  <rect width=\"1200\" height=\"630\" fill=\"url(#bg)\"/>\n  <rect width=\"1200\" height=\"630\" fill=\"url(#dots)\"/>\n  <rect width=\"1200\" height=\"630\" fill=\"url(#glowTL)\"/>\n  <rect width=\"120",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "assets/hero1.svg",
+        "start_line": 27
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- background mirrored from hero (4): vertical teal-to-navy gradient -->\n    <linearGradient id=\"bg\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"630\" gradientUnits=\"userSpaceOnUse\">\n      <stop offset=\"0\" stop-color=\"",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "assets/hero2.svg",
+        "start_line": 4
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- background mirrored from hero (3): vertical teal-to-navy gradient -->\n    <linearGradient id=\"bg\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"630\" gradientUnits=\"userSpaceOnUse\">\n      <stop offset=\"0\" stop-color=\"",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "assets/hero3.svg",
+        "start_line": 4
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Spectral wash: 2-3 prism pools dissolving into the surface. Reposition\n         per cover; bottom-edge pool is the house default. Keep type on calm areas. -->\n    <radialGradient id=\"wash-cyan\" c",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "assets/templates/cover.svg",
+        "start_line": 5
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Sora 500, sentence case, ink. 1-3 hand-wrapped lines; 68px, drop to 54px\n         when a line passes ~30 chars. Emphasis = accent color (deep variant), not weight. -->\n    <text font-family=\"Sora",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "assets/templates/cover.svg",
+        "start_line": 42
+      }
+    },
+    {
+      "id": "TM2",
+      "category": "Tool Misuse",
+      "pattern": "Chaining Abuse",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "&& rm -",
+      "explanation": "Tool calls are chained to bypass individual safety checks or escalate capabilities beyond what any single tool call would allow.",
+      "remediation": "Limit tool chaining depth and validate the output of each tool before passing it to the next. Require explicit user approval for multi-step chains.",
+      "location": {
+        "file": "scripts/export-png.sh",
+        "start_line": 123
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:44:54.039007+00:00",
+  "scanMode": "static",
+  "skillName": "content-create-hero-image",
+  "contentHash": "df8ed12f30aa12f262ae61c7f9f8f2ca02e29a33256b5349499ced37dbcf1ddc",
+  "scannerVersion": "2.5.3"
+}

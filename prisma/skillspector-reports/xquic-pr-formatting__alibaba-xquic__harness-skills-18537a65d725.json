@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:51:10.362889+00:00",
+  "scanMode": "static",
+  "skillName": "xquic-pr-formatting",
+  "contentHash": "4b8790d6d81abca56b3de6cdd75a45599a743bbd7153db35885e1a50e9473ec5",
+  "scannerVersion": "2.5.3"
+}

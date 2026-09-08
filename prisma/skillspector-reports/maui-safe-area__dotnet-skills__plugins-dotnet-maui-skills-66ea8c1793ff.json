@@ -1,0 +1,27 @@
+{
+  "riskScore": 5,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Body: respect safe areas (ScrollView only honors Container and None) -->\n        <ScrollView Grid.Row=\"1\" SafeAreaEdges=\"Container\">\n            <VerticalStackLayout Padding=\"20\">\n               ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/safe-area-api.md",
+        "start_line": 135
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:46:48.681813+00:00",
+  "scanMode": "static",
+  "skillName": "maui-safe-area",
+  "contentHash": "1ff3468206a535d9b231fa191b415bddbd8906114c1fce6d1abebe609c1c7068",
+  "scannerVersion": "2.5.3"
+}

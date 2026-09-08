@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:58.849590+00:00",
+  "scanMode": "static",
+  "skillName": "coordinate-components",
+  "contentHash": "5d4f37e553bae96c7015aa09d004a11e5fc885780bc5ba007be51daa9bc41fd9",
+  "scannerVersion": "2.5.3"
+}

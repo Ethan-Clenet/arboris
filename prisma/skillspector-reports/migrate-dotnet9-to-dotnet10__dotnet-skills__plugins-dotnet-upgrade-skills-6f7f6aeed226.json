@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:56.694720+00:00",
+  "scanMode": "static",
+  "skillName": "migrate-dotnet9-to-dotnet10",
+  "contentHash": "5334ae5a9b946eafa26d973427a0bd0dab14dd196e40b6fb4a43b0f90c3e7c86",
+  "scannerVersion": "2.5.3"
+}

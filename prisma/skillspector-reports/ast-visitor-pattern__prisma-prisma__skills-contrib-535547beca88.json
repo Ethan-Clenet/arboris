@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:57.687800+00:00",
+  "scanMode": "static",
+  "skillName": "ast-visitor-pattern",
+  "contentHash": "6344f0b5d63f4c655626b873567ef05ab182eb4cf8aed784df639e21a9d76621",
+  "scannerVersion": "2.5.3"
+}

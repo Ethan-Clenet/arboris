@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:46.277617+00:00",
+  "scanMode": "static",
+  "skillName": "flight-profiler-reload",
+  "contentHash": "1f2dd0524432725830c8f2542c02845441d7bc2ec5169c8efcd1d90180a22316",
+  "scannerVersion": "2.5.3"
+}

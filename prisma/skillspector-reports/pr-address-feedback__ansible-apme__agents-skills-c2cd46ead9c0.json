@@ -1,0 +1,27 @@
+{
+  "riskScore": 18,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'agent_skill_destructive_autonomous_actions': Autonomous destructive filesystem, shell history, or repository actions in AI agent skills [agent_skills]",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "git push --force; silently",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 273
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:40.967142+00:00",
+  "scanMode": "static",
+  "skillName": "pr-address-feedback",
+  "contentHash": "8f48337ffa724bb15e909313419b4644858893b7c9a88a460382ea8323d7d142",
+  "scannerVersion": "2.5.3"
+}

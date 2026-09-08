@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:38.280113+00:00",
+  "scanMode": "static",
+  "skillName": "maui-controls-deep-dive",
+  "contentHash": "0a15acabeead18e1b8e3ef57d3575be1f86bb4c859c81412c46cebef0856b87a",
+  "scannerVersion": "2.5.3"
+}

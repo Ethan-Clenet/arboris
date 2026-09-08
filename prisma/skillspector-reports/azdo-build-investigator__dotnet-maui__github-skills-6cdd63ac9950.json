@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:02.439676+00:00",
+  "scanMode": "static",
+  "skillName": "azdo-build-investigator",
+  "contentHash": "1f36d0171efdae223b1c5df71107ff1ef1cda521a33e08aeeb0c83bc37b02b1b",
+  "scannerVersion": "2.5.3"
+}

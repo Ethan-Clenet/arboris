@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:52.389930+00:00",
+  "scanMode": "static",
+  "skillName": "storybook-startup-benchmark",
+  "contentHash": "a218b5a7675988bca63a768b2c9c7bfc422239323ba3936edc59d79ecd2a0769",
+  "scannerVersion": "2.5.3"
+}

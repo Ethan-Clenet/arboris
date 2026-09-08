@@ -1,0 +1,97 @@
+{
+  "riskScore": 30,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 6,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- GH_AW_TRUSTED_VISUALS -->\n\n### Recommended action\n\nInvestigate.\n</details>\n'@\n\n        $merged = Merge-VisualsIntoBody `\n            -Body $body `\n            -Context $context `\n            -Rep",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "scripts/Merge-TestVisualsIntoComment.Tests.ps1",
+        "start_line": 277
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- GH_AW_TRUSTED_VISUALS -->`n</details>\"\n\n        $merged = Merge-VisualsIntoBody `\n            -Body $body `\n            -Context $context `\n            -Repository 'dotnet/maui' `\n            -Pr",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "scripts/Merge-TestVisualsIntoComment.Tests.ps1",
+        "start_line": 336
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- GH_AW_TRUSTED_VISUALS -->`nDone\"\n\n        $merged = Merge-VisualsIntoBody `\n            -Body $body `\n            -Context $context `\n            -Repository 'dotnet/maui' `\n            -PrNumber",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "scripts/Merge-TestVisualsIntoComment.Tests.ps1",
+        "start_line": 374
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- GH_AW_TRUSTED_VISUALS --></details>' `\n            -Context $context `\n            -Repository 'dotnet/maui' `\n            -PrNumber 123 `\n            -MaxCommentUrls 45 `\n            -MaxComment",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "scripts/Merge-TestVisualsIntoComment.Tests.ps1",
+        "start_line": 463
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- GH_AW_TRUSTED_VISUALS -->`nDone\"\n\n        $merged = Merge-VisualsIntoBody `\n            -Body $body `\n            -Context $context `\n            -Repository 'dotnet/maui' `\n            -PrNumber",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "scripts/Merge-TestVisualsIntoComment.Tests.ps1",
+        "start_line": 559
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Tests Failure Visuals Inline Start -->\"\n}\n\nfunction Get-InlineVisualEndMarker {\n    return \"<!-- Tests Failure Visuals Inline End -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "scripts/Merge-TestVisualsIntoComment.ps1",
+        "start_line": 49
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:49:19.243863+00:00",
+  "scanMode": "static",
+  "skillName": "review-test-failures",
+  "contentHash": "d8285a87544667bd3838327a687b12bdaf7f1160c38b12e6884d0a0ffd6b67db",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:29.412461+00:00",
+  "scanMode": "static",
+  "skillName": "scaffolding",
+  "contentHash": "4e171c1ea574b962bfedd9a2ad0e08621656db431a7cdcfd5f274ccae2433db7",
+  "scannerVersion": "2.5.3"
+}

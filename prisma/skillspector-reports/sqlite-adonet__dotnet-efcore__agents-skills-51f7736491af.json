@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:44.209750+00:00",
+  "scanMode": "static",
+  "skillName": "sqlite-adonet",
+  "contentHash": "c6c6e33595a382b7829b9030a08c93f8bba9c9e265bbd755b78c74fec12643c9",
+  "scannerVersion": "2.5.3"
+}

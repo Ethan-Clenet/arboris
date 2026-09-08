@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:02.686640+00:00",
+  "scanMode": "static",
+  "skillName": "swa-baseline-regeneration",
+  "contentHash": "7b6cf8fadae919f59aaf89350927cc933a2c5db90d66bebd87857e27ec67a765",
+  "scannerVersion": "2.5.3"
+}

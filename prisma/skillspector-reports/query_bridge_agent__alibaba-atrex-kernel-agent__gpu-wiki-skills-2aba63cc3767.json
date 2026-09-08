@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:48.802593+00:00",
+  "scanMode": "static",
+  "skillName": "query_bridge_agent",
+  "contentHash": "aecb53fea8fdb98fba51d60fc0a441f470887af9995520e0d0c255b8e4412836",
+  "scannerVersion": "2.5.3"
+}

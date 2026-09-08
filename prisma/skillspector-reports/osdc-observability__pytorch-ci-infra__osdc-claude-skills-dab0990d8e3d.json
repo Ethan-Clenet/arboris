@@ -1,0 +1,27 @@
+{
+  "riskScore": 22,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "SC2",
+      "category": "Supply Chain",
+      "pattern": "External Script Fetching",
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "finding": "curl -s -u \"$LOKI_USER:$LOKI_READ_KEY\" \\\n    \"$LOKI_URL/loki/api/v1/query_range\" \\\n    --data-urlencode 'query={cluster=\"<cluster-name>\", unit=\"kubelet.service\"} | node",
+      "explanation": "Remote code is downloaded and executed. This bypasses code review and could introduce malicious code.",
+      "remediation": "Avoid downloading and executing remote scripts. Use trusted packages from PyPI/npm. If remote fetch is required, verify checksums and use HTTPS.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 220
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:30.074685+00:00",
+  "scanMode": "static",
+  "skillName": "osdc-observability",
+  "contentHash": "68210654a1e2a64feb5b803ef241971f7b817c46307bcf15584f6490eab9c13b",
+  "scannerVersion": "2.5.3"
+}

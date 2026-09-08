@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:58.485936+00:00",
+  "scanMode": "static",
+  "skillName": "vllm-pytorch-ci-triage",
+  "contentHash": "98a68a0e17c735c0df621e5923fb3aee3c588b90694c9f1ed1013af3a107c7a3",
+  "scannerVersion": "2.5.3"
+}

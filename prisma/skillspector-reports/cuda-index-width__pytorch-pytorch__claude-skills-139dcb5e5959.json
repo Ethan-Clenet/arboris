@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:13.740047+00:00",
+  "scanMode": "static",
+  "skillName": "cuda-index-width",
+  "contentHash": "ad84fa72bf0e573acc93b3c2291aae8d0706e022e94ecee185081d29283a4e82",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:59.903985+00:00",
+  "scanMode": "static",
+  "skillName": "supabase-postgres-best-practices",
+  "contentHash": "4b697c1539ea81ee26b68cffaa81203e3bf94c212428882472c78481e85df5f3",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:49.128966+00:00",
+  "scanMode": "static",
+  "skillName": "analyzing-dotnet-performance",
+  "contentHash": "d97e8470d6cd45fbdedc3cf4dc067a7193897415edfaa8331b7e8cd4e1803fe4",
+  "scannerVersion": "2.5.3"
+}

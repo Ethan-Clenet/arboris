@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:57.326886+00:00",
+  "scanMode": "static",
+  "skillName": "release-cherry-pick-missing-reverts",
+  "contentHash": "8ee32c62cf24d05e3c9f818a736bde6f7e3fd719b8dd8551d5ec25d241485170",
+  "scannerVersion": "2.5.3"
+}

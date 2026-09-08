@@ -1,0 +1,41 @@
+{
+  "riskScore": 24,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "E1",
+      "category": "Data Exfiltration",
+      "pattern": "External Transmission",
+      "severity": "MEDIUM",
+      "confidence": 0.6,
+      "finding": "curl -Lo runtime.nupkg https://www.nuget.org/api/v2/package/$runtimePackBase/$anyVersion && unzip -q runtime.nupkg -d runtime-extracted && dotnet-symbol --symbols -o symbols-out runtime-extracted/runt",
+      "explanation": "Data is being sent to an external URL. This could be legitimate telemetry or data exfiltration. Manual review is recommended.",
+      "remediation": "Verify the destination URL is trusted and necessary. Remove or replace with documented APIs. Ensure no secrets, tokens, or PII are transmitted.",
+      "location": {
+        "file": "scripts/Symbolicate-Crash.ps1",
+        "start_line": 909
+      }
+    },
+    {
+      "id": "E4",
+      "category": "Data Exfiltration",
+      "pattern": "Context Leakage",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "Extract thread",
+      "explanation": "Code or instructions that leak agent conversation context to external services, potentially exposing sensitive user interactions.",
+      "remediation": "Remove any code that sends prompts, responses, or session data externally. Preserve user privacy; never exfiltrate conversation content.",
+      "location": {
+        "file": "scripts/Symbolicate-Crash.ps1",
+        "start_line": 635
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:42:54.448818+00:00",
+  "scanMode": "static",
+  "skillName": "apple-crash-symbolication",
+  "contentHash": "637183a37dfd2438fb10cc966adf95e659200b3701b6d73e741a04f5a93afcdf",
+  "scannerVersion": "2.5.3"
+}

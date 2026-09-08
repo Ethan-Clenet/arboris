@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:58.964239+00:00",
+  "scanMode": "static",
+  "skillName": "release-create-validation-issue",
+  "contentHash": "c02b1c245e2fa3c1c76493beb2085d2213f5982d2dfe9bbdb59d38a5cfee6de2",
+  "scannerVersion": "2.5.3"
+}

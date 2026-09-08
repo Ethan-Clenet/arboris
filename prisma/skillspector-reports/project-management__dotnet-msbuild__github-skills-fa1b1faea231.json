@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:39.288647+00:00",
+  "scanMode": "static",
+  "skillName": "project-management",
+  "contentHash": "5a2180e89a284af459a59815734baad1b034fa24999385af92e108bbee990cea",
+  "scannerVersion": "2.5.3"
+}

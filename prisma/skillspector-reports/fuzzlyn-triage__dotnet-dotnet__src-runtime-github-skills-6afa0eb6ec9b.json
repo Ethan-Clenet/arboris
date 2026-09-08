@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:52.909766+00:00",
+  "scanMode": "static",
+  "skillName": "fuzzlyn-triage",
+  "contentHash": "f52b1fd52615857681dbf5c61a4a3916f7eafa9d9e91ac6dd95663ed0ca8e15b",
+  "scannerVersion": "2.5.3"
+}

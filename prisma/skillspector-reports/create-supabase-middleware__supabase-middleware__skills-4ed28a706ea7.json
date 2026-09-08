@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:08.668581+00:00",
+  "scanMode": "static",
+  "skillName": "create-supabase-middleware",
+  "contentHash": "4ef1734a4a8af7041ed05e790e089c5b0e8a84d5732388384cfd82428e2d37b2",
+  "scannerVersion": "2.5.3"
+}

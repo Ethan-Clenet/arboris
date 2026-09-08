@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:08.824361+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-database-setup-sqlite",
+  "contentHash": "82b7987f8b9a9614f6f0579f4bd0ab36c3767c5dc366eb9a2bf8b925fd2db0d6",
+  "scannerVersion": "2.5.3"
+}

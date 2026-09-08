@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:13.598675+00:00",
+  "scanMode": "static",
+  "skillName": "review-release-notes",
+  "contentHash": "b57a087b114c6460758eec7354c4d6d592b63b8c0926f6d30690273fa846ea1b",
+  "scannerVersion": "2.5.3"
+}

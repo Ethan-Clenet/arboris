@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "PE5",
+      "category": "Privilege Escalation",
+      "pattern": "Privileged Container / Container Escape",
+      "severity": "HIGH",
+      "confidence": 0.24,
+      "finding": "--privileged",
+      "explanation": "Potential security issue detected. Manual review is recommended.",
+      "remediation": "Review the flagged content for security risks. Ensure no credentials, secrets, or sensitive data are exposed.",
+      "location": {
+        "file": "references/investigation-techniques.md",
+        "start_line": 36
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:47:36.290540+00:00",
+  "scanMode": "static",
+  "skillName": "pipeline-investigation",
+  "contentHash": "f47df43154a5ec1c99a52e3c1b45f4898353f966d7691823364973ec53bc5133",
+  "scannerVersion": "2.5.3"
+}

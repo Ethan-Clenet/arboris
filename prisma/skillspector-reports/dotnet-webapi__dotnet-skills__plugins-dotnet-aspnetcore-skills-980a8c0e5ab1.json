@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:45:26.933123+00:00",
+  "scanMode": "static",
+  "skillName": "dotnet-webapi",
+  "contentHash": "e9ef64acef63fb3b33d7429c141a646316bdd6c55fe32925ca09ed3f48b127bd",
+  "scannerVersion": "2.5.3"
+}

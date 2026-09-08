@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:04.273282+00:00",
+  "scanMode": "static",
+  "skillName": "build-parallelism",
+  "contentHash": "9e5fc76801d0d60b51716964b4ab5a4484a9a506cce2c705c56cd76e5ba0f1ef",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:39.304315+00:00",
+  "scanMode": "static",
+  "skillName": "pm-the-docs",
+  "contentHash": "224d7b727ea742a217262272f918249a0475a4369e85ac2fff5bcb395894aaec",
+  "scannerVersion": "2.5.3"
+}

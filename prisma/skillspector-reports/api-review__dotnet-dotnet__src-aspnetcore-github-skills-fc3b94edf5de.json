@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nWe welcome API proposals! We have a process to evaluate the value and shape of new API. There is an overview of our process [here](https://github.com/dotnet/aspnetcore/blob/main/docs/APIReviewPro",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "assets/issue-template.md",
+        "start_line": 3
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:42:53.870790+00:00",
+  "scanMode": "static",
+  "skillName": "api-review",
+  "contentHash": "99f18417c608a4a93f13724bd9a2bfbe3cd117a81138bdb3a9053ee771919dd5",
+  "scannerVersion": "2.5.3"
+}

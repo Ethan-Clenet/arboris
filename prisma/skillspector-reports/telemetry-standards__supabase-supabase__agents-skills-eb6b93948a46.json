@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:20.323751+00:00",
+  "scanMode": "static",
+  "skillName": "telemetry-standards",
+  "contentHash": "7540cf0da4a1c9c522ade2ea810ef2d2c56ab01388a78836acfee4e4123e0847",
+  "scannerVersion": "2.5.3"
+}

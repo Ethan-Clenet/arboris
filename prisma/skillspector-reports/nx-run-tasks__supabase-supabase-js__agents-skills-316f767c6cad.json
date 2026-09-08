@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:16.842341+00:00",
+  "scanMode": "static",
+  "skillName": "nx-run-tasks",
+  "contentHash": "4f80a738136a9b4b2523541b00a4e131694031c22099198f1c2f4e456f1259d6",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:05.510323+00:00",
+  "scanMode": "static",
+  "skillName": "humanizer",
+  "contentHash": "ed08bbf045f1bda8bc2f26d9e085c3c7877aa44907cb35e29fc14a51a38d76cc",
+  "scannerVersion": "2.5.3"
+}

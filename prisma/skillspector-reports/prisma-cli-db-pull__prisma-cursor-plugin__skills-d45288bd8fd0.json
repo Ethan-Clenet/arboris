@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:48.702578+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-cli-db-pull",
+  "contentHash": "5e04f617f7f4757673d76bea420934207b3e765c9d16b161d88e974fa8c997f4",
+  "scannerVersion": "2.5.3"
+}

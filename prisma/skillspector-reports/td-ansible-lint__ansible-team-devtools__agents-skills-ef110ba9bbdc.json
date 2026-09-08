@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:11.087162+00:00",
+  "scanMode": "static",
+  "skillName": "td-ansible-lint",
+  "contentHash": "6c8229958832f127a3618e53b321f56b0d7742af1e2decc84cd925b3aeeca3cd",
+  "scannerVersion": "2.5.3"
+}

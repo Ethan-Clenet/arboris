@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:51:08.282619+00:00",
+  "scanMode": "static",
+  "skillName": "ws-ckpt",
+  "contentHash": "0b8b82240d417e512ae180ad20f9aad8700075fb585faa11facd2ba1715b65ad",
+  "scannerVersion": "2.5.3"
+}

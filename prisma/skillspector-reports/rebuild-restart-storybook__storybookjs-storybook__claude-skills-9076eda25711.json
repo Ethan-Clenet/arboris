@@ -1,0 +1,27 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/rebuild-restart-storybook/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 6
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:48:53.583010+00:00",
+  "scanMode": "static",
+  "skillName": "unknown",
+  "contentHash": "2037ac6240d90297e2bf03ba7ba7d76f4a9671be8d6b1bdffc44bd0b5370a9dc",
+  "scannerVersion": "2.5.3"
+}

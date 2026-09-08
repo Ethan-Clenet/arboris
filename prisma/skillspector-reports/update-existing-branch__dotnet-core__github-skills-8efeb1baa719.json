@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:41.051600+00:00",
+  "scanMode": "static",
+  "skillName": "update-existing-branch",
+  "contentHash": "3c4ba2a90e3b195d9ab09c06a25149474fd58a913a44f9423d0f84f8bdecfe32",
+  "scannerVersion": "2.5.3"
+}

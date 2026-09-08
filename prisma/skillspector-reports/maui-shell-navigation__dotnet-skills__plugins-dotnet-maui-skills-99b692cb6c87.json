@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:48.922571+00:00",
+  "scanMode": "static",
+  "skillName": "maui-shell-navigation",
+  "contentHash": "c75a9688712c05096b37797ca9c07d4e3b81ad6f4e0bef00d973e209f0da2f59",
+  "scannerVersion": "2.5.3"
+}

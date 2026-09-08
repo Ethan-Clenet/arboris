@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:20.157283+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-next-migration-review",
+  "contentHash": "146af5e6dda6d4cbb7d803083f574d6f5728aff2ead9954d9fba45a2df2d488c",
+  "scannerVersion": "2.5.3"
+}

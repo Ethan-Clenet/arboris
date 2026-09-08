@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:15.862234+00:00",
+  "scanMode": "static",
+  "skillName": "td-scan-bot-prs",
+  "contentHash": "3b7836fcc7b122b44551658a47531a4fc95551bf5e8d2625925bd4bce13b1c37",
+  "scannerVersion": "2.5.3"
+}

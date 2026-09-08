@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:07.248147+00:00",
+  "scanMode": "static",
+  "skillName": "bumping-biome",
+  "contentHash": "fe682357a6a334537baf79dade25595511368e07b0e7c83aaff544e4f2430019",
+  "scannerVersion": "2.5.3"
+}

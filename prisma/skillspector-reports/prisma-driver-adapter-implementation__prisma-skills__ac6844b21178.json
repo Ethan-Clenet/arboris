@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:09.523353+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-driver-adapter-implementation",
+  "contentHash": "39ca1ca52b4a4d577e1f8a3ca2fee14c4ef0f22216aa8d76deca59317942e238",
+  "scannerVersion": "2.5.3"
+}

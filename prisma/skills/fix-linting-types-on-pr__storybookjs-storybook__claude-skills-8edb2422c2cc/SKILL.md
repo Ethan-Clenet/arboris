@@ -1,0 +1,6 @@
+---
+metadata:
+  origin: Storybook
+---
+
+@../../../.agents/skills/fix-linting-types-on-pr/SKILL.md

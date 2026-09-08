@@ -1,0 +1,41 @@
+{
+  "riskScore": 26,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- work here -->\n</Target>\n\n<!-- This target always runs because it has no Inputs/Outputs -->",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 23
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- GOOD: Stable paths, registered outputs -->\n<Target Name=\"GoodTarget\"\n        Inputs=\"@(Compile)\"\n        Outputs=\"$(IntermediateOutputPath)generated.cs\"\n        BeforeTargets=\"CoreCompile\">\n  <Ex",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 189
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:46:08.913738+00:00",
+  "scanMode": "static",
+  "skillName": "incremental-build",
+  "contentHash": "b39d13d463582450f528f987686fd2fb9ff23c3fd544d64c31643063e7f029e2",
+  "scannerVersion": "2.5.3"
+}

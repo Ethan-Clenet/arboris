@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Check TFM compatibility -->\n<PropertyGroup Condition=\"$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net472'))\">\n  <UseFrozenVersions>true</UseFrozenVersions>\n</PropertyGroup>\n\n<",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 105
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:48:39.531095+00:00",
+  "scanMode": "static",
+  "skillName": "property-patterns",
+  "contentHash": "edf278973f58e8d6fbfef0687ce9f4b060eac4de1bf613beb9a9a7d3a37bb41a",
+  "scannerVersion": "2.5.3"
+}

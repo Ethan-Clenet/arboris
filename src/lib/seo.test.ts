@@ -46,6 +46,14 @@ describe('isPremiumPublisher', () => {
     expect(isPremiumPublisher('Nous Research')).toBe(true)
     expect(isPremiumPublisher('vinta')).toBe(true)
     expect(isPremiumPublisher('Context7')).toBe(true)
+    expect(isPremiumPublisher('FastAPI')).toBe(true)
+    expect(isPremiumPublisher('Supabase')).toBe(true)
+    expect(isPremiumPublisher('PyTorch')).toBe(true)
+    expect(isPremiumPublisher('.NET')).toBe(true)
+    expect(isPremiumPublisher('Storybook')).toBe(true)
+    expect(isPremiumPublisher('Alibaba')).toBe(true)
+    expect(isPremiumPublisher('Ansible')).toBe(true)
+    expect(isPremiumPublisher('Prisma')).toBe(true)
   })
 
   it('refuse Community', () => {

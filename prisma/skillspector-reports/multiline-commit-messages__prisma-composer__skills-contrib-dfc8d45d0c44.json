@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:06.911227+00:00",
+  "scanMode": "static",
+  "skillName": "multiline-commit-messages",
+  "contentHash": "8e137f3afc6ae4a8ecee880d742ebd43e18acfdef9ad3377f6f05ae4d64b8bd8",
+  "scannerVersion": "2.5.3"
+}

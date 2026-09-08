@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:50:09.981932+00:00",
+  "scanMode": "static",
+  "skillName": "td-ade",
+  "contentHash": "85214e5d657fc1e6a468b7e4b2c975002a2d43dcbd9674816449e7f066669862",
+  "scannerVersion": "2.5.3"
+}

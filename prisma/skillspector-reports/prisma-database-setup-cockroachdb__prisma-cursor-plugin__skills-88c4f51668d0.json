@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:05.351690+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-database-setup-cockroachdb",
+  "contentHash": "c67682d36b03835e9487b8d82a34f86cae0cb1fc4e1d689567f2d75ac99730a3",
+  "scannerVersion": "2.5.3"
+}

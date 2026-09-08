@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:27.237685+00:00",
+  "scanMode": "static",
+  "skillName": "bmad-create-prd",
+  "contentHash": "425c0f71b8c7a0b5a840377427dea05b395f0b38dcdb1a51c592228beae06643",
+  "scannerVersion": "2.5.3"
+}

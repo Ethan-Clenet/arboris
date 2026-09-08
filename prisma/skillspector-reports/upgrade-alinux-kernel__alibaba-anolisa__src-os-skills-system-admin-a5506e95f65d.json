@@ -1,0 +1,27 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "PE2",
+      "category": "Privilege Escalation",
+      "pattern": "Sudo/Root Execution",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "sudo ",
+      "explanation": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified.",
+      "remediation": "Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 103
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:50:47.089070+00:00",
+  "scanMode": "static",
+  "skillName": "upgrade-alinux-kernel",
+  "contentHash": "32410f3a9cac497a7403a6b9ff91355da497d5b55d6b1926f2959391864a1c0a",
+  "scannerVersion": "2.5.3"
+}

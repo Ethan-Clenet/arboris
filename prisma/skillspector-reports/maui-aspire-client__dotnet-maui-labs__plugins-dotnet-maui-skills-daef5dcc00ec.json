@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:36.599466+00:00",
+  "scanMode": "static",
+  "skillName": "maui-aspire-client",
+  "contentHash": "e9e6fbbfeeefec1159ed452efdb4dec6e59def8df6e2d12b2d986a8b985f65e3",
+  "scannerVersion": "2.5.3"
+}

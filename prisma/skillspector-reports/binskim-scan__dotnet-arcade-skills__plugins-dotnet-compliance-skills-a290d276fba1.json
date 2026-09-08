@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:08.259133+00:00",
+  "scanMode": "static",
+  "skillName": "binskim-scan",
+  "contentHash": "d60c0ddc1d9ceca6cb804f4c961341b35ca5083aa313c9efd1c6f4f075e6c46c",
+  "scannerVersion": "2.5.3"
+}

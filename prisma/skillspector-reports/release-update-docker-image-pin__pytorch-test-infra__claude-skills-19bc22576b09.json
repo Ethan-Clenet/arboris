@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:02.886514+00:00",
+  "scanMode": "static",
+  "skillName": "release-update-docker-image-pin",
+  "contentHash": "f863ed7f0f51e50de4b9a33fd176b312daddc1156a2abf0f4ee6cfe12443df96",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:46:25.594596+00:00",
+  "scanMode": "static",
+  "skillName": "link-workspace-packages",
+  "contentHash": "96f9929a00f911e461c1a7a90e64cd5b5931b2521e8a8c0ab8798156f3ea92fb",
+  "scannerVersion": "2.5.3"
+}

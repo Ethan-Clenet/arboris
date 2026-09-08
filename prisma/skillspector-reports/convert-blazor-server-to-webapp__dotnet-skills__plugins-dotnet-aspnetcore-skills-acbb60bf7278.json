@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:44:57.648559+00:00",
+  "scanMode": "static",
+  "skillName": "convert-blazor-server-to-webapp",
+  "contentHash": "3d59b10ea80f14284857c01b15b76cb80ac31a3944f0d77228382b2dfae4429e",
+  "scannerVersion": "2.5.3"
+}

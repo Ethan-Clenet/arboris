@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:48:53.613057+00:00",
+  "scanMode": "static",
+  "skillName": "realsig-codegen",
+  "contentHash": "5719d75855e148443af3d2c3791618d2084ee5e0c1532f9e4f22a88b80398bf4",
+  "scannerVersion": "2.5.3"
+}

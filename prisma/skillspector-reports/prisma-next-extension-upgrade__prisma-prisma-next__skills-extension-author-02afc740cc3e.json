@@ -1,0 +1,361 @@
+{
+  "riskScore": 64,
+  "severity": "HIGH",
+  "recommendation": "UNSAFE",
+  "issueCount": 27,
+  "issues": [
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "README.md",
+        "start_line": 18
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "upgrades/0.11-to-0.12/regenerate-extension-public-baseline.ts",
+        "start_line": 191
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "upgrades/0.11-to-0.12/regenerate-extension-public-baseline.ts",
+        "start_line": 209
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2843: @prisma-next/sqlite gained a facade-level transaction API\n(`SqliteClient.transaction()` + `SqliteTransactionContext`), mirroring\nthe existing Postgres facade. Purely additive public sur",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.12-to-0.13/instructions.md",
+        "start_line": 49
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\ncontrol-query-extension-codecs: pgvector test files\n(planner.behavior.test.ts, planner.contract-to-schema-ir.test.ts,\nplanner.storage-types.test.ts) were updated to pass an explicit\n`PostgresCont",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.13-to-0.14/instructions.md",
+        "start_line": 145
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2867: codec-routed DDL defaults. The pgvector extension test files were updated\nto await lazy plan operations (`Promise.all(result.plan.operations)`) and to use\n`PostgresControlAdapter` inste",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.13-to-0.14/instructions.md",
+        "start_line": 154
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2859: SQLite createTable authoring method. The free `createTable` function from\n`@prisma-next/sqlite/migration` is now a protected method on the `SqliteMigration`\nbase class. The `createTable",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.13-to-0.14/instructions.md",
+        "start_line": 162
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2785: the sql-orm-client runtime gained M:N correlated include\nreads — `.include()` of an N:M relation resolves child rows through the\njunction table via a correlated subquery. Internal runti",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.13-to-0.14/instructions.md",
+        "start_line": 173
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\n#823: `jose` bumped from ^5 to ^6 in `packages/3-extensions/supabase`. The Supabase\nextension's transitive auth dependency only — no extension-author API, runtime, or\ncontract-shape change. Incid",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.13-to-0.14/instructions.md",
+        "start_line": 198
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2918: schema-namespaced op-ids for addColumn. The pgvector test files\n(planner.behavior.test.ts, planner.contract-to-schema-ir.test.ts) were updated to\nassert the new `column.${schema}.${tabl",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.13-to-0.14/instructions.md",
+        "start_line": 486
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2916: un-namespaced Postgres extension contracts (pgvector, paradedb, postgis,\nsupabase) regenerate to drop the spurious empty `__unbound__` storage namespace slot\nthe authoring + serializer ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.13-to-0.14/instructions.md",
+        "start_line": 506
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2886 (redo, PR #841): type SQL enum columns via a baked storage column lookup.\nThe SQL emitter generates a new `StorageColumnTypes` map in `contract.d.ts`, keyed\n`[namespace][table][column]`;",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.13-to-0.14/instructions.md",
+        "start_line": 514
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nRelease bump to 0.15.0 (PR #988): the version bump itself. Every\n`packages/3-extensions/*/package.json` advances to 0.15.0 (version field +\n`workspace:` specifier lockstep; one stray `workspace:*",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 469
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2503 (extension-supabase Slice E — launch close-out, PR #985): docs only.\nThe `packages/3-extensions/` touch is `packages/3-extensions/supabase/README.md` —\nthe package README corrected to as",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 478
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2886 (redo, PR #841): type SQL enum columns via a baked storage column lookup.\nThe SQL emitter generates a new `StorageColumnTypes` map in `contract.d.ts`, keyed\n`[namespace][table][column]`;",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 536
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2919: typed-DDL conversion of the not-null-with-temporary-default recipe (slice\n1 of the typed-DDL migration-ops project). The recipe's ADD COLUMN execute step\nnow lowers a typed `PostgresAlt",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 546
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2911 (native scalar-array storage machinery): the emitted contracts now carry\nthe adapter-reported `scalarList` capability marker and the bumped envelope\nversion. The scalar-list machinery th",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 561
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nExercise Mongo enums in retail-store (this PR): the `MongoClient` facade gains two\nadditive members — `raw` (MongoRawClient) and `execute<Row>(plan)` (direct query\nexecution without going through",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 583
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2503 (extension-supabase slice D): `@prisma-next/extension-supabase` gains a\nsecondary `.supabase` admin root on `asServiceRole()` — new `ServiceRoleDb` /\n`SupabaseInternalDb` exports from `/",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 600
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2912 (PSL native scalar lists, end-to-end): PSL now lowers scalar-list fields\n(`String[]`, `Int[]`, …) to native array storage columns instead of the JSONB\nfallback, gated on the adapter-repo",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 631
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nPostgres-RLS slice 2.5 (one-differ-two-ir-planner, the cutover to\n`plan(start, end)`): the migration planner now diffs two derived schema IRs\nvia the generic node differ instead of the coordinate",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 647
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2960 (no-emit native-enum column typing): a `field.column(pg.enum(handle))`\ncolumn now types as its member-value literal union in `typeof contract` (the\nno-emit path), matching what the emit ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 705
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nTML-2828 (variant relations on the narrowed accessor, PR #933): the\n`packages/3-extensions/` diff is confined to `@prisma-next/sql-orm-client` (itself an\nextension). The `.variant('X')`-narrowed ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 721
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\nDependabot runtime-deps group bump (PR #962): the packages/3-extensions/\ndiff is package.json dependency version ranges only (arktype ^2.2.2 /\n~2.2.2). No extension-facing API, contract shape, or",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "upgrades/0.14-to-0.15/instructions.md",
+        "start_line": 760
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:48:18.861717+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-next-extension-upgrade",
+  "contentHash": "871a95fa205e968b13443075f7dd47339975af8d016e9e71131f517b27cdb689",
+  "scannerVersion": "2.5.3"
+}

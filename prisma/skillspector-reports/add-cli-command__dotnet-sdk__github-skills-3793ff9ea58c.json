@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:42:34.852258+00:00",
+  "scanMode": "static",
+  "skillName": "add-cli-command",
+  "contentHash": "9b62c8d3f23fa9c288518156a68e2bba55df0169ecbc18a76f9afcc4ace8662e",
+  "scannerVersion": "2.5.3"
+}

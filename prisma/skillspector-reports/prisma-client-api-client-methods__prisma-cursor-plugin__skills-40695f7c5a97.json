@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:47:53.032914+00:00",
+  "scanMode": "static",
+  "skillName": "prisma-client-api-client-methods",
+  "contentHash": "148157f324bfaad360dafcb31304da5ef70fcfce215acf9fbc409d176bea1f5d",
+  "scannerVersion": "2.5.3"
+}

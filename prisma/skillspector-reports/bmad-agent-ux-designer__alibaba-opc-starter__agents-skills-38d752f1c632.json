@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:16.311945+00:00",
+  "scanMode": "static",
+  "skillName": "bmad-agent-ux-designer",
+  "contentHash": "34cc41c1b48414e1a5b8179475aa79b617854531c065b3eb7c7a2fcb262b785b",
+  "scannerVersion": "2.5.3"
+}

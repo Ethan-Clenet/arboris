@@ -1,0 +1,27 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA2",
+      "category": "Excessive Agency",
+      "pattern": "Autonomous Decision Making",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "do not ask the user",
+      "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+      "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 59
+      }
+    }
+  ],
+  "scannedAt": "2026-09-08T17:46:56.301953+00:00",
+  "scanMode": "static",
+  "skillName": "migrate-mstest-v3-to-v4",
+  "contentHash": "22061dc869c481dc6305dd5e71da3b72cdde7e9d8031d84e3f54ca37d53be4d6",
+  "scannerVersion": "2.5.3"
+}

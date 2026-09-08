@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:49:57.522088+00:00",
+  "scanMode": "static",
+  "skillName": "studio-shortcuts",
+  "contentHash": "65579efa6bb852eb9996cde1c4765d7ddfae66b2a9f2abeb614177ab96256b7d",
+  "scannerVersion": "2.5.3"
+}

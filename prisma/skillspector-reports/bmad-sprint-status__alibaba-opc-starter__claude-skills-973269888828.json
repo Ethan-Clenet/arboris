@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-08T17:43:54.458432+00:00",
+  "scanMode": "static",
+  "skillName": "bmad-sprint-status",
+  "contentHash": "681e671af1af26c837e89c583e9ce1395357da6facd3470e17fff84859ababb2",
+  "scannerVersion": "2.5.3"
+}
