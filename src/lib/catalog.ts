@@ -32,6 +32,8 @@ export interface Stack {
 /** Version « résumé » d'un skill (listes/tableaux). */
 export interface SkillSummary {
   id: string
+  /** Nom affiché (skills Microsoft vendor : id hashé simplifié). Défaut = id. */
+  title?: string
   categoryId: string
   icon: string
   /** Score de sûreté SkillSpector 0–100 (null = non scanné). */
@@ -265,10 +267,11 @@ export function hexToRgba(hex: string, alpha: number): string {
 }
 
 /** Prompt court (legacy) — préférer buildSkillMarkdown / SKILL.md pour la copie. */
-export function promptFor(skill: Pick<SkillSummary, 'id' | 'act'>, lang: Lang): string {
+export function promptFor(skill: Pick<SkillSummary, 'id' | 'title' | 'act'>, lang: Lang): string {
+  const label = skillLabel(skill)
   return lang === 'fr'
-    ? `Ajoute le skill « ${skill.id} » à mon projet et ${skill.act.fr}.`
-    : `Add the "${skill.id}" skill to my project and ${skill.act.en}.`
+    ? `Ajoute le skill « ${label} » à mon projet et ${skill.act.fr}.`
+    : `Add the "${label}" skill to my project and ${skill.act.en}.`
 }
 
 /** Markdown copiable pour un agent : frontmatter + description + instructions. */
@@ -278,17 +281,18 @@ export function buildSkillMarkdown(skill: SkillDetail, lang: Lang): string {
   const does = skill.does[lang]
   const triggers = skill.triggers[lang]
 
+  const label = skillLabel(skill)
   const lines = [
     '---',
     `name: ${skill.id}`,
     `description: ${tag.replace(/\n/g, ' ')}`,
     '---',
     '',
-    `# ${skill.id}`,
+    `# ${label}`,
     '',
     tag,
     '',
-    lang === 'fr' ? `## Ce que fait ${skill.id}` : `## What ${skill.id} does`,
+    lang === 'fr' ? `## Ce que fait ${label}` : `## What ${label} does`,
     ...does.map((item) => `- ${item}`),
     '',
     lang === 'fr' ? '## Instructions' : '## Instructions',
@@ -322,6 +326,130 @@ export function listingPublisher(publisher: string | null | undefined): string {
   if (!publisher || publisher === COMMUNITY_PUBLISHER) return COMMUNITY_PUBLISHER
   if (publisher === 'ECC') return 'affaan-m'
   return publisher
+}
+
+// Hash technique (12 caractères hex) en fin d'id vendor, précédé d'un tiret,
+// underscore, slash, ou collé au segment (`base__repo__<hash>`).
+const VENDOR_HASH_SUFFIX = /(?:^|[-_/])[a-f0-9]{12}$/i
+// Un token isolé qui est exactement un hash 12 caractères.
+const HASH_TOKEN = /^[a-f0-9]{12}$/i
+const PATH_NOISE = new Set([
+  'solutions',
+  'skills',
+  'skill',
+  'manual',
+  'submissions',
+  'packages',
+  'plugins',
+  'src',
+  'vs',
+  'assets',
+  'examples',
+  'docs',
+])
+
+function humanizeSlug(slug: string): string {
+  return slug
+    .replace(/[-_]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function parseVendorSkillId(id: string): { base: string; repo: string; path: string } | null {
+  if (!id.includes('__')) return null
+  const [base, repo, ...rest] = id.split('__')
+  if (!base || !repo) return null
+  const path = rest.join('__').replace(VENDOR_HASH_SUFFIX, '')
+  return { base, repo, path }
+}
+
+/**
+ * Skill « vendor » importé : id structuré `base__repo__…` terminé par un hash
+ * technique de 12 caractères (imports Microsoft, Hugging Face, Nous Research,
+ * upstash, vinta, …). Ce sont ceux dont l'id brut est illisible.
+ */
+export function isVendorSkill(id: string, _publisher?: string | null): boolean {
+  return id.includes('__') && VENDOR_HASH_SUFFIX.test(id)
+}
+
+function vendorCoreTitle(id: string): string | null {
+  const parts = parseVendorSkillId(id)
+  if (!parts) return null
+  return `${humanizeSlug(parts.base)} ${humanizeSlug(parts.repo)}`.trim()
+}
+
+function vendorPathHint(id: string): string {
+  const parts = parseVendorSkillId(id)
+  if (!parts?.path) return ''
+  const tokens = parts.path
+    .split(/[-_/]+/)
+    .filter((token) => {
+      if (!token) return false
+      if (PATH_NOISE.has(token.toLowerCase())) return false
+      if (HASH_TOKEN.test(token)) return false
+      return true
+    })
+  return humanizeSlug(tokens.join('-'))
+}
+
+/**
+ * Titres uniques pour l’UI : skill vendor = « nom repo » sans hash ;
+ * en cas de collision, suffixe le chemin (sans le hash 12 caractères).
+ */
+export function uniqueSkillTitles(
+  skills: Array<{ id: string; publisher?: string | null }>,
+): Map<string, string> {
+  const out = new Map<string, string>()
+  const groups = new Map<string, string[]>()
+
+  for (const skill of skills) {
+    if (!isVendorSkill(skill.id, skill.publisher)) {
+      out.set(skill.id, skill.id)
+      continue
+    }
+    const core = vendorCoreTitle(skill.id) ?? skill.id
+    const list = groups.get(core) ?? []
+    list.push(skill.id)
+    groups.set(core, list)
+  }
+
+  for (const [core, ids] of groups) {
+    if (ids.length === 1) {
+      out.set(ids[0], core)
+      continue
+    }
+    const used = new Set<string>()
+    for (const id of ids) {
+      const hint = vendorPathHint(id)
+      let title = hint ? `${core} ${hint}` : core
+      if (used.has(title)) {
+        let n = 2
+        const base = title
+        while (used.has(title)) {
+          title = `${base} ${n}`
+          n += 1
+        }
+      }
+      used.add(title)
+      out.set(id, title)
+    }
+  }
+
+  return out
+}
+
+export function withSkillTitles<T extends { id: string; publisher?: string | null; title?: string }>(
+  skills: T[],
+  universe: Array<{ id: string; publisher?: string | null }> = skills,
+): T[] {
+  const titles = uniqueSkillTitles(universe)
+  return skills.map((skill) => ({ ...skill, title: titles.get(skill.id) ?? skill.id }))
+}
+
+export function skillLabel(skill: Pick<SkillSummary, 'id' | 'title'> | string): string {
+  if (typeof skill === 'string') return skill
+  const title = skill.title?.trim()
+  return title || skill.id
 }
 
 export function scoreColor(score: number | null): string {

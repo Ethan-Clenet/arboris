@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import CloudInstallPanel from '#/components/CloudInstallPanel'
 import Icon from '#/components/Icon'
 import PageShell from '#/components/PageShell'
-import { hexToRgba } from '#/lib/catalog'
+import { hexToRgba, skillLabel } from '#/lib/catalog'
 import { useI18n } from '#/lib/i18n'
 import { getCollection } from '#/server/functions'
 import { collectionSeoTitle, entityDescription, seoHead } from '#/lib/seo'
@@ -117,7 +117,7 @@ function CollectionDetailPage() {
                     >
                       <Icon name={skill.icon} size={16} className="text-[var(--accent)]" />
                       <span className="min-w-0 flex-1">
-                        <span className="block font-mono text-[13px] font-semibold">{skill.id}</span>
+                        <span className={`block text-[13px] font-semibold ${skillLabel(skill) === skill.id ? 'font-mono' : ''}`}>{skillLabel(skill)}</span>
                         <span className="block truncate text-[12.5px] text-[var(--text-2)]">
                           {skill.tag[lang]}
                         </span>

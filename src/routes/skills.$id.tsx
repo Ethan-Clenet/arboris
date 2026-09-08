@@ -6,7 +6,7 @@ import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getSkillFileContent, getSkillPageContext } from '#/server/functions'
-import { buildSkillMarkdown, hexToRgba } from '#/lib/catalog'
+import { buildSkillMarkdown, hexToRgba, skillLabel } from '#/lib/catalog'
 import { AgentBadge } from '#/components/AgentLogo'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
 import CliCommandBar from '#/components/CliCommandBar'
@@ -29,15 +29,15 @@ export const Route = createFileRoute('/skills/$id')({
     const skill = loaderData?.skill
     if (!skill) return seoHead({ title: 'Skill', path: '/skills', noIndex: true })
     return seoHead({
-      title: skillSeoTitle(skill.id),
+      title: skillSeoTitle(skillLabel(skill)),
       path: `/skills/${skill.id}`,
-      description: entityDescription(skill.tag.fr, 'skill', skill.id),
+      description: entityDescription(skill.tag.fr, 'skill', skillLabel(skill)),
       type: 'article',
       noIndex: !isIndexableSkill(skill),
       breadcrumbs: [
         { name: 'Accueil', path: '/' },
         { name: 'Skills', path: '/skills' },
-        { name: skill.id, path: `/skills/${skill.id}` },
+        { name: skillLabel(skill), path: `/skills/${skill.id}` },
       ],
     })
   },
@@ -75,8 +75,8 @@ function SkillDetailPage() {
           {t.skill.back}
         </Link>
         <Icon name="caret-right" size={12} />
-        <span className="font-mono text-[var(--text-2)]" aria-current="page">
-          {skill.id}
+        <span className={`text-[var(--text-2)] ${skillLabel(skill) === skill.id ? 'font-mono' : ''}`} aria-current="page">
+          {skillLabel(skill)}
         </span>
       </nav>
 
@@ -123,8 +123,8 @@ function SkillDetailPage() {
               </span>
             ) : null}
           </div>
-          <h1 className="mb-3 break-words font-mono text-[30px] font-semibold leading-[1.1] tracking-[-0.01em]">
-            {skill.id}
+          <h1 className={`mb-3 break-words text-[30px] font-semibold leading-[1.1] tracking-[-0.01em] ${skillLabel(skill) === skill.id ? 'font-mono' : ''}`}>
+            {skillLabel(skill)}
           </h1>
           <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">{skill.tag[lang]}</p>
           <div className="flex flex-wrap items-center gap-3.5">
@@ -188,7 +188,7 @@ function SkillDetailPage() {
         <div>
           <section className="mb-[34px]">
             <h2 className="mb-4 font-display text-[19px] font-semibold">
-              {t.skill.doesTitle(skill.id)}
+              {t.skill.doesTitle(skillLabel(skill))}
             </h2>
             <div className="flex flex-col gap-[11px]">
               {skill.does[lang].map((text) => (
@@ -202,7 +202,7 @@ function SkillDetailPage() {
 
           <section className="mb-[34px]">
             <h2 className="mb-4 font-display text-[19px] font-semibold">
-              {t.skill.howTitle(skill.id)}
+              {t.skill.howTitle(skillLabel(skill))}
             </h2>
             <div className="flex flex-col gap-3.5">
               {t.skill.how.map((h, i) => (
@@ -221,7 +221,7 @@ function SkillDetailPage() {
 
           <section>
             <h2 className="mb-2 font-display text-[19px] font-semibold">
-              {t.skill.triggersTitle(skill.id)}
+              {t.skill.triggersTitle(skillLabel(skill))}
             </h2>
             <p className="mb-3.5 text-[13.5px] text-[var(--text-2)]">{t.skill.triggersHint}</p>
             <div className="flex flex-col gap-2.5">
@@ -393,7 +393,7 @@ function SkillDetailPage() {
       {/* Skills liés */}
       <section className="mt-12">
         <h2 className="mb-4 font-display text-[18px] font-semibold">
-          {t.skill.related(skill.id)}
+          {t.skill.related(skillLabel(skill))}
         </h2>
         <div className="grid gap-3.5 sm:grid-cols-2 md:grid-cols-3">
           {related.map((r) => {
@@ -416,7 +416,7 @@ function SkillDetailPage() {
                   >
                     <Icon name={r.icon} bold size={17} />
                   </span>
-                  <span className="truncate font-mono text-[13px] font-semibold text-[var(--text-1)]">{r.id}</span>
+                  <span className={`truncate text-[13px] font-semibold text-[var(--text-1)] ${skillLabel(r) === r.id ? 'font-mono' : ''}`}>{skillLabel(r)}</span>
                 </div>
                 <span className="line-clamp-2 text-[12.5px] leading-[1.45] text-[var(--text-2)]">{r.tag[lang]}</span>
               </Link>
