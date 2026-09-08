@@ -138,6 +138,7 @@ export const SEO_PREMIUM_PUBLISHERS = new Set([
   'CodeRabbit',
   'Context7',
   'Cypress',
+  'affaan-m',
   'ECC',
   'Figma',
   'Flox',

@@ -38,7 +38,7 @@ export interface SkillSummary {
   score: number | null
   securityRecommendation: 'SAFE' | 'CAUTION' | 'UNSAFE' | 'UNKNOWN' | null
   scannedAt: string | null
-  /** Éditeur / auteur (metadata.origin), ex. ECC. */
+  /** Éditeur / auteur (metadata.origin), ex. affaan-m. */
   publisher: string | null
   tech: string[]
   compat: string[]
@@ -313,6 +313,15 @@ export function promptForStack(stack: Stack, lang: Lang): string {
   return lang === 'fr'
     ? `Configure mon projet ${stack.label} avec les skills Arboris suivants et applique leurs bonnes pratiques : ${ids}.`
     : `Set up my ${stack.label} project with the following Arboris skills and apply their best practices: ${ids}.`
+}
+
+/** Éditeur affiché dans les filtres : Community absorbe l’ancien seau « Autres » (origin vide). */
+export const COMMUNITY_PUBLISHER = 'Community'
+
+export function listingPublisher(publisher: string | null | undefined): string {
+  if (!publisher || publisher === COMMUNITY_PUBLISHER) return COMMUNITY_PUBLISHER
+  if (publisher === 'ECC') return 'affaan-m'
+  return publisher
 }
 
 export function scoreColor(score: number | null): string {

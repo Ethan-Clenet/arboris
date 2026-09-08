@@ -64,8 +64,12 @@ export function normalizePublisher(raw: string): string {
   if (!value) return value
 
   const lower = value.toLowerCase()
-  if (lower === 'ecc' || lower === 'ecc-community' || lower.startsWith('ecc ')) return 'ECC'
+  if (lower === 'ecc' || lower === 'ecc-community' || lower.startsWith('ecc ') || lower === 'affaan-m' || lower === 'affaan') {
+    return 'affaan-m'
+  }
   if (lower === 'community') return 'Community'
+  if (lower === 'arboris') return 'Arboris'
+  if (lower === 'microsoft' || lower.startsWith('microsoft ')) return 'Microsoft'
   // Contributeurs / origines diverses → Community
   if (
     lower.startsWith('health1') ||

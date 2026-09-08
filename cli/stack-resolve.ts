@@ -87,7 +87,7 @@ export function hasSkillId(manifest: CliManifest, skillId: string): boolean {
   return Object.values(manifest.skillsByStack).some((ids) => ids.includes(skillId))
 }
 
-/** Résout un éditeur (ex. ecc → ECC) via le manifest. */
+/** Résout un éditeur (ex. ecc → affaan-m) via le manifest. */
 export function resolvePublisherId(input: string, manifest: CliManifest): string | null {
   const byPublisher = manifest.skillsByPublisher ?? {}
   const keys = Object.keys(byPublisher)
@@ -102,9 +102,14 @@ export function resolvePublisherId(input: string, manifest: CliManifest): string
   if (byLower) return byLower
 
   const aliases: Record<string, string> = {
-    ecc: 'ECC',
-    'ecc-community': 'ECC',
+    ecc: 'affaan-m',
+    'ecc-community': 'affaan-m',
+    affaan: 'affaan-m',
+    'affaan-m': 'affaan-m',
     community: 'Community',
+    arboris: 'Arboris',
+    microsoft: 'Microsoft',
+    ms: 'Microsoft',
     flox: 'Flox',
     brave: 'Brave',
     angular: 'Angular',
@@ -133,6 +138,14 @@ export function resolvePublisherId(input: string, manifest: CliManifest): string
     flutter: 'Flutter',
     dart: 'Flutter',
     figma: 'Figma',
+    huggingface: 'Hugging Face',
+    'hugging-face': 'Hugging Face',
+    hf: 'Hugging Face',
+    nous: 'Nous Research',
+    nousresearch: 'Nous Research',
+    'nous-research': 'Nous Research',
+    ollama: 'Ollama',
+    vinta: 'vinta',
     context7: 'Context7',
     ctx7: 'Context7',
     'context-7': 'Context7',
