@@ -36,8 +36,10 @@ describe('isPremiumPublisher', () => {
 
   it('accepte les éditeurs premium', () => {
     expect(isPremiumPublisher('Vercel')).toBe(true)
+    expect(isPremiumPublisher('affaan-m')).toBe(true)
     expect(isPremiumPublisher('ECC')).toBe(true)
     expect(isPremiumPublisher('Microsoft')).toBe(true)
+    expect(isPremiumPublisher('Arboris')).toBe(true)
     expect(isPremiumPublisher('Hugging Face')).toBe(true)
     expect(isPremiumPublisher('Ollama')).toBe(true)
     expect(isPremiumPublisher('Nous Research')).toBe(true)
@@ -52,13 +54,13 @@ describe('isPremiumPublisher', () => {
 describe('isIndexableSkill', () => {
   it('indexe une fiche propre, sûre, premium', () => {
     expect(
-      isIndexableSkill({ id: 'fastapi-patterns', score: SEO_INDEX_MIN_SCORE, publisher: 'ECC' }),
+      isIndexableSkill({ id: 'fastapi-patterns', score: SEO_INDEX_MIN_SCORE, publisher: 'affaan-m' }),
     ).toBe(true)
   })
 
   it('noindex si score trop bas ou absent', () => {
-    expect(isIndexableSkill({ id: 'fastapi-patterns', score: 69, publisher: 'ECC' })).toBe(false)
-    expect(isIndexableSkill({ id: 'fastapi-patterns', score: null, publisher: 'ECC' })).toBe(false)
+    expect(isIndexableSkill({ id: 'fastapi-patterns', score: 69, publisher: 'affaan-m' })).toBe(false)
+    expect(isIndexableSkill({ id: 'fastapi-patterns', score: null, publisher: 'affaan-m' })).toBe(false)
   })
 
   it('noindex Community même avec un bon score', () => {

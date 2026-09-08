@@ -9,6 +9,8 @@ import {
   promptFor,
   promptForStack,
   scoreColor,
+  listingPublisher,
+  COMMUNITY_PUBLISHER,
   skillMatchesStack,
   skillsForStackAndCategory,
   stackSupportsCategory,
@@ -109,6 +111,17 @@ describe('prompts et markdown', () => {
       skillIds: ['a', 'b'],
     }
     expect(promptForStack(stack, 'fr')).toContain('a, b')
+  })
+})
+
+describe('listingPublisher', () => {
+  it('fusionne origin vide et Community', () => {
+    expect(listingPublisher(null)).toBe(COMMUNITY_PUBLISHER)
+    expect(listingPublisher('')).toBe(COMMUNITY_PUBLISHER)
+    expect(listingPublisher('Community')).toBe(COMMUNITY_PUBLISHER)
+    expect(listingPublisher('Microsoft')).toBe('Microsoft')
+    expect(listingPublisher('ECC')).toBe('affaan-m')
+    expect(listingPublisher('affaan-m')).toBe('affaan-m')
   })
 })
 
