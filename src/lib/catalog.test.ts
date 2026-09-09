@@ -3,6 +3,8 @@ import type { SkillDetail, SkillSummary, Stack } from './catalog'
 import {
   buildSkillMarkdown,
   categoryIdsInGroup,
+  collectionTheme,
+  COLLECTION_THEME_ORDER,
   compatDot,
   hexToRgba,
   packIdsForStartPath,
@@ -18,6 +20,7 @@ import {
   stackSupportsCategory,
   TECH_STARTER_PACK_IDS,
 } from './catalog'
+import { COLLECTIONS } from './collections-data'
 
 const skill = (over: Partial<SkillSummary> = {}): SkillSummary => ({
   id: 'gateguard',
@@ -196,5 +199,27 @@ describe('uniqueSkillTitles (vendor)', () => {
     expect(titles.get(b)).toBe('revenue impact microsoft aibast agents library cross selling')
     expect(titles.get(a)).not.toBe(titles.get(b))
     expect(new Set(titles.values()).size).toBe(2)
+  })
+})
+
+describe('collectionTheme', () => {
+  it('classe les collections connues', () => {
+    expect(collectionTheme({ id: 'react-ts-starter' })).toBe('frontend')
+    expect(collectionTheme({ id: 'node-api-starter' })).toBe('backend')
+    expect(collectionTheme({ id: 'prisma-postgres-starter' })).toBe('data')
+    expect(collectionTheme({ id: 'docker-ops-starter' })).toBe('ops')
+    expect(collectionTheme({ id: 'ship-safely' })).toBe('security')
+  })
+
+  it('renvoie null pour un id inconnu', () => {
+    expect(collectionTheme({ id: 'unknown-collection' })).toBeNull()
+  })
+
+  it('classe toutes les collections du seed (map synchronisée)', () => {
+    for (const c of COLLECTIONS) {
+      const theme = collectionTheme(c)
+      expect(theme, `collection ${c.id} sans thème`).not.toBeNull()
+      expect(COLLECTION_THEME_ORDER).toContain(theme)
+    }
   })
 })
