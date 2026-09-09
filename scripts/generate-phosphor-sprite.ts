@@ -32,6 +32,7 @@ const STATIC_ICONS = [
   'chart-line-up',
   'check',
   'check-circle',
+  'circles-four',
   'circuitry',
   'clock',
   'cloud',

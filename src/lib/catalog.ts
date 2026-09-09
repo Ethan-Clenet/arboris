@@ -81,6 +81,49 @@ export interface CollectionDetail extends CollectionSummary {
   commands: CommandSummary[]
 }
 
+/** Thèmes de collections (facette de filtre, présentation uniquement). */
+export type CollectionThemeKey = 'frontend' | 'backend' | 'data' | 'ops' | 'security'
+
+/** Ordre d'affichage des thèmes dans les filtres. */
+export const COLLECTION_THEME_ORDER: CollectionThemeKey[] = [
+  'frontend',
+  'backend',
+  'data',
+  'ops',
+  'security',
+]
+
+/** Classement thématique explicite par id de collection. */
+const COLLECTION_THEME_BY_ID: Record<string, CollectionThemeKey> = {
+  'react-ts-starter': 'frontend',
+  'next-react-starter': 'frontend',
+  'angular-starter': 'frontend',
+  'node-api-starter': 'backend',
+  'fastapi-starter': 'backend',
+  'spring-boot-starter': 'backend',
+  'dotnet-starter': 'backend',
+  'prisma-postgres-starter': 'data',
+  'drizzle-starter': 'data',
+  'supabase-starter': 'data',
+  'firebase-starter': 'data',
+  'convex-starter': 'data',
+  'command-starter': 'ops',
+  'ops-day-two': 'ops',
+  'docker-ops-starter': 'ops',
+  'n8n-starter': 'ops',
+  'ansible-starter': 'ops',
+  sonar: 'security',
+  'ship-safely': 'security',
+}
+
+/**
+ * Thème d'une collection pour la facette de filtre. `null` si non classée
+ * (elle reste visible sous « Tous » mais sans thème dédié).
+ */
+export function collectionTheme(collection: Pick<CollectionSummary, 'id'>): CollectionThemeKey | null {
+  return COLLECTION_THEME_BY_ID[collection.id] ?? null
+}
+
 /** Ordre + couleurs de pastille des compatibilités (présentation, non stocké). */
 export const COMPAT_ORDER = ['Claude', 'Cursor', 'Codex', 'Copilot'] as const
 
