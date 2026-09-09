@@ -1,8 +1,9 @@
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import CloudInstallPanel from '#/components/CloudInstallPanel'
+import CollectionTile from '#/components/CollectionTile'
 import Icon from '#/components/Icon'
 import PageShell from '#/components/PageShell'
-import { hexToRgba, skillLabel } from '#/lib/catalog'
+import { skillLabel } from '#/lib/catalog'
 import { useI18n } from '#/lib/i18n'
 import { getCollection } from '#/server/functions'
 import { collectionSeoTitle, entityDescription, seoHead } from '#/lib/seo'
@@ -51,12 +52,7 @@ function CollectionDetailPage() {
         <div className="mb-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
           <div>
             <div className="mb-4 flex items-start gap-3.5">
-              <span
-                className="grid h-14 w-14 flex-none place-items-center rounded-[14px]"
-                style={{ background: hexToRgba(collection.color, 0.14), color: collection.color }}
-              >
-                <Icon name={collection.icon} bold size={26} />
-              </span>
+              <CollectionTile collection={collection} box="h-14 w-14 rounded-[14px]" glyph={26} />
               <div>
                 <div className="mb-1.5 flex flex-wrap items-center gap-2">
                   <h1 className="font-display text-[28px] font-semibold tracking-[-0.02em] text-[var(--text-1)]">

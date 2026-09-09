@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
+import CollectionTile from '#/components/CollectionTile'
 import PageShell from '#/components/PageShell'
 import {
   collectionTheme,
@@ -296,12 +297,7 @@ function CollectionCard({ collection }: { collection: CollectionSummary }) {
       className="flex cursor-pointer flex-col rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow-card)] transition-colors hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]"
     >
       <div className="mb-3 flex items-start gap-3">
-        <span
-          className="grid h-11 w-11 flex-none place-items-center rounded-[11px]"
-          style={{ background: hexToRgba(collection.color, 0.14), color: collection.color }}
-        >
-          <Icon name={collection.icon} bold size={20} />
-        </span>
+        <CollectionTile collection={collection} box="h-11 w-11 rounded-[11px]" glyph={20} />
         <div className="min-w-0 flex-1">
           <div className="mb-1 flex flex-wrap items-center gap-2">
             <span className="font-display text-[17px] font-semibold text-[var(--text-1)]">
