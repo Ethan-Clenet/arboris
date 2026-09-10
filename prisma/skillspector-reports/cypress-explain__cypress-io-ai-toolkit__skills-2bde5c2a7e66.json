@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T08:19:09.386895+00:00",
+  "scanMode": "static",
+  "skillName": "cypress-explain",
+  "contentHash": "a6070fc566bce287518458f496cf6cf9db29b6f3ad16e425bb5e94cf3f72ef57",
+  "scannerVersion": "2.5.3"
+}

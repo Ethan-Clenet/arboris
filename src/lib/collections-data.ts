@@ -443,9 +443,9 @@ export const COLLECTIONS: CollectionSeed[] = [
       'E2E and component testing with Cypress: write, explain and fix tests, drive the cy-cloud and cypress tap CLIs, plus official docs.',
     kind: 'pack',
     skillIds: [
-      'cypress-author',
-      'cypress-explain',
-      'cypress-docs',
+      'cypress-author__cypress-io-ai-toolkit__skills-f7f2bc4eede4',
+      'cypress-explain__cypress-io-ai-toolkit__skills-2bde5c2a7e66',
+      'cypress-docs__cypress-io-ai-toolkit__skills-eb326601e05e',
       'cypress-tap__cypress-io-ai-toolkit__skills-4767aa6d491b',
       'cypress-cloud-cli__cypress-io-ai-toolkit__skills-2973b89d6fbe',
     ],
