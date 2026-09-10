@@ -1,0 +1,27 @@
+{
+  "riskScore": 18,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "YR1",
+      "category": "YARA Match",
+      "pattern": "YARA rule 'info_stealer': Information stealer patterns (credential harvesting, browser data theft) [malware]",
+      "severity": "HIGH",
+      "confidence": 0.75,
+      "finding": "cookies, headers, request URLs, and runtime environment values inside the active request. Do not capture them at module scope; edge; cookies, or session data in a module variable. Create config and re",
+      "explanation": "YARA rule matched a known malware signature (reverse shell, backdoor, ransomware, C2 framework, or info stealer).",
+      "remediation": "Remove the malware payload or compromised file entirely. Investigate how it entered the skill and audit all other artifacts for additional indicators of compromise.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 26
+      }
+    }
+  ],
+  "scannedAt": "2026-09-10T07:59:09.084267+00:00",
+  "scanMode": "static",
+  "skillName": "start-server-core",
+  "contentHash": "70fc046f840fc4325d67ddb9da30db8fece673843eb2b743c48e032c2cb1be7a",
+  "scannerVersion": "2.5.3"
+}

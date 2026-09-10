@@ -116,6 +116,24 @@ const SOURCES = [
   { repo: 'prisma/mrkdwn', publisher: 'Prisma', roots: ['.'] },
   { repo: 'prisma/studio', publisher: 'Prisma', roots: ['.'] },
   { repo: 'prisma/prisma-cli', publisher: 'Prisma', roots: ['.'] },
+
+  // TanStack — https://skillsmp.com/creators/tanstack
+  { repo: 'TanStack/table', publisher: 'TanStack', roots: ['.'] },
+  { repo: 'TanStack/ai', publisher: 'TanStack', roots: ['.'] },
+  { repo: 'TanStack/router', publisher: 'TanStack', roots: ['.'] },
+  { repo: 'TanStack/db', publisher: 'TanStack', roots: ['.'] },
+  { repo: 'TanStack/charts', publisher: 'TanStack', roots: ['.'] },
+  { repo: 'TanStack/devtools', publisher: 'TanStack', roots: ['.'] },
+  { repo: 'TanStack/markdown', publisher: 'TanStack', roots: ['.'] },
+  { repo: 'TanStack/cli', publisher: 'TanStack', roots: ['.'] },
+  { repo: 'TanStack/highlight', publisher: 'TanStack', roots: ['.'] },
+  { repo: 'TanStack/intent', publisher: 'TanStack', roots: ['.'] },
+  { repo: 'TanStack/tanstack.com', publisher: 'TanStack', roots: ['.'] },
+
+  // cypress-io — https://skillsmp.com/creators/cypress-io
+  { repo: 'cypress-io/ai-toolkit', publisher: 'Cypress', roots: ['.'] },
+  { repo: 'cypress-io/cypress', publisher: 'Cypress', roots: ['.'] },
+  { repo: 'cypress-io/cypress-design', publisher: 'Cypress', roots: ['.'] },
 ]
 
 function slugifyForId(input) {
@@ -273,13 +291,23 @@ function sparseClone(repo, ref, workdir) {
 }
 
 function main() {
+  // Filtre optionnel par éditeur : `node scripts/import-vendor-skills.mjs TanStack Cypress`
+  const filters = process.argv.slice(2).map((s) => s.toLowerCase())
+  const sources = filters.length
+    ? SOURCES.filter((s) => filters.includes(s.publisher.toLowerCase()))
+    : SOURCES
+  if (filters.length && sources.length === 0) {
+    console.error(`Aucun éditeur ne correspond à : ${filters.join(', ')}`)
+    process.exit(1)
+  }
+
   const scratch = mkdtempSync(join(tmpdir(), 'arboris-vendor-'))
   const summary = []
   let skills = 0
   let commands = 0
 
   try {
-    for (const source of SOURCES) {
+    for (const source of sources) {
       const ref = source.ref ?? 'HEAD'
       const repoDir = join(scratch, source.repo.replace('/', '__'))
       console.log(`\n→ ${source.repo} (${source.publisher})`)

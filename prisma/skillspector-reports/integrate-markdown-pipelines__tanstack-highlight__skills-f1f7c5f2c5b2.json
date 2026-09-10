@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:36.250431+00:00",
+  "scanMode": "static",
+  "skillName": "integrate-markdown-pipelines",
+  "contentHash": "194f90ce5d7b10c28c4c4f65ec1233fafeb699c19736710ff531034bfede2880",
+  "scannerVersion": "2.5.3"
+}

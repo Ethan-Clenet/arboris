@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:59:28.280797+00:00",
+  "scanMode": "static",
+  "skillName": "vue-db",
+  "contentHash": "84643860718629e80cae6a25ce6f47f27d195fba2b1f3e53a348cebe3c9b5ab7",
+  "scannerVersion": "2.5.3"
+}

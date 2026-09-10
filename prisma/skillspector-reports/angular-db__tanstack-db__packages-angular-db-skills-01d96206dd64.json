@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:57:41.429211+00:00",
+  "scanMode": "static",
+  "skillName": "angular-db",
+  "contentHash": "7c8eaddd03d8f551789090ce52c8bc2dc7de6e4924ddc0b575e0a6c0e1a125bd",
+  "scannerVersion": "2.5.3"
+}

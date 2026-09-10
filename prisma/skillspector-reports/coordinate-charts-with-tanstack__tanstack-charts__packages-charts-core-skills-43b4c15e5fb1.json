@@ -1,0 +1,27 @@
+{
+  "riskScore": 6,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "MP3",
+      "category": "Memory Poisoning",
+      "pattern": "Memory Manipulation",
+      "severity": "HIGH",
+      "confidence": 0.27,
+      "finding": "corrupt state",
+      "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+      "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+      "location": {
+        "file": "references/query-db-and-sync.md",
+        "start_line": 73
+      }
+    }
+  ],
+  "scannedAt": "2026-09-10T07:57:54.848132+00:00",
+  "scanMode": "static",
+  "skillName": "coordinate-charts-with-tanstack",
+  "contentHash": "03c6ddf0b740a2aa083f1652cbf95ea89e6adecdf570c85302370571d19f352f",
+  "scannerVersion": "2.5.3"
+}

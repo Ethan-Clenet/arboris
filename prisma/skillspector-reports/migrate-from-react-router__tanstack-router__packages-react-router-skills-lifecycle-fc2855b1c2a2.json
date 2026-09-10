@@ -1,0 +1,26 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 412
+      }
+    }
+  ],
+  "scannedAt": "2026-09-10T07:58:39.052136+00:00",
+  "scanMode": "static",
+  "skillName": "migrate-from-react-router",
+  "contentHash": "90b8b1a996f16a4b0c5e291dca0acce4219c95964b1a8eabd00939bdb171c0de",
+  "scannerVersion": "2.5.3"
+}

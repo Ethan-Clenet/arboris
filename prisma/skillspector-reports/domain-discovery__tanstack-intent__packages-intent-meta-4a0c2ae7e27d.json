@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:20.799472+00:00",
+  "scanMode": "static",
+  "skillName": "domain-discovery",
+  "contentHash": "5ac5bc0ed77250a47281ce120ee0f5850a3a93eb7df002e5bf15605fd7171e05",
+  "scannerVersion": "2.5.3"
+}

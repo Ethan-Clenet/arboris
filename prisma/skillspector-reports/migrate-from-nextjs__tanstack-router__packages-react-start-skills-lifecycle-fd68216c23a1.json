@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:38.877269+00:00",
+  "scanMode": "static",
+  "skillName": "migrate-from-nextjs",
+  "contentHash": "a05c1d2299689a3321a7d4462c93456fd529ea53478e3696c74466a30d5a7a4d",
+  "scannerVersion": "2.5.3"
+}

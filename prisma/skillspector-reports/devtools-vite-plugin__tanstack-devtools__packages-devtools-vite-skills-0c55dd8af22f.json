@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:13.644813+00:00",
+  "scanMode": "static",
+  "skillName": "devtools-vite-plugin",
+  "contentHash": "a837a21c384f02bc69408767a2e2a35b73a5b60272e1f202b8e1e333421b0eb0",
+  "scannerVersion": "2.5.3"
+}

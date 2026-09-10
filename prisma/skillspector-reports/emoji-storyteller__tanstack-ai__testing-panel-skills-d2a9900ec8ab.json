@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:20.885638+00:00",
+  "scanMode": "static",
+  "skillName": "emoji-storyteller",
+  "contentHash": "6ad3156ac6c4ea11f615db68ec08c354a909bf04217086e91a5fdb5bcfb65125",
+  "scannerVersion": "2.5.3"
+}

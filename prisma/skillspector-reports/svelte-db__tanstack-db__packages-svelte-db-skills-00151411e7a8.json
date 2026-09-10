@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:59:10.224228+00:00",
+  "scanMode": "static",
+  "skillName": "svelte-db",
+  "contentHash": "850dc24ea8cdcd0392abd72199da25cd25174e49c0ced899234ff8f0cbb0a749",
+  "scannerVersion": "2.5.3"
+}

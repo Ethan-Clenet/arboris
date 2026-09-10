@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:55.700942+00:00",
+  "scanMode": "static",
+  "skillName": "react-rendering",
+  "contentHash": "28bba9a7216925a29f4963276b02d0105acb182a63fcfaa4565b3eb3ad6330b4",
+  "scannerVersion": "2.5.3"
+}

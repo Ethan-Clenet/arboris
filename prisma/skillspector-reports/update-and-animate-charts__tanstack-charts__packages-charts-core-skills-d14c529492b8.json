@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:59:27.088825+00:00",
+  "scanMode": "static",
+  "skillName": "update-and-animate-charts",
+  "contentHash": "7b9f49ca0472643e841b7780e165f8052febc61eacf05931252eea3308ee0552",
+  "scannerVersion": "2.5.3"
+}

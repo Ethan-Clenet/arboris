@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:57:52.826690+00:00",
+  "scanMode": "static",
+  "skillName": "configure-scales-guides-color",
+  "contentHash": "de94e55e612a01082cfb4858ea7df4e96fb28aeaee0ef3c16f3996133331fea7",
+  "scannerVersion": "2.5.3"
+}

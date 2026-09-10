@@ -1,0 +1,39 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "collection-setup/references/electric-adapter.md",
+        "start_line": 188
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "collection-setup/references/electric-adapter.md",
+        "start_line": 196
+      }
+    }
+  ],
+  "scannedAt": "2026-09-10T07:58:05.821117+00:00",
+  "scanMode": "static",
+  "skillName": "db-core",
+  "contentHash": "216dccfe13a47def7214a1d89aea74280e0a96c388902cdf0c7e6459da6e0bd5",
+  "scannerVersion": "2.5.3"
+}

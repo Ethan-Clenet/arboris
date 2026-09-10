@@ -98,6 +98,7 @@ const COLLECTION_THEME_BY_ID: Record<string, CollectionThemeKey> = {
   'react-ts-starter': 'frontend',
   'next-react-starter': 'frontend',
   'angular-starter': 'frontend',
+  'tanstack-starter': 'frontend',
   'node-api-starter': 'backend',
   'fastapi-starter': 'backend',
   'spring-boot-starter': 'backend',
@@ -112,6 +113,7 @@ const COLLECTION_THEME_BY_ID: Record<string, CollectionThemeKey> = {
   'docker-ops-starter': 'ops',
   'n8n-starter': 'ops',
   'ansible-starter': 'ops',
+  'cypress-testing': 'ops',
   sonar: 'security',
   'ship-safely': 'security',
 }

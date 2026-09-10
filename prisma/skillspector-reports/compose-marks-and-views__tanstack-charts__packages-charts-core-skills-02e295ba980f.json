@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:57:51.812000+00:00",
+  "scanMode": "static",
+  "skillName": "compose-marks-and-views",
+  "contentHash": "f6ee42a4cce0b9e2955ff2264fa261a2341463ac7d89e4e57424de3c29c7ef1a",
+  "scannerVersion": "2.5.3"
+}

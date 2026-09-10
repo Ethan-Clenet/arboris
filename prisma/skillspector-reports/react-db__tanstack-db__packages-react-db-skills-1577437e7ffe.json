@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:55.275136+00:00",
+  "scanMode": "static",
+  "skillName": "react-db",
+  "contentHash": "27dade63b4015c20356fac8790ae676d815eaa7e0b019212d94e0754d82ff7cd",
+  "scannerVersion": "2.5.3"
+}

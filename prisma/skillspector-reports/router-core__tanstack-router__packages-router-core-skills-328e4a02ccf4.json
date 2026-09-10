@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:59:00.638703+00:00",
+  "scanMode": "static",
+  "skillName": "router-core",
+  "contentHash": "ff97e75f1ea858d2316487a9b76e73d5d3546fdb702bde328d05f6eb7e1c30cc",
+  "scannerVersion": "2.5.3"
+}
