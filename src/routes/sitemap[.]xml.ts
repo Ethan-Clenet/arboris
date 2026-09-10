@@ -1,4 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { COLLECTIONS } from '#/lib/collections-data'
+import { loadEmbeddedCommands } from '#/lib/commands-embedded'
 import { isIndexableSkill, SITEMAP_INCLUDE_SKILL_PAGES } from '#/lib/seo'
 import { absoluteUrl } from '#/lib/site'
 
@@ -18,8 +20,6 @@ export const Route = createFileRoute('/sitemap.xml')({
   server: {
     handlers: {
       GET: async () => {
-        const { loadCatalog } = await import('#/server/catalog.server')
-        const catalog = await loadCatalog()
         const today = new Date().toISOString().slice(0, 10)
 
         const staticPages = [
@@ -30,17 +30,19 @@ export const Route = createFileRoute('/sitemap.xml')({
           urlEntry('/collections', { changefreq: 'weekly', priority: '0.8', lastmod: today }),
         ]
 
-        const skillPages = SITEMAP_INCLUDE_SKILL_PAGES
-          ? catalog.skills.filter(isIndexableSkill).map((s) =>
-              urlEntry(`/skills/${encodeURIComponent(s.id)}`, {
-                changefreq: 'weekly',
-                priority: '0.6',
-                lastmod: s.scannedAt?.slice(0, 10) ?? today,
-              }),
-            )
-          : []
+        // Collections & commandes : sources statiques (seed / bundle), aucune
+        // requête base de données. Le sitemap reste ainsi rapide et fiable pour
+        // les robots (pas de cold start Postgres → plus de « Impossible de
+        // récupérer le sitemap » côté Search Console).
+        const collectionPages = COLLECTIONS.map((c) =>
+          urlEntry(`/collections/${encodeURIComponent(c.id)}`, {
+            changefreq: 'weekly',
+            priority: '0.7',
+            lastmod: today,
+          }),
+        )
 
-        const commandPages = catalog.commands.map((c) =>
+        const commandPages = loadEmbeddedCommands().map((c) =>
           urlEntry(`/commands/${encodeURIComponent(c.id)}`, {
             changefreq: 'weekly',
             priority: '0.6',
@@ -48,13 +50,25 @@ export const Route = createFileRoute('/sitemap.xml')({
           }),
         )
 
-        const collectionPages = (catalog.collections ?? []).map((c) =>
-          urlEntry(`/collections/${encodeURIComponent(c.id)}`, {
-            changefreq: 'weekly',
-            priority: '0.7',
-            lastmod: today,
-          }),
-        )
+        // Fiches skills : désactivées par défaut (sitemap hub-first). On ne
+        // touche la base que si elles sont réactivées, et jamais au point de
+        // faire échouer le sitemap (fallback silencieux).
+        let skillPages: string[] = []
+        if (SITEMAP_INCLUDE_SKILL_PAGES) {
+          try {
+            const { loadCatalog } = await import('#/server/catalog.server')
+            const catalog = await loadCatalog()
+            skillPages = catalog.skills.filter(isIndexableSkill).map((s) =>
+              urlEntry(`/skills/${encodeURIComponent(s.id)}`, {
+                changefreq: 'weekly',
+                priority: '0.6',
+                lastmod: s.scannedAt?.slice(0, 10) ?? today,
+              }),
+            )
+          } catch {
+            skillPages = []
+          }
+        }
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
