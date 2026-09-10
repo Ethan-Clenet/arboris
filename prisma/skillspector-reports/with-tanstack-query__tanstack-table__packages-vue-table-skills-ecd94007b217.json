@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:59:33.508748+00:00",
+  "scanMode": "static",
+  "skillName": "with-tanstack-query",
+  "contentHash": "45c1a0bb3adeeba248c9099617c529b6a4d4814b2e45944faa45d170da7e4b56",
+  "scannerVersion": "2.5.3"
+}

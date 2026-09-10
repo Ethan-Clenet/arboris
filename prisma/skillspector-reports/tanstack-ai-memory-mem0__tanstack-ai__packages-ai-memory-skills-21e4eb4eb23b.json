@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:59:19.958989+00:00",
+  "scanMode": "static",
+  "skillName": "tanstack-ai-memory-mem0",
+  "contentHash": "ae0e7be8de5e7a878e3f93e8e77727b2669c572c604b10ccabea91363296ca68",
+  "scannerVersion": "2.5.3"
+}

@@ -75,6 +75,7 @@ function publisherMeta(name: string): { icon: string; color?: string; logo?: boo
     Figma: { icon: 'pen-nib', color: PUBLISHER_LOGO_COLOR.Figma },
     'Hugging Face': { icon: 'robot', color: PUBLISHER_LOGO_COLOR['Hugging Face'] },
     'Nous Research': { icon: 'sparkle', color: PUBLISHER_LOGO_COLOR['Nous Research'] },
+    TanStack: { icon: 'code', color: PUBLISHER_LOGO_COLOR.TanStack },
     Ollama: { icon: 'cpu', color: PUBLISHER_LOGO_COLOR.Ollama },
     vinta: { icon: 'code', color: PUBLISHER_LOGO_COLOR.vinta },
     Context7: { icon: 'book-open-text', color: PUBLISHER_LOGO_COLOR.Context7 },

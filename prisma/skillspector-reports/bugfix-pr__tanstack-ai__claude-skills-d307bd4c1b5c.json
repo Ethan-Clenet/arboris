@@ -1,0 +1,27 @@
+{
+  "riskScore": 8,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA1",
+      "category": "Excessive Agency",
+      "pattern": "Unrestricted Tool Access",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "run any command",
+      "explanation": "Skill grants unrestricted tool access without appropriate constraints. An agent with unfettered tool access can perform arbitrary actions including file modification, network requests, and code execution.",
+      "remediation": "Restrict tool access to only the tools required for the skill's stated purpose. Use an explicit allowlist rather than granting blanket access.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 5
+      }
+    }
+  ],
+  "scannedAt": "2026-09-10T07:57:44.047087+00:00",
+  "scanMode": "static",
+  "skillName": "bugfix-pr",
+  "contentHash": "f42132185c4bf84927e006d300e700612a4214c3bf99f3d2f0ed34d2406e8bad",
+  "scannerVersion": "2.5.3"
+}

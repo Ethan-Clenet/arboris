@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:33.595261+00:00",
+  "scanMode": "static",
+  "skillName": "haiku",
+  "contentHash": "3f46cf2a637b64abac05af8990ee97246435ab6bd504f0e0ffe133ec4e6b3476",
+  "scannerVersion": "2.5.3"
+}

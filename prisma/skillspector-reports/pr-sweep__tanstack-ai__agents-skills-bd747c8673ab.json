@@ -1,0 +1,41 @@
+{
+  "riskScore": 26,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 2,
+  "issues": [
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "git push --force-with-lease` + CI approve** for PRs that pass security and are marked actionable, **in the same turn**. `--apply` on the invocation is consent — do not wait for a second yes. Still **n",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 41
+      }
+    },
+    {
+      "id": "TM1",
+      "category": "Tool Misuse",
+      "pattern": "Tool Parameter Abuse",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "git push --force-with-lease\n# Forks: push to the upstream `gh pr checkout` set (often not origin).\n# If no upstream: git push --force-with-lease <fork-remote> HEAD:<headRefName>\n\nAFTER=$(gh pr view <N",
+      "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+      "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 321
+      }
+    }
+  ],
+  "scannedAt": "2026-09-10T07:58:51.485583+00:00",
+  "scanMode": "static",
+  "skillName": "pr-sweep",
+  "contentHash": "345a10a01eec8ea2f28eeb18e62262ff7f91cb5efea53c961de0d4615fa580d9",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:59:41.185135+00:00",
+  "scanMode": "static",
+  "skillName": "cy-ui-illustration",
+  "contentHash": "3bf94c76bc18c3281ca0968e485f9c5657b938acf0e21f069883267868534592",
+  "scannerVersion": "2.5.3"
+}

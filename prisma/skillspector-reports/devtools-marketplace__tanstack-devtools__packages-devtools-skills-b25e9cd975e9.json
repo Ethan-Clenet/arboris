@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:11.230866+00:00",
+  "scanMode": "static",
+  "skillName": "devtools-marketplace",
+  "contentHash": "bfce1e4c6f1c9f69ec771250a3fefe809fb750c5f9dad522fc5a440f4c43c07f",
+  "scannerVersion": "2.5.3"
+}

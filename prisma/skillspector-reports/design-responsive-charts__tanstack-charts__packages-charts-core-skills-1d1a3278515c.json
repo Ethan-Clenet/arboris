@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:07.100795+00:00",
+  "scanMode": "static",
+  "skillName": "design-responsive-charts",
+  "contentHash": "c91f8228be089951573566f4ddaf66c373994201b59b0cc68532d2fe416a2495",
+  "scannerVersion": "2.5.3"
+}

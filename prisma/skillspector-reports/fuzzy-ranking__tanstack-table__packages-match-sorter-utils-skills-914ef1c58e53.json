@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:23.369207+00:00",
+  "scanMode": "static",
+  "skillName": "fuzzy-ranking",
+  "contentHash": "a7c9ab991331ab2978cc92eb6c49b4410e4d96851600b6cb9043fc1bb068f0fc",
+  "scannerVersion": "2.5.3"
+}

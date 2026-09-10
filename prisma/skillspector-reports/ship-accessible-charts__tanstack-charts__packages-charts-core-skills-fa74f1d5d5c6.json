@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:59:03.427687+00:00",
+  "scanMode": "static",
+  "skillName": "ship-accessible-charts",
+  "contentHash": "6153523b3adf09e3128d5c164ab0b87d88206c370a9ace60b00748f0e37381ad",
+  "scannerVersion": "2.5.3"
+}

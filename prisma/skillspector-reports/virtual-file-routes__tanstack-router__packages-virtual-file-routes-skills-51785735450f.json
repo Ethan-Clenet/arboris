@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:59:27.388032+00:00",
+  "scanMode": "static",
+  "skillName": "virtual-file-routes",
+  "contentHash": "3725999d84c1dcdcc42915ba422b7d9c64abab4384e7166c4236bc9f158b75fe",
+  "scannerVersion": "2.5.3"
+}

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:44.759952+00:00",
+  "scanMode": "static",
+  "skillName": "migrate-v8-to-v9",
+  "contentHash": "0a318a6161686f4e4cab2f62d45c5967647945b5dba588212c7a33fbd0773295",
+  "scannerVersion": "2.5.3"
+}

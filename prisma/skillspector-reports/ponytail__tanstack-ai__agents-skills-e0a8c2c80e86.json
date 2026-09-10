@@ -1,0 +1,27 @@
+{
+  "riskScore": 3,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "EA3",
+      "category": "Excessive Agency",
+      "pattern": "Scope Creep",
+      "severity": "LOW",
+      "confidence": 0.7,
+      "finding": "NOT LIMITED TO",
+      "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+      "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+      "location": {
+        "file": "LICENSE",
+        "start_line": 16
+      }
+    }
+  ],
+  "scannedAt": "2026-09-10T07:58:48.734933+00:00",
+  "scanMode": "static",
+  "skillName": "ponytail",
+  "contentHash": "8b5723d53805f8e0a6e92de51aa3b264e83ecaa7f3e175c509db7eabd3809c28",
+  "scannerVersion": "2.5.3"
+}

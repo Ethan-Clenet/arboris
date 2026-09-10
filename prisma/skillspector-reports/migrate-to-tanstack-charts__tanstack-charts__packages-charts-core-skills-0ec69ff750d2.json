@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:40.270820+00:00",
+  "scanMode": "static",
+  "skillName": "migrate-to-tanstack-charts",
+  "contentHash": "2a258a828d931d5b258309461a5fd5e6f7bb62e0224339ec90b8135336aba1c0",
+  "scannerVersion": "2.5.3"
+}

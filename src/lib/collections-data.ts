@@ -402,6 +402,56 @@ export const COLLECTIONS: CollectionSeed[] = [
     commandIds: [...DEV_LOOP_COMMANDS, 'docker-rebuild', 'sync-env'],
     sort: 22,
   },
+
+  // ── Créateurs SkillsMP ──────────────────────────────────────────────────
+
+  {
+    id: 'tanstack-starter',
+    icon: 'atom',
+    color: '#FF4154',
+    labelFr: 'TanStack',
+    labelEn: 'TanStack',
+    briefFr:
+      'L’écosystème TanStack pour ton agent : Router, Table, DB, AI, CLI, Devtools, Markdown et Charts — skills officiels pour des apps typées.',
+    briefEn:
+      'The TanStack ecosystem for your agent: Router, Table, DB, AI, CLI, Devtools, Markdown and Charts — official skills for typed apps.',
+    kind: 'pack',
+    skillIds: [
+      'router-core__tanstack-router__packages-router-core-skills-328e4a02ccf4',
+      'react-router__tanstack-router__packages-react-router-skills-b72f526e5a17',
+      'getting-started__tanstack-table__packages-react-table-skills-d0a18e2e6b35',
+      'db-core__tanstack-db__packages-db-skills-bf749623722c',
+      'react-db__tanstack-db__packages-react-db-skills-1577437e7ffe',
+      'ai-core__tanstack-ai__packages-ai-skills-7d55d561d2b9',
+      'create-app-scaffold__tanstack-cli__packages-cli-skills-18a29568da8c',
+      'devtools-app-setup__tanstack-devtools__packages-devtools-skills-95701495e0a5',
+      'render-markdown__tanstack-markdown__skills-0187275deb8b',
+      'design-a-chart__tanstack-charts__packages-charts-core-skills-0dfd76b25145',
+    ],
+    commandIds: [],
+    sort: 25,
+  },
+  {
+    id: 'cypress-testing',
+    icon: 'flask',
+    color: '#69D3A7',
+    labelFr: 'Cypress',
+    labelEn: 'Cypress',
+    briefFr:
+      'Tests E2E et composant avec Cypress : écrire, expliquer et corriger des tests, piloter la CLI cy-cloud et cypress tap, plus la doc officielle.',
+    briefEn:
+      'E2E and component testing with Cypress: write, explain and fix tests, drive the cy-cloud and cypress tap CLIs, plus official docs.',
+    kind: 'pack',
+    skillIds: [
+      'cypress-author__cypress-io-ai-toolkit__skills-f7f2bc4eede4',
+      'cypress-explain__cypress-io-ai-toolkit__skills-2bde5c2a7e66',
+      'cypress-docs__cypress-io-ai-toolkit__skills-eb326601e05e',
+      'cypress-tap__cypress-io-ai-toolkit__skills-4767aa6d491b',
+      'cypress-cloud-cli__cypress-io-ai-toolkit__skills-2973b89d6fbe',
+    ],
+    commandIds: [],
+    sort: 26,
+  },
 ]
 
 export function findCollectionSeed(id: string): CollectionSeed | undefined {

@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:57:56.911908+00:00",
+  "scanMode": "static",
+  "skillName": "create-table-hook",
+  "contentHash": "a2ca041237a4e83ae344df610726192b49e37291c0f330d0741575119e052d80",
+  "scannerVersion": "2.5.3"
+}

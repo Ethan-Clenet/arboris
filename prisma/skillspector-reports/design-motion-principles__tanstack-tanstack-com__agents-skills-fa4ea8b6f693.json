@@ -1,0 +1,125 @@
+{
+  "riskScore": 27,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 8,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!--\n  Demo Shell — design-motion-principles\n  =====================================\n\n  Minimal, isolated reference for a single demo card. The agent reads this\n  during STEP 3 of the audit workflow (",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/demo-shell.html",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- DEMO-CARD-MOTION-SLOT-{n}\n           Per-finding motion-target element goes here. Its class must\n           match the rules in MOTION-CODE-SLOT-{n} above:\n             <div class=\"demo-{n}__mt\">.",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/demo-shell.html",
+        "start_line": 394
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.21,
+      "finding": "<!-- Global theme switch (Dark/Light radios) -->\n  <!-- Header (eyebrow, title, lede, meta, stats) -->\n  <!-- Overall Assessment -->\n  <!-- 01 · Lens summary table -->\n  <!-- 02 · Where the timings la",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/output-format.md",
+        "start_line": 46
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.175,
+      "finding": "<!--\n  ════════════════════════════════════════════════════════════════════\n  design-motion-principles MOTION AUDIT — reference template\n  worked example: \"Tally\" (habit & streak tracker · React + Fra",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/report-template.html",
+        "start_line": 8
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- ═══════════ GLOBAL THEME TOGGLE ═══════════ -->\n      <div class=\"theme-switch\" role=\"radiogroup\" aria-label=\"Report theme\">\n        <input class=\"vh\" type=\"radio\" name=\"theme\" id=\"theme-dark\" ch",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/report-template.html",
+        "start_line": 1270
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- track: x 40..640 maps ms 0..600 -->\n            <rect\n              x=\"40\"\n              y=\"118\"\n              width=\"600\"\n              height=\"58\"\n              rx=\"10\"\n              fill=\"url(",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/report-template.html",
+        "start_line": 1511
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- ═══════════ 04 · PER-LENS — EMIL (secondary) ═══════════ -->\n      <section class=\"lens-sec\">\n        <div class=\"sec-index\">04</div>\n        <div class=\"lens-sec__head\">\n          <h3>Emil Kowal",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/report-template.html",
+        "start_line": 1928
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- FINDING 05 (Important) -->\n            <div class=\"finding-row\" data-sev=\"imp\" id=\"finding-5\">\n              <div class=\"finding-row__prose\">\n                <div class=\"find-tags\">\n             ",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/report-template.html",
+        "start_line": 2158
+      }
+    }
+  ],
+  "scannedAt": "2026-09-10T07:58:07.939856+00:00",
+  "scanMode": "static",
+  "skillName": "design-motion-principles",
+  "contentHash": "ad1aad3f8056284b7b6f7efe794c6ad33e2ca99858222ebf3e67fd92fca6f4e7",
+  "scannerVersion": "2.5.3"
+}

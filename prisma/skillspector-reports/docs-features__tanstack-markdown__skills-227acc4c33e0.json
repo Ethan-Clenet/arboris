@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "SAFE",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-10T07:58:18.492947+00:00",
+  "scanMode": "static",
+  "skillName": "docs-features",
+  "contentHash": "e13f4b37dfb03105ac03210b019114d6f70cd8cbfb3f6989a20ee9e7b606b03d",
+  "scannerVersion": "2.5.3"
+}
