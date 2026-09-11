@@ -63,6 +63,7 @@ const STATIC_ICONS = [
   'info',
   'leaf',
   'lightning',
+  'list',
   'list-magnifying-glass',
   'lock-key',
   'magic-wand',

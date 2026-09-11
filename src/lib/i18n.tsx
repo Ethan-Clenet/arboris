@@ -284,6 +284,8 @@ const fr = {
     currentPage: 'page actuelle',
     searchSkills: 'Rechercher un skill',
     filterSkills: 'Filtrer les skills',
+    openMenu: 'Ouvrir le menu',
+    closeMenu: 'Fermer le menu',
   },
   start: {
     eyebrow: 'Premier pas',
@@ -570,6 +572,8 @@ const en: typeof fr = {
     currentPage: 'current page',
     searchSkills: 'Search skills',
     filterSkills: 'Filter skills',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
   },
   start: {
     eyebrow: 'Getting started',
