@@ -49,8 +49,22 @@ describe('NotFoundPage / ServerErrorPage', () => {
 describe('Header', () => {
   it('affiche la navigation principale sans auth', () => {
     render(wrap(<Header />))
-    expect(screen.getByRole('navigation', { name: /navigation principale/i })).toBeTruthy()
-    expect(screen.getByRole('link', { name: 'Skills' })).toBeTruthy()
+    expect(screen.getAllByRole('navigation', { name: /navigation principale/i }).length).toBeGreaterThan(0)
+    expect(screen.getAllByRole('link', { name: 'Skills' }).length).toBeGreaterThan(0)
     expect(screen.queryByRole('link', { name: 'Connexion' })).toBeNull()
+  })
+
+  it('ouvre et ferme le menu mobile au clic', async () => {
+    const user = userEvent.setup()
+    render(wrap(<Header />))
+    const toggle = screen.getByRole('button', { name: /ouvrir le menu/i })
+    expect(toggle.getAttribute('aria-expanded')).toBe('false')
+    expect(document.getElementById('mobile-nav')).toBeNull()
+    await user.click(toggle)
+    expect(toggle.getAttribute('aria-expanded')).toBe('true')
+    expect(document.getElementById('mobile-nav')).toBeTruthy()
+    expect(screen.getByRole('button', { name: /fermer le menu/i })).toBeTruthy()
+    await user.click(screen.getByRole('button', { name: /fermer le menu/i }))
+    expect(document.getElementById('mobile-nav')).toBeNull()
   })
 })
