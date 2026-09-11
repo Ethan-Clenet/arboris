@@ -12,6 +12,7 @@ Allow: /
 # https://search.google.com/search-console
 
 Sitemap: ${SITE_URL}/sitemap.xml
+Sitemap: ${SITE_URL}/sitemap_index.xml
 `
         return new Response(body, {
           headers: {

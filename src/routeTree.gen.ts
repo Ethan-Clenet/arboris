@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as Sitemap_indexDotxmlRouteImport } from './routes/sitemap_index[.]xml'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as Google2d4e68e917b5f045DothtmlRouteImport } from './routes/google2d4e68e917b5f045[.]html'
@@ -23,6 +24,11 @@ import { Route as SkillsIdRouteImport } from './routes/skills.$id'
 import { Route as CommandsIdRouteImport } from './routes/commands.$id'
 import { Route as CollectionsIdRouteImport } from './routes/collections.$id'
 
+const Sitemap_indexDotxmlRoute = Sitemap_indexDotxmlRouteImport.update({
+  id: '/sitemap_index.xml',
+  path: '/sitemap_index.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
   '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
   '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
   '/commands/$id': typeof CommandsIdRoute
   '/skills/$id': typeof SkillsIdRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
     | '/google2d4e68e917b5f045.html'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/sitemap_index.xml'
     | '/collections/$id'
     | '/commands/$id'
     | '/skills/$id'
@@ -161,6 +171,7 @@ export interface FileRouteTypes {
     | '/google2d4e68e917b5f045.html'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/sitemap_index.xml'
     | '/collections/$id'
     | '/commands/$id'
     | '/skills/$id'
@@ -176,6 +187,7 @@ export interface FileRouteTypes {
     | '/google2d4e68e917b5f045.html'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/sitemap_index.xml'
     | '/collections/$id'
     | '/commands/$id'
     | '/skills/$id'
@@ -192,6 +204,7 @@ export interface RootRouteChildren {
   Google2d4e68e917b5f045DothtmlRoute: typeof Google2d4e68e917b5f045DothtmlRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  Sitemap_indexDotxmlRoute: typeof Sitemap_indexDotxmlRoute
   CollectionsIdRoute: typeof CollectionsIdRoute
   CommandsIdRoute: typeof CommandsIdRoute
   SkillsIdRoute: typeof SkillsIdRoute
@@ -202,6 +215,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap_index.xml': {
+      id: '/sitemap_index.xml'
+      path: '/sitemap_index.xml'
+      fullPath: '/sitemap_index.xml'
+      preLoaderRoute: typeof Sitemap_indexDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -304,6 +324,7 @@ const rootRouteChildren: RootRouteChildren = {
   Google2d4e68e917b5f045DothtmlRoute: Google2d4e68e917b5f045DothtmlRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  Sitemap_indexDotxmlRoute: Sitemap_indexDotxmlRoute,
   CollectionsIdRoute: CollectionsIdRoute,
   CommandsIdRoute: CommandsIdRoute,
   SkillsIdRoute: SkillsIdRoute,
