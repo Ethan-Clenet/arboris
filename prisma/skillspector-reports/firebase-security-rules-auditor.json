@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "CAUTION",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-14T12:07:53.043012+00:00",
+  "scanMode": "static",
+  "skillName": "firebase-security-rules-auditor",
+  "contentHash": "69927a1fca3467543feb4eafaa1ff376a9b642db1095b29bfc2160c9a555ca61",
+  "scannerVersion": "2.11.2"
+}

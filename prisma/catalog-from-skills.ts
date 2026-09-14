@@ -204,7 +204,7 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
   // Overrides slug (évite les faux positifs « test » / « verification » dans la description)
   if (slug === 'shadcn') return 'frontend'
   if (slug === 'query') return 'data'
-  if (slug === 'convex-setup-auth' || slug === 'firebase-auth-basics') return 'security'
+  if (slug === 'convex-auth' || slug === 'firebase-auth-basics') return 'security'
   if (
     slug === 'skill-sonar' ||
     slug === 'gateguard' ||
@@ -362,8 +362,14 @@ function inferStacks(id: string, description: string, body: string, stacks: Stac
     'firebase-basics': ['firebase', 'js', 'ts'],
     'firebase-auth-basics': ['firebase', 'js', 'ts'],
     'firebase-firestore': ['firebase', 'js', 'ts'],
+    'firebase-security-rules-auditor': ['firebase', 'js', 'ts'],
+    'firestore-rules-creation': ['firebase', 'js', 'ts'],
+    convex: ['convex', 'ts', 'react'],
+    'convex-agent': ['convex', 'ts'],
+    'convex-test': ['convex', 'ts'],
+    'turso-cloud': ['turso', 'ts'],
     'convex-quickstart': ['convex', 'ts', 'react'],
-    'convex-setup-auth': ['convex', 'ts'],
+    'convex-auth': ['convex', 'ts'],
     'neon-postgres': ['neon', 'postgresql', 'prisma'],
     postgres: ['postgresql'],
     mysql: ['mysql'],

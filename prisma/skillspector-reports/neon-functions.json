@@ -1,9 +1,37 @@
 {
-  "riskScore": 10,
-  "severity": "LOW",
-  "recommendation": "SAFE",
-  "issueCount": 2,
+  "riskScore": 43,
+  "severity": "MEDIUM",
+  "recommendation": "CAUTION",
+  "issueCount": 5,
   "issues": [
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "Access token",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "references/mastra-studio.md",
+        "start_line": 79
+      }
+    },
+    {
+      "id": "AS3",
+      "category": "Agent Snooping",
+      "pattern": "Skill Enumeration",
+      "severity": "MEDIUM",
+      "confidence": 0.8,
+      "finding": "skills/neon/SKILL.md",
+      "explanation": "Skill enumerates or reads other installed skills. Access to other skills' SKILL.md files or the skills directory reveals prompt instructions, capabilities, and secrets that should be invisible to peer skills.",
+      "remediation": "Remove all code or instructions that list or read other skills' files or directories. Skills should operate independently; cross-skill access is a privilege escalation.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 22
+      }
+    },
     {
       "id": "RP1",
       "category": "MCP Rug Pull",
@@ -15,6 +43,20 @@
       "location": {
         "file": "SKILL.md",
         "start_line": 25
+      }
+    },
+    {
+      "id": "P9",
+      "category": "Prompt Injection",
+      "pattern": "Whitespace Padding",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "U+0020 x84",
+      "explanation": "Large whitespace padding was detected (a block of blank lines or a long run of spaces). This can push injected instructions below or to the right of the visible area so a human reviewer never sees them while the agent still reads them. Manual review of the hidden content is recommended.",
+      "remediation": "Remove the large whitespace padding (blank-line blocks or long space runs) and review any content hidden below or to the right of it. Keep skill files compact and reviewable so no instructions can be concealed off-screen.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 168
       }
     },
     {
@@ -31,8 +73,9 @@
       }
     }
   ],
-  "scannedAt": "2026-08-07T05:57:34.437890+00:00",
+  "scannedAt": "2026-09-14T12:08:14.374079+00:00",
   "scanMode": "static",
   "skillName": "neon-functions",
-  "contentHash": "a9360454b4caca0b00ea21bb99b8bb7425e20876ce0607c7f2d189075620e696"
+  "contentHash": "a9360454b4caca0b00ea21bb99b8bb7425e20876ce0607c7f2d189075620e696",
+  "scannerVersion": "2.11.2"
 }
