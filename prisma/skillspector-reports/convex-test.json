@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "CAUTION",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-14T12:07:59.988396+00:00",
+  "scanMode": "static",
+  "skillName": "convex-test",
+  "contentHash": "8d782d8ad6f6e43d85e8fb9966a01d49bd007451f950108894a64b1e7da2fceb",
+  "scannerVersion": "2.11.2"
+}

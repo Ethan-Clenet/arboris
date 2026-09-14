@@ -353,7 +353,13 @@ export const COLLECTIONS: CollectionSeed[] = [
     briefEn:
       'Firebase stack: platform basics, Auth and Firestore — to bootstrap a Google cloud app fast.',
     kind: 'pack',
-    skillIds: ['firebase-basics', 'firebase-auth-basics', 'firebase-firestore'],
+    skillIds: [
+      'firebase-basics',
+      'firebase-auth-basics',
+      'firebase-firestore',
+      'firebase-security-rules-auditor',
+      'firestore-rules-creation',
+    ],
     commandIds: [...DEV_LOOP_COMMANDS, 'sync-env'],
     sort: 19,
   },
@@ -368,7 +374,7 @@ export const COLLECTIONS: CollectionSeed[] = [
     briefEn:
       'Reactive Convex backend: quickstart + auth, TypeScript — great for a full-stack TS app without DB ops.',
     kind: 'pack',
-    skillIds: ['convex-quickstart', 'convex-setup-auth', 'typescript-advanced-types', 'react-patterns'],
+    skillIds: ['convex', 'convex-quickstart', 'convex-auth', 'typescript-advanced-types', 'react-patterns'],
     commandIds: [...DEV_LOOP_COMMANDS],
     sort: 20,
   },

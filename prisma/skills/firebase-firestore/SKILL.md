@@ -1,13 +1,10 @@
 ---
 name: firebase-firestore
 description: >-
-  Sets up, manages, and executes queries against Cloud Firestore database
-  instances, including advanced native full-text search and relational joins
-  using pipelines. You MUST unconditionally activate this skill if you plan to
-  use Firestore in any way. Use when listing or creating Firestore databases,
-  configuring security rules, designing data models, writing client SDK
-  queries (including search/joins), or checking indexes.
+  Sets up, manages, queries, and configures Cloud Firestore databases (Standard/Enterprise edition), including data modeling, security rules, indexes, and SDK integrations (Web, Python, iOS, Android, Flutter). Use when creating/listing Firestore databases, defining data models/indexes, writing SDK queries, or integrating Firestore SDKs. Don't use for Firebase Hosting, Data Connect, Auth, Storage/GCS, Crashlytics, Functions, or BigQuery.
 compatibility: This skill is best used with the Firebase CLI, but does not require it. Firebase CLI can be accessed through `npx -y firebase-tools@latest`.
+metadata:
+  category: Databases
 ---
 
 # Cloud Firestore Database and Operations
@@ -54,8 +51,7 @@ corresponding reference guides:
 ### Standard Edition (`references/standard/`)
 
 - **Provisioning**: Read [provisioning.md](references/standard/provisioning.md)
-- **Security Rules**: Read
-  [security_rules.md](references/standard/security_rules.md)
+- **Security Rules**: See the `firestore-rules-creation` skill
 - **SDK Usage**: Read [web_sdk_usage.md](references/standard/web_sdk_usage.md),
   [android_sdk_usage.md](references/standard/android_sdk_usage.md),
   [ios_setup.md](references/standard/ios_setup.md), or
@@ -69,8 +65,7 @@ corresponding reference guides:
 
 - **Data Model**: Read [data_model.md](references/enterprise/data_model.md)
 
-- **Security Rules**: Read
-  [security_rules.md](references/enterprise/security_rules.md)
+- **Security Rules**: See the `firestore-rules-creation` skill
 
 - **SDK Usage**:
 

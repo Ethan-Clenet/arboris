@@ -1,0 +1,12 @@
+{
+  "riskScore": 0,
+  "severity": "LOW",
+  "recommendation": "CAUTION",
+  "issueCount": 0,
+  "issues": [],
+  "scannedAt": "2026-09-14T12:07:55.784948+00:00",
+  "scanMode": "static",
+  "skillName": "firestore-rules-creation",
+  "contentHash": "62a47cf62c4cb922d1294eb55f9a3c9db7fb13ec664605c05d1942e37c43a9f2",
+  "scannerVersion": "2.11.2"
+}
