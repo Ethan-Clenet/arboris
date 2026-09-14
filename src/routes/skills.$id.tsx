@@ -7,6 +7,7 @@ import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getSkillFileContent, getSkillPageContext } from '#/server/functions'
 import { buildSkillMarkdown, hexToRgba, skillLabel } from '#/lib/catalog'
+import { resolveSkillGithubUrl } from '#/lib/skill-github'
 import { AgentBadge } from '#/components/AgentLogo'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
 import CliCommandBar from '#/components/CliCommandBar'
@@ -53,6 +54,8 @@ function SkillDetailPage() {
   const tint = category ? hexToRgba(category.color, 0.14) : 'var(--surface-2)'
   const publisher = skill.publisher
   const showPublisherLogo = Boolean(publisher && hasPublisherLogo(publisher))
+  const github = useMemo(() => resolveSkillGithubUrl(skill.id), [skill.id])
+  const githubLabel = github.kind === 'upstream' ? t.skill.githubUpstream : t.skill.githubMirror
   const copyContent = useMemo(
     () => fileContent ?? buildSkillMarkdown(skill, lang),
     [fileContent, skill, lang],
@@ -127,6 +130,20 @@ function SkillDetailPage() {
             {skillLabel(skill)}
           </h1>
           <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">{skill.tag[lang]}</p>
+          <div className="mb-4">
+            <a
+              href={github.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5 text-[13px] font-medium text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
+            >
+              <Icon name="arrow-square-out" size={14} />
+              <span>{githubLabel}</span>
+              {github.repo ? (
+                <span className="font-mono text-[11px] text-[var(--text-3)]">{github.repo}</span>
+              ) : null}
+            </a>
+          </div>
           <div className="flex flex-wrap items-center gap-3.5">
             <Button variant="primary" size="lg" copied={copied} onClick={handleCopy}>
               <Icon name={copied ? 'check' : 'copy'} size={16} />
@@ -340,6 +357,18 @@ function SkillDetailPage() {
               {t.skill.metaTitle}
             </div>
             <div className="flex flex-col gap-3.5">
+              <div>
+                <div className="mb-1.5 text-[12px] text-[var(--text-3)]">{t.skill.githubSource}</div>
+                <a
+                  href={github.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex max-w-full items-center gap-1.5 text-[13px] font-medium text-[var(--link)] transition-colors hover:text-[var(--link-hover)]"
+                >
+                  <Icon name="arrow-square-out" size={14} className="shrink-0" />
+                  <span className="truncate">{github.repo ?? githubLabel}</span>
+                </a>
+              </div>
               <div>
                 <div className="mb-1.5 text-[12px] text-[var(--text-3)]">{t.skill.compat}</div>
                 <div className="flex flex-wrap gap-1.5">
