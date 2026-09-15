@@ -130,20 +130,6 @@ function SkillDetailPage() {
             {skillLabel(skill)}
           </h1>
           <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">{skill.tag[lang]}</p>
-          <div className="mb-4">
-            <a
-              href={github.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5 text-[13px] font-medium text-[var(--text-2)] transition-colors hover:border-[var(--border-2)] hover:text-[var(--text-1)]"
-            >
-              <Icon name="arrow-square-out" size={14} />
-              <span>{githubLabel}</span>
-              {github.repo ? (
-                <span className="font-mono text-[11px] text-[var(--text-3)]">{github.repo}</span>
-              ) : null}
-            </a>
-          </div>
           <div className="flex flex-wrap items-center gap-3.5">
             <Button variant="primary" size="lg" copied={copied} onClick={handleCopy}>
               <Icon name={copied ? 'check' : 'copy'} size={16} />
@@ -169,12 +155,33 @@ function SkillDetailPage() {
           />
           </div>
         </div>
-        <CliCommandBar
-          args={`install ${skill.id}`}
-          copyLabel={t.skill.copyCommand}
-          copiedLabel={t.skill.copiedCommand}
-          className="w-full shrink-0 lg:mt-1 lg:max-w-[440px]"
-        />
+        <div className="flex w-full shrink-0 flex-col gap-3 lg:mt-1 lg:max-w-[440px]">
+          <CliCommandBar
+            args={`install ${skill.id}`}
+            copyLabel={t.skill.copyCommand}
+            copiedLabel={t.skill.copiedCommand}
+            className="max-w-none"
+          />
+          <a
+            href={github.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-[10px] border border-[var(--border)] bg-[var(--surface)] px-3.5 py-3 transition-colors hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]"
+          >
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-2)]">
+              <Icon name="arrow-square-out" size={16} />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
+                {t.skill.githubSource}
+              </span>
+              <span className="mt-0.5 block truncate font-mono text-[13px] font-medium text-[var(--text-1)]">
+                {github.repo ?? githubLabel}
+              </span>
+            </span>
+            <Icon name="caret-right" size={14} className="shrink-0 text-[var(--text-3)]" />
+          </a>
+        </div>
       </div>
 
       {/* Prompt */}
