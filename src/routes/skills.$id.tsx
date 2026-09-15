@@ -10,6 +10,7 @@ import { buildSkillMarkdown, hexToRgba, skillLabel } from '#/lib/catalog'
 import { resolveSkillGithubUrl } from '#/lib/skill-github'
 import { AgentBadge } from '#/components/AgentLogo'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
+import SkillGithubCard from '#/components/SkillGithubCard'
 import CliCommandBar from '#/components/CliCommandBar'
 import SecurityBadge from '#/components/SecurityBadge'
 import NvidiaLogo from '#/components/NvidiaLogo'
@@ -55,7 +56,10 @@ function SkillDetailPage() {
   const publisher = skill.publisher
   const showPublisherLogo = Boolean(publisher && hasPublisherLogo(publisher))
   const github = useMemo(() => resolveSkillGithubUrl(skill.id), [skill.id])
-  const githubLabel = github.kind === 'upstream' ? t.skill.githubUpstream : t.skill.githubMirror
+  const githubTitle =
+    publisher ||
+    (github.repo ? github.repo.split('/')[0] : null) ||
+    (github.kind === 'upstream' ? t.skill.githubUpstream : t.skill.githubMirror)
   const copyContent = useMemo(
     () => fileContent ?? buildSkillMarkdown(skill, lang),
     [fileContent, skill, lang],
@@ -156,31 +160,20 @@ function SkillDetailPage() {
           </div>
         </div>
         <div className="flex w-full shrink-0 flex-col gap-3 lg:mt-1 lg:max-w-[440px]">
+          <SkillGithubCard
+            source={github}
+            title={githubTitle}
+            publisher={publisher}
+            openLabel={t.skill.githubOpenRepo}
+            shareLabel={t.skill.githubShare}
+            sharedLabel={t.skill.githubShared}
+          />
           <CliCommandBar
             args={`install ${skill.id}`}
             copyLabel={t.skill.copyCommand}
             copiedLabel={t.skill.copiedCommand}
             className="max-w-none"
           />
-          <a
-            href={github.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 rounded-[10px] border border-[var(--border)] bg-[var(--surface)] px-3.5 py-3 transition-colors hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]"
-          >
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-2)]">
-              <Icon name="arrow-square-out" size={16} />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
-                {t.skill.githubSource}
-              </span>
-              <span className="mt-0.5 block truncate font-mono text-[13px] font-medium text-[var(--text-1)]">
-                {github.repo ?? githubLabel}
-              </span>
-            </span>
-            <Icon name="caret-right" size={14} className="shrink-0 text-[var(--text-3)]" />
-          </a>
         </div>
       </div>
 
@@ -373,7 +366,7 @@ function SkillDetailPage() {
                   className="inline-flex max-w-full items-center gap-1.5 text-[13px] font-medium text-[var(--link)] transition-colors hover:text-[var(--link-hover)]"
                 >
                   <Icon name="arrow-square-out" size={14} className="shrink-0" />
-                  <span className="truncate">{github.repo ?? githubLabel}</span>
+                  <span className="truncate">{github.repo ?? githubTitle}</span>
                 </a>
               </div>
               <div>
