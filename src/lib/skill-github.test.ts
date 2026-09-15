@@ -2,24 +2,29 @@ import { describe, expect, it } from 'vitest'
 import { resolveSkillGithubUrl } from './skill-github'
 
 describe('resolveSkillGithubUrl', () => {
-  it('résout un skill du lock vers le blob GitHub exact', () => {
+  it('résout un skill du lock vers la racine du dépôt GitHub', () => {
     const src = resolveSkillGithubUrl('supabase')
     expect(src.kind).toBe('upstream')
     expect(src.repo).toBe('supabase/agent-skills')
-    expect(src.url).toBe(
-      'https://github.com/supabase/agent-skills/blob/HEAD/skills/supabase/SKILL.md',
-    )
+    expect(src.url).toBe('https://github.com/supabase/agent-skills')
   })
 
-  it('résout un skill vendor vers une recherche GitHub dans le bon repo', () => {
+  it('résout un skill vendor vers la racine du dépôt d’origine', () => {
     const src = resolveSkillGithubUrl(
       'create-table-hook__tanstack-table__packages-react-table-skills-686c19936c82',
     )
     expect(src.kind).toBe('upstream')
     expect(src.repo).toBe('TanStack/table')
-    expect(src.url).toContain('github.com/search')
-    expect(decodeURIComponent(src.url)).toContain('repo:TanStack/table')
-    expect(decodeURIComponent(src.url)).toContain('create-table-hook')
+    expect(src.url).toBe('https://github.com/TanStack/table')
+  })
+
+  it('pointe microsoft/aibast-agents-library (pas une recherche code)', () => {
+    const src = resolveSkillGithubUrl(
+      'abandonment-analysis__microsoft-aibast-agents-library__solutions-cart-abandonment-recovery-manual-skills-8c2a6bf4f120',
+    )
+    expect(src.kind).toBe('upstream')
+    expect(src.repo).toBe('microsoft/aibast-agents-library')
+    expect(src.url).toBe('https://github.com/microsoft/aibast-agents-library')
   })
 
   it('infère org/repo pour un vendor hors liste SOURCES', () => {
@@ -28,6 +33,7 @@ describe('resolveSkillGithubUrl', () => {
     )
     expect(src.kind).toBe('upstream')
     expect(src.repo).toBe('NousResearch/hermes-agent')
+    expect(src.url).toBe('https://github.com/NousResearch/hermes-agent')
   })
 
   it('bascule sur le miroir Arboris pour un skill local sans source', () => {
