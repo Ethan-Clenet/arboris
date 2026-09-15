@@ -42,18 +42,18 @@ export default function SkillGithubCard({
     <div
       className={`overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)] ${className}`.trim()}
     >
-      <div className="flex items-start gap-3 px-4 pt-4 pb-3.5">
-        <div className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-full border border-[var(--border)] bg-[var(--surface-2)]">
+      <div className="flex items-center gap-3 px-4 pt-4 pb-3">
+        <div className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-full border border-[var(--border)] bg-[var(--surface-2)]">
           {logoName ? (
-            <PublisherLogo name={logoName} size={24} />
+            <PublisherLogo name={logoName} size={22} />
           ) : (
-            <span className="font-display text-[16px] font-semibold text-[var(--text-2)]">{initial}</span>
+            <span className="font-display text-[15px] font-semibold text-[var(--text-2)]">{initial}</span>
           )}
         </div>
-        <div className="min-w-0 flex-1 pt-0.5">
-          <div className="truncate text-[15px] font-semibold tracking-tight text-[var(--text-1)]">{title}</div>
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-[14.5px] font-semibold tracking-tight text-[var(--text-1)]">{title}</div>
           {source.repo ? (
-            <div className="mt-0.5 truncate font-mono text-[12px] text-[var(--text-3)]">{source.repo}</div>
+            <div className="mt-0.5 truncate text-[12px] text-[var(--text-3)]">{source.repo}</div>
           ) : null}
         </div>
         <button
@@ -61,13 +61,13 @@ export default function SkillGithubCard({
           onClick={() => copy(source.url, source.url, sharedLabel)}
           aria-label={shareLabel}
           title={shareLabel}
-          className={`grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-lg border transition-colors ${
+          className={`grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-lg transition-colors ${
             shared
-              ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)]'
-              : 'border-[var(--border)] bg-[var(--surface)] text-[var(--text-3)] hover:border-[var(--border-2)] hover:text-[var(--text-1)]'
+              ? 'bg-[var(--accent-soft)] text-[var(--accent)]'
+              : 'text-[var(--text-3)] hover:bg-[var(--surface-2)] hover:text-[var(--text-1)]'
           }`}
         >
-          <Icon name={shared ? 'check' : 'share-network'} size={15} />
+          <Icon name={shared ? 'check' : 'share-network'} size={16} />
         </button>
       </div>
 
@@ -76,7 +76,7 @@ export default function SkillGithubCard({
           href={source.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3.5 py-2.5 text-[13.5px] font-semibold text-[var(--text-1)] transition-colors hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]"
+          className="flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] px-3.5 py-2.5 text-[13.5px] font-semibold text-[var(--text-1)] transition-colors hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]"
         >
           <Icon name="github-logo" bold size={17} />
           <span>{openLabel}</span>
