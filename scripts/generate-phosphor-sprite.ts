@@ -57,6 +57,7 @@ const STATIC_ICONS = [
   'gear-six',
   'git-branch',
   'git-pull-request',
+  'github-logo',
   'google-logo',
   'hexagon',
   'house',

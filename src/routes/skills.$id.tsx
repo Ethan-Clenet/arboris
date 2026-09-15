@@ -7,8 +7,10 @@ import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
 import { getSkillFileContent, getSkillPageContext } from '#/server/functions'
 import { buildSkillMarkdown, hexToRgba, skillLabel } from '#/lib/catalog'
+import { resolveSkillGithubUrl } from '#/lib/skill-github'
 import { AgentBadge } from '#/components/AgentLogo'
 import SkillInstallButtons from '#/components/SkillInstallButtons'
+import SkillGithubCard from '#/components/SkillGithubCard'
 import CliCommandBar from '#/components/CliCommandBar'
 import SecurityBadge from '#/components/SecurityBadge'
 import NvidiaLogo from '#/components/NvidiaLogo'
@@ -53,6 +55,11 @@ function SkillDetailPage() {
   const tint = category ? hexToRgba(category.color, 0.14) : 'var(--surface-2)'
   const publisher = skill.publisher
   const showPublisherLogo = Boolean(publisher && hasPublisherLogo(publisher))
+  const github = useMemo(() => resolveSkillGithubUrl(skill.id), [skill.id])
+  const githubTitle =
+    publisher ||
+    (github.repo ? github.repo.split('/')[0] : null) ||
+    (github.kind === 'upstream' ? t.skill.githubUpstream : t.skill.githubMirror)
   const copyContent = useMemo(
     () => fileContent ?? buildSkillMarkdown(skill, lang),
     [fileContent, skill, lang],
@@ -152,12 +159,22 @@ function SkillDetailPage() {
           />
           </div>
         </div>
-        <CliCommandBar
-          args={`install ${skill.id}`}
-          copyLabel={t.skill.copyCommand}
-          copiedLabel={t.skill.copiedCommand}
-          className="w-full shrink-0 lg:mt-1 lg:max-w-[440px]"
-        />
+        <div className="flex w-full shrink-0 flex-col gap-3 lg:mt-1 lg:max-w-[440px]">
+          <CliCommandBar
+            args={`install ${skill.id}`}
+            copyLabel={t.skill.copyCommand}
+            copiedLabel={t.skill.copiedCommand}
+            className="max-w-none"
+          />
+          <SkillGithubCard
+            source={github}
+            title={githubTitle}
+            publisher={publisher}
+            openLabel={t.skill.githubOpenRepo}
+            shareLabel={t.skill.githubShare}
+            sharedLabel={t.skill.githubShared}
+          />
+        </div>
       </div>
 
       {/* Prompt */}
@@ -340,6 +357,18 @@ function SkillDetailPage() {
               {t.skill.metaTitle}
             </div>
             <div className="flex flex-col gap-3.5">
+              <div>
+                <div className="mb-1.5 text-[12px] text-[var(--text-3)]">{t.skill.githubSource}</div>
+                <a
+                  href={github.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex max-w-full items-center gap-1.5 text-[13px] font-medium text-[var(--link)] transition-colors hover:text-[var(--link-hover)]"
+                >
+                  <Icon name="arrow-square-out" size={14} className="shrink-0" />
+                  <span className="truncate">{github.repo ?? githubTitle}</span>
+                </a>
+              </div>
               <div>
                 <div className="mb-1.5 text-[12px] text-[var(--text-3)]">{t.skill.compat}</div>
                 <div className="flex flex-wrap gap-1.5">
