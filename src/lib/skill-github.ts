@@ -1,6 +1,7 @@
 /**
  * Résolution d’URL GitHub pour un skill du catalogue.
- * Priorité : skills-lock (chemin exact) → repo vendor (id `base__repo__…`) → miroir Arboris.
+ * Priorité : skills-lock (repo source) → repo vendor (id `base__repo__…`) → miroir Arboris.
+ * Les sources upstream pointent vers la racine du dépôt (CTA « Ouvrir le dépôt »).
  */
 import { VENDOR_GITHUB_REPOS } from '#/lib/vendor-github-repos'
 import skillsLock from '../../skills-lock.json' with { type: 'json' }
@@ -100,9 +101,8 @@ function arborisMirrorUrl(skillId: string): SkillGithubSource {
 function lockGithubUrl(skillId: string): SkillGithubSource | null {
   const entry = lockSkills[skillId]
   if (!entry?.source || !entry.skillPath) return null
-  const path = entry.skillPath.replace(/^\/+/, '')
   return {
-    url: `https://github.com/${entry.source}/blob/HEAD/${path}`,
+    url: `https://github.com/${entry.source}`,
     repo: entry.source,
     kind: 'upstream',
   }
@@ -113,10 +113,8 @@ function vendorGithubUrl(skillId: string): SkillGithubSource | null {
   if (!parsed) return null
   const repo = inferRepoFromSlug(parsed.repoSlug)
   if (!repo) return null
-  // Recherche ciblée du SKILL.md dans le dépôt d’origine (le chemin exact est perdu dans l’id).
-  const q = `repo:${repo} filename:SKILL.md ${parsed.base}`
   return {
-    url: `https://github.com/search?q=${encodeURIComponent(q)}&type=code`,
+    url: `https://github.com/${repo}`,
     repo,
     kind: 'upstream',
   }
