@@ -160,6 +160,12 @@ function SkillDetailPage() {
           </div>
         </div>
         <div className="flex w-full shrink-0 flex-col gap-3 lg:mt-1 lg:max-w-[440px]">
+          <CliCommandBar
+            args={`install ${skill.id}`}
+            copyLabel={t.skill.copyCommand}
+            copiedLabel={t.skill.copiedCommand}
+            className="max-w-none"
+          />
           <SkillGithubCard
             source={github}
             title={githubTitle}
@@ -167,12 +173,6 @@ function SkillDetailPage() {
             openLabel={t.skill.githubOpenRepo}
             shareLabel={t.skill.githubShare}
             sharedLabel={t.skill.githubShared}
-          />
-          <CliCommandBar
-            args={`install ${skill.id}`}
-            copyLabel={t.skill.copyCommand}
-            copiedLabel={t.skill.copiedCommand}
-            className="max-w-none"
           />
         </div>
       </div>
