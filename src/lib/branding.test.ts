@@ -38,6 +38,7 @@ describe('publisher logos', () => {
     expect(publisherLogoAsset('FastAPI')).toBeUndefined()
     expect(hasPublisherLogo('Supabase')).toBe(true)
     expect(publisherLogoAsset('Supabase')).toBeUndefined()
+    expect(hasPublisherLogo('supabase')).toBe(true)
     expect(hasPublisherLogo('.NET')).toBe(true)
     expect(publisherLogoAsset('.NET')).toBeUndefined()
     expect(hasPublisherLogo('Storybook')).toBe(true)

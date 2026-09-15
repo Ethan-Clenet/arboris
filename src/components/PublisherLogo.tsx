@@ -2,6 +2,7 @@ import {
   PUBLISHER_LOGO_COLOR,
   PUBLISHER_LOGO_PATH,
   publisherLogoAsset,
+  resolvePublisherLogoName,
 } from '#/lib/publisher-logos'
 
 type PublisherLogoProps = {
@@ -26,8 +27,9 @@ export default function PublisherLogo({
   inherit = false,
   alt,
 }: PublisherLogoProps) {
-  const altText = alt ?? `Logo ${name}`
-  const asset = publisherLogoAsset(name)
+  const resolved = resolvePublisherLogoName(name) ?? name
+  const altText = alt ?? `Logo ${resolved}`
+  const asset = publisherLogoAsset(resolved)
   if (asset && !inherit) {
     return (
       <img
@@ -41,9 +43,9 @@ export default function PublisherLogo({
     )
   }
 
-  const path = PUBLISHER_LOGO_PATH[name]
+  const path = PUBLISHER_LOGO_PATH[resolved]
   if (!path) return null
-  const fill = inherit ? 'currentColor' : (PUBLISHER_LOGO_COLOR[name] ?? 'currentColor')
+  const fill = inherit ? 'currentColor' : (PUBLISHER_LOGO_COLOR[resolved] ?? 'currentColor')
 
   return (
     <svg

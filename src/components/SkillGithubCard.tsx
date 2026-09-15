@@ -1,7 +1,7 @@
 import Icon from '#/components/Icon'
 import PublisherLogo from '#/components/PublisherLogo'
 import Toast from '#/components/Toast'
-import { hasPublisherLogo } from '#/lib/publisher-logos'
+import { resolvePublisherLogoName } from '#/lib/publisher-logos'
 import type { SkillGithubSource } from '#/lib/skill-github'
 import { useCopy } from '#/lib/useCopy'
 
@@ -34,7 +34,8 @@ export default function SkillGithubCard({
 }: SkillGithubCardProps) {
   const { copiedKey, copy } = useCopy(1600)
   const shared = copiedKey === source.url
-  const logoName = publisher && hasPublisherLogo(publisher) ? publisher : null
+  const logoName =
+    resolvePublisherLogoName(publisher) ?? resolvePublisherLogoName(ownerFromRepo(source.repo))
   const initial = (title.trim()[0] || ownerFromRepo(source.repo)?.[0] || 'A').toUpperCase()
 
   return (

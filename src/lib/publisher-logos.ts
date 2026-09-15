@@ -86,9 +86,65 @@ export const PUBLISHER_LOGO_ASSET: Record<string, string> = {
 }
 
 export function hasPublisherLogo(name: string): boolean {
-  return name in PUBLISHER_LOGO_ASSET || name in PUBLISHER_LOGO_PATH
+  return resolvePublisherLogoName(name) != null
 }
 
 export function publisherLogoAsset(name: string): string | undefined {
-  return PUBLISHER_LOGO_ASSET[name]
+  const resolved = resolvePublisherLogoName(name)
+  return resolved ? PUBLISHER_LOGO_ASSET[resolved] : undefined
+}
+
+/** Résout un nom d’éditeur / org GitHub vers la clé logo canonique (casse-insensible). */
+export function resolvePublisherLogoName(name: string | null | undefined): string | null {
+  if (!name) return null
+  const trimmed = name.trim()
+  if (!trimmed) return null
+  if (trimmed in PUBLISHER_LOGO_ASSET || trimmed in PUBLISHER_LOGO_PATH) return trimmed
+
+  const lower = trimmed.toLowerCase()
+  const aliases: Record<string, string> = {
+    supabase: 'Supabase',
+    microsoft: 'Microsoft',
+    huggingface: 'Hugging Face',
+    'hugging-face': 'Hugging Face',
+    'nousresearch': 'Nous Research',
+    'nous-research': 'Nous Research',
+    tanstack: 'TanStack',
+    fastapi: 'FastAPI',
+    pytorch: 'PyTorch',
+    prisma: 'Prisma',
+    vercel: 'Vercel',
+    neon: 'Neon',
+    ansible: 'Ansible',
+    alibaba: 'Alibaba',
+    storybookjs: 'Storybook',
+    storybook: 'Storybook',
+    angular: 'Angular',
+    anthropic: 'Anthropic',
+    auth0: 'Auth0',
+    brave: 'Brave',
+    cloudflare: 'Cloudflare',
+    cypress: 'Cypress',
+    'cypress-io': 'Cypress',
+    figma: 'Figma',
+    flutter: 'Flutter',
+    gemini: 'Gemini',
+    ollama: 'Ollama',
+    arboris: 'Arboris',
+    context7: 'Context7',
+    vinta: 'vinta',
+    'get-convex': 'Convex',
+    convex: 'Convex',
+    dotnet: '.NET',
+    '.net': '.NET',
+  }
+  if (aliases[lower]) return aliases[lower]
+
+  for (const key of Object.keys(PUBLISHER_LOGO_ASSET)) {
+    if (key.toLowerCase() === lower) return key
+  }
+  for (const key of Object.keys(PUBLISHER_LOGO_PATH)) {
+    if (key.toLowerCase() === lower) return key
+  }
+  return null
 }
