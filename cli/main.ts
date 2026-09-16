@@ -75,6 +75,7 @@ Exemples:
   npx arboris-cli collection command-starter --agent cursor
   npx arboris-cli collection react-ts-starter --agent cursor
   npx arboris-cli collection node-api-starter --agent cursor
+  npx arboris-cli collection prisma-postgres-starter --agent cursor
   npx arboris-cli publisher affaan-m
   npx arboris-cli publisher brave --agent cursor
   npx arboris-cli typescript --force
@@ -254,20 +255,48 @@ async function runInstallCommand(commandId: string, options: CliOptions) {
   if (skillFailed > 0) process.exit(1)
 }
 
+async function readCliVersion(): Promise<string> {
+  const candidates = [
+    join(PACKAGE_ROOT, 'package.json'),
+    join(PACKAGE_ROOT, 'packages', 'arboris-cli', 'package.json'),
+  ]
+  for (const path of candidates) {
+    try {
+      const pkg = JSON.parse(await readFile(path, 'utf-8')) as {
+        name?: string
+        version?: string
+      }
+      if (pkg.name === 'arboris-cli' && pkg.version) return pkg.version
+    } catch {
+      // essayer le chemin suivant
+    }
+  }
+  return 'dev'
+}
+
 async function runListCollections() {
-  console.log('Collections disponibles:\n')
+  const version = await readCliVersion()
+  console.log(`Collections disponibles (arboris-cli@${version}):\n`)
   for (const col of COLLECTIONS) {
     const n = col.commandIds.length + col.skillIds.length
     console.log(`  ${col.id} — ${col.labelFr} (${n} éléments, ${col.kind})`)
   }
-  console.log('\nExemple: npx arboris-cli collection command-starter')
+  console.log('\nExemple: npx arboris-cli@latest collection prisma-postgres-starter')
 }
 
 async function runInstallCollection(collectionId: string, options: CliOptions) {
   const col = findCollectionSeed(collectionId)
   if (!col) {
+    const version = await readCliVersion()
     console.error(`Collection inconnue: "${collectionId}"`)
-    console.error('Utilise: npx arboris-cli list-collections')
+    console.error(`arboris-cli@${version} — collections:`)
+    for (const known of COLLECTIONS) {
+      console.error(`  ${known.id}`)
+    }
+    console.error('Utilise: npx arboris-cli@latest list-collections')
+    console.error(
+      'Si le pack apparaît sur le site mais pas ici: npx arboris-cli@latest (évite un cache npx trop vieux).',
+    )
     process.exit(1)
   }
 

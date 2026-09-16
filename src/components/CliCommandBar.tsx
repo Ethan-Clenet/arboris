@@ -3,19 +3,21 @@ import Toast from '#/components/Toast'
 import { useCopy } from '#/lib/useCopy'
 
 type CliCommandBarProps = {
-  /** Arguments après `npx arboris-cli` (ex. `node` ou `install mon-skill`). */
+  /** Arguments après `npx arboris-cli@latest` (ex. `node` ou `install mon-skill`). */
   args: string
   copyLabel: string
   copiedLabel: string
   className?: string
 }
 
+const CLI_BIN = 'arboris-cli@latest'
+
 function CommandDisplay({ args }: { args: string }) {
   if (args.startsWith('install ')) {
     const skillId = args.slice('install '.length)
     return (
       <>
-        npx <span className="text-[#9BCB3C]">arboris-cli</span> install{' '}
+        npx <span className="text-[#9BCB3C]">{CLI_BIN}</span> install{' '}
         <span className="text-[#9BCB3C]">{skillId}</span>
       </>
     )
@@ -26,7 +28,7 @@ function CommandDisplay({ args }: { args: string }) {
     const publisher = rest.join(' ')
     return (
       <>
-        npx <span className="text-[#9BCB3C]">arboris-cli</span> {cmd}{' '}
+        npx <span className="text-[#9BCB3C]">{CLI_BIN}</span> {cmd}{' '}
         <span className="text-[#9BCB3C]">{publisher}</span>
       </>
     )
@@ -34,14 +36,14 @@ function CommandDisplay({ args }: { args: string }) {
 
   return (
     <>
-      npx <span className="text-[#9BCB3C]">arboris-cli</span> <span className="text-[#9BCB3C]">{args}</span>
+      npx <span className="text-[#9BCB3C]">{CLI_BIN}</span> <span className="text-[#9BCB3C]">{args}</span>
     </>
   )
 }
 
 export default function CliCommandBar({ args, copyLabel, copiedLabel, className = '' }: CliCommandBarProps) {
   const { copiedKey, copy } = useCopy(1600)
-  const command = `npx arboris-cli ${args}`
+  const command = `npx ${CLI_BIN} ${args}`
   const copied = copiedKey === command
 
   return (
