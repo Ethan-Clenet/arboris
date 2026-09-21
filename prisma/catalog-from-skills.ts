@@ -204,7 +204,7 @@ function inferCategory(id: string, description: string): CategorySeed['id'] {
   // Overrides slug (évite les faux positifs « test » / « verification » dans la description)
   if (slug === 'shadcn') return 'frontend'
   if (slug === 'query') return 'data'
-  if (slug === 'convex-auth' || slug === 'firebase-auth-basics') return 'security'
+  if (slug === 'convex-auth' || slug === 'firebase-auth-basics' || slug === 'neon-auth') return 'security'
   if (
     slug === 'skill-sonar' ||
     slug === 'gateguard' ||
@@ -371,6 +371,7 @@ function inferStacks(id: string, description: string, body: string, stacks: Stac
     'convex-quickstart': ['convex', 'ts', 'react'],
     'convex-auth': ['convex', 'ts'],
     'neon-postgres': ['neon', 'postgresql', 'prisma'],
+    'neon-auth': ['neon', 'ts', 'js'],
     postgres: ['postgresql'],
     mysql: ['mysql'],
     'turso-db': ['turso', 'postgresql'],
