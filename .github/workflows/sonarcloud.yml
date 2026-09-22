@@ -1,26 +1,9 @@
 name: SonarCloud
 
+# Repo privé : pas de minutes Actions gratuites une fois la limite atteinte.
+# Lancer à la main si besoin (Actions → SonarCloud → Run workflow).
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
-    paths:
-      - 'src/**'
-      - 'sonar-project.properties'
-      - '.github/workflows/sonarcloud.yml'
-      - 'vitest.config.ts'
-      - 'package.json'
-      - 'package-lock.json'
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches: [master]
-    paths:
-      - 'src/**'
-      - 'sonar-project.properties'
-      - '.github/workflows/sonarcloud.yml'
-      - 'vitest.config.ts'
-      - 'package.json'
-      - 'package-lock.json'
 
 permissions:
   contents: read
@@ -75,23 +58,8 @@ jobs:
             echo "::warning::API autoscan/activation HTTP ${code}. Si le scan échoue, désactive Automatic Analysis ici : https://sonarcloud.io/project/analysis_method?id=ThePheniX974_arboris"
           fi
 
-      # Sur une PR, l’API ALM show_pullrequest échoue (projet BOUND mais
-      # l’app GitHub ne lit pas la PR). On analyse la branche plutôt que
-      # d’échouer le premier step (annotation rouge) puis de replier.
       - name: SonarCloud Scan
-        if: github.event_name != 'pull_request'
         uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: SonarCloud Scan (branche)
-        if: github.event_name == 'pull_request'
-        uses: SonarSource/sonarqube-scan-action@v8
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_EVENT_NAME: push
-        with:
-          args: >
-            -Dsonar.branch.name=${{ github.head_ref }}
