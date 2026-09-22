@@ -40,7 +40,7 @@ export const Route = createFileRoute('/skills/')({
 })
 
 const SKILL_TABLE_COLS =
-  'grid grid-cols-[minmax(0,1.25fr)_minmax(0,1.4fr)_minmax(0,1fr)_5.5rem_7.75rem] items-center gap-x-1.5'
+  'grid grid-cols-[minmax(0,1.25fr)_minmax(0,1.6fr)_5.5rem_7.75rem] items-center gap-x-1.5'
 
 /** Nombre de lignes rendues par « page » de lazy-load. */
 const SKILLS_PAGE_SIZE = 40
@@ -448,11 +448,10 @@ function SkillsPage() {
             aria-busy={hasMore}
           >
             <div className="scroll-x">
-              <div className="min-w-[720px]">
+              <div className="min-w-[640px]">
                 <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] bg-[var(--surface-2)] px-4 py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)] sm:px-[18px]`}>
                   <div>{t.skills.colSkill}</div>
                   <div>{t.skills.colDesc}</div>
-                  <div className="min-w-0">{t.skills.colTech}</div>
                   <div className="border-l border-[var(--border)] pl-2">{t.skills.colCompat}</div>
                   <div className="text-right">{t.skills.copy}</div>
                 </div>
@@ -504,11 +503,10 @@ function SkillsTableSkeleton({ rows }: { rows: number }) {
   return (
     <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
       <div className="scroll-x">
-        <div className="min-w-[720px]">
+        <div className="min-w-[640px]">
           <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] bg-[var(--surface-2)] px-4 py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)] sm:px-[18px]`}>
             <div>{t.skills.colSkill}</div>
             <div>{t.skills.colDesc}</div>
-            <div className="min-w-0">{t.skills.colTech}</div>
             <div className="border-l border-[var(--border)] pl-2">{t.skills.colCompat}</div>
             <div className="text-right">{t.skills.copy}</div>
           </div>
@@ -537,10 +535,6 @@ function SkillRowSkeleton() {
       <div className="grid gap-1.5 self-center">
         <span className="skel h-3 w-full" />
         <span className="skel h-3 w-[78%]" />
-      </div>
-      <div className="flex items-center gap-1.5">
-        <span className="skel h-[22px] w-16 rounded-md" />
-        <span className="skel h-[22px] w-7 rounded-md" />
       </div>
       <div className="flex items-center border-l border-[var(--border)] pl-2">
         <span className="skel h-4 w-14 rounded" />
@@ -660,23 +654,6 @@ function SkillRow({
 
       <div className="min-w-0 overflow-hidden line-clamp-2 self-center text-[13px] leading-[1.4] text-[var(--text-2)]" title={skill.tag[lang]}>
         {truncateListing(skill.tag[lang], 140)}
-      </div>
-
-      <div className="flex min-w-0 items-center overflow-hidden" title={skill.tech.join(', ')}>
-        {skill.tech.length > 0 ? (
-          <div className="flex h-[22px] min-w-0 max-w-full items-center gap-1.5">
-            <span className="min-w-0 truncate rounded-md border border-[var(--border)] px-[7px] py-0.5 font-mono text-[10.5px] leading-none text-[var(--text-2)]">
-              {skill.tech[0]}
-            </span>
-            {skill.tech.length > 1 ? (
-              <span className="inline-flex h-[22px] w-7 shrink-0 items-center justify-center rounded-md border border-[var(--border)] font-mono text-[10.5px] leading-none text-[var(--text-3)]">
-                +{skill.tech.length - 1}
-              </span>
-            ) : null}
-          </div>
-        ) : (
-          <span className="text-[var(--text-3)]">—</span>
-        )}
       </div>
 
       <div className="flex items-center border-l border-[var(--border)] pl-2">
