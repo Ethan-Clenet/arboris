@@ -39,7 +39,7 @@ describe('resolveSkillGithubUrl', () => {
   it('bascule sur le miroir Arboris pour un skill local sans source', () => {
     const src = resolveSkillGithubUrl('agent-eval')
     expect(src.kind).toBe('mirror')
-    expect(src.repo).toBe('ThePheniX974/arboris')
+    expect(src.repo).toBe('affaan-m/ECC')
     expect(src.url).toContain('/prisma/skills/agent-eval')
   })
 })

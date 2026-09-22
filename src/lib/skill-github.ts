@@ -15,7 +15,7 @@ export type SkillGithubSource = {
   kind: 'upstream' | 'mirror'
 }
 
-const ARBORIS_REPO = 'ThePheniX974/arboris'
+const ARBORIS_REPO = 'affaan-m/ECC'
 const ARBORIS_SKILLS_TREE = `https://github.com/${ARBORIS_REPO}/tree/master/prisma/skills`
 
 /** Préfixes d’org connus (slug → casing GitHub), du plus long au plus court. */
