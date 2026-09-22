@@ -243,24 +243,20 @@ html[data-arboris-vt="active"]::view-transition-group(root) {
 }
 
 @keyframes shimmer-slide {
+  from {
+    transform: translate3d(-25%, 0, 0);
+  }
   to {
-    transform: translate(calc(100cqw - 100%), 0);
+    transform: translate3d(0%, 0, 0);
   }
 }
 
+/* Rotation continue du wedge — pas de paliers qui figent le highlight sur un coin. */
 @keyframes spin-around {
-  0% {
-    transform: translateZ(0) rotate(0);
+  from {
+    transform: translateZ(0) rotate(0deg);
   }
-  15%,
-  35% {
-    transform: translateZ(0) rotate(90deg);
-  }
-  65%,
-  85% {
-    transform: translateZ(0) rotate(270deg);
-  }
-  100% {
+  to {
     transform: translateZ(0) rotate(360deg);
   }
 }
@@ -278,14 +274,23 @@ html[data-arboris-vt="active"]::view-transition-group(root) {
 /* Magic UI — animations explicites (plus fiables que @theme seul en Tailwind v4) */
 .animate-shimmer-slide {
   animation: shimmer-slide var(--speed, 3s) ease-in-out infinite alternate;
+  will-change: transform;
 }
 
 .animate-spin-around {
   animation: spin-around calc(var(--speed, 3s) * 2) infinite linear;
+  will-change: transform;
 }
 
 .animate-rippling {
   animation: rippling var(--duration, 600ms) ease-out forwards;
+}
+
+/* Sans animation, le conic-gradient laisse un « beam » blanc figé sur le bord. */
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-beam {
+    display: none !important;
+  }
 }
 
 .rise-in {
@@ -378,5 +383,9 @@ textarea:focus-visible,
   .animate-rippling,
   .animate-toast-in {
     animation: none !important;
+  }
+
+  .shimmer-beam {
+    display: none !important;
   }
 }
