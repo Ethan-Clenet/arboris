@@ -23,6 +23,13 @@ describe('COLLECTIONS', () => {
     expect(findCollectionSeed('__nope__')).toBeUndefined()
   })
 
+  it('résout les alias courts de collections', () => {
+    expect(findCollectionSeed('tanstack')?.id).toBe('tanstack-starter')
+    expect(findCollectionSeed('TanStack')?.id).toBe('tanstack-starter')
+    expect(findCollectionSeed('prisma-postgres')?.id).toBe('prisma-postgres-starter')
+    expect(findCollectionSeed('n8n')?.id).toBe('n8n-starter')
+  })
+
   it('embarque les packs Docker et n8n', () => {
     const docker = COLLECTIONS.find((c) => c.id === 'docker-ops-starter')
     expect(docker?.skillIds).toContain('docker-patterns')

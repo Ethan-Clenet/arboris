@@ -21,7 +21,7 @@ if ! command -v docker >/dev/null 2>&1 \
 fi
 
 # 2. Node dependencies. The repo requires --legacy-peer-deps (see CI + vercel.json).
-#    `postinstall` runs `prisma generate`.
+#    `postinstall` runs `prisma generate` + `build:cli`.
 npm install --legacy-peer-deps
 
 # 3. Local environment file. Never overwrite an existing one.

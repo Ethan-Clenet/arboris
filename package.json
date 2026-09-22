@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "vite dev --port 3000",
-    "postinstall": "prisma generate",
+    "postinstall": "prisma generate && npm run build:cli",
     "generate:commands": "node scripts/generate-commands-bundle.mjs",
     "generate:phosphor": "tsx scripts/generate-phosphor-sprite.ts",
     "build": "npm run generate:commands && npm run generate:phosphor && prisma generate && vite build",
