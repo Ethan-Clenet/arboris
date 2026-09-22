@@ -1,25 +1,9 @@
 name: Semgrep
 
+# Repo privé : pas de minutes Actions gratuites une fois la limite atteinte.
+# Lancer à la main si besoin (Actions → Semgrep → Run workflow).
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
-    paths:
-      - 'src/**'
-      - 'cli/**'
-      - 'scripts/**'
-      - 'prisma/**/*.ts'
-      - '.semgrepignore'
-      - '.github/workflows/semgrep.yml'
-  pull_request:
-    branches: [master]
-    paths:
-      - 'src/**'
-      - 'cli/**'
-      - 'scripts/**'
-      - 'prisma/**/*.ts'
-      - '.semgrepignore'
-      - '.github/workflows/semgrep.yml'
 
 concurrency:
   group: semgrep-${{ github.ref }}

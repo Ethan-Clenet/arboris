@@ -1,5 +1,7 @@
 name: Pa11y CI (axe)
 
+# Repo privé : pas de minutes Actions gratuites une fois la limite atteinte.
+# Lancer à la main si besoin (Actions → Pa11y CI → Run workflow).
 on:
   workflow_dispatch:
     inputs:
@@ -7,17 +9,6 @@ on:
         description: 'URL de base à auditer (prod, preview…)'
         required: false
         default: 'https://arboristhree.xyz'
-  schedule:
-    # Lundi 06:30 UTC — juste après Lighthouse
-    - cron: '30 6 * * 1'
-  push:
-    branches: [master]
-    paths:
-      - 'src/**'
-      - '.pa11yci.cjs'
-      - 'scripts/run-pa11y.mjs'
-      - 'package.json'
-      - '.github/workflows/pa11y-ci.yml'
 
 concurrency:
   group: pa11y-ci-${{ github.ref }}
