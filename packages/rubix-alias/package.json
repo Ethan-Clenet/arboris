@@ -1,6 +1,6 @@
 {
   "name": "@rubix0270/arboris",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Alias de compatibilité vers arboris-cli.",
   "type": "module",
   "bin": {
@@ -8,7 +8,7 @@
     "arboris-cli": "run.mjs"
   },
   "dependencies": {
-    "arboris-cli": "^1.1.2"
+    "arboris-cli": "^1.2.0"
   },
   "engines": {
     "node": ">=20"

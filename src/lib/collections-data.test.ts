@@ -75,4 +75,21 @@ describe('COLLECTIONS', () => {
     expect(react?.skillIds.some((id) => id.includes('storybook-init'))).toBe(true)
     expect(react?.skillIds.some((id) => id.includes('storybookjs-mcp'))).toBe(true)
   })
+
+  it('embarque le pack Prisma + PostgreSQL', () => {
+    const pack = COLLECTIONS.find((c) => c.id === 'prisma-postgres-starter')
+    expect(pack?.kind).toBe('pack')
+    expect(pack?.skillIds).toEqual(
+      expect.arrayContaining([
+        'prisma-patterns',
+        'postgres',
+        'postgres-patterns',
+        'database-migrations',
+        'neon-postgres',
+        'backend-patterns',
+      ]),
+    )
+    expect(pack?.commandIds).toEqual(expect.arrayContaining(['db-migrate-smoke', 'commit']))
+    expect(findCollectionSeed('prisma-postgres-starter')?.id).toBe('prisma-postgres-starter')
+  })
 })
