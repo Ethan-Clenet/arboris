@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-14T12:09:11.789Z",
+  "generatedAt": "2026-09-22T11:28:29.375Z",
   "stacks": [
     {
       "id": "node",
@@ -1702,6 +1702,7 @@
     "nemo-gym-reward-profiling__nousresearch-gym__agents-skills-7df500198675",
     "neon",
     "neon-ai-gateway",
+    "neon-auth",
     "neon-functions",
     "neon-object-storage",
     "neon-postgres",
@@ -3162,6 +3163,7 @@
       "migrating-mvc-static-files__microsoft-upgrade-agent-plugins__plugins-upgrade-agent-extenders-upgrade-dotnet-upgrade-skills-lazy-web-mvc-ee586f913786",
       "migrating-webforms-to-blazor-server__microsoft-upgrade-agent-plugins__plugins-upgrade-agent-extenders-upgrade-dotnet-upgrade-skills-lazy-web-webforms-c664c4019726",
       "mysql-patterns",
+      "neon-auth",
       "node-inspect-debugger__nousresearch-hermes-agent__skills-software-development-5bbb9eb9c9d9",
       "nodejs-keccak256",
       "p5js__nousresearch-hermes-agent__skills-creative-875c35d2236a",
@@ -3351,6 +3353,7 @@
       "msgraph-integration-patterns__microsoft-amplifier-bundle-skills__skills-0fbb8d056804",
       "neon",
       "neon-ai-gateway",
+      "neon-auth",
       "neon-functions",
       "neon-object-storage",
       "neon-postgres-branches",
@@ -4518,6 +4521,7 @@
       "manim-video__nousresearch-hermes-agent__skills-creative-20b97a10c413",
       "neon",
       "neon-ai-gateway",
+      "neon-auth",
       "neon-functions",
       "neon-object-storage",
       "neon-postgres",

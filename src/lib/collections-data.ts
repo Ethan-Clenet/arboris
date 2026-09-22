@@ -461,5 +461,22 @@ export const COLLECTIONS: CollectionSeed[] = [
 ]
 
 export function findCollectionSeed(id: string): CollectionSeed | undefined {
-  return COLLECTIONS.find((c) => c.id === id)
+  const raw = id.trim().toLowerCase()
+  if (!raw) return undefined
+
+  const exact = COLLECTIONS.find((c) => c.id === raw)
+  if (exact) return exact
+
+  // Alias court : `tanstack` → `tanstack-starter`, `react-ts` → `react-ts-starter`
+  const withStarter = COLLECTIONS.find((c) => c.id === `${raw}-starter`)
+  if (withStarter) return withStarter
+
+  // Préfixe unique : `docker` → `docker-ops-starter` si un seul match
+  const prefixed = COLLECTIONS.filter(
+    (c) => c.id.startsWith(`${raw}-`) || c.id.startsWith(raw),
+  )
+  if (prefixed.length === 1) return prefixed[0]
+
+  return undefined
 }
+
