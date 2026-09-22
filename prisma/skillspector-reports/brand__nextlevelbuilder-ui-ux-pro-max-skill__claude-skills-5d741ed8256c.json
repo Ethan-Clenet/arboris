@@ -1,0 +1,96 @@
+{
+  "riskScore": 87,
+  "severity": "CRITICAL",
+  "recommendation": "UNSAFE",
+  "issueCount": 6,
+  "issues": [
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/extract-colors.cjs (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 43
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/extract-colors.cjs (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 44
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/extract-colors.cjs (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 97
+      }
+    },
+    {
+      "id": "P6",
+      "category": "System Prompt Leakage",
+      "pattern": "Direct Prompt Extraction",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "return prompt",
+      "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+      "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+      "location": {
+        "file": "scripts/inject-brand-context.cjs",
+        "start_line": 304
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Declare the skill's tool scope: for Claude Code / Agent Skills SKILL.md, list the tools the skill may invoke in the 'allowed-tools' frontmatter field; for MCP server manifests, add a 'permissions' list naming the required capabilities.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    return subprocess.run(\n        [node, str(SCRIPT), *args],\n        cwd=tmp_path,\n        capture_output=True,\n        text=True,\n        # sync-brand-to-tokens.cjs prints emoji. Without an explici",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/tests/test_sync_brand_to_tokens.py",
+        "start_line": 31
+      }
+    }
+  ],
+  "scannedAt": "2026-09-22T14:51:57.293149+00:00",
+  "scanMode": "static",
+  "skillName": "brand",
+  "contentHash": "467e3eed11bfceaa74cea003a1c3bd84c57983b8c11dabf33f7e43cee220118a",
+  "scannerVersion": "2.11.2"
+}

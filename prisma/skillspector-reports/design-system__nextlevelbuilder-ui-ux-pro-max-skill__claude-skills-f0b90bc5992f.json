@@ -1,0 +1,121 @@
+{
+  "riskScore": 70,
+  "severity": "HIGH",
+  "recommendation": "UNSAFE",
+  "issueCount": 8,
+  "issues": [
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/validate-tokens.cjs (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 65
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/validate-tokens.cjs (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 94
+      }
+    },
+    {
+      "id": "LP3",
+      "category": "MCP Least Privilege",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+      "remediation": "Declare the skill's tool scope: for Claude Code / Agent Skills SKILL.md, list the tools the skill may invoke in the 'allowed-tools' frontmatter field; for MCP server manifests, add a 'permissions' list naming the required capabilities.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 1
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "references/tailwind-integration.md",
+        "start_line": 239
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "references/tailwind-integration.md",
+        "start_line": 245
+      }
+    },
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "explanation": "npx commands without a version suffix (e.g. @1.0.0) create a rug-pull risk if the upstream server is compromised and publishes a malicious update.",
+      "remediation": "Pin the version: npx @scope/server@1.2.3",
+      "location": {
+        "file": "references/tailwind-integration.md",
+        "start_line": 248
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    result = subprocess.run(cmd)",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/slide-token-validator.py",
+        "start_line": 30
+      }
+    },
+    {
+      "id": "AST4",
+      "category": "Dangerous Code Execution",
+      "pattern": "subprocess module call",
+      "severity": "MEDIUM",
+      "confidence": 0.7,
+      "finding": "    return subprocess.run(\n        [node, str(SCRIPT), \"--dir\", str(tmp_path)],\n        capture_output=True,\n        text=True,\n        # validate-tokens.cjs prints emoji; without an explicit encoding",
+      "explanation": "subprocess module calls execute external commands. Without careful input validation, this enables command injection.",
+      "remediation": "Use subprocess.run() with shell=False and an explicit argument list. Validate all inputs and avoid passing user-controlled data to commands.",
+      "location": {
+        "file": "scripts/tests/test_validate_tokens.py",
+        "start_line": 24
+      }
+    }
+  ],
+  "scannedAt": "2026-09-22T14:52:27.673836+00:00",
+  "scanMode": "static",
+  "skillName": "design-system",
+  "contentHash": "0dc00788b81d5cb34d6abb52aa6887c03f812739104cf82e96f3c031529d957b",
+  "scannerVersion": "2.11.2"
+}

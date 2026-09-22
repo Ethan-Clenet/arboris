@@ -136,6 +136,15 @@ export function normalizePublisher(raw: string): string {
   if (lower === 'alibaba' || lower === 'alibabacloud' || lower === 'aliyun') return 'Alibaba'
   if (lower === 'ansible' || lower === 'ansible-community') return 'Ansible'
   if (lower === 'prisma') return 'Prisma'
+  if (
+    lower === 'nextlevelbuilder' ||
+    lower === 'next-level-builder' ||
+    lower === 'next level builder' ||
+    lower === 'uupm' ||
+    lower === 'ui-ux-pro-max'
+  ) {
+    return 'NextLevelBuilder'
+  }
   if (value.includes('/')) {
     const tail = value.split('/').pop()?.trim()
     if (tail) return normalizePublisher(tail)

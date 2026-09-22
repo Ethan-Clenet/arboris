@@ -34,6 +34,7 @@ export const VENDOR_GITHUB_REPOS = [
   "cypress-io/ai-toolkit",
   "cypress-io/cypress",
   "cypress-io/cypress-design",
+  "nextlevelbuilder/ui-ux-pro-max-skill",
   "dotnet/arcade-skills",
   "dotnet/core",
   "dotnet/dotnet",

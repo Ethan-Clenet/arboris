@@ -99,6 +99,7 @@ const COLLECTION_THEME_BY_ID: Record<string, CollectionThemeKey> = {
   'next-react-starter': 'frontend',
   'angular-starter': 'frontend',
   'tanstack-starter': 'frontend',
+  'ux-ui-pro': 'frontend',
   'node-api-starter': 'backend',
   'fastapi-starter': 'backend',
   'spring-boot-starter': 'backend',

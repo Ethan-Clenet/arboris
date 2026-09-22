@@ -134,6 +134,14 @@ const SOURCES = [
   { repo: 'cypress-io/ai-toolkit', publisher: 'Cypress', roots: ['.'] },
   { repo: 'cypress-io/cypress', publisher: 'Cypress', roots: ['.'] },
   { repo: 'cypress-io/cypress-design', publisher: 'Cypress', roots: ['.'] },
+
+  // nextlevelbuilder — https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+  // Uniquement .claude/skills (évite les doublons cli/assets/skills).
+  {
+    repo: 'nextlevelbuilder/ui-ux-pro-max-skill',
+    publisher: 'NextLevelBuilder',
+    roots: ['.claude/skills'],
+  },
 ]
 
 function slugifyForId(input) {
