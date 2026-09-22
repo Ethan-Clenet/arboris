@@ -1,5 +1,7 @@
 name: Lighthouse CI
 
+# Repo privé : pas de minutes Actions gratuites une fois la limite atteinte.
+# Lancer à la main si besoin (Actions → Lighthouse CI → Run workflow).
 on:
   workflow_dispatch:
     inputs:
@@ -7,11 +9,6 @@ on:
         description: 'URL de base à auditer (prod, preview…)'
         required: false
         default: 'https://arboristhree.xyz'
-  schedule:
-    # Lundi 06:00 UTC — tendance hebdo sur la prod
-    - cron: '0 6 * * 1'
-  push:
-    branches: [master]
 
 concurrency:
   group: lighthouse-ci-${{ github.ref }}

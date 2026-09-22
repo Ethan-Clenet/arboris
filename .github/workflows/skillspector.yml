@@ -1,13 +1,9 @@
 name: SkillSpector scan
 
+# Repo privé : pas de minutes Actions gratuites une fois la limite atteinte.
+# Lancer à la main si besoin (Actions → SkillSpector scan → Run workflow).
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'prisma/skills/**'
-      - 'scripts/skillspector-scan.mjs'
-      - 'scripts/skillspector-resolve-version.mjs'
-      - 'skillspector-version.json'
 
 jobs:
   scan:

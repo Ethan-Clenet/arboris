@@ -1,31 +1,9 @@
 name: Knip
 
+# Repo privé : pas de minutes Actions gratuites une fois la limite atteinte.
+# Lancer à la main si besoin (Actions → Knip → Run workflow).
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
-    paths:
-      - 'src/**'
-      - 'cli/**'
-      - 'scripts/**'
-      - 'prisma/**/*.ts'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'knip.json'
-      - 'vite.config.ts'
-      - '.github/workflows/knip.yml'
-  pull_request:
-    branches: [master]
-    paths:
-      - 'src/**'
-      - 'cli/**'
-      - 'scripts/**'
-      - 'prisma/**/*.ts'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'knip.json'
-      - 'vite.config.ts'
-      - '.github/workflows/knip.yml'
 
 concurrency:
   group: knip-${{ github.ref }}
