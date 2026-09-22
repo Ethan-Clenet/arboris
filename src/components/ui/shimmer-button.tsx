@@ -28,25 +28,27 @@ const shimmerVars = (
     '--bg': background,
   }) as CSSProperties
 
+/**
+ * Pas de background sur le shell + pas de z-index négatif :
+ * Firefox ne peint pas les descendants z-négatifs au-dessus du fond d’un
+ * élément overflow:hidden / stacking context (le beam disparaît).
+ * Empilement positif : beam (0) → fill (1) → gloss (2) → contenu (10).
+ */
 const shimmerShellClass =
-  'group relative z-0 inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 overflow-hidden border border-white/20 font-medium whitespace-nowrap text-white shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] [border-radius:var(--radius)] [background:var(--bg)] transform-gpu transition-[transform,filter] duration-300 ease-in-out hover:brightness-110 active:translate-y-px'
+  'group relative z-0 inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 overflow-hidden border border-white/20 bg-transparent font-medium whitespace-nowrap text-white shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset] [border-radius:var(--radius)] transform-gpu transition-[transform,filter] duration-300 ease-in-out hover:brightness-110 active:translate-y-px'
 
 function ShimmerBeam() {
   return (
     <div
-      className="shimmer-beam pointer-events-none absolute inset-0 -z-30 overflow-hidden [border-radius:var(--radius)]"
+      className="shimmer-beam pointer-events-none absolute inset-0 z-0 overflow-hidden [border-radius:var(--radius)]"
       aria-hidden
     >
-      {/*
-        Rotation seule, sans 100cqh/cqw : le wedge du conic tourne autour du bouton.
-        Le calque cutout (ShimmerChrome) ne laisse voir que le liseré — plus de beam figé
-        quand les container queries ne s’établissent pas.
-      */}
       <div
         className="animate-spin-around absolute -inset-full"
         style={{
+          // calc() sans multiplication d’angles : plus fiable sous Firefox
           background:
-            'conic-gradient(from calc(270deg - (var(--spread) * 0.5)), transparent 0, var(--shimmer-color) var(--spread), transparent var(--spread))',
+            'conic-gradient(from 225deg, transparent 0deg, var(--shimmer-color) var(--spread), transparent calc(var(--spread) + 0.1deg))',
         }}
       />
     </div>
@@ -56,19 +58,17 @@ function ShimmerBeam() {
 function ShimmerChrome() {
   return (
     <>
+      {/* Remplit le centre : seul le liseré (--cut) laisse voir le beam. */}
       <div
-        className={cn(
-          'pointer-events-none absolute inset-0 z-[1] [border-radius:var(--radius)]',
-          'shadow-[inset_0_-8px_10px_#ffffff1f]',
-          'transition-shadow duration-300 ease-in-out',
-          'group-hover:shadow-[inset_0_-6px_10px_#ffffff3f]',
-        )}
+        className="pointer-events-none absolute z-[1] [border-radius:var(--radius)] [background:var(--bg)] inset-[var(--cut)]"
         aria-hidden
       />
       <div
         className={cn(
-          'pointer-events-none absolute -z-20 [border-radius:var(--radius)] [background:var(--bg)]',
-          'inset-[var(--cut)]',
+          'pointer-events-none absolute inset-0 z-[2] [border-radius:var(--radius)]',
+          'shadow-[inset_0_-8px_10px_#ffffff1f]',
+          'transition-shadow duration-300 ease-in-out',
+          'group-hover:shadow-[inset_0_-6px_10px_#ffffff3f]',
         )}
         aria-hidden
       />
@@ -98,8 +98,8 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
         {...props}
       >
         <ShimmerBeam />
-        <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
         <ShimmerChrome />
+        <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
       </button>
     )
   },
@@ -134,8 +134,8 @@ export function ShimmerButtonLink({
       {...props}
     >
       <ShimmerBeam />
-      <span className="relative z-10 inline-flex items-center gap-2 [&_i]:!text-white">{children}</span>
       <ShimmerChrome />
+      <span className="relative z-10 inline-flex items-center gap-2 [&_i]:!text-white">{children}</span>
     </Link>
   )
 }
