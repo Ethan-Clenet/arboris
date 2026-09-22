@@ -26,7 +26,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThePheniX974/arboris.git",
+    "url": "git+https://github.com/affaan-m/ECC.git",
     "directory": "packages/arboris-cli"
   },
   "license": "MIT",
