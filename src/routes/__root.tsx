@@ -1,6 +1,7 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { lazy, Suspense, type ReactNode } from 'react'
 import '#/fonts'
+import DeferredFonts from '#/components/DeferredFonts'
 import DevtoolsGate from '#/components/DevtoolsGate'
 import AppShell from '#/components/AppShell'
 import NotFoundPage from '#/components/NotFoundPage'
@@ -32,6 +33,8 @@ export const Route = createRootRoute({
       ...fontPreloadLinks,
       { rel: 'stylesheet', href: appCss },
       { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+      // Sprite icônes — fetch tôt sans bloquer le rendu.
+      { rel: 'preload', href: '/phosphor-sprite.svg', as: 'fetch', crossOrigin: 'anonymous' },
     ],
   }),
   notFoundComponent: NotFoundPage,
@@ -53,6 +56,7 @@ function RootDocument({ children }: { children: ReactNode }) {
             <AppShell>{children}</AppShell>
           </AnnouncerProvider>
         </I18nProvider>
+        <DeferredFonts />
         <DevtoolsGate />
         <Scripts />
         <Suspense fallback={null}>
