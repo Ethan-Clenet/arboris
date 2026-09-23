@@ -87,6 +87,7 @@ function publisherMeta(name: string): { icon: string; color?: string; logo?: boo
     Alibaba: { icon: 'cloud', color: PUBLISHER_LOGO_COLOR.Alibaba },
     Ansible: { icon: 'gear-six', color: PUBLISHER_LOGO_COLOR.Ansible },
     Prisma: { icon: 'diamonds-four', color: PUBLISHER_LOGO_COLOR.Prisma },
+    NextLevelBuilder: { icon: 'palette', color: PUBLISHER_LOGO_COLOR.NextLevelBuilder },
   }
   const base = known[name] ?? { icon: 'buildings', color: '#8a909b' }
   return { ...base, logo: hasPublisherLogo(name) }

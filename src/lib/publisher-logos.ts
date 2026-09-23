@@ -71,6 +71,7 @@ export const PUBLISHER_LOGO_COLOR: Record<string, string> = {
   Stitch: '#EA4335',
   Vercel: '#F4F4F5',
   Yunt: '#0A0A0A',
+  NextLevelBuilder: '#7C3AED',
 }
 
 /** Assets SVG officiels (multicolores) — préférés aux paths monochromes. */
@@ -85,6 +86,7 @@ export const PUBLISHER_LOGO_ASSET: Record<string, string> = {
   Context7: '/publishers/context7.svg',
   Auth0: '/publishers/auth0.svg',
   Yunt: '/publishers/yunt.svg',
+  NextLevelBuilder: '/publishers/nextlevelbuilder.png',
 }
 
 export function hasPublisherLogo(name: string): boolean {
@@ -141,6 +143,10 @@ export function resolvePublisherLogoName(name: string | null | undefined): strin
     convex: 'Convex',
     dotnet: '.NET',
     '.net': '.NET',
+    nextlevelbuilder: 'NextLevelBuilder',
+    'next-level-builder': 'NextLevelBuilder',
+    uupm: 'NextLevelBuilder',
+    'ui-ux-pro-max': 'NextLevelBuilder',
   }
   if (aliases[lower]) return aliases[lower]
 
