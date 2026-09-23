@@ -112,6 +112,7 @@ const COLLECTION_THEME_BY_ID: Record<string, CollectionThemeKey> = {
   'command-starter': 'ops',
   'ops-day-two': 'ops',
   'docker-ops-starter': 'ops',
+  'yunt-docker': 'ops',
   'n8n-starter': 'ops',
   'ansible-starter': 'ops',
   'cypress-testing': 'ops',

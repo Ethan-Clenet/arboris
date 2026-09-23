@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-23T07:22:48.756Z",
+  "generatedAt": "2026-09-23T08:01:11.449Z",
   "stacks": [
     {
       "id": "node",
@@ -2720,6 +2720,11 @@
     "xurl__nousresearch-hermes-agent__skills-social-media-a94cd9af501e",
     "youtube-content__nousresearch-hermes-agent__skills-media-474659128ea9",
     "yuanbao__nousresearch-hermes-agent__optional-skills-37c0ad287a36",
+    "yunt-docker-compose",
+    "yunt-docker-containers",
+    "yunt-docker-fundamentals",
+    "yunt-docker-images-build",
+    "yunt-docker-volumes-networks",
     "zephyr__pytorch-executorch__claude-skills-b6e3798ebd63"
   ],
   "skillsByStack": {
@@ -3097,7 +3102,9 @@
       "with-tanstack-virtual__tanstack-table__packages-solid-table-skills-1620ec6083e0",
       "workers-best-practices",
       "write-the-docs__supabase-supabase__agents-skills-fe2d330cef27",
-      "xquic-pr-pre-review__alibaba-xquic__harness-skills-149617822f4f"
+      "xquic-pr-pre-review__alibaba-xquic__harness-skills-149617822f4f",
+      "yunt-docker-images-build",
+      "yunt-docker-volumes-networks"
     ],
     "js": [
       "add-cloud-flow__microsoft-power-platform-skills__plugins-power-pages-skills-51a20265afda",
@@ -4053,7 +4060,12 @@
       "watchers__nousresearch-hermes-agent__optional-skills-devops-01d31e0a0a92",
       "web-pentest__nousresearch-hermes-agent__optional-skills-security-3b748f0b631e",
       "write-the-docs__supabase-supabase__agents-skills-fe2d330cef27",
-      "xurl__nousresearch-hermes-agent__skills-social-media-a94cd9af501e"
+      "xurl__nousresearch-hermes-agent__skills-social-media-a94cd9af501e",
+      "yunt-docker-compose",
+      "yunt-docker-containers",
+      "yunt-docker-fundamentals",
+      "yunt-docker-images-build",
+      "yunt-docker-volumes-networks"
     ],
     "n8n": [
       "n8n-patterns",
@@ -4098,7 +4110,8 @@
       "quarkus-security",
       "serving-llms-vllm__nousresearch-hermes-agent__optional-skills-mlops-inference-ca7ebc6e66ee",
       "testing-standards__alibaba-loongcollector__skills-d9f912b91e76",
-      "uncloud"
+      "uncloud",
+      "yunt-docker-compose"
     ],
     "postgresql": [
       "agentic-os",
@@ -4250,7 +4263,9 @@
       "turso-db",
       "uncloud",
       "workers-best-practices",
-      "wrangler"
+      "wrangler",
+      "yunt-docker-compose",
+      "yunt-docker-volumes-networks"
     ],
     "mysql": [
       "ai-persistence__tanstack-ai__packages-ai-persistence-skills-06d9fc0c51ac",
@@ -7267,6 +7282,13 @@
     ],
     "Ollama": [
       "release-notes__ollama-ollama__agent-testdata-import-614b9c6e9372"
+    ],
+    "Yunt": [
+      "yunt-docker-compose",
+      "yunt-docker-containers",
+      "yunt-docker-fundamentals",
+      "yunt-docker-images-build",
+      "yunt-docker-volumes-networks"
     ]
   }
 }

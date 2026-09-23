@@ -93,18 +93,19 @@ describe('COLLECTIONS', () => {
     expect(findCollectionSeed('prisma-postgres-starter')?.id).toBe('prisma-postgres-starter')
   })
 
-  it('embarque le pack UX / UI Pro (NextLevelBuilder)', () => {
-    const pack = COLLECTIONS.find((c) => c.id === 'ux-ui-pro')
+  it('embarque le pack Yunt — Docker', () => {
+    const pack = COLLECTIONS.find((c) => c.id === 'yunt-docker')
     expect(pack?.kind).toBe('pack')
-    expect(pack?.skillIds).toEqual(
-      expect.arrayContaining([
-        'ui-ux-pro-max__nextlevelbuilder-ui-ux-pro-max-skill__claude-skills-fa8b0c2ef9a4',
-        'design__nextlevelbuilder-ui-ux-pro-max-skill__claude-skills-c488ca8fe826',
-        'design-system__nextlevelbuilder-ui-ux-pro-max-skill__claude-skills-f0b90bc5992f',
-        'banner-design__nextlevelbuilder-ui-ux-pro-max-skill__claude-skills-e2a4f126c877',
-      ]),
-    )
-    expect(findCollectionSeed('ux-ui')?.id).toBe('ux-ui-pro')
-    expect(findCollectionSeed('ux-ui-pro')?.id).toBe('ux-ui-pro')
+    expect(pack?.skillIds).toEqual([
+      'yunt-docker-fundamentals',
+      'yunt-docker-containers',
+      'yunt-docker-images-build',
+      'yunt-docker-volumes-networks',
+      'yunt-docker-compose',
+    ])
+    expect(findCollectionSeed('yunt')?.id).toBe('yunt-docker')
+    expect(findCollectionSeed('yunt-docker')?.id).toBe('yunt-docker')
+    // `docker` reste l’alias de docker-ops-starter (pas yunt-docker)
+    expect(findCollectionSeed('docker')?.id).toBe('docker-ops-starter')
   })
 })

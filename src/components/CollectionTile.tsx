@@ -23,7 +23,16 @@ export default function CollectionTile({ collection, box, glyph }: CollectionTil
       className={`grid flex-none place-items-center ${box}`}
       style={{ background: hexToRgba(color, 0.14), color }}
     >
-      {logo ? (
+      {logo?.asset ? (
+        <img
+          src={logo.asset}
+          alt=""
+          width={glyph}
+          height={glyph}
+          className="inline-block shrink-0 rounded-[3px] object-contain"
+          aria-hidden="true"
+        />
+      ) : logo?.path ? (
         <svg
           viewBox="0 0 24 24"
           width={glyph}

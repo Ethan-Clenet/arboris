@@ -136,6 +136,7 @@ export function normalizePublisher(raw: string): string {
   if (lower === 'alibaba' || lower === 'alibabacloud' || lower === 'aliyun') return 'Alibaba'
   if (lower === 'ansible' || lower === 'ansible-community') return 'Ansible'
   if (lower === 'prisma') return 'Prisma'
+  if (lower === 'yunt' || lower === 'yunt academy' || lower === 'yunt-academy') return 'Yunt'
   if (
     lower === 'nextlevelbuilder' ||
     lower === 'next-level-builder' ||
