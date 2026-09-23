@@ -85,7 +85,7 @@ export const PUBLISHER_LOGO_ASSET: Record<string, string> = {
   vinta: '/publishers/vinta.png',
   Context7: '/publishers/context7.svg',
   Auth0: '/publishers/auth0.svg',
-  Yunt: '/publishers/yunt.svg',
+  Yunt: '/publishers/yunt.png',
   NextLevelBuilder: '/publishers/nextlevelbuilder.png',
 }
 
