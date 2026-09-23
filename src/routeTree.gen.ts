@@ -23,6 +23,7 @@ import { Route as CollectionsIndexRouteImport } from './routes/collections.index
 import { Route as SkillsIdRouteImport } from './routes/skills.$id'
 import { Route as CommandsIdRouteImport } from './routes/commands.$id'
 import { Route as CollectionsIdRouteImport } from './routes/collections.$id'
+import { Route as CliCollectionZipIdRouteImport } from './routes/cli.collection-zip.$id'
 
 const Sitemap_indexDotxmlRoute = Sitemap_indexDotxmlRouteImport.update({
   id: '/sitemap_index.xml',
@@ -95,6 +96,11 @@ const CollectionsIdRoute = CollectionsIdRouteImport.update({
   path: '/collections/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CliCollectionZipIdRoute = CliCollectionZipIdRouteImport.update({
+  id: '/cli/collection-zip/$id',
+  path: '/cli/collection-zip/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/collections/': typeof CollectionsIndexRoute
   '/commands/': typeof CommandsIndexRoute
   '/skills/': typeof SkillsIndexRoute
+  '/cli/collection-zip/$id': typeof CliCollectionZipIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByTo {
   '/collections': typeof CollectionsIndexRoute
   '/commands': typeof CommandsIndexRoute
   '/skills': typeof SkillsIndexRoute
+  '/cli/collection-zip/$id': typeof CliCollectionZipIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -144,6 +152,7 @@ export interface FileRoutesById {
   '/collections/': typeof CollectionsIndexRoute
   '/commands/': typeof CommandsIndexRoute
   '/skills/': typeof SkillsIndexRoute
+  '/cli/collection-zip/$id': typeof CliCollectionZipIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -162,6 +171,7 @@ export interface FileRouteTypes {
     | '/collections/'
     | '/commands/'
     | '/skills/'
+    | '/cli/collection-zip/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -178,6 +188,7 @@ export interface FileRouteTypes {
     | '/collections'
     | '/commands'
     | '/skills'
+    | '/cli/collection-zip/$id'
   id:
     | '__root__'
     | '/'
@@ -194,6 +205,7 @@ export interface FileRouteTypes {
     | '/collections/'
     | '/commands/'
     | '/skills/'
+    | '/cli/collection-zip/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -211,6 +223,7 @@ export interface RootRouteChildren {
   CollectionsIndexRoute: typeof CollectionsIndexRoute
   CommandsIndexRoute: typeof CommandsIndexRoute
   SkillsIndexRoute: typeof SkillsIndexRoute
+  CliCollectionZipIdRoute: typeof CliCollectionZipIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -313,6 +326,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cli/collection-zip/$id': {
+      id: '/cli/collection-zip/$id'
+      path: '/cli/collection-zip/$id'
+      fullPath: '/cli/collection-zip/$id'
+      preLoaderRoute: typeof CliCollectionZipIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -331,6 +351,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionsIndexRoute: CollectionsIndexRoute,
   CommandsIndexRoute: CommandsIndexRoute,
   SkillsIndexRoute: SkillsIndexRoute,
+  CliCollectionZipIdRoute: CliCollectionZipIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

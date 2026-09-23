@@ -88,6 +88,12 @@ describe('CliCommandBar', () => {
     rerender(wrap(<CliCommandBar args="node" copyLabel="Copier" copiedLabel="Copié" />))
     expect(screen.getByText('node')).toBeTruthy()
   })
+
+  it('utilise l’installateur web pour les collections', () => {
+    render(wrap(<CliCommandBar args="collection ux-ui-pro" copyLabel="Copier" copiedLabel="Copié" />))
+    expect(screen.getByText('ux-ui-pro')).toBeTruthy()
+    expect(screen.getByText(/install-collection\.mjs/)).toBeTruthy()
+  })
 })
 
 describe('SkillInstallButtons', () => {

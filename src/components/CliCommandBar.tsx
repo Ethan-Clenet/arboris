@@ -1,9 +1,10 @@
 import Icon from '#/components/Icon'
 import Toast from '#/components/Toast'
+import { SITE_URL } from '#/lib/site'
 import { useCopy } from '#/lib/useCopy'
 
 type CliCommandBarProps = {
-  /** Arguments après `npx arboris-cli@latest` (ex. `node` ou `install mon-skill`). */
+  /** Arguments après le binaire CLI (ex. `node`, `install mon-skill`, `collection ux-ui-pro`). */
   args: string
   copyLabel: string
   copiedLabel: string
@@ -11,8 +12,24 @@ type CliCommandBarProps = {
 }
 
 const CLI_BIN = 'arboris-cli@latest'
+/** Installateur web — toujours à jour avec le catalogue déployé (pas le cache npm). */
+const COLLECTION_INSTALLER = `${SITE_URL}/cli/install-collection.mjs`
+
+function isCollectionArgs(args: string): boolean {
+  return args.startsWith('collection ')
+}
 
 function CommandDisplay({ args }: { args: string }) {
+  if (isCollectionArgs(args)) {
+    const id = args.slice('collection '.length).trim()
+    return (
+      <>
+        npx --yes <span className="text-[#9BCB3C]">{COLLECTION_INSTALLER}</span>{' '}
+        <span className="text-[#9BCB3C]">{id}</span>
+      </>
+    )
+  }
+
   if (args.startsWith('install ')) {
     const skillId = args.slice('install '.length)
     return (
@@ -23,7 +40,7 @@ function CommandDisplay({ args }: { args: string }) {
     )
   }
 
-  if (args.startsWith('publisher ') || args.startsWith('creator ') || args.startsWith('collection ')) {
+  if (args.startsWith('publisher ') || args.startsWith('creator ')) {
     const [cmd, ...rest] = args.split(' ')
     const publisher = rest.join(' ')
     return (
@@ -41,9 +58,17 @@ function CommandDisplay({ args }: { args: string }) {
   )
 }
 
+function buildCommand(args: string): string {
+  if (isCollectionArgs(args)) {
+    const id = args.slice('collection '.length).trim()
+    return `npx --yes ${COLLECTION_INSTALLER} ${id}`
+  }
+  return `npx ${CLI_BIN} ${args}`
+}
+
 export default function CliCommandBar({ args, copyLabel, copiedLabel, className = '' }: CliCommandBarProps) {
   const { copiedKey, copy } = useCopy(1600)
-  const command = `npx ${CLI_BIN} ${args}`
+  const command = buildCommand(args)
   const copied = copiedKey === command
 
   return (
