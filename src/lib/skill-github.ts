@@ -1,6 +1,6 @@
 /**
  * Résolution d’URL GitHub pour un skill du catalogue.
- * Priorité : skills-lock (repo source) → repo vendor (id `base__repo__…`) → miroir Arboris.
+ * Priorité : source Yunt Academy → skills-lock (repo source) → repo vendor → miroir Arboris.
  * Les sources upstream pointent vers la racine du dépôt (CTA « Ouvrir le dépôt »).
  */
 import { VENDOR_GITHUB_REPOS } from '#/lib/vendor-github-repos'
@@ -9,14 +9,15 @@ import skillsLock from '../../skills-lock.json' with { type: 'json' }
 export type SkillGithubSource = {
   /** URL ouverte dans un nouvel onglet. */
   url: string
-  /** org/repo si connu (sans chemin fichier). */
+  /** org/repo si connu (sans chemin fichier), ou hôte externe (ex. academy.yunt.fr). */
   repo: string | null
-  /** upstream = source d’origine ; mirror = copie dans le dépôt Arboris. */
-  kind: 'upstream' | 'mirror'
+  /** upstream = source d’origine ; mirror = copie dans le dépôt Arboris ; site = page web (hors GitHub). */
+  kind: 'upstream' | 'mirror' | 'site'
 }
 
 const ARBORIS_REPO = 'affaan-m/ECC'
 const ARBORIS_SKILLS_TREE = `https://github.com/${ARBORIS_REPO}/tree/master/prisma/skills`
+const YUNT_CATALOGUE_URL = 'https://academy.yunt.fr/dashboard/catalogue'
 
 /** Préfixes d’org connus (slug → casing GitHub), du plus long au plus court. */
 const VENDOR_ORG_PREFIXES: Array<{ slug: string; github: string }> = [
@@ -98,6 +99,16 @@ function arborisMirrorUrl(skillId: string): SkillGithubSource {
   }
 }
 
+/** Skills Yunt Academy → catalogue (pas le miroir affaan-m/ECC). */
+function yuntCatalogueUrl(skillId: string): SkillGithubSource | null {
+  if (!skillId.startsWith('yunt-')) return null
+  return {
+    url: YUNT_CATALOGUE_URL,
+    repo: 'academy.yunt.fr',
+    kind: 'site',
+  }
+}
+
 function lockGithubUrl(skillId: string): SkillGithubSource | null {
   const entry = lockSkills[skillId]
   if (!entry?.source || !entry.skillPath) return null
@@ -120,7 +131,12 @@ function vendorGithubUrl(skillId: string): SkillGithubSource | null {
   }
 }
 
-/** URL GitHub la plus pertinente pour un skill (toujours non nulle). */
+/** URL source la plus pertinente pour un skill (toujours non nulle). */
 export function resolveSkillGithubUrl(skillId: string): SkillGithubSource {
-  return lockGithubUrl(skillId) ?? vendorGithubUrl(skillId) ?? arborisMirrorUrl(skillId)
+  return (
+    yuntCatalogueUrl(skillId) ??
+    lockGithubUrl(skillId) ??
+    vendorGithubUrl(skillId) ??
+    arborisMirrorUrl(skillId)
+  )
 }
