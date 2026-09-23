@@ -1,0 +1,26 @@
+{
+  "riskScore": 7,
+  "severity": "LOW",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "RP1",
+      "category": "MCP Rug Pull",
+      "pattern": "",
+      "severity": "MEDIUM",
+      "confidence": 0.75,
+      "explanation": "Docker image references without a specific tag (:latest is implicit) or digest (@sha256:...) can be silently replaced by a malicious image.",
+      "remediation": "Pin the image: image:tag or image@sha256:abc123",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 40
+      }
+    }
+  ],
+  "scannedAt": "2026-09-23T09:35:56.634186+00:00",
+  "scanMode": "static",
+  "skillName": "yunt-docker-containers",
+  "contentHash": "f71de06b555bf8cba6200e43cf6190583206bf485c5f3913ae7b654af671513e",
+  "scannerVersion": "2.11.2"
+}
