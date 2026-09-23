@@ -1,5 +1,7 @@
 import type { CSSProperties } from 'react'
-import { PHOSPHOR_SPRITE_PATHS } from '#/generated/phosphor-sprite'
+
+/** Sprite SVG externe — hors HTML critique (LCP / parse). */
+export const PHOSPHOR_SPRITE_HREF = '/phosphor-sprite.svg'
 
 interface IconProps {
   name: string
@@ -11,34 +13,18 @@ interface IconProps {
 }
 
 function spriteId(name: string, bold: boolean): string {
-  const id = bold ? `ph-bold-${name}` : `ph-${name}`
-  if (PHOSPHOR_SPRITE_PATHS[id]) return id
-  return bold ? 'ph-bold-fallback' : 'ph-fallback'
+  return bold ? `ph-bold-${name}` : `ph-${name}`
 }
 
-/** Sprite SVG caché — une seule copie des glyphes Phosphor utilisés. */
+/**
+ * Ancien sprite inline — conservé no-op pour les imports AppShell existants.
+ * Les glyphes vivent dans `public/phosphor-sprite.svg`.
+ */
 export function PhosphorSprite() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-      focusable="false"
-      className="pointer-events-none absolute h-0 w-0 overflow-hidden"
-    >
-      <defs>
-        {Object.entries(PHOSPHOR_SPRITE_PATHS).map(([id, paths]) => (
-          <symbol key={id} id={id} viewBox="0 0 256 256">
-            {paths.map((d) => (
-              <path key={d.slice(0, 24)} fill="currentColor" d={d} />
-            ))}
-          </symbol>
-        ))}
-      </defs>
-    </svg>
-  )
+  return null
 }
 
-/** Icône Phosphor locale (sprite auto-généré, sans webfont). */
+/** Icône Phosphor locale (sprite externe, sans webfont). */
 export default function Icon({
   name,
   bold = false,
@@ -59,7 +45,7 @@ export default function Icon({
       className={`inline-block shrink-0 ${className}`.trim()}
       style={{ color, ...style }}
     >
-      <use href={`#${id}`} />
+      <use href={`${PHOSPHOR_SPRITE_HREF}#${id}`} />
     </svg>
   )
 }

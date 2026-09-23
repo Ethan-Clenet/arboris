@@ -3,12 +3,20 @@
 // l'import dynamique de `./catalog.server` (qui charge Prisma) reste donc
 // strictement côté serveur.
 import { createServerFn } from '@tanstack/react-start'
-import type { Catalog, SkillDetail } from '#/lib/catalog'
+import type { Catalog, HomeCatalog, SkillDetail } from '#/lib/catalog'
 
 export const getCatalog = createServerFn({ method: 'GET' }).handler(
   async (): Promise<Catalog> => {
     const { loadCatalog } = await import('./catalog.server')
     return loadCatalog()
+  },
+)
+
+/** Home uniquement — payload léger (LCP / HTML initial). */
+export const getHomeCatalog = createServerFn({ method: 'GET' }).handler(
+  async (): Promise<HomeCatalog> => {
+    const { loadHomeCatalog } = await import('./catalog.server')
+    return loadHomeCatalog()
   },
 )
 

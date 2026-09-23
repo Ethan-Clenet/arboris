@@ -72,7 +72,7 @@ describe('PageShell / StatusPage / Toast', () => {
 })
 
 describe('Icon / logos', () => {
-  it('rend une icône et le sprite', () => {
+  it('pointe vers le sprite SVG externe', () => {
     const { container } = render(
       <>
         <PhosphorSprite />
@@ -80,8 +80,9 @@ describe('Icon / logos', () => {
         <Icon name="unknown-icon" bold />
       </>,
     )
-    expect(container.querySelector('use')?.getAttribute('href')).toMatch(/^#ph-/)
-    expect(container.querySelectorAll('symbol').length).toBeGreaterThan(10)
+    const hrefs = [...container.querySelectorAll('use')].map((u) => u.getAttribute('href'))
+    expect(hrefs[0]).toBe('/phosphor-sprite.svg#ph-tree')
+    expect(hrefs[1]).toBe('/phosphor-sprite.svg#ph-bold-unknown-icon')
   })
 
   it('NvidiaLogo / PublisherLogo / AgentLogo', () => {

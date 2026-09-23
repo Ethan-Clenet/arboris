@@ -36,7 +36,7 @@ export default function Header() {
           <span className="grid h-[30px] w-[30px] shrink-0 place-items-center rounded-lg bg-[var(--accent)] text-white shadow-[0_2px_8px_var(--accent-soft)]">
             <Icon name="tree" bold size={17} />
           </span>
-          <span className="truncate font-mono text-[16px] font-semibold tracking-tight">{t.nav.brand}</span>
+          <span className="truncate font-display text-[16px] font-semibold tracking-tight">{t.nav.brand}</span>
         </Link>
 
         <nav className="ml-1 hidden min-w-0 items-center gap-1 md:flex" aria-label={t.a11y.mainNav}>

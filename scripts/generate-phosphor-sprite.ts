@@ -202,7 +202,22 @@ export const PHOSPHOR_SPRITE_ICON_COUNT = ${names.size}
 `
 
   await writeFile(OUT, file, 'utf8')
+
+  const svgSymbols = entries
+    .map(({ id, paths }) => {
+      const pathXml = paths.map((d) => `<path fill="currentColor" d="${d}"/>`).join('')
+      return `<symbol id="${id}" viewBox="0 0 256 256">${pathXml}</symbol>`
+    })
+    .join('')
+  const svgOut = join(ROOT, '../public/phosphor-sprite.svg')
+  await writeFile(
+    svgOut,
+    `<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg">${svgSymbols}</svg>\n`,
+    'utf8',
+  )
+
   console.log(`phosphor sprite: ${names.size} icons, ${entries.length} symbols → ${OUT}`)
+  console.log(`phosphor svg → ${svgOut}`)
   if (missing.length) {
     console.warn(`missing (${missing.length}):`, missing.slice(0, 12).join(', '), missing.length > 12 ? '…' : '')
   }
