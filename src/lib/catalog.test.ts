@@ -4,6 +4,7 @@ import {
   buildSkillMarkdown,
   categoryIdsInGroup,
   collectionTheme,
+  isPremiumCollection,
   COLLECTION_THEME_ORDER,
   compatDot,
   hexToRgba,
@@ -221,5 +222,17 @@ describe('collectionTheme', () => {
       expect(theme, `collection ${c.id} sans thème`).not.toBeNull()
       expect(COLLECTION_THEME_ORDER).toContain(theme)
     }
+  })
+})
+
+describe('isPremiumCollection', () => {
+  it('marque yunt-docker comme premium', () => {
+    expect(isPremiumCollection('yunt-docker')).toBe(true)
+    expect(isPremiumCollection({ id: 'yunt-docker' })).toBe(true)
+  })
+
+  it('laisse les autres collections hors premium', () => {
+    expect(isPremiumCollection('docker-ops-starter')).toBe(false)
+    expect(isPremiumCollection({ id: 'sonar' })).toBe(false)
   })
 })

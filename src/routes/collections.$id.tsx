@@ -3,7 +3,7 @@ import CloudInstallPanel from '#/components/CloudInstallPanel'
 import CollectionTile from '#/components/CollectionTile'
 import Icon from '#/components/Icon'
 import PageShell from '#/components/PageShell'
-import { skillLabel } from '#/lib/catalog'
+import { isPremiumCollection, skillLabel } from '#/lib/catalog'
 import { useI18n } from '#/lib/i18n'
 import { getCollection } from '#/server/functions'
 import { collectionSeoTitle, entityDescription, seoHead } from '#/lib/seo'
@@ -37,6 +37,7 @@ function CollectionDetailPage() {
   const { t, lang } = useI18n()
   const kindLabel = collection.kind === 'pack' ? t.collections.pack : t.collections.featured
   const count = collection.skillIds.length + collection.commandIds.length
+  const premium = isPremiumCollection(collection)
 
   return (
     <main id="main-content" className="w-full">
@@ -61,6 +62,11 @@ function CollectionDetailPage() {
                   <span className="rounded-md border border-[var(--border)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--text-3)]">
                     {kindLabel}
                   </span>
+                  {premium ? (
+                    <span className="rounded-full border border-[#C9A227]/55 bg-[rgba(201,162,39,0.12)] px-2 py-0.5 text-[10.5px] font-semibold tracking-[0.04em] text-[#E8C547]">
+                      {t.collections.skillsPremium}
+                    </span>
+                  ) : null}
                 </div>
                 <p className="max-w-[520px] text-[15px] text-[var(--text-2)]">{collection.brief[lang]}</p>
                 <p className="mt-3 max-w-[520px] text-[14px] leading-relaxed text-[var(--text-2)]">

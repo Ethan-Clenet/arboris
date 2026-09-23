@@ -7,6 +7,7 @@ import PageShell from '#/components/PageShell'
 import {
   collectionTheme,
   hexToRgba,
+  isPremiumCollection,
   COLLECTION_THEME_ORDER,
   type CollectionSummary,
   type CollectionThemeKey,
@@ -289,13 +290,28 @@ function CollectionCard({ collection }: { collection: CollectionSummary }) {
   const { t, lang } = useI18n()
   const kindLabel = collection.kind === 'pack' ? t.collections.pack : t.collections.featured
   const themeKey = collectionTheme(collection)
+  const premium = isPremiumCollection(collection)
 
   return (
     <Link
       to="/collections/$id"
       params={{ id: collection.id }}
-      className="flex cursor-pointer flex-col rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow-card)] transition-colors hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]"
+      className={`group relative flex cursor-pointer flex-col rounded-[14px] border bg-[var(--surface)] p-5 shadow-[var(--shadow-card)] transition-[border-color,background-color,box-shadow] ${
+        premium
+          ? 'border-[#C9A227]/55 hover:border-[#D4AF37] hover:bg-[var(--surface-hover)] hover:shadow-[0_0_0_1px_rgba(212,175,55,0.25),0_8px_24px_rgba(201,162,39,0.12)]'
+          : 'border-[var(--border)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]'
+      }`}
     >
+      {premium ? (
+        <span
+          className="pointer-events-none absolute inset-x-0 top-2.5 z-10 flex justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+          aria-hidden="true"
+        >
+          <span className="rounded-full border border-[#C9A227]/55 bg-[rgba(20,16,8,0.92)] px-2.5 py-0.5 text-[10.5px] font-semibold tracking-[0.04em] text-[#E8C547] shadow-[0_4px_12px_rgba(0,0,0,0.35)]">
+            {t.collections.skillsPremium}
+          </span>
+        </span>
+      ) : null}
       <div className="mb-3 flex items-start gap-3">
         <CollectionTile collection={collection} box="h-11 w-11 rounded-[11px]" glyph={20} />
         <div className="min-w-0 flex-1">
