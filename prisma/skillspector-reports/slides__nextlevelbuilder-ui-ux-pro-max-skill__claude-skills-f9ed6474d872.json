@@ -1,0 +1,27 @@
+{
+  "riskScore": 17,
+  "severity": "LOW",
+  "recommendation": "CAUTION",
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Progress Bar -->\n    <div class=\"progress-bar\" id=\"progressBar\"></div>\n\n    <!-- Slide Deck Container (16:9 on desktop) -->\n    <div class=\"slide-deck\">\n\n    <!-- Slides -->\n    <div class=\"slide",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/html-template.md",
+        "start_line": 145
+      }
+    }
+  ],
+  "scannedAt": "2026-09-22T14:52:32.729555+00:00",
+  "scanMode": "static",
+  "skillName": "slides",
+  "contentHash": "cb4ca64c8cb60fa8696bc17dfb1c212d944c8fa042cb7de9a76c49911ab27466",
+  "scannerVersion": "2.11.2"
+}

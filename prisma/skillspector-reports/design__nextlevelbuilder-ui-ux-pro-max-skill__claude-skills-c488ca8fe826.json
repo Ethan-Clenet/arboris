@@ -1,0 +1,363 @@
+{
+  "riskScore": 100,
+  "severity": "CRITICAL",
+  "recommendation": "UNSAFE",
+  "issueCount": 47,
+  "issues": [
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/logo/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 69
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/logo/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 70
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/logo/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 71
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/logo/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 72
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/logo/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 73
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/logo/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 256
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/logo/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 293
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/cip/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 103
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/cip/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 106
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/cip/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 109
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/cip/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 112
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/cip/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 257
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/cip/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 296
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/icon/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 195
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/icon/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 196
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/icon/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 197
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/icon/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 203
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/icon/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 209
+      }
+    },
+    {
+      "id": "AE1",
+      "category": "analysis-evasion",
+      "pattern": "",
+      "severity": "HIGH",
+      "confidence": 1,
+      "finding": "scripts/icon/generate.py (partial)",
+      "explanation": "Referenced artifact was not completely inspected",
+      "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+      "location": {
+        "file": "SKILL.md",
+        "start_line": 299
+      }
+    },
+    {
+      "id": "P2",
+      "category": "Prompt Injection",
+      "pattern": "Hidden Instructions",
+      "severity": "HIGH",
+      "confidence": 0.7,
+      "finding": "<!-- Progress Bar -->\n    <div class=\"progress-bar\" id=\"progressBar\"></div>\n\n    <!-- Slide Deck Container (16:9 on desktop) -->\n    <div class=\"slide-deck\">\n\n    <!-- Slides -->\n    <div class=\"slide",
+      "explanation": "Hidden instructions were detected in comments or invisible text. These could contain malicious directives. Manual review is recommended.",
+      "remediation": "Audit all comments and invisible characters. Remove any instructions that direct the agent to perform unauthorized actions. Use plain, reviewable content.",
+      "location": {
+        "file": "references/slides-html-template.md",
+        "start_line": 145
+      }
+    },
+    {
+      "id": "P6",
+      "category": "System Prompt Leakage",
+      "pattern": "Direct Prompt Extraction",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "finding": "show prompt",
+      "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+      "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+      "location": {
+        "file": "scripts/cip/generate.py",
+        "start_line": 412
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "scripts/cip/generate.py",
+        "start_line": 70
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "scripts/icon/generate.py",
+        "start_line": 28
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env ",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "scripts/logo/generate.py",
+        "start_line": 41
+      }
+    },
+    {
+      "id": "PE3",
+      "category": "Privilege Escalation",
+      "pattern": "Credential Access",
+      "severity": "HIGH",
+      "confidence": 0.6,
+      "finding": ".env\"",
+      "explanation": "Code accesses credential files (SSH keys, AWS credentials, etc.). This could indicate credential theft attempts.",
+      "remediation": "Remove references to credential paths. Use environment variables or secrets managers. For docs, use placeholder paths (e.g., /path/to/config). Never load .env or token files in production code paths.",
+      "location": {
+        "file": "scripts/cip/generate.py",
+        "start_line": 72
+      }
+    }
+  ],
+  "scannedAt": "2026-09-22T14:52:15.591399+00:00",
+  "scanMode": "static",
+  "skillName": "design",
+  "contentHash": "95431521c610724a9c505dc24aaffec3edf1e8e1f6e4dd11fecc38320496425a",
+  "scannerVersion": "2.11.2"
+}

@@ -458,6 +458,29 @@ export const COLLECTIONS: CollectionSeed[] = [
     commandIds: [],
     sort: 26,
   },
+  {
+    id: 'ux-ui-pro',
+    icon: 'palette',
+    color: '#A855F7',
+    labelFr: 'UX / UI Pro',
+    labelEn: 'UX / UI Pro',
+    briefFr:
+      'Design intelligence NextLevelBuilder (UI/UX Pro Max) : styles UI, design system, brand, slides, banners et styling — pack UX/UI prêt pour ton agent.',
+    briefEn:
+      'NextLevelBuilder design intelligence (UI/UX Pro Max): UI styles, design system, brand, slides, banners and styling — a UX/UI pack ready for your agent.',
+    kind: 'pack',
+    skillIds: [
+      'ui-ux-pro-max__nextlevelbuilder-ui-ux-pro-max-skill__claude-skills-fa8b0c2ef9a4',
+      'design__nextlevelbuilder-ui-ux-pro-max-skill__claude-skills-c488ca8fe826',
+      'design-system__nextlevelbuilder-ui-ux-pro-max-skill__claude-skills-f0b90bc5992f',
+      'ui-styling__nextlevelbuilder-ui-ux-pro-max-skill__claude-skills-2b213cb6cb18',
+      'brand__nextlevelbuilder-ui-ux-pro-max-skill__claude-skills-5d741ed8256c',
+      'slides__nextlevelbuilder-ui-ux-pro-max-skill__claude-skills-f9ed6474d872',
+      'banner-design__nextlevelbuilder-ui-ux-pro-max-skill__claude-skills-e2a4f126c877',
+    ],
+    commandIds: [],
+    sort: 27,
+  },
 ]
 
 export function findCollectionSeed(id: string): CollectionSeed | undefined {
