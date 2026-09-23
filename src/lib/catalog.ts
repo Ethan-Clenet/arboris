@@ -128,6 +128,14 @@ export function collectionTheme(collection: Pick<CollectionSummary, 'id'>): Coll
   return COLLECTION_THEME_BY_ID[collection.id] ?? null
 }
 
+/** Collections mises en avant « premium » (bordure dorée + badge au survol). */
+const PREMIUM_COLLECTION_IDS = new Set(['yunt-docker'])
+
+export function isPremiumCollection(collection: Pick<CollectionSummary, 'id'> | string): boolean {
+  const id = typeof collection === 'string' ? collection : collection.id
+  return PREMIUM_COLLECTION_IDS.has(id)
+}
+
 /** Ordre + couleurs de pastille des compatibilités (présentation, non stocké). */
 export const COMPAT_ORDER = ['Claude', 'Cursor', 'Codex', 'Copilot'] as const
 

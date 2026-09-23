@@ -34,8 +34,8 @@ describe('publisher logos', () => {
     expect(hasPublisherLogo('affaan-m')).toBe(true)
     expect(publisherLogoAsset('affaan-m')).toBe('/publishers/affaan-m.png')
     expect(hasPublisherLogo('Yunt')).toBe(true)
-    expect(publisherLogoAsset('Yunt')).toBe('/publishers/yunt.svg')
-    expect(publisherLogoAsset('yunt')).toBe('/publishers/yunt.svg')
+    expect(publisherLogoAsset('Yunt')).toBe('/publishers/yunt.png')
+    expect(publisherLogoAsset('yunt')).toBe('/publishers/yunt.png')
     expect(hasPublisherLogo('FastAPI')).toBe(true)
     // Logos monochromes rendus en path inline coloré (plus d'asset <img> noir).
     expect(publisherLogoAsset('FastAPI')).toBeUndefined()
