@@ -33,7 +33,7 @@ export const ZIP_RATE_LIMIT: RateLimitOptions = { limit: 20, windowMs: 60_000 }
 export const INSTALL_RATE_LIMIT: RateLimitOptions = { limit: 30, windowMs: 60_000 }
 
 /** Plafond d’entrées dans un ZIP généré. */
-export const MAX_ZIP_ENTRIES = 250
+export const MAX_ZIP_ENTRIES = 500
 
 /** Tests uniquement. */
 export function resetRateLimitBuckets(): void {

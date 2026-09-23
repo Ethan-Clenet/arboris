@@ -289,14 +289,12 @@ async function runInstallCollection(collectionId: string, options: CliOptions) {
   if (!col) {
     const version = await readCliVersion()
     console.error(`Collection inconnue: "${collectionId}"`)
-    console.error(`arboris-cli@${version} — collections:`)
-    for (const known of COLLECTIONS) {
-      console.error(`  ${known.id}`)
-    }
-    console.error('Utilise: npx arboris-cli@latest list-collections')
+    console.error(`arboris-cli@${version} — ce binaire npm est peut‑être en retard sur le catalogue.`)
+    console.error('Installe depuis le site (toujours à jour) :')
     console.error(
-      'Si le pack apparaît sur le site mais pas ici: npx arboris-cli@latest (évite un cache npx trop vieux).',
+      `  npx --yes https://arboristhree.xyz/cli/install-collection.mjs ${collectionId}`,
     )
+    console.error('Ou force la dernière CLI : npx arboris-cli@latest list-collections')
     process.exit(1)
   }
 
