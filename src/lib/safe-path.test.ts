@@ -5,7 +5,7 @@ import { join } from 'node:path'
 describe('isSafeCatalogId', () => {
   it('accepte les IDs catalogue courants', () => {
     expect(isSafeCatalogId('gateguard')).toBe(true)
-    expect(isSafeCatalogId('add-cli-command__dotnet-sdk__github-skills-3793ff9ea58c')).toBe(true)
+    expect(isSafeCatalogId('add-cli-command__dotnet-dotnet__src-sdk-github-skills-9ab38984b9dd')).toBe(true)
     expect(isSafeCatalogId('vendor/nested-skill')).toBe(true)
   })
 
