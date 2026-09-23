@@ -59,7 +59,11 @@ function SkillDetailPage() {
   const githubTitle =
     publisher ||
     (github.repo ? github.repo.split('/')[0] : null) ||
-    (github.kind === 'upstream' ? t.skill.githubUpstream : t.skill.githubMirror)
+    (github.kind === 'upstream' || github.kind === 'site'
+      ? t.skill.githubUpstream
+      : t.skill.githubMirror)
+  const githubOpenLabel = github.kind === 'site' ? t.skill.githubOpenSite : t.skill.githubOpenRepo
+  const githubShareLabel = github.kind === 'site' ? t.skill.githubShareSite : t.skill.githubShare
   const copyContent = useMemo(
     () => fileContent ?? buildSkillMarkdown(skill, lang),
     [fileContent, skill, lang],
@@ -170,8 +174,8 @@ function SkillDetailPage() {
             source={github}
             title={githubTitle}
             publisher={publisher}
-            openLabel={t.skill.githubOpenRepo}
-            shareLabel={t.skill.githubShare}
+            openLabel={githubOpenLabel}
+            shareLabel={githubShareLabel}
             sharedLabel={t.skill.githubShared}
           />
         </div>

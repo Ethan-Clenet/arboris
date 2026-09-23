@@ -7,7 +7,7 @@ description: >
 metadata:
   origin: Yunt
   course: Conteneuriser ses projets web avec Docker
-  source: https://academy.yunt.fr/dashboard/cours/cmta1lr1j000404l1qfs3kl25
+  source: https://academy.yunt.fr/dashboard/catalogue
 ---
 
 # Yunt — Images & Dockerfile

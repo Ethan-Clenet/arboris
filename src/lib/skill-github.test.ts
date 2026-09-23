@@ -42,4 +42,19 @@ describe('resolveSkillGithubUrl', () => {
     expect(src.repo).toBe('affaan-m/ECC')
     expect(src.url).toContain('/prisma/skills/agent-eval')
   })
+
+  it('pointe les skills Yunt vers le catalogue Academy (pas affaan-m/ECC)', () => {
+    for (const id of [
+      'yunt-docker-compose',
+      'yunt-docker-containers',
+      'yunt-docker-fundamentals',
+      'yunt-docker-images-build',
+      'yunt-docker-volumes-networks',
+    ]) {
+      const src = resolveSkillGithubUrl(id)
+      expect(src.kind).toBe('site')
+      expect(src.repo).toBe('academy.yunt.fr')
+      expect(src.url).toBe('https://academy.yunt.fr/dashboard/catalogue')
+    }
+  })
 })
