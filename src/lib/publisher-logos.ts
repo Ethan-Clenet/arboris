@@ -70,6 +70,7 @@ export const PUBLISHER_LOGO_COLOR: Record<string, string> = {
   Neon: '#00E699',
   Stitch: '#EA4335',
   Vercel: '#F4F4F5',
+  Yunt: '#0A0A0A',
 }
 
 /** Assets SVG officiels (multicolores) — préférés aux paths monochromes. */
@@ -83,6 +84,7 @@ export const PUBLISHER_LOGO_ASSET: Record<string, string> = {
   vinta: '/publishers/vinta.png',
   Context7: '/publishers/context7.svg',
   Auth0: '/publishers/auth0.svg',
+  Yunt: '/publishers/yunt.svg',
 }
 
 export function hasPublisherLogo(name: string): boolean {
@@ -115,6 +117,8 @@ export function resolvePublisherLogoName(name: string | null | undefined): strin
     prisma: 'Prisma',
     vercel: 'Vercel',
     neon: 'Neon',
+    yunt: 'Yunt',
+    'yunt-academy': 'Yunt',
     ansible: 'Ansible',
     alibaba: 'Alibaba',
     storybookjs: 'Storybook',

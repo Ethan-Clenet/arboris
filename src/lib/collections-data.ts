@@ -481,6 +481,27 @@ export const COLLECTIONS: CollectionSeed[] = [
     commandIds: [],
     sort: 27,
   },
+  {
+    id: 'yunt-docker',
+    icon: 'shipping-container',
+    color: '#0A0A0A',
+    labelFr: 'Yunt — Docker',
+    labelEn: 'Yunt — Docker',
+    briefFr:
+      'Cours Yunt Academy « Conteneuriser ses projets web avec Docker » : fondamentaux, conteneurs, images/Dockerfile, volumes/réseaux et Compose — 5 skills condensés avec autorisation du créateur.',
+    briefEn:
+      'Yunt Academy course “Containerize your web projects with Docker”: fundamentals, containers, images/Dockerfile, volumes/networks and Compose — 5 condensed skills with creator permission.',
+    kind: 'pack',
+    skillIds: [
+      'yunt-docker-fundamentals',
+      'yunt-docker-containers',
+      'yunt-docker-images-build',
+      'yunt-docker-volumes-networks',
+      'yunt-docker-compose',
+    ],
+    commandIds: ['docker-rebuild'],
+    sort: 28,
+  },
 ]
 
 export function findCollectionSeed(id: string): CollectionSeed | undefined {
@@ -490,13 +511,18 @@ export function findCollectionSeed(id: string): CollectionSeed | undefined {
   const exact = COLLECTIONS.find((c) => c.id === raw)
   if (exact) return exact
 
+  if (raw === 'yunt' || raw === 'yunt-docker-course') {
+    return COLLECTIONS.find((c) => c.id === 'yunt-docker')
+  }
+
   // Alias court : `tanstack` → `tanstack-starter`, `react-ts` → `react-ts-starter`
   const withStarter = COLLECTIONS.find((c) => c.id === `${raw}-starter`)
   if (withStarter) return withStarter
 
   // Préfixe unique : `docker` → `docker-ops-starter` si un seul match
+  // (exclure les ids déjà préfixés comme `yunt-docker` quand on cherche `docker`)
   const prefixed = COLLECTIONS.filter(
-    (c) => c.id.startsWith(`${raw}-`) || c.id.startsWith(raw),
+    (c) => c.id.startsWith(`${raw}-`) || (c.id.startsWith(raw) && c.id !== raw),
   )
   if (prefixed.length === 1) return prefixed[0]
 
