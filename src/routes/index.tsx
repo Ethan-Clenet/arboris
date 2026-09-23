@@ -6,7 +6,7 @@ import { ShimmerButtonLink } from '#/components/ui/shimmer-button'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
-import { getCatalog } from '#/server/functions'
+import { getHomeCatalog } from '#/server/functions'
 import { AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
 import SecurityBadge from '#/components/SecurityBadge'
 import HomeTerminal from '#/components/HomeTerminal'
@@ -19,7 +19,7 @@ import {
 } from '#/lib/catalog'
 
 export const Route = createFileRoute('/')({
-  loader: () => getCatalog(),
+  loader: () => getHomeCatalog(),
   head: () =>
     seoHead({
       path: '/',
@@ -34,8 +34,6 @@ type TabMode = 'popular' | 'trending' | 'recent'
 const TABLE_COLS =
   'grid grid-cols-[minmax(168px,1.2fr)_minmax(120px,0.9fr)_minmax(118px,128px)_56px_minmax(148px,160px)] items-center gap-x-5'
 
-const HOME_INDEX_LIMIT = 10
-
 function HomePage() {
   const catalog = Route.useLoaderData()
   const { t, lang } = useI18n()
@@ -49,30 +47,30 @@ function HomePage() {
     return map
   }, [catalog.categories])
 
-  const filtered = useMemo(() => {
+  const tabSkills = useMemo(() => {
+    if (tab === 'trending') return catalog.trending
+    if (tab === 'recent') return catalog.recent
+    return catalog.popular
+  }, [catalog.popular, catalog.trending, catalog.recent, tab])
+
+  const searchPool = useMemo(() => {
+    const map = new Map<string, SkillSummary>()
+    for (const s of catalog.popular) map.set(s.id, s)
+    for (const s of catalog.trending) map.set(s.id, s)
+    for (const s of catalog.recent) map.set(s.id, s)
+    return [...map.values()]
+  }, [catalog.popular, catalog.trending, catalog.recent])
+
+  const rows = useMemo(() => {
     const q = query.trim().toLowerCase()
-    if (!q) return catalog.skills
-    return catalog.skills.filter((s) => {
+    const source = q ? searchPool : tabSkills
+    if (!q) return source
+    return source.filter((s) => {
       const cat = catById.get(s.categoryId)
       const hay = `${s.id} ${s.tag[lang]} ${s.tech.join(' ')} ${cat ? cat.label[lang] : ''}`.toLowerCase()
       return hay.includes(q)
     })
-  }, [query, catalog.skills, catById, lang])
-
-  const rows = useMemo(() => {
-    const list = [...filtered]
-    let sorted: SkillSummary[]
-    if (tab === 'popular') {
-      sorted = list.sort((a, b) => (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id))
-    } else if (tab === 'trending') {
-      sorted = list.sort(
-        (a, b) => b.stacks.length - a.stacks.length || (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id),
-      )
-    } else {
-      sorted = list.sort((a, b) => a.id.localeCompare(b.id))
-    }
-    return sorted.slice(0, HOME_INDEX_LIMIT)
-  }, [filtered, tab])
+  }, [query, searchPool, tabSkills, catById, lang])
 
   const tabs: { id: TabMode; label: string; icon: string }[] = [
     { id: 'popular', label: t.home.tabPopular, icon: 'star' },
@@ -198,7 +196,7 @@ function HomePage() {
 
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[var(--border)] bg-[var(--surface-2)] px-4 py-3 sm:px-5">
             <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
-              {t.home.footerCount(catalog.skills.length)}
+              {t.home.footerCount(catalog.skillTotal)}
             </span>
             <Link
               to="/skills"

@@ -65,6 +65,17 @@ export interface Catalog {
   compatOrder: string[]
 }
 
+/** Payload home — évite de sérialiser les ~2k skills dans le HTML initial (LCP / TBT). */
+export interface HomeCatalog {
+  categories: Category[]
+  compatOrder: string[]
+  /** Effectif total du catalogue (footer), pas la taille des listes ci-dessous. */
+  skillTotal: number
+  popular: SkillSummary[]
+  trending: SkillSummary[]
+  recent: SkillSummary[]
+}
+
 export interface CollectionSummary {
   id: string
   icon: string

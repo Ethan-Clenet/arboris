@@ -1,7 +1,5 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/react'
-import type { ReactNode } from 'react'
+import { lazy, Suspense, type ReactNode } from 'react'
 import '#/fonts'
 import DevtoolsGate from '#/components/DevtoolsGate'
 import AppShell from '#/components/AppShell'
@@ -13,9 +11,20 @@ import { I18nProvider } from '#/lib/i18n'
 import { rootFallbackMeta } from '#/lib/seo'
 import appCss from '#/styles.css?url'
 
+/** Theme anti-FOUC — inline (CSP `unsafe-inline`) pour éviter une requête render-blocking. */
+const THEME_INIT = `(function(){try{var t=localStorage.getItem('sp-theme');if(t!=='light'&&t!=='dark')t='dark';document.documentElement.setAttribute('data-theme',t);document.documentElement.style.colorScheme=t}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();`
+
+const Analytics = lazy(() =>
+  import('@vercel/analytics/react').then((m) => ({ default: m.Analytics })),
+)
+const SpeedInsights = lazy(() =>
+  import('@vercel/speed-insights/react').then((m) => ({ default: m.SpeedInsights })),
+)
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
+      { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ...rootFallbackMeta(),
     ],
@@ -35,11 +44,7 @@ function RootDocument({ children }: { children: ReactNode }) {
     <html lang="fr" data-theme="dark" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
-        {/*
-          Script externe (CSP). Les payloads d’hydratation TanStack Start restent
-          inline : script-src prod doit inclure 'unsafe-inline' (vercel.json).
-        */}
-        <script src="/arboris-theme-init.js"></script>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
         <HeadContent />
       </head>
       <body>
@@ -50,8 +55,10 @@ function RootDocument({ children }: { children: ReactNode }) {
         </I18nProvider>
         <DevtoolsGate />
         <Scripts />
-        <Analytics />
-        <SpeedInsights />
+        <Suspense fallback={null}>
+          <Analytics />
+          <SpeedInsights />
+        </Suspense>
       </body>
     </html>
   )

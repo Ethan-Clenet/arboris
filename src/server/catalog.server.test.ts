@@ -5,6 +5,7 @@ import {
   loadCatalog,
   loadCollection,
   loadCommand,
+  loadHomeCatalog,
   loadSkill,
   loadSkillPageContext,
 } from './catalog.server'
@@ -13,7 +14,7 @@ vi.mock('./db', () => ({
   prisma: {
     category: { findMany: vi.fn(), findUnique: vi.fn() },
     stack: { findMany: vi.fn() },
-    skill: { findMany: vi.fn(), findUnique: vi.fn() },
+    skill: { findMany: vi.fn(), findUnique: vi.fn(), count: vi.fn() },
     collection: { findMany: vi.fn(), findUnique: vi.fn() },
   },
 }))
@@ -42,6 +43,7 @@ beforeEach(() => {
   vi.mocked(prisma.stack.findMany).mockReset()
   vi.mocked(prisma.skill.findMany).mockReset()
   vi.mocked(prisma.skill.findUnique).mockReset()
+  vi.mocked(prisma.skill.count).mockReset()
   vi.mocked(prisma.collection.findMany).mockReset()
   vi.mocked(prisma.collection.findUnique).mockReset()
 })
@@ -74,6 +76,43 @@ describe('loadCatalog', () => {
     const again = await loadCatalog()
     expect(again).toBe(catalog)
     expect(prisma.skill.findMany).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('loadHomeCatalog', () => {
+  it('retourne un payload réduit (pas tout le catalogue)', async () => {
+    vi.mocked(prisma.category.findMany).mockResolvedValue([
+      { id: 'security', labelFr: 'Sécu', labelEn: 'Sec', color: '#0D9488', icon: 'shield', sort: 0 },
+    ] as never)
+    vi.mocked(prisma.skill.count).mockResolvedValue(42 as never)
+    vi.mocked(prisma.skill.findMany).mockResolvedValue([skillRow] as never)
+
+    const home = await loadHomeCatalog()
+    expect(home.skillTotal).toBe(42)
+    expect(home.popular).toHaveLength(1)
+    expect(home.trending).toHaveLength(1)
+    expect(home.recent).toHaveLength(1)
+    expect(home.categories[0]?.id).toBe('security')
+    expect(prisma.skill.findMany).toHaveBeenCalledTimes(3)
+  })
+
+  it('dérive depuis le cache full catalog quand disponible', async () => {
+    vi.mocked(prisma.category.findMany).mockResolvedValue([
+      { id: 'security', labelFr: 'Sécu', labelEn: 'Sec', color: '#0D9488', icon: 'shield', sort: 0 },
+    ] as never)
+    vi.mocked(prisma.stack.findMany).mockResolvedValue([] as never)
+    vi.mocked(prisma.skill.findMany).mockResolvedValue([skillRow] as never)
+    vi.mocked(prisma.collection.findMany).mockResolvedValue([] as never)
+
+    await loadCatalog()
+    vi.mocked(prisma.skill.findMany).mockClear()
+    vi.mocked(prisma.skill.count).mockClear()
+
+    const home = await loadHomeCatalog()
+    expect(home.skillTotal).toBe(1)
+    expect(home.popular[0]?.id).toBe('gateguard')
+    expect(prisma.skill.findMany).not.toHaveBeenCalled()
+    expect(prisma.skill.count).not.toHaveBeenCalled()
   })
 })
 

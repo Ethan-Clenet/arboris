@@ -1,12 +1,7 @@
-/** Polices auto-hébergées — importées ici pour le bundle Vite et la détection Knip. */
+/** Polices auto-hébergées — poids critiques seulement (chemin LCP). */
 import '@fontsource/hanken-grotesk/latin-400.css'
-import '@fontsource/hanken-grotesk/latin-500.css'
 import '@fontsource/hanken-grotesk/latin-600.css'
-import '@fontsource/hanken-grotesk/latin-700.css'
-import '@fontsource/space-grotesk/latin-400.css'
-import '@fontsource/space-grotesk/latin-500.css'
 import '@fontsource/space-grotesk/latin-600.css'
 import '@fontsource/space-grotesk/latin-700.css'
 import '@fontsource/jetbrains-mono/latin-400.css'
 import '@fontsource/jetbrains-mono/latin-500.css'
-import '@fontsource/jetbrains-mono/latin-600.css'

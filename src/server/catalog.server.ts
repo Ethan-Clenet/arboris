@@ -6,6 +6,7 @@ import {
   type Category,
   type CollectionDetail,
   type CollectionSummary,
+  type HomeCatalog,
   type SkillDetail,
   type SkillSummary,
   type Stack,
@@ -219,6 +220,94 @@ export async function loadCatalog(): Promise<Catalog> {
     })
 
   return catalogInflight
+}
+
+/** Lignes max par onglet home (popular / trending / recent). */
+export const HOME_TAB_LIMIT = 24
+/** Candidats chargés pour dériver l’onglet « trending » (tri par #stacks). */
+const HOME_TRENDING_POOL = 120
+
+function sliceHomeFromCatalog(catalog: Catalog): HomeCatalog {
+  const byScore = [...catalog.skills].sort(
+    (a, b) => (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id),
+  )
+  const byStacks = [...catalog.skills].sort(
+    (a, b) =>
+      b.stacks.length - a.stacks.length ||
+      (b.score ?? -1) - (a.score ?? -1) ||
+      a.id.localeCompare(b.id),
+  )
+  const byId = [...catalog.skills].sort((a, b) => a.id.localeCompare(b.id))
+  return {
+    categories: catalog.categories,
+    compatOrder: catalog.compatOrder,
+    skillTotal: catalog.skills.length,
+    popular: byScore.slice(0, HOME_TAB_LIMIT),
+    trending: byStacks.slice(0, HOME_TAB_LIMIT),
+    recent: byId.slice(0, HOME_TAB_LIMIT),
+  }
+}
+
+async function fetchHomeCatalog(): Promise<HomeCatalog> {
+  const [categories, skillTotal, popularRows, recentRows, trendingPoolRows] = await Promise.all([
+    prisma.category.findMany({ orderBy: { sort: 'asc' } }),
+    prisma.skill.count(),
+    prisma.skill.findMany({
+      orderBy: [{ score: 'desc' }, { id: 'asc' }],
+      take: HOME_TAB_LIMIT,
+      select: skillSummarySelect,
+    }),
+    prisma.skill.findMany({
+      orderBy: { id: 'asc' },
+      take: HOME_TAB_LIMIT,
+      select: skillSummarySelect,
+    }),
+    prisma.skill.findMany({
+      orderBy: [{ score: 'desc' }, { id: 'asc' }],
+      take: HOME_TRENDING_POOL,
+      select: skillSummarySelect,
+    }),
+  ])
+
+  const [popular, recent, trendingPool] = await Promise.all([
+    titledSummaries(popularRows),
+    titledSummaries(recentRows),
+    titledSummaries(trendingPoolRows),
+  ])
+
+  const trending = [...trendingPool]
+    .sort(
+      (a, b) =>
+        b.stacks.length - a.stacks.length ||
+        (b.score ?? -1) - (a.score ?? -1) ||
+        a.id.localeCompare(b.id),
+    )
+    .slice(0, HOME_TAB_LIMIT)
+
+  return {
+    categories: categories.map(
+      (c): Category => ({
+        id: c.id,
+        label: { fr: c.labelFr, en: c.labelEn },
+        color: c.color,
+        icon: c.icon,
+      }),
+    ),
+    compatOrder: [...COMPAT_ORDER],
+    skillTotal,
+    popular,
+    trending,
+    recent,
+  }
+}
+
+/** Catalogue réduit pour `/` — pas de stacks/commands/collections ni les 2k+ skills. */
+export async function loadHomeCatalog(): Promise<HomeCatalog> {
+  const now = Date.now()
+  if (catalogCache && catalogCache.expiresAt > now) {
+    return sliceHomeFromCatalog(catalogCache.value)
+  }
+  return fetchHomeCatalog()
 }
 
 export async function loadSkill(id: string): Promise<SkillDetail | null> {
