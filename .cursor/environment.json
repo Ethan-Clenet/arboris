@@ -1,7 +1,7 @@
 {
   "name": "Arboris",
   "install": "bash .cursor/install.sh",
-  "start": "bash .cursor/start.sh",
+  "start": "for i in $(seq 1 120); do [ -x /workspace/.cursor/start.sh ] && exec bash /workspace/.cursor/start.sh; sleep 1; done; echo 'start.sh missing after 120s' >&2; exit 1",
   "terminals": [
     {
       "name": "dev",
