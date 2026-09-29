@@ -24,7 +24,7 @@ export const Route = createFileRoute('/')({
     seoHead({
       path: '/',
       description:
-        'Catalogue de skills et slash commands pour Cursor, Claude, Codex et Copilot. Copie le Markdown, installe-le dans ton agent — zéro config.',
+        'Skills et slash commands prêts à l’emploi pour Cursor, Claude, Codex et Copilot. Copie le Markdown, zéro config.',
     }),
   component: HomePage,
 })

@@ -33,6 +33,7 @@ export const Route = createRootRoute({
       ...fontPreloadLinks,
       { rel: 'stylesheet', href: appCss },
       { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+      { rel: 'icon', href: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
       // Sprite icônes — fetch tôt sans bloquer le rendu.
       { rel: 'preload', href: '/phosphor-sprite.svg', as: 'fetch', crossOrigin: 'anonymous' },
     ],

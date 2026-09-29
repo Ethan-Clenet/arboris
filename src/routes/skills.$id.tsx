@@ -16,7 +16,7 @@ import SecurityBadge from '#/components/SecurityBadge'
 import NvidiaLogo from '#/components/NvidiaLogo'
 import PublisherLogo from '#/components/PublisherLogo'
 import { hasPublisherLogo } from '#/lib/publisher-logos'
-import { seoHead, entityDescription, skillSeoTitle, isIndexableSkill } from '#/lib/seo'
+import { seoHead, entityDescription, skillSeoTitle, isIndexableSkill, skillJsonLd } from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/$id')({
   loader: async ({ params }) => {
@@ -41,6 +41,12 @@ export const Route = createFileRoute('/skills/$id')({
         { name: 'Skills', path: '/skills' },
         { name: skillLabel(skill), path: `/skills/${skill.id}` },
       ],
+      jsonLd: skillJsonLd({
+        id: skill.id,
+        label: skillLabel(skill),
+        description: skill.tag.fr,
+        publisher: skill.publisher,
+      }),
     })
   },
   component: SkillDetailPage,

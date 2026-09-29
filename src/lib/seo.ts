@@ -15,6 +15,8 @@ type SeoInput = {
   image?: string
   /** Fil d’Ariane (≥ 2 items) — résultat enrichi Search Console. */
   breadcrumbs?: BreadcrumbItem[]
+  /** JSON-LD supplémentaire (entité typée de la page). Ignoré si `noIndex`. */
+  jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>
 }
 
 /** Bornes SERP (approx. Screaming Frog / Google). */
@@ -239,10 +241,31 @@ export function siteJsonLd() {
         applicationCategory: 'DeveloperApplication',
         operatingSystem: 'Linux, macOS, Windows',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
-        url: SITE_URL,
+        url: `${SITE_URL}/`,
         publisher: { '@id': `${SITE_URL}/#organization` },
       },
     ],
+  }
+}
+
+/** Entité typée pour une fiche skill (résultat enrichi / compréhension SERP). */
+export function skillJsonLd(input: {
+  id: string
+  label: string
+  description: string
+  publisher?: string | null
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareSourceCode',
+    name: input.label,
+    description: input.description,
+    url: absoluteUrl(`/skills/${input.id}`),
+    programmingLanguage: 'Markdown',
+    inLanguage: 'fr',
+    isAccessibleForFree: true,
+    author: { '@type': 'Organization', name: input.publisher?.trim() || SITE_NAME },
+    publisher: { '@id': `${SITE_URL}/#organization` },
   }
 }
 
@@ -279,7 +302,6 @@ export function seoHead(input: SeoInput = {}) {
     { property: 'og:type', content: type },
     { property: 'og:url', content: url },
     { property: 'og:locale', content: 'fr_FR' },
-    { property: 'og:locale:alternate', content: 'en_US' },
     { property: 'og:image', content: image },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: title },
@@ -304,6 +326,12 @@ export function seoHead(input: SeoInput = {}) {
   const crumbs = input.breadcrumbs?.filter((item) => item.name && item.path) ?? []
   if (!input.noIndex && crumbs.length >= 2) {
     scripts.push({ type: 'application/ld+json', children: JSON.stringify(breadcrumbJsonLd(crumbs)) })
+  }
+  if (!input.noIndex && input.jsonLd) {
+    const entities = Array.isArray(input.jsonLd) ? input.jsonLd : [input.jsonLd]
+    for (const entity of entities) {
+      scripts.push({ type: 'application/ld+json', children: JSON.stringify(entity) })
+    }
   }
 
   return {
