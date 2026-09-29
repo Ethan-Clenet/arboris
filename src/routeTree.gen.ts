@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as Sitemap_indexDotxmlRouteImport } from './routes/sitemap_index[.]xml'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as Google2d4e68e917b5f045DothtmlRouteImport } from './routes/google2d4e68e917b5f045[.]html'
 import { Route as GettingStartedRouteImport } from './routes/getting-started'
 import { Route as R500RouteImport } from './routes/500'
@@ -38,6 +39,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
   id: '/robots.txt',
   path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Google2d4e68e917b5f045DothtmlRoute =
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/500': typeof R500Route
   '/getting-started': typeof GettingStartedRoute
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/500': typeof R500Route
   '/getting-started': typeof GettingStartedRoute
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
@@ -143,6 +151,7 @@ export interface FileRoutesById {
   '/500': typeof R500Route
   '/getting-started': typeof GettingStartedRoute
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
@@ -162,6 +171,7 @@ export interface FileRouteTypes {
     | '/500'
     | '/getting-started'
     | '/google2d4e68e917b5f045.html'
+    | '/llms.txt'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/sitemap_index.xml'
@@ -179,6 +189,7 @@ export interface FileRouteTypes {
     | '/500'
     | '/getting-started'
     | '/google2d4e68e917b5f045.html'
+    | '/llms.txt'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/sitemap_index.xml'
@@ -196,6 +207,7 @@ export interface FileRouteTypes {
     | '/500'
     | '/getting-started'
     | '/google2d4e68e917b5f045.html'
+    | '/llms.txt'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/sitemap_index.xml'
@@ -214,6 +226,7 @@ export interface RootRouteChildren {
   R500Route: typeof R500Route
   GettingStartedRoute: typeof GettingStartedRoute
   Google2d4e68e917b5f045DothtmlRoute: typeof Google2d4e68e917b5f045DothtmlRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   Sitemap_indexDotxmlRoute: typeof Sitemap_indexDotxmlRoute
@@ -247,6 +260,13 @@ declare module '@tanstack/react-router' {
       path: '/robots.txt'
       fullPath: '/robots.txt'
       preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/google2d4e68e917b5f045.html': {
@@ -342,6 +362,7 @@ const rootRouteChildren: RootRouteChildren = {
   R500Route: R500Route,
   GettingStartedRoute: GettingStartedRoute,
   Google2d4e68e917b5f045DothtmlRoute: Google2d4e68e917b5f045DothtmlRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   Sitemap_indexDotxmlRoute: Sitemap_indexDotxmlRoute,

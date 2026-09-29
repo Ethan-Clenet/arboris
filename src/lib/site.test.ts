@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { SITE_NAME, SITE_TAGLINE, SITE_URL, absoluteUrl, pageTitle } from './site'
 
+describe('SITE_URL', () => {
+  it('pointe vers le domaine de production', () => {
+    expect(SITE_URL).toBe('https://arboristhree.xyz')
+  })
+})
+
 describe('absoluteUrl', () => {
   it('ajoute un slash pour la racine', () => {
     expect(absoluteUrl()).toBe(`${SITE_URL}/`)

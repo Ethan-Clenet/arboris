@@ -11,6 +11,8 @@ import {
   rootFallbackMeta,
   SEO_INDEX_MIN_SCORE,
   seoHead,
+  siteJsonLd,
+  skillJsonLd,
   skillSeoTitle,
 } from './seo'
 import { SITE_NAME, SITE_URL } from './site'
@@ -171,6 +173,54 @@ describe('seoHead', () => {
       ],
     })
     expect(head.scripts?.some((s) => s.children.includes('BreadcrumbList'))).toBe(true)
+  })
+
+  it('n’émet pas og:locale:alternate (pas d’URL EN dédiée)', () => {
+    const head = seoHead({ path: '/' })
+    expect(head.meta.some((m) => m.property === 'og:locale:alternate')).toBe(false)
+    expect(head.meta.some((m) => m.property === 'og:locale' && m.content === 'fr_FR')).toBe(true)
+  })
+
+  it('injecte le JSON-LD supplémentaire sur une page indexable', () => {
+    const head = seoHead({
+      path: '/skills/fastapi-patterns',
+      jsonLd: { '@type': 'SoftwareSourceCode', name: 'fastapi-patterns' },
+    })
+    expect(head.scripts?.some((s) => s.children.includes('SoftwareSourceCode'))).toBe(true)
+  })
+
+  it('ignore le JSON-LD supplémentaire si noIndex', () => {
+    const head = seoHead({
+      path: '/skills/x',
+      noIndex: true,
+      jsonLd: { '@type': 'SoftwareSourceCode', name: 'x' },
+    })
+    expect(head.scripts).toBeUndefined()
+  })
+})
+
+describe('siteJsonLd', () => {
+  it('aligne les URLs SoftwareApplication sur le canonical (slash final)', () => {
+    const graph = siteJsonLd()
+    const app = graph['@graph'].find((node) => node['@type'] === 'SoftwareApplication')
+    expect(app?.url).toBe(`${SITE_URL}/`)
+  })
+})
+
+describe('skillJsonLd', () => {
+  it('décrit une fiche skill en SoftwareSourceCode', () => {
+    const json = skillJsonLd({
+      id: 'fastapi-patterns',
+      label: 'FastAPI Patterns',
+      description: 'Patterns FastAPI.',
+      publisher: 'FastAPI',
+    })
+    expect(json).toMatchObject({
+      '@type': 'SoftwareSourceCode',
+      name: 'FastAPI Patterns',
+      url: `${SITE_URL}/skills/fastapi-patterns`,
+      author: { '@type': 'Organization', name: 'FastAPI' },
+    })
   })
 })
 

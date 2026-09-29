@@ -13,6 +13,10 @@ interface StatusPageProps {
 export default function StatusPage({ code, title, body, icon, children }: StatusPageProps) {
   return (
     <PageShell className="flex min-h-[52vh] flex-col items-center justify-center py-24 text-center">
+      {/* Pages d'erreur/404 : hors index (React 19 hoiste title/meta vers <head>). */}
+      <title>{`${title} — Arboris`}</title>
+      <meta name="robots" content="noindex, follow" />
+      <meta name="googlebot" content="noindex, follow" />
       <div className="mx-auto mb-5 grid h-14 w-14 place-items-center rounded-2xl border border-[var(--border)] bg-[var(--surface)] text-[var(--text-3)] shadow-[var(--shadow-card)]">
         <Icon name={icon} size={28} />
       </div>
