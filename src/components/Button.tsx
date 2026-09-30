@@ -21,7 +21,7 @@ const variants: Record<ButtonVariant, string> = {
 }
 
 const copiedCopy =
-  'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)] hover:border-[var(--accent-border)] hover:bg-[var(--accent-soft)]'
+  'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent-text)] hover:border-[var(--accent-border)] hover:bg-[var(--accent-soft)]'
 
 const sizes: Record<ButtonSize, string> = {
   sm: 'px-2.5 py-1 text-[13px]',

@@ -92,7 +92,7 @@ export default function SecurityBadge({
     >
       <Icon name={style.icon} bold size={iconSize} />
       {showLabel ? <span className="truncate">{label}</span> : null}
-      <span className="inline-block min-w-[1.5rem] text-center tabular-nums opacity-90">
+      <span className="inline-block min-w-[1.5rem] text-center tabular-nums">
         {score != null ? score : '—'}
       </span>
     </span>

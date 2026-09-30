@@ -36,6 +36,14 @@ describe('AppShell', () => {
     expect(legal.querySelector('a[href="/mentions-legales"]')?.textContent).toMatch(/mentions légales/i)
     expect(legal.querySelector('a[href="/confidentialite"]')?.textContent).toMatch(/confidentialité/i)
   })
+
+  it('ajoute contact mailto et un CTA CLI, sans lien GitHub', () => {
+    render(wrap(<AppShell>page</AppShell>))
+    const footer = screen.getByRole('contentinfo')
+    expect(footer.querySelector('a[href="mailto:ethan.clenet@outlook.fr"]')?.textContent).toMatch(/contact/i)
+    expect(footer.querySelector('a[href="/getting-started"]')?.textContent).toMatch(/installer la cli/i)
+    expect(footer.querySelector('a[href*="github.com"]')).toBeNull()
+  })
 })
 
 describe('NotFoundPage / ServerErrorPage', () => {

@@ -96,7 +96,7 @@ function GettingStartedPage() {
                     : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-2)]'
                 }`}
               >
-                <span className="grid h-11 w-11 flex-none place-items-center rounded-[11px] bg-[var(--surface)] text-[var(--accent)]">
+                <span className="grid h-11 w-11 flex-none place-items-center rounded-[11px] bg-[var(--surface)] text-[var(--accent-text)]">
                   <Icon name={entry.icon} bold size={20} />
                 </span>
                 <span className="min-w-0">

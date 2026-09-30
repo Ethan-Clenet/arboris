@@ -79,14 +79,14 @@ export const PUBLISHER_LOGO_ASSET: Record<string, string> = {
   Brave: '/publishers/brave.svg',
   Arboris: '/publishers/arboris.svg',
   Microsoft: '/publishers/microsoft.svg',
-  'affaan-m': '/publishers/affaan-m.png',
+  'affaan-m': '/publishers/affaan-m.webp',
   'Hugging Face': '/publishers/huggingface.svg',
-  'Nous Research': '/publishers/nous-research.png',
-  vinta: '/publishers/vinta.png',
+  'Nous Research': '/publishers/nous-research.webp',
+  vinta: '/publishers/vinta.webp',
   Context7: '/publishers/context7.svg',
   Auth0: '/publishers/auth0.svg',
-  Yunt: '/publishers/yunt.png',
-  NextLevelBuilder: '/publishers/nextlevelbuilder.png',
+  Yunt: '/publishers/yunt.svg',
+  NextLevelBuilder: '/publishers/nextlevelbuilder.webp',
 }
 
 export function hasPublisherLogo(name: string): boolean {

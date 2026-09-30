@@ -37,6 +37,8 @@ export default function PublisherLogo({
         alt={altText}
         width={size}
         height={size}
+        loading="lazy"
+        decoding="async"
         className={`block object-contain ${className}`.trim()}
         draggable={false}
       />

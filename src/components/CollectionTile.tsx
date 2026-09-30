@@ -29,6 +29,8 @@ export default function CollectionTile({ collection, box, glyph }: CollectionTil
           alt=""
           width={glyph}
           height={glyph}
+          loading="lazy"
+          decoding="async"
           className="inline-block shrink-0 rounded-[3px] object-contain"
           aria-hidden="true"
         />

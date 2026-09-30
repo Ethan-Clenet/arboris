@@ -99,7 +99,7 @@ const COLLECTION_LOGOS: Record<string, CollectionLogo> = {
   },
   "yunt-docker": {
     color: "#0A0A0A",
-    asset: "/publishers/yunt.png",
+    asset: "/publishers/yunt.svg",
   },
 }
 

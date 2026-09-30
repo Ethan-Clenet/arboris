@@ -84,7 +84,7 @@ function CollectionsPage() {
     <main id="main-content" className="w-full">
       <PageShell as="div" className="pt-9">
         <div className="max-w-[640px]">
-          <div className="mb-3 flex items-center gap-2.5 font-mono text-[11.5px] font-medium tracking-[0.02em] text-[var(--accent)]">
+          <div className="mb-3 flex items-center gap-2.5 font-mono text-[11.5px] font-medium tracking-[0.02em] text-[var(--accent-text)]">
             <Icon name="stack" bold />
             <span>{t.collections.kicker}</span>
             <span className="text-[var(--text-3)]">·</span>
@@ -187,7 +187,7 @@ function CollectionsPage() {
             <button
               type="button"
               onClick={clearAll}
-              className="flex cursor-pointer items-center gap-[7px] p-0.5 text-[13px] font-medium text-[var(--accent)]"
+              className="flex cursor-pointer items-center gap-[7px] p-0.5 text-[13px] font-medium text-[var(--accent-text)]"
             >
               <Icon name="arrow-counter-clockwise" size={14} />
               {t.collections.clear}

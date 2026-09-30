@@ -44,7 +44,7 @@ function CommandsPage() {
     <main id="main-content" className="w-full">
       <PageShell as="div" className="pt-9 pb-[70px]">
         <div className="mb-8 max-w-[640px]">
-          <div className="mb-3 flex items-center gap-2.5 font-mono text-[11.5px] font-medium tracking-[0.02em] text-[var(--accent)]">
+          <div className="mb-3 flex items-center gap-2.5 font-mono text-[11.5px] font-medium tracking-[0.02em] text-[var(--accent-text)]">
             <Icon name="terminal-window" bold />
             <span>{t.commands.kicker}</span>
             <span className="text-[var(--text-3)]">·</span>
@@ -55,7 +55,7 @@ function CommandsPage() {
           </h1>
           <p className="max-w-[540px] text-[15px] text-[var(--text-2)]">{t.commands.subtitle}</p>
           <p className="mt-3 rounded-[10px] border border-[var(--border)] bg-[var(--surface-2)] px-3.5 py-2.5 text-[13px] text-[var(--text-2)]">
-            <Icon name="info" size={14} className="mr-1.5 inline text-[var(--accent)]" />
+            <Icon name="info" size={14} className="mr-1.5 inline text-[var(--accent-text)]" />
             {t.commands.usageBanner}
           </p>
         </div>
@@ -106,7 +106,7 @@ function CommandRow({ command }: { command: CommandSummary }) {
       className="flex cursor-pointer flex-col gap-2 border-b border-[var(--border)] px-4 py-4 transition-colors last:border-b-0 hover:bg-[var(--surface-hover)] sm:flex-row sm:items-center sm:gap-6 sm:px-[18px]"
     >
       <div className="flex min-w-0 flex-1 items-start gap-3">
-        <span className="grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px] bg-[var(--accent-soft)] text-[var(--accent)]">
+        <span className="grid h-[34px] w-[34px] flex-none place-items-center rounded-[9px] bg-[var(--accent-soft)] text-[var(--accent-text)]">
           <Icon name="terminal-window" bold size={17} />
         </span>
         <span className="min-w-0">

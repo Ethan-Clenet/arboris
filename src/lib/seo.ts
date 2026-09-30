@@ -1,5 +1,5 @@
 import { SECURITY_WARN_SCORE } from '#/lib/skillspector'
-import { absoluteUrl, pageTitle, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '#/lib/site'
+import { absoluteUrl, pageTitle, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from '#/lib/site'
 
 export type BreadcrumbItem = {
   name: string
@@ -247,7 +247,12 @@ export function siteJsonLd() {
         '@id': `${SITE_URL}/#organization`,
         name: SITE_NAME,
         url: `${SITE_URL}/`,
-        logo: absoluteUrl('/favicon.svg'),
+        logo: {
+          '@type': 'ImageObject',
+          url: absoluteUrl('/logo-512.png'),
+          width: 512,
+          height: 512,
+        },
       },
       {
         '@type': 'SoftwareApplication',
@@ -442,10 +447,14 @@ export function seoHead(input: SeoInput = {}) {
     { property: 'og:url', content: url },
     { property: 'og:locale', content: 'fr_FR' },
     { property: 'og:image', content: image },
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:image:alt', content: `${SITE_NAME} — ${SITE_TAGLINE}` },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: title },
     { name: 'twitter:description', content: description },
     { name: 'twitter:image', content: image },
+    { name: 'twitter:image:alt', content: `${SITE_NAME} — ${SITE_TAGLINE}` },
   ]
 
   if (input.noIndex) {

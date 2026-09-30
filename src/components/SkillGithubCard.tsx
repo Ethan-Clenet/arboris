@@ -63,7 +63,7 @@ export default function SkillGithubCard({
           title={shareLabel}
           className={`grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-lg transition-colors ${
             shared
-              ? 'bg-[var(--accent-soft)] text-[var(--accent)]'
+              ? 'bg-[var(--accent-soft)] text-[var(--accent-text)]'
               : 'text-[var(--text-3)] hover:bg-[var(--surface-2)] hover:text-[var(--text-1)]'
           }`}
         >

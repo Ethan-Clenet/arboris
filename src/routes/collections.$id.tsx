@@ -109,7 +109,7 @@ function CollectionDetailPage() {
                       params={{ id: cmd.id }}
                       className="flex cursor-pointer items-center gap-3 border-b border-[var(--border)] px-4 py-3 last:border-b-0 hover:bg-[var(--surface-hover)]"
                     >
-                      <Icon name="terminal-window" size={16} className="text-[var(--accent)]" />
+                      <Icon name="terminal-window" size={16} className="text-[var(--accent-text)]" />
                       <span className="min-w-0 flex-1">
                         <span className="block font-mono text-[13px] font-semibold">/{cmd.id}</span>
                         <span className="block truncate text-[12.5px] text-[var(--text-2)]">
@@ -135,7 +135,7 @@ function CollectionDetailPage() {
                       params={{ id: skill.id }}
                       className="flex cursor-pointer items-center gap-3 border-b border-[var(--border)] px-4 py-3 last:border-b-0 hover:bg-[var(--surface-hover)]"
                     >
-                      <Icon name={skill.icon} size={16} className="text-[var(--accent)]" />
+                      <Icon name={skill.icon} size={16} className="text-[var(--accent-text)]" />
                       <span className="min-w-0 flex-1">
                         <span className={`block text-[13px] font-semibold ${skillLabel(skill) === skill.id ? 'font-mono' : ''}`}>{skillLabel(skill)}</span>
                         <span className="block truncate text-[12.5px] text-[var(--text-2)]">

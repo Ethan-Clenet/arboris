@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import Icon from './Icon'
+import { CONTACT_EMAIL } from '#/lib/site'
 import { useI18n } from '#/lib/i18n'
 
 export default function Footer() {
@@ -15,6 +16,9 @@ export default function Footer() {
             </span>
             {t.home.footer}
           </div>
+          <Link to="/getting-started" className="cursor-pointer text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
+            {t.home.installCli} →
+          </Link>
           <Link to="/skills" className="cursor-pointer text-[12.5px] text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]">
             {t.home.browseAll} →
           </Link>
@@ -42,6 +46,12 @@ export default function Footer() {
           >
             {t.legal.privacy}
           </Link>
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="cursor-pointer text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]"
+          >
+            {t.home.contact}
+          </a>
         </nav>
       </div>
     </footer>

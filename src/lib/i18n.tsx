@@ -52,6 +52,8 @@ const fr = {
     aboutBody:
       'Arboris regroupe des skills et slash commands prêts à coller dans Cursor, Claude, Codex ou Copilot. Chaque fiche explique le rôle du skill, les technos concernées et la compatibilité agents. Tu copies le Markdown, tu l’installes en local ou via la CLI, puis ton agent s’en sert dès que le contexte correspond. Le catalogue couvre backend, frontend, data, sécu, ops et workflows agents — sans compte obligatoire pour parcourir ou copier.',
     browseAll: 'Voir tous les skills',
+    contact: 'Contact',
+    installCli: 'Installer la CLI',
   },
   skills: {
     kicker: 'Catalogue de skills',
@@ -360,6 +362,8 @@ const en: typeof fr = {
     aboutBody:
       'Arboris gathers skills and slash commands ready to paste into Cursor, Claude, Codex, or Copilot. Each page explains what the skill does, which stacks it covers, and which agents it supports. Copy the Markdown, install locally or via the CLI, then let your agent use it when the context matches. The catalog spans backend, frontend, data, security, ops, and agent workflows — no account required to browse or copy.',
     browseAll: 'See all skills',
+    contact: 'Contact',
+    installCli: 'Install the CLI',
   },
   skills: {
     kicker: 'Skill catalog',

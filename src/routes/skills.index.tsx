@@ -374,7 +374,7 @@ function SkillsPage() {
             <button
               type="button"
               onClick={clearAll}
-              className="flex cursor-pointer items-center gap-[7px] p-0.5 text-[13px] font-medium text-[var(--accent)]"
+              className="flex cursor-pointer items-center gap-[7px] p-0.5 text-[13px] font-medium text-[var(--accent-text)]"
             >
               <Icon name="arrow-counter-clockwise" size={14} />
               {t.skills.clear}
@@ -393,7 +393,7 @@ function SkillsPage() {
           {showPublisherInstall ? (
             <div className="mb-4 rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]">
               <div className="mb-1 flex items-center gap-2 text-[13px] font-semibold text-[var(--text-1)]">
-                <Icon name="terminal-window" size={16} className="text-[var(--accent)]" />
+                <Icon name="terminal-window" size={16} className="text-[var(--accent-text)]" />
                 {t.skills.installAllTitle(publisher)}
               </div>
               <p className="mb-3 text-[12.5px] text-[var(--text-2)]">

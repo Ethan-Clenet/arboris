@@ -200,7 +200,7 @@ function HomePage() {
             </span>
             <Link
               to="/skills"
-              className="inline-flex cursor-pointer items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)] transition-colors hover:text-[var(--accent)]"
+              className="inline-flex cursor-pointer items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)] transition-colors hover:text-[var(--accent-text)]"
             >
               {t.home.footerLink}
               <Icon name="arrow-right" size={12} />
@@ -258,7 +258,7 @@ function HomeTableRow({
           title={copied ? t.home.copied : t.home.copy}
           className={`grid h-6 w-6 shrink-0 cursor-pointer place-items-center rounded-md border text-[var(--text-3)] opacity-0 transition-all group-hover:opacity-100 ${
             copied
-              ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)] opacity-100'
+              ? 'border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent-text)] opacity-100'
               : 'border-[var(--border)] hover:border-[var(--border-2)] hover:text-[var(--text-1)]'
           }`}
         >

@@ -137,7 +137,7 @@ export default function SkillInstallButtons({
               {loading ? (
                 <span className="grid h-[18px] w-[18px] place-items-center text-[13px] text-[var(--text-3)]">…</span>
               ) : active ? (
-                <span className="grid h-[18px] w-[18px] place-items-center text-[13px] text-[var(--accent)]">✓</span>
+                <span className="grid h-[18px] w-[18px] place-items-center text-[13px] text-[var(--accent-text)]">✓</span>
               ) : (
                 <AgentLogo agent={agent} size={18} />
               )}
@@ -146,7 +146,7 @@ export default function SkillInstallButtons({
         })}
       </div>
       {done ? (
-        <p className="mt-2 text-[12.5px] text-[var(--accent)]" role="status">
+        <p className="mt-2 text-[12.5px] text-[var(--accent-text)]" role="status">
           {t.installed(done.path)}
         </p>
       ) : null}

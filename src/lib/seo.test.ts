@@ -189,6 +189,19 @@ describe('seoHead', () => {
     expect(head.meta.some((m) => m.property === 'og:locale' && m.content === 'fr_FR')).toBe(true)
   })
 
+  it('déclare og:image 1200×630 avec alt', () => {
+    const head = seoHead({ path: '/' })
+    expect(head.meta).toEqual(
+      expect.arrayContaining([
+        { property: 'og:image', content: `${SITE_URL}/og.png` },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:image:alt', content: `${SITE_NAME} — Catalogue de skills IA` },
+        { name: 'twitter:image:alt', content: `${SITE_NAME} — Catalogue de skills IA` },
+      ]),
+    )
+  })
+
   it('ajoute prev/next et conserve la query dans le canonical', () => {
     const head = seoHead({
       path: '/skills?page=2',
@@ -258,6 +271,16 @@ describe('siteJsonLd', () => {
   it('déclare uniquement le français (pas de version EN)', () => {
     const website = siteJsonLd()['@graph'].find((node) => node['@type'] === 'WebSite')
     expect(website?.inLanguage).toBe('fr')
+  })
+
+  it('expose un logo raster ImageObject ≥ 112 px', () => {
+    const org = siteJsonLd()['@graph'].find((node) => node['@type'] === 'Organization')
+    expect(org?.logo).toEqual({
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/logo-512.png`,
+      width: 512,
+      height: 512,
+    })
   })
 })
 

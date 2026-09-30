@@ -68,12 +68,12 @@ function CommandDetailPage() {
 
       <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
         <div className="flex min-w-0 flex-1 flex-wrap items-start gap-[22px]">
-          <div className="grid h-16 w-16 flex-none place-items-center rounded-2xl bg-[var(--accent-soft)] text-[var(--accent)]">
+          <div className="grid h-16 w-16 flex-none place-items-center rounded-2xl bg-[var(--accent-soft)] text-[var(--accent-text)]">
             <Icon name="terminal-window" bold size={32} />
           </div>
           <div className="min-w-[240px] flex-1">
             <div className="mb-2.5 flex flex-wrap items-center gap-2.5">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-[11px] py-1 text-[12px] font-semibold text-[var(--accent)]">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent-border)] bg-[var(--accent-soft)] px-[11px] py-1 text-[12px] font-semibold text-[var(--accent-text)]">
                 <Icon name="terminal" bold size={13} />
                 {t.commands.slash}
               </span>
@@ -100,7 +100,7 @@ function CommandDetailPage() {
                         params={{ id }}
                         className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 font-mono text-[12.5px] text-[var(--text-1)] hover:border-[var(--border-2)] hover:bg-[var(--surface-hover)]"
                       >
-                        <Icon name="sparkle" size={12} className="text-[var(--accent)]" />
+                        <Icon name="sparkle" size={12} className="text-[var(--accent-text)]" />
                         {id}
                       </Link>
                     </li>
@@ -145,7 +145,7 @@ function CommandDetailPage() {
       <div className="mt-[30px] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
         <div className="flex items-center justify-between gap-3.5 border-b border-[var(--border)] bg-[var(--surface-2)] px-[18px] py-[13px]">
           <h2 className="m-0 flex items-center gap-2.5 font-mono text-[11.5px] font-semibold uppercase tracking-[0.08em] text-[var(--text-3)]">
-            <Icon name="cursor-text" bold size={14} className="text-[var(--accent)]" />
+            <Icon name="cursor-text" bold size={14} className="text-[var(--accent-text)]" />
             {t.commands.promptHeading(command.id)}
           </h2>
           <Button variant="copy" size="sm" copied={copied} onClick={handleCopy}>

@@ -140,7 +140,7 @@ export default function CloudInstallPanel({
       </div>
 
       {done ? (
-        <p className="mt-2 text-[12.5px] text-[var(--accent)]" role="status">
+        <p className="mt-2 text-[12.5px] text-[var(--accent-text)]" role="status">
           {done}
         </p>
       ) : null}

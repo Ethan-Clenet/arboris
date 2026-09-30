@@ -13,9 +13,6 @@ import { beforeSendMeasurement } from '#/lib/analytics-optout'
 import { rootFallbackMeta, notFoundSeo } from '#/lib/seo'
 import appCss from '#/styles.css?url'
 
-/** Theme anti-FOUC — inline (CSP `unsafe-inline`) pour éviter une requête render-blocking. */
-const THEME_INIT = `(function(){try{var t=localStorage.getItem('sp-theme');if(t!=='light'&&t!=='dark')t='dark';document.documentElement.setAttribute('data-theme',t);document.documentElement.style.colorScheme=t}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();`
-
 const Analytics = lazy(() =>
   import('@vercel/analytics/react').then((m) => ({ default: m.Analytics })),
 )
@@ -31,6 +28,7 @@ export const Route = createRootRoute({
       meta: [
         { charSet: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'theme-color', content: '#197544' },
         ...seo.meta,
       ],
       links: [
@@ -38,6 +36,8 @@ export const Route = createRootRoute({
         { rel: 'stylesheet', href: appCss },
         { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
         { rel: 'icon', href: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
+        { rel: 'manifest', href: '/manifest.webmanifest' },
         { rel: 'preload', href: '/phosphor-sprite.svg', as: 'fetch', crossOrigin: 'anonymous' },
         ...(seo.links ?? []),
       ],
@@ -52,8 +52,7 @@ function RootDocument({ children }: { children: ReactNode }) {
   return (
     <html lang="fr" data-theme="dark" suppressHydrationWarning>
       <head>
-        <meta charSet="utf-8" />
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+        <script src="/arboris-theme-init.js" />
         <HeadContent />
       </head>
       <body>

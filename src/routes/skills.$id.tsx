@@ -145,7 +145,7 @@ function SkillDetailPage() {
             />
             {skill.score != null ? (
               <span className="inline-flex items-center gap-1 rounded-full border border-[var(--border)] bg-[var(--surface-2)] px-2.5 py-1 font-mono text-[12px] font-semibold tabular-nums text-[var(--text-1)]">
-                <Icon name="shield-check" bold size={12} className="text-[var(--accent)]" />
+                <Icon name="shield-check" bold size={12} className="text-[var(--accent-text)]" />
                 {skill.score}/100
               </span>
             ) : null}
@@ -203,7 +203,7 @@ function SkillDetailPage() {
       <div className="mt-[30px] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
         <div className="flex items-center justify-between gap-3.5 border-b border-[var(--border)] bg-[var(--surface-2)] px-[18px] py-[13px]">
           <div className="flex items-center gap-2.5 font-mono text-[11.5px] font-semibold uppercase tracking-[0.08em] text-[var(--text-3)]">
-            <Icon name="cursor-text" bold size={14} className="text-[var(--accent)]" />
+            <Icon name="cursor-text" bold size={14} className="text-[var(--accent-text)]" />
             {t.skill.promptTitle}
           </div>
           <Button variant="copy" size="sm" copied={copied} onClick={handleCopy}>
@@ -232,7 +232,7 @@ function SkillDetailPage() {
             <div className="flex flex-col gap-[11px]">
               {skill.does[lang].map((text) => (
                 <div key={text} className="flex items-start gap-[11px]">
-                  <Icon name="check-circle" bold size={18} className="mt-px flex-none text-[var(--accent)]" />
+                  <Icon name="check-circle" bold size={18} className="mt-px flex-none text-[var(--accent-text)]" />
                   <LangText text={text} as="span" className="text-[14.5px] text-[var(--text-1)]" />
                 </div>
               ))}
@@ -246,7 +246,7 @@ function SkillDetailPage() {
             <div className="flex flex-col gap-3.5">
               {t.skill.how.map((h, i) => (
                 <div key={h.t} className="flex items-start gap-3.5">
-                  <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-[var(--accent-soft)] font-mono text-[13px] font-semibold text-[var(--accent)]">
+                  <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-[var(--accent-soft)] font-mono text-[13px] font-semibold text-[var(--accent-text)]">
                     {i + 1}
                   </span>
                   <div className="pt-0.5">
@@ -283,7 +283,7 @@ function SkillDetailPage() {
               <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
                 {t.skill.securityTitle}
               </div>
-              <Icon name="shield-check" bold size={14} className="text-[var(--accent)]" />
+              <Icon name="shield-check" bold size={14} className="text-[var(--accent-text)]" />
             </div>
             {skill.score == null || !skill.securityReport ? (
               <div className="rounded-xl border border-dashed border-[var(--border-2)] bg-[var(--surface-2)] px-3.5 py-4 text-center">
