@@ -16,10 +16,11 @@ beforeEach(() => {
 })
 
 describe('skillSitemapWhere', () => {
-  it('filtre score, ids hashés et éditeurs premium côté SQL', () => {
+  it('filtre score et éditeurs premium côté SQL (pas de LIKE joker `_`)', () => {
     const where = skillSitemapWhere()
     expect(where.score).toEqual({ gte: SEO_INDEX_MIN_SCORE })
-    expect(where.NOT).toEqual({ id: { contains: '__' } })
+    expect(where).not.toHaveProperty('NOT')
+    expect(JSON.stringify(where)).not.toContain("'__'")
     expect(where.OR).toEqual(
       expect.arrayContaining([
         { publisher: null },
