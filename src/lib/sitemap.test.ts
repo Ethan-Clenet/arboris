@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import { SITE_URL } from './site'
 import {
+  sitemapHandler,
   sitemapIndexDocument,
   SITEMAP_CHILDREN,
   toLastmod,
   urlsetXml,
   xmlEscape,
 } from './sitemap'
+import { commandSitemapUrls, collectionSeedSitemapUrls, staticSitemapUrls } from './sitemap-sources'
 
 describe('xmlEscape / toLastmod', () => {
   it('échappe les caractères XML', () => {
@@ -21,13 +23,13 @@ describe('xmlEscape / toLastmod', () => {
 })
 
 describe('sitemap index', () => {
-  it('liste les 4 sitemaps enfants avec loc absolue', () => {
-    const xml = sitemapIndexDocument({ skills: '2026-09-30' })
+  it('liste les 4 sitemaps enfants avec loc absolue, sans Prisma', () => {
+    const xml = sitemapIndexDocument()
     expect(xml).toContain('<sitemapindex')
     for (const child of SITEMAP_CHILDREN) {
       expect(xml).toContain(`<loc>${SITE_URL}${child.path}</loc>`)
     }
-    expect(xml).toContain('<lastmod>2026-09-30</lastmod>')
+    expect(xml.match(/<sitemap>/g)?.length).toBe(4)
   })
 })
 
@@ -40,5 +42,55 @@ describe('urlsetXml', () => {
     expect(xml).toContain(`${SITE_URL}/skills/fastapi-patterns`)
     expect(xml).toContain('<lastmod>2026-09-01</lastmod>')
     expect(xml).not.toContain('…')
+  })
+})
+
+describe('sources sitemap hors DB', () => {
+  it('liste les pages statiques (hubs + légales)', () => {
+    const paths = staticSitemapUrls().map((u) => u.path)
+    expect(paths).toEqual([
+      '/',
+      '/getting-started',
+      '/skills',
+      '/commands',
+      '/collections',
+      '/mentions-legales',
+      '/confidentialite',
+    ])
+  })
+
+  it('liste les commandes embarquées sans Prisma', () => {
+    const urls = commandSitemapUrls()
+    expect(urls.length).toBeGreaterThan(0)
+    expect(urls.every((u) => u.path.startsWith('/commands/'))).toBe(true)
+  })
+
+  it('fallback collections = seed embarqué', () => {
+    const urls = collectionSeedSitemapUrls()
+    expect(urls.length).toBeGreaterThan(0)
+    expect(urls.every((u) => u.path.startsWith('/collections/'))).toBe(true)
+  })
+})
+
+describe('sitemapHandler', () => {
+  it('renvoie un index XML 200 si le builder throw', async () => {
+    const res = await sitemapHandler('index', () => {
+      throw new Error('prisma boom')
+    })()
+    expect(res.status).toBe(200)
+    expect(res.headers.get('Content-Type')).toContain('application/xml')
+    const text = await res.text()
+    expect(text).toContain('<sitemapindex')
+    expect(text).toContain(`${SITE_URL}/sitemap-skills.xml`)
+  })
+
+  it('renvoie un urlset vide 200 si le builder throw', async () => {
+    const res = await sitemapHandler('urlset', async () => {
+      throw new Error('neon timeout')
+    })()
+    expect(res.status).toBe(200)
+    const text = await res.text()
+    expect(text).toContain('<urlset')
+    expect(text).not.toContain('<url>')
   })
 })

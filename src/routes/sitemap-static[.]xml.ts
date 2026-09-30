@@ -1,13 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { urlsetXml, xmlResponse } from '#/lib/sitemap'
+import { sitemapHandler, urlsetXml } from '#/lib/sitemap'
+import { staticSitemapUrls } from '#/lib/sitemap-sources'
 
 export const Route = createFileRoute('/sitemap-static.xml')({
   server: {
     handlers: {
-      GET: async () => {
-        const { staticSitemapUrls } = await import('#/server/sitemap.server')
-        return xmlResponse(urlsetXml(staticSitemapUrls()))
-      },
+      GET: sitemapHandler('urlset', () => urlsetXml(staticSitemapUrls())),
     },
   },
 })

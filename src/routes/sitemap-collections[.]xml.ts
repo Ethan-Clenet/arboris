@@ -1,13 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { urlsetXml, xmlResponse } from '#/lib/sitemap'
+import { sitemapHandler, urlsetXml } from '#/lib/sitemap'
 
 export const Route = createFileRoute('/sitemap-collections.xml')({
   server: {
     handlers: {
-      GET: async () => {
+      GET: sitemapHandler('urlset', async () => {
         const { collectionSitemapUrls } = await import('#/server/sitemap.server')
-        return xmlResponse(urlsetXml(await collectionSitemapUrls()))
-      },
+        return urlsetXml(await collectionSitemapUrls())
+      }),
     },
   },
 })

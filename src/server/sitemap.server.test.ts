@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { prisma } from './db'
-import { collectionSitemapUrls, skillSitemapUrls } from './sitemap.server'
+import { collectionSitemapUrls, skillSitemapUrls, skillSitemapWhere } from './sitemap.server'
+import { SEO_INDEX_MIN_SCORE, SEO_PREMIUM_PUBLISHERS } from '#/lib/seo'
 
 vi.mock('./db', () => ({
   prisma: {
@@ -12,6 +13,21 @@ vi.mock('./db', () => ({
 beforeEach(() => {
   vi.mocked(prisma.skill.findMany).mockReset()
   vi.mocked(prisma.collection.findMany).mockReset()
+})
+
+describe('skillSitemapWhere', () => {
+  it('filtre score, ids hashés et éditeurs premium côté SQL', () => {
+    const where = skillSitemapWhere()
+    expect(where.score).toEqual({ gte: SEO_INDEX_MIN_SCORE })
+    expect(where.NOT).toEqual({ id: { contains: '__' } })
+    expect(where.OR).toEqual(
+      expect.arrayContaining([
+        { publisher: null },
+        { publisher: '' },
+        { publisher: { in: expect.arrayContaining([...SEO_PREMIUM_PUBLISHERS]) } },
+      ]),
+    )
+  })
 })
 
 describe('skillSitemapUrls', () => {
@@ -38,6 +54,9 @@ describe('skillSitemapUrls', () => {
     ] as never)
 
     const urls = await skillSitemapUrls()
+    expect(prisma.skill.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: skillSitemapWhere() }),
+    )
     expect(urls.map((u) => u.path)).toEqual(['/skills/fastapi-patterns'])
     expect(urls[0]?.lastmod).toBe('2026-08-01')
   })
@@ -45,6 +64,13 @@ describe('skillSitemapUrls', () => {
   it('reste vide si la base est indisponible', async () => {
     vi.mocked(prisma.skill.findMany).mockRejectedValue(new Error('db down'))
     await expect(skillSitemapUrls()).resolves.toEqual([])
+  })
+
+  it('reste vide si Prisma/Neon dépasse le timeout', async () => {
+    vi.mocked(prisma.skill.findMany).mockImplementation(
+      () => new Promise((_, reject) => setTimeout(() => reject(new Error('slow')), 80)) as never,
+    )
+    await expect(skillSitemapUrls(20)).resolves.toEqual([])
   })
 })
 
@@ -57,5 +83,14 @@ describe('collectionSitemapUrls', () => {
     expect(urls).toEqual([
       expect.objectContaining({ path: '/collections/sonar', lastmod: '2026-07-15' }),
     ])
+  })
+
+  it('retombe sur le seed si la requête timeoute', async () => {
+    vi.mocked(prisma.collection.findMany).mockImplementation(
+      () => new Promise((_, reject) => setTimeout(() => reject(new Error('slow')), 80)) as never,
+    )
+    const urls = await collectionSitemapUrls(20)
+    expect(urls.length).toBeGreaterThan(0)
+    expect(urls.every((u) => u.path.startsWith('/collections/'))).toBe(true)
   })
 })

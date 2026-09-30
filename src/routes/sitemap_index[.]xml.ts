@@ -1,18 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { sitemapIndexDocument, xmlResponse } from '#/lib/sitemap'
+import { sitemapHandler, sitemapIndexDocument } from '#/lib/sitemap'
 
 /**
  * Alias de `/sitemap.xml` (même index). Search Console peut rester collée
- * sur l’URL historiquement soumise.
+ * sur l’URL historiquement soumise. Sans Prisma / Neon.
  */
 export const Route = createFileRoute('/sitemap_index.xml')({
   server: {
     handlers: {
-      GET: async () => {
-        const { sitemapIndexLastmods } = await import('#/server/sitemap.server')
-        const lastmods = await sitemapIndexLastmods()
-        return xmlResponse(sitemapIndexDocument(lastmods))
-      },
+      GET: sitemapHandler('index', () => sitemapIndexDocument()),
     },
   },
 })

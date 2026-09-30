@@ -88,3 +88,37 @@ export function sitemapIndexDocument(lastmodByChild: Partial<Record<(typeof SITE
     })),
   )
 }
+
+export type SitemapKind = 'index' | 'urlset'
+
+function fallbackXml(kind: SitemapKind): string {
+  switch (kind) {
+    case 'index':
+      return sitemapIndexDocument()
+    case 'urlset':
+      return urlsetXml([])
+    default: {
+      const _exhaustive: never = kind
+      void _exhaustive
+      return urlsetXml([])
+    }
+  }
+}
+
+/**
+ * Handler GET sitemap : jamais de 500. Un throw (Prisma, timeout Neon, import)
+ * renvoie un XML valide (index synchrone ou urlset vide).
+ */
+export function sitemapHandler(
+  kind: SitemapKind,
+  build: () => string | Promise<string>,
+): () => Promise<Response> {
+  return async () => {
+    try {
+      return xmlResponse(await build())
+    } catch (err) {
+      console.error('[sitemap]', kind, err)
+      return xmlResponse(fallbackXml(kind))
+    }
+  }
+}
