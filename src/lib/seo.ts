@@ -269,6 +269,25 @@ export function skillJsonLd(input: {
   }
 }
 
+/** Page légale / informative — WebPage avec dateModified. */
+export function webPageJsonLd(input: {
+  path: string
+  name: string
+  description: string
+  dateModified: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    dateModified: input.dateModified,
+    inLanguage: 'fr',
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+  }
+}
+
 /** Fil d’Ariane — type de résultat enrichi détecté par l’inspection d’URL. */
 export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
   return {

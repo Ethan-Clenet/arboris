@@ -31,6 +31,8 @@ vi.mock('@tanstack/react-router', async () => {
       select: (s: { location: { pathname: string } }) => unknown
     }) => select({ location: { pathname: testRouter.pathname } }),
     redirect: vi.fn(),
+    createFileRoute: () => (opts: Record<string, unknown>) => opts,
+    notFound: vi.fn(),
   }
 })
 

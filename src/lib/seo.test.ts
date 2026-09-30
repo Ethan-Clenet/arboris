@@ -14,6 +14,7 @@ import {
   siteJsonLd,
   skillJsonLd,
   skillSeoTitle,
+  webPageJsonLd,
 } from './seo'
 import { SITE_NAME, SITE_URL } from './site'
 
@@ -189,6 +190,24 @@ describe('seoHead', () => {
     expect(head.scripts?.some((s) => s.children.includes('SoftwareSourceCode'))).toBe(true)
   })
 
+  it('indexe une page légale avec canonical et JSON-LD WebPage', () => {
+    const head = seoHead({
+      title: 'Mentions légales du site',
+      path: '/mentions-legales',
+      jsonLd: webPageJsonLd({
+        path: '/mentions-legales',
+        name: 'Mentions légales',
+        description: 'Éditeur et hébergeur.',
+        dateModified: '2026-09-30',
+      }),
+    })
+    expect(head.links).toEqual([{ rel: 'canonical', href: `${SITE_URL}/mentions-legales` }])
+    expect(head.meta.some((m) => m.name === 'robots' && m.content?.startsWith('index'))).toBe(true)
+    expect(head.scripts?.some((s) => s.children.includes('"WebPage"') && s.children.includes('2026-09-30'))).toBe(
+      true,
+    )
+  })
+
   it('ignore le JSON-LD supplémentaire si noIndex', () => {
     const head = seoHead({
       path: '/skills/x',
@@ -232,6 +251,23 @@ describe('breadcrumbJsonLd', () => {
     ])
     expect(json.itemListElement).toHaveLength(2)
     expect(json.itemListElement[0]).toMatchObject({ position: 1, item: `${SITE_URL}/` })
+  })
+})
+
+describe('webPageJsonLd', () => {
+  it('émet une WebPage indexable avec dateModified', () => {
+    const json = webPageJsonLd({
+      path: '/mentions-legales',
+      name: 'Mentions légales',
+      description: 'Éditeur et hébergeur.',
+      dateModified: '2026-09-30',
+    })
+    expect(json).toMatchObject({
+      '@type': 'WebPage',
+      url: `${SITE_URL}/mentions-legales`,
+      dateModified: '2026-09-30',
+      inLanguage: 'fr',
+    })
   })
 })
 
