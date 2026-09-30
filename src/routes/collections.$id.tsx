@@ -6,7 +6,12 @@ import PageShell from '#/components/PageShell'
 import { isPremiumCollection, skillLabel } from '#/lib/catalog'
 import { useI18n } from '#/lib/i18n'
 import { getCollection } from '#/server/functions'
-import { collectionSeoTitle, entityDescription, seoHead } from '#/lib/seo'
+import {
+  collectionJsonLd,
+  collectionSeoTitle,
+  frenchEntityDescription,
+  seoHead,
+} from '#/lib/seo'
 
 export const Route = createFileRoute('/collections/$id')({
   loader: async ({ params }) => {
@@ -17,16 +22,29 @@ export const Route = createFileRoute('/collections/$id')({
   head: ({ loaderData }) => {
     const collection = loaderData?.collection
     if (!collection) return seoHead({ title: 'Collection', path: '/collections' })
+    const description = frenchEntityDescription(
+      collection.brief.fr,
+      'collection',
+      collection.label.fr,
+    )
     return seoHead({
       title: collectionSeoTitle(collection.label.fr),
       path: `/collections/${collection.id}`,
-      description: entityDescription(collection.brief.fr, 'collection', collection.id),
+      description,
       type: 'article',
       breadcrumbs: [
         { name: 'Accueil', path: '/' },
         { name: 'Collections', path: '/collections' },
         { name: collection.label.fr, path: `/collections/${collection.id}` },
       ],
+      jsonLd: collectionJsonLd({
+        id: collection.id,
+        name: collection.label.fr,
+        description,
+        skillIds: collection.skillIds,
+        commandIds: collection.commandIds,
+        skillNames: collection.skills.map((s) => skillLabel(s)),
+      }),
     })
   },
   component: CollectionDetailPage,

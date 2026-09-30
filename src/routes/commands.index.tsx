@@ -7,6 +7,7 @@ import { useI18n } from '#/lib/i18n'
 import { getCommandsIndex } from '#/server/functions'
 import type { CommandSummary } from '#/lib/command-types'
 import { seoHead } from '#/lib/seo'
+import LangText from '#/components/LangText'
 
 export const Route = createFileRoute('/commands/')({
   loader: () => getCommandsIndex(),
@@ -15,7 +16,7 @@ export const Route = createFileRoute('/commands/')({
       title: 'Slash commands du catalogue',
       path: '/commands',
       description:
-        'Slash commands Arboris installables dans ton agent : commit, rebase, revue PR, audit deps…',
+        'Slash commands Arboris pour ton agent : commit, rebase, revue de PR et audit des dépendances.',
       breadcrumbs: [
         { name: 'Accueil', path: '/' },
         { name: 'Commandes', path: '/commands' },
@@ -115,7 +116,11 @@ function CommandRow({ command }: { command: CommandSummary }) {
               {t.commands.slash}
             </span>
           </span>
-          <span className="line-clamp-2 text-[13px] text-[var(--text-2)]">{command.description[lang]}</span>
+          <LangText
+            text={command.description[lang]}
+            as="span"
+            className="line-clamp-2 text-[13px] text-[var(--text-2)]"
+          />
         </span>
       </div>
       <div className="flex shrink-0 items-center pl-11 sm:pl-0">

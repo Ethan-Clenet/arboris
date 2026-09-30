@@ -67,7 +67,7 @@ function HomePage() {
     if (!q) return source
     return source.filter((s) => {
       const cat = catById.get(s.categoryId)
-      const hay = `${s.id} ${s.tag[lang]} ${s.tech.join(' ')} ${cat ? cat.label[lang] : ''}`.toLowerCase()
+      const hay = `${skillLabel(s)} ${s.id} ${s.tag[lang]} ${s.tech.join(' ')} ${cat ? cat.label[lang] : ''}`.toLowerCase()
       return hay.includes(q)
     })
   }, [query, searchPool, tabSkills, catById, lang])

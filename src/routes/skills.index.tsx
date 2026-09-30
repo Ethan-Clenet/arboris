@@ -7,6 +7,7 @@ import PageShell from '#/components/PageShell'
 import { AgentBadge, AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
 import SecurityBadge from '#/components/SecurityBadge'
 import PublisherLogo from '#/components/PublisherLogo'
+import LangText from '#/components/LangText'
 import { hasPublisherLogo, PUBLISHER_LOGO_COLOR } from '#/lib/publisher-logos'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
@@ -640,7 +641,7 @@ function SkillRow({
       </Link>
 
       <div className="min-w-0 overflow-hidden line-clamp-2 self-center text-[13px] leading-[1.4] text-[var(--text-2)]">
-        {skill.tag[lang]}
+        <LangText text={skill.tag[lang]} />
       </div>
 
       <div className="flex items-center border-l border-[var(--border)] pl-2">

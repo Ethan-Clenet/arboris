@@ -29,6 +29,7 @@ const skillRow = {
   score: 90,
   securityRecommendation: 'SAFE',
   scannedAt: new Date('2026-01-01T00:00:00.000Z'),
+  updatedAt: new Date('2026-01-02T00:00:00.000Z'),
   publisher: 'ECC',
   techJson: '["ts"]',
   compatJson: '["Cursor"]',
@@ -97,6 +98,25 @@ describe('loadHomeCatalog', () => {
     expect(home.recent).toHaveLength(1)
     expect(home.categories[0]?.id).toBe('security')
     expect(prisma.skill.findMany).toHaveBeenCalledTimes(3)
+  })
+
+  it('n’expose que des skills indexables (pas de slug vendor __)', async () => {
+    const hashed = {
+      ...skillRow,
+      id: 'abandonment-analysis__microsoft-aibast-agents-library__solutions-x-aaaaaaaaaaaa',
+      publisher: 'Microsoft',
+      score: 100,
+    }
+    const community = { ...skillRow, id: 'n8n-patterns', publisher: 'Community', score: 90 }
+    vi.mocked(prisma.category.findMany).mockResolvedValue([
+      { id: 'security', labelFr: 'Sécu', labelEn: 'Sec', color: '#0D9488', icon: 'shield', sort: 0 },
+    ] as never)
+    vi.mocked(prisma.skill.count).mockResolvedValue(3 as never)
+    vi.mocked(prisma.skill.findMany).mockResolvedValue([hashed, community, skillRow] as never)
+
+    const home = await loadHomeCatalog()
+    expect(home.popular.map((s) => s.id)).toEqual(['gateguard'])
+    expect(home.popular[0]?.title).toBe('Gateguard')
   })
 
   it('dérive depuis le cache full catalog quand disponible', async () => {

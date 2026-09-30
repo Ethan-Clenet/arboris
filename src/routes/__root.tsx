@@ -9,7 +9,7 @@ import ServerErrorPage from '#/components/ServerErrorPage'
 import { AnnouncerProvider } from '#/lib/announcer'
 import { fontPreloadLinks } from '#/lib/font-preload'
 import { I18nProvider } from '#/lib/i18n'
-import { rootFallbackMeta } from '#/lib/seo'
+import { rootFallbackMeta, notFoundSeo } from '#/lib/seo'
 import appCss from '#/styles.css?url'
 
 /** Theme anti-FOUC — inline (CSP `unsafe-inline`) pour éviter une requête render-blocking. */
@@ -23,21 +23,25 @@ const SpeedInsights = lazy(() =>
 )
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      ...rootFallbackMeta(),
-    ],
-    links: [
-      ...fontPreloadLinks,
-      { rel: 'stylesheet', href: appCss },
-      { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
-      { rel: 'icon', href: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
-      // Sprite icônes — fetch tôt sans bloquer le rendu.
-      { rel: 'preload', href: '/phosphor-sprite.svg', as: 'fetch', crossOrigin: 'anonymous' },
-    ],
-  }),
+  head: ({ matches }) => {
+    const isNotFound = matches.some((match) => match.status === 'notFound')
+    const seo = isNotFound ? notFoundSeo() : { meta: rootFallbackMeta(), links: [] as Array<{ rel: string; href: string }> }
+    return {
+      meta: [
+        { charSet: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        ...seo.meta,
+      ],
+      links: [
+        ...fontPreloadLinks,
+        { rel: 'stylesheet', href: appCss },
+        { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+        { rel: 'icon', href: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
+        { rel: 'preload', href: '/phosphor-sprite.svg', as: 'fetch', crossOrigin: 'anonymous' },
+        ...(seo.links ?? []),
+      ],
+    }
+  },
   notFoundComponent: NotFoundPage,
   errorComponent: ServerErrorPage,
   shellComponent: RootDocument,

@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { useMemo } from 'react'
 import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
+import LangText from '#/components/LangText'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
@@ -16,7 +17,13 @@ import SecurityBadge from '#/components/SecurityBadge'
 import NvidiaLogo from '#/components/NvidiaLogo'
 import PublisherLogo from '#/components/PublisherLogo'
 import { hasPublisherLogo } from '#/lib/publisher-logos'
-import { seoHead, entityDescription, skillSeoTitle, isIndexableSkill, skillJsonLd } from '#/lib/seo'
+import {
+  seoHead,
+  frenchEntityDescription,
+  skillSeoTitle,
+  isIndexableSkill,
+  skillJsonLd,
+} from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/$id')({
   loader: async ({ params }) => {
@@ -30,22 +37,25 @@ export const Route = createFileRoute('/skills/$id')({
   head: ({ loaderData }) => {
     const skill = loaderData?.skill
     if (!skill) return seoHead({ title: 'Skill', path: '/skills', noIndex: true })
+    const label = skillLabel(skill)
+    const github = resolveSkillGithubUrl(skill.id)
     return seoHead({
-      title: skillSeoTitle(skillLabel(skill)),
+      title: skillSeoTitle(label),
       path: `/skills/${skill.id}`,
-      description: entityDescription(skill.tag.fr, 'skill', skillLabel(skill)),
+      description: frenchEntityDescription(skill.tag.fr, 'skill', label),
       type: 'article',
       noIndex: !isIndexableSkill(skill),
       breadcrumbs: [
         { name: 'Accueil', path: '/' },
         { name: 'Skills', path: '/skills' },
-        { name: skillLabel(skill), path: `/skills/${skill.id}` },
+        { name: label, path: `/skills/${skill.id}` },
       ],
       jsonLd: skillJsonLd({
         id: skill.id,
-        label: skillLabel(skill),
-        description: skill.tag.fr,
+        label,
+        description: frenchEntityDescription(skill.tag.fr, 'skill', label),
         publisher: skill.publisher,
+        codeRepository: github.kind === 'site' ? undefined : github.url,
       }),
     })
   },
@@ -143,7 +153,9 @@ function SkillDetailPage() {
           <h1 className={`mb-3 break-words text-[30px] font-semibold leading-[1.1] tracking-[-0.01em] ${skillLabel(skill) === skill.id ? 'font-mono' : ''}`}>
             {skillLabel(skill)}
           </h1>
-          <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">{skill.tag[lang]}</p>
+          <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">
+            <LangText text={skill.tag[lang]} />
+          </p>
           <div className="flex flex-wrap items-center gap-3.5">
             <Button variant="primary" size="lg" copied={copied} onClick={handleCopy}>
               <Icon name={copied ? 'check' : 'copy'} size={16} />
@@ -221,7 +233,7 @@ function SkillDetailPage() {
               {skill.does[lang].map((text) => (
                 <div key={text} className="flex items-start gap-[11px]">
                   <Icon name="check-circle" bold size={18} className="mt-px flex-none text-[var(--accent)]" />
-                  <span className="text-[14.5px] text-[var(--text-1)]">{text}</span>
+                  <LangText text={text} as="span" className="text-[14.5px] text-[var(--text-1)]" />
                 </div>
               ))}
             </div>
@@ -258,7 +270,7 @@ function SkillDetailPage() {
                   className="flex items-center gap-[11px] rounded-[10px] border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2.5"
                 >
                   <Icon name="quotes" size={15} className="text-[var(--text-3)]" />
-                  <span className="text-[14px] text-[var(--text-1)]">{text}</span>
+                  <LangText text={text} as="span" className="text-[14px] text-[var(--text-1)]" />
                 </div>
               ))}
             </div>
@@ -457,7 +469,11 @@ function SkillDetailPage() {
                   </span>
                   <span className={`truncate text-[13px] font-semibold text-[var(--text-1)] ${skillLabel(r) === r.id ? 'font-mono' : ''}`}>{skillLabel(r)}</span>
                 </div>
-                <span className="line-clamp-2 text-[12.5px] leading-[1.45] text-[var(--text-2)]">{r.tag[lang]}</span>
+                <LangText
+                  text={r.tag[lang]}
+                  as="span"
+                  className="line-clamp-2 text-[12.5px] leading-[1.45] text-[var(--text-2)]"
+                />
               </Link>
             )
           })}

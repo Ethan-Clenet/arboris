@@ -9,6 +9,19 @@
       "master": true
     }
   },
+  "redirects": [
+    {
+      "source": "/:path((?!.*\\.).*)/",
+      "destination": "/:path",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.arboristhree.xyz" }],
+      "destination": "https://arboristhree.xyz/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

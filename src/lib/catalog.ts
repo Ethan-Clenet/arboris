@@ -40,6 +40,7 @@ export interface SkillSummary {
   score: number | null
   securityRecommendation: 'SAFE' | 'CAUTION' | 'UNSAFE' | 'UNKNOWN' | null
   scannedAt: string | null
+  updatedAt?: string
   /** Éditeur / auteur (metadata.origin), ex. affaan-m. */
   publisher: string | null
   tech: string[]
@@ -421,6 +422,39 @@ function humanizeSlug(slug: string): string {
     .trim()
 }
 
+const TITLE_ACRONYMS: Record<string, string> = {
+  fastapi: 'FastAPI',
+  n8n: 'n8n',
+  api: 'API',
+  ui: 'UI',
+  ux: 'UX',
+  cli: 'CLI',
+  pr: 'PR',
+  ts: 'TypeScript',
+  js: 'JS',
+  ai: 'IA',
+  db: 'DB',
+  http: 'HTTP',
+  css: 'CSS',
+  html: 'HTML',
+  sdk: 'SDK',
+  mcp: 'MCP',
+  adr: 'ADR',
+}
+
+/** Titre humain à partir d’un id/slug (sans chemin de dépôt). */
+export function titleCaseSkillSlug(slug: string): string {
+  return humanizeSlug(slug)
+    .split(' ')
+    .filter(Boolean)
+    .map((word) => {
+      const lower = word.toLowerCase()
+      if (TITLE_ACRONYMS[lower]) return TITLE_ACRONYMS[lower]
+      return word.charAt(0).toUpperCase() + word.slice(1)
+    })
+    .join(' ')
+}
+
 function parseVendorSkillId(id: string): { base: string; repo: string; path: string } | null {
   if (!id.includes('__')) return null
   const [base, repo, ...rest] = id.split('__')
@@ -438,10 +472,13 @@ export function isVendorSkill(id: string, _publisher?: string | null): boolean {
   return id.includes('__') && VENDOR_HASH_SUFFIX.test(id)
 }
 
-function vendorCoreTitle(id: string): string | null {
+function vendorCoreTitle(id: string, publisher?: string | null): string | null {
   const parts = parseVendorSkillId(id)
   if (!parts) return null
-  return `${humanizeSlug(parts.base)} ${humanizeSlug(parts.repo)}`.trim()
+  const name = titleCaseSkillSlug(parts.base)
+  const pub = listingPublisher(publisher)
+  if (pub && pub !== COMMUNITY_PUBLISHER) return `${name} (${pub})`
+  return name
 }
 
 function vendorPathHint(id: string): string {
@@ -459,8 +496,9 @@ function vendorPathHint(id: string): string {
 }
 
 /**
- * Titres uniques pour l’UI : skill vendor = « nom repo » sans hash ;
- * en cas de collision, suffixe le chemin (sans le hash 12 caractères).
+ * Titres uniques pour l’UI : skill vendor = nom humain + éditeur ;
+ * en cas de collision, suffixe un hint de chemin (sans le hash).
+ * Les ids first-party sont title-casés (plus de slug brut).
  */
 export function uniqueSkillTitles(
   skills: Array<{ id: string; publisher?: string | null }>,
@@ -470,10 +508,10 @@ export function uniqueSkillTitles(
 
   for (const skill of skills) {
     if (!isVendorSkill(skill.id, skill.publisher)) {
-      out.set(skill.id, skill.id)
+      out.set(skill.id, titleCaseSkillSlug(skill.id))
       continue
     }
-    const core = vendorCoreTitle(skill.id) ?? skill.id
+    const core = vendorCoreTitle(skill.id, skill.publisher) ?? titleCaseSkillSlug(skill.id)
     const list = groups.get(core) ?? []
     list.push(skill.id)
     groups.set(core, list)
@@ -486,8 +524,8 @@ export function uniqueSkillTitles(
     }
     const used = new Set<string>()
     for (const id of ids) {
-      const hint = vendorPathHint(id)
-      let title = hint ? `${core} ${hint}` : core
+      const hint = titleCaseSkillSlug(vendorPathHint(id))
+      let title = hint ? `${core} — ${hint}` : core
       if (used.has(title)) {
         let n = 2
         const base = title

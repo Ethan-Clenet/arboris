@@ -11,6 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as Sitemap_indexDotxmlRouteImport } from './routes/sitemap_index[.]xml'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SitemapStaticDotxmlRouteImport } from './routes/sitemap-static[.]xml'
+import { Route as SitemapSkillsDotxmlRouteImport } from './routes/sitemap-skills[.]xml'
+import { Route as SitemapCommandsDotxmlRouteImport } from './routes/sitemap-commands[.]xml'
+import { Route as SitemapCollectionsDotxmlRouteImport } from './routes/sitemap-collections[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
@@ -38,6 +42,27 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapStaticDotxmlRoute = SitemapStaticDotxmlRouteImport.update({
+  id: '/sitemap-static.xml',
+  path: '/sitemap-static.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapSkillsDotxmlRoute = SitemapSkillsDotxmlRouteImport.update({
+  id: '/sitemap-skills.xml',
+  path: '/sitemap-skills.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapCommandsDotxmlRoute = SitemapCommandsDotxmlRouteImport.update({
+  id: '/sitemap-commands.xml',
+  path: '/sitemap-commands.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapCollectionsDotxmlRoute =
+  SitemapCollectionsDotxmlRouteImport.update({
+    id: '/sitemap-collections.xml',
+    path: '/sitemap-collections.xml',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
   id: '/robots.txt',
   path: '/robots.txt',
@@ -130,6 +155,10 @@ export interface FileRoutesByFullPath {
   '/llms.txt': typeof LlmsDottxtRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-collections.xml': typeof SitemapCollectionsDotxmlRoute
+  '/sitemap-commands.xml': typeof SitemapCommandsDotxmlRoute
+  '/sitemap-skills.xml': typeof SitemapSkillsDotxmlRoute
+  '/sitemap-static.xml': typeof SitemapStaticDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
@@ -150,6 +179,10 @@ export interface FileRoutesByTo {
   '/llms.txt': typeof LlmsDottxtRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-collections.xml': typeof SitemapCollectionsDotxmlRoute
+  '/sitemap-commands.xml': typeof SitemapCommandsDotxmlRoute
+  '/sitemap-skills.xml': typeof SitemapSkillsDotxmlRoute
+  '/sitemap-static.xml': typeof SitemapStaticDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
@@ -171,6 +204,10 @@ export interface FileRoutesById {
   '/llms.txt': typeof LlmsDottxtRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-collections.xml': typeof SitemapCollectionsDotxmlRoute
+  '/sitemap-commands.xml': typeof SitemapCommandsDotxmlRoute
+  '/sitemap-skills.xml': typeof SitemapSkillsDotxmlRoute
+  '/sitemap-static.xml': typeof SitemapStaticDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
   '/collections/$id': typeof CollectionsIdRoute
@@ -193,6 +230,10 @@ export interface FileRouteTypes {
     | '/llms.txt'
     | '/mentions-legales'
     | '/robots.txt'
+    | '/sitemap-collections.xml'
+    | '/sitemap-commands.xml'
+    | '/sitemap-skills.xml'
+    | '/sitemap-static.xml'
     | '/sitemap.xml'
     | '/sitemap_index.xml'
     | '/collections/$id'
@@ -213,6 +254,10 @@ export interface FileRouteTypes {
     | '/llms.txt'
     | '/mentions-legales'
     | '/robots.txt'
+    | '/sitemap-collections.xml'
+    | '/sitemap-commands.xml'
+    | '/sitemap-skills.xml'
+    | '/sitemap-static.xml'
     | '/sitemap.xml'
     | '/sitemap_index.xml'
     | '/collections/$id'
@@ -233,6 +278,10 @@ export interface FileRouteTypes {
     | '/llms.txt'
     | '/mentions-legales'
     | '/robots.txt'
+    | '/sitemap-collections.xml'
+    | '/sitemap-commands.xml'
+    | '/sitemap-skills.xml'
+    | '/sitemap-static.xml'
     | '/sitemap.xml'
     | '/sitemap_index.xml'
     | '/collections/$id'
@@ -254,6 +303,10 @@ export interface RootRouteChildren {
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapCollectionsDotxmlRoute: typeof SitemapCollectionsDotxmlRoute
+  SitemapCommandsDotxmlRoute: typeof SitemapCommandsDotxmlRoute
+  SitemapSkillsDotxmlRoute: typeof SitemapSkillsDotxmlRoute
+  SitemapStaticDotxmlRoute: typeof SitemapStaticDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   Sitemap_indexDotxmlRoute: typeof Sitemap_indexDotxmlRoute
   CollectionsIdRoute: typeof CollectionsIdRoute
@@ -279,6 +332,34 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-static.xml': {
+      id: '/sitemap-static.xml'
+      path: '/sitemap-static.xml'
+      fullPath: '/sitemap-static.xml'
+      preLoaderRoute: typeof SitemapStaticDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-skills.xml': {
+      id: '/sitemap-skills.xml'
+      path: '/sitemap-skills.xml'
+      fullPath: '/sitemap-skills.xml'
+      preLoaderRoute: typeof SitemapSkillsDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-commands.xml': {
+      id: '/sitemap-commands.xml'
+      path: '/sitemap-commands.xml'
+      fullPath: '/sitemap-commands.xml'
+      preLoaderRoute: typeof SitemapCommandsDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-collections.xml': {
+      id: '/sitemap-collections.xml'
+      path: '/sitemap-collections.xml'
+      fullPath: '/sitemap-collections.xml'
+      preLoaderRoute: typeof SitemapCollectionsDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/robots.txt': {
@@ -406,6 +487,10 @@ const rootRouteChildren: RootRouteChildren = {
   LlmsDottxtRoute: LlmsDottxtRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapCollectionsDotxmlRoute: SitemapCollectionsDotxmlRoute,
+  SitemapCommandsDotxmlRoute: SitemapCommandsDotxmlRoute,
+  SitemapSkillsDotxmlRoute: SitemapSkillsDotxmlRoute,
+  SitemapStaticDotxmlRoute: SitemapStaticDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   Sitemap_indexDotxmlRoute: Sitemap_indexDotxmlRoute,
   CollectionsIdRoute: CollectionsIdRoute,

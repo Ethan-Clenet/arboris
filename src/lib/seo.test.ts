@@ -1,12 +1,17 @@
 import { describe, expect, it } from 'vitest'
 import {
   breadcrumbJsonLd,
+  collectionJsonLd,
   collectionSeoTitle,
+  commandJsonLd,
   commandSeoTitle,
   entityDescription,
+  frenchEntityDescription,
   isHashedVendorSkillId,
   isIndexableSkill,
   isPremiumPublisher,
+  jsonLdAuthor,
+  looksEnglish,
   SITEMAP_INCLUDE_SKILL_PAGES,
   rootFallbackMeta,
   SEO_INDEX_MIN_SCORE,
@@ -15,6 +20,7 @@ import {
   skillJsonLd,
   skillSeoTitle,
   webPageJsonLd,
+  notFoundSeo,
 } from './seo'
 import { SITE_NAME, SITE_URL } from './site'
 
@@ -92,8 +98,8 @@ describe('isIndexableSkill', () => {
 })
 
 describe('SITEMAP_INCLUDE_SKILL_PAGES', () => {
-  it('exclut les fiches skills du sitemap (hub-first)', () => {
-    expect(SITEMAP_INCLUDE_SKILL_PAGES).toBe(false)
+  it('inclut les fiches skills indexables dans le sitemap', () => {
+    expect(SITEMAP_INCLUDE_SKILL_PAGES).toBe(true)
   })
 })
 
@@ -106,7 +112,8 @@ describe('skillSeoTitle', () => {
     const id = 'a'.repeat(80)
     const title = skillSeoTitle(id)
     expect(title.length).toBeLessThanOrEqual(45)
-    expect(title.endsWith('…')).toBe(true)
+    expect(title.includes('…')).toBe(false)
+    expect(title.endsWith('...')).toBe(false)
   })
 })
 
@@ -229,6 +236,16 @@ describe('seoHead', () => {
     })
     expect(head.scripts).toBeUndefined()
   })
+
+  it('donne un titre et une description 404 distincts de l’accueil', () => {
+    const head = notFoundSeo()
+    expect(head.meta.some((m) => m.title === `Page introuvable — ${SITE_NAME}`)).toBe(true)
+    expect(head.meta.some((m) => m.name === 'description' && m.content?.includes('n’existe pas'))).toBe(
+      true,
+    )
+    expect(head.meta.some((m) => m.name === 'robots' && m.content === 'noindex, follow')).toBe(true)
+    expect(head.links).toEqual([])
+  })
 })
 
 describe('siteJsonLd', () => {
@@ -237,22 +254,93 @@ describe('siteJsonLd', () => {
     const app = graph['@graph'].find((node) => node['@type'] === 'SoftwareApplication')
     expect(app?.url).toBe(`${SITE_URL}/`)
   })
+
+  it('déclare uniquement le français (pas de version EN)', () => {
+    const website = siteJsonLd()['@graph'].find((node) => node['@type'] === 'WebSite')
+    expect(website?.inLanguage).toBe('fr')
+  })
 })
 
 describe('skillJsonLd', () => {
-  it('décrit une fiche skill en SoftwareSourceCode', () => {
+  it('décrit une fiche skill en SoftwareSourceCode, toujours inLanguage fr', () => {
     const json = skillJsonLd({
       id: 'fastapi-patterns',
       label: 'FastAPI Patterns',
-      description: 'Patterns FastAPI.',
+      description: 'FastAPI best practices covering project structure.',
       publisher: 'FastAPI',
+      codeRepository: 'https://github.com/fastapi/fastapi',
     })
     expect(json).toMatchObject({
       '@type': 'SoftwareSourceCode',
       name: 'FastAPI Patterns',
       url: `${SITE_URL}/skills/fastapi-patterns`,
       author: { '@type': 'Organization', name: 'FastAPI' },
+      inLanguage: 'fr',
+      codeRepository: 'https://github.com/fastapi/fastapi',
     })
+  })
+})
+
+describe('frenchEntityDescription', () => {
+  it('garde un résumé français', () => {
+    const desc = frenchEntityDescription('Garde les merges dangereux.', 'skill', 'Gate Guard')
+    expect(desc).toContain('Garde les merges dangereux.')
+  })
+
+  it('remplace un résumé anglais par un texte FR basé sur le titre', () => {
+    const desc = frenchEntityDescription(
+      'FastAPI best practices covering project structure',
+      'skill',
+      'FastAPI Patterns',
+    )
+    expect(desc).toContain('FastAPI Patterns')
+    expect(desc.toLowerCase()).not.toContain('best practices covering')
+    expect(desc).not.toContain('…')
+  })
+})
+
+describe('commandJsonLd / collectionJsonLd', () => {
+  it('décrit une commande en SoftwareSourceCode', () => {
+    const json = commandJsonLd({ id: 'adr', description: 'Rédige une ADR.' })
+    expect(json).toMatchObject({
+      '@type': 'SoftwareSourceCode',
+      name: '/adr',
+      url: `${SITE_URL}/commands/adr`,
+      isAccessibleForFree: true,
+      inLanguage: 'fr',
+      author: { '@type': 'Organization', name: SITE_NAME },
+    })
+  })
+
+  it('décrit une collection en CollectionPage + ItemList', () => {
+    const json = collectionJsonLd({
+      id: 'sonar',
+      name: 'Sonar',
+      description: 'Pack de garde.',
+      skillIds: ['gateguard'],
+      commandIds: ['sonar'],
+    })
+    expect(json['@type']).toBe('CollectionPage')
+    const main = json.mainEntity as { '@type': string; itemListElement: Array<{ url: string }> }
+    expect(main['@type']).toBe('ItemList')
+    expect(main.itemListElement).toHaveLength(2)
+    expect(main.itemListElement[0]?.url).toBe(`${SITE_URL}/skills/gateguard`)
+  })
+})
+
+describe('jsonLdAuthor / looksEnglish', () => {
+  it('mappe affaan-m en Person GitHub', () => {
+    expect(jsonLdAuthor('affaan-m')).toEqual({
+      '@type': 'Person',
+      name: 'affaan-m',
+      url: 'https://github.com/affaan-m',
+    })
+    expect(jsonLdAuthor('FastAPI')).toEqual({ '@type': 'Organization', name: 'FastAPI' })
+  })
+
+  it('détecte un résumé anglais', () => {
+    expect(looksEnglish('FastAPI best practices covering project structure')).toBe(true)
+    expect(looksEnglish('Garde les merges dangereux avant la revue.')).toBe(false)
   })
 })
 

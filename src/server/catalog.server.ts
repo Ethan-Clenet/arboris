@@ -11,13 +11,14 @@ import {
   type SkillSummary,
   type Stack,
 } from '#/lib/catalog'
+import { isIndexableSkill } from '#/lib/seo'
 import {
-  SKILLS_PAGE_SIZE,
   computeSkillFacets,
   filterAndSortSkills,
   paginateSkills,
   skillsListPath,
   toSkillListItem,
+  SKILLS_PAGE_SIZE,
   type SkillsListPage,
   type SkillsSearch,
 } from '#/lib/skills-list'
@@ -59,6 +60,7 @@ const skillSummarySelect = {
   score: true,
   securityRecommendation: true,
   scannedAt: true,
+  updatedAt: true,
   publisher: true,
   techJson: true,
   compatJson: true,
@@ -76,6 +78,7 @@ type SkillRow = {
   score: number | null
   securityRecommendation: string | null
   scannedAt: Date | null
+  updatedAt: Date
   publisher: string | null
   techJson: string
   compatJson: string
@@ -100,6 +103,7 @@ function toSummary(row: SkillRow): SkillSummary {
     score: row.score,
     securityRecommendation: recommendation,
     scannedAt: row.scannedAt ? row.scannedAt.toISOString() : null,
+    updatedAt: row.updatedAt.toISOString(),
     publisher: row.publisher,
     tech: parseList(row.techJson),
     compat: parseList(row.compatJson),
@@ -234,27 +238,30 @@ export async function loadCatalog(): Promise<Catalog> {
 
 /** Lignes max par onglet home (popular / trending / recent). */
 export const HOME_TAB_LIMIT = 24
-/** Candidats chargés pour dériver l’onglet « trending » (tri par #stacks). */
-const HOME_TRENDING_POOL = 120
+/** Candidats chargés pour dériver les onglets home (filtre indexable ensuite). */
+const HOME_FETCH_POOL = 400
 
 function sliceHomeFromCatalog(catalog: Catalog): HomeCatalog {
-  const byScore = [...catalog.skills].sort(
+  const indexable = catalog.skills.filter(isIndexableSkill)
+  const byScore = [...indexable].sort(
     (a, b) => (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id),
   )
-  const byStacks = [...catalog.skills].sort(
+  const byStacks = [...indexable].sort(
     (a, b) =>
       b.stacks.length - a.stacks.length ||
       (b.score ?? -1) - (a.score ?? -1) ||
       a.id.localeCompare(b.id),
   )
-  const byId = [...catalog.skills].sort((a, b) => a.id.localeCompare(b.id))
+  const byUpdated = [...indexable].sort(
+    (a, b) => (b.updatedAt ?? '').localeCompare(a.updatedAt ?? '') || a.id.localeCompare(b.id),
+  )
   return {
     categories: catalog.categories,
     compatOrder: catalog.compatOrder,
     skillTotal: catalog.skills.length,
     popular: byScore.slice(0, HOME_TAB_LIMIT),
     trending: byStacks.slice(0, HOME_TAB_LIMIT),
-    recent: byId.slice(0, HOME_TAB_LIMIT),
+    recent: byUpdated.slice(0, HOME_TAB_LIMIT),
   }
 }
 
@@ -264,28 +271,31 @@ async function fetchHomeCatalog(): Promise<HomeCatalog> {
     prisma.skill.count(),
     prisma.skill.findMany({
       orderBy: [{ score: 'desc' }, { id: 'asc' }],
-      take: HOME_TAB_LIMIT,
+      take: HOME_FETCH_POOL,
       select: skillSummarySelect,
     }),
     prisma.skill.findMany({
-      orderBy: { id: 'asc' },
-      take: HOME_TAB_LIMIT,
+      orderBy: [{ updatedAt: 'desc' }, { id: 'asc' }],
+      take: HOME_FETCH_POOL,
       select: skillSummarySelect,
     }),
     prisma.skill.findMany({
       orderBy: [{ score: 'desc' }, { id: 'asc' }],
-      take: HOME_TRENDING_POOL,
+      take: HOME_FETCH_POOL,
       select: skillSummarySelect,
     }),
   ])
 
-  const [popular, recent, trendingPool] = await Promise.all([
+  const [popularAll, recentAll, trendingPool] = await Promise.all([
     titledSummaries(popularRows),
     titledSummaries(recentRows),
     titledSummaries(trendingPoolRows),
   ])
 
+  const popular = popularAll.filter(isIndexableSkill).slice(0, HOME_TAB_LIMIT)
+  const recent = recentAll.filter(isIndexableSkill).slice(0, HOME_TAB_LIMIT)
   const trending = [...trendingPool]
+    .filter(isIndexableSkill)
     .sort(
       (a, b) =>
         b.stacks.length - a.stacks.length ||

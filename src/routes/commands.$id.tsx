@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { useMemo } from 'react'
 import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
+import LangText from '#/components/LangText'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
@@ -10,7 +11,7 @@ import { AgentBadge } from '#/components/AgentLogo'
 import CommandInstallButtons from '#/components/CommandInstallButtons'
 import CloudInstallPanel from '#/components/CloudInstallPanel'
 import { commandInstallContent } from '#/lib/command-types'
-import { commandSeoTitle, entityDescription, seoHead } from '#/lib/seo'
+import { commandSeoTitle, frenchEntityDescription, seoHead, commandJsonLd } from '#/lib/seo'
 
 export const Route = createFileRoute('/commands/$id')({
   loader: async ({ params }) => {
@@ -21,16 +22,18 @@ export const Route = createFileRoute('/commands/$id')({
   head: ({ loaderData }) => {
     const command = loaderData?.command
     if (!command) return seoHead({ title: 'Commande', path: '/commands' })
+    const description = frenchEntityDescription(command.description.fr, 'command', command.id)
     return seoHead({
       title: commandSeoTitle(command.id),
       path: `/commands/${command.id}`,
-      description: entityDescription(command.description.fr, 'command', command.id),
+      description,
       type: 'article',
       breadcrumbs: [
         { name: 'Accueil', path: '/' },
         { name: 'Commandes', path: '/commands' },
         { name: `/${command.id}`, path: `/commands/${command.id}` },
       ],
+      jsonLd: commandJsonLd({ id: command.id, description }),
     })
   },
   component: CommandDetailPage,
@@ -78,7 +81,9 @@ function CommandDetailPage() {
             <h1 className="mb-3 break-words font-mono text-[30px] font-semibold leading-[1.1] tracking-[-0.01em]">
               /{command.id}
             </h1>
-            <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">{command.description[lang]}</p>
+            <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">
+              <LangText text={command.description[lang]} />
+            </p>
             <p className="mb-5 max-w-[640px] text-[14px] leading-relaxed text-[var(--text-2)]">
               {t.commands.aboutBody(command.id)}
             </p>

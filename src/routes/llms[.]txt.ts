@@ -26,8 +26,11 @@ export const Route = createFileRoute('/llms.txt')({
 - CLI: \`npx arboris-cli install <skill-id>\` — ou copie du Markdown depuis chaque fiche.
 
 ## Ressources
-- Sitemap: ${SITE_URL}/sitemap.xml
-- Index des sitemaps: ${SITE_URL}/sitemap_index.xml
+- Sitemap index: ${SITE_URL}/sitemap.xml
+- Alias index: ${SITE_URL}/sitemap_index.xml
+- Skills indexables: ${SITE_URL}/sitemap-skills.xml
+- Commandes: ${SITE_URL}/sitemap-commands.xml
+- Collections: ${SITE_URL}/sitemap-collections.xml
 `
 
         return new Response(body, {

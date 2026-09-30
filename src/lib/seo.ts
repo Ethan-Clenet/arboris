@@ -22,7 +22,7 @@ type SeoInput = {
 }
 
 /** Bornes SERP (approx. Screaming Frog / Google). */
-const META_MAX_CHARS = 130
+const META_MAX_CHARS = 160
 const META_MIN_CHARS = 80
 const META_MAX_PX = 960
 /** Titre final avec « — Arboris » (~10 car.) : viser 30–60 car. / ≤561 px. */
@@ -42,15 +42,30 @@ function estimateMetaPixels(text: string): number {
   return px
 }
 
-function truncateMeta(text: string, maxChars = META_MAX_CHARS, maxPx = META_MAX_PX): string {
+function clipComplete(text: string, maxChars = META_MAX_CHARS, maxPx = META_MAX_PX): string {
   let out = text.trim().replace(/\s+/g, ' ')
   if (out.length > maxChars) {
-    out = `${out.slice(0, maxChars - 1).trimEnd()}…`
+    const window = out.slice(0, maxChars)
+    const sentenceEnd = Math.max(
+      window.lastIndexOf('. '),
+      window.lastIndexOf('! '),
+      window.lastIndexOf('? '),
+    )
+    out = sentenceEnd >= META_MIN_CHARS ? window.slice(0, sentenceEnd + 1).trim() : window.trim()
+    if (out.length > maxChars) {
+      const sp = out.lastIndexOf(' ')
+      out = (sp > 40 ? out.slice(0, sp) : out.slice(0, maxChars)).trim()
+    }
   }
   while (out.length > 40 && estimateMetaPixels(out) > maxPx) {
-    out = `${out.slice(0, Math.max(20, out.length - 8)).trimEnd()}…`
+    const sp = out.lastIndexOf(' ')
+    out = (sp > 40 ? out.slice(0, sp) : out.slice(0, Math.max(20, out.length - 8))).trim()
   }
   return out
+}
+
+function truncateMeta(text: string, maxChars = META_MAX_CHARS, maxPx = META_MAX_PX): string {
+  return clipComplete(text, maxChars, maxPx)
 }
 
 function padMeta(text: string, filler: string): string {
@@ -72,7 +87,7 @@ export function skillSeoTitle(id: string): string {
   const short = `${id} · Skill`
   if (short.length <= TITLE_CORE_MAX) return short
   if (id.length <= TITLE_CORE_MAX) return id
-  return `${id.slice(0, TITLE_CORE_MAX - 1)}…`
+  return id.slice(0, TITLE_CORE_MAX).trimEnd()
 }
 
 /** Titre commande slash — même budget caractère/pixel. */
@@ -83,7 +98,7 @@ export function commandSeoTitle(id: string): string {
   if (mid.length <= TITLE_CORE_MAX) return mid
   const short = `/${id}`
   if (short.length <= TITLE_CORE_MAX) return short
-  return `${short.slice(0, TITLE_CORE_MAX - 1)}…`
+  return short.slice(0, TITLE_CORE_MAX).trimEnd()
 }
 
 /** Titre collection — sans « Arboris » (ajouté par pageTitle). */
@@ -104,7 +119,7 @@ export function collectionSeoTitle(label: string): string {
     return `${padded}${' · catalogue'.slice(0, TITLE_CORE_MIN - padded.length)}`
   }
   if (label.length <= TITLE_CORE_MAX) return label
-  return `${label.slice(0, TITLE_CORE_MAX - 1)}…`
+  return label.slice(0, TITLE_CORE_MAX).trimEnd()
 }
 
 /** Meta description unique par entité (évite les doublons SF quand le tag est partagé). */
@@ -195,12 +210,10 @@ export function isIndexableSkill(skill: SkillIndexInput): boolean {
 }
 
 /**
- * Hub-first : les fiches `/skills/:id` restent hors sitemap le temps que le
- * nouveau domaine prenne de l’autorité. Les pages restent crawlables via
- * `/skills` ; le noindex par fiche (`isIndexableSkill`) ne change pas.
- * Remettre à `true` pour republier les URLs skills dans le sitemap.
+ * Inclut les fiches `/skills/:id` **indexables** dans le sitemap enfants.
+ * Passer à `false` pour un sitemap hub-only (pages liste uniquement).
  */
-export const SITEMAP_INCLUDE_SKILL_PAGES = false
+export const SITEMAP_INCLUDE_SKILL_PAGES = true
 
 /**
  * Fallback root-only (charset/viewport restent dans __root).
@@ -226,7 +239,7 @@ export function siteJsonLd() {
         url: `${SITE_URL}/`,
         name: SITE_NAME,
         description: SITE_DESCRIPTION,
-        inLanguage: ['fr', 'en'],
+        inLanguage: 'fr',
         publisher: { '@id': `${SITE_URL}/#organization` },
       },
       {
@@ -250,12 +263,52 @@ export function siteJsonLd() {
   }
 }
 
+const PERSON_PUBLISHERS = new Set(['affaan-m'])
+
+/** Auteur JSON-LD : compte GitHub individuel → Person, sinon Organization. */
+export function jsonLdAuthor(publisher?: string | null) {
+  const name = publisher?.trim() || SITE_NAME
+  if (PERSON_PUBLISHERS.has(name)) {
+    return { '@type': 'Person' as const, name, url: `https://github.com/${name}` }
+  }
+  return { '@type': 'Organization' as const, name }
+}
+
+/** Heuristique légère : le résumé n’a pas d’accents FR et contient des mots EN. */
+export function looksEnglish(text: string): boolean {
+  const value = text.trim()
+  if (!value) return false
+  if (/[àâäéèêëïîôùûçœæ]/i.test(value)) return false
+  return /\b(the|and|with|for|from|this|that|your|into|using|best|practices)\b/i.test(value)
+}
+
+/**
+ * Description meta toujours en français (pas de version EN indexable).
+ * Si le résumé source est anglais, on s’appuie sur le titre affiché.
+ */
+export function frenchEntityDescription(
+  summary: string,
+  kind: 'skill' | 'command' | 'collection',
+  id: string,
+): string {
+  const base = summary.trim().replace(/\s+/g, ' ')
+  if (base && !looksEnglish(base)) return entityDescription(base, kind, id)
+  const kindLabel =
+    kind === 'skill' ? 'Skill' : kind === 'command' ? 'Commande slash' : 'Collection'
+  return entityDescription(
+    `${kindLabel} « ${id} » du catalogue Arboris, prêt pour Cursor, Claude, Codex et Copilot.`,
+    kind,
+    id,
+  )
+}
+
 /** Entité typée pour une fiche skill (résultat enrichi / compréhension SERP). */
 export function skillJsonLd(input: {
   id: string
   label: string
   description: string
   publisher?: string | null
+  codeRepository?: string | null
 }) {
   return {
     '@context': 'https://schema.org',
@@ -264,10 +317,64 @@ export function skillJsonLd(input: {
     description: input.description,
     url: absoluteUrl(`/skills/${input.id}`),
     programmingLanguage: 'Markdown',
-    inLanguage: 'fr',
+    inLanguage: 'fr' as const,
     isAccessibleForFree: true,
-    author: { '@type': 'Organization', name: input.publisher?.trim() || SITE_NAME },
+    author: jsonLdAuthor(input.publisher),
     publisher: { '@id': `${SITE_URL}/#organization` },
+    ...(input.codeRepository ? { codeRepository: input.codeRepository } : {}),
+  }
+}
+
+/** Slash command — SoftwareSourceCode (Markdown installable). */
+export function commandJsonLd(input: { id: string; description: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareSourceCode',
+    name: `/${input.id}`,
+    description: input.description,
+    url: absoluteUrl(`/commands/${input.id}`),
+    programmingLanguage: 'Markdown',
+    inLanguage: 'fr' as const,
+    isAccessibleForFree: true,
+    author: jsonLdAuthor(SITE_NAME),
+    publisher: { '@id': `${SITE_URL}/#organization` },
+  }
+}
+
+/** Collection — CollectionPage + ItemList des membres. */
+export function collectionJsonLd(input: {
+  id: string
+  name: string
+  description: string
+  skillIds: string[]
+  commandIds: string[]
+  skillNames?: string[]
+}) {
+  const items = [
+    ...input.skillIds.map((id, index) => ({
+      url: absoluteUrl(`/skills/${id}`),
+      name: input.skillNames?.[index] ?? id,
+    })),
+    ...input.commandIds.map((id) => ({ url: absoluteUrl(`/commands/${id}`), name: `/${id}` })),
+  ]
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(`/collections/${input.id}`),
+    inLanguage: 'fr',
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: items.length,
+      itemListElement: items.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: item.url,
+        name: item.name,
+      })),
+    },
   }
 }
 
@@ -302,6 +409,16 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
       item: absoluteUrl(item.path),
     })),
   }
+}
+
+/** Meta 404 : titre et description propres, noindex (pas ceux de l’accueil). */
+export function notFoundSeo() {
+  return seoHead({
+    title: 'Page introuvable',
+    description:
+      'Cette page n’existe pas sur Arboris. Reviens à l’accueil ou parcours le catalogue de skills IA.',
+    noIndex: true,
+  })
 }
 
 /** Meta + links SEO / Open Graph / Twitter pour `route.head()`. */

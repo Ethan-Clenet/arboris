@@ -150,41 +150,39 @@ describe('uniqueSkillTitles (vendor)', () => {
     const id =
       'abandonment-analysis__microsoft-aibast-agents-library__solutions-cart-abandonment-recovery-manual-skills-8c2a6bf4f120'
     const titles = uniqueSkillTitles([{ id, publisher: 'Microsoft' }])
-    expect(titles.get(id)).toBe('abandonment analysis microsoft aibast agents library')
-    expect(skillLabel({ id, title: titles.get(id) })).toBe(
-      'abandonment analysis microsoft aibast agents library',
-    )
+    expect(titles.get(id)).toBe('Abandonment Analysis (Microsoft)')
+    expect(skillLabel({ id, title: titles.get(id) })).toBe('Abandonment Analysis (Microsoft)')
   })
 
   it('simplifie un id vendor Hugging Face', () => {
     const id = 'agent-eval__huggingface-skills__skills-eval-b3d4f9a1c2e5'
     const titles = uniqueSkillTitles([{ id, publisher: 'Hugging Face' }])
-    expect(titles.get(id)).toBe('agent eval huggingface skills')
+    expect(titles.get(id)).toBe('Agent Eval (Hugging Face)')
   })
 
   it('simplifie un id vendor Nous Research (hash après tiret)', () => {
     const id =
       '1password__nousresearch-hermes-agent__optional-skills-security-8c6b9c4182d0'
     const titles = uniqueSkillTitles([{ id, publisher: 'Nous Research' }])
-    expect(titles.get(id)).toBe('1password nousresearch hermes agent')
+    expect(titles.get(id)).toBe('1password (Nous Research)')
   })
 
   it('simplifie un id vendor dont le hash est le dernier segment (sans tiret)', () => {
     const id = 'skill__nousresearch-pokemon-agent__9c53c074d7ac'
     const titles = uniqueSkillTitles([{ id, publisher: 'Nous Research' }])
-    expect(titles.get(id)).toBe('skill nousresearch pokemon agent')
+    expect(titles.get(id)).toBe('Skill (Nous Research)')
   })
 
   it('simplifie un id vendor upstash/context7', () => {
     const id = 'context7-mcp__upstash-context7__skills-4bd9b07b8b1f'
     const titles = uniqueSkillTitles([{ id, publisher: 'Context7' }])
-    expect(titles.get(id)).toBe('context7 mcp upstash context7')
+    expect(titles.get(id)).toBe('Context7 MCP (Context7)')
   })
 
-  it('laisse inchangé un id first-party (sans __ ni hash)', () => {
+  it('title-case un id first-party (sans __ ni hash)', () => {
     const id = 'codebase-onboarding'
     const titles = uniqueSkillTitles([{ id, publisher: 'Arboris' }])
-    expect(titles.get(id)).toBe(id)
+    expect(titles.get(id)).toBe('Codebase Onboarding')
   })
 
   it('désambiguïse les doublons via le chemin, sans le hash', () => {
@@ -196,8 +194,8 @@ describe('uniqueSkillTitles (vendor)', () => {
       { id: a, publisher: 'Microsoft' },
       { id: b, publisher: 'Microsoft' },
     ])
-    expect(titles.get(a)).toBe('revenue impact microsoft aibast agents library win loss analysis')
-    expect(titles.get(b)).toBe('revenue impact microsoft aibast agents library cross selling')
+    expect(titles.get(a)).toBe('Revenue Impact (Microsoft) — Win Loss Analysis')
+    expect(titles.get(b)).toBe('Revenue Impact (Microsoft) — Cross Selling')
     expect(titles.get(a)).not.toBe(titles.get(b))
     expect(new Set(titles.values()).size).toBe(2)
   })
