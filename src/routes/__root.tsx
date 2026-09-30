@@ -9,6 +9,7 @@ import ServerErrorPage from '#/components/ServerErrorPage'
 import { AnnouncerProvider } from '#/lib/announcer'
 import { fontPreloadLinks } from '#/lib/font-preload'
 import { I18nProvider } from '#/lib/i18n'
+import { beforeSendMeasurement } from '#/lib/analytics-optout'
 import { rootFallbackMeta, notFoundSeo } from '#/lib/seo'
 import appCss from '#/styles.css?url'
 
@@ -65,8 +66,8 @@ function RootDocument({ children }: { children: ReactNode }) {
         <DevtoolsGate />
         <Scripts />
         <Suspense fallback={null}>
-          <Analytics />
-          <SpeedInsights />
+          <Analytics beforeSend={beforeSendMeasurement} />
+          <SpeedInsights beforeSend={beforeSendMeasurement} />
         </Suspense>
       </body>
     </html>

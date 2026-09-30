@@ -1,9 +1,16 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import AnalyticsOptOut from '#/components/AnalyticsOptOut'
 import LegalLayout, { LegalLink, LegalList, LegalSection } from '#/components/LegalLayout'
 import { seoHead, webPageJsonLd } from '#/lib/seo'
 import {
   CONTACT_EMAIL,
+  DB_HOST_ADDRESS,
+  DB_HOST_NAME,
+  DB_HOST_PRIVACY_URL,
   EDITOR_NAME,
+  HOST_ANALYTICS_PRICING_URL,
+  HOST_ANALYTICS_PRIVACY_URL,
+  HOST_LOGS_URL,
   HOST_NAME,
   HOST_PRIVACY_URL,
   LEGAL_UPDATED,
@@ -12,7 +19,7 @@ import {
 
 const TITLE = 'Politique de confidentialité'
 const DESCRIPTION =
-  'Politique de confidentialité RGPD d’Arboris : responsable du traitement, logs Vercel, mesure d’audience, droits et cookies.'
+  'Politique de confidentialité RGPD d’Arboris : bases légales, durées de conservation, opt-out d’audience et droits.'
 
 export const Route = createFileRoute('/confidentialite')({
   head: () =>
@@ -40,7 +47,7 @@ export function ConfidentialitePage() {
       eyebrow="RGPD"
       icon="lock-key"
       title="Confidentialité"
-      lead={`Cette page décrit les traitements de données réellement mis en œuvre par ${SITE_NAME}, tel que le code de l’application le permet de constater.`}
+      lead={`Cette page décrit les traitements de données mis en œuvre sur ${SITE_NAME} : ce qui est collecté, sur quelle base, pour combien de temps, et comment s’y opposer.`}
       currentPath="/confidentialite"
     >
       <LegalSection title="Responsable du traitement">
@@ -62,16 +69,16 @@ export function ConfidentialitePage() {
           <li>d’appel, depuis le navigateur, à une API tierce autre que l’origine du site</li>
         </LegalList>
         <p>
-          La base PostgreSQL (Neon) stocke le catalogue (skills, collections, scores de sûreté,
-          contenus Markdown). Elle ne contient pas de profil visiteur, d’adresse e-mail d’utilisateur
-          ni d’historique de navigation individuelle.
+          La base PostgreSQL ({DB_HOST_NAME}) stocke le catalogue (skills, collections, scores de
+          sûreté, contenus Markdown). Elle ne contient pas de profil visiteur, d’adresse e-mail
+          d’utilisateur ni d’historique de navigation individuelle.
         </p>
       </LegalSection>
 
       <LegalSection title="Préférences enregistrées dans le navigateur">
         <p>
           Le site enregistre localement, dans le <code className="font-mono text-[13.5px]">localStorage</code>{' '}
-          du navigateur, deux préférences demandées par l’utilisateur :
+          du navigateur :
         </p>
         <LegalList>
           <li>
@@ -81,55 +88,103 @@ export function ConfidentialitePage() {
             <code className="font-mono text-[13.5px]">sp-lang</code> : langue d’interface (français
             ou anglais)
           </li>
+          <li>
+            <code className="font-mono text-[13.5px]">va-disable</code> : refus de la mesure
+            d’audience et de performance, si vous l’activez ci-dessous
+          </li>
         </LegalList>
         <p>
-          Ces données restent sur l’appareil, ne sont pas transmises au serveur et peuvent être
-          effacées en vidant les données du site. Elles sont strictement nécessaires au service
-          demandé (affichage et langue).
+          <strong className="font-medium text-[var(--text-1)]">Base légale :</strong> intérêt
+          légitime (art. 6, 1, f du RGPD) pour mémoriser un choix d’affichage déjà exprimé, et
+          consentement (art. 6, 1, a) pour l’opt-out de mesure. Ces clés ne quittent pas l’appareil.
+        </p>
+        <p>
+          <strong className="font-medium text-[var(--text-1)]">Durée :</strong> jusqu’à ce que vous
+          vidiez les données du site ou changiez la préférence. Aucune copie n’est conservée côté
+          serveur.
         </p>
       </LegalSection>
 
       <LegalSection title="Mesure d’audience (Vercel Web Analytics)">
         <p>
           L’application charge le module <code className="font-mono text-[13.5px]">@vercel/analytics</code>{' '}
-          sur toutes les pages. Vercel Web Analytics sert à connaître, de façon agrégée, les pages
-          consultées (mesure d’audience). Selon la documentation Vercel, ce service est conçu pour
-          fonctionner sans cookie de tracking.
+          sur toutes les pages. Le script est servi en first-party depuis ce site
+          (<code className="font-mono text-[13.5px]">/_vercel/insights/script.js</code>), pas depuis
+          un domaine Vercel tiers.
         </p>
         <p>
-          Les informations typiquement associées à ce type de mesure portent sur la page vue et un
-          contexte de visite agrégé (et non sur une identité nominative collectée par {SITE_NAME}).
-          Le traitement est effectué par {HOST_NAME}, en qualité de sous-traitant / prestataire
-          d’hébergement et d’analytics.
+          Selon la{' '}
+          <LegalLink href={HOST_ANALYTICS_PRIVACY_URL}>
+            documentation Privacy de Vercel Web Analytics
+          </LegalLink>
+          , les visiteurs sont identifiés par un hachage dérivé de la requête, sans cookie de
+          tracking. Ce hachage de session n’est pas stocké de façon permanente : il est écarté au
+          bout de 24 heures. Les points de données (horodatage, URL, referrer filtré, géolocalisation
+          approximative, OS, navigateur, type d’appareil) servent à des statistiques agrégées.
+        </p>
+        <p>
+          <strong className="font-medium text-[var(--text-1)]">Base légale :</strong> intérêt
+          légitime (art. 6, 1, f du RGPD) de l’éditeur à mesurer l’audience du catalogue pour
+          améliorer le service, sans suivi inter-sites ni profil publicitaire. La mise en balance :
+          données agrégées, pas de cookie, script first-party, et possibilité de s’opposer en un
+          clic.
+        </p>
+        <p>
+          <strong className="font-medium text-[var(--text-1)]">Durée :</strong> la fenêtre de
+          reporting documentée par Vercel est de 1 mois (plan Hobby), 12 mois (Pro) ou 24 mois (Plus
+          / Enterprise). Vercel indique que seule cette fenêtre est garantie, et qu’il peut
+          conserver les données plus longtemps en cas de changement de plan (
+          <LegalLink href={HOST_ANALYTICS_PRICING_URL}>tarifs Web Analytics</LegalLink>). Le plan
+          exact du projet n’est pas affiché sur le site public.
         </p>
       </LegalSection>
 
       <LegalSection title="Mesure de performance (Vercel Speed Insights)">
         <p>
-          L’application charge également{' '}
-          <code className="font-mono text-[13.5px]">@vercel/speed-insights</code>. Speed Insights
-          mesure les indicateurs de performance réels (Core Web Vitals : LCP, INP, CLS, FCP, TTFB,
-          notamment) pour la page visitée, avec un contexte technique (chemin, type de connexion).
+          L’application charge{' '}
+          <code className="font-mono text-[13.5px]">@vercel/speed-insights</code>. Le script est
+          servi en first-party (
+          <code className="font-mono text-[13.5px]">/_vercel/speed-insights/script.js</code>). Speed
+          Insights mesure les Core Web Vitals (LCP, INP, CLS, FCP, TTFB) pour la page visitée.
         </p>
         <p>
-          Arboris n’écrit pas de cookie first-party pour ce service dans son code. Vercel peut
-          associer les métriques à un identifiant technique côté serveur afin d’agréger les mesures.
-          Les données sont transmises aux infrastructures Vercel (script chargé depuis le domaine
-          Vercel prévu à cet effet).
+          <strong className="font-medium text-[var(--text-1)]">Base légale :</strong> intérêt
+          légitime (art. 6, 1, f) — diagnostiquer la performance réelle du site. Même mise en
+          balance que pour l’audience, avec le même opt-out.
         </p>
+        <p>
+          <strong className="font-medium text-[var(--text-1)]">Durée :</strong> Vercel ne publie pas,
+          dans sa documentation Speed Insights, une durée de conservation unique comparable à la
+          fenêtre de reporting Web Analytics. Nous ne l’inventons pas. Le traitement suit la
+          politique de {HOST_NAME} (
+          <LegalLink href={HOST_PRIVACY_URL}>politique de confidentialité Vercel</LegalLink>).
+        </p>
+      </LegalSection>
+
+      <LegalSection title="Ne pas être mesuré">
+        <p>
+          Vous pouvez refuser Web Analytics et Speed Insights sur cet appareil. Le bouton pose{' '}
+          <code className="font-mono text-[13.5px]">localStorage.va-disable</code> ; le site transmet
+          alors <code className="font-mono text-[13.5px]">beforeSend</code> qui abandonne l’événement
+          (comportement documenté par Vercel pour Analytics et Speed Insights).
+        </p>
+        <AnalyticsOptOut />
       </LegalSection>
 
       <LegalSection title="Journaux d’hébergement">
         <p>
-          Comme tout site web, l’hébergeur ({HOST_NAME}) enregistre des journaux techniques de
-          requête, qui peuvent inclure l’adresse IP, la date et l’heure, l’URL demandée et
-          l’identifiant du navigateur (user-agent). Ces journaux servent à la sécurité, au
-          diagnostic et au fonctionnement du service, sur le fondement de l’intérêt légitime de
-          l’éditeur (art. 6, 1, f du RGPD).
+          L’hébergeur ({HOST_NAME}) enregistre des journaux techniques de requête (adresse IP, date,
+          URL, user-agent) pour la sécurité, le diagnostic et le fonctionnement du service.
         </p>
         <p>
-          Leur durée de conservation suit la politique d’{HOST_NAME}. Voir{' '}
-          <LegalLink href={HOST_PRIVACY_URL}>la politique de confidentialité de Vercel</LegalLink>.
+          <strong className="font-medium text-[var(--text-1)]">Base légale :</strong> intérêt
+          légitime (art. 6, 1, f du RGPD) — assurer la sécurité et la disponibilité du site.
+        </p>
+        <p>
+          <strong className="font-medium text-[var(--text-1)]">Durée :</strong> la conservation des
+          journaux d’exécution (runtime logs) documentée par Vercel est de 1 heure (Hobby), 1 jour
+          (Pro) ou 3 jours (Enterprise) ; 30 jours avec l’option Observability Plus (
+          <LegalLink href={HOST_LOGS_URL}>Runtime Logs</LegalLink>).
         </p>
       </LegalSection>
 
@@ -138,38 +193,52 @@ export function ConfidentialitePage() {
           Certaines actions (copie d’un skill, génération d’un ZIP, limitation de débit) sont
           traitées par le serveur d’{SITE_NAME} sans créer de compte. Le limiteur de débit
           applicatif fonctionne en mémoire, par type d’action, et ne constitue pas un fichier
-          d’identification des visiteurs. L’installation « workspace » (écriture de fichiers sur
-          un disque local) n’est disponible que lorsque l’instance est configurée à cette fin ; ce
-          n’est pas un compte visiteur du site public.
+          d’identification des visiteurs.
         </p>
         <p>
-          Les polices (Space Grotesk, Hanken Grotesk, JetBrains Mono) et les icônes sont servies
-          depuis le site lui-même. Aucune webfont Google ni iframe tierce n’est embarquée.
+          Les polices et les icônes sont servies depuis le site lui-même. Aucune webfont Google ni
+          iframe tierce n’est embarquée.
         </p>
       </LegalSection>
 
       <LegalSection title="Transferts hors de l’Union européenne">
         <p>
-          {HOST_NAME} est une société établie aux États-Unis. L’hébergement, les journaux, Web
-          Analytics et Speed Insights peuvent donc impliquer un transfert de données hors de l’UE.
-          Vercel indique être certifiée au titre du EU-U.S. Data Privacy Framework et recourir à
-          des clauses contractuelles types. Le détail figure dans{' '}
+          {HOST_NAME} est établi aux États-Unis. L’hébergement, les journaux, Web Analytics et Speed
+          Insights peuvent impliquer un transfert hors UE. Vercel indique être certifiée au titre du
+          EU-U.S. Data Privacy Framework et recourir à des clauses contractuelles types. Le détail
+          figure dans{' '}
           <LegalLink href={HOST_PRIVACY_URL}>sa politique de confidentialité</LegalLink>.
         </p>
         <p>
-          La base de données catalogue est hébergée chez Neon (PostgreSQL). Neon est également un
-          prestataire susceptible d’opérer hors UE ; aucun fichier visiteur n’y est stocké.
+          Le catalogue est stocké chez {DB_HOST_NAME}, {DB_HOST_ADDRESS}. Neon fait partie de
+          Databricks ; la notice servie par neon.com est celle de Databricks, Inc. (
+          <LegalLink href={DB_HOST_PRIVACY_URL}>{DB_HOST_PRIVACY_URL}</LegalLink>
+          ). Aucun fichier visiteur n’y est stocké. Les transferts éventuels suivent les mécanismes
+          décrits par Databricks (DPF / clauses types, selon leur notice).
         </p>
       </LegalSection>
 
       <LegalSection title="Vos droits">
         <p>
           Conformément au RGPD, vous disposez d’un droit d’accès, de rectification, d’effacement,
-          d’opposition et de limitation, dans les conditions prévues par la loi. Pour les exercer,
-          écrivez à <LegalLink href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</LegalLink> en
-          précisant l’objet de la demande. {SITE_NAME} ne tenant pas de compte utilisateur, les
-          demandes portent principalement sur les éventuelles traces techniques détenues par
-          l’hébergeur ou sur un contenu du catalogue (correction / retrait).
+          d’opposition et de limitation. Pour les exercer, écrivez à{' '}
+          <LegalLink href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</LegalLink>. Nous répondons
+          dans un délai d’un mois (art. 12, 3 du RGPD), prolongeable de deux mois si la demande est
+          complexe ; vous en seriez informé.
+        </p>
+        <p>
+          {SITE_NAME} ne tenant pas de compte utilisateur, les demandes portent principalement sur
+          les traces techniques détenues par l’hébergeur ou sur un contenu du catalogue.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="Directives post-mortem">
+        <p>
+          Aucune directive particulière relative au sort des données après le décès de l’éditeur
+          n’a été déposée auprès d’un tiers de confiance. Vous pouvez indiquer vos souhaits à{' '}
+          <LegalLink href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</LegalLink> (art. 85 de la loi
+          Informatique et Libertés). À défaut, les ayants droit s’adressent à l’hébergeur dans les
+          conditions légales.
         </p>
       </LegalSection>
 
@@ -185,15 +254,10 @@ export function ConfidentialitePage() {
       <LegalSection title="Pourquoi pas de bandeau cookies">
         <p>
           Le site n’installe pas, dans son code, de cookie ou de traceur soumis à consentement
-          préalable (publicité, personnalisation non essentielle, réseaux sociaux). Les seules
-          préférences locales (thème, langue) sont stockées dans le navigateur à la demande de
-          l’utilisateur. Les scripts Vercel Web Analytics et Speed Insights sont présentés par
-          Vercel comme des mesures d’audience et de performance sans cookie de tracking.
-        </p>
-        <p>
-          En l’état de cet audit, aucun bandeau de consentement n’est affiché. Si un cookie ou un
-          identifiant de tracking nécessitant un consentement était ajouté plus tard, cette page
-          et le bandeau devraient être mis à jour avant toute collecte.
+          préalable (publicité, personnalisation non essentielle, réseaux sociaux). Les préférences
+          locales (thème, langue, opt-out) sont stockées dans le navigateur à votre demande. Web
+          Analytics et Speed Insights sont présentés par Vercel comme des mesures sans cookie de
+          tracking, avec information et opposition ci-dessus.
         </p>
         <p>
           Les{' '}
@@ -203,7 +267,7 @@ export function ConfidentialitePage() {
           >
             mentions légales
           </Link>{' '}
-          décrivent l’éditeur, l’hébergeur et les droits sur le catalogue.
+          décrivent l’éditeur, l’hébergeur et le prestataire de stockage.
         </p>
       </LegalSection>
     </LegalLayout>

@@ -3,6 +3,9 @@ import LegalLayout, { LegalLink, LegalList, LegalSection } from '#/components/Le
 import { seoHead, webPageJsonLd } from '#/lib/seo'
 import {
   CONTACT_EMAIL,
+  DB_HOST_ADDRESS,
+  DB_HOST_NAME,
+  DB_HOST_PRIVACY_URL,
   EDITOR_NAME,
   HOST_ADDRESS,
   HOST_NAME,
@@ -47,9 +50,10 @@ export function MentionsLegalesPage() {
     >
       <LegalSection title="Éditeur du site">
         <p>
-          Conformément à l’article 6, III de la loi n° 2004-575 du 21 juin 2004 pour la confiance
-          dans l’économie numérique (LCEN), l’éditeur et le directeur de la publication du site{' '}
-          {SITE_NAME} ({SITE_URL.replace(/^https:\/\//, '')}) est :
+          Conformément à l’article 1-1 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans
+          l’économie numérique (LCEN), dans sa rédaction issue de la loi n° 2024-449 du 21 mai 2024
+          visant à sécuriser et à réguler l’espace numérique (SREN), l’éditeur et le directeur de la
+          publication du site {SITE_NAME} ({SITE_URL.replace(/^https:\/\//, '')}) est :
         </p>
         <LegalList>
           <li>
@@ -62,13 +66,15 @@ export function MentionsLegalesPage() {
         </LegalList>
         <p>
           En tant que personne physique non professionnelle, son adresse personnelle et son numéro
-          de téléphone ont été communiqués à l’hébergeur et ne sont pas publiés sur le site, conformément
-          à l’article 6, III de la LCEN.
+          de téléphone ont été communiqués à l’hébergeur et ne sont pas publiés sur le site,
+          conformément à l’article 1-1, II, de la LCEN.
         </p>
       </LegalSection>
 
       <LegalSection title="Hébergeur">
-        <p>Le site est hébergé par :</p>
+        <p>
+          Le site (pages web) est hébergé par, au sens de l’article 1-1, I, 4° de la LCEN :
+        </p>
         <LegalList>
           <li>
             <strong className="font-medium text-[var(--text-1)]">{HOST_NAME}</strong>
@@ -78,6 +84,32 @@ export function MentionsLegalesPage() {
             Site : <LegalLink href={HOST_URL}>{HOST_URL}</LegalLink>
           </li>
         </LegalList>
+        <p>
+          Le numéro de téléphone de l’hébergeur n’est pas publié sur les pages légales générales de
+          Vercel (mentions, conditions, politique de confidentialité). Il n’est donc pas repris ici.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="Stockage des données">
+        <p>
+          Le catalogue (skills, collections, scores) est stocké chez un prestataire distinct de
+          l’hébergeur des pages, au sens de l’article 1-1, I, 5° de la LCEN (« le cas échéant ») :
+        </p>
+        <LegalList>
+          <li>
+            <strong className="font-medium text-[var(--text-1)]">{DB_HOST_NAME}</strong>
+          </li>
+          <li>{DB_HOST_ADDRESS}</li>
+          <li>
+            Politique de confidentialité :{' '}
+            <LegalLink href={DB_HOST_PRIVACY_URL}>{DB_HOST_PRIVACY_URL}</LegalLink>
+          </li>
+        </LegalList>
+        <p>
+          Cette adresse est celle indiquée comme contact postal sur la notice de confidentialité
+          servie par neon.com (Databricks, Inc., maison mère de Neon). La base ne contient pas de
+          profil visiteur.
+        </p>
       </LegalSection>
 
       <LegalSection title="Nom de domaine">

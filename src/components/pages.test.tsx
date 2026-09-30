@@ -85,6 +85,8 @@ describe('pages légales', () => {
     expect(screen.getAllByText(/Ethan Clenet/).length).toBeGreaterThan(0)
     expect(screen.getAllByRole('link', { name: 'ethan.clenet@outlook.fr' }).length).toBeGreaterThan(0)
     expect(screen.getByText(/Vercel Inc/)).toBeTruthy()
+    expect(screen.getAllByText(/article 1-1/).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/Neon/).length).toBeGreaterThan(0)
     expect(screen.getByRole('link', { name: 'politique de confidentialité' })).toBeTruthy()
   })
 
@@ -95,6 +97,9 @@ describe('pages légales', () => {
     expect(screen.getByText(/@vercel\/analytics/)).toBeTruthy()
     expect(screen.getByText(/@vercel\/speed-insights/)).toBeTruthy()
     expect(screen.getByText(/sp-theme/)).toBeTruthy()
+    expect(screen.getByRole('button', { name: /ne pas être mesuré/i })).toBeTruthy()
+    expect(screen.getByText(/\/_vercel\/insights\/script\.js/)).toBeTruthy()
+    expect(screen.queryByText(/domaine Vercel prévu/)).toBeNull()
     expect(screen.getByText(/bandeau cookies/i)).toBeTruthy()
     expect(screen.getByRole('navigation', { name: /fil d’ariane/i })).toBeTruthy()
   })
