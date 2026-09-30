@@ -17,6 +17,8 @@ type SeoInput = {
   breadcrumbs?: BreadcrumbItem[]
   /** JSON-LD supplémentaire (entité typée de la page). Ignoré si `noIndex`. */
   jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>
+  /** Liens extra (prev/next de pagination, etc.). */
+  extraLinks?: Array<{ rel: string; href: string }>
 }
 
 /** Bornes SERP (approx. Screaming Frog / Google). */
@@ -306,8 +308,9 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
 export function seoHead(input: SeoInput = {}) {
   const title = input.title ? pageTitle(input.title) : pageTitle()
   const description = padMeta(input.description ?? SITE_DESCRIPTION, 'Catalogue Arboris pour agents IA.')
-  const path = (input.path ?? '/').split('?')[0].split('#')[0] || '/'
-  const url = absoluteUrl(path)
+  const pathForUrl = (input.path ?? '/').split('#')[0] || '/'
+  const pathname = pathForUrl.split('?')[0] || '/'
+  const url = absoluteUrl(pathForUrl)
   const image = input.image ?? absoluteUrl('/og.png')
   const type = input.type ?? 'website'
 
@@ -339,7 +342,7 @@ export function seoHead(input: SeoInput = {}) {
   // Pas de canonical sur les pages noindex : évite « Canonisé » + « Version canonique non indexable »
   // quand des query params pointent vers une cible noindex.
   const scripts: Array<{ type: string; children: string }> = []
-  if (!input.noIndex && path === '/') {
+  if (!input.noIndex && pathname === '/') {
     scripts.push({ type: 'application/ld+json', children: JSON.stringify(siteJsonLd()) })
   }
   const crumbs = input.breadcrumbs?.filter((item) => item.name && item.path) ?? []
@@ -353,9 +356,13 @@ export function seoHead(input: SeoInput = {}) {
     }
   }
 
+  const links: Array<{ rel: string; href: string }> = input.noIndex
+    ? []
+    : [{ rel: 'canonical', href: url }, ...(input.extraLinks ?? [])]
+
   return {
     meta,
-    links: input.noIndex ? [] : [{ rel: 'canonical', href: url }],
+    links,
     ...(scripts.length ? { scripts } : {}),
   }
 }

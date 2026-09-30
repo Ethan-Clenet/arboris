@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react'
 import Icon from '#/components/Icon'
 import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
-import { getCatalog } from '#/server/functions'
+import { getCollectionsIndex } from '#/server/functions'
 import { seoHead } from '#/lib/seo'
 import {
   collectionsInOrder,
@@ -14,7 +14,7 @@ import {
 } from '#/lib/catalog'
 
 export const Route = createFileRoute('/getting-started')({
-  loader: () => getCatalog(),
+  loader: () => getCollectionsIndex(),
   head: () =>
     seoHead({
       title: 'Premier pas — starter ou pack garde',
@@ -53,14 +53,14 @@ function packsGridClass(path: GettingStartedPath): string {
 }
 
 function GettingStartedPage() {
-  const catalog = Route.useLoaderData()
+  const { collections } = Route.useLoaderData()
   const { t } = useI18n()
   const [path, setPath] = useState<GettingStartedPath | null>(null)
 
   const packs = useMemo(() => {
     if (!path) return []
-    return collectionsInOrder(catalog.collections ?? [], packIdsForStartPath(path))
-  }, [catalog.collections, path])
+    return collectionsInOrder(collections ?? [], packIdsForStartPath(path))
+  }, [collections, path])
 
   const activePath = path ? PATHS.find((entry) => entry.id === path) : undefined
 

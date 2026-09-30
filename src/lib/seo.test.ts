@@ -182,6 +182,19 @@ describe('seoHead', () => {
     expect(head.meta.some((m) => m.property === 'og:locale' && m.content === 'fr_FR')).toBe(true)
   })
 
+  it('ajoute prev/next et conserve la query dans le canonical', () => {
+    const head = seoHead({
+      path: '/skills?page=2',
+      extraLinks: [{ rel: 'prev', href: `${SITE_URL}/skills` }],
+    })
+    expect(head.links).toEqual(
+      expect.arrayContaining([
+        { rel: 'canonical', href: `${SITE_URL}/skills?page=2` },
+        { rel: 'prev', href: `${SITE_URL}/skills` },
+      ]),
+    )
+  })
+
   it('injecte le JSON-LD supplémentaire sur une page indexable', () => {
     const head = seoHead({
       path: '/skills/fastapi-patterns',

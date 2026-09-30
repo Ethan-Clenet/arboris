@@ -5,9 +5,12 @@ import {
   loadCatalog,
   loadCollection,
   loadCommand,
+  loadCommandsIndex,
+  loadCollectionsIndex,
   loadHomeCatalog,
   loadSkill,
   loadSkillPageContext,
+  loadSkillsListPage,
 } from './catalog.server'
 
 vi.mock('./db', () => ({
@@ -223,5 +226,54 @@ describe('loadSkillPageContext', () => {
     const full = await loadSkillPageContext('gateguard')
     expect(full?.category).toBeNull()
     expect(full?.related).toHaveLength(3)
+  })
+})
+
+describe('loadSkillsListPage / index légers', () => {
+  function mockFullCatalog(skillCount: number) {
+    vi.mocked(prisma.category.findMany).mockResolvedValue([
+      { id: 'security', labelFr: 'Sécu', labelEn: 'Sec', color: '#0D9488', icon: 'shield', sort: 0 },
+    ] as never)
+    vi.mocked(prisma.stack.findMany).mockResolvedValue([] as never)
+    vi.mocked(prisma.collection.findMany).mockResolvedValue([] as never)
+    const rows = Array.from({ length: skillCount }, (_, i) => ({
+      ...skillRow,
+      id: `skill-${String(i).padStart(3, '0')}`,
+      score: 100 - i,
+    }))
+    vi.mocked(prisma.skill.findMany).mockResolvedValue(rows as never)
+  }
+
+  it('ne sérialise que 40 skills et des facettes', async () => {
+    mockFullCatalog(45)
+    const page = await loadSkillsListPage({})
+    expect(page.skills).toHaveLength(40)
+    expect(page.total).toBe(45)
+    expect(page.totalUnfiltered).toBe(45)
+    expect(page.pageCount).toBe(2)
+    expect(page.path).toBe('/skills')
+    expect(page.skills[0]).not.toHaveProperty('act')
+    expect(JSON.stringify(page).length).toBeLessThan(80_000)
+
+    const page2 = await loadSkillsListPage({ page: 2 })
+    expect(page2.skills).toHaveLength(5)
+    expect(page2.path).toBe('/skills?page=2')
+  })
+
+  it('filtre côté serveur sans renvoyer tout le catalogue', async () => {
+    mockFullCatalog(3)
+    const page = await loadSkillsListPage({ q: 'skill-001' })
+    expect(page.total).toBe(1)
+    expect(page.skills[0]?.id).toBe('skill-001')
+  })
+
+  it('charge commandes et collections sans skills', async () => {
+    mockFullCatalog(12)
+    const commands = await loadCommandsIndex()
+    const collections = await loadCollectionsIndex()
+    expect(commands.commands.length).toBeGreaterThan(0)
+    expect(commands).not.toHaveProperty('skills')
+    expect(collections.collections.length).toBeGreaterThan(0)
+    expect(collections).not.toHaveProperty('skills')
   })
 })

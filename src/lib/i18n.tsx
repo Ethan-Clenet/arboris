@@ -95,6 +95,9 @@ const fr = {
       `Une commande pour installer les ${count} skills de cet éditeur dans ton projet.`,
     copyCli: 'Copier la commande CLI',
     copiedCli: 'Commande copiée !',
+    pagePrev: 'Page précédente',
+    pageNext: 'Page suivante',
+    pageOf: (page: number, total: number) => `Page ${page} sur ${total}`,
   },
   skill: {
     back: 'Tous les skills',
@@ -400,6 +403,9 @@ const en: typeof fr = {
       `One command to install all ${count} skills from this publisher into your project.`,
     copyCli: 'Copy CLI command',
     copiedCli: 'Command copied!',
+    pagePrev: 'Previous page',
+    pageNext: 'Next page',
+    pageOf: (page: number, total: number) => `Page ${page} of ${total}`,
   },
   skill: {
     back: 'All skills',

@@ -13,11 +13,11 @@ import {
   type CollectionThemeKey,
 } from '#/lib/catalog'
 import { useI18n } from '#/lib/i18n'
-import { getCatalog } from '#/server/functions'
+import { getCollectionsIndex } from '#/server/functions'
 import { seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/collections/')({
-  loader: () => getCatalog(),
+  loader: () => getCollectionsIndex(),
   head: () =>
     seoHead({
       title: 'Packs et collections de skills',
@@ -36,9 +36,9 @@ type TypeFilter = 'all' | 'pack' | 'featured'
 type ThemeFilter = 'all' | CollectionThemeKey
 
 function CollectionsPage() {
-  const catalog = Route.useLoaderData()
+  const { collections } = Route.useLoaderData()
   const { t, lang } = useI18n()
-  const all = catalog.collections ?? []
+  const all = collections ?? []
 
   const [q, setQ] = useState('')
   const [type, setType] = useState<TypeFilter>('all')

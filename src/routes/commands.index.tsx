@@ -4,12 +4,12 @@ import Icon from '#/components/Icon'
 import PageShell from '#/components/PageShell'
 import { AgentCompatList } from '#/components/AgentLogo'
 import { useI18n } from '#/lib/i18n'
-import { getCatalog } from '#/server/functions'
+import { getCommandsIndex } from '#/server/functions'
 import type { CommandSummary } from '#/lib/command-types'
 import { seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/commands/')({
-  loader: () => getCatalog(),
+  loader: () => getCommandsIndex(),
   head: () =>
     seoHead({
       title: 'Slash commands du catalogue',
@@ -25,19 +25,19 @@ export const Route = createFileRoute('/commands/')({
 })
 
 function CommandsPage() {
-  const catalog = Route.useLoaderData()
+  const { commands } = Route.useLoaderData()
   const { t, lang } = useI18n()
   const [q, setQ] = useState('')
 
   const rows = useMemo(() => {
     const ql = q.trim().toLowerCase()
-    const list = catalog.commands ?? []
+    const list = commands ?? []
     if (!ql) return list
     return list.filter((c) => {
       const hay = `${c.id} ${c.description[lang]} ${c.preview}`.toLowerCase()
       return hay.includes(ql)
     })
-  }, [catalog.commands, q, lang])
+  }, [commands, q, lang])
 
   return (
     <main id="main-content" className="w-full">
@@ -47,7 +47,7 @@ function CommandsPage() {
             <Icon name="terminal-window" bold />
             <span>{t.commands.kicker}</span>
             <span className="text-[var(--text-3)]">·</span>
-            <span className="text-[var(--text-3)]">{catalog.commands.length} commands</span>
+            <span className="text-[var(--text-3)]">{commands.length} commands</span>
           </div>
           <h1 className="mb-2.5 font-display text-[33px] font-semibold leading-[1.1] tracking-[-0.02em]">
             {t.commands.title}

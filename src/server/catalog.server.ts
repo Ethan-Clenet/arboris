@@ -12,6 +12,16 @@ import {
   type Stack,
 } from '#/lib/catalog'
 import {
+  SKILLS_PAGE_SIZE,
+  computeSkillFacets,
+  filterAndSortSkills,
+  paginateSkills,
+  skillsListPath,
+  toSkillListItem,
+  type SkillsListPage,
+  type SkillsSearch,
+} from '#/lib/skills-list'
+import {
   normalizeRecommendation,
   parseSecurityReport,
   type SecurityRecommendation,
@@ -386,6 +396,42 @@ export async function loadSkillPageContext(id: string): Promise<{
 
 export async function loadCommand(id: string) {
   return resolveCommand(id)
+}
+
+/** Page liste `/skills` — uniquement la page visible + facettes (pas le catalogue entier). */
+export async function loadSkillsListPage(search: SkillsSearch = {}): Promise<SkillsListPage> {
+  const catalog = await loadCatalog()
+  const filtered = filterAndSortSkills(catalog.skills, catalog.categories, search)
+  const { page, pageCount, slice } = paginateSkills(filtered, search.page, SKILLS_PAGE_SIZE)
+  const currentSearch: SkillsSearch = {
+    ...search,
+    page: page > 1 ? page : undefined,
+  }
+  return {
+    categories: catalog.categories,
+    compatOrder: catalog.compatOrder,
+    facets: computeSkillFacets(catalog.skills),
+    skills: slice.map(toSkillListItem),
+    page,
+    pageSize: SKILLS_PAGE_SIZE,
+    total: filtered.length,
+    totalUnfiltered: catalog.skills.length,
+    pageCount,
+    search: currentSearch,
+    path: skillsListPath(currentSearch),
+  }
+}
+
+/** Index `/commands` — pas de skills (évite ~4 Mo d’hydratation). */
+export async function loadCommandsIndex() {
+  const catalog = await loadCatalog()
+  return { commands: catalog.commands }
+}
+
+/** Index `/collections` et `/getting-started`. */
+export async function loadCollectionsIndex() {
+  const catalog = await loadCatalog()
+  return { collections: catalog.collections }
 }
 
 export async function loadCollection(id: string): Promise<CollectionDetail | null> {

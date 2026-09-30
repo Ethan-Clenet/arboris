@@ -3,7 +3,9 @@
 // l'import dynamique de `./catalog.server` (qui charge Prisma) reste donc
 // strictement côté serveur.
 import { createServerFn } from '@tanstack/react-start'
-import type { Catalog, HomeCatalog, SkillDetail } from '#/lib/catalog'
+import type { Catalog, CollectionSummary, HomeCatalog, SkillDetail } from '#/lib/catalog'
+import type { CommandSummary } from '#/lib/command-types'
+import type { SkillsListPage, SkillsSearch } from '#/lib/skills-list'
 
 export const getCatalog = createServerFn({ method: 'GET' }).handler(
   async (): Promise<Catalog> => {
@@ -17,6 +19,28 @@ export const getHomeCatalog = createServerFn({ method: 'GET' }).handler(
   async (): Promise<HomeCatalog> => {
     const { loadHomeCatalog } = await import('./catalog.server')
     return loadHomeCatalog()
+  },
+)
+
+/** Liste `/skills` paginée — jamais le catalogue entier dans l’hydratation. */
+export const getSkillsListPage = createServerFn({ method: 'GET' })
+  .validator((data: SkillsSearch) => data)
+  .handler(async ({ data }): Promise<SkillsListPage> => {
+    const { loadSkillsListPage } = await import('./catalog.server')
+    return loadSkillsListPage(data)
+  })
+
+export const getCommandsIndex = createServerFn({ method: 'GET' }).handler(
+  async (): Promise<{ commands: CommandSummary[] }> => {
+    const { loadCommandsIndex } = await import('./catalog.server')
+    return loadCommandsIndex()
+  },
+)
+
+export const getCollectionsIndex = createServerFn({ method: 'GET' }).handler(
+  async (): Promise<{ collections: CollectionSummary[] }> => {
+    const { loadCollectionsIndex } = await import('./catalog.server')
+    return loadCollectionsIndex()
   },
 )
 

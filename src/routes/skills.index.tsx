@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import Icon from '#/components/Icon'
 import { Button } from '#/components/Button'
 import CliCommandBar from '#/components/CliCommandBar'
@@ -10,40 +10,56 @@ import PublisherLogo from '#/components/PublisherLogo'
 import { hasPublisherLogo, PUBLISHER_LOGO_COLOR } from '#/lib/publisher-logos'
 import { useI18n } from '#/lib/i18n'
 import { useSkillCopy } from '#/lib/useSkillCopy'
-import { getCatalog } from '#/server/functions'
+import { getSkillsListPage } from '#/server/functions'
+import { hexToRgba, skillLabel, type Category } from '#/lib/catalog'
 import {
-  hexToRgba,
-  listingPublisher,
-  skillLabel,
-  type Category,
-  type SkillSummary,
-} from '#/lib/catalog'
+  parseCompatFilter,
+  parseSkillsSearch,
+  skillsListPath,
+  type SkillListItem,
+  type SkillsSearch,
+} from '#/lib/skills-list'
 import type { SecurityRecommendation } from '#/lib/skillspector'
-import { seoHead } from '#/lib/seo'
+import { absoluteUrl, seoHead } from '#/lib/seo'
 
 export const Route = createFileRoute('/skills/')({
-  loader: () => getCatalog(),
+  validateSearch: (search: Record<string, unknown>): SkillsSearch => parseSkillsSearch(search),
+  loaderDeps: ({ search }) => search,
+  loader: ({ deps }) => getSkillsListPage({ data: deps }),
   pendingMs: 0,
   pendingComponent: SkillsPending,
-  head: () =>
-    seoHead({
+  head: ({ loaderData }) => {
+    const extraLinks: Array<{ rel: string; href: string }> = []
+    if (loaderData && loaderData.page > 1) {
+      extraLinks.push({
+        rel: 'prev',
+        href: absoluteUrl(skillsListPath({ ...loaderData.search, page: loaderData.page - 1 })),
+      })
+    }
+    if (loaderData && loaderData.page < loaderData.pageCount) {
+      extraLinks.push({
+        rel: 'next',
+        href: absoluteUrl(skillsListPath({ ...loaderData.search, page: loaderData.page + 1 })),
+      })
+    }
+    return seoHead({
       title: 'Catalogue complet des skills IA',
-      path: '/skills',
+      path: loaderData?.path ?? '/skills',
       description:
         'Index complet des skills Arboris : filtre par catégorie, techno, agent compatible et score de sûreté.',
       breadcrumbs: [
         { name: 'Accueil', path: '/' },
         { name: 'Skills', path: '/skills' },
       ],
-    }),
+      extraLinks,
+    })
+  },
   component: SkillsPage,
 })
 
 const SKILL_TABLE_COLS =
   'grid grid-cols-[minmax(0,1.25fr)_minmax(0,1.6fr)_5.5rem_7.75rem] items-center gap-x-1.5'
 
-/** Nombre de lignes rendues par « page » de lazy-load. */
-const SKILLS_PAGE_SIZE = 40
 const SKELETON_ROWS = 6
 
 type SecurityFilter = 'all' | SecurityRecommendation
@@ -93,12 +109,6 @@ function publisherMeta(name: string): { icon: string; color?: string; logo?: boo
   return { ...base, logo: hasPublisherLogo(name) }
 }
 
-function truncateListing(text: string, max = 140): string {
-  const normalized = text.trim().replace(/\s+/g, ' ')
-  if (normalized.length <= max) return normalized
-  return `${normalized.slice(0, max - 1).trimEnd()}…`
-}
-
 function SkillsPending() {
   const { t } = useI18n()
   return (
@@ -128,35 +138,46 @@ function SkillsPending() {
 }
 
 function SkillsPage() {
-  const catalog = Route.useLoaderData()
+  const data = Route.useLoaderData()
+  const search = Route.useSearch()
+  const navigate = Route.useNavigate()
   const { t, lang } = useI18n()
   const { copiedKey, copySkill } = useSkillCopy()
+  const [qDraft, setQDraft] = useState(search.q ?? '')
 
-  const [q, setQ] = useState('')
-  const [cat, setCat] = useState<string>('all')
-  /** Filtre unique sur l’éditeur (metadata.origin). */
-  const [publisher, setPublisher] = useState<string>('all')
-  const [compat, setCompat] = useState<string[]>([])
-  const [security, setSecurity] = useState<SecurityFilter>('all')
-  const [visibleCount, setVisibleCount] = useState(SKILLS_PAGE_SIZE)
-  const sentinelRef = useRef<HTMLDivElement | null>(null)
+  useEffect(() => {
+    setQDraft(search.q ?? '')
+  }, [search.q])
+
+  useEffect(() => {
+    const handle = window.setTimeout(() => {
+      const next = qDraft.trim()
+      if ((search.q ?? '') === next) return
+      void navigate({
+        search: (prev) => parseSkillsSearch({ ...prev, q: next || undefined, page: undefined }),
+        replace: true,
+      })
+    }, 300)
+    return () => window.clearTimeout(handle)
+  }, [qDraft, navigate, search.q])
+
+  const patchSearch = (patch: Partial<SkillsSearch>) => {
+    void navigate({
+      search: (prev) => parseSkillsSearch({ ...prev, ...patch, page: undefined }),
+      replace: true,
+    })
+  }
+
+  const cat = search.cat ?? 'all'
+  const publisher = search.publisher ?? 'all'
+  const compat = parseCompatFilter(search.compat)
+  const security = (search.security as SecurityFilter | undefined) ?? 'all'
 
   const catById = useMemo(() => {
     const map = new Map<string, Category>()
-    for (const c of catalog.categories) map.set(c.id, c)
+    for (const c of data.categories) map.set(c.id, c)
     return map
-  }, [catalog.categories])
-
-  const publisherList = useMemo(() => {
-    const counts = new Map<string, number>()
-    for (const s of catalog.skills) {
-      const key = listingPublisher(s.publisher)
-      counts.set(key, (counts.get(key) ?? 0) + 1)
-    }
-    return [...counts.entries()]
-      .map(([id, count]) => ({ id, count }))
-      .sort((a, b) => b.count - a.count || a.id.localeCompare(b.id))
-  }, [catalog.skills])
+  }, [data.categories])
 
   const badgeLabels = {
     unscanned: t.skills.securityUnscanned,
@@ -166,86 +187,21 @@ function SkillsPage() {
     score: t.skills.securityScore,
   }
 
-  const toggle = (arr: string[], v: string) =>
-    arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]
-
-  const rows = useMemo(() => {
-    const ql = q.trim().toLowerCase()
-    const match = (s: SkillSummary) => {
-      if (cat !== 'all' && s.categoryId !== cat) return false
-      if (publisher !== 'all') {
-        if (listingPublisher(s.publisher) !== publisher) return false
-      }
-      if (compat.length && !compat.every((x) => s.compat.includes(x))) return false
-      if (security !== 'all') {
-        const tone = s.securityRecommendation ?? 'UNKNOWN'
-        if (tone !== security) return false
-      }
-      if (ql) {
-        const c = catById.get(s.categoryId)
-        const hay = `${s.id} ${skillLabel(s)} ${s.tag[lang]} ${s.tech.join(' ')} ${s.publisher ?? ''} ${
-          c ? c.label[lang] : ''
-        }`.toLowerCase()
-        if (!hay.includes(ql)) return false
-      }
-      return true
-    }
-    const list = catalog.skills.filter(match)
-    return [...list].sort(
-      (a, b) => (b.score ?? -1) - (a.score ?? -1) || a.id.localeCompare(b.id),
-    )
-  }, [q, cat, publisher, compat, security, catalog.skills, catById, lang])
-
-  const filterKey = `${q}\0${cat}\0${publisher}\0${compat.join(',')}\0${security}`
-
-  useEffect(() => {
-    setVisibleCount(SKILLS_PAGE_SIZE)
-  }, [filterKey])
-
-  const visibleRows = rows.slice(0, visibleCount)
-  const hasMore = visibleCount < rows.length
-
-  useEffect(() => {
-    if (!hasMore) return
-    const el = sentinelRef.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return
-        setVisibleCount((n) => Math.min(n + SKILLS_PAGE_SIZE, rows.length))
-      },
-      { rootMargin: '320px 0px' },
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [hasMore, rows.length, visibleCount])
-
-  const securityCounts = useMemo(() => {
-    const counts = { SAFE: 0, CAUTION: 0, UNSAFE: 0, UNKNOWN: 0 }
-    for (const s of catalog.skills) {
-      const tone = s.securityRecommendation ?? 'UNKNOWN'
-      counts[tone]++
-    }
-    return counts
-  }, [catalog.skills])
-
-  const hasFilters =
-    cat !== 'all' || publisher !== 'all' || compat.length > 0 || security !== 'all' || q.trim().length > 0
-  const clearAll = () => {
-    setQ('')
-    setCat('all')
-    setPublisher('all')
-    setCompat([])
-    setSecurity('all')
+  const toggleCompat = (name: string) => {
+    const next = compat.includes(name) ? compat.filter((x) => x !== name) : [...compat, name]
+    patchSearch({ compat: next.length ? next.join(',') : undefined })
   }
 
-  const resultLabel = `${rows.length > 1 ? t.skills.resMany : t.skills.resOne} ${t.skills.resTail(catalog.skills.length)}`
+  const hasFilters =
+    cat !== 'all' || publisher !== 'all' || compat.length > 0 || security !== 'all' || Boolean(search.q)
+  const clearAll = () => {
+    setQDraft('')
+    void navigate({ search: {}, replace: true })
+  }
 
-  const publisherInstallCount = useMemo(() => {
-    if (publisher === 'all') return 0
-    return catalog.skills.filter((s) => s.publisher != null && listingPublisher(s.publisher) === publisher).length
-  }, [catalog.skills, publisher])
-
+  const resultLabel = `${data.total > 1 ? t.skills.resMany : t.skills.resOne} ${t.skills.resTail(data.totalUnfiltered)}`
+  const publisherInstallCount =
+    publisher === 'all' ? 0 : (data.facets.byPublisher.find((p) => p.id === publisher)?.count ?? 0)
   const showPublisherInstall = publisher !== 'all' && publisherInstallCount > 0
 
   return (
@@ -257,7 +213,7 @@ function SkillsPage() {
               <Icon name="tree" bold />
               <span>{t.skills.kicker}</span>
               <span className="text-[var(--text-3)]">·</span>
-              <span className="text-[var(--text-3)]">{catalog.skills.length} skills</span>
+              <span className="text-[var(--text-3)]">{data.totalUnfiltered} skills</span>
             </div>
             <h1 className="mb-2.5 font-display text-[33px] font-semibold leading-[1.1] tracking-[-0.02em]">
               {t.skills.title}
@@ -268,7 +224,7 @@ function SkillsPage() {
             <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)]">
               {t.skills.worksWith}
             </div>
-            <AgentLogoRow agents={catalog.compatOrder} size={16} />
+            <AgentLogoRow agents={data.compatOrder} size={16} />
           </div>
         </div>
       </PageShell>
@@ -287,15 +243,18 @@ function SkillsPage() {
             <input
               id="skills-search"
               type="search"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
+              value={qDraft}
+              onChange={(e) => setQDraft(e.target.value)}
               placeholder={t.skills.searchPh}
               className="h-10 w-full rounded-[10px] border border-[var(--border)] bg-[var(--surface)] pl-9 pr-9 text-[13.5px] text-[var(--text-1)] outline-none focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_var(--accent-soft)]"
             />
-            {q.length > 0 && (
+            {qDraft.length > 0 && (
               <button
                 type="button"
-                onClick={() => setQ('')}
+                onClick={() => {
+                  setQDraft('')
+                  patchSearch({ q: undefined })
+                }}
                 aria-label={t.a11y.clearSearch}
                 className="absolute right-2 top-1/2 grid h-[22px] w-[22px] -translate-y-1/2 cursor-pointer place-items-center text-[var(--text-3)] hover:text-[var(--text-1)]"
               >
@@ -313,18 +272,18 @@ function SkillsPage() {
                 active={cat === 'all'}
                 icon="squares-four"
                 label={t.skills.allCats}
-                count={catalog.skills.length}
-                onClick={() => setCat('all')}
+                count={data.facets.total}
+                onClick={() => patchSearch({ cat: undefined })}
               />
-              {catalog.categories.map((c) => (
+              {data.categories.map((c) => (
                 <CategoryButton
                   key={c.id}
                   active={cat === c.id}
                   icon={c.icon}
                   color={c.color}
                   label={c.label[lang]}
-                  count={catalog.skills.filter((s) => s.categoryId === c.id).length}
-                  onClick={() => setCat(cat === c.id ? 'all' : c.id)}
+                  count={data.facets.byCategory[c.id] ?? 0}
+                  onClick={() => patchSearch({ cat: cat === c.id ? undefined : c.id })}
                 />
               ))}
             </div>
@@ -337,11 +296,11 @@ function SkillsPage() {
             <div className="flex flex-col gap-0.5">
               {(
                 [
-                  ['all', t.skills.securityAll, catalog.skills.length, 'shield'],
-                  ['SAFE', t.skills.securitySafe, securityCounts.SAFE, 'shield-check'],
-                  ['CAUTION', t.skills.securityCaution, securityCounts.CAUTION, 'warning'],
-                  ['UNSAFE', t.skills.securityUnsafe, securityCounts.UNSAFE, 'shield-warning'],
-                  ['UNKNOWN', t.skills.securityUnscanned, securityCounts.UNKNOWN, 'shield'],
+                  ['all', t.skills.securityAll, data.facets.total, 'shield'],
+                  ['SAFE', t.skills.securitySafe, data.facets.bySecurity.SAFE, 'shield-check'],
+                  ['CAUTION', t.skills.securityCaution, data.facets.bySecurity.CAUTION, 'warning'],
+                  ['UNSAFE', t.skills.securityUnsafe, data.facets.bySecurity.UNSAFE, 'shield-warning'],
+                  ['UNKNOWN', t.skills.securityUnscanned, data.facets.bySecurity.UNKNOWN, 'shield'],
                 ] as const
               ).map(([id, label, count, icon]) => (
                 <CategoryButton
@@ -350,7 +309,11 @@ function SkillsPage() {
                   icon={icon}
                   label={label}
                   count={count}
-                  onClick={() => setSecurity(security === id ? 'all' : id)}
+                  onClick={() =>
+                    patchSearch({
+                      security: security === id || id === 'all' ? undefined : id,
+                    })
+                  }
                 />
               ))}
             </div>
@@ -361,7 +324,7 @@ function SkillsPage() {
               {t.skills.compat}
             </div>
             <div className="flex flex-wrap gap-[7px]">
-              {catalog.compatOrder.map((name) => {
+              {data.compatOrder.map((name) => {
                 const active = compat.includes(name)
                 return (
                   <AgentBadge
@@ -369,7 +332,7 @@ function SkillsPage() {
                     agent={name}
                     active={active}
                     size={15}
-                    onClick={() => setCompat(toggle(compat, name))}
+                    onClick={() => toggleCompat(name)}
                   />
                 )
               })}
@@ -385,10 +348,10 @@ function SkillsPage() {
                 active={publisher === 'all'}
                 icon="buildings"
                 label={t.skills.allPublishers}
-                count={catalog.skills.length}
-                onClick={() => setPublisher('all')}
+                count={data.facets.total}
+                onClick={() => patchSearch({ publisher: undefined })}
               />
-              {publisherList.map((p) => {
+              {data.facets.byPublisher.map((p) => {
                 const meta = publisherMeta(p.id)
                 return (
                   <CategoryButton
@@ -399,7 +362,7 @@ function SkillsPage() {
                     logo={meta.logo ? <PublisherLogo name={p.id} size={16} /> : undefined}
                     label={p.id}
                     count={p.count}
-                    onClick={() => setPublisher(publisher === p.id ? 'all' : p.id)}
+                    onClick={() => patchSearch({ publisher: publisher === p.id ? undefined : p.id })}
                   />
                 )
               })}
@@ -423,7 +386,7 @@ function SkillsPage() {
             {t.skills.listHeading}
           </h2>
           <div className="mb-3.5 text-[13.5px] text-[var(--text-2)]">
-            <span className="font-semibold text-[var(--text-1)]">{rows.length}</span> {resultLabel}
+            <span className="font-semibold text-[var(--text-1)]">{data.total}</span> {resultLabel}
           </div>
 
           {showPublisherInstall ? (
@@ -444,10 +407,7 @@ function SkillsPage() {
             </div>
           ) : null}
 
-          <div
-            className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]"
-            aria-busy={hasMore}
-          >
+          <div className="overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
             <div className="scroll-x">
               <div className="min-w-[640px]">
                 <div className={`${SKILL_TABLE_COLS} border-b border-[var(--border)] bg-[var(--surface-2)] px-4 py-[11px] text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-3)] sm:px-[18px]`}>
@@ -457,7 +417,7 @@ function SkillsPage() {
                   <div className="text-right">{t.skills.copy}</div>
                 </div>
 
-                {visibleRows.map((skill) => (
+                {data.skills.map((skill) => (
                   <SkillRow
                     key={skill.id}
                     skill={skill}
@@ -467,20 +427,10 @@ function SkillsPage() {
                     onCopy={() => copySkill({ id: skill.id, lang, announceMsg: t.skills.copied })}
                   />
                 ))}
-
-                {hasMore ? (
-                  <>
-                    {Array.from({ length: 3 }, (_, i) => (
-                      <SkillRowSkeleton key={`skel-${i}`} />
-                    ))}
-                    <div ref={sentinelRef} className="h-px w-full" aria-hidden />
-                    <p className="sr-only">{t.skills.loadingMore}</p>
-                  </>
-                ) : null}
               </div>
             </div>
 
-            {rows.length === 0 && (
+            {data.total === 0 && (
               <div className="px-6 py-16 text-center">
                 <div className="mx-auto mb-3.5 grid h-12 w-12 place-items-center rounded-xl bg-[var(--surface-2)] text-[var(--text-3)]">
                   <Icon name="magnifying-glass" size={22} />
@@ -493,6 +443,43 @@ function SkillsPage() {
               </div>
             )}
           </div>
+
+          {data.pageCount > 1 ? (
+            <nav
+              className="mt-5 flex flex-wrap items-center justify-between gap-3"
+              aria-label={t.skills.pageOf(data.page, data.pageCount)}
+            >
+              <p className="text-[13px] text-[var(--text-2)]">{t.skills.pageOf(data.page, data.pageCount)}</p>
+              <div className="flex items-center gap-2">
+                {data.page > 1 ? (
+                  <Link
+                    to="/skills"
+                    search={{ ...search, page: data.page - 1 > 1 ? data.page - 1 : undefined }}
+                    className="inline-flex h-9 items-center rounded-lg border border-[var(--border)] px-3 text-[13px] font-medium text-[var(--text-1)] hover:bg-[var(--surface-hover)]"
+                  >
+                    {t.skills.pagePrev}
+                  </Link>
+                ) : (
+                  <span className="inline-flex h-9 items-center rounded-lg border border-transparent px-3 text-[13px] text-[var(--text-3)]">
+                    {t.skills.pagePrev}
+                  </span>
+                )}
+                {data.page < data.pageCount ? (
+                  <Link
+                    to="/skills"
+                    search={{ ...search, page: data.page + 1 }}
+                    className="inline-flex h-9 items-center rounded-lg border border-[var(--border)] px-3 text-[13px] font-medium text-[var(--text-1)] hover:bg-[var(--surface-hover)]"
+                  >
+                    {t.skills.pageNext}
+                  </Link>
+                ) : (
+                  <span className="inline-flex h-9 items-center rounded-lg border border-transparent px-3 text-[13px] text-[var(--text-3)]">
+                    {t.skills.pageNext}
+                  </span>
+                )}
+              </div>
+            </nav>
+          ) : null}
         </section>
       </PageShell>
     </main>
@@ -575,7 +562,6 @@ function CategoryButton({
           : 'border-transparent text-[var(--text-2)] hover:bg-[var(--surface-hover)]'
       }`}
     >
-      {/* Logos marque : pas de pastille teintée (sale en dark). Icônes Phosphor : pastille légère. */}
       <span
         className={`grid h-[22px] w-[22px] shrink-0 place-items-center ${logo ? '' : 'rounded-md'}`}
         style={
@@ -601,7 +587,7 @@ function SkillRow({
   badgeLabels,
   onCopy,
 }: {
-  skill: SkillSummary
+  skill: SkillListItem
   category?: Category
   copied: boolean
   badgeLabels: {
@@ -653,8 +639,8 @@ function SkillRow({
         </span>
       </Link>
 
-      <div className="min-w-0 overflow-hidden line-clamp-2 self-center text-[13px] leading-[1.4] text-[var(--text-2)]" title={skill.tag[lang]}>
-        {truncateListing(skill.tag[lang], 140)}
+      <div className="min-w-0 overflow-hidden line-clamp-2 self-center text-[13px] leading-[1.4] text-[var(--text-2)]">
+        {skill.tag[lang]}
       </div>
 
       <div className="flex items-center border-l border-[var(--border)] pl-2">
