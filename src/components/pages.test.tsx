@@ -10,6 +10,8 @@ import AppShell from './AppShell'
 import NotFoundPage from './NotFoundPage'
 import ServerErrorPage from './ServerErrorPage'
 import Header from './Header'
+import { ConfidentialitePage } from '#/routes/confidentialite'
+import { MentionsLegalesPage } from '#/routes/mentions-legales'
 
 function wrap(ui: ReactNode) {
   return (
@@ -26,6 +28,13 @@ describe('AppShell', () => {
     expect(screen.getByRole('link', { name: /aller au contenu/i })).toBeTruthy()
     expect(screen.getByRole('banner')).toBeTruthy()
     expect(screen.getByRole('contentinfo')).toBeTruthy()
+  })
+
+  it('expose les liens mentions légales et confidentialité', () => {
+    render(wrap(<AppShell>page</AppShell>))
+    const legal = screen.getByRole('navigation', { name: /informations légales/i })
+    expect(legal.querySelector('a[href="/mentions-legales"]')?.textContent).toMatch(/mentions légales/i)
+    expect(legal.querySelector('a[href="/confidentialite"]')?.textContent).toMatch(/confidentialité/i)
   })
 })
 
@@ -66,5 +75,27 @@ describe('Header', () => {
     expect(screen.getByRole('button', { name: /fermer le menu/i })).toBeTruthy()
     await user.click(screen.getByRole('button', { name: /fermer le menu/i }))
     expect(document.getElementById('mobile-nav')).toBeNull()
+  })
+})
+
+describe('pages légales', () => {
+  it('présente l’éditeur et l’hébergeur', () => {
+    render(wrap(<MentionsLegalesPage />))
+    expect(screen.getByRole('heading', { name: 'Mentions légales' })).toBeTruthy()
+    expect(screen.getAllByText(/Ethan Clenet/).length).toBeGreaterThan(0)
+    expect(screen.getAllByRole('link', { name: 'ethan.clenet@outlook.fr' }).length).toBeGreaterThan(0)
+    expect(screen.getByText(/Vercel Inc/)).toBeTruthy()
+    expect(screen.getByRole('link', { name: 'politique de confidentialité' })).toBeTruthy()
+  })
+
+  it('décrit les traitements RGPD réellement en place', () => {
+    render(wrap(<ConfidentialitePage />))
+    expect(screen.getByRole('heading', { name: 'Confidentialité' })).toBeTruthy()
+    expect(screen.getByText(/ne propose pas/i)).toBeTruthy()
+    expect(screen.getByText(/@vercel\/analytics/)).toBeTruthy()
+    expect(screen.getByText(/@vercel\/speed-insights/)).toBeTruthy()
+    expect(screen.getByText(/sp-theme/)).toBeTruthy()
+    expect(screen.getByText(/bandeau cookies/i)).toBeTruthy()
+    expect(screen.getByRole('navigation', { name: /fil d’ariane/i })).toBeTruthy()
   })
 })

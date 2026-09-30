@@ -19,6 +19,8 @@ export const Route = createFileRoute('/llms.txt')({
 - [Skills](${SITE_URL}/skills): catalogue filtrable des skills (recherche, catégorie, éditeur, score de sûreté)
 - [Commandes](${SITE_URL}/commands): slash commands prêtes à copier
 - [Collections](${SITE_URL}/collections): packs de skills + commandes à installer d'un coup
+- [Mentions légales](${SITE_URL}/mentions-legales): éditeur, hébergeur, propriété intellectuelle
+- [Confidentialité](${SITE_URL}/confidentialite): politique de confidentialité (RGPD)
 
 ## Installation
 - CLI: \`npx arboris-cli install <skill-id>\` — ou copie du Markdown depuis chaque fiche.

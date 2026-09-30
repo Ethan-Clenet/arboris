@@ -15,6 +15,8 @@ const paths = [
   '/commands',
   '/collections',
   '/getting-started',
+  '/mentions-legales',
+  '/confidentialite',
   '/skills/accessibility',
   '/skills/skill-sonar',
   '/skills/gateguard',

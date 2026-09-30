@@ -10,6 +10,23 @@ export const SITE_TAGLINE = 'Catalogue de skills IA'
 export const SITE_DESCRIPTION =
   "Catalogue de skills et slash commands prêts à l'emploi pour ton agent IA (Cursor, Claude, Codex, Copilot)."
 
+/** Éditeur / directeur de la publication (LCEN, art. 6 III). */
+export const EDITOR_NAME = 'Ethan Clenet'
+export const CONTACT_EMAIL = 'ethan.clenet@outlook.fr'
+
+/** Date ISO de dernière mise à jour des pages légales. */
+export const LEGAL_UPDATED = '2026-09-30'
+
+export const HOST_NAME = 'Vercel Inc.'
+export const HOST_ADDRESS = '440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis'
+export const HOST_URL = 'https://vercel.com'
+export const HOST_PRIVACY_URL = 'https://vercel.com/legal/privacy-policy'
+
+export const LEGAL_ROUTES = [
+  { path: '/mentions-legales', title: 'Mentions légales' },
+  { path: '/confidentialite', title: 'Confidentialité' },
+] as const
+
 export function absoluteUrl(path = '/'): string {
   if (!path || path === '/') return `${SITE_URL}/`
   return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`
@@ -18,4 +35,15 @@ export function absoluteUrl(path = '/'): string {
 export function pageTitle(page?: string): string {
   if (!page) return `${SITE_NAME} — ${SITE_TAGLINE}`
   return `${page} — ${SITE_NAME}`
+}
+
+/** Affichage long de `LEGAL_UPDATED` (ex. « 30 septembre 2026 »). */
+export function formatLegalDate(isoDate: string, locale = 'fr-FR'): string {
+  const [year, month, day] = isoDate.split('-').map(Number)
+  return new Intl.DateTimeFormat(locale, {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(Date.UTC(year, month - 1, day)))
 }

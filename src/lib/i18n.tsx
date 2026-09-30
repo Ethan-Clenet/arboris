@@ -294,6 +294,13 @@ const fr = {
     filterSkills: 'Filtrer les skills',
     openMenu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',
+    legalNav: 'Informations légales',
+  },
+  legal: {
+    mentions: 'Mentions légales',
+    privacy: 'Confidentialité',
+    homeCrumb: 'Accueil',
+    updated: (date: string) => `Dernière mise à jour : ${date}`,
   },
   start: {
     eyebrow: 'Premier pas',
@@ -590,6 +597,13 @@ const en: typeof fr = {
     filterSkills: 'Filter skills',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
+    legalNav: 'Legal information',
+  },
+  legal: {
+    mentions: 'Mentions légales',
+    privacy: 'Confidentialité',
+    homeCrumb: 'Home',
+    updated: (date: string) => `Last updated: ${date}`,
   },
   start: {
     eyebrow: 'Getting started',

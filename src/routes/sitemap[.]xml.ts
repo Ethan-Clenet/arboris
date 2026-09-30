@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { COLLECTIONS } from '#/lib/collections-data'
 import { loadEmbeddedCommands } from '#/lib/commands-embedded'
 import { isIndexableSkill, SITEMAP_INCLUDE_SKILL_PAGES } from '#/lib/seo'
-import { absoluteUrl } from '#/lib/site'
+import { absoluteUrl, LEGAL_ROUTES, LEGAL_UPDATED } from '#/lib/site'
 
 function urlEntry(path: string, opts?: { changefreq?: string; priority?: string; lastmod?: string }) {
   const loc = absoluteUrl(path)
@@ -28,6 +28,9 @@ export const Route = createFileRoute('/sitemap.xml')({
           urlEntry('/skills', { changefreq: 'daily', priority: '0.9', lastmod: today }),
           urlEntry('/commands', { changefreq: 'weekly', priority: '0.8', lastmod: today }),
           urlEntry('/collections', { changefreq: 'weekly', priority: '0.8', lastmod: today }),
+          ...LEGAL_ROUTES.map((page) =>
+            urlEntry(page.path, { changefreq: 'yearly', priority: '0.3', lastmod: LEGAL_UPDATED }),
+          ),
         ]
 
         // Collections & commandes : sources statiques (seed / bundle), aucune

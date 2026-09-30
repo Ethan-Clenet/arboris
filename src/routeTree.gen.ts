@@ -12,9 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as Sitemap_indexDotxmlRouteImport } from './routes/sitemap_index[.]xml'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as Google2d4e68e917b5f045DothtmlRouteImport } from './routes/google2d4e68e917b5f045[.]html'
 import { Route as GettingStartedRouteImport } from './routes/getting-started'
+import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as R500RouteImport } from './routes/500'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
@@ -41,6 +43,11 @@ const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
   path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
   id: '/llms.txt',
   path: '/llms.txt',
@@ -55,6 +62,11 @@ const Google2d4e68e917b5f045DothtmlRoute =
 const GettingStartedRoute = GettingStartedRouteImport.update({
   id: '/getting-started',
   path: '/getting-started',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
+  id: '/confidentialite',
+  path: '/confidentialite',
   getParentRoute: () => rootRouteImport,
 } as any)
 const R500Route = R500RouteImport.update({
@@ -112,9 +124,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/500': typeof R500Route
+  '/confidentialite': typeof ConfidentialiteRoute
   '/getting-started': typeof GettingStartedRoute
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/llms.txt': typeof LlmsDottxtRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
@@ -130,9 +144,11 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/500': typeof R500Route
+  '/confidentialite': typeof ConfidentialiteRoute
   '/getting-started': typeof GettingStartedRoute
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/llms.txt': typeof LlmsDottxtRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
@@ -149,9 +165,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/500': typeof R500Route
+  '/confidentialite': typeof ConfidentialiteRoute
   '/getting-started': typeof GettingStartedRoute
   '/google2d4e68e917b5f045.html': typeof Google2d4e68e917b5f045DothtmlRoute
   '/llms.txt': typeof LlmsDottxtRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sitemap_index.xml': typeof Sitemap_indexDotxmlRoute
@@ -169,9 +187,11 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/500'
+    | '/confidentialite'
     | '/getting-started'
     | '/google2d4e68e917b5f045.html'
     | '/llms.txt'
+    | '/mentions-legales'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/sitemap_index.xml'
@@ -187,9 +207,11 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/500'
+    | '/confidentialite'
     | '/getting-started'
     | '/google2d4e68e917b5f045.html'
     | '/llms.txt'
+    | '/mentions-legales'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/sitemap_index.xml'
@@ -205,9 +227,11 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/500'
+    | '/confidentialite'
     | '/getting-started'
     | '/google2d4e68e917b5f045.html'
     | '/llms.txt'
+    | '/mentions-legales'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/sitemap_index.xml'
@@ -224,9 +248,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   R500Route: typeof R500Route
+  ConfidentialiteRoute: typeof ConfidentialiteRoute
   GettingStartedRoute: typeof GettingStartedRoute
   Google2d4e68e917b5f045DothtmlRoute: typeof Google2d4e68e917b5f045DothtmlRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   Sitemap_indexDotxmlRoute: typeof Sitemap_indexDotxmlRoute
@@ -262,6 +288,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/llms.txt': {
       id: '/llms.txt'
       path: '/llms.txt'
@@ -281,6 +314,13 @@ declare module '@tanstack/react-router' {
       path: '/getting-started'
       fullPath: '/getting-started'
       preLoaderRoute: typeof GettingStartedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confidentialite': {
+      id: '/confidentialite'
+      path: '/confidentialite'
+      fullPath: '/confidentialite'
+      preLoaderRoute: typeof ConfidentialiteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/500': {
@@ -360,9 +400,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
   R500Route: R500Route,
+  ConfidentialiteRoute: ConfidentialiteRoute,
   GettingStartedRoute: GettingStartedRoute,
   Google2d4e68e917b5f045DothtmlRoute: Google2d4e68e917b5f045DothtmlRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
+  MentionsLegalesRoute: MentionsLegalesRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   Sitemap_indexDotxmlRoute: Sitemap_indexDotxmlRoute,
