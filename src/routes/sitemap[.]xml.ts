@@ -1,17 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { sitemapIndexDocument, xmlResponse } from '#/lib/sitemap'
+import { sitemapHandler, sitemapIndexDocument } from '#/lib/sitemap'
 
-async function sitemapIndexResponse() {
-  const { sitemapIndexLastmods } = await import('#/server/sitemap.server')
-  const lastmods = await sitemapIndexLastmods()
-  return xmlResponse(sitemapIndexDocument(lastmods))
-}
-
-/** Index des sitemaps enfants (static, commands, collections, skills). */
+/** Index des sitemaps enfants — synchrone, sans Prisma / Neon. */
 export const Route = createFileRoute('/sitemap.xml')({
   server: {
     handlers: {
-      GET: sitemapIndexResponse,
+      GET: sitemapHandler('index', () => sitemapIndexDocument()),
     },
   },
 })
