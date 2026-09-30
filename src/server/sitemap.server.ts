@@ -8,7 +8,9 @@ export const SITEMAP_DB_TIMEOUT_MS = 4_000
 export function skillSitemapWhere() {
   return {
     score: { gte: SEO_INDEX_MIN_SCORE },
-    NOT: { id: { contains: '__' } },
+    // Pas de `contains: '__'` : Prisma/Postgres traduit ça en LIKE '%__%'
+    // où `_` est un joker (toute fiche d’id ≥ 2 car. est exclue). Les ids
+    // hashés `base__repo__hash` restent filtrés par isIndexableSkill().
     OR: [{ publisher: null }, { publisher: '' }, { publisher: { in: [...SEO_PREMIUM_PUBLISHERS] } }],
   }
 }
@@ -25,7 +27,10 @@ async function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
 }
 
 async function loadPrisma(timeoutMs: number) {
-  return withTimeout(import('./db').then((mod) => mod.prisma), timeoutMs)
+  // await import() puis .prisma : ne pas chaîner `.then((m) => m.prisma)`
+  // (Rolldown/Nitro unwrap `n.t` et casse l’accès au client).
+  const mod = await withTimeout(import('./db'), timeoutMs)
+  return mod.prisma
 }
 
 export async function collectionSitemapUrls(timeoutMs = SITEMAP_DB_TIMEOUT_MS): Promise<SitemapUrl[]> {
