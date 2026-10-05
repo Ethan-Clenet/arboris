@@ -103,5 +103,8 @@
       "@prisma/engines",
       "prisma"
     ]
+  },
+  "overrides": {
+    "@tanstack/router-core": "1.171.34"
   }
 }
