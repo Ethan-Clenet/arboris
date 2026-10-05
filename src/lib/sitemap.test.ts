@@ -69,6 +69,7 @@ describe('sources sitemap hors DB', () => {
     const urls = collectionSeedSitemapUrls()
     expect(urls.length).toBeGreaterThan(0)
     expect(urls.every((u) => u.path.startsWith('/collections/'))).toBe(true)
+    expect(urls.map((u) => u.path)).toContain('/collections/flutter-starter')
   })
 })
 
