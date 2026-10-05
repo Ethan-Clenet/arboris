@@ -55,9 +55,10 @@ describe('stackSupportsCategory / skillMatchesStack', () => {
     expect(stackSupportsCategory('docker', 'ops')).toBe(true)
   })
 
-  it('expose Docker et n8n dans les starters « nouveau projet »', () => {
+  it('expose Docker, n8n et Flutter dans les starters « nouveau projet »', () => {
     expect(TECH_STARTER_PACK_IDS).toContain('docker-ops-starter')
     expect(TECH_STARTER_PACK_IDS).toContain('n8n-starter')
+    expect(TECH_STARTER_PACK_IDS).toContain('flutter-starter')
     expect(packIdsForStartPath('new-project')).toEqual(TECH_STARTER_PACK_IDS)
   })
 
@@ -204,6 +205,7 @@ describe('uniqueSkillTitles (vendor)', () => {
 describe('collectionTheme', () => {
   it('classe les collections connues', () => {
     expect(collectionTheme({ id: 'react-ts-starter' })).toBe('frontend')
+    expect(collectionTheme({ id: 'flutter-starter' })).toBe('frontend')
     expect(collectionTheme({ id: 'node-api-starter' })).toBe('backend')
     expect(collectionTheme({ id: 'prisma-postgres-starter' })).toBe('data')
     expect(collectionTheme({ id: 'docker-ops-starter' })).toBe('ops')

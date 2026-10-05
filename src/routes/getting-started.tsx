@@ -20,7 +20,7 @@ export const Route = createFileRoute('/getting-started')({
       title: 'Premier pas — starter ou pack garde',
       path: '/getting-started',
       description:
-        'Démarre un projet (React, Node, FastAPI, Docker ou n8n) ou sécurise un agent avec Sonar. Un pack, une commande, puis le catalogue.',
+        'Démarre un projet (React, Node, FastAPI, Flutter, Docker ou n8n) ou sécurise un agent avec Sonar. Un pack, une commande, puis le catalogue.',
       breadcrumbs: [
         { name: 'Accueil', path: '/' },
         { name: 'Premier pas', path: '/getting-started' },

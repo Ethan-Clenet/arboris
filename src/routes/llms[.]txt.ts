@@ -15,7 +15,7 @@ export const Route = createFileRoute('/llms.txt')({
 
 ## Pages
 - [Accueil](${SITE_URL}/): présentation et index rapide du catalogue
-- [Premier pas](${SITE_URL}/getting-started): starters par techno (React, Node, FastAPI, Docker…) et packs de garde
+- [Premier pas](${SITE_URL}/getting-started): starters par techno (React, Node, FastAPI, Flutter, Docker…) et packs de garde
 - [Skills](${SITE_URL}/skills): catalogue filtrable des skills (recherche, catégorie, éditeur, score de sûreté)
 - [Commandes](${SITE_URL}/commands): slash commands prêtes à copier
 - [Collections](${SITE_URL}/collections): packs de skills + commandes à installer d'un coup

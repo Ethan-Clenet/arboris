@@ -28,6 +28,7 @@ describe('COLLECTIONS', () => {
     expect(findCollectionSeed('TanStack')?.id).toBe('tanstack-starter')
     expect(findCollectionSeed('prisma-postgres')?.id).toBe('prisma-postgres-starter')
     expect(findCollectionSeed('n8n')?.id).toBe('n8n-starter')
+    expect(findCollectionSeed('flutter')?.id).toBe('flutter-starter')
   })
 
   it('embarque les packs Docker et n8n', () => {
@@ -91,6 +92,27 @@ describe('COLLECTIONS', () => {
     )
     expect(pack?.commandIds).toEqual(expect.arrayContaining(['db-migrate-smoke', 'commit']))
     expect(findCollectionSeed('prisma-postgres-starter')?.id).toBe('prisma-postgres-starter')
+  })
+
+  it('embarque le pack Flutter', () => {
+    const pack = COLLECTIONS.find((c) => c.id === 'flutter-starter')
+    expect(pack?.kind).toBe('pack')
+    expect(pack?.labelFr).toBe('Flutter')
+    expect(pack?.skillIds).toEqual(
+      expect.arrayContaining([
+        'dart-flutter-patterns',
+        'flutter-apply-architecture-best-practices',
+        'flutter-add-widget-test',
+        'flutter-dart-code-review',
+        'firebase-basics',
+      ]),
+    )
+    expect(pack?.skillIds).not.toContain('dart-build-cli-app')
+    expect(pack?.skillIds).not.toContain('dart-use-ffigen')
+    expect(pack?.skillIds).not.toContain('dart-setup-ffi-assets')
+    expect(pack?.commandIds).toEqual(expect.arrayContaining(['commit', 'ready-pr', 'review-pr', 'explain-code']))
+    expect(findCollectionSeed('flutter-starter')?.id).toBe('flutter-starter')
+    expect(findCollectionSeed('flutter')?.id).toBe('flutter-starter')
   })
 
   it('embarque le pack Yunt — Docker', () => {

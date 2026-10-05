@@ -37,6 +37,11 @@ const COLLECTION_LOGOS: Record<string, CollectionLogo> = {
     // Simple Icons — angular
     path: "M16.712 17.711H7.288l-1.204 2.916L12 24l5.916-3.373-1.204-2.916ZM14.692 0l7.832 16.855.814-12.856L14.692 0ZM9.308 0 .662 3.999l.814 12.856L9.308 0Zm-.405 13.93h6.198L12 6.396 8.903 13.93Z",
   },
+  "flutter-starter": {
+    color: "#027DFD",
+    // Simple Icons — flutter
+    path: "M14.314 0L2.3 12 6 15.7 21.684.013h-7.357zm.014 11.072L7.857 17.53l6.47 6.47H21.7l-6.46-6.468 6.46-6.46h-7.37z",
+  },
   "node-api-starter": {
     color: "#66C452",
     // Simple Icons — nodedotjs
