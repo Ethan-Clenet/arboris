@@ -1,6 +1,7 @@
 import Icon from '#/components/Icon'
 import { hexToRgba } from '#/lib/catalog'
 import { collectionLogo } from '#/lib/collection-logos'
+import { contrastSafeFill } from '#/lib/publisher-logos'
 
 type CollectionTileProps = {
   collection: { id: string; icon: string; color: string }
@@ -21,7 +22,7 @@ export default function CollectionTile({ collection, box, glyph }: CollectionTil
   return (
     <span
       className={`grid flex-none place-items-center ${box}`}
-      style={{ background: hexToRgba(color, 0.14), color }}
+      style={{ background: hexToRgba(color, 0.14), color: contrastSafeFill(color) }}
     >
       {logo?.asset ? (
         <img

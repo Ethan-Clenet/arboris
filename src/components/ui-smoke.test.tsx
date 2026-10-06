@@ -93,7 +93,16 @@ describe('Icon / logos', () => {
     expect(screen.getByAltText('Logo Brave')).toBeTruthy()
 
     rerender(<PublisherLogo name="Vercel" />)
-    expect(screen.getByRole('img', { name: 'Logo Vercel' })).toBeTruthy()
+    const vercel = screen.getByRole('img', { name: 'Logo Vercel' })
+    expect(vercel.tagName).not.toBe('IMG')
+    expect(vercel.getAttribute('style') ?? '').toContain('var(--text-1)')
+    expect(vercel.getAttribute('style') ?? '').toContain('/publishers/vercel.svg')
+
+    rerender(<PublisherLogo name="FastAPI" />)
+    const fastapi = screen.getByRole('img', { name: 'Logo FastAPI' })
+    expect(fastapi.tagName).not.toBe('IMG')
+    expect(fastapi.getAttribute('style') ?? '').toMatch(/#009688|rgb\(0,\s*150,\s*136\)/)
+    expect(fastapi.innerHTML).toBe('')
 
     rerender(<PublisherLogo name="InconnuXYZ" />)
     expect(screen.queryByRole('img')).toBeNull()
