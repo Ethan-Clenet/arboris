@@ -1,6 +1,17 @@
 import { describe, expect, it } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { AGENT_LOGO_PATH, agentLogoColor } from './agent-logos'
-import { hasPublisherLogo, publisherLogoAsset } from './publisher-logos'
+import {
+  contrastSafeFill,
+  hasPublisherLogo,
+  PUBLISHER_LOGO_ASSET,
+  PUBLISHER_LOGO_COLOR,
+  PUBLISHER_LOGO_NATIVE,
+  publisherLogoAsset,
+  publisherLogoIsNative,
+  publisherLogoPaint,
+} from './publisher-logos'
 import { fontPreloadLinks } from './font-preload'
 import { findCollectionSeed } from './collections-data'
 
@@ -52,6 +63,33 @@ describe('publisher logos', () => {
     expect(publisherLogoAsset('NextLevelBuilder')).toBe('/publishers/nextlevelbuilder.webp')
     expect(hasPublisherLogo('nextlevelbuilder')).toBe(true)
     expect(hasPublisherLogo('Inconnu')).toBe(false)
+    expect(publisherLogoIsNative('Brave')).toBe(true)
+    expect(publisherLogoIsNative('Microsoft')).toBe(true)
+    expect(publisherLogoIsNative('FastAPI')).toBe(false)
+    expect(publisherLogoIsNative('Vercel')).toBe(false)
+  })
+
+  it('peint les silhouettes en couleur marque, adapté clair/sombre', () => {
+    expect(publisherLogoPaint('FastAPI')).toBe('#009688')
+    expect(publisherLogoPaint('Angular')).toBe('#DD0031')
+    expect(publisherLogoPaint('TanStack')).toBe('#FF4154')
+    expect(publisherLogoPaint('Vercel')).toBe('var(--text-1)')
+    expect(publisherLogoPaint('Ollama')).toBe('var(--text-1)')
+    expect(publisherLogoPaint('FastAPI', true)).toBe('currentColor')
+    expect(contrastSafeFill('#F4F4F5')).toBe('var(--text-1)')
+    expect(contrastSafeFill('#0A0A0A')).toBe('var(--text-1)')
+    expect(contrastSafeFill('#009688')).toBe('#009688')
+  })
+
+  it('les SVG silhouettes portent la couleur de marque, pas le gris #888888', () => {
+    for (const [name, src] of Object.entries(PUBLISHER_LOGO_ASSET)) {
+      if (PUBLISHER_LOGO_NATIVE.has(name) || !src.endsWith('.svg')) continue
+      const svg = readFileSync(join(process.cwd(), 'public', src.replace(/^\//, '')), 'utf8')
+      const color = PUBLISHER_LOGO_COLOR[name]
+      expect(svg.includes('#888888'), `${name} still gray`).toBe(false)
+      expect(color, name).toBeTruthy()
+      expect(svg.toLowerCase().includes(color.toLowerCase()), `${name} missing ${color}`).toBe(true)
+    }
   })
 })
 

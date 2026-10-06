@@ -1,7 +1,10 @@
+import type { CSSProperties } from 'react'
 import {
   PUBLISHER_LOGO_COLOR,
   PUBLISHER_LOGO_PATH,
   publisherLogoAsset,
+  publisherLogoIsNative,
+  publisherLogoPaint,
   resolvePublisherLogoName,
 } from '#/lib/publisher-logos'
 
@@ -15,10 +18,22 @@ type PublisherLogoProps = {
   alt?: string
 }
 
+function silhouetteMaskStyle(asset: string, size: number, fill: string): CSSProperties {
+  const mask = `url("${asset}") center / contain no-repeat`
+  return {
+    width: size,
+    height: size,
+    backgroundColor: fill,
+    WebkitMask: mask,
+    mask,
+  }
+}
+
 /**
  * Logo marque d’éditeur.
  * Préfère les SVG officiels multicolores (`/publishers/*.svg`) quand dispo
- * (ex. Brave orange + visage blanc). Sinon path monochrome Simple Icons.
+ * (ex. Brave orange + visage blanc). Les silhouettes Simple Icons sont des
+ * fichiers SVG masqués en CSS (couleur marque, HTML léger).
  */
 export default function PublisherLogo({
   name,
@@ -30,7 +45,7 @@ export default function PublisherLogo({
   const resolved = resolvePublisherLogoName(name) ?? name
   const altText = alt ?? `Logo ${resolved}`
   const asset = publisherLogoAsset(resolved)
-  if (asset && !inherit) {
+  if (asset && !inherit && publisherLogoIsNative(resolved)) {
     return (
       <img
         src={asset}
@@ -41,6 +56,17 @@ export default function PublisherLogo({
         decoding="async"
         className={`block object-contain ${className}`.trim()}
         draggable={false}
+      />
+    )
+  }
+
+  if (asset && !inherit) {
+    return (
+      <span
+        role="img"
+        aria-label={altText}
+        className={`block shrink-0 ${className}`.trim()}
+        style={silhouetteMaskStyle(asset, size, publisherLogoPaint(resolved))}
       />
     )
   }

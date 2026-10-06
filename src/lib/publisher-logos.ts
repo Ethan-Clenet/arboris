@@ -114,6 +114,25 @@ export const PUBLISHER_LOGO_ASSET: Record<string, string> = {
   Vercel: '/publishers/vercel.svg',
 }
 
+/**
+ * Assets officiels déjà en couleurs de marque (SVG multi-tons / photos).
+ * Les autres fichiers `/publishers/*.svg` sont des silhouettes Simple Icons
+ * à teinter via CSS (masque), pas via un fill figé.
+ */
+export const PUBLISHER_LOGO_NATIVE: ReadonlySet<string> = new Set([
+  'Brave',
+  'Arboris',
+  'Microsoft',
+  'affaan-m',
+  'Hugging Face',
+  'Nous Research',
+  'vinta',
+  'Context7',
+  'Auth0',
+  'Yunt',
+  'NextLevelBuilder',
+])
+
 export function hasPublisherLogo(name: string): boolean {
   return resolvePublisherLogoName(name) != null
 }
@@ -182,4 +201,36 @@ export function resolvePublisherLogoName(name: string | null | undefined): strin
     if (key.toLowerCase() === lower) return key
   }
   return null
+}
+
+function hexRelativeLuminance(color: string): number | null {
+  const match = /^#([0-9a-f]{6})$/i.exec(color.trim())
+  if (!match) return null
+  const n = Number.parseInt(match[1], 16)
+  const r = (n >> 16) & 255
+  const g = (n >> 8) & 255
+  const b = n & 255
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255
+}
+
+/** Fill trop clair ou trop sombre → `--text-1` pour rester lisible clair/sombre. */
+export function contrastSafeFill(color: string): string {
+  const luminance = hexRelativeLuminance(color)
+  if (luminance == null) return color
+  if (luminance > 0.85 || luminance < 0.12) return 'var(--text-1)'
+  return color
+}
+
+export function publisherLogoIsNative(name: string): boolean {
+  const resolved = resolvePublisherLogoName(name)
+  return resolved != null && PUBLISHER_LOGO_NATIVE.has(resolved)
+}
+
+/** Couleur CSS du glyphe silhouette (marque, ou currentColor si `inherit`). */
+export function publisherLogoPaint(name: string, inherit = false): string {
+  if (inherit) return 'currentColor'
+  const resolved = resolvePublisherLogoName(name) ?? name
+  const color = PUBLISHER_LOGO_COLOR[resolved]
+  if (!color) return 'currentColor'
+  return contrastSafeFill(color)
 }
