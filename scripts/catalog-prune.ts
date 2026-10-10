@@ -1,12 +1,31 @@
 /**
  * Plan de suppression des skills orphelins (présents en base, absents du disque).
  * Garde-fous : ne jamais vider le catalogue si la source est vide, trop petite,
- * ou si le volume d’orphelins ressemble à une erreur de chargement.
+ * ou si elle a perdu plus de 30 % des ids déjà en base (chargement partiel).
+ * Les retraits validés sont toujours appliqués dès que la source est saine.
  */
 
 export const CATALOG_PRUNE_MIN_SOURCE = 500
-export const CATALOG_PRUNE_MAX_ABS = 50
-export const CATALOG_PRUNE_MAX_RATIO = 0.05
+/** La source doit représenter au moins 70 % de la base, sinon on refuse le prune global. */
+export const CATALOG_PRUNE_MIN_SOURCE_RATIO = 0.7
+
+/**
+ * Ids retirés du disque (veille 10/10 + orphelins #65) — toujours supprimés
+ * s’ils restent en base et absents de la source, même si le prune global est ignoré.
+ */
+export const CATALOG_EXPLICIT_REMOVALS = [
+  'author-auth0-skill',
+  'cypress-author',
+  'cypress-docs',
+  'cypress-explain',
+  'gemini-interactions-api',
+  'ito-basket-compare',
+  'ito-data-atlas-agent',
+  'ito-market-intelligence',
+  'ito-trade-planner',
+  'motion-ui',
+  'sandbox-sdk',
+] as const
 
 export type CatalogPruneSkipReason = 'empty-source' | 'source-too-small' | 'too-many-orphans'
 
@@ -20,6 +39,15 @@ export type CatalogPrunePlan =
       orphanSample: string[]
     }
   | { action: 'none'; sourceCount: number }
+
+export function planExplicitRemovals(
+  sourceIds: readonly string[],
+  dbIds: readonly string[],
+): string[] {
+  const source = new Set(sourceIds)
+  const db = new Set(dbIds)
+  return CATALOG_EXPLICIT_REMOVALS.filter((id) => db.has(id) && !source.has(id))
+}
 
 export function planCatalogPrune(
   sourceIds: readonly string[],
@@ -54,8 +82,8 @@ export function planCatalogPrune(
     return { action: 'none', sourceCount: source.size }
   }
 
-  const ratio = orphans.length / Math.max(dbIds.length, 1)
-  if (orphans.length > CATALOG_PRUNE_MAX_ABS || ratio > CATALOG_PRUNE_MAX_RATIO) {
+  const coverage = source.size / Math.max(dbIds.length, 1)
+  if (coverage < CATALOG_PRUNE_MIN_SOURCE_RATIO) {
     return {
       action: 'skip',
       reason: 'too-many-orphans',

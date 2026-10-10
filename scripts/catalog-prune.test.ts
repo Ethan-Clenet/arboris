@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
-  CATALOG_PRUNE_MAX_ABS,
+  CATALOG_EXPLICIT_REMOVALS,
   CATALOG_PRUNE_MIN_SOURCE,
   planCatalogPrune,
+  planExplicitRemovals,
 } from './catalog-prune'
 
 function ids(prefix: string, count: number): string[] {
@@ -31,32 +32,31 @@ describe('planCatalogPrune', () => {
     })
   })
 
-  it('refuse si le volume d’orphelins dépasse le plafond (erreur source)', () => {
+  it('refuse si la source a perdu plus de 30 % des ids en base', () => {
     const source = ids('src', CATALOG_PRUNE_MIN_SOURCE)
-    const orphans = ids('gone', CATALOG_PRUNE_MAX_ABS + 1)
+    const orphans = ids('gone', CATALOG_PRUNE_MIN_SOURCE)
     const plan = planCatalogPrune(source, [...source, ...orphans])
     expect(plan).toMatchObject({
       action: 'skip',
       reason: 'too-many-orphans',
-      orphanCount: CATALOG_PRUNE_MAX_ABS + 1,
+      orphanCount: CATALOG_PRUNE_MIN_SOURCE,
     })
   })
 
-  it('supprime les orphelins ciblés quand la source est saine', () => {
+  it('supprime un volume d’orphelins historiques si la source reste majoritaire', () => {
+    const source = ids('src', 2000)
+    const orphans = ids('gone', 80)
+    const plan = planCatalogPrune(source, [...source, ...orphans])
+    expect(plan).toEqual({
+      action: 'delete',
+      sourceCount: 2000,
+      ids: orphans,
+    })
+  })
+
+  it('supprime les 11 retraits validés quand la source est saine', () => {
     const source = ids('src', CATALOG_PRUNE_MIN_SOURCE)
-    const orphans = [
-      'author-auth0-skill',
-      'cypress-author',
-      'cypress-docs',
-      'cypress-explain',
-      'gemini-interactions-api',
-      'ito-basket-compare',
-      'ito-data-atlas-agent',
-      'ito-market-intelligence',
-      'ito-trade-planner',
-      'motion-ui',
-      'sandbox-sdk',
-    ]
+    const orphans = [...CATALOG_EXPLICIT_REMOVALS]
     const plan = planCatalogPrune(source, [...source, ...orphans])
     expect(plan).toEqual({
       action: 'delete',
@@ -71,5 +71,17 @@ describe('planCatalogPrune', () => {
       action: 'none',
       sourceCount: CATALOG_PRUNE_MIN_SOURCE,
     })
+  })
+})
+
+describe('planExplicitRemovals', () => {
+  it('ne cible que les ids encore en base et absents de la source', () => {
+    const source = ['firebase-basics', 'cypress-author']
+    const db = ['firebase-basics', 'cypress-author', 'sandbox-sdk', 'motion-ui', 'other']
+    expect(planExplicitRemovals(source, db)).toEqual(['motion-ui', 'sandbox-sdk'])
+  })
+
+  it('ne retire rien si la liste explicite n’est plus en base', () => {
+    expect(planExplicitRemovals(['a'], ['a', 'b'])).toEqual([])
   })
 })
