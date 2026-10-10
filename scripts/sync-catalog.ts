@@ -1,12 +1,15 @@
 /**
  * Sync idempotent du catalogue (upsert) — sans wipe.
  * Skip les updates si le contenu n’a pas changé (économise le transfer Neon).
+ * Après upsert, prune les ids absents du disque, avec garde-fous
+ * (source vide / trop petite / trop d’orphelins → aucune suppression).
  */
 import { createHash } from 'node:crypto'
 import { PrismaClient } from '@prisma/client'
 import { CATEGORIES, STACKS } from '../prisma/catalog-data'
 import { COLLECTIONS } from '../prisma/collections-data'
 import { loadSkillSeeds } from '../prisma/catalog-from-skills'
+import { planCatalogPrune } from './catalog-prune'
 
 const prisma = new PrismaClient()
 
@@ -176,7 +179,43 @@ async function syncSkills() {
     }
   }
 
-  return { total: skills.length, created, updated, skipped }
+  return {
+    total: skills.length,
+    created,
+    updated,
+    skipped,
+    ids: skills.map((skill) => skill.id),
+  }
+}
+
+async function pruneMissingSkills(sourceIds: string[]) {
+  const dbRows = await prisma.skill.findMany({ select: { id: true } })
+  const dbIds = dbRows.map((row) => row.id)
+  const plan = planCatalogPrune(sourceIds, dbIds)
+
+  switch (plan.action) {
+    case 'none':
+      return { deleted: 0, skipped: false, ids: [] as string[] }
+    case 'skip':
+      console.warn(
+        `[sync-catalog] Prune ignoré (${plan.reason}) — source ${plan.sourceCount}, orphelins ${plan.orphanCount}. Échantillon: ${plan.orphanSample.join(', ') || '—'}`,
+      )
+      return { deleted: 0, skipped: true, ids: [] as string[] }
+    case 'delete': {
+      const result = await prisma.skill.deleteMany({
+        where: { id: { in: plan.ids } },
+      })
+      console.log(
+        `[sync-catalog] Prune — ${result.count} orphelin(s) : ${plan.ids.join(', ')}`,
+      )
+      return { deleted: result.count, skipped: false, ids: plan.ids }
+    }
+    default: {
+      const _exhaustive: never = plan
+      void _exhaustive
+      return { deleted: 0, skipped: true, ids: [] as string[] }
+    }
+  }
 }
 
 async function syncCollections(skillIds: Set<string>) {
@@ -221,12 +260,13 @@ async function main() {
   await ensureCategories()
   await ensureStacks()
   const skills = await syncSkills()
+  const prune = await pruneMissingSkills(skills.ids)
   const skillIdSet = new Set(
     (await prisma.skill.findMany({ select: { id: true } })).map((s) => s.id),
   )
   const collections = await syncCollections(skillIdSet)
   console.log(
-    `[sync-catalog] OK — skills ${skills.total} (créés ${skills.created}, maj ${skills.updated}, inchangés ${skills.skipped}), collections ${collections}.`,
+    `[sync-catalog] OK — skills ${skills.total} (créés ${skills.created}, maj ${skills.updated}, inchangés ${skills.skipped}), prune ${prune.deleted}${prune.skipped ? ' (ignoré)' : ''}, collections ${collections}.`,
   )
 }
 
