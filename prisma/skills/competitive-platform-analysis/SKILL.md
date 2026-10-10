@@ -1,11 +1,8 @@
 ---
 name: competitive-platform-analysis
-description: >-
-  Use when scoping a competitive landscape — identifying, categorising, and
-  score-filtering a competitor set before any benchmarking begins. Decides who
-  counts as a competitor, which tier they belong to, and which sources to mine.
-  First step in the three-skill competitive pipeline; precedes
-  benchmark-methodology.
+description: Use when scoping a competitive landscape — identifying, categorising, and score-filtering a competitor set before any benchmarking begins. Decides who counts as a competitor, which tier they belong to, and which sources to mine. First step in the three-skill competitive pipeline; precedes benchmark-methodology.
+metadata:
+  origin: ECC
 ---
 
 # Competitive Platform Analysis
