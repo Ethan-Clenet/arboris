@@ -9,7 +9,7 @@ import { PrismaClient } from '@prisma/client'
 import { CATEGORIES, STACKS } from '../prisma/catalog-data'
 import { COLLECTIONS } from '../prisma/collections-data'
 import { loadSkillSeeds } from '../prisma/catalog-from-skills'
-import { planCatalogPrune } from './catalog-prune'
+import { CATALOG_PRUNE_MIN_SOURCE, planCatalogPrune, planExplicitRemovals } from './catalog-prune'
 
 const prisma = new PrismaClient()
 
@@ -188,34 +188,47 @@ async function syncSkills() {
   }
 }
 
+async function deleteSkillIds(ids: string[], label: string) {
+  if (ids.length === 0) return 0
+  const result = await prisma.skill.deleteMany({ where: { id: { in: ids } } })
+  console.log(`[sync-catalog] ${label} — ${result.count} : ${ids.join(', ')}`)
+  return result.count
+}
+
 async function pruneMissingSkills(sourceIds: string[]) {
   const dbRows = await prisma.skill.findMany({ select: { id: true } })
   const dbIds = dbRows.map((row) => row.id)
-  const plan = planCatalogPrune(sourceIds, dbIds)
+  const explicit =
+    sourceIds.length >= CATALOG_PRUNE_MIN_SOURCE
+      ? planExplicitRemovals(sourceIds, dbIds)
+      : []
+  const explicitDeleted = await deleteSkillIds(explicit, 'Retraits ciblés')
+
+  const remainingDbIds = dbIds.filter((id) => !explicit.includes(id))
+  const plan = planCatalogPrune(sourceIds, remainingDbIds)
+  let pruned = 0
+  let skipped = false
 
   switch (plan.action) {
     case 'none':
-      return { deleted: 0, skipped: false, ids: [] as string[] }
+      break
     case 'skip':
+      skipped = true
       console.warn(
         `[sync-catalog] Prune ignoré (${plan.reason}) — source ${plan.sourceCount}, orphelins ${plan.orphanCount}. Échantillon: ${plan.orphanSample.join(', ') || '—'}`,
       )
-      return { deleted: 0, skipped: true, ids: [] as string[] }
-    case 'delete': {
-      const result = await prisma.skill.deleteMany({
-        where: { id: { in: plan.ids } },
-      })
-      console.log(
-        `[sync-catalog] Prune — ${result.count} orphelin(s) : ${plan.ids.join(', ')}`,
-      )
-      return { deleted: result.count, skipped: false, ids: plan.ids }
-    }
+      break
+    case 'delete':
+      pruned = await deleteSkillIds(plan.ids, 'Prune')
+      break
     default: {
       const _exhaustive: never = plan
       void _exhaustive
-      return { deleted: 0, skipped: true, ids: [] as string[] }
+      skipped = true
     }
   }
+
+  return { deleted: explicitDeleted + pruned, skipped, ids: [...explicit, ...(plan.action === 'delete' ? plan.ids : [])] }
 }
 
 async function syncCollections(skillIds: Set<string>) {
