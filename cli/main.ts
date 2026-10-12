@@ -6,6 +6,7 @@ import { installSkillToWorkspace, installStackToWorkspace } from '../src/lib/ski
 import { installCommandToWorkspace } from '../src/lib/command-install-core.ts'
 import { listCommandIds, loadCommandFile } from '../src/lib/command-file.ts'
 import { findCollectionSeed, COLLECTIONS } from '../src/lib/collections-data.ts'
+import { buildWebInstallCommand } from '../src/lib/web-install-command.ts'
 import { needsInstallConfirm, riskToSafetyScore } from '../src/lib/skillspector.ts'
 import {
   formatPublisherList,
@@ -291,9 +292,7 @@ async function runInstallCollection(collectionId: string, options: CliOptions) {
     console.error(`Collection inconnue: "${collectionId}"`)
     console.error(`arboris-cli@${version} — ce binaire npm est peut‑être en retard sur le catalogue.`)
     console.error('Installe depuis le site (toujours à jour) :')
-    console.error(
-      `  npx --yes https://arboristhree.xyz/cli/install-collection.mjs ${collectionId}`,
-    )
+    console.error(`  ${buildWebInstallCommand({ kind: 'collection', id: collectionId, os: 'unix' })}`)
     console.error('Ou force la dernière CLI : npx arboris-cli@latest list-collections')
     process.exit(1)
   }

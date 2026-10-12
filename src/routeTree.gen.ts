@@ -9,73 +9,54 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as Sitemap_indexDotxmlRouteImport } from './routes/sitemap_index[.]xml'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SitemapStaticDotxmlRouteImport } from './routes/sitemap-static[.]xml'
-import { Route as SitemapSkillsDotxmlRouteImport } from './routes/sitemap-skills[.]xml'
-import { Route as SitemapCommandsDotxmlRouteImport } from './routes/sitemap-commands[.]xml'
-import { Route as SitemapCollectionsDotxmlRouteImport } from './routes/sitemap-collections[.]xml'
-import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
-import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
-import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
-import { Route as Google2d4e68e917b5f045DothtmlRouteImport } from './routes/google2d4e68e917b5f045[.]html'
-import { Route as GettingStartedRouteImport } from './routes/getting-started'
-import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
-import { Route as R500RouteImport } from './routes/500'
-import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as SkillsIndexRouteImport } from './routes/skills.index'
-import { Route as CommandsIndexRouteImport } from './routes/commands.index'
+import { Route as R404RouteImport } from './routes/404'
+import { Route as R500RouteImport } from './routes/500'
+import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
+import { Route as GettingStartedRouteImport } from './routes/getting-started'
+import { Route as Google2d4e68e917b5f045DothtmlRouteImport } from './routes/google2d4e68e917b5f045[.]html'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as SitemapCollectionsDotxmlRouteImport } from './routes/sitemap-collections[.]xml'
+import { Route as SitemapCommandsDotxmlRouteImport } from './routes/sitemap-commands[.]xml'
+import { Route as SitemapSkillsDotxmlRouteImport } from './routes/sitemap-skills[.]xml'
+import { Route as SitemapStaticDotxmlRouteImport } from './routes/sitemap-static[.]xml'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as Sitemap_indexDotxmlRouteImport } from './routes/sitemap_index[.]xml'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
-import { Route as SkillsIdRouteImport } from './routes/skills.$id'
-import { Route as CommandsIdRouteImport } from './routes/commands.$id'
 import { Route as CollectionsIdRouteImport } from './routes/collections.$id'
+import { Route as CommandsIndexRouteImport } from './routes/commands.index'
+import { Route as CommandsIdRouteImport } from './routes/commands.$id'
+import { Route as SkillsIndexRouteImport } from './routes/skills.index'
+import { Route as SkillsIdRouteImport } from './routes/skills.$id'
 import { Route as CliCollectionZipIdRouteImport } from './routes/cli.collection-zip.$id'
+import { Route as CliCommandZipIdRouteImport } from './routes/cli.command-zip.$id'
+import { Route as CliSkillZipIdRouteImport } from './routes/cli.skill-zip.$id'
 
-const Sitemap_indexDotxmlRoute = Sitemap_indexDotxmlRouteImport.update({
-  id: '/sitemap_index.xml',
-  path: '/sitemap_index.xml',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const R404Route = R404RouteImport.update({
+  id: '/404',
+  path: '/404',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapStaticDotxmlRoute = SitemapStaticDotxmlRouteImport.update({
-  id: '/sitemap-static.xml',
-  path: '/sitemap-static.xml',
+const R500Route = R500RouteImport.update({
+  id: '/500',
+  path: '/500',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapSkillsDotxmlRoute = SitemapSkillsDotxmlRouteImport.update({
-  id: '/sitemap-skills.xml',
-  path: '/sitemap-skills.xml',
+const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
+  id: '/confidentialite',
+  path: '/confidentialite',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapCommandsDotxmlRoute = SitemapCommandsDotxmlRouteImport.update({
-  id: '/sitemap-commands.xml',
-  path: '/sitemap-commands.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapCollectionsDotxmlRoute =
-  SitemapCollectionsDotxmlRouteImport.update({
-    id: '/sitemap-collections.xml',
-    path: '/sitemap-collections.xml',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
-  id: '/robots.txt',
-  path: '/robots.txt',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
-  id: '/mentions-legales',
-  path: '/mentions-legales',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
-  id: '/llms.txt',
-  path: '/llms.txt',
+const GettingStartedRoute = GettingStartedRouteImport.update({
+  id: '/getting-started',
+  path: '/getting-started',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Google2d4e68e917b5f045DothtmlRoute =
@@ -84,39 +65,50 @@ const Google2d4e68e917b5f045DothtmlRoute =
     path: '/google2d4e68e917b5f045.html',
     getParentRoute: () => rootRouteImport,
   } as any)
-const GettingStartedRoute = GettingStartedRouteImport.update({
-  id: '/getting-started',
-  path: '/getting-started',
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
-  id: '/confidentialite',
-  path: '/confidentialite',
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
   getParentRoute: () => rootRouteImport,
 } as any)
-const R500Route = R500RouteImport.update({
-  id: '/500',
-  path: '/500',
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
-const R404Route = R404RouteImport.update({
-  id: '/404',
-  path: '/404',
+const SitemapCollectionsDotxmlRoute =
+  SitemapCollectionsDotxmlRouteImport.update({
+    id: '/sitemap-collections.xml',
+    path: '/sitemap-collections.xml',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SitemapCommandsDotxmlRoute = SitemapCommandsDotxmlRouteImport.update({
+  id: '/sitemap-commands.xml',
+  path: '/sitemap-commands.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const SitemapSkillsDotxmlRoute = SitemapSkillsDotxmlRouteImport.update({
+  id: '/sitemap-skills.xml',
+  path: '/sitemap-skills.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SkillsIndexRoute = SkillsIndexRouteImport.update({
-  id: '/skills/',
-  path: '/skills/',
+const SitemapStaticDotxmlRoute = SitemapStaticDotxmlRouteImport.update({
+  id: '/sitemap-static.xml',
+  path: '/sitemap-static.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CommandsIndexRoute = CommandsIndexRouteImport.update({
-  id: '/commands/',
-  path: '/commands/',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Sitemap_indexDotxmlRoute = Sitemap_indexDotxmlRouteImport.update({
+  id: '/sitemap_index.xml',
+  path: '/sitemap_index.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CollectionsIndexRoute = CollectionsIndexRouteImport.update({
@@ -124,9 +116,14 @@ const CollectionsIndexRoute = CollectionsIndexRouteImport.update({
   path: '/collections/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SkillsIdRoute = SkillsIdRouteImport.update({
-  id: '/skills/$id',
-  path: '/skills/$id',
+const CollectionsIdRoute = CollectionsIdRouteImport.update({
+  id: '/collections/$id',
+  path: '/collections/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommandsIndexRoute = CommandsIndexRouteImport.update({
+  id: '/commands/',
+  path: '/commands/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CommandsIdRoute = CommandsIdRouteImport.update({
@@ -134,14 +131,29 @@ const CommandsIdRoute = CommandsIdRouteImport.update({
   path: '/commands/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CollectionsIdRoute = CollectionsIdRouteImport.update({
-  id: '/collections/$id',
-  path: '/collections/$id',
+const SkillsIndexRoute = SkillsIndexRouteImport.update({
+  id: '/skills/',
+  path: '/skills/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SkillsIdRoute = SkillsIdRouteImport.update({
+  id: '/skills/$id',
+  path: '/skills/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CliCollectionZipIdRoute = CliCollectionZipIdRouteImport.update({
   id: '/cli/collection-zip/$id',
   path: '/cli/collection-zip/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CliCommandZipIdRoute = CliCommandZipIdRouteImport.update({
+  id: '/cli/command-zip/$id',
+  path: '/cli/command-zip/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CliSkillZipIdRoute = CliSkillZipIdRouteImport.update({
+  id: '/cli/skill-zip/$id',
+  path: '/cli/skill-zip/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -168,6 +180,8 @@ export interface FileRoutesByFullPath {
   '/commands/': typeof CommandsIndexRoute
   '/skills/': typeof SkillsIndexRoute
   '/cli/collection-zip/$id': typeof CliCollectionZipIdRoute
+  '/cli/command-zip/$id': typeof CliCommandZipIdRoute
+  '/cli/skill-zip/$id': typeof CliSkillZipIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -192,6 +206,8 @@ export interface FileRoutesByTo {
   '/commands': typeof CommandsIndexRoute
   '/skills': typeof SkillsIndexRoute
   '/cli/collection-zip/$id': typeof CliCollectionZipIdRoute
+  '/cli/command-zip/$id': typeof CliCommandZipIdRoute
+  '/cli/skill-zip/$id': typeof CliSkillZipIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -217,6 +233,8 @@ export interface FileRoutesById {
   '/commands/': typeof CommandsIndexRoute
   '/skills/': typeof SkillsIndexRoute
   '/cli/collection-zip/$id': typeof CliCollectionZipIdRoute
+  '/cli/command-zip/$id': typeof CliCommandZipIdRoute
+  '/cli/skill-zip/$id': typeof CliSkillZipIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -243,6 +261,8 @@ export interface FileRouteTypes {
     | '/commands/'
     | '/skills/'
     | '/cli/collection-zip/$id'
+    | '/cli/command-zip/$id'
+    | '/cli/skill-zip/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -267,6 +287,8 @@ export interface FileRouteTypes {
     | '/commands'
     | '/skills'
     | '/cli/collection-zip/$id'
+    | '/cli/command-zip/$id'
+    | '/cli/skill-zip/$id'
   id:
     | '__root__'
     | '/'
@@ -291,6 +313,8 @@ export interface FileRouteTypes {
     | '/commands/'
     | '/skills/'
     | '/cli/collection-zip/$id'
+    | '/cli/command-zip/$id'
+    | '/cli/skill-zip/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -316,99 +340,17 @@ export interface RootRouteChildren {
   CommandsIndexRoute: typeof CommandsIndexRoute
   SkillsIndexRoute: typeof SkillsIndexRoute
   CliCollectionZipIdRoute: typeof CliCollectionZipIdRoute
+  CliCommandZipIdRoute: typeof CliCommandZipIdRoute
+  CliSkillZipIdRoute: typeof CliSkillZipIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap_index.xml': {
-      id: '/sitemap_index.xml'
-      path: '/sitemap_index.xml'
-      fullPath: '/sitemap_index.xml'
-      preLoaderRoute: typeof Sitemap_indexDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap-static.xml': {
-      id: '/sitemap-static.xml'
-      path: '/sitemap-static.xml'
-      fullPath: '/sitemap-static.xml'
-      preLoaderRoute: typeof SitemapStaticDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap-skills.xml': {
-      id: '/sitemap-skills.xml'
-      path: '/sitemap-skills.xml'
-      fullPath: '/sitemap-skills.xml'
-      preLoaderRoute: typeof SitemapSkillsDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap-commands.xml': {
-      id: '/sitemap-commands.xml'
-      path: '/sitemap-commands.xml'
-      fullPath: '/sitemap-commands.xml'
-      preLoaderRoute: typeof SitemapCommandsDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap-collections.xml': {
-      id: '/sitemap-collections.xml'
-      path: '/sitemap-collections.xml'
-      fullPath: '/sitemap-collections.xml'
-      preLoaderRoute: typeof SitemapCollectionsDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/robots.txt': {
-      id: '/robots.txt'
-      path: '/robots.txt'
-      fullPath: '/robots.txt'
-      preLoaderRoute: typeof RobotsDottxtRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mentions-legales': {
-      id: '/mentions-legales'
-      path: '/mentions-legales'
-      fullPath: '/mentions-legales'
-      preLoaderRoute: typeof MentionsLegalesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/llms.txt': {
-      id: '/llms.txt'
-      path: '/llms.txt'
-      fullPath: '/llms.txt'
-      preLoaderRoute: typeof LlmsDottxtRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/google2d4e68e917b5f045.html': {
-      id: '/google2d4e68e917b5f045.html'
-      path: '/google2d4e68e917b5f045.html'
-      fullPath: '/google2d4e68e917b5f045.html'
-      preLoaderRoute: typeof Google2d4e68e917b5f045DothtmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/getting-started': {
-      id: '/getting-started'
-      path: '/getting-started'
-      fullPath: '/getting-started'
-      preLoaderRoute: typeof GettingStartedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/confidentialite': {
-      id: '/confidentialite'
-      path: '/confidentialite'
-      fullPath: '/confidentialite'
-      preLoaderRoute: typeof ConfidentialiteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/500': {
-      id: '/500'
-      path: '/500'
-      fullPath: '/500'
-      preLoaderRoute: typeof R500RouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/404': {
@@ -418,25 +360,95 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof R404RouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/500': {
+      id: '/500'
+      path: '/500'
+      fullPath: '/500'
+      preLoaderRoute: typeof R500RouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/skills/': {
-      id: '/skills/'
-      path: '/skills'
-      fullPath: '/skills/'
-      preLoaderRoute: typeof SkillsIndexRouteImport
+    '/confidentialite': {
+      id: '/confidentialite'
+      path: '/confidentialite'
+      fullPath: '/confidentialite'
+      preLoaderRoute: typeof ConfidentialiteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/commands/': {
-      id: '/commands/'
-      path: '/commands'
-      fullPath: '/commands/'
-      preLoaderRoute: typeof CommandsIndexRouteImport
+    '/getting-started': {
+      id: '/getting-started'
+      path: '/getting-started'
+      fullPath: '/getting-started'
+      preLoaderRoute: typeof GettingStartedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/google2d4e68e917b5f045.html': {
+      id: '/google2d4e68e917b5f045.html'
+      path: '/google2d4e68e917b5f045.html'
+      fullPath: '/google2d4e68e917b5f045.html'
+      preLoaderRoute: typeof Google2d4e68e917b5f045DothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-collections.xml': {
+      id: '/sitemap-collections.xml'
+      path: '/sitemap-collections.xml'
+      fullPath: '/sitemap-collections.xml'
+      preLoaderRoute: typeof SitemapCollectionsDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-commands.xml': {
+      id: '/sitemap-commands.xml'
+      path: '/sitemap-commands.xml'
+      fullPath: '/sitemap-commands.xml'
+      preLoaderRoute: typeof SitemapCommandsDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-skills.xml': {
+      id: '/sitemap-skills.xml'
+      path: '/sitemap-skills.xml'
+      fullPath: '/sitemap-skills.xml'
+      preLoaderRoute: typeof SitemapSkillsDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-static.xml': {
+      id: '/sitemap-static.xml'
+      path: '/sitemap-static.xml'
+      fullPath: '/sitemap-static.xml'
+      preLoaderRoute: typeof SitemapStaticDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap_index.xml': {
+      id: '/sitemap_index.xml'
+      path: '/sitemap_index.xml'
+      fullPath: '/sitemap_index.xml'
+      preLoaderRoute: typeof Sitemap_indexDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/collections/': {
@@ -446,11 +458,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/skills/$id': {
-      id: '/skills/$id'
-      path: '/skills/$id'
-      fullPath: '/skills/$id'
-      preLoaderRoute: typeof SkillsIdRouteImport
+    '/collections/$id': {
+      id: '/collections/$id'
+      path: '/collections/$id'
+      fullPath: '/collections/$id'
+      preLoaderRoute: typeof CollectionsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/commands/': {
+      id: '/commands/'
+      path: '/commands'
+      fullPath: '/commands/'
+      preLoaderRoute: typeof CommandsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/commands/$id': {
@@ -460,11 +479,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommandsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/collections/$id': {
-      id: '/collections/$id'
-      path: '/collections/$id'
-      fullPath: '/collections/$id'
-      preLoaderRoute: typeof CollectionsIdRouteImport
+    '/skills/': {
+      id: '/skills/'
+      path: '/skills'
+      fullPath: '/skills/'
+      preLoaderRoute: typeof SkillsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/skills/$id': {
+      id: '/skills/$id'
+      path: '/skills/$id'
+      fullPath: '/skills/$id'
+      preLoaderRoute: typeof SkillsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cli/collection-zip/$id': {
@@ -472,6 +498,20 @@ declare module '@tanstack/react-router' {
       path: '/cli/collection-zip/$id'
       fullPath: '/cli/collection-zip/$id'
       preLoaderRoute: typeof CliCollectionZipIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cli/command-zip/$id': {
+      id: '/cli/command-zip/$id'
+      path: '/cli/command-zip/$id'
+      fullPath: '/cli/command-zip/$id'
+      preLoaderRoute: typeof CliCommandZipIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cli/skill-zip/$id': {
+      id: '/cli/skill-zip/$id'
+      path: '/cli/skill-zip/$id'
+      fullPath: '/cli/skill-zip/$id'
+      preLoaderRoute: typeof CliSkillZipIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -500,6 +540,8 @@ const rootRouteChildren: RootRouteChildren = {
   CommandsIndexRoute: CommandsIndexRoute,
   SkillsIndexRoute: SkillsIndexRoute,
   CliCollectionZipIdRoute: CliCollectionZipIdRoute,
+  CliCommandZipIdRoute: CliCommandZipIdRoute,
+  CliSkillZipIdRoute: CliSkillZipIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { SITE_URL } from '#/lib/site'
+import { buildWebInstallCommand } from '#/lib/web-install-command'
 
 /**
  * `llms.txt` — résumé du site pour les agents IA / crawlers LLM.
@@ -23,7 +24,11 @@ export const Route = createFileRoute('/llms.txt')({
 - [Confidentialité](${SITE_URL}/confidentialite): politique de confidentialité (RGPD)
 
 ## Installation
-- CLI: \`npx arboris-cli install <skill-id>\` — ou copie du Markdown depuis chaque fiche.
+- Collection: \`${buildWebInstallCommand({ kind: 'collection', id: '<collection-id>', os: 'unix' })}\`
+- Skill: \`${buildWebInstallCommand({ kind: 'skill', id: '<skill-id>', os: 'unix' })}\`
+- Commande: \`${buildWebInstallCommand({ kind: 'command', id: '<command-id>', os: 'unix' })}\`
+- Variante Windows (PowerShell): \`${buildWebInstallCommand({ kind: 'skill', id: '<skill-id>', os: 'windows' })}\`
+- Ou copie du Markdown depuis chaque fiche.
 
 ## Ressources
 - Sitemap index: ${SITE_URL}/sitemap.xml
