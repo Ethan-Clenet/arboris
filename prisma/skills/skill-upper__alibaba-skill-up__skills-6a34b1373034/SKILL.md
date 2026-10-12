@@ -1,6 +1,6 @@
 ---
 name: skill-upper
-description: "Create, run, diagnose, and iteratively improve Agent Skill evaluations (evals) with the skill-up CLI / 使用 skill-up CLI 创建、运行、诊断并持续改进 Agent Skill 评测. Use when the user asks to evaluate, test, regress, verify, fix, improve, iterate, or evolve a Skill; add or strengthen eval cases; write eval.yaml/case.yaml; run skill-up run/validate/list-cases/report/import/init; or migrate from Anthropic evals.json. Handles Skill discovery, eval scaffolding, judge authoring, validation, runs, reports, and evidence-based repair loops."
+description: "Capture and review Agent Skill observations, and create, run, diagnose, or iteratively improve Skill evaluations (evals) with the skill-up CLI. Use when the user asks to record explicitly attributed Skill usage or feedback; review observations or user-supplied traces/transcripts; turn an approved observation into a regression case; evaluate, test, regress, verify, fix, improve, iterate, or evolve a Skill; add or strengthen eval cases; write eval.yaml/case.yaml; run skill-up run/validate/list-cases/report/import/init; or migrate from Anthropic evals.json. Plugin observation capture/review require either the Codex skill-up plugin or an observer-enabled DSH skill-up plugin. User-supplied external evidence can be reviewed without a plugin; evaluation remains multi-engine."
 metadata:
   origin: Alibaba
 ---
@@ -17,7 +17,7 @@ Manual: <https://alibaba.github.io/skill-up/>
 
 Detection rules (highest priority first):
 
-1. The user explicitly specifies a language in the current message (e.g. "answer in English" / "用中文回答") → follow the user's instruction.
+1. The user explicitly specifies a language in the current message (e.g. "answer in English" or "reply in Chinese") → follow the user's instruction.
 2. The natural language used in the user's current message → match it.
 3. None of the above → use English (default).
 
@@ -25,18 +25,25 @@ Regardless of the response language, technical identifiers in this SKILL — CLI
 
 ### Language Rules for Generated Artifacts
 
-When creating or editing `eval.yaml`, `case.yaml`, grading scripts, README snippets, final replies, or any other user-visible artifact, treat the language of the user's current message as the output language for this turn:
+Use the user's current language for replies, newly authored explanatory prose,
+and YAML comments. Preserve the language and semantics of test inputs, expected
+output literals, identifiers, commands, paths, and existing regression cases.
+Do not translate a deterministic assertion merely because the conversation
+language changed. When testing localized behavior, keep the original business
+text even in an English conversation.
 
-- If the user asks in Chinese, write the final response and all generated natural-language content in Chinese, including YAML comments, `title`, `description`, `input.prompt`, `expect` keywords, and `judge.criteria`.
-- If the user asks in English, write the final response and all generated natural-language content in English, including YAML comments, `title`, `description`, `input.prompt`, `expect` keywords, and `judge.criteria`; do not leave Chinese or CJK characters in generated case files.
-- If the target Skill itself is written in Chinese but the user asks in English, translate the Skill's functional intent into English test prompts and assertions instead of copying Chinese prose from the target Skill or templates.
-- In an English context, deterministic keywords in `rule_based` cases, including `expect.must_contain` and `judge.success.output_contains`, must also be English keywords. Translate terms such as `资源泄漏`, `关闭`, and `异常处理` into `resource leak`, `close`, and `exception handling`; do not write bilingual parentheticals like `"资源" (resources)`.
-- Keep technical identifiers unchanged, such as `schema_version`, `environment.type`, `engine.name`, `rule_based`, `agent_judge`, `script_path`, file paths, and commands.
-- Generated YAML comments must use field-leading comments. Keep each comment short: one line for field meaning, plus one line for options only when useful.
-- When listing options in comments, keep enum values unchanged, such as `none | opensandbox | docker` and `rule_based | agent_judge | script`.
-- Treat `assets/*.tmpl` as structural references only. Rewrite placeholder prose and comments into the current output language; in an English context, translate or remove every Chinese comment and Chinese placeholder before writing generated files.
-- `skill-up import` uses the CLI conversion path and does not preserve template comments; do not promise commented YAML for import-generated files.
-- In an English context, after generating all files but BEFORE submitting the final reply, you **MUST perform a CJK self-check**: open every `evals/cases/*.yaml` and `evals/eval.yaml` and scan for CJK characters (Unicode ranges `\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff\u3000-\u303f\uff00-\uffef`), including but not limited to `title`, `description`, `input.prompt`, `expect` keywords, `judge.criteria`, and YAML comments. If any CJK character is found, **replace it with an equivalent English expression before finishing the task**. This step is mandatory and must not be skipped.
+Treat `assets/*.tmpl` as structural references: adapt placeholder prose and
+comments to the requested language. Review only files created or changed for
+this task; never rewrite unrelated cases to enforce a language preference.
+
+Use short field-leading comments for generated YAML. Explain actual configured
+fields: `schema_version`, `environment.type`, `engine.name`, `cases.files`, and
+`report.formats` in eval.yaml; `id`, `title`, `input.prompt`, and `judge.type` in
+case YAML. For nested fields, place the comment inside the parent mapping
+immediately before the child field, rather than only before the parent.
+Comment `expect` and a top-level `judge` when present; do not add an
+optional field just to satisfy a comment check. Keep field names and enum values
+unchanged. `skill-up import` does not preserve template comments.
 
 ## What is skill-up
 
@@ -61,12 +68,73 @@ Use this skill in any of the following situations:
 - The user asks to "run / evaluate / verify / test this skill".
 - The user asks to "fix / improve / iterate / evolve this skill" from eval failures.
 - The user wants to "add evals, test cases, or regression cases to a skill".
+- The user asks to record explicitly attributed Skill usage, evidence, or feedback.
+- The user wants to review captured Skill observations or turn approved feedback into a regression case.
 - The user wants to edit `eval.yaml` / `case.yaml`, or asks you to choose an appropriate `judge` type.
 - The user mentions `skill-up run/validate/list-cases/report/import/init`.
 - The user wants to migrate from Anthropic `evals.json` to skill-up.
 - The current working directory contains `evals/eval.yaml` or `evals/evals.json` and the user wants to run it.
 
-## Main flow (follow this order strictly)
+## Choose the requested workflow
+
+- **Diagnose or plan:** read the target Skill and supplied evidence, identify
+  concrete problems, and propose changes or cases. Do not install tools, create
+  eval files, change configuration, or run evaluations unless requested.
+- **Create or edit cases:** use Steps 1–4 to create or update the suite and
+  validate its configuration. Stop before credentials and execution unless the
+  user also requests a run. Report the actual config/case paths and validation
+  status in the final reply.
+- **Evaluate:** follow Steps 0–7 for the requested suite; report failures without
+  automatically editing the Skill.
+- **Improve:** follow the evaluation workflow and Step 8 within the requested
+  scope. Preserve valid existing cases and assertions.
+
+## Evaluation workflow
+
+### Observation capture mode (optional)
+
+Use this mode when the user asks to record the current Skill interaction or
+feedback and observation tools are available. It requires either a current
+Codex release with the `codex-skill-up` plugin and lifecycle-hook support, or DSH with
+the skill-up plugin's observer explicitly enabled. Do not retrofit observation
+capture onto the pinned Codex 0.80.0 evaluation adapter.
+
+If the user asks how to install either host plugin, or the required observation
+tools are missing and the user asks to enable them, read
+`references/install.md` under "Install an observation host plugin (optional)". Do not
+install or enable a plugin unless the user asks.
+
+Claude Code, qodercli, Qwen Code, and other Agent Engines are not supported for
+this observation workflow. This restriction does not apply to normal `skill-up`
+evaluation runs, which remain multi-engine.
+
+1. Attribute the interaction only when the user explicitly references a Skill
+   (for example, `$my-skill`) or the responsible Skill is otherwise known with
+   certainty.
+2. In Codex, if explicit attribution is absent but certain, call
+   `mark_skill_invocation` once with the Skill name and optional version. DSH
+   derives exact attribution from its durable `/skill` injection or successful
+   `skill` tool result; do not add inferred attribution.
+3. In Codex, use `attach_skill_evidence` only for references that help reproduce or
+   evaluate the behavior. Prefer paths and short summaries over copied file
+   contents.
+4. In Codex, use `record_skill_feedback` during the observed turn. In DSH,
+   the observer stores the next user turn in the same session as an unclassified
+   follow-up candidate. For explicit feedback, use `record_observation_feedback`
+   with the completed observation's ID. Never invent sentiment or comments.
+
+Both adapters redact common credential shapes before local persistence, but still
+avoid sending secrets to marker tools. If the request is capture-only, stop
+after recording it; do not edit, evaluate, commit, or publish a Skill unless
+the user also asks for that work.
+
+### Observation input mode (optional)
+
+When the request starts from a captured Skill observation, read
+`references/observations.md` first. Use the available observation tools to
+inspect and preview the observation, require explicit approval for the exact
+candidate, write it only after approval, and then continue at Step 4. If the
+request does not start from an observation, use the normal flow below.
 
 ### Step 0: Make sure skill-up is installed
 
@@ -92,7 +160,8 @@ curl -fsSL https://raw.githubusercontent.com/alibaba/skill-up/main/install.sh | 
 
 After installing, run `skill-up --version` again. If the command is still missing, add `~/.local/bin` to `PATH`.
 
-More details: `references/install.md`.
+More details, including optional Codex and DSH observation host plugins:
+`references/install.md`.
 
 ### Step 0.5 (optional): User config and telemetry
 
@@ -110,7 +179,7 @@ Precedence (low → high): embedded empty defaults < user config < project `.ski
 ### Step 1: Locate the target Skill
 
 1. Identify the root directory of the target Skill (the directory containing `SKILL.md`). Search in this priority: user path → nearest `SKILL.md` upward from CWD → recently viewed files.
-2. Read the target `SKILL.md` for scope, triggers, and dependencies. If the Skill is Chinese but the user writes in English, translate capabilities into English for prompts and assertions.
+2. Read the target `SKILL.md` for scope, triggers, and dependencies. Preserve localized behavior and expected literals when designing cases.
 3. Check `evals/`:
    - `evals/eval.yaml` exists → Step 4 (optionally Step 3).
    - Only `evals/evals.json` → `references/migrate-anthropic.md` (`skill-up run --auto` or `skill-up import`).
@@ -121,8 +190,7 @@ Precedence (low → high): embedded empty defaults < user config < project `.ski
 - Copy `assets/eval.yaml.tmpl` to `<skill-root>/evals/eval.yaml`.
 - Copy `assets/case.yaml.tmpl` to `<skill-root>/evals/cases/<case-id>.yaml`.
 
-Adapt language per "Language Rules for Generated Artifacts". In an English context, it is **prohibited** to copy Chinese placeholder text from the templates into generated files — all prose must be rewritten in English. The Chinese in the templates is for structural reference only, not to be carried over.
-Preserve short field-leading comments in generated YAML. In Chinese context, rewrite those comments into Chinese while keeping field names and enum values in English.
+Adapt language per "Language Rules for Generated Artifacts". Replace the templates' generic English placeholders with case-specific prose in the requested output language. Preserve short field-leading comments in generated YAML; translate them when the output language differs from English, while keeping field names and enum values in English.
 
 Selection guidelines:
 
@@ -130,6 +198,7 @@ Selection guidelines:
 - `engine.name` + `engine.model`: default `claude_code`; `model` is optional. For `qodercli`, often omit `model`.
 - `judge.type`: `rule_based` (preferred), `script`, `agent_judge` (expensive) — see `references/judge-types.md`.
 - Case ID = filename without `.yaml`; prompts should exercise real Skill value.
+- For interactive cases, preserve fixed `input.turns[].content` where the user message is known. Use `input.turns[].respond` only for a reply that must react to the agent, or `input.prompt` plus case-level `user_simulator.scenario` when the simulator should choose all later replies and when to stop. Set an independent eval-level `user_simulator` model and a bounded `max_turns`; see both YAML references. Do not reuse `engine.model` or `judge.model` as an implicit simulator model.
 
 See `references/eval-yaml.md` and `references/case-yaml.md`.
 
@@ -138,6 +207,7 @@ See `references/eval-yaml.md` and `references/case-yaml.md`.
 - `skill-up list-cases <path>`
 - Review `eval.yaml` and representative cases; avoid `agent_judge` abuse.
 - Add or edit YAML under `cases/` as needed.
+- If adding simulated user turns, check that the selected engine supports session resumption, configure the separate simulator connection, and retain deterministic fixed turns and judge assertions wherever possible.
 
 ### Step 4: Validate the configuration
 
@@ -147,15 +217,32 @@ skill-up validate <skill-root>/evals/eval.yaml
 
 Expect: `✓ eval.yaml is valid (loaded N case(s))`.
 
+For a case-authoring request, finish here with the config and case paths plus
+validation status. Do not start a background evaluation as part of scaffolding.
+
 ### Step 5: Prepare credentials
 
-Priority: `--api-key` > env (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `QODER_PERSONAL_ACCESS_TOKEN`) > `~/.skill-up/credentials.yaml`.
+Check authentication for the selected engine and provider. Provider API keys
+resolve from `--api-key`, environment variables, or `~/.skill-up/credentials.yaml`;
+engine-specific tokens and saved login sessions follow the engine's auth rules.
+Never dump environment variables or credential files, or print secret values
+into tool output, logs, or the conversation. Check only whether a relevant
+variable has a non-empty value. For example, for an OpenAI API-key workflow:
 
 ```bash
-printenv | grep -E 'ANTHROPIC_API_KEY|OPENAI_API_KEY|QODER_PERSONAL_ACCESS_TOKEN'
+if printenv OPENAI_API_KEY | grep -q .; then
+  printf '%s\n' 'OPENAI_API_KEY: configured'
+else
+  printf '%s\n' 'OPENAI_API_KEY: not configured in the environment'
+fi
 ```
 
-If missing, **stop and ask**; do not write secrets into YAML without consent.
+An absent environment variable does not rule out file-based credentials or an
+existing engine login. If the selected authentication path is unavailable,
+**stop and ask** the user to configure it locally; do not ask them to paste a
+secret into the conversation or write secrets into YAML without consent.
+
+The user simulator resolves credentials by its own `user_simulator.provider`. For `provider: simulation`, set `SIMULATION_API_KEY` and `SIMULATION_BASE_URL`, or configure the `simulation` provider in `~/.skill-up/credentials.yaml`. For `provider: openai`, use `OPENAI_API_KEY` and optionally `OPENAI_BASE_URL`; its standard endpoint is the fallback. Choose `protocol: openai` for Chat Completions or `protocol: anthropic` for Messages; custom base URLs must match that protocol. For `provider: anthropic` with `protocol: anthropic`, use `ANTHROPIC_API_KEY` and optional `ANTHROPIC_BASE_URL` (official endpoint fallback). `--api-key` for the agent does not supply the simulator connection. Never put a raw key in eval YAML.
 
 For `opensandbox`, also ensure `OPENSANDBOX_API_KEY` (and related env) as needed.
 
@@ -190,6 +277,7 @@ Artifacts under `<skill-root>/<skill-name>-workspace/iteration-N/`:
 - `<case-id>/with_skill/grading.json`, `outputs/`
 
 Summarize: pass rate and timing; for failures, case id, assertion `text`, and `evidence`; benchmark deltas if enabled; offer HTML path or `skill-up report result.json --format html`.
+For simulated cases, inspect each turn's `source` and any `stop_reason` alongside the transcript. Hitting `max_turns` is an execution error; a simulator stop does not itself mean PASS, because the configured judge still grades the result.
 
 ### Step 8: Evolve the Skill when requested
 
@@ -224,10 +312,11 @@ Full flags: `references/cli.md`.
 
 - Model IDs vs proxy aliases — preserve what works for the user's `base_url`.
 - `opensandbox` without `OPENSANDBOX_API_KEY` — auth failures.
-- Chinese `expect.must_contain` vs English model output — align language in prompts/assertions.
+- Match the language of deterministic assertions to the behavior under test, not merely to the conversation language.
 - Abusing `agent_judge`.
 - Anthropic `evals.json` expectations → default `agent_judge`; use `import` + hand edits for deterministic checks.
 - Paths relative to Skill root (`SKILL.md` directory).
+- A simulator reply is literal user text, including `{{placeholders}}`; captured-variable substitution belongs only in configured fixed turns and `respond` instructions.
 - `--iteration 0` appends one run after the latest existing iteration without
   summarizing history; positive `--iteration N` runs N samples of the selected
   cases and, when N > 1, prints a simple stability/flakiness summary covering
@@ -241,4 +330,5 @@ Full flags: `references/cli.md`.
 - `references/judge-types.md`
 - `references/cli.md`
 - `references/migrate-anthropic.md`
+- `references/observations.md`
 - `assets/eval.yaml.tmpl`, `assets/case.yaml.tmpl`

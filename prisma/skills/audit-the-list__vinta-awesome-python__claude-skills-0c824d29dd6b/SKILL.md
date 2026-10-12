@@ -8,7 +8,7 @@ metadata:
 
 # Audit the list
 
-An Audit re-runs the admission test over live sections of README.md: every entry re-verified against current data, tiers reassessed, structure reconsidered, then the maintainer adjudicates and the result is committed. The rules live in CONTRIBUTING.md (Admission, Evidence, Entry Ordering) and CONTEXT.md (vocabulary) — this skill is the process that applies them, not a second copy of them. Entry changes land only on the maintainer's explicit go.
+An Audit re-runs the admission test over live sections of README.md: every entry re-verified against current data, tiers reassessed, structure reconsidered, then the maintainer adjudicates and the result is committed. The rules live in CONTRIBUTING.md (Admission, Evidence, Entry Ordering) — this skill is the process that applies them, not a second copy of them. Entry changes land only on the maintainer's explicit go.
 
 ## 1. Scope
 
@@ -35,8 +35,8 @@ Run the `preview-verdicts` skill: it generates the interactive review page and d
 
 ## 5. Execute
 
-One commit per section: body lists each removal with its reason and downloads figure; restructures, tier moves, and reorders ride the same commit. Format-only outcomes (no removals) are a single style commit. `make test` before every commit, `make build` after the last one. Generic commit helpers tend to split a section audit into structural and per-subcategory commits — if that happens, squash back to one commit per section. Done when the tree is clean, tests passed before each commit, and the build count reconciles with the adjudicated changes.
+One commit per section: body lists each removal with its reason and downloads figure, naming the figure's source and fetch date so a later audit can tell whether a trend compares like with like (ClickPy counts mirror traffic, pypistats does not); restructures, tier moves, and reorders ride the same commit. A restructure that renames or dissolves a category or subcategory adds `"old path": "new path"` to `website/data/redirects.json` in that commit, so the old URL keeps its search ranking; the build fails when a redirect target no longer exists, so a later rename also updates the entries pointing at the renamed path. Format-only outcomes (no removals) are a single style commit. `make test` before every commit. After the last add or rename, re-run the ClickPy sweep, since new names have no cache row and the build would count them without downloads, then `make build`. Generic commit helpers tend to split a section audit into structural and per-subcategory commits — if that happens, squash back to one commit per section. Done when the tree is clean, tests passed before each commit, and the build count reconciles with the adjudicated changes.
 
 ## 6. Record
 
-A conclusion that outlives the sitting goes into the repo before the audit ends: admission or evidence rules into CONTRIBUTING.md, repo process and environment facts into CLAUDE.md and AGENTS.md (kept in sync), vocabulary into CONTEXT.md. Done when nothing the next audit needs is stranded in conversation.
+A conclusion that outlives the sitting goes into the repo before the audit ends: admission or evidence rules into CONTRIBUTING.md, repo process and environment facts into CLAUDE.md and AGENTS.md (kept in sync). Done when nothing the next audit needs is stranded in conversation.

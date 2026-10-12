@@ -14,15 +14,18 @@ skills:
     path: .
 
 engine:
-  name: qodercli
+  name: opencode
   model:
-    name: auto
+    provider: dashscope
+    name: qwen3.8-max
+    base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
 
 cases:
   files:
     - evals/cases/analyze-directory.yaml
     - evals/cases/top-extensions.yaml
     - evals/cases/current-directory-format.yaml
+    - evals/cases/exclude-dependencies.yaml
   defaults:
     timeout_seconds: 900
     max_turns: 5
