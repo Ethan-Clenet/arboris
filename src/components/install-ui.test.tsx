@@ -79,6 +79,9 @@ describe('CliCommandBar', () => {
       wrap(<CliCommandBar args="install gateguard" copyLabel="Copier" copiedLabel="Copié" />),
     )
     expect(screen.getByText('gateguard')).toBeTruthy()
+    expect(screen.getByRole('code').textContent).toMatch(/curl -fsSL/)
+    expect(screen.getByRole('code').textContent).toMatch(/install-skill\.mjs/)
+    expect(screen.getByRole('code').textContent).not.toMatch(/npx arboris-cli/)
     await user.click(screen.getByRole('button', { name: 'Copier' }))
     expect(screen.getByLabelText('Copier')).toBeTruthy()
 
@@ -89,10 +92,17 @@ describe('CliCommandBar', () => {
     expect(screen.getByText('node')).toBeTruthy()
   })
 
-  it('utilise l’installateur web pour les collections', () => {
+  it('utilise l’installateur web curl|node pour les collections, avec variante Windows', async () => {
+    const user = userEvent.setup()
     render(wrap(<CliCommandBar args="collection ux-ui-pro" copyLabel="Copier" copiedLabel="Copié" />))
     expect(screen.getByText('ux-ui-pro')).toBeTruthy()
-    expect(screen.getByText(/install-collection\.mjs/)).toBeTruthy()
+    expect(screen.getByRole('code').textContent).toMatch(/curl -fsSL/)
+    expect(screen.getByRole('code').textContent).toMatch(/install-collection\.mjs/)
+
+    await user.click(screen.getByRole('tab', { name: 'Windows' }))
+    expect(screen.getByRole('code').textContent).toMatch(/iwr -UseBasicParsing/)
+    expect(screen.getByRole('code').textContent).toMatch(/ux-ui-pro/)
+    expect(screen.getByRole('code').textContent).not.toMatch(/npx /)
   })
 })
 
