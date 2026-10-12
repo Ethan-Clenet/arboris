@@ -89,6 +89,8 @@ function publisherMeta(name: string): { icon: string; color?: string; logo?: boo
     Vercel: { icon: 'triangle', color: '#EDEDED' },
     Neon: { icon: 'database', color: PUBLISHER_LOGO_COLOR.Neon },
     Flutter: { icon: 'device-mobile', color: PUBLISHER_LOGO_COLOR.Flutter },
+    Kotlin: { icon: 'code', color: PUBLISHER_LOGO_COLOR.Kotlin },
+    Swift: { icon: 'device-mobile', color: PUBLISHER_LOGO_COLOR.Swift },
     Figma: { icon: 'pen-nib', color: PUBLISHER_LOGO_COLOR.Figma },
     'Hugging Face': { icon: 'robot', color: PUBLISHER_LOGO_COLOR['Hugging Face'] },
     'Nous Research': { icon: 'sparkle', color: PUBLISHER_LOGO_COLOR['Nous Research'] },
