@@ -5,11 +5,8 @@ user-invocable: true
 model: sonnet
 effort: medium
 allowed-tools:
-  - Glob
-  - Read
-  - Edit
-  - Bash(git:*)
-  - Bash(python3:*)
+  - Edit(**/.claude-plugin/*.json)
+  - Bash(python3 .claude/skills/publish-plugins/scripts/check_manifest_sync.py:*)
   - Bash(claude plugin validate:*)
   - Bash(npx -y skills@latest add . -l)
 metadata:
@@ -26,8 +23,10 @@ Each plugin owns its version in its own `.claude-plugin/plugin.json`, and the re
 | Plugin                    | Manifest                                                     |
 | ------------------------- | ------------------------------------------------------------ |
 | `hal-skills`              | `skills/.claude-plugin/plugin.json`                          |
-| `hal-voice`               | `plugins/hal-voice/.claude-plugin/plugin.json`               |
+| `hal-output-styles`       | `plugins/hal-output-styles/.claude-plugin/plugin.json`       |
+| `hal-grammar-check`       | `plugins/hal-grammar-check/.claude-plugin/plugin.json`       |
 | `hal-session-auto-rename` | `plugins/hal-session-auto-rename/.claude-plugin/plugin.json` |
+| `hal-voice`               | `plugins/hal-voice/.claude-plugin/plugin.json`               |
 
 ## 1. Find the changed plugins
 
@@ -49,9 +48,11 @@ If a plugin's version already differs from `origin/main`, it was bumped for unre
 
 ## 3. Bump
 
-- **Patch** (0.2.0 -> 0.2.1): bug fixes, config changes, style cleanup
-- **Minor** (0.2.0 -> 0.3.0): new features, new hooks, new commands
-- **Major** (0.2.0 -> 1.0.0): breaking changes to hook behavior or config format
+- **Patch** (0.2.0 -> 0.2.1): bug fixes, config changes, style cleanup.
+- **Minor** (0.2.0 -> 0.3.0): new features, new hooks, new commands.
+- **Major** (0.2.0 -> 1.0.0): breaking changes to hook behavior or config format.
+
+Commit a bump made on its own through the `commit` skill with no argument: its subject already says why a bump exists.
 
 ## 4. Check the manifests are in sync
 
@@ -61,9 +62,9 @@ python3 .claude/skills/publish-plugins/scripts/check_manifest_sync.py
 
 Every plugin is described twice on purpose: once in its own `.claude-plugin/plugin.json` and once as an entry in `.claude-plugin/marketplace.json`. For each plugin the script checks that
 
-- both describe the same fields with the same values, apart from `version` (plugin.json only) and `source`, `category`, `tags`, `strict`, `defaultEnabled` (marketplace entry only — Claude Code ignores them in a plugin.json)
-- every component path either manifest declares exists on disk
-- every skill directory in a plugin's root appears in both skill lists
+- both describe the same fields with the same values, apart from `version` and the directory listing fields `icon`, `documentationUrl`, `supportUrl`, `privacyPolicyUrl`, `termsOfServiceUrl` (plugin.json only) and `source`, `category`, `tags`, `strict`, `defaultEnabled` (marketplace entry only — Claude Code ignores them in a plugin.json).
+- every component path either manifest declares exists on disk.
+- every skill directory in a plugin's root appears in both skill lists.
 
 It exits non-zero naming each problem. Fix the manifests it names, then run it again.
 
@@ -72,8 +73,10 @@ It exits non-zero naming each problem. Fix the manifests it names, then run it a
 ```bash
 claude plugin validate .
 claude plugin validate ./skills
-claude plugin validate ./plugins/hal-voice
+claude plugin validate ./plugins/hal-output-styles
+claude plugin validate ./plugins/hal-grammar-check
 claude plugin validate ./plugins/hal-session-auto-rename
+claude plugin validate ./plugins/hal-voice
 ```
 
 The first call validates the marketplace manifest; the rest validate each plugin manifest.
