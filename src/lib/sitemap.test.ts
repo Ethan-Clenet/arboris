@@ -70,6 +70,10 @@ describe('sources sitemap hors DB', () => {
     expect(urls.length).toBeGreaterThan(0)
     expect(urls.every((u) => u.path.startsWith('/collections/'))).toBe(true)
     expect(urls.map((u) => u.path)).toContain('/collections/flutter-starter')
+    expect(urls.map((u) => u.path)).toContain('/collections/kotlin-starter')
+    expect(urls.map((u) => u.path)).toContain('/collections/swift-starter')
+    expect(urls.map((u) => u.path)).toContain('/collections/huggingface-starter')
+    expect(urls.map((u) => u.path)).toContain('/collections/google-workspace-starter')
   })
 })
 

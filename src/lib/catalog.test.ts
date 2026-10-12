@@ -59,6 +59,8 @@ describe('stackSupportsCategory / skillMatchesStack', () => {
     expect(TECH_STARTER_PACK_IDS).toContain('docker-ops-starter')
     expect(TECH_STARTER_PACK_IDS).toContain('n8n-starter')
     expect(TECH_STARTER_PACK_IDS).toContain('flutter-starter')
+    expect(TECH_STARTER_PACK_IDS).toContain('kotlin-starter')
+    expect(TECH_STARTER_PACK_IDS).toContain('swift-starter')
     expect(packIdsForStartPath('new-project')).toEqual(TECH_STARTER_PACK_IDS)
   })
 
@@ -206,6 +208,10 @@ describe('collectionTheme', () => {
   it('classe les collections connues', () => {
     expect(collectionTheme({ id: 'react-ts-starter' })).toBe('frontend')
     expect(collectionTheme({ id: 'flutter-starter' })).toBe('frontend')
+    expect(collectionTheme({ id: 'kotlin-starter' })).toBe('frontend')
+    expect(collectionTheme({ id: 'swift-starter' })).toBe('frontend')
+    expect(collectionTheme({ id: 'huggingface-starter' })).toBe('data')
+    expect(collectionTheme({ id: 'google-workspace-starter' })).toBe('ops')
     expect(collectionTheme({ id: 'node-api-starter' })).toBe('backend')
     expect(collectionTheme({ id: 'prisma-postgres-starter' })).toBe('data')
     expect(collectionTheme({ id: 'docker-ops-starter' })).toBe('ops')

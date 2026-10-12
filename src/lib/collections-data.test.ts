@@ -29,6 +29,10 @@ describe('COLLECTIONS', () => {
     expect(findCollectionSeed('prisma-postgres')?.id).toBe('prisma-postgres-starter')
     expect(findCollectionSeed('n8n')?.id).toBe('n8n-starter')
     expect(findCollectionSeed('flutter')?.id).toBe('flutter-starter')
+    expect(findCollectionSeed('kotlin')?.id).toBe('kotlin-starter')
+    expect(findCollectionSeed('swift')?.id).toBe('swift-starter')
+    expect(findCollectionSeed('huggingface')?.id).toBe('huggingface-starter')
+    expect(findCollectionSeed('google-workspace')?.id).toBe('google-workspace-starter')
   })
 
   it('embarque les packs Docker et n8n', () => {
@@ -129,5 +133,95 @@ describe('COLLECTIONS', () => {
     expect(findCollectionSeed('yunt-docker')?.id).toBe('yunt-docker')
     // `docker` reste l’alias de docker-ops-starter (pas yunt-docker)
     expect(findCollectionSeed('docker')?.id).toBe('docker-ops-starter')
+  })
+
+  it('compte 28 collections', () => {
+    expect(COLLECTIONS).toHaveLength(28)
+  })
+
+  it('embarque le pack Kotlin (8 skills first-party)', () => {
+    const pack = COLLECTIONS.find((c) => c.id === 'kotlin-starter')
+    expect(pack?.kind).toBe('pack')
+    expect(pack?.labelFr).toBe('Kotlin')
+    expect(pack?.skillIds).toHaveLength(8)
+    expect(pack?.skillIds).toEqual([
+      'kotlin-patterns',
+      'kotlin-coroutines-flows',
+      'kotlin-ktor-patterns',
+      'kotlin-exposed-patterns',
+      'kotlin-testing',
+      'compose-multiplatform-patterns',
+      'android-clean-architecture',
+      'apollo-kotlin',
+    ])
+    expect(pack?.commandIds).toEqual(['commit', 'ready-pr', 'review-pr', 'explain-code'])
+    expect(findCollectionSeed('kotlin-starter')?.id).toBe('kotlin-starter')
+  })
+
+  it('embarque le pack Swift (8 skills)', () => {
+    const pack = COLLECTIONS.find((c) => c.id === 'swift-starter')
+    expect(pack?.kind).toBe('pack')
+    expect(pack?.labelFr).toBe('Swift')
+    expect(pack?.skillIds).toHaveLength(8)
+    expect(pack?.skillIds).toEqual([
+      'swiftui-patterns',
+      'swift-concurrency-6-2',
+      'swift-actor-persistence',
+      'swift-protocol-di-testing',
+      'foundation-models-on-device',
+      'ios-icon-gen',
+      'figma-swiftui',
+      'apollo-ios',
+    ])
+    expect(pack?.commandIds).toEqual(['commit', 'ready-pr', 'review-pr', 'explain-code'])
+    expect(findCollectionSeed('swift-starter')?.id).toBe('swift-starter')
+  })
+
+  it('embarque le pack Hugging Face (produits officiels, sans CI ni kernels)', () => {
+    const pack = COLLECTIONS.find((c) => c.id === 'huggingface-starter')
+    expect(pack?.kind).toBe('pack')
+    expect(pack?.labelFr).toBe('Hugging Face')
+    expect(pack?.skillIds).toHaveLength(9)
+    expect(pack?.skillIds).toEqual(
+      expect.arrayContaining([
+        'huggingface-llm-trainer__huggingface-skills__skills-955045b18625',
+        'huggingface-datasets__huggingface-skills__skills-ebb42bcb0d99',
+        'huggingface-gradio__huggingface-skills__skills-f590c3a4e2fc',
+        'huggingface-spaces__huggingface-skills__skills-d8a00a89959f',
+        'transformers-js__huggingface-skills__skills-5bf8a39ad389',
+        'trl-training__huggingface-skills__skills-87c5c166e35a',
+        'pytorch-patterns',
+        'mle-workflow',
+        'ml-adoption-playbook',
+      ]),
+    )
+    expect(pack?.skillIds.some((id) => id.includes('kernel'))).toBe(false)
+    expect(pack?.skillIds.some((id) => id.includes('pytorch-ci'))).toBe(false)
+    expect(pack?.skillIds.some((id) => id.includes('huggingface-kernels'))).toBe(false)
+    expect(pack?.skillIds.some((id) => id.includes('huggingface-mlclaw'))).toBe(false)
+    expect(pack?.commandIds).toEqual(['commit', 'ready-pr', 'review-pr', 'explain-code'])
+    expect(findCollectionSeed('huggingface-starter')?.id).toBe('huggingface-starter')
+  })
+
+  it('embarque le pack Google Workspace (~15 skills gws/recipe)', () => {
+    const pack = COLLECTIONS.find((c) => c.id === 'google-workspace-starter')
+    expect(pack?.kind).toBe('pack')
+    expect(pack?.labelFr).toBe('Google Workspace')
+    expect(pack?.skillIds).toHaveLength(15)
+    expect(pack?.skillIds).toEqual(
+      expect.arrayContaining([
+        'gws-gmail',
+        'gws-drive',
+        'gws-calendar',
+        'gws-docs',
+        'gws-sheets',
+        'recipe-label-and-archive-emails',
+        'recipe-organize-drive-folder',
+        'recipe-generate-report-from-sheet',
+      ]),
+    )
+    expect(pack?.skillIds.filter((id) => id.startsWith('recipe-'))).toHaveLength(3)
+    expect(pack?.commandIds).toEqual(['commit', 'ready-pr', 'review-pr', 'explain-code'])
+    expect(findCollectionSeed('google-workspace-starter')?.id).toBe('google-workspace-starter')
   })
 })

@@ -137,6 +137,8 @@ export function resolvePublisherId(input: string, manifest: CliManifest): string
     neondatabase: 'Neon',
     flutter: 'Flutter',
     dart: 'Flutter',
+    kotlin: 'Kotlin',
+    swift: 'Swift',
     figma: 'Figma',
     huggingface: 'Hugging Face',
     'hugging-face': 'Hugging Face',
