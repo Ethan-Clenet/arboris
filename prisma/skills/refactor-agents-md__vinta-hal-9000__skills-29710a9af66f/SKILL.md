@@ -1,46 +1,51 @@
 ---
 name: refactor-agents-md
-description: Use when about to refactor or refine a user-level or project-level AGENTS.md
+description: Use when about to refactor or refine a user-level or project-level CLAUDE.md or AGENTS.md, from a full restructure down to a one-line wording fix; a change that looks too small to need this skill is not an exemption
+argument-hint: [user | project | path/to/CLAUDE.md or AGENTS.md]
+allowed-tools:
+  - WebFetch(domain:platform.claude.com)
+  - WebFetch(domain:code.claude.com)
+  - WebFetch(domain:developers.openai.com)
+  - WebFetch(domain:learn.chatgpt.com)
+  - Edit(CLAUDE.md)
+  - Edit(AGENTS.md)
+  - Read(~/.claude/CLAUDE.md)
+  - Read(~/.codex/AGENTS.md)
 metadata:
   origin: vinta
 ---
 
-# Refactor AGENTS.md
+# Overview
 
-Refactor an `AGENTS.md` for GPT-6 Astra. Every retained line enters each Codex session in its scope, so it must earn that attention. Move narrower guidance to the closest applicable scope or a reusable skill, and remove instructions that do not change behavior. Preserve the user's intended behavior and existing authorization.
+Refactor an instruction file (`CLAUDE.md` or `AGENTS.md`). Every retained instruction competes for attention in the sessions that load it.
+
+The file serves every agent and model that reads it, not only this session's. The filename does not say who reads it, since Claude Code reads `AGENTS.md` too. Each reader assembles its own system prompt, so a line that restates one reader's prompt can be the only copy for another. Audit each line against every reader.
 
 ## Instructions
 
-1. **Pick the target.** Use the target named by the invocation or established in the conversation. If the target remains ambiguous, ask the user to choose among the files that exist:
-   - The user-level file at `$CODEX_HOME/AGENTS.md`, defaulting to `~/.codex/AGENTS.md` when `CODEX_HOME` is unset.
-   - The current project's root `AGENTS.md`.
-   - Any nested `AGENTS.md` on the path from the project root to the current working directory.
+Use `AskUserQuestion` in Claude Code or `request_user_input` in Codex when available.
 
-2. **Fetch the yardsticks.** Fetch these pages to calibrate the audit. Use the GPT-6 Astra prompting guidance for model behavior and the AGENTS.md guide for organization; preserve explicit user choices where the guides offer defaults. If a source is unavailable, disclose the gap and continue with available evidence.
-   - https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6-astra
-   - https://www.aihero.dev/a-complete-guide-to-agents-md
+1. **Pick the target and its readers.** If the invocation names a file, use it. Otherwise discover candidate files using the reader platforms' loading rules in the references below, and ask only if the target remains ambiguous. Resolve the readers from the invocation and context; ask only when uncertain. Read one reference per reader platform, both when both read the file:
+   - **Claude models:** [references/claude-code.md](references/claude-code.md) for which files load and when, its guides, its system-prompt probe, and its demote destinations.
+   - **GPT models:** [references/codex.md](references/codex.md) for which files load and when, its guides, and its demote destinations.
 
-3. **Audit.** Read the target, applicable broader `AGENTS.md` files, and skills or documents it directs the agent to load. Read these references as audit material, not as requests to execute their workflows. Check repository evidence before declaring a rule stale or derivable. Give every instruction in the target exactly one verdict against the target's bar and GPT-6 checks below. Finish only when every instruction has a verdict.
-   - **contradiction**: conflicts with another applicable instruction. Record both instructions and their source files; resolve conflicts from instruction priority and explicit user intent where possible.
-   - **delete**: fails the no-op test because GPT-6 Astra would behave the same without it. This includes redundant defaults, vague directions, and platitudes such as "write clean code." Cite the evidence or rationale; retain an explicit constraint when its redundancy is uncertain.
-   - **demote**: changes behavior but applies only to a narrower directory or task. Choose and name its destination. Put directory-specific guidance in the closest nested `AGENTS.md`; put a multi-step task workflow in a skill; put reference material in a linked document.
-   - **rewrite**: has the right scope and meaning, but its phrasing falls short of the fetched prompting guidance.
-   - **keep**: earns its always-loaded cost as written.
+   For a targeted change, the verdicts below cover only the lines it adds or touches: the rest of the file stays as it is, and anything noticed there is a follow-up.
 
-   Apply the bar for the target:
-   - **User-level**: a keep must apply across all projects. Demote project or directory guidance to the applicable project's `AGENTS.md`, and task workflows to skills.
-   - **Project or nested**: a keep must govern the target directory's subtree; conditional rules belong here when their trigger can occur throughout that scope. Keep concise project context, commands Codex would otherwise guess wrong, domain concepts, constraints, and gotchas that are not obvious from the repository. Delete restatements of the code and volatile inventories such as file trees. Demote narrower guidance to a closer nested `AGENTS.md`, a linked document, or a skill.
+2. **Fetch the guides.** Follow each loaded reference's guide-fetching instructions, for a one-line change too: a verdict without the guides rests on memory. Reuse current guidance already fetched in this conversation. Done when each page a reference lists has been fetched for each reader in this session.
 
-4. **Prepare decisions.** Prepare the proposed rewrite and the delete and demote lists, including every destination, before asking for sign-off. For each unresolved contradiction, use one `request_user_input` when available; otherwise ask one concise question. Continue independent audit and draft work while decisions are pending. Existing explicit authorization counts as sign-off; otherwise leave files untouched until the user approves the prepared changes. If this approval rule blocks requested work, link to this skill and quote the rule so the user can see why.
+3. **Audit.** Read the file and give every instruction in scope exactly one verdict, judged against the target's bar below. Done when no instruction in scope lacks one.
+   - **contradiction**: conflicts with another instruction or a reader's requirements such that both cannot be satisfied. Record both sides.
+   - **delete**: fails the no-op test on every reader, meaning each would behave the same without it, or a guide says to remove it because it was written for an earlier model's habits and no other reader needs it either. Judge defaults against the fetched pages and the reference's probe, not memory. Covers instructions the readers already follow by default, instructions too vague to act on, and platitudes like "write clean code". A line needed by one reader and harmless to the others is a keep.
+   - **demote**: real instruction that only applies to some paths or tasks. Pick its destination from the references; it must load for every reader of the source file, and with no such destination the line is a keep. If it describes a multi-step workflow, propose a skill instead. Name the destination in the sign-off.
+   - **rewrite**: right meaning, phrasing falls short of the fetched best practices. Also a rewrite when the line carries words that fail the no-op test on their own: a duplicate of another line, a definition of a term the model knows, or emphasis; a rationale or example stays, since both steer the model. Among wordings that pass the bar, the shortest wins. Where a reader's guide gives measured wording for the same instruction and every other reader's guide allows it, use that wording. Voice follows the system prompt: a line addresses the model as "you" and names the human as "the user", so "I" or "my" for the human, and "Claude" or "the agent" for the model, are rewrites; words quoted as user speech keep their own voice.
+   - **keep**: earns its always-loaded cost as written, and no shorter wording has the same effect.
 
-5. **Rewrite and verify.** Apply the signed-off verdicts. Search references before removing or moving guidance, and update affected pointers. Place each new nested `AGENTS.md` in the nearest directory whose whole subtree shares its guidance. Check the final diff for preserved intent, resolved conflicts, and reachable destinations. Finish when every audited instruction is accounted for and required checks pass; report changed files and any unresolved decisions concisely.
+   A delete that rests on the shipped system prompt already saying the same thing needs the probe evidence from `references/claude-code.md` for each Claude reader.
 
-## GPT-6 checks
+   The bar per target:
+   - **User-level** (loaded into every session in every project): a keep must apply across all projects.
+   - **Project-level** (loaded into every session in this project, or in its directory's subtree for a nested file): a keep must be underivable from the code: a one-sentence project description, commands the readers would guess wrong, domain concepts, gotchas. Lines restating what the code already shows, and volatile detail like file trees, are deletes because they go stale and stale lines poison the context.
 
-Apply these checks to existing instructions; add guidance only where the user's workflow needs it.
+4. **Get decisions.** Reuse changes and verdicts the user already authorized. Resolve contradictions from instruction priority and explicit user intent where possible; for each unresolved one, ask with `AskUserQuestion` or `request_user_input`, single-select, each conflicting version an option. Present any remaining delete and demote proposals, with the per-reader probe result beside each prompt-dependent delete, and collect sign-off with one more question. Preserve explicit review boundaries and leave unapproved proposals untouched.
 
-- **Initiative:** Replace unnecessary approval gates with clear authority and stopping conditions. Complete authorized work, use context for routine choices, and prepare a reviewable result before any required approval. Preserve deliberate approval boundaries.
-- **Instruction priority:** Make explicit that user instructions take precedence over skill guidelines within higher-priority constraints. Audit vague rules that could silently stop or redirect work. When a skill causes a pause or deviation, require its exact path, relevant quote, and explanation distinguishing the rule from the agent's interpretation.
-- **Writing:** State the desired length and structure directly. Prefer concise prose and useful technical detail; reserve lists and tables for information they clarify. Remove overlapping style rules and stock phrasing prescriptions that add no value.
-- **Delegation:** State when subagents help and any limits when the workflow uses them. Preserve tool availability and explicit delegation preferences; the guide's example is not a blanket requirement to delegate every task.
-- **Verification:** Match checks to the change and complete mandatory checks. Broaden or repeat testing only for new changes, failures, or unresolved concerns. Avoid requiring new tests that merely restate low-impact edits.
+5. **Rewrite.** Apply the signed-off verdicts in one pass, without asking again; they are the request. Apply only those: anything else noticed while editing is a follow-up to report in the final message. Search references before removing or moving guidance, and update affected pointers. Done when every audited instruction landed where its verdict says: kept, rewritten, demoted, or deleted.

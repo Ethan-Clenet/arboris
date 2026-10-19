@@ -4,6 +4,7 @@ description: Opens a pull request from the current branch using the PR template.
 allowed-tools: Bash, Read, AskQuestion
 metadata:
   origin: Storybook
+  internal: true
 ---
 
 # Open Pull Request

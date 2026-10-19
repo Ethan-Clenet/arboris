@@ -4,6 +4,7 @@ description: Rebuild and restart the internal Storybook UI after changes to inte
 allowed-tools: Bash, Read
 metadata:
   origin: Storybook
+  internal: true
 ---
 
 # Rebuild and Restart Storybook

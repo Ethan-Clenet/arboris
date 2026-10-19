@@ -4,6 +4,7 @@ description: Finds or publishes a pkg.pr.new canary release for a Storybook bran
 allowed-tools: Bash
 metadata:
   origin: Storybook
+  internal: true
 ---
 
 # Find Or Publish Canary Release

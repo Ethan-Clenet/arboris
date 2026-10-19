@@ -4,6 +4,7 @@ description: Write the changelog entry for a new minor or major Storybook releas
 allowed-tools: Bash, Read, Write, Edit
 metadata:
   origin: Storybook
+  internal: true
 ---
 
 # Write Minor/Major Release Changelog

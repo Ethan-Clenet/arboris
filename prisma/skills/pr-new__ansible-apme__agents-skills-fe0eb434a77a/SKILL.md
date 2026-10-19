@@ -11,7 +11,7 @@ user-invocable: true
 metadata:
   origin: Ansible
   author: APME Team
-  version: 1.2.0
+  version: 1.3.0
 ---
 
 # PR New
@@ -107,6 +107,13 @@ artifact type, translate it:
    annotation, return value, error code, version range, log level,
    comment, and docstring. If the code declares it, the runtime must
    honor it on every path.
+   For recurring background work, compare steady-state and transition logs:
+   unchanged successes and repeated failures should not crowd out meaningful
+   changes; initial failures and recoveries must remain visible.
+   When classifying free-form diagnostics, require context and token boundaries
+   for numeric identifiers so unrelated values do not acquire error semantics.
+   Check real diagnostics from the upstream producer, including every supported
+   output format, so restrictive matching still recognizes actual failures.
 
 2. **Does this expose more than it should?** Check every log call,
    error message, and user-facing string. Does it contain user content,
@@ -124,6 +131,10 @@ artifact type, translate it:
    the same module? When a helper opens a channel, socket, or other
    closeable resource, does every return path (success and failure)
    close it — typically via `finally` — or can a failed RPC leak it?
+   Trace async entry points through helpers to every filesystem operation,
+   including discovery, metadata probes, and parsing. Blocking storage must
+   stay off the event loop, and unchanged hot paths should avoid repeated
+   content reads and unnecessary shared-lock contention.
 
 4. **Is everything still true after this change?** Diff comments and
    docstrings against the code they describe. Did you rename something
@@ -143,7 +154,11 @@ artifact type, translate it:
 
 5. **Are dependencies and versions pinned to intent?** Check every
    version range, action tag, and base image. Does each one express
-   what you actually mean — not tighter, not looser? For workflow
+   what you actually mean — not tighter, not looser? When updating a tool
+   used by CI, compare all of its resolution sources: CI requirements,
+   project lockfiles, developer install commands, and agent setup guides.
+   Keep the resolved versions aligned or document the intentional split.
+   For workflow
    checkouts: if the job has write scopes (`packages: write`, etc.)
    or runs untrusted/repo scripts after checkout, is
    `persist-credentials: false` set so `GITHUB_TOKEN` is not left
@@ -212,9 +227,26 @@ artifact type, translate it:
    string with the same whitespace class, not ``split(trim(x, " "), " ")``.
    Also construct _temporal_ failures: what happens when an async
    dependency never responds, times out, or responds after the
-   consumer has moved on? What happens when `asyncio.gather()`
+   consumer has moved on? For React effects that rerun when a provider,
+   route, or selected entity changes, resolve and reject an older request
+   after cleanup; verify its success, catch, and finally handlers cannot
+   overwrite current data, selections, persisted values, or loading state.
+   What happens when `asyncio.gather()`
    returns a mix of results and exceptions — does every caller
    handle `return_exceptions=True` correctly?
+   Trace intentional control-flow exceptions through enclosing broad catches:
+   retries, cancellations, and source conflicts must retain their caller-visible
+   meaning. Malformed user configuration must reach the public entry point's
+   error contract with useful setting context and without exposing raw values.
+   For persisted identity, enumerate all transitive inputs (including trust
+   files, directory entries, and symlink targets); rotate their contents at
+   unchanged paths and verify both invalidation and steady-state reuse.
+   When the change schedules fire-and-forget tasks (notifications,
+   broadcasts, cleanup), construct the fixture/lifecycle race: does
+   teardown dispose shared resources (DB engine, clients) while a
+   pending task still needs them? Drain or cancel outstanding work
+   before closing those resources — mid-test awaits alone do not
+   cover paths that never assert on the side effect.
    For persistence and aggregation helpers, also construct:
    - **Concurrent writers** — two sessions calling the same
      select-then-insert / claim path before either commits (lost
@@ -345,7 +377,7 @@ Also construct at least one realistic failure per public entry point:
 empty-but-not-falsy values, post-filter field combinations, async
 dependency never responds / asyncio.gather(return_exceptions=True)
 mix, concurrent select-then-insert, non-unique dict keys, mixed members
-of a group stamped with one decision, unbounded SQL IN vs SQLite
+of a group stamped with one decision, unbounded SQL IN clause size
 limits (prefer ``col.in_(select(...))`` over materializing large id
 lists into bound parameters; chunk at ~900 when a Python list is
 unavoidable; when checking membership of a *small* candidate set
@@ -373,6 +405,18 @@ break ``rpartition(":")``: empty host (``:port``), unbracketed IPv6
 ``host:abc``). If a caller claims graceful degrade and only catches
 ``ImportError``, also construct a parse ``ValueError`` through that
 caller. Do not treat “contains a colon” as proof of TCP.
+When a function degrades to identity (return original / omit from
+diffs / skip and continue) on failure, construct the caller path that
+reports "already clean", "idempotent", or "success" from an empty
+result list — require an explicit per-item diagnostic (error field,
+skipped list, WARNING progress/log) so failure is not presented as
+success. If that diagnostic is logged inside ``run_in_executor``,
+require ``contextvars.copy_context()`` (or an explicit progress event)
+so ADR-033 collectors and FixSession clients actually see it.
+When a graph builder maps ordered source sections to sibling edges,
+compare edge positions with the source language's execution phases, not
+only build order. Test a producer in an earlier phase consumed by a later
+phase (for Ansible plays: ``pre_tasks → roles → tasks → post_tasks``).
 Treat structured health/status bodies as contracts: reject
 substring/`"ok" in body` checks when the peer emits JSON with a
 ``status`` field — require exact equality (``status == "ok"``).
@@ -382,6 +426,11 @@ GitHub ``run:``), construct interpolator collisions: unescaped
 ``{...}`` that tox substitutes before Python runs. For
 ``next(glob(...))``, construct the empty-match path and require an
 explicit error instead of ``StopIteration``.
+
+For any text unescape/decode normalizer, construct inputs with one and
+multiple escaping layers, structural boundaries at root and nested
+positions, and lookalike escape sequences inside quoted content. Verify
+the detector and the rewrite recognize the same boundaries.
 
 Do NOT discuss architecture philosophy. Rank findings
 critical/high/medium/low.
@@ -426,7 +475,13 @@ critical/high/medium/low.
   _DEFAULT_PORTS ↔ started services; Helm template ↔ Podman
   ``pod.yaml`` for the same in-pod env/volume/probe wiring — if Helm
   mounts a shared socket for Gateway health, Podman Gateway must too)
-- Test gaps for behaviors the code/docs claim
+- Sibling-rule parity: when rules enforce the same security condition,
+  compare their scope enumeration and all-path requirements so a protected
+  path cannot hide an unprotected path in another rule (for example, L047
+  and L110 handling shared include contexts).
+- Test gaps for behaviors the code/docs claim; verify each regression test
+  reaches the changed logic and would fail without the fix (use a positive
+  control or the pre-fix behavior when practical)
 - Silent no-ops, dead branches, wrong defaults
 - **Dependencies pinned to intent** — version ranges, GitHub Action
   tags, base images, pip/uv specs (not tighter, not looser);
@@ -483,8 +538,12 @@ fix-now vs follow-up issue. Be skeptical.
 **Lens — system architecture:** Zoom out beyond this PR's files:
 - Dependency direction (gateway vs engine; no inverted imports)
 - Where state lives and failure modes (concurrency, restart,
-  multi-instance, partial flush/claim)
-- Scaling: algorithmic cost, SQLite parameter limits, fan-out under load
+  multi-instance, partial flush/claim). Client-visible IDs that
+  authorize or bind requests (gate ids, session tokens, generation
+  handles) must not reuse values across process lifetimes —
+  process-local counters reset on restart and can accept stale
+  client retries against a new operation
+- Scaling: algorithmic cost, PostgreSQL parameter limits, fan-out under load
 - Whether schemas/analytics support the views claimed in ADR/docs
 - Frontend/API contract readiness for the stated UX
 - Migration/backfill for existing deployments
@@ -572,6 +631,27 @@ If a new rule was added, regenerate the catalog:
 python tools/generate_rule_catalog.py
 ```
 
+### Step 4b: ADR and issue traceability (mandatory)
+
+**Do not commit or open a PR until this step passes** (or gaps are explicitly
+documented in the PR body with follow-up issues filed).
+
+Follow the **`pr-traceability`** skill (`.agents/skills/pr-traceability/SKILL.md`):
+
+1. Find related **GitHub issues** — link with `Closes #N` / `Refs #N`, or create
+   an issue / document why none applies.
+2. Find related **ADRs** — update status (`Implemented`, `Partially
+   Implemented`, etc.), revision history, and regenerate the index when the PR
+   implements or advances an ADR decision.
+3. Add **`## Related issues`** and **`## Related ADRs`** sections to the PR body.
+
+If the change is a **new** architectural decision, run **`/adr-new`** (Step 5)
+before or in the same PR — do not ship code that contradicts an accepted ADR
+without a superseding ADR.
+
+Reviewers use the same checklist via `pr-contributor-review` and
+`pr-address-feedback` after follow-up commits.
+
 ### Step 5: Update SDLC artifacts (if applicable)
 
 If the change involves an architectural decision (new service, new protocol, new deployment strategy, new tooling adoption), create an ADR in `.sdlc/adrs/` using the `adr-new` skill. The file should follow the naming convention `ADR-NNN-slug.md`.
@@ -653,6 +733,13 @@ gh pr create --repo upstream-owner/repo --title "conventional commit style title
 ## Changes
 - List of notable changes
 
+## Related issues
+- Closes #NNN — <why>
+- Refs #NNN — <partial / context> (or `None — <why no related issue applies>`)
+
+## Related ADRs
+- ADR-NNN — <status change or "reviewed, no change"> (or `None — <why no related ADR applies>`)
+
 ## Quality of life
 - List any non-functional improvements bundled in this PR: skill updates,
   workflow fixes, SDLC artifact changes, rule/template tweaks, documentation
@@ -663,7 +750,8 @@ gh pr create --repo upstream-owner/repo --title "conventional commit style title
 - [ ] `tox -e lint` passes
 - [ ] `tox -e unit` passes
 - [ ] Docs updated (if applicable)
-- [ ] ADR added (if applicable)
+- [ ] ADR added or updated (if applicable)
+- [ ] Issues referenced (`Closes` / `Refs`) per pr-traceability
 EOF
 )"
 ```

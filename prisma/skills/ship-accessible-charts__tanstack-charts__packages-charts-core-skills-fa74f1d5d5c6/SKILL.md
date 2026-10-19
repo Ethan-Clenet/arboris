@@ -8,7 +8,7 @@ metadata:
   origin: TanStack
   type: lifecycle
   library: '@tanstack/charts'
-  library_version: '0.18.0'
+  library_version: '1.1.0'
 sources:
   - 'TanStack/charts:docs/guides/accessibility.md'
   - 'TanStack/charts:docs/guides/ssr-and-hydration.md'

@@ -3,6 +3,7 @@ name: handle-pr-comments
 description: Triage and resolve GitHub PR review comments one by one, interactively. Use when the user asks to handle, address, respond to, or resolve PR review comments, or mentions reviewer feedback on a pull request.
 metadata:
   origin: Storybook
+  internal: true
 ---
 
 # Handle PR Comments

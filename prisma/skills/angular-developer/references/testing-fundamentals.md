@@ -1,17 +1,16 @@
 # Testing Fundamentals
 
-This guide covers the fundamental principles and practices for writing unit tests in this repository, which uses Vitest as the test runner.
+This guide covers the fundamental principles and practices for writing Angular unit and component tests. Use the runner already configured in the project.
 
-## Core Philosophy: Zoneless & Async-First
+## Core Philosophy: Async-First
 
-This project follows a modern, zoneless testing approach. State changes schedule updates asynchronously, and tests must account for this.
+Modern Angular applications often schedule state changes asynchronously, especially when using signals or zoneless change detection. Tests should account for this.
 
-**Do NOT** use `fixture.detectChanges()` to manually trigger updates.
-**ALWAYS** use the "Act, Wait, Assert" pattern:
+Prefer the "Act, Wait, Assert" pattern:
 
-1.  **Act:** Update state or perform an action (e.g., set a component input, click a button).
-2.  **Wait:** Use `await fixture.whenStable()` to allow the framework to process the scheduled update and render the changes.
-3.  **Assert:** Verify the outcome.
+1. **Act:** Update state or perform an action (e.g., set a component input, click a button).
+2. **Wait:** Use `await fixture.whenStable()` to allow the framework to process the scheduled update and render the changes.
+3. **Assert:** Verify the outcome.
 
 ### Basic Test Structure Example
 
@@ -24,10 +23,13 @@ describe('MyComponent', () => {
   let fixture: ComponentFixture<MyComponent>;
   let h1: HTMLElement;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
+  beforeEach(async () => {
+    // 1. Configure the test module
+    await TestBed.configureTestingModule({
+      imports: [MyComponent],
+    }).compileComponents();
 
-    // Create the component fixture
+    // 2. Create the component fixture
     fixture = TestBed.createComponent(MyComponent);
     component = fixture.componentInstance;
     h1 = fixture.nativeElement.querySelector('h1');

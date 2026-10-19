@@ -8,7 +8,7 @@ metadata:
   origin: TanStack
   type: core
   library: '@tanstack/charts'
-  library_version: '0.18.0'
+  library_version: '1.1.0'
 requires:
   - compose-marks-and-views
 sources:

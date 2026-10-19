@@ -26,13 +26,15 @@ interface Transaction<T> {
   metadata: Record<string, unknown>
   error?: { message: string; error: Error }
 
-  // Deferred promise -- resolves when the transaction settles, rejects on
-  // mutation failure or rollback
+  // Deprecated alias for the settlement promise; retained until the 1.0 RC
   isPersisted: {
     promise: Promise<Transaction<T>>
     resolve: (value: Transaction<T>) => void
     reject: (reason?: any) => void
   }
+
+  // Resolves when the transaction settles; rejects on failure or rollback
+  when(state: 'settled'): Promise<Transaction<T>>
 
   // Execute collection operations inside the ambient transaction context
   mutate(callback: () => void): Transaction<T>
@@ -129,7 +131,7 @@ const action = createOptimisticAction<TVariables>({
 
 // Returns a function: (variables: TVariables) => Transaction
 const tx = action(variables)
-await tx.isPersisted.promise
+await tx.when('settled')
 ```
 
 ## createPacedMutations
@@ -165,6 +167,10 @@ debounceStrategy({
 })
 ```
 
+Debounce cleanup lets a pending write run after the last call's quiet period.
+It returns before that transaction settles.
+With `trailing: false`, a skipped call rejects with `DebounceCallDroppedError`.
+
 ### throttleStrategy
 
 ```ts
@@ -172,10 +178,13 @@ import { throttleStrategy } from "@tanstack/db"
 
 throttleStrategy({
   wait: number,           // minimum ms between commits
-  leading?: boolean,      // execute on the leading edge
-  trailing?: boolean,     // execute on the trailing edge
+  leading?: boolean,      // defaults true unless trailing is explicitly true
+  trailing?: boolean,     // defaults true; false rejects skipped optimistic calls
 })
 ```
+
+Throttle cleanup lets an already scheduled trailing write run at its configured
+edge. It returns before that transaction settles.
 
 ### queueStrategy
 
@@ -184,23 +193,24 @@ import { queueStrategy } from "@tanstack/db"
 
 queueStrategy({
   wait?: number,                      // ms between processing items (default 0)
-  maxSize?: number,                   // drop items if queue exceeds this
+  maxSize?: number,                   // reject overflow when waiting queue is full
   addItemsTo?: "front" | "back",     // default "back" (FIFO)
   getItemsFrom?: "front" | "back",   // default "front" (FIFO)
 })
 ```
 
 Queue creates a **separate transaction per call** (unlike debounce/throttle
-which merge). Each transaction commits and awaits `isPersisted` before the next
-starts. Failed transactions do not block subsequent ones.
+which merge). Each transaction commits and awaits settlement before the next
+starts. Failed transactions do not block subsequent ones. Cleanup drains admitted
+work at the configured pace but rejects later calls with `QueueDisposedError`.
 
-## Transaction.isPersisted.promise
+## Transaction.when('settled')
 
 ```ts
 const tx = collection.insert({ id: '1', text: 'Hello' })
 
 try {
-  await tx.isPersisted.promise // resolves with the Transaction on success
+  await tx.when('settled') // resolves with the Transaction on success
   console.log(tx.state) // "completed"
 } catch (error) {
   console.log(tx.state) // "failed"
@@ -208,12 +218,16 @@ try {
 }
 ```
 
-The promise is a `Deferred` -- it is created at transaction construction time
-and settled when `commit()` completes or `rollback()` is called. For
+`when('settled')` returns the existing settlement promise. It is created at
+transaction construction time and settled when `commit()` completes or
+`rollback()` is called. For
 `autoCommit: true` transactions, commit starts after `mutate()` returns; the
 promise can remain pending as long as `mutationFn` does.
 
 For a non-empty commit, `mutationFn` is the normal success boundary.
-`isPersisted.promise` does not by itself prove that a backend uploaded,
+`when('settled')` does not by itself prove that a backend uploaded,
 confirmed, or read back the write. It proves those stronger guarantees only
 when `mutationFn` waits for them before returning.
+
+The old `isPersisted.promise` remains available until the 1.0 RC but is
+deprecated. Replace it with `when('settled')`.

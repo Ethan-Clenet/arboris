@@ -6,7 +6,7 @@ The `inject()` function can only be used when code is executing within an **inje
 
 An injection context is automatically available in:
 
-1. **Field initializers** of classes instantiated by DI (`@Service`, `@Injectable`, `@Component`, `@Directive`, `@Pipe`).
+1. **Field initializers** of classes instantiated by DI (`@Injectable`, `@Component`, `@Directive`, `@Pipe`).
 2. **Constructors** of classes instantiated by DI.
 3. **Factory functions** specified in `useFactory` or `InjectionToken` configurations.
 4. **Functional APIs** executed by Angular (e.g., functional route guards, resolvers, interceptors).
@@ -14,16 +14,16 @@ An injection context is automatically available in:
 ```ts
 @Component({...})
 export class Example {
-  // ✅ Valid: Field initializer
+  // Valid: Field initializer
   private router = inject(Router);
 
   constructor() {
-    // ✅ Valid: Constructor
+    // Valid: Constructor
     const http = inject(HttpClient);
   }
 
   onClick() {
-    // ❌ Invalid: Not an injection context
+    // Invalid: Not an injection context
     // const auth = inject(AuthService);
   }
 }
@@ -34,15 +34,15 @@ export class Example {
 If you need to run a function within an injection context (often needed for dynamic component creation or testing), use `runInInjectionContext`. This requires access to an existing injector (like `EnvironmentInjector` or `Injector`).
 
 ```ts
-import {inject, EnvironmentInjector, runInInjectionContext, Service} from '@angular/core';
+import {Injectable, inject, EnvironmentInjector, runInInjectionContext} from '@angular/core';
 
-@Service()
+@Injectable({providedIn: 'root'})
 export class MyService {
   private injector = inject(EnvironmentInjector);
 
   doSomethingDynamic() {
     runInInjectionContext(this.injector, () => {
-      // ✅ Now valid to use inject() here
+      // Now valid to use inject() here
       const router = inject(Router);
     });
   }

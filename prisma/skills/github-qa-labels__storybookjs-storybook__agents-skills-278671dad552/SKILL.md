@@ -4,6 +4,7 @@ description: Label GitHub issues and PRs found during QA testing. Use when organ
 allowed-tools: Bash
 metadata:
   origin: Storybook
+  internal: true
 ---
 
 # GitHub QA Labels

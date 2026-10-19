@@ -54,7 +54,7 @@ describe('planCatalogPrune', () => {
     })
   })
 
-  it('supprime les 11 retraits validés quand la source est saine', () => {
+  it('supprime les retraits validés quand la source est saine', () => {
     const source = ids('src', CATALOG_PRUNE_MIN_SOURCE)
     const orphans = [...CATALOG_EXPLICIT_REMOVALS]
     const plan = planCatalogPrune(source, [...source, ...orphans])

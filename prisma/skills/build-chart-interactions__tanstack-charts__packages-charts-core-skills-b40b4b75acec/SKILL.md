@@ -9,7 +9,7 @@ metadata:
   origin: TanStack
   type: core
   library: '@tanstack/charts'
-  library_version: '0.18.0'
+  library_version: '1.1.0'
 sources:
   - 'TanStack/charts:docs/guides/tooltips-and-focus.md'
   - 'TanStack/charts:docs/guides/interactions-and-selections.md'

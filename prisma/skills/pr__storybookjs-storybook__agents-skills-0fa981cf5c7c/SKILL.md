@@ -4,6 +4,7 @@ description: Creates a pull request following Storybook conventions. Use when cr
 allowed-tools: Bash, Read
 metadata:
   origin: Storybook
+  internal: true
 ---
 
 # Create Pull Request

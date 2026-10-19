@@ -5,25 +5,38 @@ Import only the definitions the application registers.
 | Language | Export | Direct import | Aliases |
 | --- | --- | --- | --- |
 | Apache | `apache` | `@tanstack/highlight/languages/apache` | - |
+| CMake | `cmake` | `@tanstack/highlight/languages/cmake` | - |
+| C++ | `cpp` | `@tanstack/highlight/languages/cpp` | `c++`, `cc`, `cxx`, `hpp`, `hxx` |
+| C# | `csharp` | `@tanstack/highlight/languages/csharp` | `c#`, `cs` |
 | CSS | `css` | `@tanstack/highlight/languages/css` | - |
+| Dart | `dart` | `@tanstack/highlight/languages/dart` | - |
 | Diff | `diff` | `@tanstack/highlight/languages/diff` | `patch` |
 | Dockerfile | `dockerfile` | `@tanstack/highlight/languages/dockerfile` | `docker` |
 | EJS | `ejs` | `@tanstack/highlight/languages/ejs` | - |
 | Env | `env` | `@tanstack/highlight/languages/env` | `dotenv` |
+| Go | `go` | `@tanstack/highlight/languages/go` | `golang` |
 | HTML | `html` | `@tanstack/highlight/languages/html` | `htm`, `xml`, `angular-html` |
 | HTTP | `http` | `@tanstack/highlight/languages/http` | - |
+| Java | `java` | `@tanstack/highlight/languages/java` | - |
 | JavaScript | `js` | `@tanstack/highlight/languages/js` | `javascript`, `mjs`, `cjs`, `js-vue` |
 | JSON | `json` | `@tanstack/highlight/languages/json` | `jsonc`, `json5` |
 | JSX | `jsx` | `@tanstack/highlight/languages/jsx` | - |
+| Kotlin | `kotlin` | `@tanstack/highlight/languages/kotlin` | `kt`, `kts` |
+| Lua | `lua` | `@tanstack/highlight/languages/lua` | - |
 | Markdown | `markdown` | `@tanstack/highlight/languages/markdown` | `md` |
 | Mermaid | `mermaid` | `@tanstack/highlight/languages/mermaid` | - |
 | Nginx | `nginx` | `@tanstack/highlight/languages/nginx` | - |
+| Perl | `perl` | `@tanstack/highlight/languages/perl` | `pl` |
+| PHP | `php` | `@tanstack/highlight/languages/php` | - |
 | Plaintext | `plaintext` | `@tanstack/highlight/languages/plaintext` | `text`, `txt`, `-->` |
 | Python | `python` | `@tanstack/highlight/languages/python` | `py` |
+| Ruby | `ruby` | `@tanstack/highlight/languages/ruby` | `rb` |
+| Rust | `rust` | `@tanstack/highlight/languages/rust` | `rs` |
 | Scheme | `scheme` | `@tanstack/highlight/languages/scheme` | `scm`, `racket` |
 | Shell | `shell` | `@tanstack/highlight/languages/shell` | `bash`, `sh`, `zsh`, `cmd`, `console` |
 | SQL | `sql` | `@tanstack/highlight/languages/sql` | - |
 | Svelte | `svelte` | `@tanstack/highlight/languages/svelte` | - |
+| Swift | `swift` | `@tanstack/highlight/languages/swift` | - |
 | TOML | `toml` | `@tanstack/highlight/languages/toml` | - |
 | TypeScript | `ts` | `@tanstack/highlight/languages/ts` | `typescript`, `angular-ts` |
 | TSRX | `tsrx` | `@tanstack/highlight/languages/tsrx` | `octane` |
@@ -39,6 +52,7 @@ Import only the definitions the application registers.
 | Vue | `js`, `ts`, `css` |
 | Svelte | `js`, `ts`, `css` |
 | EJS | `js` |
+| PHP | `html` (and its optional script/style languages) |
 | Markdown | The language named by each fence |
 
 The aggregate `@tanstack/highlight/languages` entry can tree-shake in a compatible bundler. Direct subpaths make isolation explicit and are the default for size-sensitive clients.

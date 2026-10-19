@@ -9,7 +9,7 @@ user-invocable: true
 metadata:
   origin: Ansible
   author: APME Team
-  version: 1.2.0
+  version: 1.3.0
 ---
 
 # PR Address Feedback
@@ -55,6 +55,18 @@ verify tracking.
 
 Untracked follow-ups are invisible debt. If it is worth mentioning, it is
 worth an issue.
+
+## ADR and issue traceability after fixes
+
+After pushing commits that change **behavior, architecture, or delivery scope**,
+re-run the **`pr-traceability`** skill before requesting re-review:
+
+- Update governing ADR status / revision history if the fix completes or
+  advances ADR scope (regenerate index via pre-commit or
+  `scripts/generate_adr_index.py`).
+- Add `Closes #N` / `Refs #N` when the fix resolves or relates to a tracked
+  issue; create issues for any new deferred work.
+- Update the PR **`## Related issues`** and **`## Related ADRs`** sections.
 
 ```bash
 # Create a follow-up issue and capture the URL

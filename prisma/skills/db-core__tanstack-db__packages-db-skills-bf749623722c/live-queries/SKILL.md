@@ -9,7 +9,7 @@ description: >
   add, subtract, multiply, divide.
   $selected namespace. createLiveQueryCollection. Derived collections. Predicate push-down.
   Incremental view maintenance via differential dataflow (d2ts). Virtual
-  properties ($synced, $origin, $key, $collectionId). Includes subqueries
+  properties ($hasPendingWrites, $origin, $key, $collectionId). Includes subqueries
   for hierarchical data. Collection, toArray, materialize, and
   concat(toArray(...)) include modes.
   queryOnce for one-shot queries. createEffect for reactive side effects
@@ -115,7 +115,7 @@ non-null value.
 
 ### 2. Joining two collections
 
-Join conditions **must** use `eq()` (equality only -- IVM constraint). Default join type is `left`. Convenience methods: `leftJoin`, `rightJoin`, `innerJoin`, `fullJoin`.
+Join conditions accept `eq()` or a nonempty, possibly nested `and()` of equalities (equality only -- IVM constraint). Default join type is `left`. Convenience methods: `leftJoin`, `rightJoin`, `innerJoin`, `fullJoin`.
 
 ```ts
 import { eq } from '@tanstack/db'
@@ -203,20 +203,31 @@ const activeUserPosts = createLiveQueryCollection((q) =>
 Create derived collections once at module scope and reuse them. Do not recreate on every render or navigation.
 
 Live query collections default to `gcTime: 5_000`. An explicit `gcTime: 0` is
-preserved and disables garbage collection for that derived collection.
+preserved and disables garbage collection for that derived collection --
+including the reclamation of a collection that started syncing and never gained
+a subscriber. Note this is the opposite of `gcTime: 0` in TanStack Query, where
+it collects as soon as the query goes inactive; use a small positive value if
+you want prompt collection here.
+
+Sync started without subscribers has a minimum 50ms GC grace period. Pending
+`preload()` calls retain the collection until they settle; the unused retention
+period then starts. Preloading an already-ready collection refreshes that
+period. Explicit `cleanup()` can still abort a pending preload.
 
 ## Virtual Properties
 
 Live query results include computed, read-only virtual properties on every row:
 
-- `$synced`: `true` when no pending local optimistic write affects the row;
-  `false` while one does. This is local mutation status, not proof that a
+- `$hasPendingWrites`: `true` while a pending local optimistic write affects
+  the row; `false` otherwise. This is local mutation status, not proof that a
   backend uploaded, confirmed, or read back the row.
 - `$origin`: `"local"` if the last confirmed change came from this client, otherwise `"remote"`.
 - `$key`: the row key for the result.
 - `$collectionId`: the source collection ID.
 
 These props are added automatically and can be used in `where`, `select`, and `orderBy` clauses. Do not persist them back to storage.
+The deprecated `$synced` alias is the inverse of `$hasPendingWrites` and will
+be removed in the 1.0 RC.
 
 ## Includes (Subqueries in Select)
 
@@ -516,6 +527,27 @@ q.from({ order: ordersCollection })
   .having(({ order }) => gt(count(order.id), 5))
 ```
 
+### Compound joins and acquisition
+
+```ts
+import { and, eq } from '@tanstack/db'
+
+q.from({ product: productsCollection }).leftJoin(
+  { stock: stockCollection },
+  ({ product, stock }) =>
+    and(eq(product.sku, stock.sku), eq(product.region, stock.region)),
+)
+```
+
+All equalities must match. A nullish component never matches, and outer joins
+retain unmatched rows. For on-demand sources, the first equality supplies
+candidate loading and index selection. Put a selective plain-field equality
+first when creating the live-query Collection. Reordered equalities keep the
+same semantic query identity; a React hook can reuse the existing Collection
+and its original loading plan. Reordering during a rerender does not replan that
+Collection. A computed joined-side operand can disable lazy loading, and a broad
+first field can fetch extra candidates. Later equalities still control matches.
+
 ### HIGH: .limit() / .offset() without .orderBy()
 
 Without deterministic ordering, limit/offset results are non-deterministic and cannot be incrementally maintained. Throws `LimitOffsetRequireOrderByError`.
@@ -530,9 +562,9 @@ q.from({ user: usersCollection })
   .limit(10)
 ```
 
-### HIGH: Join condition using non-eq() operator
+### HIGH: Join condition using OR or a non-equality comparison
 
-The differential dataflow join operator only supports equality joins. Using `gt()`, `like()`, etc. throws `JoinConditionMustBeEqualityError`.
+The differential dataflow join operator supports a single equality or nested `and()` equalities. Using `or()`, `gt()`, `like()`, or empty `and()` throws `JoinConditionMustBeEqualityError`. Each equality must bind the joined source to an available source. Put field-to-literal filters in `.where()`; invalid source bindings fail at compilation.
 
 ```ts
 // WRONG
@@ -570,7 +602,7 @@ this prototype-pollution guard.
 
 The query builder looks like SQL but has constraints that SQL does not:
 
-- **Equality joins only** -- `eq()` is the only allowed join condition operator.
+- **Equality joins only** -- use `eq()` or nonempty nested `and()` equalities. OR and inequalities are unsupported.
 - **orderBy required for limit/offset** -- non-deterministic pagination cannot be incrementally maintained.
 - **distinct requires select** -- deduplication needs an explicit projection.
 - **fn.select() cannot be used with groupBy()** -- the compiler must statically analyze select to discover aggregate functions.
