@@ -96,6 +96,47 @@ function copySkillTree(srcDir, destDir) {
   cpSync(srcDir, destDir, { recursive: true })
 }
 
+/** Aligné sur import-vendor-skills.mjs : origin Cloudflare pour les skills cloudflare/*. */
+function patchOrigin(skillMd, publisher) {
+  let text = skillMd
+  if (text.charCodeAt(0) === 0xfeff) text = text.slice(1)
+  if (!text.startsWith('---')) {
+    return `---\nmetadata:\n  origin: ${publisher}\n---\n\n${text}`
+  }
+  const end = text.indexOf('\n---', 3)
+  if (end === -1) return text
+  const fm = text.slice(4, end)
+  const body = text.slice(end + 4)
+  let nextFm = fm
+  if (/^metadata:\s*$/m.test(fm) || /^metadata:\s*\n/m.test(fm)) {
+    if (/^[ \t]+origin:/m.test(fm)) {
+      nextFm = fm.replace(/^[ \t]+origin:\s*.+$/m, `  origin: ${publisher}`)
+    } else {
+      nextFm = fm.replace(/^metadata:\s*$/m, `metadata:\n  origin: ${publisher}`)
+      if (nextFm === fm) {
+        nextFm = fm.replace(/^(metadata:\s*\n)/m, `$1  origin: ${publisher}\n`)
+      }
+    }
+  } else if (/^origin:/m.test(fm)) {
+    nextFm = fm.replace(/^origin:\s*.+$/m, `origin: ${publisher}`)
+  } else {
+    nextFm = `${fm.trimEnd()}\nmetadata:\n  origin: ${publisher}\n`
+  }
+  return `---\n${nextFm.trimEnd()}\n---${body.startsWith('\n') ? body : `\n${body}`}`
+}
+
+function publisherForSource(source) {
+  if (String(source).startsWith('cloudflare/')) return 'Cloudflare'
+  return null
+}
+
+function applyPublisherOrigin(destDir, publisher) {
+  if (!publisher) return
+  const skillPath = join(destDir, 'SKILL.md')
+  if (!existsSync(skillPath)) return
+  writeFileSync(skillPath, patchOrigin(readFileSync(skillPath, 'utf-8'), publisher))
+}
+
 function skillDirFromPath(skillPath) {
   const normalized = skillPath.replace(/\\/g, '/')
   return normalized.replace(/\/SKILL\.md$/i, '')
@@ -114,6 +155,9 @@ async function syncOne(id, entry, scratch, dryRun) {
     }
     copySkillTree(srcDir, join(AGENTS_DIR, id))
     copySkillTree(srcDir, join(PRISMA_DIR, id))
+    const publisher = publisherForSource(entry.source)
+    applyPublisherOrigin(join(AGENTS_DIR, id), publisher)
+    applyPublisherOrigin(join(PRISMA_DIR, id), publisher)
   }
 
   const hashSource = dryRun ? join(PRISMA_DIR, id) : join(AGENTS_DIR, id)

@@ -9,6 +9,13 @@ describe('resolveSkillGithubUrl', () => {
     expect(src.url).toBe('https://github.com/supabase/agent-skills')
   })
 
+  it('résout security-audit vers le dépôt Cloudflare amont', () => {
+    const src = resolveSkillGithubUrl('security-audit')
+    expect(src.kind).toBe('upstream')
+    expect(src.repo).toBe('cloudflare/security-audit-skill')
+    expect(src.url).toBe('https://github.com/cloudflare/security-audit-skill')
+  })
+
   it('résout un skill vendor vers la racine du dépôt d’origine', () => {
     const src = resolveSkillGithubUrl(
       'create-table-hook__tanstack-table__packages-react-table-skills-686c19936c82',

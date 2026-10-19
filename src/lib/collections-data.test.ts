@@ -53,8 +53,15 @@ describe('COLLECTIONS', () => {
     const pack = COLLECTIONS.find((c) => c.id === 'ship-safely')
     expect(pack?.kind).toBe('pack')
     expect(pack?.skillIds).toEqual(
-      expect.arrayContaining(['cve-scan', 'cwe-code-audit', 'capec-code-audit', 'security-review']),
+      expect.arrayContaining([
+        'cve-scan',
+        'cwe-code-audit',
+        'capec-code-audit',
+        'security-review',
+        'security-audit',
+      ]),
     )
+    expect(pack?.skillIds).toHaveLength(5)
     expect(findCollectionSeed('ship-safely')?.id).toBe('ship-safely')
   })
 
