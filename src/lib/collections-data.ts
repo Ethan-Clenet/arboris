@@ -68,7 +68,7 @@ export const COLLECTIONS: CollectionSeed[] = [
     briefEn:
       'Quality and security before merge: CVE scan (OSV), CWE/CAPEC source audits, dependency audit, security diff, test coverage, owners review and PR quality. A pack to lock a reliable merge gate into your agent.',
     kind: 'pack',
-    skillIds: ['cve-scan', 'cwe-code-audit', 'capec-code-audit', 'security-review'],
+    skillIds: ['cve-scan', 'cwe-code-audit', 'capec-code-audit', 'security-review', 'security-audit'],
     commandIds: ['cve', 'audit-deps', 'security-diff', 'test-coverage', 'owners-review', 'pr-quality'],
     sort: 2,
   },

@@ -120,6 +120,12 @@
       "sourceType": "github",
       "skillPath": "skills/turso-db/SKILL.md",
       "computedHash": "d1aa5693c437b9bb848642fe04d613097fe54200c8190f09e7351f7d473c6b83"
+    },
+    "security-audit": {
+      "source": "cloudflare/security-audit-skill",
+      "sourceType": "github",
+      "skillPath": "skills/security-audit/SKILL.md",
+      "computedHash": "b3555ac2be54a93c4732491855d9f5fb6a9901a0ba58048a84439333a4fd64a9"
     }
   }
 }
