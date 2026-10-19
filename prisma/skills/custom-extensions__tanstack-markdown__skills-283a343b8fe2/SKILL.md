@@ -1,14 +1,14 @@
 ---
 name: 'custom-extensions'
 description: >
-  Implement MarkdownExtension block parsers, inline and document transforms,
-  HTML hooks, and portable ComponentNode output. Load when adding deterministic
+  Implement MarkdownExtension block and inline source parsers, inline and document transforms,
+  HTML hooks, and portable block and inline component output. Load when adding deterministic
   custom syntax or rendering behavior across HTML, React, and Octane.
 metadata:
   origin: TanStack
   type: core
   library: '@tanstack/markdown'
-  library_version: '0.0.13'
+  library_version: '1.0.0'
 requires:
   - 'render-markdown'
 sources:
@@ -77,6 +77,14 @@ console.log(html)
 
 ## Core Patterns
 
+### Recognize inline source before formatting
+
+Use `inlineParser: { markers, parse(context) }` for syntax that needs original source characters. `markers` is a string of literal first characters. The context supplies `source`, UTF-16 `index`, `options`, `inLink`, and `parseInline(value)` sharing the current depth and scan budget. Return `{ node, length }` with one standard `InlineNode` and a positive in-bounds integer length, or `undefined` to decline. Invalid lengths throw `RangeError`.
+
+Escapes and code spans take precedence. Hooks do not run in code, image alt text, or link destinations; they do run in emphasis and link labels. Respect `inLink` when creating automatic links. Indices are local to the current inline container, and ranges cannot cross enclosing inline or block boundaries. Hook dispatch is budgeted, but callback work is trusted and must avoid repeated suffix scans. Returned AST nodes are trusted; validate URLs and component metadata yourself.
+
+Use `transformInline` for changes to already-parsed nodes. It cannot distinguish an escaped opener from an ordinary text opener or restore raw Markdown spelling. See the extension guide for a complete source-parser example.
+
 ### Transform parsed inline nodes
 
 ```ts
@@ -110,7 +118,14 @@ const html = renderHtml('IMPORTANT: Back up the database.', {
 console.log(html)
 ```
 
-Transforms receive built-in inline nodes and must return a deterministic replacement array.
+Transforms receive both built-in inline nodes and extension nodes returned by `inlineParser`, and must return a deterministic replacement array.
+
+For custom inline UI, return an `InlineComponentNode` with `type: 'inlineComponent'`,
+`name`, `attributes`, inline `children`, and optional `tagName` and string `properties`.
+It uses the same emitted-tag component maps as a block `ComponentNode`, but defaults
+to `<span>` instead of `<md-comment-component>`. Keep tag and property names under
+extension control, use phrasing content, and recurse through inline `children` when
+transforming text nested inside links or emphasis. This does not require `allowHtml`.
 
 ### Derive document metadata after parsing
 
@@ -371,7 +386,7 @@ export function Article() {
 }
 ```
 
-`renderHtml` hooks do not run in React or Octane; a `ComponentNode` and emitted-tag component mapping is the portable path.
+`renderHtml` hooks do not run in React or Octane; a `ComponentNode` or `InlineComponentNode` and emitted-tag component mapping is the portable path.
 
 Source: `docs/guides/extensions.md`
 
@@ -426,7 +441,7 @@ Source: `docs/guides/extensions.md`
 
 ### HIGH Rich output versus untrusted-content safety
 
-Prefer `ComponentNode` plus application components for rich output. Treat `allowHtml`, extension HTML strings, and highlighter markup as explicit trusted boundaries; see `production-pipelines`.
+Prefer block or inline component nodes plus application components for rich output. Treat `allowHtml`, extension HTML strings, and highlighter markup as explicit trusted boundaries; see `production-pipelines`.
 
 ### MEDIUM Parse-ahead performance versus option timing
 

@@ -79,13 +79,13 @@ effect(() => {
 The reactive context is only active for **synchronous** code. Signal reads after an `await` will not be tracked. **Always read signals before asynchronous boundaries.**
 
 ```ts
-// ❌ INCORRECT: theme() is not tracked because it is read after await
+// Incorrect: theme() is not tracked because it is read after await
 effect(async () => {
   const data = await fetchUserData();
   console.log(theme());
 });
 
-// ✅ CORRECT: Read the signal before the await
+// Correct: Read the signal before the await
 effect(async () => {
   const currentTheme = theme();
   const data = await fetchUserData();

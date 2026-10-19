@@ -129,7 +129,7 @@ const adapterWithKey = createOpenaiChat('gpt-5.2', 'sk-...')
 
 - `bedrockText(model)` or `bedrockText(model, { api: 'converse' })` (the default) — Bedrock's native Converse API via `@aws-sdk/client-bedrock-runtime` (adapter name `bedrock-converse`). Reaches the broad catalog: Claude, Nova, Llama, Mistral, DeepSeek, and more.
 - `bedrockText(model, { api: 'chat' })` — OpenAI-compatible Chat Completions endpoint (adapter name `bedrock`). Open-weight models only (gpt-oss, DeepSeek V3.x, Gemma, Qwen, etc.). Does NOT reach Claude, Nova, or Llama.
-- `bedrockText(model, { api: 'responses' })` — OpenAI-compatible Responses API, mantle-only (adapter name `bedrock-responses`). Currently gpt-oss family.
+- `bedrockText(model, { api: 'responses' })` — OpenAI-compatible Responses API, mantle-only (adapter name `bedrock-responses`). Currently gpt-oss and Gemma 4.
 
 Use `createBedrockText(model, apiKey, config?)` to pass the key explicitly. Auth resolves from `BEDROCK_API_KEY` / `AWS_BEARER_TOKEN_BEDROCK`, or SigV4 via the standard AWS credential chain (no extra packages needed — handled by `@aws-sdk/client-bedrock-runtime`).
 
@@ -175,7 +175,7 @@ export function handleChat(
 
 ### 3. Configuring Reasoning / Thinking
 
-Different providers expose reasoning/thinking through their `modelOptions`:
+Set reasoning/thinking with the `reasoning` option on `chat()`. It is the same on every provider, and the types take only the levels of the selected model:
 
 ```typescript
 import { chat } from '@tanstack/ai'
@@ -187,56 +187,35 @@ const messages = [
   { role: 'user' as const, content: 'Plan a database migration.' },
 ]
 
-// OpenAI: reasoning with effort and summary
+// OpenAI: the level goes out as reasoning.effort, with a summary
 const openaiStream = chat({
   adapter: openaiText('gpt-5.2'),
   messages,
-  modelOptions: {
-    reasoning: {
-      effort: 'high',
-      summary: 'auto',
-    },
-  },
+  reasoning: { level: 'high', summary: true },
 })
 
-// Anthropic: extended thinking with budget_tokens
+// Anthropic: extended thinking with a token budget
 const anthropicStream = chat({
   adapter: anthropicText('claude-sonnet-4-6'),
   messages,
-  modelOptions: {
-    max_tokens: 16000,
-    thinking: {
-      type: 'enabled',
-      budget_tokens: 8000, // must be >= 1024 and < max_tokens
-    },
-  },
+  modelOptions: { max_tokens: 16000 },
+  reasoning: { level: 'high', budgetTokens: 8000 },
 })
 
-// Anthropic: adaptive thinking (Sonnet 5, Fable 5, Opus 4.7+) — depth is
-// tuned with output_config.effort instead of a token budget
+// Anthropic: adaptive thinking (Sonnet 5, Fable 5, Opus 4.7+) — the level
+// goes out as output_config.effort
 const adaptiveStream = chat({
   adapter: anthropicText('claude-sonnet-5'),
   messages,
-  modelOptions: {
-    max_tokens: 16000,
-    thinking: {
-      type: 'adaptive',
-      display: 'summarized', // stream the reasoning text (default 'omitted')
-    },
-    output_config: { effort: 'high' }, // 'low' | 'medium' | 'high' | 'xhigh' | 'max'
-  },
+  modelOptions: { max_tokens: 16000 },
+  reasoning: 'high', // 'low' | 'medium' | 'high' | 'xhigh' | 'max'
 })
 
-// Gemini: thinking config with budget or level
+// Gemini: a thinking budget on Gemini 2.5, a thinking level on Gemini 3
 const geminiStream = chat({
   adapter: geminiText('gemini-2.5-pro'),
   messages,
-  modelOptions: {
-    thinkingConfig: {
-      includeThoughts: true,
-      thinkingBudget: 4096,
-    },
-  },
+  reasoning: { level: 'high', budgetTokens: 4096 },
 })
 ```
 
@@ -394,6 +373,20 @@ adapter for a custom model that doesn't support the combination, return
 > Note `seed-2-0-lite-260428` (the obvious default) is one of them; use
 > `seed-2-0-lite-260228` or `dola-seed-2-1-turbo-260628` for typed output.
 
+> **JSON mode (`json_object`) is never combined.** Some OpenRouter and Groq
+> models reject strict `json_schema` and accept only `json_object`
+> (`OPENROUTER_JSON_OBJECT_ONLY_MODELS`, Groq models whose `features` list
+> `json_object` without `json_schema`). For these, structured output sends
+> `json_object` and adds the schema as a system prompt. A caller can also
+> set JSON mode in `modelOptions` (`responseFormat` / `text.format` on
+> OpenRouter, `response_format` / `text.format` on OpenAI-base adapters).
+> In JSON mode `supportsCombinedToolsAndSchema()` returns `false`, so the
+> schema prompt goes only on the separate finalization request. A subclass
+> of the OpenAI-base adapters marks its own JSON-only models by overriding
+> `protected modelPrefersJsonObject(model: string): boolean`. With a plain
+> JSON Schema `outputSchema`, TanStack AI does not validate the reply; use
+> a Standard Schema (Zod, Valibot, ArkType) to get it validated.
+
 ### 6. OpenAI-Compatible Providers
 
 Any provider that implements the OpenAI **Chat Completions** API (DeepSeek,
@@ -455,6 +448,68 @@ compatible providers speak.
 
 > Verify the provider's current `baseURL` and model ids against its live docs —
 > they drift. See `docs/adapters/openai-compatible.md` for the full provider table.
+
+### 7. Files Adapters (upload once, reference by handle)
+
+Four providers expose a native Files/storage API as a tree-shakeable `files`
+adapter: `openaiFiles()`, `anthropicFiles()`, `geminiFiles()` (each reads the
+same env var as the provider's text adapter; `create*Files(apiKey)` variants
+take an explicit key), and `falFiles(config)`. Upload media once with
+`uploadFile()`, then reference the returned `FileHandle` in messages via a
+`{ type: 'file' }` content source instead of re-sending base64 each request:
+
+```typescript
+import { chat, fileSourceFromHandle, uploadFile } from '@tanstack/ai'
+import { openaiFiles, openaiText } from '@tanstack/ai-openai'
+import { pdfBase64 } from './pdf-data'
+
+const handle = await uploadFile({
+  adapter: openaiFiles(),
+  input: { data: pdfBase64, mimeType: 'application/pdf' },
+})
+
+chat({
+  adapter: openaiText('gpt-5.5'),
+  messages: [
+    {
+      role: 'user',
+      content: [
+        { type: 'text', content: 'Summarize this document' },
+        { type: 'document', source: fileSourceFromHandle(handle) },
+      ],
+    },
+  ],
+})
+```
+
+Rules agents must respect:
+
+- **The source is one opaque handle plus its issuer.** `fileSourceFromHandle`
+  builds `{ type: 'file', value: 'file-…', provider: 'openai' }`, matching the
+  AG-UI `FileSource` arm. A handle only resolves at the provider that issued
+  it, so an adapter throws when `provider` names a different adapter.
+  `provider` is optional, as on the AG-UI wire; a source without it is taken
+  as-is. To use the same bytes with two providers,
+  upload to each and send the matching handle.
+- **Adapters declare `supportsFileSources`.** For adapters that don't (Groq, Bedrock, Mistral, OpenRouter, Ollama, BytePlus, Cohere, and anything
+  written before this feature), `chat()` / `generateImage()` /
+  `generateVideo()` / `embed()` reject file sources in preflight, before any
+  request is built — pass `data`/`url` sources there instead.
+- **Lifecycle:** `getFile()` / `deleteFile()` work for OpenAI, Anthropic,
+  Gemini, and Grok, and accept the handle itself (provider-literal typed, so a
+  foreign handle is a compile error). fal storage is upload-only, so those
+  calls throw for `falFiles()`. `grokFiles().get()` mints the public URL again,
+  so do not call it after `revokePublicUrl()`.
+- **Some endpoints need raw bytes even on supporting providers:** OpenAI
+  `images/edits` + Sora `input_reference`, Gemini Veo, and Chat Completions
+  image inputs throw endpoint-specific errors for file sources.
+- **A file source crosses the chat wire.** A browser that holds a handle puts
+  `fileSourceFromHandle(handle)` straight into the `sendMessage` content, and
+  the server passes the messages to `chat()` as usual. `fileSourceFromHandle`
+  and the `FileHandle` type are exported from the browser-safe
+  `@tanstack/ai/client` entry.
+
+See `docs/advanced/files-api.md` for the full guide.
 
 ## Behind a proxy or gateway
 

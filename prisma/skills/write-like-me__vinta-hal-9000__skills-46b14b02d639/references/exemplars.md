@@ -6,7 +6,7 @@ Verbatim excerpts from the user's published writing. These carry the voice bette
 
 The intro that scopes a whole post in three sentences:
 
-> I've used Claude Code daily since it came out. Here are the best practices, tools, and configuration patterns I've picked up. Most of this applies to other coding agents (Codex) too.
+> I've used Claude Code and Codex daily since they came out. Here are the best practices, tools, and configuration patterns that work for me. Most of them apply to both coding agents.
 
 Q&A sections — the heading poses the question, the body opens with the verdict:
 
@@ -85,6 +85,33 @@ And defended verbatim when an AI rewrite tried to drop it (chat, quoted with app
 
 > Refine it, but keep dominate and cats rule the internet.
 
+pangu.js, a tagline whose tail is a bare noun phrase, then the README paragraphs it points at — symmetric sentences over symmetric content, a verbless sentence, a deflating tail:
+
+> Opinionated paranoid text spacing in JavaScript, with on-device AI semantic judgment
+
+> Regex rules can't distinguish semantic nuances like these, so the extension asks an LLM. It uses Chrome's built-in [Prompt API](https://developer.chrome.com/docs/ai/prompt-api), which runs Gemini Nano on your device. Fully offline, nothing leaves your machine. Needs a one-time model download from the options page. It's free, btw.
+>
+> GPT-6 Astra writes the prompts. It runs the [prompt-experiments](.agents/skills/prompt-experiments/SKILL.md) skill: propose a change, then test it against the real Gemini Nano in Chrome. When a case fails, it interviews Gemini Nano for clues. When progress stalls, it searches online for new approaches to test. Prompts for a model, tuned by a bigger model, judged on real data.
+
+hal-9000 Skills list bullets the user wrote after rejecting drafts that explained how each skill works: purpose, not mechanism:
+
+> - [difference](skills/difference/SKILL.md): A shortcut to answer "what's the difference? pros and cons?" very quickly
+> - [blindspot](skills/blindspot/SKILL.md): Turns unknown unknowns into known unknowns, then lets you pick where to explore
+
+pangu.js, README code-block comments talking to the reader:
+
+> ```js
+> import pangu from 'pangu/browser'; // use this with a bundler
+> // or
+> // import pangu from 'pangu/browser/standalone'; // use this if no bundler, it's one self-contained file
+> ```
+>
+> ```js
+> import pangu from 'pangu';
+> // or
+> // const pangu = require('pangu'); // use this if you're still using CommonJS
+> ```
+
 dockerfiles, a 2014 README whose body is one joke link:
 
 > My dockerfiles for [making the world a better place](https://www.youtube.com/watch?v=J-GVd_HLlps).
@@ -97,15 +124,11 @@ laughing-man, direct address:
 
 > If you're the type who skips the manual, just copy this prompt to your agent:
 
-dear-ai, the purest sass sample — italics for the pivot, then a plain shrug:
-
-> Yes, you _could_ just use a one-line prompt like `Fetch and follow https://vinta.github.io/dear-ai/guide-name.md` to get things done. But if you _really_ need everything wrapped in a shiny agentic skill so you can pretend it's more productive, fine, knock yourself out:
-
 dear-ai, division of labor in plain second person:
 
 > Open your AI coding agent in the terminal, point it at a guide listed below, and let it handle the server setup, installation, and configuration. You handle the parts that need a browser: creating accounts, clicking OAuth buttons, copying tokens, and payments.
 
-awesome-python (2021, pre-AI), softener before a firm ask — note the move survives while the slip gets fixed per the style spec:
+awesome-python (2021, pre-AI), softener before a firm ask:
 
 > Just a gentle reminder: **Try not to submit your own project. Instead, wait for someone finds it useful and submits it for you.**
 
@@ -130,10 +153,3 @@ The user's feedback:
 Published instead:
 
 > `"advisorModel": "fable"`: Use something faster like `sonnet` as the main model, and let it [consult](https://code.claude.com/docs/en/advisor) `fable` when needed
-
-What the diff teaches:
-
-- The rejected draft is 2.5x the length of the user's original sentence; the published line matches the original's length. Length preservation is voice.
-- The em-dash chain, the tricolon ("before committing to an approach, when stuck, before declaring done"), and the packed caveats were all deleted wholesale, not trimmed.
-- The caveats also died on content, not just register: detail the note's reader didn't need.
-- The published line keeps the user's two-clause structure ("Use X ..., and let it consult Y when needed") and fixes only grammar. His structure, native fluency, nothing added.

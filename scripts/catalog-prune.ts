@@ -10,10 +10,12 @@ export const CATALOG_PRUNE_MIN_SOURCE = 500
 export const CATALOG_PRUNE_MIN_SOURCE_RATIO = 0.7
 
 /**
- * Ids retirés du disque (veille 10/10 + orphelins #65) — toujours supprimés
- * s’ils restent en base et absents de la source, même si le prune global est ignoré.
+ * Ids retirés du disque (veille 10/10 + orphelins #65 + veille 19/10) —
+ * toujours supprimés s’ils restent en base et absents de la source, même si
+ * le prune global est ignoré.
  */
 export const CATALOG_EXPLICIT_REMOVALS = [
+  'audit-claude-settings__vinta-hal-9000__skills-f0ce6934a890',
   'author-auth0-skill',
   'cypress-author',
   'cypress-docs',
@@ -24,7 +26,10 @@ export const CATALOG_EXPLICIT_REMOVALS = [
   'ito-market-intelligence',
   'ito-trade-planner',
   'motion-ui',
+  'refactor-claude-md__vinta-hal-9000__skills-02c1d0c985be',
   'sandbox-sdk',
+  'stories__storybookjs-storybook__code-lib-claude-plugin-skills-37800384acf4',
+  'stories__storybookjs-storybook__code-lib-codex-plugin-plugins-storybook-skills-0d4224554f40',
 ] as const
 
 export type CatalogPruneSkipReason = 'empty-source' | 'source-too-small' | 'too-many-orphans'

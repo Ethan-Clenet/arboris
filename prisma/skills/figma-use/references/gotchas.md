@@ -254,7 +254,7 @@ return "Done!"
 
 ## Prefer returned IDs for workflow state
 
-Return node IDs and keep workflow state outside the Figma file. Put human-readable component purpose and usage in `description`.
+Return node IDs and keep workflow state outside the Figma file. Put human-readable component purpose and usage in `node.description` only on a `COMPONENT` or `COMPONENT_SET`.
 
 ```js
 const rect = figma.createRectangle()
@@ -559,7 +559,7 @@ colorVar.setValueForMode(modeId, { r: 0, g: 0, b: 0, a: 0 })  // fully transpare
 
 ## `layoutSizingHorizontal`/`layoutSizingVertical` value rules: `FIXED`, `HUG`, `FILL`
 
-The property exists on every `SceneNode`, but the **value** you can assign depends on the node's relationship to auto-layout. The scenegraph validates the assignment (`fullscreen/lib/scenegraph/FGStackLayoutSizeHelper.cpp::checkStackLayoutSize`) and rejects non-`FIXED` values that don't satisfy a structural rule:
+The property exists on every `SceneNode`, but the **value** you can assign depends on the node's relationship to auto-layout. The tool validates the assignment and rejects non-`FIXED` values that don't satisfy a structural rule:
 
 | Value | Allowed when | Rejected with |
 | --- | --- | --- |
@@ -930,24 +930,24 @@ When constructing a `var(--name)` string from a Figma variable name, replace BOT
 
 ## "no such property" errors — reading or calling members not defined on the node type
 
-Every Figma node implements a specific set of mixins. Reading or calling a property/method that isn't on the target throws `TypeError: node.X: no such property 'X' on Y node` (where `Y` is the runtime type — `TEXT`, `RECTANGLE`, `GROUP`, `PAGE`, `VECTOR`, …). The same error fires for hallucinated API names that don't exist anywhere (e.g. `getRangeAllFontNames` — the real APIs are `getStyledTextSegments(['fontName'])` and `getRangeFontName(start, end)`). This is the read-side counterpart to the write-side "object is not extensible" error below; both stem from the same cause.
+Every Figma node implements a specific set of mixins. In `use_figma`, reading or calling a non-softened property/method that isn't on the target throws `TypeError: node.X: no such property 'X' on Y node` (where `Y` is the runtime type — `TEXT`, `RECTANGLE`, `GROUP`, `PAGE`, `VECTOR`, …). Some commonly probed missing properties return `undefined`, but unsupported writes still throw. The same error fires for hallucinated API names that don't exist anywhere (e.g. `getRangeAllFontNames` — the real APIs are `getStyledTextSegments(['fontName'])` and `getRangeFontName(start, end)`).
 
 Common shapes the bug takes — what you tried vs. where the member actually lives:
-
 | Member | Defined on | Notably absent from |
 | --- | --- | --- |
 | `children`, `appendChild`, `insertChild`, `findAll`, `findOne`, `findChildren`, `findChild`, `findAllWithCriteria` | `ChildrenMixin` — container nodes (`Document`, `Page`, `Frame`, `Group`, `Component`, `ComponentSet`, `Instance`, `Section`, `BooleanOperation`) | `TEXT`, `RECTANGLE`, `VECTOR`, `ELLIPSE`, `LINE`, `STAR`, `POLYGON`, `SLICE` |
 | `layoutMode`, `itemSpacing`, padding/axis-alignment (`primaryAxisAlignItems`, `counterAxisAlignItems`, `counterAxisSpacing`, `counterAxisAlignContent`, `layoutWrap`, `primaryAxisSizingMode`) | `BaseFrameMixin` / `AutoLayoutMixin` — `FRAME`, `COMPONENT`, `COMPONENT_SET`, `INSTANCE` only | `TEXT`, shapes, vectors, `GROUP`, `SECTION` |
 | `fills`, `strokes`, `strokeWeight` | `GeometryMixin`/`MinimalFillsMixin` — shapes, frames, components, text, sections | `GROUP` (groups are pass-through), `PAGE`, `DOCUMENT` |
 | `x`, `y`, `width`, `height`, `rotation`, `resize()` | `LayoutMixin` — every `SceneNode` | `PAGE`, `DOCUMENT` |
-| `characters`, `fontName`, `fontSize`, `getStyledTextSegments`, `getRangeFontName`, `setRangeFontName`, `setRangeFontSize` | `TextNode` only | every non-text node |
+| `characters`, `fontName`, `fontSize`, `getStyledTextSegments`, `getRangeFontName`, `setRangeFontName`, `setRangeFontSize` | text-capable nodes (`TEXT`, `TEXT_PATH`, and text sublayers reached through `.text`) | frames, instances, and other non-text nodes |
+| `description` | `COMPONENT` and `COMPONENT_SET` scene nodes | every other scene-node type; missing reads return `undefined` in `use_figma`, but writes throw |
 | `createInstance` | `COMPONENT` only | every other type |
 | `addComponentProperty`, `componentPropertyDefinitions` | `COMPONENT_SET`, or a non-variant `COMPONENT` (one whose parent is NOT a `COMPONENT_SET`) | every other type, **including variant `COMPONENT`s** — invoking on a variant throws `"Can only get/set component property definitions of a component set or non-variant component"`. Add properties on the variant before `combineAsVariants`, or on the parent `COMPONENT_SET` after. |
 | `defaultVariant`, `variantGroupProperties` | `COMPONENT_SET` only | every other type |
 | `figma.createPage` | Design files only (`figma.com/design/...`) | FigJam (`/board/`) and Slides (`/slides/`) — see Page Rules |
 
 Verify any member you're unsure about against [plugin-api-standalone.d.ts](plugin-api-standalone.d.ts) before using it. Names that "sound plausible" but aren't in the typings will always throw — the typings are the source of truth.
-
+For `componentPropertyDefinitions`, checking only `node.type === 'COMPONENT'` is insufficient because variants have that type too. Resolve the owner first: keep a `COMPONENT_SET`, promote a variant `COMPONENT` to its parent set, keep a non-variant `COMPONENT`, and reject every other node type. See [component-patterns.md → Component-property owner narrowing](component-patterns.md#component-property-owner-narrowing) for the owner-narrowing rule.
 **Optional chaining (`?.`) does NOT defend against this.** The property access happens before `?.` is evaluated, so `node.children?.length` still throws on a `TEXT` node. The same applies to `try { node.fills }` — the access throws inside the try, which works for catching, but you should narrow up front instead.
 
 **How to avoid:**

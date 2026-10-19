@@ -4,6 +4,7 @@ description: Upgrade Storybook to a specific version (canary or release). Use th
 allowed-tools: Bash
 metadata:
   origin: Storybook
+  internal: true
 ---
 
 # Storybook Upgrade

@@ -4,6 +4,7 @@ description: Measure Storybook startup time from spawning `storybook dev` until 
 allowed-tools: Bash, Read
 metadata:
   origin: Storybook
+  internal: true
 ---
 
 # Storybook Startup Benchmark

@@ -22,7 +22,7 @@ describe('Dashboard Component Routing', () => {
 
   beforeEach(async () => {
     // 1. Configure TestBed with test routes
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       providers: [
         // Use provideRouter with your test-specific routes
         provideRouter([
@@ -30,7 +30,7 @@ describe('Dashboard Component Routing', () => {
           {path: 'heroes/:id', component: HeroDetail},
         ]),
       ],
-    });
+    }).compileComponents();
 
     // 2. Create the RouterTestingHarness
     harness = await RouterTestingHarness.create();
@@ -40,8 +40,8 @@ describe('Dashboard Component Routing', () => {
 
 ### Key Concepts
 
-1.  **`provideRouter([...])`**: Provide a test-specific routing configuration. This should include the routes necessary for the component-under-test to function correctly.
-2.  **`RouterTestingHarness.create()`**: Asynchronously creates and initializes the harness and performs an initial navigation to the root URL (`/`).
+1. **`provideRouter([...])`**: Provide a test-specific routing configuration. This should include the routes necessary for the component-under-test to function correctly.
+2. **`RouterTestingHarness.create()`**: Asynchronously creates and initializes the harness and performs an initial navigation to the root URL (`/`).
 
 ## Writing Router Tests
 

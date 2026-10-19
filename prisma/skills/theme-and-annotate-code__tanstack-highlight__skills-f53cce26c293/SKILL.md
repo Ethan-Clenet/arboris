@@ -9,7 +9,7 @@ metadata:
   origin: TanStack
   type: core
   library: '@tanstack/highlight'
-  library_version: '0.0.10'
+  library_version: '1.1.0'
 sources:
   - 'TanStack/highlight:docs/guides/themes.md'
   - 'TanStack/highlight:docs/guides/annotations.md'

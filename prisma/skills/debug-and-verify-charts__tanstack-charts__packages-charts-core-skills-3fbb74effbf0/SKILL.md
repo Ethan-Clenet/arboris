@@ -9,7 +9,7 @@ metadata:
   origin: TanStack
   type: lifecycle
   library: '@tanstack/charts'
-  library_version: '0.18.0'
+  library_version: '1.1.0'
 sources:
   - 'TanStack/charts:docs/guides/testing-and-debugging.md'
   - 'TanStack/charts:docs/guides/typescript.md'

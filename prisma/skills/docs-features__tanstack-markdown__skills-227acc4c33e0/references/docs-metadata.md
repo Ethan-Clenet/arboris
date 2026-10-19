@@ -194,13 +194,14 @@ No direct code children means the original component is returned.
 
 ### Package-manager tabs
 
-Accepted variants are `package-manager` and `package-managers`. Each nonempty source line uses:
+Accepted variants are `package-manager` and `package-managers`. Each nonempty source line is either a framework line or a shared line:
 
 ```text
 framework: package-one package-two
+package-three
 ```
 
-Framework names become lowercase. Repeated framework lines append package arrays rather than merging them.
+A framework prefix is a name of letters, digits, `_`, or `-` followed by a colon that is not directly followed by `/` or `.`, so `https://` and `file:../` specifiers are shared lines. Framework names become lowercase. Repeated framework lines append package arrays rather than merging them. Shared lines are stored under the empty string key, which is emitted first, and are also appended to every framework group in source order.
 
 The root sets:
 
@@ -217,7 +218,7 @@ interface PackageManagerProperties {
 
 `data-package-manager-meta` is JSON-encoded `PackageManagerMetadata`. Only `dev-install` and `local-install` are preserved; an omitted, differently cased, or unknown mode resolves after lowercasing to `install`. Successful transformation replaces all children with an empty array and emits no `md-tab-panel` children.
 
-No valid `framework: packages` line means the original component is returned.
+No valid framework or shared line means the original component is returned.
 
 ### Bundler tabs
 
@@ -317,4 +318,4 @@ interface CodeBlockNode {
 - `{2,4-6}` and `lines=2,4-6` produce sorted, unique positive line numbers.
 - Invalid ranges are ignored, and each individual range expands to at most 1,000 lines.
 
-HTML code blocks expose `data-lang`, `data-code-title`, `data-filename`, and `data-framework` when the corresponding values exist. Highlight lines are passed to a configured highlighter; metadata alone does not create token or line markup.
+HTML, React, and Octane code blocks expose `data-lang`, `data-meta`, `data-code-title`, `data-filename`, and `data-framework` on `<pre>` when the corresponding values exist. Framework `pre` replacements can read `props['data-meta']`; highlighters receive the raw metadata in `options.meta` alongside highlight lines. Metadata alone does not create token or line markup.

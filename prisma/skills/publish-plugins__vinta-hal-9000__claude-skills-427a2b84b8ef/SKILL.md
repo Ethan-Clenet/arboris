@@ -7,7 +7,9 @@ effort: medium
 allowed-tools:
   - Edit(**/.claude-plugin/*.json)
   - Bash(python3 .claude/skills/publish-plugins/scripts/check_manifest_sync.py:*)
+  - Bash(python3 .claude/skills/publish-plugins/scripts/check_skill_descriptions_sync.py:*)
   - Bash(claude plugin validate:*)
+  - Bash(claude plugin test:*)
   - Bash(npx -y skills@latest add . -l)
 metadata:
   origin: vinta
@@ -68,7 +70,15 @@ Every plugin is described twice on purpose: once in its own `.claude-plugin/plug
 
 It exits non-zero naming each problem. Fix the manifests it names, then run it again.
 
-## 5. Validate
+## 5. Check the skill descriptions are in sync
+
+```bash
+python3 .claude/skills/publish-plugins/scripts/check_skill_descriptions_sync.py
+```
+
+For every skill under `skills/`, check that `interface.short_description` in `agents/openai.yaml` matches its description in both `README.md` and `skills/README.md` exactly. Treat the README descriptions as the source of truth. Keep descriptions as single-line double-quoted strings. Fix missing entries or mismatches, then rerun until the check passes.
+
+## 6. Validate
 
 ```bash
 claude plugin validate .
@@ -81,7 +91,16 @@ claude plugin validate ./plugins/hal-voice
 
 The first call validates the marketplace manifest; the rest validate each plugin manifest.
 
-## 6. Check the skills still group for other agents
+## 7. Run the mod tests
+
+```bash
+claude plugin test ./plugins/hal-grammar-check
+claude plugin test ./plugins/hal-session-auto-rename
+```
+
+These two plugins are mods (hooks modules with `tests/*.test.ts`); `make test` and CI run only the Python tests. Fix the failing test or the module, then rerun until every test passes; a command that fails to start is not a pass.
+
+## 8. Check the skills still group for other agents
 
 ```bash
 npx -y skills@latest add . -l

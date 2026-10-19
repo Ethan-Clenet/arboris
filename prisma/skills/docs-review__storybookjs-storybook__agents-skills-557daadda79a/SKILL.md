@@ -3,6 +3,7 @@ name: docs-review
 description: Review, improve, rewrite, author, or plan Storybook documentation in /docs. Use this when asked to review docs, improve a page, rewrite documentation, draft new docs, or advise on docs strategy.
 metadata:
   origin: Storybook
+  internal: true
 ---
 
 # Documentation Review
