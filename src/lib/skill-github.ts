@@ -19,11 +19,17 @@ const ARBORIS_REPO = 'affaan-m/ECC'
 const ARBORIS_SKILLS_TREE = `https://github.com/${ARBORIS_REPO}/tree/master/prisma/skills`
 const YUNT_CATALOGUE_URL = 'https://academy.yunt.fr/dashboard/catalogue'
 
+/** Slugs d’id vendor dont le dépôt a été renommé (redirection GitHub). */
+const REPO_SLUG_ALIASES: Record<string, string> = {
+  'huggingface-openenv': 'openenv/OpenEnv',
+}
+
 /** Préfixes d’org connus (slug → casing GitHub), du plus long au plus court. */
 const VENDOR_ORG_PREFIXES: Array<{ slug: string; github: string }> = [
   { slug: 'cypress-io', github: 'cypress-io' },
   { slug: 'nousresearch', github: 'NousResearch' },
   { slug: 'storybookjs', github: 'storybookjs' },
+  { slug: 'openenv', github: 'openenv' },
   { slug: 'huggingface', github: 'huggingface' },
   { slug: 'microsoft', github: 'microsoft' },
   { slug: 'tanstack', github: 'TanStack' },
@@ -78,6 +84,9 @@ function parseVendorSkillId(id: string): { base: string; repoSlug: string } | nu
 
 /** Reconstruit org/repo depuis un slug `org-rest` quand le repo exact n’est pas listé. */
 function inferRepoFromSlug(repoSlug: string): string | null {
+  const aliased = REPO_SLUG_ALIASES[repoSlug]
+  if (aliased) return aliased
+
   const known = VENDOR_REPO_BY_SLUG.get(repoSlug)
   if (known) return known
 

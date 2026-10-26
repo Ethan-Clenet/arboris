@@ -31,15 +31,22 @@ values you fill in from the campaign, or a choice among the listed alternatives,
 The episode prompt's ownership rules, execution boundary, mode policy, and framework-escalation
 directive outrank this skill. Where they conflict, follow the prompt.
 
+## Episode mode
+
+Use the Python-supplied `ATREX_EPISODE_MODE` (default: `full`), as defined in
+`.agents/skills/gen-plan/SKILL.md`. Fast/full episodes advance one coherent engineering direction.
+Goal episodes can repeat this loop across a roadmap of directions, preserving the best
+validated checkpoint until the roadmap is complete or exhausted.
+
 ## Telemetry
 
 Telemetry is best-effort and must not block engineering work. Mark phase boundaries with standalone
 commands and keep at most one phase active:
 
 ```bash
-python3 tools/iteration_trace.py phase-start <profile|research|planning|implementation|correctness|benchmark|recording>
-python3 tools/iteration_trace.py phase-end <profile|research|planning|implementation|correctness|benchmark|recording>
-python3 tools/iteration_trace.py source-read <gpu_wiki|reference_projects|workspace|public_web> <safe-relative-reference>
+python3 -m aka.legacy.workflow.iteration_trace phase-start <profile|research|planning|implementation|correctness|benchmark|recording>
+python3 -m aka.legacy.workflow.iteration_trace phase-end <profile|research|planning|implementation|correctness|benchmark|recording>
+python3 -m aka.legacy.workflow.iteration_trace source-read <gpu_wiki|reference_projects|workspace|public_web> <safe-relative-reference>
 ```
 
 Never put credentials, private URL parameters, absolute user paths, raw tool output, or transcript
@@ -47,7 +54,7 @@ text into telemetry.
 
 ## Loop
 
-Repeat this evidence loop until the direction yields a mature candidate or is exhausted. The numbered
+Repeat this evidence loop until the direction (fast/full) or roadmap (goal) yields a mature candidate or is exhausted. The numbered
 steps map onto the telemetry phases above: `profile`, `research`, `planning`, `implementation`,
 `correctness`/`benchmark`, and `recording`.
 
@@ -63,10 +70,12 @@ hypothesis tied to the current bottleneck.
 
 ### 2. Profile and localize
 
-For a PPU target, do not apply the NVIDIA/AMD default below. Read
-`skills/ppu-acu-joint-profile/SKILL.md` first and let its PPU-specific per-iteration rule decide
+For a PPU target, do not apply the NVIDIA/AMD default below. Confirm that the `ppu-acu` capability is selected; if it is unavailable, report the missing PPU evidence capability. When installed, read
+`.agents/skills/ppu-acu-joint-profile/SKILL.md` first and let its PPU-specific per-iteration rule decide
 whether new PPU profiler evidence is needed. That route may use source or compiler inspection, the
 probe-free benchmark, or still-valid PPU evidence instead of collecting a new profile.
+
+Use only profiling capabilities listed by the selected Resources installation. NVIDIA and AMD wrappers below are available only when that capability was selected; missing required profiling must be reported explicitly.
 
 Reuse a profile only when it matches the current committed kernel. Otherwise profile through the
 sandbox using the vendor-appropriate tooling. Both wrappers run `python <file>`, so the profiled file
@@ -75,12 +84,12 @@ evaluator only ever imports:
 
 ```bash
 # NVIDIA
-python tools/sandbox.py --kind profile --sync <PROFILE_DIR> -- \
-  bash tools/profile_nvidia.sh profile_driver.py --output-dir <PROFILE_DIR> --source
+python -m aka.legacy.execution.cli --kind profile --sync <PROFILE_DIR> -- \
+  bash profiling/nvidia/profile_nvidia.sh profile_driver.py --output-dir <PROFILE_DIR> --source
 
 # AMD
-python tools/sandbox.py --kind profile --sync <PROFILE_DIR> -- \
-  bash tools/profile_kernel.sh profile_driver.py --output-dir <PROFILE_DIR>
+python -m aka.legacy.execution.cli --kind profile --sync <PROFILE_DIR> -- \
+  bash profiling/amd/profile_kernel.sh profile_driver.py --output-dir <PROFILE_DIR>
 ```
 
 `profile_driver.py` imports the current `kernel.py`, builds real inputs from the campaign contract
@@ -90,8 +99,8 @@ invokes the candidate repeatedly. Select what it drives with environment variabl
 it — it is a protected path and a candidate that modifies it is rejected:
 
 ```bash
-PROFILE_ITERS=30 PROFILE_WORKLOAD_IDX=2 python tools/sandbox.py ...   # SOL: one workload
-PROFILE_ITERS=30 PROFILE_SHAPE_ID=3 python tools/sandbox.py ...       # generalized or legacy Atrex-Bench
+PROFILE_ITERS=30 PROFILE_WORKLOAD_IDX=2 python -m aka.legacy.execution.cli ...   # SOL: one workload
+PROFILE_ITERS=30 PROFILE_SHAPE_ID=3 python -m aka.legacy.execution.cli ...       # generalized or legacy Atrex-Bench
 ```
 
 When several shapes or workloads need profiling, run one sandbox command per id in waves of at most
@@ -109,7 +118,7 @@ lowering or instruction selection is part of the hypothesis. Do not make specula
 changes before obtaining usable evidence.
 
 When ordinary profiling has isolated one kernel but cannot distinguish a specific in-kernel timing
-hypothesis, read `skills/autonomous-gpu-kernel-timeline/SKILL.md` and run its autonomous loop. Use
+hypothesis and the `timeline` capability is installed, read `.agents/skills/autonomous-gpu-kernel-timeline/SKILL.md` and run its autonomous loop. Use
 standalone CUDA/inline PTX through its CUDA backend and CuTe DSL through IKeT. Keep every attempt
 under `<PROFILE_DIR>/timeline/attempt-N`; when the remote command reads backend files, pass that
 specific skill path with sandbox `--input` and sync only the attempt output directory.
@@ -129,9 +138,13 @@ survey` to enumerate kernels, `sol` (the default) for the bottleneck class, and 
 that name verbatim from the survey/SOL result; never guess a substring. Raw `.ncu-rep`/ATT artifacts
 stay remote unless `--include-raw-profile` is justified.
 
-On NVIDIA, `summary.txt` carries a `LOCALIZE` line naming the analysis files that pin a symptom to
-source lines. Those files exist only on a `--source` run: never pin a source-level claim to a profile
-collected without it.
+On NVIDIA, collection and parsing both run remotely. Read the structured
+`[sandbox] PROFILE_JSON=...` response; Dev wrapper sync also provides `profile.json`,
+`analysis/metrics.csv` and key metrics. `--source` adds `analysis/source.txt`
+(source-correlated CUDA/SASS when supported by NCU). Do not install/import
+`ncu_report` or parse binary reports on the Agent host. Missing source correlation
+is not evidence for a source-line claim. `summary.txt` is a heuristic; high Memory
+SOL is not proof of DRAM saturation—check DRAM throughput, traffic and cache counters.
 
 #### When the seeded driver cannot represent the work
 
@@ -159,37 +172,18 @@ option before `--`, which routes the job through the dev interface.
 
 Search in this order and stop when one actionable direction is supported:
 
-1. **GPU Wiki through the natural-language front door.** Profile first, then describe the measured
-   problem rather than trying to guess query flags. PPU is the exception: start from the decisive
-   evidence selected by `ppu-acu-joint-profile`, whether or not it required a new profile:
-
-   ```bash
-   python3 gpu-wiki/tools/query_nl.py "<your description>" --brief
-   python3 gpu-wiki/tools/query_nl.py --file research_request.txt
-   ```
-
-   Include the true target product and authoritative runtime architecture exactly as supplied. Ask for
-   the full product specification and relevant architecture/ISA facts so the response contains isolated
-   `hardware_wiki` and `kernel_wiki` records. Also include the operator, framework, shapes, dtypes,
-   profile numbers, what was already tried, exact failures, competing hypotheses, and the fact that would
-   end this line of work. For a PPU iteration that skipped profiling, identify the source, compiler,
-   clean-benchmark, or prior PPU evidence used instead. Do not translate the hardware identity or
-   pre-compress the prose into keywords.
-
-   Read the compact response before acting: records are keyed by stable id, every `payload` is isolated,
-   `store` distinguishes `gpu_wiki` from namespaced `internal_gpu_wiki` records,
-   `match.arch` states its reach, and `notes` reports deterministic normalization, widening, truncation,
-   or store gaps. Pass `--exclude <ids-already-read>` on later queries and use `--max-bytes` for a hard
-   context bound. The structured `query_wiki.py` and `query_hardware.py` tools remain available when the
-   exact address is already known; never drop architecture scope to manufacture a match.
-   Copy the response's top-level `query_id` and each used record's own emitted canonical `wiki_id`
-   exactly so the decisive experiment can declare its Wiki attribution in the native journal. Never
-   reconstruct them from response mapping keys or prose.
-2. `reference-projects/` only when the local wiki is insufficient.
+1. **Enabled knowledge tools.** Read `.atrex_plugins/instructions.md` and inspect
+   `python3 -m aka.legacy.resources.cli list`. Follow the session's phase-specific plugin instructions.
+   Profile first, then describe measured symptoms, exact product/runtime architecture, operator,
+   framework, shapes/dtypes, failed attempts and the fact needed for the next decision. On PPU,
+   use the decisive evidence selected by `ppu-acu-joint-profile`, even when no new profile was needed.
+   Preserve source IDs and attribution exactly. Respect architecture scope and context budgets.
+   If no suitable plugin is enabled, continue with available references; never invoke a disabled tool.
+2. Explicitly installed `reference-projects/<project>/` resources, when the enabled knowledge tools are absent or insufficient. If none were selected, continue to public sources.
 3. Public primary sources only when local sources do not answer the question.
 
 After repeated rejected episodes, expand across DSLs targeting the same architecture instead of
-repeating local parameter tweaks. Record stable Wiki ids and the evidence-to-action chain.
+repeating local parameter tweaks. Record stable source ids and the evidence-to-action chain.
 
 ### 4. Plan a coherent direction
 
@@ -198,8 +192,8 @@ rollback points, and measurable acceptance criteria. For a PPU iteration that di
 profile, record the decisive PPU evidence selected by its routing skill instead. Then produce
 `<PLAN_FILE>` with the backend-native plan generator `<PLAN_GENERATOR>`.
 
-The episode may contain multiple related experiments, but they must advance one coherent engineering
-direction. Checkpoint useful intermediate states so failed sub-steps can be reverted without losing
+Fast/full episodes may contain multiple related experiments, but they must advance one coherent
+engineering direction. Goal episodes may plan and validate multiple directions. Checkpoint useful intermediate states so failed sub-steps can be reverted without losing
 the whole direction.
 
 ### 5. Implement and repair
@@ -218,9 +212,9 @@ unattributable. When the evidence localizes a symptom to specific lines, change 
 Use the immutable evaluator for development measurements:
 
 ```bash
-python tools/sandbox.py --kind run --no-sync -- \
+python -m aka.legacy.execution.cli --kind run --no-sync -- \
   python test_kernel.py --version vlong --no-memory
-python tools/sandbox.py --kind run --no-sync -- \
+python -m aka.legacy.execution.cli --kind run --no-sync -- \
   python test_kernel.py --version vlong --multi-seed 5 --no-memory
 ```
 
@@ -242,7 +236,7 @@ progress view in the incumbent workspace.
 
 ```bash
 <JOURNAL_CLI> append --path <JOURNAL_PATH> \
-  --experiment-json '{"name":"...","hypothesis":"...","change":"...","evidence":"...","result":"...","evaluation":{"correctness":"pass|fail|unknown","performance":"improved|not_improved|unknown","latency_us":null,"kernel_hash":""},"decision":"keep_as_best|promote|reject_and_continue|revert|pivot|blocked","wiki_usage_status":"declared","wiki_query_ids":["<emitted-query-id>"],"wiki_usage":[{"query_id":"<emitted-query-id>","wiki_id":"<emitted-canonical-wiki-id>","disposition":"applied|partially_applied|reference_only|rejected","use":"...","evidence":"..."}]}'
+  --experiment-json '{"name":"...","hypothesis":"...","change":"...","evidence":"...","result":"...","evaluation":{"correctness":"pass|fail|unknown","performance":"improved|not_improved|unknown","latency_us":null,"kernel_hash":""},"decision":"keep_as_best|promote|reject_and_continue|revert|pivot|blocked","wiki_usage_status":"not_queried"}'
 ```
 
 Use `declared` only with non-empty `wiki_usage`. Include `wiki_query_ids` for both `declared` and
@@ -252,10 +246,11 @@ with `wiki_usage_errors`; this diagnostic field never blocks the experiment or h
 
 ## Leaving the loop
 
-Leave the loop as soon as one coherent candidate passes the full development correctness check and
-has credible performance evidence, or as soon as the direction is exhausted or blocked. Then follow
+In fast/full mode, leave the loop as soon as one coherent candidate passes the full development correctness check and
+has credible performance evidence, or as soon as the direction is exhausted or blocked. In goal mode, finish or exhaust the roadmap
+and restore the best validated checkpoint, or report a blocker. Then follow
 the episode prompt's terminal contract for finalizing the journal and publishing the handoff. For a
 PPU full episode, include `outcome.accepted_ppu_diagnostics` using the schema in
-`skills/ppu-acu-joint-profile/SKILL.md`; retain only evidence that still applies to the terminal
+`.agents/skills/ppu-acu-joint-profile/SKILL.md`; retain only evidence that still applies to the terminal
 probe-free kernel. Each retained row must bind an accepted decision-grade artifact by path, SHA-256,
 schema, and evidence id. This is optional when no reusable PPU profiler evidence exists.

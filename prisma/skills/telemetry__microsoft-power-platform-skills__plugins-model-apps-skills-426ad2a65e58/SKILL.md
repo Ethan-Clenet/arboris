@@ -1,5 +1,4 @@
 ---
-
 name: telemetry
 description: >
   Use this skill when the user wants to enable, disable, turn on or off, opt out
@@ -13,7 +12,6 @@ model: haiku
 metadata:
   origin: Microsoft
 ---
-
 
 > **Plugin check**: Run `node "${PLUGIN_ROOT}/scripts/check-version.js"` — if it outputs a message, show it to the user before proceeding.
 

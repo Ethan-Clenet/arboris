@@ -56,11 +56,12 @@ const codeModeTool = createCodeModeTool({
 
 // Use in chat
 export async function POST(request: Request) {
-  const { messages } = await request.json()
+  const { messages, threadId } = await request.json()
 
   const stream = chat({
     adapter: openaiText('gpt-5.5'),
     messages,
+    threadId,
     tools: [codeModeTool],
   })
 
@@ -94,13 +95,14 @@ const { tool, systemPrompt } = createCodeMode({
 })
 
 export async function POST(request: Request) {
-  const { messages } = await request.json()
+  const { messages, threadId } = await request.json()
 
   const stream = chat({
     adapter: openaiText('gpt-5.5'),
     systemPrompts: ['You are a helpful assistant.', systemPrompt],
     tools: [tool],
     messages,
+    threadId,
   })
 
   return toServerSentEventsResponse(stream)
@@ -217,7 +219,7 @@ const storage = createFileSnippetStorage({
 const driver = createNodeIsolateDriver()
 
 export async function POST(request: Request) {
-  const { messages } = await request.json()
+  const { messages, threadId } = await request.json()
 
   // High-level API: automatic LLM-based snippet selection
   const { toolsRegistry, systemPrompt } = await codeModeWithSnippets({
@@ -233,12 +235,14 @@ export async function POST(request: Request) {
       maxSnippetsInContext: 5,
     },
     messages,
+    threadId,
   })
 
   const stream = chat({
     adapter: openaiText('gpt-5.5'),
     tools: toolsRegistry.getTools(),
     messages,
+    threadId,
     systemPrompts: ['You are a helpful assistant.', systemPrompt],
     agentLoopStrategy: maxIterations(15),
   })
@@ -328,6 +332,7 @@ export function CodeModeChat() {
 
   const { messages, sendMessage, isLoading } = useChat({
     connection: fetchServerSentEvents('/api/chat'),
+    threadId: 'support-42',
     onCustomEvent: handleCustomEvent,
   })
 
@@ -434,13 +439,14 @@ const { tools, systemPrompt } = createCodeMode({
 })
 
 export async function POST(request: Request) {
-  const { messages } = await request.json()
+  const { messages, threadId } = await request.json()
 
   const stream = chat({
     adapter: openaiText('gpt-5.5'),
     systemPrompts: ['You are a helpful assistant.', systemPrompt],
     tools: [...tools], // spread tools, not just tool
     messages,
+    threadId,
   })
 
   return toServerSentEventsResponse(stream)

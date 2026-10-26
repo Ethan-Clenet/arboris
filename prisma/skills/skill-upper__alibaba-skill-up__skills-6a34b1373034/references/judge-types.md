@@ -24,7 +24,7 @@ judge:
         not: ["(?i)api[_-]?key\\s*="]
     - exit_code: 0
     - tool_called:
-        name: "github::create_pull_request"
+        name: "mcp__github__create_pull_request"
         args:
           title: "Fix null check"
   failure:
@@ -33,6 +33,8 @@ judge:
 ```
 
 `failure` has priority: any matching failure assertion immediately fails the case. Otherwise, every `success` assertion must hold.
+
+`tool_called` matches `name` exactly. Claude Code, Codex, and Qoder CLI record MCP tools as `mcp__<server>__<tool>`, where `<server>` is the server `name` from `mcp.servers`.
 
 Supported matchers: `output_contains`, `output_matches` (Go regexp with `all`, `any`, and `not`), `exit_code`, `tool_called`, `files_exist`, and `files_not_exist`.
 
@@ -73,7 +75,7 @@ judge:
   criteria: ["The result satisfies the task"]
 ```
 
-The block uses the run engine schema, with required `name`, `model.provider`, and `model.name`. It does not inherit runner model, kwargs, version, custom config, or connection. Resolve credentials by its provider/protocol; never infer an engine from the provider. Case-level engine/model selections replace the eval selection. In `none`, preinstall the judge CLI. Docker/OpenSandbox install and check it during judging; their multi-judge snapshot support is still unavailable.
+The block uses the run engine schema, with required `name`, `model.provider`, and `model.name`. It does not inherit runner model, kwargs, version, custom config, or connection. Resolve credentials by its provider/protocol; never infer an engine from the provider. Case-level engine/model selections replace the eval selection. In `none`, preinstall the judge CLI. Docker/OpenSandbox install and check it during judging. Multiple judges reuse the same case runtime sequentially with fresh sessions and shared filesystem state.
 
 ## script: custom check
 
@@ -100,7 +102,7 @@ judges:
       - "The result satisfies the user intent"
 ```
 
-Every judge evaluates the same agent run in its own workspace copy. The case passes only if every judge passes. This is currently supported for `environment.type: none`; other runtime types fail before the tested agent starts. `evaluation.json` contains grouped results. The compatibility `grading.json` reports one top-level assertion per judge.
+Judges evaluate one agent run sequentially in the same runtime (`none`, Docker or OpenSandbox). Every Agent judge starts a fresh session. Filesystem changes are shared and visible to later judges; use read-only checks when unchanged output is required. No snapshot API is needed. The case passes only if every judge passes. `evaluation.json` contains grouped results, and `grading.json` reports one top-level assertion per judge. Artifacts and verdicts remain separate by member ID.
 
 ## Relative cost
 

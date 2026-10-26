@@ -22,10 +22,11 @@ Facts are your job, never the user's. Sweep before writing anything:
 
 - **Goal**: the goal the request serves, climbed one level at a time through the request and the repo's records until they run out. The map sits at the highest level still open; the request's own wording is usually the lowest.
 - **Premises**: what the request and the repo's design records (ADRs, docs, past decisions) take as settled, restated as questions. Premises are the source of idea-level areas; docs and pitfall searches yield mechanics.
+- **Fields**: the request's noun restated as a verb (a quarterly review: getting busy people to believe a story about cause and effect), and the other fields whose work is that verb. Borrow each field's methods, not its voice.
 - **Repo**: the `Explore` agent in Claude Code or an `explorer` subagent in Codex, for existing patterns, conventions, and adjacent solutions.
 - **Tools and domain**: `find-docs` for current APIs and config; `WebSearch` in Claude Code or `web_search` in Codex for pitfalls ("X gotchas", "X common mistakes") — pitfalls live in issue threads and post-mortems, not getting-started docs.
 
-Recon hunts for the areas a practitioner would have on their list that the request never mentions. Done when every area that could reorder the map has its source, recon or a premise, or a note that recon found nothing.
+Recon hunts for the areas a practitioner in any of those fields would have on their list that the request never mentions. Done when every area that could reorder the map has its source, recon or a premise, or a note that recon found nothing.
 
 ### 2. Show the territory
 
@@ -38,7 +39,7 @@ Before any question, one reply the user reads, under a page:
 
 Use `AskUserQuestion` in Claude Code or `request_user_input` in Codex when available.
 
-One single-select question: the top 3 unexplored areas by number, plus "Enough, hand off". Each option is an area and its description that area's why in one line; every option names an area the reply above explained. The user is choosing where to look, so labels stay unranked: no "(Recommended)". A free-text answer reaches any numbered area.
+Offer the top unexplored areas by number, plus "Enough, hand off". Each option is an area and its description that area's why in one line; every option names an area the reply above explained. The user is choosing where to look, so labels stay unranked: no "(Recommended)". A free-text answer reaches any numbered area.
 
 Round 1 adds one premortem question phrased in past tense — "it's three months later and this failed: what broke?" — past tense recruits prospective hindsight; "what could go wrong" is measurably weaker. Its answer often names the real goal, so re-rank the areas by it. If the user's goal or familiarity is still unclear after recon, round 1 also carries one calibration question.
 
