@@ -71,12 +71,6 @@ directly. Every task maps to a `tox -e <env>` command.
 | `tox -e openapi -- --check` | Fail if the committed OpenAPI artifact is stale | CI / prek freshness check. |
 | `tox -e grpc` | `scripts/gen_grpc.sh` | After modifying any `.proto` file. |
 
-### Helm
-
-| Environment | What it runs | When to use |
-|-------------|-------------|-------------|
-| `tox -e helm` | `scripts/helm_chart.sh` (`helm lint` + `helm package`) | After changing `deploy/helm/apme/**`. Writes `dist/charts/*.tgz`. |
-
 ### Developer tools
 
 | Environment | What it runs | When to use |
@@ -157,7 +151,7 @@ tox l
 ## Installation
 
 ```bash
-uv tool install tox==4.61.4 --with tox-uv==1.36.0
+uv tool install tox==4.63.0 --with tox-uv==1.36.0
 ```
 
 ## Configuration

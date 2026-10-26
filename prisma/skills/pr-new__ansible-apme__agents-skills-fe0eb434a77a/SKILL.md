@@ -11,7 +11,7 @@ user-invocable: true
 metadata:
   origin: Ansible
   author: APME Team
-  version: 1.3.0
+  version: 1.6.0
 ---
 
 # PR New
@@ -206,6 +206,9 @@ artifact type, translate it:
    an empty-but-not-falsy value. Trace it through the code path.
    If it fails silently, sends a vacuous request, or produces a
    return value that violates the declared type, that's a finding.
+   When tests exercise optional OS or native capabilities, trace both
+   available and unavailable cases: gate capability-specific assertions
+   and separately assert the documented fallback.
    When a check treats a character as a metacharacter (shell `|`,
    glob `*`, YAML `&`), construct an input where that character is
    a token in a *different* grammar in the same string — Jinja
@@ -225,6 +228,12 @@ artifact type, translate it:
    — "empty" must mean the same thing on both sides. After the
    emptiness check uses ``trim_space``, tokenize/split on that
    string with the same whitespace class, not ``split(trim(x, " "), " ")``.
+   When a scanner skips escaped characters inside quoted strings,
+   verify that escaping follows the active quote style. Construct each
+   supported quote style with a backslash immediately before its closing
+   delimiter and structural text afterward; the scanner must close the
+   scalar and continue parsing that structure. YAML single-quoted scalars
+   treat backslashes literally, while doubled single quotes encode an apostrophe.
    Also construct _temporal_ failures: what happens when an async
    dependency never responds, times out, or responds after the
    consumer has moved on? For React effects that rerun when a provider,
@@ -405,6 +414,21 @@ break ``rpartition(":")``: empty host (``:port``), unbracketed IPv6
 ``host:abc``). If a caller claims graceful degrade and only catches
 ``ImportError``, also construct a parse ``ValueError`` through that
 caller. Do not treat “contains a colon” as proof of TCP.
+For hostname-based socket probes, construct IPv4-only, IPv6-only, and
+dual-stack DNS answers in both answer orders. Verify every resolved
+address is probed with its matching socket family, and simulate
+resolution failures and recovery so an unavailable lookup cannot be
+misreported as a free port or retried with a guessed family.
+For best-effort local-address discovery, verify candidates with an
+ephemeral bind before adding them to wildcard probe targets. Drop
+non-loopback candidates rejected as no longer local, but retain the
+loopback sentinel when it fails with ``EADDRNOTAVAIL`` and candidates
+when the family itself is unsupported. Stale-state checks must treat
+these as unverified instead of free.
+For durable state that records a hostname, simulate DNS changing between
+state creation and recovery. Current resolver answers cannot prove where the
+process originally bound; persist the original targets or fail closed when
+no address snapshot exists.
 When a function degrades to identity (return original / omit from
 diffs / skip and continue) on failure, construct the caller path that
 reports "already clean", "idempotent", or "success" from an empty
@@ -447,7 +471,7 @@ critical/high/medium/low.
 - Docstring/ADR/comment vs code drift (especially "all"/"every" claims
   vs filtered implementation)
 - Rename/migration incompleteness: when an identifier is renamed in the
-  diff, scan the same affected docs, tests, Helm keys, and state-file
+  diff, scan the same affected docs, tests, operator manifests, and state-file
   contracts for leftover old names in *current* guidance (historical
   notes OK only when explicitly marked). Prefer a compatibility alias
   or an explicit breaking-change note for persisted/public keys.
@@ -472,8 +496,8 @@ critical/high/medium/low.
   OpenAPI shape is unchanged — prefer log+ignore / intersection
   unless an ADR explicitly hardens the contract.
 - Cross-artifact parity (proto RPC ↔ daemon servicer; rule IDs ADR-008;
-  _DEFAULT_PORTS ↔ started services; Helm template ↔ Podman
-  ``pod.yaml`` for the same in-pod env/volume/probe wiring — if Helm
+  _DEFAULT_PORTS ↔ started services; operator manifests ↔ Podman
+  ``pod.yaml`` for the same in-pod env/volume/probe wiring — if the operator
   mounts a shared socket for Gateway health, Podman Gateway must too)
 - Sibling-rule parity: when rules enforce the same security condition,
   compare their scope enumeration and all-path requirements so a protected

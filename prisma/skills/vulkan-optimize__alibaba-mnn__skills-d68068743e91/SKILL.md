@@ -21,6 +21,10 @@ metadata:
 
 4. **正确性 oracle 先于性能**。GPU 输出错和算法错难分辨。优化前要有"已知正确"的 baseline，每步改完都比对它。数学等价的 kernel 改动应与 baseline **逐 token 一致**。
 
+   **融合须保留原 pointwise 的运算类型与舍入位置**：GEMM 使用 FP32 累加，不代表其后的 SiLU 可以改用 FP32。
+   对照原 shader 的 exp、加法、除法、乘法及 cast；用未融合的原生算子作数值 oracle，并覆盖较大正负输入。
+   token 一致或普通 FP16 容差通过仍可能掩盖舍入变化，必要时比较固定输入序列的完整 logits。
+
 5. **真机才算数，且面向多个 vendor**。Vulkan 同时跑 Adreno（Android）、Mali（Android）、Apple（iOS/MoltenVK）等，**driver 稳定性和性能差异极大**。Mac MoltenVK ≠ Android Adreno。进入性能/稳定性测试前先 `adb devices` 检查目标 Android 设备；没设备直接停下来给用户提需求。
 
 6. **Buffer / Image 是编译期二选一**。由 `MNN_VULKAN_IMAGE` 决定：`=OFF` → `source/backend/vulkan/buffer/*`（LLM 全链路走 buffer）；`=ON` → `source/backend/vulkan/image/*`。**两个后端是完全独立的代码树**，一边改动另一边没有。改前先 `grep MNN_VULKAN_IMAGE project/android/build_64/CMakeCache.txt` 确认，并保证改的路径和 build 选的后端一致（详见手册陷阱 C）。
@@ -32,6 +36,8 @@ metadata:
 9. **换 shader 后必清 pipeline cache**。持久化的 `VkPipelineCache`（存在 `tmp/mnn_cachefile.bin`）在 shader 变了之后会 **stale → 直接 segfault**。改 shader 后测试/发布前先 `rm tmp/mnn_cachefile.bin`（详见手册陷阱 B）。
 
 10. **新特性必须有示例代码 + fallback**。集成 coop matrix / subgroup / 扩展时：(1) 要求用户提供可运行示例——不同 vendor 对同一特性行为可能不同；(2) 用 runtime 特性检测分发，保留原路径做 fallback，不支持的设备不受影响。
+
+11. **名字必须等于真实物理量**。改任何算子 / kernel 代码时，先核对沿途变量、字段、宏名是否就是它实际装的那个量（不只是自己新加的名字）：`blockSize` 到底是"块内元素数"还是"每行块数"、分档判据的自变量是"head 数"还是 dispatch 的 workgroup 数。名字骗人不会报错——编译、对拍、单测都过，但基于它写的分档、阈值、门控会一起错。名字与实际索引算术不符就改名，并全仓确认零残留。
 
 ---
 

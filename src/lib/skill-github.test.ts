@@ -43,6 +43,15 @@ describe('resolveSkillGithubUrl', () => {
     expect(src.url).toBe('https://github.com/NousResearch/hermes-agent')
   })
 
+  it('pointe huggingface/OpenEnv vers openenv/OpenEnv après le renommage', () => {
+    const src = resolveSkillGithubUrl(
+      'generate-openenv-env__huggingface-openenv__claude-skills-9aaf11ebc6e4',
+    )
+    expect(src.kind).toBe('upstream')
+    expect(src.repo).toBe('openenv/OpenEnv')
+    expect(src.url).toBe('https://github.com/openenv/OpenEnv')
+  })
+
   it('bascule sur le miroir Arboris pour un skill local sans source', () => {
     const src = resolveSkillGithubUrl('agent-eval')
     expect(src.kind).toBe('mirror')
