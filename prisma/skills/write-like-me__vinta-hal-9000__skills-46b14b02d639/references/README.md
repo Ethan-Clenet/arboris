@@ -19,6 +19,7 @@ Every quote in these files comes from published text:
 - READMEs of public repos:
   - [hal-9000](https://github.com/vinta/hal-9000)
   - [pangu.js](https://github.com/vinta/pangu.js)
+  - [blackwall](https://github.com/vinta/blackwall)
   - [laughing-man](https://github.com/vinta/laughing-man)
 - Pre-2025 revisions from public git history, blame-verified as human-typed before AI assistance: hal-9000 README (`79e27cc`, 2023-06-27), awesome-python README (`f387123`, 2024-09-18), awesome-python CONTRIBUTING (`aa4e0ee`, 2021-07-25)
 
@@ -26,7 +27,7 @@ Every quote in these files comes from published text:
 
 The voice was extracted from a curated corpus, not from everything the user ever wrote. Three provenance tiers:
 
-1. **Blame-verified pre-2025 human text** — the calibration anchor. When an AI-era pattern and an anchor pattern conflict, the anchor wins.
+1. **Blame-verified pre-2025 human text** — the calibration anchor. When two patterns conflict, the one from the same register as the text being written wins; within one register, the newer vouched text wins over the anchor (ruled 2026-10-29).
 2. **Vouched AI-era text** — writing the user reviewed line by line and claims as their own, regardless of who typed the draft.
 3. **The user's own chat messages** (private) — only turns the user typed; assistant text, pasted logs, and command output never qualify. Chat evidence informs the claims in the style spec, but a chat line appears as a quote only with the user's per-quote approval.
 

@@ -4,13 +4,6 @@ description: (project) Use when editing any file under skills/ or plugins/ to bu
 user-invocable: true
 model: sonnet
 effort: medium
-allowed-tools:
-  - Edit(**/.claude-plugin/*.json)
-  - Bash(python3 .claude/skills/publish-plugins/scripts/check_manifest_sync.py:*)
-  - Bash(python3 .claude/skills/publish-plugins/scripts/check_skill_descriptions_sync.py:*)
-  - Bash(claude plugin validate:*)
-  - Bash(claude plugin test:*)
-  - Bash(npx -y skills@latest add . -l)
 metadata:
   origin: vinta
   internal: true
@@ -22,13 +15,14 @@ Prepare the repo's plugins for release: work out which ones changed, bump their 
 
 Each plugin owns its version in its own `.claude-plugin/plugin.json`, and the repo-root `.claude-plugin/marketplace.json` carries no `version` fields:
 
-| Plugin                    | Manifest                                                     |
-| ------------------------- | ------------------------------------------------------------ |
-| `hal-skills`              | `skills/.claude-plugin/plugin.json`                          |
-| `hal-output-styles`       | `plugins/hal-output-styles/.claude-plugin/plugin.json`       |
-| `hal-grammar-check`       | `plugins/hal-grammar-check/.claude-plugin/plugin.json`       |
-| `hal-session-auto-rename` | `plugins/hal-session-auto-rename/.claude-plugin/plugin.json` |
-| `hal-voice`               | `plugins/hal-voice/.claude-plugin/plugin.json`               |
+| Plugin                        | Manifest                                                         |
+| ----------------------------- | ---------------------------------------------------------------- |
+| `hal-skills`                  | `skills/.claude-plugin/plugin.json`                              |
+| `hal-output-styles`           | `plugins/hal-output-styles/.claude-plugin/plugin.json`           |
+| `hal-grammar-check`           | `plugins/hal-grammar-check/.claude-plugin/plugin.json`           |
+| `hal-session-auto-rename`     | `plugins/hal-session-auto-rename/.claude-plugin/plugin.json`     |
+| `hal-shell-mode-auto-suggest` | `plugins/hal-shell-mode-auto-suggest/.claude-plugin/plugin.json` |
+| `hal-voice`                   | `plugins/hal-voice/.claude-plugin/plugin.json`                   |
 
 ## 1. Find the changed plugins
 
@@ -86,6 +80,7 @@ claude plugin validate ./skills
 claude plugin validate ./plugins/hal-output-styles
 claude plugin validate ./plugins/hal-grammar-check
 claude plugin validate ./plugins/hal-session-auto-rename
+claude plugin validate ./plugins/hal-shell-mode-auto-suggest
 claude plugin validate ./plugins/hal-voice
 ```
 
@@ -94,11 +89,10 @@ The first call validates the marketplace manifest; the rest validate each plugin
 ## 7. Run the mod tests
 
 ```bash
-claude plugin test ./plugins/hal-grammar-check
-claude plugin test ./plugins/hal-session-auto-rename
+make test-claude-code-mods
 ```
 
-These two plugins are mods (hooks modules with `tests/*.test.ts`); `make test` and CI run only the Python tests. Fix the failing test or the module, then rerun until every test passes; a command that fails to start is not a pass.
+This runs `claude plugin test` on every plugin with a `tests/` directory, which is what the `claude-code-tests` CI job runs too. Fix the failing test or the module, then rerun until every test passes; a command that fails to start is not a pass.
 
 ## 8. Check the skills still group for other agents
 

@@ -111,7 +111,7 @@ To create a new module: make a directory under `modules/`, add any of the files 
 
 Reading cluster config in scripts: `uv run scripts/cluster-config.py <cluster-id> <dot.path> [default]`. Supports nested paths (e.g., `harbor.core_replicas`). Falls back to `defaults:` section, then optional third argument.
 
-**`recycle_karpenter_nodes: true`** (cluster-level config, e.g. `meta-staging-aws-uw1`, `meta-staging-aws-ue1`): when set, `just deploy` calls `just recycle-nodes "$CLUSTER"` automatically after modules deploy and **skips** the ARC node-tainting step (tainting is pointless when nodes are being destroyed).
+**`recycle_karpenter_nodes: true`** (cluster-level config, e.g. `meta-staging-aws-ue1`, `meta-staging-aws-ue2`): when set, `just deploy` calls `just recycle-nodes "$CLUSTER"` automatically after modules deploy and **skips** the ARC node-tainting step (tainting is pointless when nodes are being destroyed).
 
 **`proactive_capacity_max: <int>`** (cluster-level): caps the warm-pool placeholder pairs the runner-set scaler will provision ahead of demand. Staging clusters set this to `0` to disable pre-provisioning entirely. See `docs/arc-fork-build-deploy.md` for how this is plumbed into the controller (`CAPACITY_AWARE_PROACTIVE_CAPACITY`).
 
@@ -274,7 +274,7 @@ harbor:
   registry_replicas: 4
   nginx_replicas: 6
   pdb_max_unavailable: 1     # Default: conservative production protection for core/registry/nginx
-  # staging clusters (meta-staging-aws-uw1, meta-staging-aws-ue1) override to "100%" (string, quoted)
+  # staging clusters (meta-staging-aws-ue1, meta-staging-aws-ue2) override to "100%" (string, quoted)
   # to effectively disable — staging runs 1 replica each
 ```
 
@@ -283,7 +283,7 @@ Standalone PDB manifests are applied by `_deploy-harbor` after the Helm install 
 **ARC controller:**
 ```yaml
 arc:
-  chart_version: "0.14.1-jeanschmidt.17"   # Must match controller + runner charts (minor mismatch deletes ARS). Fork chart from jeanschmidt/actions-runner-controller. Check clusters.yaml for the current value.
+  chart_version: "0.14.1-jeanschmidt.20"   # Must match controller + runner charts (minor mismatch deletes ARS). Fork chart from jeanschmidt/actions-runner-controller. Check clusters.yaml for the current value.
   runner_image_tag: "2.334.0"
   replica_count: 4
   log_level: info
@@ -362,7 +362,7 @@ Key workflows (all callable as reusable workflows via `workflow_call` from the o
 | `osdc-lint.yml` | `just lint` |
 | `osdc-test.yml` | `just test` |
 | `osdc-pre-merge.yml` | Lint + test on PR |
-| `osdc-plan-prod.yml` | `just plan <cluster>` (read-only tofu plan; CI-safe) |
+| `osdc-plan-prod.yml` | `just plan <cluster>` (read-only tofu plan; CI-safe). Runs on PRs that change a file its `paths` filter matches: every file `just plan` or its tofu reads, plus `osdc-plan-prod.yml`, `_osdc-plan.yml` and `_osdc-deploy.yml`. When `just plan` or its tofu starts reading a new file, add it there; `scripts/python/test_plan_prod_paths.py` (in `just test`) catches most omissions — its docstring lists what it cannot see, notably files read inside scripts the recipe runs or sources (e.g. `cluster-config.py`). |
 | `osdc-deploy-prod.yml` | Per-cluster prod deploy. Calls `_osdc-deploy.yml` |
 | `_osdc-deploy.yml` | Reusable: `just lint && just test` → `just deploy <cluster>` → `just smoke <cluster>` → `just integration-test <cluster> --skip-drain --skip-smoke --skip-compactor`. Pre-flight checks can be skipped with the `skip_lint_test` input (firefighting only). |
 | `_osdc-plan.yml` | Reusable: `just plan <cluster>` and tee to `plan.txt` |

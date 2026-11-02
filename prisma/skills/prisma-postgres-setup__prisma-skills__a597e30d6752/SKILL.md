@@ -5,7 +5,7 @@ license: MIT
 metadata:
   origin: Prisma
   author: prisma
-  version: "2.2.0"
+  version: "2.3.1"
 ---
 
 # Prisma Postgres setup

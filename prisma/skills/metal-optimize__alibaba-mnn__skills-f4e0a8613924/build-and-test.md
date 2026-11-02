@@ -1,12 +1,23 @@
-# 构建、测试、性能基线（Metal LLM）
+# 构建与测试（Metal LLM）
 
-> **配套 SKILL.md 的 sub-doc**：build 命令、模型导出、性能测试脚本、基线数据、文件索引。做完 `kernel-dev-and-optimize` / `graph-fusion` / `runtime-scheduling` 里描述的改动后，回到这里跑测试。
+> **配套 SKILL.md 的 sub-doc**：build 命令、模型导出、性能测试脚本。做完 `kernel-dev-and-optimize` / `graph-fusion` / `runtime-scheduling` 里描述的改动后，回到这里跑测试。
+
+> ## ⛔ 本文件的记录规则
+>
+> 1. **只写可执行的流程**：命令、脚本、模型/config 清单、判据。这里的模型名、路径、形状与
+>    env 取值是**操作参数**，照写；但**不写任何性能数字**（百分比、ms/µs、GB/s、TFLOPS、tok/s）。
+> 2. **不写日期与溯源**：某项能力"从某天起"如何，一律写成现状结论（"数据驱动，无 env"），
+>    不给时间戳，不写 commit / 分支标号。
+> 3. **陷阱要留，事故经过不留**：写"触发条件 + 症状 + 规避/验证方式"，
+>    不写某次白做了哪些事。
+> 4. 环境变量只在本文件中作为**路径开关**被引用；名称、默认值、语义的唯一登记处是
+>    [`env-registry.md`](./env-registry.md)。
 
 ---
 
 ## ⚠️ 每次 Metal 改动之后的强制验证流程（最重要）
 
-**任何 Metal 改动都必须走完这套流程再评估性能，否则大概率是假信号。** 这条不是建议，是硬性规则 —— 违反的代价见 § 真实教训。
+**任何 Metal 改动都必须走完这套流程再评估性能，否则大概率是假信号。** 这条不是建议，是硬性规则。
 
 ### Step 0. 强制重编译，别相信 make 增量
 
@@ -22,7 +33,7 @@ cd build && make -j8 -B llm_demo
 
 如果测试结果诡异（比如"改了 kernel body 但行为没变"），第一步先 `ls -l build/libMNN.dylib` 看链接时间是否最新，不是就 `make -B`。
 
-**新增源文件后必须重跑 `cmake ..`。** build 目录的源文件列表是 configure 时 GLOB 出来的，新增 `.mm/.hpp` 不会被自动纳入 —— 表现为链接期 `Undefined symbols`（2026-07-30 前科：`MetalReplayProxy` / `metalReplayEmit` / `metalReplayValidate` 全缺）。更坏的情况是 link 失败后 `libMNN.dylib` 已被删掉，而你以为"构建成功过"。
+**新增源文件后必须重跑 `cmake ..`。** build 目录的源文件列表是 configure 时 GLOB 出来的，新增 `.mm/.hpp` 不会被自动纳入 —— 表现为链接期 `Undefined symbols`（症状：`MetalReplayProxy` / `metalReplayEmit` / `metalReplayValidate` 整批缺失）。更坏的情况是 link 失败后 `libMNN.dylib` 已被删掉，而你以为"构建成功过"。
 
 ```bash
 cd build && cmake .. && make -j10 llm_demo llm_bench
@@ -30,19 +41,19 @@ cd build && cmake .. && make -j10 llm_demo llm_bench
 
 ### Step 0.5 测量前的二进制新鲜度断言（血泪，必做）
 
-**过期 build 不会报错，只会静默给出错误的性能数字。** 2026-07-30 前科：整轮 MNN-vs-MLX 对比（4 模型 × 3 prompt 长度）跑在一个隔了一天的 `libMNN.dylib` 上，0.6B decode 偏低 6~8%，还据此立项排查了一个不存在的"-9% 回归"（建 worktree、编译 baseline、正反序配对、二分两轮，全部白做）。
+**过期 build 不会报错，只会静默给出错误的性能数字。** 典型后果：整轮 MNN-vs-对手基准对比跑在一个隔了一天的 `libMNN.dylib` 上，decode 系统性偏低，还据此立项排查了一个不存在的"回归"（建 worktree、编译 baseline、正反序配对、二分两轮，全部白做）。
 
 ```bash
 # 1) 时间戳必须晚于你最后一次改动
 ls -l build/libMNN.dylib
 
 # 2) 关键符号断言：改动引入的新 kernel/函数名必须出现在产物里
-strings build/libMNN.dylib | grep -c prefill_flash_attn_nax   # 应为非 0
+strings build/libMNN.dylib | grep -c prefill_flash_attn_tc   # 应为非 0
 ```
 
 判据：**只要"当前 HEAD 引入的某个新符号"在 `libMNN.dylib` 里找不到，这一轮所有数字作废。** 反向也成立——排查"疑似回归"时，先做这个断言再去建 worktree 二分。
 
-⚠️ 顺带一个易踩的输出格式差异：HEAD 的 `llm_bench -pg <pp>,<tg>` 只打印**合并吞吐**（单个数字），要分列 prefill / decode 必须用 `-p A -n B -kv true`。当年那个 WIP 二进制的 `-pg` 会打两个数字，照旧脚本抄会拿到错的口径。
+⚠️ 顺带一个易踩的输出格式口径：HEAD 的 `llm_bench -pg <pp>,<tg>` **分列报告 prefill / decode 两个速度**（`-kv` 已废弃，`-p A -n B -kv true` == `-pg A,B`）。历史 WIP 二进制的 `-pg` 输出格式与 HEAD 不同——发现输出列数/口径和预期不符，本身就是"跑的不是当前产物"的信号，回到本节做新鲜度断言。
 
 ### Step 1. 清 Metal pipeline binary cache
 
@@ -55,7 +66,7 @@ find . -name "mnn_cachefile.bin" -delete
 
 ### Step 1.5 新导出模型：先造 greedy config，禁止用导出默认 config 对拍
 
-`llmexport.py` 产出的默认 `config.json` 是 **`backend_type: cpu` + `sampler_type: mixed` + `temperature 0.8`**——拿它跑 `llm_demo` 做"对拍/自拍"，得到的是**CPU 上的随机采样**：自拍必然 DIFFERS、从第 1 个 token 就分叉，且任何 Metal env 开关都"看似无效"。2026-07-29 的前科：splitkv 越界修复后的验证被它污染，误报出一个"p4096 prefill 非确定性"的假 bug，差点为此新开排查。
+`llmexport.py` 产出的默认 `config.json` 是 **`backend_type: cpu` + `sampler_type: mixed` + `temperature 0.8`**——拿它跑 `llm_demo` 做"对拍/自拍"，得到的是**CPU 上的随机采样**：自拍必然 DIFFERS、从第 1 个 token 就分叉，且任何 Metal env 开关都"看似无效"。典型后果：一次越界修复后的验证被它污染，误报出一个"长 pp prefill 非确定性"的假 bug，差点为此新开排查。
 
 ```bash
 # 新模型落地第一步（llm_bench 因有 -a metal 不受影响，llm_demo 全部用这份）
@@ -72,7 +83,7 @@ EOF
 
 ### Step 2. 正确性验证矩阵（必须全部跑）
 
-**只测速度不测正确性 = 假信号。** 见 § 真实教训里的 P0 flash-attn small-gate 案例。
+**只测速度不测正确性 = 假信号。**
 
 强制使用 `sampler_type: greedy, temperature: 0.0, top_k: 1` 的 config（跨 run byte-identical 是黄金标准）。
 
@@ -81,11 +92,11 @@ EOF
 | 维度 | 覆盖点 | 为什么 |
 |---|---|---|
 | **Prompt 长度** | 短 (~50 tok) + 中 (~512 tok) + 长 (~2048 tok) | 触发不同 kernel 路径（mShortSeq / mQkSimdMatrix / mQkTensorMatrix / mFlashAttnPrefill） |
-| **FA on / off** | `MNN_ENABLE_FLASH_ATTN_PREFILL=1` 和 `=0` | 决定走 flash-attn 还是三段 pipeline (prefill_qk[_tensor] + softmax + prefill_qkv[_tensor])。两条路径都要正确 |
-| **CAUSAL_TRI（数据驱动，2026-07-31 起无 env）** | 用真实 mask 张量 vs 标量哨兵 mask 两类模型覆盖 | causal-tri/bound 现由 `mCausalLayout`（inputs[3] 形状）自动 gate，非手动 env。**任何 attention/softmax 改动都要同时覆盖 causal（标量 mask）与非 causal（真实张量 mask）两条路径**，见下方 § "Attention causal 假设" |
+| **FA on / off** | config `attention_mode` ∈ {8, 10}（FA on）与 {0, 1, 2}（FA off）各一份 | 决定走 flash-attn 还是三段 pipeline (prefill_qk[_tensor] + softmax + prefill_qkv[_tensor])。两条路径都要正确（无 env 覆盖，改 config 换路） |
+| **CAUSAL_TRI（数据驱动，无 env）** | 用真实 mask 张量 vs 标量哨兵 mask 两类模型覆盖 | causal-tri/bound 现由 `mCausalLayout`（inputs[3] 形状）自动 gate，非手动 env。**任何 attention/softmax 改动都要同时覆盖 causal（标量 mask）与非 causal（真实张量 mask）两条路径**，见下方 § "Attention causal 假设" |
 | **每一个新增 env var** | 默认（不设）+ 每个显式值都跑一遍 | Env 只在 static 初始化时读一次（`static const int kX = getenv(...)`），不同值 = 完全不同分支 |
 | **至少 2 个模型 shape** | `head_dim ∈ {64, 128, 256}` × `group_size ∈ {1, 2, 4, 8}` | Qwen3-0.6B (D=128, G=2)、Qwen3-4B (D=128, G=4)、Qwen3.5-2B (D=256, G=4) — 每个都可能踩不同 layout / stride 分支 |
-| **Mask 语义（数据驱动）** | 非 causal 模型（SWA / prefix LM / bidirectional）**无需再设 env** | Metal 2026-07-31 起从 mask 张量形状自动判定：真实张量 ⇒ 逐元素 honor、关全部 causal 优化；标量/无 mask+kvcache ⇒ causal。若非 causal 仍乱码，查 `gen_attention_mask` 是否为该模型产出真实张量 mask（非误走标量）。详见下方 § "Attention causal 假设"。 |
+| **Mask 语义（数据驱动）** | 非 causal 模型（SWA / prefix LM / bidirectional）**无需再设 env** | Metal 从 mask 张量形状自动判定：真实张量 ⇒ 逐元素 honor、关全部 causal 优化；标量/无 mask+kvcache ⇒ causal。若非 causal 仍乱码，查 `gen_attention_mask` 是否为该模型产出真实张量 mask（非误走标量）。详见下方 § "Attention causal 假设"。 |
 
 **判据**：跟 baseline 前 N (≥ 20) tokens byte-identical，或至少输出语义合理（无乱码 / 无异常重复 / 无语言跳变）。
 
@@ -99,14 +110,11 @@ Baseline 选取原则：
 MAX_TOKENS=30
 for M in qwen3-0.6b-head-b32 qwen3-4b-head-b32 qwen3.5-0.8b-head-b32 qwen3.5-2b-head-b32; do
   CFG=/Users/jiuqi/models/${M}/config_mtl_greedy.json
-  for FA in 1 0; do
-    echo "=== ${M} FA=${FA} ==="
-    MNN_ENABLE_FLASH_ATTN_PREFILL=$FA \
-      DYLD_LIBRARY_PATH=build:build/express build/llm_demo \
-      "$CFG" /tmp/prompt_2048_oneline.txt $MAX_TOKENS 2>&1 \
-      | awk '/^prompt file is/{f=1;next} /^#####/{f=0} f' | head -3
-    echo
-  done
+  echo "=== ${M} ==="
+  DYLD_LIBRARY_PATH=build:build/express build/llm_demo \
+    "$CFG" /tmp/prompt_2048_oneline.txt $MAX_TOKENS 2>&1 \
+    | awk '/^prompt file is/{f=1;next} /^#####/{f=0} f' | head -3
+  echo
 done
 ```
 
@@ -124,7 +132,7 @@ done
 # 标准 Metal + LLM 编译
 mkdir -p build && cd build
 cmake .. -DMNN_METAL=ON -DMNN_BUILD_LLM=ON -DMNN_LOW_MEMORY=ON -DMNN_SUPPORT_TRANSFORMER_FUSE=ON
-make -j8 llm_demo MNN
+make -j8 llm_demo llm_bench MNN
 
 # 带 profiling 编译（Step 1）
 cmake .. -DMNN_METAL=ON -DMNN_BUILD_LLM=ON -DMNN_LOW_MEMORY=ON -DMNN_SUPPORT_TRANSFORMER_FUSE=ON -DMNN_METAL_OP_PROFILE=ON
@@ -141,25 +149,29 @@ make -j8 llm_demo MNNConvert
 cd transformers/llm/export
 python llmexport.py --export mnn \
     --path /path/to/HuggingFace/model \
-    --mnnconvert /path/to/build/MNNConvert \
-    --quant_block 32
+    --mnnconvert /path/to/build/MNNConvert
 ```
 
 ## 性能测试
 
+**用 `llm_bench` 而不是 `llm_demo` 测性能，且必须带 `-pg`。** `-pg <pp>,<tg>`：prefill pp 个 token 后复用该 KV cache 继续 decode tg 个 token，**分列报告 prefill / decode 两个速度**。`-kv` 已废弃（`-p A -n B -kv true` == `-pg A,B`）；单独的 `-p` / `-n` 是 prefill-only / decode-only 口径，默认值 512/128 会额外生成独立测试，**只想跑 -pg 时须加 `-p 0 -n 0` 压掉**。`-pg` 可重复传，多组累加。
+
 ```bash
 cd build
 
-# Metal 后端：修改 config.json 中 backend_type 为 "metal"
-./llm_demo /path/to/model/config.json /path/to/prompt.txt 30
+# Metal 后端（-a metal 直接指定，无需改 config.json）
+./llm_bench -m /path/to/model/config.json -a metal -p 0 -n 0 -pg 512,128 -rep 3
 
 # CPU 后端对比
-./llm_demo /path/to/model/config_cpu.json /path/to/prompt.txt 30
+./llm_bench -m /path/to/model/config.json -a cpu -t 4 -p 0 -n 0 -pg 512,128 -rep 3
 
-# 不同 prompt 长度测试
-./llm_demo /path/to/config.json /path/to/short_prompt.txt 50   # 短 prefill
-./llm_demo /path/to/config.json /path/to/512.txt 30            # 中等 prefill
-./llm_demo /path/to/config.json /path/to/1024.txt 30           # 长 prefill
+# 不同 prompt 长度（一次跑多组）
+./llm_bench -m /path/to/model/config.json -a metal -p 0 -n 0 \
+    -pg 64,64 -pg 512,128 -pg 2048,128 -rep 3
+
+# FA A/B
+./llm_bench -m /path/to/model/config.json -a metal -p 0 -n 0 -pg 512,128 -rep 3 -fa 0
+./llm_bench -m /path/to/model/config.json -a metal -p 0 -n 0 -pg 512,128 -rep 3 -fa 1
 
 # 长 prompt + 内存受限：chunk + FA + KV int8
 # config.json 加 "chunk": 512, "attention_mode": 10
@@ -177,9 +189,9 @@ cd build
 # Metal 对比
 ./llm_demo config_metal.json prompt.txt 30
 
-# FA A/B 对比（同一 config）
-MNN_ENABLE_FLASH_ATTN_PREFILL=0 ./llm_demo config_metal.json prompt.txt 30 > off.log
-MNN_ENABLE_FLASH_ATTN_PREFILL=1 ./llm_demo config_metal.json prompt.txt 30 > on.log
+# FA A/B 对比（两份 config：attention_mode=8 与 =0，其余字段相同）
+./llm_demo config_metal_fa8.json prompt.txt 30 > on.log
+./llm_demo config_metal_fa0.json prompt.txt 30 > off.log
 diff off.log on.log
 ```
 
@@ -203,7 +215,7 @@ Metal 后端**两条** prefill attention 路径**都硬编码了 "attention mask
 **准入检查（导入新模型前跑一次）**：
 
 ```bash
-# 数据驱动检测（2026-07-31 起）：causal 由 gen_attention_mask 产出的 mask 形状决定
+# 数据驱动检测：causal 由 gen_attention_mask 产出的 mask 形状决定
 # —— 标准 causal 模型发标量哨兵 mask，非 causal 模型发真实张量 mask，Metal 自动分流。
 # 无需 A/B env 对拍。直接与 CPU 后端 greedy 对拍前 20 token：
 DYLD_LIBRARY_PATH=build:build/express build/llm_demo <cfg_metal> <prompt> 20 > /tmp/a.log 2>&1
@@ -217,82 +229,8 @@ diff <(awk '/^prompt file is/{f=1;next}/^#####/{f=0}f' /tmp/a.log) \
 
 **推荐操作**：
 - 加载 **Qwen / Llama / Phi / DeepSeek / Yi / Baichuan-Chat** 等纯 causal LLM：直接跑，标量哨兵 mask + causal 优化全开
-- 加载 SWA / prefix / bidirectional 模型：**无需再设任何 env**（2026-07-31 起数据驱动）；真实张量 mask 自动触发逐元素 honor、关掉 causal-tri/bound/FA。前提是 `gen_attention_mask` 为该模型产出真实张量 mask（SWA 走 `attention_type=mix` 双平面；确认导出 config 正确）
+- 加载 SWA / prefix / bidirectional 模型：**无需再设任何 env**（数据驱动）；真实张量 mask 自动触发逐元素 honor、关掉 causal-tri/bound/FA。前提是 `gen_attention_mask` 为该模型产出真实张量 mask（SWA 走 `attention_type=mix` 双平面；确认导出 config 正确）
 - 不确定模型是不是 causal：读 HF `config.json` 里有没有 `sliding_window` / `attention_bias` / `is_encoder_decoder` 字段
 
-**注意**：causal-tri/bound 及 FA-v1/faNax 的 causal 假设现由 `mCausalLayout`（inputs[3] 形状）统一 gate。真实张量 mask 会一并关掉 FA（含 FA-v1 那条以前无 opt-out 的路径），不再需要手动关 `MNN_ENABLE_FLASH_ATTN_PREFILL`。
+**注意**：causal-tri/bound 及 FA-v1/faTc 的 causal 假设现由 `mCausalLayout`（inputs[3] 形状）统一 gate。真实张量 mask 会一并关掉 FA（含 FA-v1 那条以前无 opt-out 的路径）。
 
----
-
-## 真实教训（为什么强制验证流程存在）
-
-**案例 1：P0 flash-attn small-model gate（2026-07 M5）**
-基于 M5 pp2048 A/B "no_flash_attn +7.1% prefill" 数据，加了小模型自动关 FA 的 gate。合入前一个 correctness 抽查发现 Qwen3-0.6B 输出乱码 `个 https:// 中文文告 thái`。**"+7.1% 更快"其实是 FA off 路径本身有 bug，写错 layout 直接吐乱码，"快"只是因为少写了正确数据**。
-
-Root cause: `prefill_qkv_tensor` kernel 缺 `#ifdef ATTENTION_C4` 分支（长期潜伏），只有 c4-head 导出模型 + M5+ tensor API 路径 + FA off 三个条件同时命中才触发。前 3 次尝试 fix 反复验证"没生效"，原因是 make 增量没 relink libMNN.dylib（Step 0）+ Metal pipeline cache 命中旧 binary（Step 1）。
-
-**教训**：
-- **没有正确性验证的"性能提升"不能信** —— 假信号率极高。今天 P0-D 5 次尝试 4 次是假信号。
-- **改 shader 一定要 `touch header + make -B` + 删 pipeline cache** 后测。
-- **必须覆盖 FA on/off × 多模型** —— 单一路径过了不代表另一路径没坏。
-
-**案例 2：M3 Pro fusion 诊断（2026-07）**
-第一版脚本每场景 3-rep 全跑完再切下一场景，第一个跑的 baseline 吃冷启动税 → 后面场景全比 baseline 快 5-7%，包括理论上不该有效应的 `no_fused_Q4_gemm`（M3 Pro 硬 gated off）。用户 catch 到这个矛盾信号，`v2` 改成 outer=rep / inner=case + WARMUP + SHUFFLE 后，delta 大幅缩小。**性能测量的 process-level cold start 效应比 kernel 差异大**。
-
-**案例 3：过期二进制伪造出 -9% 假回归（2026-07-30）**
-
-跑 MNN-vs-MLX 全矩阵对比时，用户指出「`200530d339` 在 tg128@p512 应有 decode 342.9」，而当轮只测出 307.0。随后的排查路径**全部走在错误前提上**：
-
-1. 用文档原测法 `llm_demo + config_greedy` 复测 → 309.09，"排除了工具差异"；
-2. 建 worktree 编译 `200530d339`，正序交替配对 3 轮 → ratio 0.9475 / 0.8952 / 0.9134；
-3. 反序配对 3 轮（[`SKILL.md`](./SKILL.md) 通用原则 7：A/B 必须交替配对）→ 0.9051 / 0.8891 / 0.8994，"双向一致，确认真回归"；
-4. 二分两轮（`6975fa71e7` 331 快、`024412a537` 337 快），把嫌疑收窄到 3 个 commit；
-5. 才去看 `ls -l build/libMNN.dylib` → **7月29 20:34，比 HEAD 晚三个 commit**，`decode_sdpa` / `probe_coop_input` / `prefill_flash_attn_nax` 三个符号全缺；
-6. 重跑 `cmake ..` + `make` 后再配对 → **0.9998 / 0.9997 / 1.0001，回归消失。**
-
-**教训**：
-
-- **交替配对 + 反序验证只能排除热漂移，不能排除"测的不是你以为的那个二进制"。** 两个方向都稳定复现 -9%，正是因为那个慢的产物是真实存在的、稳定的——只不过它不是 HEAD。方法论再严谨，装置错了就全错。
-- **排查顺序应当是「先验证测量装置，再验证代码」**：疑似回归时，第 1 步做 Step 0.5 的符号断言，第 2 步才是建 worktree 二分。本次顺序反了，白烧掉两次编译 + 六轮配对 + 两轮二分。
-- **副作用会污染下游结论**：同一个过期产物还让「b64 对 decode 只有 +0.2~3.2%」这个结论成立，订正后真值是 **+4.1~9.2%**（模型越大越明显），差点据此把 b64 判为无收益。
-- 过期产物的来源是前一天残留的 WIP 构建 —— 它的 `llm_bench -pg` 输出格式都和 HEAD 不同（两个数字 vs 一个数字），这本身就是个该被注意到的信号。
-
----
-
-## 性能基线（Qwen3-0.6B Q4, Mac M4）
-
-| 指标 | CPU (4 线程) | Metal | 加速比 |
-|------|------------|-------|--------|
-| 短 prompt (15 tok) prefill | 424 tok/s | 920 tok/s | **2.2x** |
-| 短 prompt decode | 188 tok/s | 193 tok/s | 1.03x |
-| 长 prompt (514 tok) prefill | 1036 tok/s | 4033 tok/s | **3.9x** |
-| 长 prompt decode | 142 tok/s | 260 tok/s | **1.8x** |
-| 长 prompt (999 tok) prefill | 1089 tok/s | 2601 tok/s | **2.4x** |
-| 长 prompt decode | 101 tok/s | 141 tok/s | **1.4x** |
-
----
-
-## 文件索引
-
-| 文件 | 职责 |
-|------|------|
-| `source/backend/metal/ConvSimdGroupShader.hpp` | GEMV/GEMM shader 字符串（deferred dequant, 双 simdgroup, pre-scaling, GATE_UP_FUSED, QKV_FUSED） |
-| `source/backend/metal/MetalConvolution1x1.mm` | Conv1x1 dispatcher，buffer 分配，kernel 选择，Gate/Up 和 QKV fusion setup/encode |
-| `source/backend/metal/MetalConvolution1x1.hpp` | Conv1x1 成员变量（deferred dequant buffers, Gate/Up fusion, QKV fusion） |
-| `source/backend/metal/MetalAttention.mm` | Attention dispatcher，GQA group_size 选择，flash-attn prefill eligibility/dispatch |
-| `source/backend/metal/MetalAttention.hpp` | Attention 成员（`mFlashAttnPrefill`, `mKernel_flashAttn`）|
-| `source/backend/metal/MetalAttentionShader.hpp` | Fused attention shader（decode_qk_softmax） |
-| `source/backend/metal/MetalFlashAttnShader.hpp` | Fused prefill flash-attention shader（`gPrefillFlashAttn`）|
-| `source/backend/metal/MetalLayerNorm.mm` | RMSNorm kernel 选择 |
-| `source/backend/metal/MetalRope.mm` | RoPE Metal 实现（inv_freq fusion） |
-| `source/backend/metal/MetalBinary.mm` | Binary op 实现，Gate/Up fusion 关系发现（从 MUL_SILU 输入） |
-| `source/backend/metal/MetalBackend.mm/hpp` | Op profiling、Gate/Up 注册匹配、QKV 分组注册匹配（`registerConv1x1ForQKV`、`matchQKVFusions`） |
-| `source/backend/metal/MetalDefine.h` | MNN_METAL_OP_PROFILE 宏 |
-| `source/backend/cpu/CPURoPE.cpp` | RoPE CPU 实现对齐 |
-| `schema/default/MNN.fbs` | RoPE op schema（hasInvFreq） |
-| `tools/converter/source/optimizer/postconvert/RemoveDeadShapeOp.cpp` | 死代码消除 pass |
-| `tools/converter/source/optimizer/postconvert/FuseTransformerC4.cpp` | QKV projection 图重排 |
-| `transformers/llm/export/utils/transformers.py` | LLM 导出（RoPE unsqueeze 修复） |
-| `transformers/llm/export/utils/custom_op.py` | FusedRoPE 导出 |
-| `transformers/llm/engine/src/llm.cpp` | attention_mode 默认值、chunk 处理 |
-| `docs/transformers/llm.md` | Metal attention_mode 配置说明 |

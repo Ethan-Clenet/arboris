@@ -41,6 +41,20 @@ fields: `schema_version`, `environment.type`, `engine.name`, `cases.files`, and
 `report.formats` in eval.yaml; `id`, `title`, `input.prompt`, and `judge.type` in
 case YAML. For nested fields, place the comment inside the parent mapping
 immediately before the child field, rather than only before the parent.
+For example, comment both `prompt` and `type` at their own indentation:
+
+```yaml
+input:
+  # User request sent to the agent.
+  prompt: Review this code.
+# Cheap prerequisites checked before the judge.
+expect:
+  must_contain: ["suggestion"]
+judge:
+  # Deterministic grading strategy for this case.
+  type: rule_based
+```
+
 Comment `expect` and a top-level `judge` when present; do not add an
 optional field just to satisfy a comment check. Keep field names and enum values
 unchanged. `skill-up import` does not preserve template comments.
@@ -190,6 +204,14 @@ Precedence (low → high): embedded empty defaults < user config < project `.ski
 - Copy `assets/eval.yaml.tmpl` to `<skill-root>/evals/eval.yaml`.
 - Copy `assets/case.yaml.tmpl` to `<skill-root>/evals/cases/<case-id>.yaml`.
 
+Start with the smallest complete scaffold requested by the user. Unless they
+request broader coverage, create one representative case; add more only for
+distinct requirements. For a script judge, implement the required output
+contract in a short script and reuse it across cases with the same contract.
+Do not build a general report parser or an extensive script test matrix as part
+of scaffolding. For a JSON-only contract, use `json.loads` and explicit field
+checks; support prose or Markdown wrappers only when the contract allows them.
+
 Adapt language per "Language Rules for Generated Artifacts". Replace the templates' generic English placeholders with case-specific prose in the requested output language. Preserve short field-leading comments in generated YAML; translate them when the output language differs from English, while keeping field names and enum values in English.
 
 Selection guidelines:
@@ -207,6 +229,9 @@ See `references/eval-yaml.md` and `references/case-yaml.md`.
 - `skill-up list-cases <path>`
 - Review `eval.yaml` and representative cases; avoid `agent_judge` abuse.
 - Add or edit YAML under `cases/` as needed.
+- For byte-for-byte preservation checks, compare `sha256sum <file>` (or
+  `shasum -a 256 <file>`) before and after editing, within the user's allowed
+  command profile.
 - If adding simulated user turns, check that the selected engine supports session resumption, configure the separate simulator connection, and retain deterministic fixed turns and judge assertions wherever possible.
 
 ### Step 4: Validate the configuration
@@ -219,6 +244,19 @@ Expect: `✓ eval.yaml is valid (loaded N case(s))`.
 
 For a case-authoring request, finish here with the config and case paths plus
 validation status. Do not start a background evaluation as part of scaffolding.
+Before replying, reopen the generated YAML and check comments immediately
+before nested `input.prompt`, `judge.type`, and `report.formats` where configured.
+A comment before `input`, `judge`, or `report` does not document its child field.
+Check every generated case separately: read its actual `judge:` block and ensure
+the explanatory comment sits between `judge:` and `type:`, indented like `type:`.
+If the comment is above `judge:`, move it inside the mapping and validate again.
+Do not infer comment coverage from a successful YAML validation or from what you
+intended to write.
+For an `expect` block, put its explanatory comment immediately above `expect:`;
+a comment inside it above `must_contain` does not document the parent gate.
+For a new scoring script, check one passing and one failing sample when feasible,
+then report the checks and finish. Do not expand into unrelated script features
+or a large test matrix unless the user asks for that work.
 
 ### Step 5: Prepare credentials
 
@@ -241,6 +279,13 @@ An absent environment variable does not rule out file-based credentials or an
 existing engine login. If the selected authentication path is unavailable,
 **stop and ask** the user to configure it locally; do not ask them to paste a
 secret into the conversation or write secrets into YAML without consent.
+
+When asked to author a credential probe, respect the user's allowed command
+profile during verification too. Writing a script does not authorize launching
+it with `sh`, `sh -x`, or sourcing it when that profile excludes script execution.
+Inspect the written probe instead and report that execution was not performed;
+do not add an unsupported launcher just to test it. Check shell-tracing behavior
+only in an explicitly permitted isolated test with synthetic credentials.
 
 The user simulator resolves credentials by its own `user_simulator.provider`. For `provider: simulation`, set `SIMULATION_API_KEY` and `SIMULATION_BASE_URL`, or configure the `simulation` provider in `~/.skill-up/credentials.yaml`. For `provider: openai`, use `OPENAI_API_KEY` and optionally `OPENAI_BASE_URL`; its standard endpoint is the fallback. Choose `protocol: openai` for Chat Completions or `protocol: anthropic` for Messages; custom base URLs must match that protocol. For `provider: anthropic` with `protocol: anthropic`, use `ANTHROPIC_API_KEY` and optional `ANTHROPIC_BASE_URL` (official endpoint fallback). `--api-key` for the agent does not supply the simulator connection. Never put a raw key in eval YAML.
 
@@ -285,12 +330,36 @@ Only enter this loop when the user asks to fix, improve, iterate, or evolve the
 target Skill. If the user only asks to evaluate or report results, stop after
 Step 7 without modifying it.
 
-1. Diagnose failures from `result.json`, `grading.json`, and output evidence.
-2. Fix `SKILL.md` or supporting files when the Skill behavior is incorrect.
-3. Add or refine eval cases when coverage is missing.
-4. Do not weaken valid assertions merely to make a failure pass.
-5. Rerun failed cases first, then run the full eval suite.
-6. Continue until the evals pass or clearly report what remains blocked.
+1. Diagnose failures from `result.json`, `grading.json`, transcripts, and produced
+   artifacts. Distinguish a Skill defect from an invalid eval, execution or
+   infrastructure error, and an uncertain outcome. Before editing, state the
+   observed failure, the smallest proposed change, and the behavior it should
+   change; cite the evidence rather than assuming a score increase proves why.
+2. Preserve the original Skill and its run artifacts so the candidate can be
+   compared or reverted without overwriting either version's evidence. Fix
+   `SKILL.md` or supporting files within the requested scope. Keep unrelated
+   changes separate so their effects can be assessed.
+3. Preserve valid assertions. If an eval or judge is wrong, explain and correct
+   it separately, then evaluate both Skill versions against that same corrected
+   suite. Add regression coverage and nearby counterexamples where needed to
+   distinguish a reusable fix from a rule tailored to one prompt.
+4. Compare the original and candidate on the affected cases with the same engine,
+   model, environment, inputs, and judges. Reuse existing runs only when those
+   conditions match. `--baseline` compares with and without a Skill; it does not
+   compare old and new Skill versions. Use separate output directories for the
+   two versions. For uncertain or intermittent outcomes, repeat both versions
+   within the user's budget; `--iteration N` samples one version, not N revisions.
+5. Run the full eval suite for a promising candidate. Accept it only when the
+   evidence supports the intended improvement without regressions in important
+   existing behaviors. Inspect runtime, token usage, and execution errors where
+   available. A single PASS, a higher aggregate score, or a preferred-looking
+   answer alone does not establish a reliable improvement.
+6. Revert unsupported changes or report uncertainty; keeping the original is a
+   valid outcome. Stop when the requested improvement is verified, the agreed
+   budget is reached, or an external blocker prevents validation. Summarize the
+   accepted or reverted change, comparative evidence and artifact paths,
+   regressions, costs, and remaining limitations. Record reusable lessons only
+   when the execution evidence supports them, with their scope and uncertainty.
 
 ## Command quick reference
 
