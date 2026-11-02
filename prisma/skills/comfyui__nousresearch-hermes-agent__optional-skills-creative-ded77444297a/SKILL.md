@@ -24,7 +24,6 @@ metadata:
       - creative
       - generative-ai
       - video-generation
-    related_skills: [stable-diffusion]
     category: creative
 ---
 

@@ -66,7 +66,7 @@ Check this precondition before setting anything up: Neon Functions is currently 
 
 ## Architecture: Where Functions Fit
 
-Neon (Functions included) is **backend primitives, not full-stack app hosting**. Host your app on **Vercel** (or Netlify, or another frontend/app host); Functions are the long-running, stateful slice of your backend that lives next to your data. They compose with that platform in two ways:
+Neon (Functions included) is **backend primitives, not full-stack app hosting**. Host your app on a frontend hosting provider like **Vercel** (or Netlify, Cloudflare, etc.), or serve a small static page from a `public_read` bucket behind a CDN (see the `neon-object-storage` skill for caching); Functions are the long-running, stateful slice of your backend that lives next to your data. They compose with that platform in two ways:
 
 - **Add a Function to a full-stack app.** Your Next.js / TanStack Start app on Vercel (or Netlify) owns UI, auth (Managed Auth, Better Auth, Clerk, or another IdP), and talks directly to Lakebase Postgres and Object Storage. Add a Function as a Hono API layer for the web app and other clients, or for one job next to the data: Object Storage uploads, AI agents, Discord bots, WebSocket or SSE servers. (See [Functions as an Agent Backend](#functions-as-an-agent-backend-nextjs-and-similar-frameworks) for the client-direct pattern.)
 - **Run the whole backend control plane on Functions.** Especially when the frontend is **client-only** — TanStack Router, React Router in client mode, and similar SPAs hosted on Vercel or Netlify — the client calls Functions **directly**. Build REST APIs and request/response agents, host **MCP servers**, and run anything stateful or that belongs close to Postgres and Object Storage.
@@ -629,7 +629,7 @@ app.all("/mcp", async (c) => {
 });
 ```
 
-Because the function's URL is public, **authenticate before connecting the transport** — [Better Auth](https://better-auth.com) covers both OAuth (its MCP plugin makes your app the authorization server so third-party clients self-authorize per the MCP spec) and a simpler API-key / session-JWT check for your own callers. Public-consumer edge protection: [references/production-hardening.md](references/production-hardening.md). [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md) has the full pattern — server with Postgres-backed tools via Drizzle, both Better Auth auth options, and testing with `mcporter` / `add-mcp`.
+Because the function's URL is public, **authenticate before connecting the transport** — Managed Better Auth is the OAuth server for third-party MCP clients (guard the Function with `@neon/oauth`; see the `neon-auth` skill's [oauth-server.md](https://neon.com/docs/ai/skills/neon-auth/references/oauth-server.md)), and a simpler API-key / session-JWT check covers your own callers. Public-consumer edge protection: [references/production-hardening.md](references/production-hardening.md). [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md) has the full pattern — server with Postgres-backed tools via Drizzle, the auth options, and testing with `mcporter` / `add-mcp`.
 
 ## Integrations and Observability
 

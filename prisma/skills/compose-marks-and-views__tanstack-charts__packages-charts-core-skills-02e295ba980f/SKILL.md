@@ -9,7 +9,7 @@ metadata:
   origin: TanStack
   type: core
   library: '@tanstack/charts'
-  library_version: '1.1.0'
+  library_version: '1.2.0'
 sources:
   - 'TanStack/charts:docs/concepts/grammar-of-graphics.md'
   - 'TanStack/charts:docs/concepts/marks-and-layering.md'

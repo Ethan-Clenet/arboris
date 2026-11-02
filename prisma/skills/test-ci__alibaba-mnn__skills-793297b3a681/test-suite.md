@@ -60,6 +60,17 @@ Valid filters: `all` (default) · `cpu` · `opencl` · `opencl-image` ·
 * Combined stdout/stderr for every stage is saved under
   `logs/test-<UTC-timestamp>/<stage>.log` — read the named log of a failing
   stage for the trailing output. `rc=137` ≈ OOM-kill, `rc=139` ≈ SIGSEGV.
+* **`run_test.out` prints `√√√ all <filter> tests passed` even when the filter
+  matched nothing.** Judge by the `passed:N` count in
+  `TEST_CASE_AMOUNT_UNIT` / `TEST_CASE` — `passed:0` means the case never ran
+  (wrong filter name, or the file was never compiled in; see § Adding a new
+  test). Never read the all-passed line as proof that a specific test ran.
+* `skipped:N` in the same line counts cases that gated themselves off the
+  running backend through `MNNTEST_CPU_ONLY()` (`test/MNNTestSuite.h`); they are
+  excluded from `passed`. A green Metal run reporting `skipped:6` means
+  `op/AvePool3d`, `op/Interp`, `op/InterpInt8` and
+  `op/unary/{erf,erfc,erfinv}Int8` never executed — not that they passed. Each
+  gate site records the backend gap it stands in for.
 * When a remote transport has a shorter timeout than the device workload, a
   blank or truncated client response does not prove that the process exited.
   Write results on the device, then poll the process and result-file size
@@ -158,40 +169,75 @@ recommending deletion:
   `test_stages.json` self-documentation, developer docs, skill docs, and code
   comments in the same change so the old entrypoint disappears completely.
 
-## Adding a new operator test
+## Bugfix 单测提交原则
 
-1. Write the C++ test under `test/op/` (one file, registered with
-   `MNNTestSuiteRegister`). The full template + conventions are in
+- **不默认给每个 bugfix 新增仓库单测**。优先复用已有测试、模型 smoke 或最小复现验证，避免重复用例和
+  一次性复现代码持续膨胀。
+- **开发时可以写临时单测，但不要随修复提交**。临时用例或脚本留在本地或临时目录，提交前从 diff 中
+  排除；它们用于定位和验证，不自动成为仓库的长期维护内容。
+- **提交到仓库的单测必须审查必要性，理由充分才添加**。评估现有覆盖的缺口、问题再次发生的风险与影响、
+  用例能否稳定捕获回归，以及代码量、构建/运行和维护成本；在 CR/PR 中说明为什么已有验证不足、
+  该用例有什么长期价值。仅为证明本次修复有效、重复已有覆盖或照抄实现逻辑，不足以支持新增单测。
+- **确需长期覆盖时，优先小幅扩展已有用例**，再考虑新增独立单测；保持用例最小，并确认修复前失败、
+  修复后通过。不提交新增单测也必须完成修复验证，在 CR/PR 中记录复现方式、修复前后结果和已执行的验证。
+
+## Adding a new test
+
+For bugfixes, first apply the [unit-test submission policy](#bugfix-单测提交原则).
+Use the steps below when a committed test is warranted; a bugfix alone does not require adding one.
+
+1. Write the C++ test under `test/<area>/` (one file, registered with
+   `MNNTestSuiteRegister`). For operators the full template + conventions are in
    [`docs/testing.md`](../../docs/testing.md) § "新增算子测试".
-2. If its name prefix matches an existing stage (e.g. `op/*`), it is picked up
-   automatically — no JSON change needed. Otherwise add a dedicated stage.
+2. **Re-run `cmake` before building.** `test/CMakeLists.txt` collects sources
+   with `GLOB_RECURSE`, which CMake expands at **configure** time — a new file
+   is *not* picked up by an incremental `cmake --build`, and the test is simply
+   absent from `run_test.out` with no error. Run `cmake .` in the build dir (or
+   delete it) first, then confirm the case actually ran via `passed:N`
+   (see § Reading the result) — not via the all-passed line.
+3. If its name prefix matches an existing stage (e.g. `op/*`, `core/*`), it is
+   picked up automatically — no JSON change needed. Otherwise add a dedicated
+   stage.
+4. **Check that the test can actually fail.** Reintroduce the bug (or revert the
+   fix) and confirm the test goes red; a test that passes on the broken code is
+   worse than no test, because it manufactures confidence. See
+   [general-debug §3](../general-debug/concurrency.md) for the case where a runtime
+   test *cannot* work and the invariant must be asserted at compile time.
 
 ### Attention causal-mask assumption (⚠️ non-causal models on Metal)
 
-Metal backend prefill has a **silent-error mode**: both the three-kernel path
-(with CAUSAL_TRI / CAUSAL_BOUND, `f28510967` / `78ae7bc55`) and the flash-attn
-path (`MetalFlashAttnShader.hpp`) hard-code the assumption **"attention mask
-is causal lower-triangular"**. Non-causal architectures (Sliding Window
-Attention: Mistral 7B v0.1 / Gemma-2 / Ministral; Prefix LM: Baichuan-Base;
-encoder / bidirectional: BERT-family, T5, UL2) will **produce garbled tokens
-with no crash and no warning** when routed through Metal.
+Since 2026-07-31 the causal assumption on Metal is **data-driven** — the old
+`MNN_METAL_QK_CAUSAL_TRI` env is deleted: `MetalAttention.mm`
+`_computePathFlags` derives `mCausalLayout` from the mask input. A scalar
+sentinel mask (or no mask + KV cache) routes to the causal-optimized kernels
+(CAUSAL_TRI / CAUSAL_BOUND / FA); a real mask tensor disables all causal
+optimizations (including FA / faTc) and honors the mask element-wise.
+
+The remaining silent-error mode is therefore on the **export / mask-generation
+side**: if `gen_attention_mask` emits a scalar sentinel for a model that is
+actually non-causal (Sliding Window Attention: Mistral 7B v0.1 / Gemma-2 /
+Ministral; Prefix LM: Baichuan-Base; encoder / bidirectional: BERT-family,
+T5, UL2), Metal still applies causal optimizations and **produces garbled
+tokens with no crash and no warning**.
 
 The default LLM smoke stage uses Qwen2.5-0.5B (causal), so it will not catch
 this regression. When adding a **non-causal model** to `test_stages.json`
 smoke list, or when introducing a new Attention / softmax / prefill_qk /
 prefill_qkv shader change, you must:
 
-1. Include a diff-based A/B in the smoke: run once with `MNN_METAL_QK_CAUSAL_TRI=0`
-   and once with default; the first 20 greedy tokens must be identical
-   (indicates the model actually is causal-safe under CAUSAL_TRI/BOUND).
-   If they diverge, the model is not causal and the smoke must pin
-   `MNN_METAL_QK_CAUSAL_TRI=0`.
-2. For any model configured with `attention_mode >= 8` (FA enabled), also
-   verify with `MNN_ENABLE_FLASH_ATTN_PREFILL=0` — FA's causal hard-code
-   has no opt-out short of disabling FA entirely.
-3. Add the safe env pin to the model's stage entry (via a wrapper script or a
-   TODO in `test_stages.json`), and note in `_documentation.skip_rationale`
-   or a new note field why it is required.
+1. Verify the non-causal model actually emits a **real mask tensor** (not the
+   scalar sentinel), so `mCausalLayout == false`; then greedy-diff the first
+   20 tokens against the CPU backend (recipe in
+   [`build-and-test.md`](../metal-optimize/build-and-test.md) § "Attention
+   causal 假设"). If it garbles, the root cause is almost always the
+   export / `gen_attention_mask` side, not the kernel.
+2. For shader changes, cover **both** mask routes — one scalar-sentinel
+   (causal) model and one real-mask-tensor (non-causal) model — since the two
+   compile and dispatch different kernel variants.
+
+No env pin in stage entries is needed. FA routing is config-driven
+(`attention_mode/8`) and real-mask models never route to FA, so no
+correctness workaround is required either.
 
 Full risk breakdown, gate conditions, and remediation options: see
 [`skills/general-debug/kernel-assumptions.md`](../general-debug/kernel-assumptions.md) (§7 后端 kernel 隐式假设违反)

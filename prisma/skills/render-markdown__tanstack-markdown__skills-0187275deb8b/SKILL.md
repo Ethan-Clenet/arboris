@@ -10,7 +10,7 @@ metadata:
   origin: TanStack
   type: core
   library: '@tanstack/markdown'
-  library_version: '1.0.0'
+  library_version: '1.1.1'
 sources:
   - 'TanStack/markdown:docs/quick-start.md'
   - 'TanStack/markdown:docs/core-concepts/document-model.md'
@@ -153,8 +153,9 @@ lists, tables, frontmatter, reference definitions, and footnote definitions.
 - Footnotes render in first-reference order with collision-safe IDs and
   repeated-reference back links.
 - Code fence metadata is recorded in the AST; highlighting is external.
-- The AST is public but pre-1.0. Regenerate persisted documents when an
-  upgrade changes node contracts.
+- The documented AST follows the version 1 compatibility policy. Existing
+  valid 1.x documents remain supported by later 1.x renderers. Record the
+  producer version with persisted documents and rebuild caches to adopt fixes.
 
 ## Compatibility and Option Timing
 
@@ -202,7 +203,7 @@ const html = renderHtml(controlledMarkdown)
 console.log(html)
 ```
 
-Setext headings and automatic URL linking are outside the supported syntax
+Setext headings are outside the supported syntax
 profile, so unsupported input can remain literal or have different structure.
 
 Source: `docs/core-concepts/syntax-profile.md`
@@ -321,6 +322,10 @@ Standalone inline parsing does not extract document-level reference or
 footnote definitions unless internal parser state is supplied explicitly.
 
 Source: `docs/reference/default-entry.md`
+
+## Optional pasted URLs
+
+Import `autolinksExtension` from `@tanstack/markdown/extensions/autolinks` and pass it in `extensions` to recognize bare HTTP(S) URLs and `<https://…>` notation. This is opt-in and is not part of the docs preset. It uses the application `urlTransform` policy and produces ordinary portable link nodes. Code, images, and explicit link labels retain existing behavior. Bare links exclude trailing sentence punctuation and unmatched closing delimiters; use angle notation for meaningful trailing punctuation. `www.` addresses, emails, other schemes, and full GFM autolink conformance are not included.
 
 ## Related Skills
 

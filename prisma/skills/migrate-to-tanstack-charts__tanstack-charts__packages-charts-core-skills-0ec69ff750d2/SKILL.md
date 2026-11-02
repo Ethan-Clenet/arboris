@@ -8,7 +8,7 @@ metadata:
   origin: TanStack
   type: composition
   library: '@tanstack/charts'
-  library_version: '1.1.0'
+  library_version: '1.2.0'
 requires:
   - design-a-chart
   - debug-and-verify-charts

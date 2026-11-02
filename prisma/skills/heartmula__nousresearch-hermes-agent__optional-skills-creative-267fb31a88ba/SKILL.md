@@ -9,7 +9,7 @@ metadata:
   origin: Nous Research
   hermes:
     tags: [music, audio, generation, ai, heartmula, heartcodec, lyrics, songs]
-    related_skills: [audiocraft-audio-generation, songwriting-and-ai-music]
+    related_skills: [songwriting-and-ai-music]
 ---
 
 # HeartMuLa - Open-Source Music Generation

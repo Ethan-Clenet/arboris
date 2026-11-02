@@ -10,7 +10,7 @@ metadata:
   origin: TanStack
   type: core
   library: '@tanstack/highlight'
-  library_version: '1.2.0'
+  library_version: '1.2.8'
 requires:
   - 'configure-selective-highlighting'
 sources:

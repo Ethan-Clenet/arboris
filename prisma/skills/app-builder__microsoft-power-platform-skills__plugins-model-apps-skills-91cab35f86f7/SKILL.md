@@ -12,6 +12,8 @@ metadata:
 
 > **Plugin check**: Run `node "${PLUGIN_ROOT}/scripts/check-version.js"` — if it outputs a message, show it to the user before proceeding.
 
+> **Model check (lightweight models only)**: If you are a lightweight model optimized for fast, simple tasks, tell the user in your first message that `/app-builder` works best on a general-purpose coding model or an advanced reasoning model — designing the App Spec, reasoning about the dependencies between tables, relationships and artifacts, orchestrating the build and reconciling what already exists take multistep planning, tool use and validation — and recommend switching; then continue. On any other model, skip this note and say nothing about it.
+
 # app-builder — intent → model-driven app
 
 Turn a natural-language intent into a deployed model-driven app. You author a reviewable **App Spec**
@@ -64,7 +66,8 @@ prod-ready** app; don't under-build (a bare table list) or over-build (surfaces 
   `100000003`, because they are assigned per publisher. Resolve by label via `getOptions()`
   (see `references/app-spec-schema-advanced.md` → webResources). Note also that command and web-resource
   **edits do not redeploy on rebuild** — the phases reuse what exists, so changing a button or a
-  script means deleting it first. This does not apply to recovery of the build's own
+  script means deleting it first (the build warns, and verify fails, when a web resource's deployed
+  content differs from the spec's). This does not apply to recovery of the build's own
   `WEB_RESOURCE_UNVERIFIED` row: keep that row and the same build workspace, then follow its halt.
 - **Form logic without code** — `businessRules[]`: show/hide, lock/unlock, set-required and
   set-value, driven by a condition on the record. **Reach for a business rule before form JS** when
@@ -366,6 +369,23 @@ After plan-mode approval (before the full build):
    that starts with `--`, `&`, `:` or `@` is read); Fluent's `...shorthands.*(…)` and
    `...typographyStyles.*` may be spread as they are.
 
+   Review every generated page for iteration that another page compiler can lose as well:
+
+   Pages this plugin uploads are compiled with iterator support (ES5 with `downlevelIteration`), so a
+   spread, a `for...of` loop or an array destructure of a Map, Set, iterator, generator or string
+   reads it as modern JavaScript does. A tool that compiles the page again without that support — an
+   older maker portal, or `pac` — reads length and indices instead: values disappear, defaults replace
+   them, and rest destructuring or a string spread throws, all with a clean compile. Keep the page
+   correct under every compiler: convert with `Array.from(...)` before spreading, looping or
+   destructuring, for example `[...new Set(xs)]`, `[...m.values()]`, `[...seen.values()]`, `for (const
+   [k, v] of m)`, `new Set([...prev, id])`, `[...selected]` and `[...text.matchAll(re)]`; copy a Set
+   with `new Set(prev)` then `.add(id)`. Ordinary array spreads and loops remain valid. `Object.keys`,
+   `Object.values` and `Object.entries` return arrays. Rest destructuring of a non-iterable array-like without
+   `slice` throws under every compiler. A destructuring default must not write to the array being
+   destructured: `const [a = (values[1] = 3), b] = values` leaves `b` at its old value here, unlike
+   modern JavaScript. See **Common Errors > 5. Iteration that another page compiler can lose** in
+   `references/rules.md` for the pairs.
+
    Then validate and commit the transition — never flip `source` by hand, and never
    flip pages one at a time as workers return. Run:
    ```bash
@@ -583,7 +603,11 @@ columns bind, which the platform refuses to delete while the table exists, and i
 business rule on it could not be deleted (the rule's activated copy can never be deleted once its table is gone), so
 a re-run deletes the rule first, then the table and what was kept with it. It never deletes the solution's
 **publisher** (the build reuses one by prefix, and other solutions may share it); its closing summary says so in one line,
-so tell the user the publisher stays and can be removed in Maker once nothing uses it. **Dry-run by default**; add `--apply
+so tell the user the publisher stays and can be removed in Maker once nothing uses it. **Known limit — generative pages on
+forms:** teardown deletes the app's generative pages even when a form still embeds one (the `MscrmControls.UxAgentControl`
+control); the platform records no dependency for that and teardown reads no form, so the form is left pointing at a deleted
+page. When the app has pages, tell the user before `--apply` and have them take each page off any form that shows it (or delete
+that form) first. **Dry-run by default**; add `--apply
 --allow-destructive` to actually delete (`--clear-workspace` also prunes `.maker-workspace/`).
 **`--allow-destructive` is required for `teardown --apply`** — without it teardown refuses and
 touches nothing.
@@ -707,6 +731,9 @@ not everything:**
 - **Does NOT round-trip:** `forms[]`, `views[]`, `charts[]`, `commands[]` — they come back empty.
   All four **survive on the live app** (a rebuild preserves them by discovery), so a plain edit is
   safe; they just aren't editable through the downloaded spec. Change them in Maker or a fresh spec.
+  The download names every one it leaves out — the command-bar buttons of the app's tables included —
+  in its `NOTE` and its result's `notRoundTripped`, and lists them under `descriptionInventory` in the
+  spec: tell the user before they rebuild the spec in another environment, which would not have them.
 - **Roles are not in the spec, and a rebuild leaves them as they are.** A download carries no
   `personas[]`: the roles associated with the app stay as the environment has them. Keep `personas[]`
   out when you extend an app whose roles somebody else owns — a persona's role is converged to exactly
@@ -735,7 +762,12 @@ connector — give the binding the logical name of a reference that is for the r
 binding's `connectorId` to the one that environment has, and never pick a reference for the user — and its
 warnings say by name each reference or Custom API that is not there yet, a reference that has no connection, an
 operation the custom connector there does not define, and what it could NOT check (a row that did not say its
-connector or connection, or operations no custom connector definition could prove): relay them. Do not write bindings into a
+connector or connection, or operations no custom connector definition could prove): relay them. A binding named
+exactly `WhoAmI` or `RetrieveVersion` is a reviewed built-in Dataverse operation, not a Custom API: the pull lists it
+under `neededInTarget.dataverseOperations` (nothing to deploy), and a rebuild reads nothing for it and says
+`These are reviewed built-in operation names; their availability in this environment or player and the signed-in
+user's permissions were not checked.` — relay that too, never as "missing" and never as "compatible"
+(`references/dataverse-operations.md`). Do not write bindings into a
 spec yourself — they come from a page a pull read — and when you reset a page to `intent` to regenerate it, delete
 its bindings from the spec: the generator writes no connector code.
 
@@ -770,6 +802,11 @@ Then:
    A page you did not touch is sent again as it is, and a
    key it already has only draws a warning — and so does a page you changed in a workspace that holds no record of it (a new or moved one, or
    another environment), where the build cannot tell what was sent: run the checker on that page yourself.
+   A page you edit by hand also follows the iteration rule of Phase 1.5, step 5 (**Common Errors > 5.
+   Iteration that another page compiler can lose** in `references/rules.md`): convert a Map, Set or
+   iterator with `Array.from` before spreading, looping over or destructuring it. An upload compiles the
+   changed page again with iterator support, so a form it already had now reads its values where an
+   earlier release lost them, converted or not; convert such a form only when the requested change needs it.
 3. **If the edit ADDS a page** (or resets a page's `source` back to `intent` to regenerate it),
    **re-run Phase 1.5 before Phase 2** — a downloaded spec contains only `kind: "tsx"` pages, so an
    added `intent` page has no code and Phase 2's `deploy` profile rejects it. Phase 1.5 is safe to
@@ -797,7 +834,7 @@ laid out, explicit `tabs` honored; sub-grids, quick-views, and form JS (`events[
 canonical control cells / the `/bag/c` events region via the SDK's generic `addElement` surface)
 → **business rules** (`businessRules[]` — authored as the workflow object model through the bound
 `CreateProcessWithWfomJson` member and activated; **skipped with a warning** on an environment that
-does not declare that member) →
+does not declare that member or has it switched off — HTTP 400 `0x80040216`, common on production environments) →
 **business process flows** (`businessProcessFlows[]`; a category-4 process compiled from the
 authored stages and activated — this goes through the SDK's generic artifact surface, a plain
 `workflows` row, so it is NOT subject to the bound-member gate above) →
@@ -881,8 +918,10 @@ child view id. Each step emits `[n/total]`.
     upstream because it covered 4 of the 7 action types and a single clause, so it silently narrowed
     a rule into something that did not say what the author wrote. Environments that do not declare
     the member therefore **cannot host business rules at all** — and that is the common case, not an
-    edge case. The build **skips** the rules, warns once naming the
-    member, and builds everything else normally, so an app is never left half-created. If rules are
+    edge case. **Production environments are the other common case**: they declare the member but
+    answer the first rule with HTTP 400 `0x80040216` ("An unexpected error occurred."), a platform
+    limit, and nothing is created. The build **skips** the rules in both cases, warns once naming the
+    member or the code, and builds everything else normally, so an app is never left half-created. If rules are
     essential, verify the environment first.
     **Business process flows are NOT affected by this gate** — a BPF is written as an ordinary
     `workflows` row through the SDK's generic artifact surface, with no bound member involved.
