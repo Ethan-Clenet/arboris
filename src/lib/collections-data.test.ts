@@ -1,5 +1,9 @@
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { COLLECTIONS, findCollectionSeed } from './collections-data'
+
+const SKILLS_DIR = join(process.cwd(), 'prisma/skills')
 
 describe('COLLECTIONS', () => {
   it('a des ids uniques et des champs requis', () => {
@@ -47,6 +51,17 @@ describe('COLLECTIONS', () => {
     )
     expect(n8n?.commandIds).toContain('docker-rebuild')
     expect(findCollectionSeed('n8n-starter')?.id).toBe('n8n-starter')
+  })
+
+  it('ne référence aucun skill absent du disque', () => {
+    for (const collection of COLLECTIONS) {
+      for (const skillId of collection.skillIds) {
+        expect(
+          existsSync(join(SKILLS_DIR, skillId, 'SKILL.md')),
+          `${collection.id} → ${skillId}`,
+        ).toBe(true)
+      }
+    }
   })
 
   it('embarque le pack Ship safely avec les audits CWE/CAPEC', () => {

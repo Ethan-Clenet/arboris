@@ -9,7 +9,7 @@ metadata:
   origin: TanStack
   type: core
   library: '@tanstack/charts'
-  library_version: '1.2.0'
+  library_version: '1.5.0'
 sources:
   - 'TanStack/charts:docs/guides/responsive-charts.md'
   - 'TanStack/charts:docs/reference/chart-definitions.md'

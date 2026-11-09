@@ -5,14 +5,6 @@ argument-hint: [why the changes were made]
 context: fork
 model: sonnet
 effort: high
-allowed-tools:
-  - Bash(git stash:*)
-  - Bash(git add:*)
-  - Bash(git restore:*)
-  - Bash(git mv:*)
-  - Bash(git rm:*)
-  - Bash(git apply:*)
-  - Bash(git commit:*)
 metadata:
   origin: vinta
 ---

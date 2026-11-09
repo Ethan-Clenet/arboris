@@ -1,6 +1,6 @@
 ---
 name: capability-matrix
-description: Helps maintain the Supabase SDK capability matrix in packages/capability-matrix/capabilities/*.yaml and specs/ — naming a new feature ID, picking or creating a group, checking for duplicate or semantically-overlapping capabilities, spotting naming drift within a group, suggesting when a spec file is warranted, and noting platform-specific behavior. Use whenever a capability YAML or spec file is being added or edited, before opening a PR that touches capabilities/, or when asked to review/audit the matrix, check for duplicates, or suggest groupings. This is an advisory pass, not a gate — it complements `npm run validate`, it doesn't replace it.
+description: Helps maintain the Supabase SDK capability matrix in packages/capability-matrix/capabilities/*.yaml and specs/ — naming a new feature ID, picking or creating a group, checking for duplicate or semantically-overlapping capabilities, spotting naming drift within a group, suggesting when a spec file is warranted, reviewing a spec for normative voice and precision, and noting platform-specific behavior. Use whenever a capability YAML or spec file is being added or edited, before opening a PR that touches capabilities/, or when asked to review/audit the matrix, check for duplicates, or suggest groupings. This is an advisory pass, not a gate — it complements `bun run validate`, it doesn't replace it.
 metadata:
   origin: Supabase
 ---
@@ -8,7 +8,7 @@ metadata:
 # Capability Matrix Maintenance
 
 This repo is the canonical registry of features across Supabase's client SDKs
-(`capabilities/*.yaml`). The JSON Schema and `npm run validate` already catch
+(`capabilities/*.yaml`). The JSON Schema and `bun run validate` already catch
 everything mechanical: malformed IDs, area/filename mismatches, exact
 duplicate IDs, orphaned spec files. What they can't catch is judgment —
 whether a new feature is *actually* new, whether its name reads naturally
@@ -25,7 +25,7 @@ Before spending any judgment calls, run the deterministic validator so you're
 not duplicating what it already guarantees:
 
 ```bash
-cd packages/capability-matrix && npm run validate
+cd packages/capability-matrix && bun run validate
 ```
 
 This confirms schema conformance, `area` field matches the filename, IDs
@@ -43,7 +43,7 @@ plausibly overlap another area (e.g. something touching both `realtime` and
 
 ## Step 2: semantic duplicates
 
-`npm run validate` only catches identical IDs. Read every feature's `name` +
+`bun run validate` only catches identical IDs. Read every feature's `name` +
 `description` in the same area (and group, if cross-area overlap looks
 possible) and ask: does this describe behavior another entry already
 covers, just worded differently? Common patterns to watch for:
@@ -85,16 +85,39 @@ its siblings in the same `group`:
 
 ## Step 5: spec suggestion
 
-Spec files (`specs/<area>/<group_namespace>/<method_stem>.md`) are optional,
-but valuable when a feature has real behavioral complexity: multiple named
-error conditions, branching behavior, side effects, or prerequisites. The
-directory always mirrors the feature `id`'s own segments — e.g.
-`auth.mfa.challenge` lives at `auth/mfa/challenge.md` — regardless of what
-that feature's optional `group` field currently says; the two can diverge
-when a feature has been regrouped for display without renaming its `id`.
-If the new feature's `description` hints at real complexity and no spec
-exists, suggest creating one from `specs/TEMPLATE.md`. Don't suggest a spec
-for a simple getter/setter with an already-complete one-line description.
+Spec files (`specs/<area>/<group_namespace>/<method_stem>.md`) are optional
+and additive. The service's API spec owns the wire: paths, request and
+response shapes, status codes, and error codes. A spec file earns its place
+only when the SDK layer has something to say that the API spec cannot:
+defaults the SDK fills in, state it keeps, validation it should do before
+the wire, how it reshapes the response, sequencing across capabilities, or
+server behavior that would surprise someone who has read the API spec
+alone. The number of fields or error codes an operation has is not a reason
+for a spec, because they are in the API spec already. The directory always
+mirrors the feature `id`'s own segments, so `auth.mfa.challenge` lives at
+`auth/mfa/challenge.md`, regardless of what that feature's optional `group`
+field currently says. The two can diverge when a feature has been regrouped
+for display without renaming its `id`. If the new feature's `description`
+hints at SDK-layer complexity and no spec exists, suggest creating one from
+`specs/TEMPLATE.md`. Don't suggest a spec for a feature whose API spec entry
+already tells an implementer everything.
+
+When a spec file is being added or edited, read it against the API spec it
+links and flag every sentence that restates it: field lists, status code
+tables, error code catalogs, descriptions of what the service does
+internally. Each one is a candidate for deletion with a link in its place.
+If that removal leaves only the API section, suggest dropping the file.
+
+Then read what survives for voice and precision, which no validator can see. These checks exist because specs in this repository have failed each of them before, and the failures read plausibly until someone tried to implement from them.
+
+- Snapshot test. A spec is normative: it states what an SDK does, in the present tense, for every SDK at once. Flag every sentence that names an SDK (`supabase-js`, `JS`, `Swift`, `Dart`, `Python`) or describes what SDKs do today ("the existing SDKs", "currently", "most SDKs"). Kinds are fine ("SDKs that hold a session"), instances are not. A sentence describing how one SDK diverges is never spec content: suggest an issue in that SDK's repository that cites the spec, and delete the sentence.
+- Precision test. Flag every sentence two implementers could read and build differently. Server behavior names the HTTP status, the `error_code`, and the message when it carries meaning. A check before the wire names its input, the form it accepts, the error the SDK raises, and the server answer it pre-empts. "Malformed", "invalid", "clear", "appropriate", "properly", and "handles" are the usual tells: "a malformed id gets a clear client-side error" names no input, no form, and no error.
+- Expiry test. Flag any sentence whose truth has a date on it ("until it is corrected", "not yet", "currently"). The fact stays in the prose and the condition that retires it moves to an HTML comment directly below, with the upstream issue URL, which is the form the template gives for API drift pointers.
+- Service test. Flag every sentence that describes the service rather than what the SDK does with it. Service behavior is spec content only as the premise of an SDK obligation, in the same sentence ("the body is an empty object, so the SDK returns nothing"). If deleting the sentence changes nothing about what the SDK does, it goes, and if a reader would still need the fact, a link to the guide on supabase.com/docs, or to the handler when no guide covers it, takes its place. What a delete removes, what blocks it, and how a soft delete obfuscates a row are the guide's to own.
+- Placement. A check the SDK makes before the wire is defined under `## Errors`, not `## Behavior`.
+- Diagrams. Apply the Mermaid diagram rule in the `## Behavior` comment of `specs/TEMPLATE.md`: suggest a diagram where it calls for one, and flag a diagram that breaks it.
+- Evidence. For every status, code, message, and server behavior the spec names, find the line in the service's handler that produces it, at a commit, before accepting the sentence. Do not take the API spec's word for a response body: "the server returns the deleted user" is the kind of claim that reads plausibly, is documented upstream, and is false.
+- Siblings. When a sentence fails any test, search `specs/` for the same wording. Specs copy from each other, and the fix is one PR for all of them, not a fix to the file in front of you.
 
 ## Step 6: platform-scope notes
 

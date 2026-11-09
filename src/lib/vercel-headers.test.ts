@@ -7,6 +7,7 @@ const vercel = JSON.parse(
   readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../../vercel.json'), 'utf-8'),
 ) as {
   headers: Array<{ source: string; headers: Array<{ key: string; value: string }> }>
+  redirects: Array<{ source: string; destination: string; permanent?: boolean }>
 }
 
 function header(source: string, key: string): string | undefined {
@@ -28,6 +29,20 @@ describe('en-têtes Vercel (cache, CSP, HSTS)', () => {
     const legal = 'public, max-age=0, s-maxage=86400, stale-while-revalidate=86400'
     expect(header('/mentions-legales', 'Cache-Control')).toBe(legal)
     expect(header('/confidentialite', 'Cache-Control')).toBe(legal)
+  })
+
+  it('redirige en 301 les skills Neon fusionnés vers neon-postgres', () => {
+    const merged = [
+      '/skills/neon-postgres-branches',
+      '/skills/neon-postgres-egress-optimizer',
+    ]
+    for (const source of merged) {
+      const rule = vercel.redirects.find((entry) => entry.source === source)
+      expect(rule, source).toMatchObject({
+        destination: '/skills/neon-postgres',
+        permanent: true,
+      })
+    }
   })
 
   it('retire le domaine Analytics inutilisé et pose includeSubDomains', () => {

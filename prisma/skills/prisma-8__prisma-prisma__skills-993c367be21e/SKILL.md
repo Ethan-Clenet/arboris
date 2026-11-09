@@ -16,7 +16,7 @@ description: >-
 metadata:
   origin: Prisma
   library: '@prisma/orm-postgres'
-  library_version: '8.0.0-rc.22'
+  library_version: '8.0.0-rc.23'
   version: '2026-09-12'
 ---
 

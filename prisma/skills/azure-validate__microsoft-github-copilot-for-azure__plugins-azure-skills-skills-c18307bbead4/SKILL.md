@@ -1,5 +1,4 @@
 ---
-
 name: azure-validate
 description: "Pre-deployment validation for Azure readiness. Run deep checks on configuration, infrastructure (Bicep or Terraform), RBAC role assignments, managed identity permissions, and prerequisites before deploying. WHEN: validate my app, check deployment readiness, run preflight checks, verify configuration, check if ready to deploy, validate azure.yaml, validate Bicep, test before deploying, troubleshoot deployment errors, validate Azure Functions, validate function app, validate serverless deployment, verify RBAC roles, check role assignments, review managed identity permissions, what-if analysis, validate Container Apps deployment."
 license: MIT
@@ -8,7 +7,6 @@ metadata:
   author: Microsoft
   version: "0.0.0-placeholder"
 ---
-
 
 # Azure Validate
 
@@ -52,7 +50,7 @@ pwsh references/scripts/workflow.ps1 -WorkspacePath <workspace-path>
 
 Each run prints the next action and the value to pass next. Perform the action, then re-run with that value (`-CompletedStep <value>` for pwsh, `--completed-step <value>` for bash). Repeat until it reports the azure-validate workflow is complete.
 
-The steps reference recipe details in [references/recipes/README.md](references/recipes/README.md) and role checks in [references/role-verification.md](references/role-verification.md).
+Read [references/recipes/README.md](references/recipes/README.md) and apply its Node.js runtime check for **every recipe** before provisioning or deployment. The steps also reference [role checks](references/role-verification.md).
 
 > **⛔ VALIDATION AUTHORITY**
 >

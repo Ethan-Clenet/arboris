@@ -84,4 +84,10 @@ describe('planExplicitRemovals', () => {
   it('ne retire rien si la liste explicite n’est plus en base', () => {
     expect(planExplicitRemovals(['a'], ['a', 'b'])).toEqual([])
   })
+
+  it('inclut les retraits Neon indexés de la veille 09/11', () => {
+    expect(CATALOG_EXPLICIT_REMOVALS).toEqual(
+      expect.arrayContaining(['neon-postgres-branches', 'neon-postgres-egress-optimizer']),
+    )
+  })
 })

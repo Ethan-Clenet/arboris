@@ -11,7 +11,7 @@ metadata:
   origin: TanStack
   type: composition
   library: '@tanstack/charts'
-  library_version: '1.2.0'
+  library_version: '1.5.0'
 sources:
   - 'TanStack/charts:docs/guides/interactions-and-selections.md'
   - 'TanStack/charts:docs/guides/transforms-and-reactivity.md'
