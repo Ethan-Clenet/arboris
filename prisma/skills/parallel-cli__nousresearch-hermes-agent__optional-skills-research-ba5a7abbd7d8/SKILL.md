@@ -9,7 +9,7 @@ metadata:
   origin: Nous Research
   hermes:
     tags: [Research, Web, Search, Deep-Research, Enrichment, CLI]
-    related_skills: [duckduckgo-search, mcporter]
+    related_skills: [mcporter]
 ---
 
 # Parallel CLI

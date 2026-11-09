@@ -105,9 +105,10 @@ assemblies built beside the test project.
 
 ## Run
 
-The runner always performs an incremental build of the selected test project before
+The runner always performs one incremental build of the selected test project before
 execution. This keeps the test assembly current and guarantees that the run reports an
-MSBuild binlog path. Do not replace the runner with a hand-written `dotnet test`,
+MSBuild binlog path. Pass `--repeat N` to execute the selected tests repeatedly after
+that single build. Do not replace the runner with a hand-written `dotnet test`,
 `dotnet exec`, or test-application command: those commands can execute zero tests under
 the wrong platform or omit the diagnostics needed after a failure.
 
@@ -130,7 +131,9 @@ On macOS/Linux:
 Omit `--filter` to run the whole project. Multi-targeted projects select
 `SdkTargetFramework` by default; pass `--framework <TFM>` to choose another supported
 target. Use `--configuration Release` when validating a Release redist layout. Unfiltered
-project runs can be expensive; do not treat one as the complete repository suite.
+project runs can be expensive; do not treat one as the complete repository suite. For
+flake checks or performance samples, pass `--repeat N` instead of invoking the runner N
+times so the project is built only once.
 
 All supported SDK test projects use MSTest.Sdk/Microsoft.Testing.Platform. The runner
 evaluates the selected framework, builds it, then invokes its test application directly.
@@ -138,3 +141,6 @@ It only requests a TRX when the project enables the TRX report extension. It pri
 run directory and exact command before execution. At completion it prints the retained
 TRX/binlog paths; on failure it also prints failed test names when a TRX is available and
 the rerun command.
+
+Pass `--test-binlogs` to capture logs from `MSBuildCommand` and `DotnetBuildCommand`.
+The runner writes them to a `test-binlogs` subdirectory under the run directory.

@@ -23,7 +23,8 @@ Maintainers changing the `alchemy` or `effect` pins in this repo.
 
 **Check what upstream ships before working around what we pin.** The pinned
 version is not a constant, and treating it as one is expensive: TML-3158 was a
-long chase through pinning, peer dependencies, and a CLI preflight, all to keep
+long chase through pinning, peer dependencies, and a CLI preflight (since
+retired), all to keep
 a consumer's tree away from an `effect` that alchemy 2.0.0-beta.59 could not
 run — while a newer alchemy that had already fixed it sat on the registry the
 whole time. One command would have shown it:
@@ -39,7 +40,7 @@ fix. Reach for workarounds only after that check says otherwise.
 ## Why the versions move as a set
 
 `effect` and its companions — `@effect/platform-node`, `@effect/platform-bun`,
-`@effect/platform-node-shared`, `@effect/vitest` — each declare a peer that is
+`@effect/platform-node-shared` — each declare a peer that is
 **floored at their own version**:
 
 ```jsonc
@@ -50,13 +51,11 @@ fix. Reach for workarounds only after that check says otherwise.
 That caret is a range, not an exact pin: it accepts `4.0.0-rc.112` and stable
 `4.x`, but nothing below `4.0.0-rc.111`. So an `effect` **older** than any
 companion in the tree is unsatisfiable, and npm resolves that by installing a
-*second* `effect`. Pinning every package in this repo to the same beta is the
+*second* `effect`. Pinning every package in this repo to the same release is the
 simple way to stay above every floor at once. Treat them as one constellation,
 never as individual bumps.
 
-alchemy sits on top with a deliberately loose range (`>=4.0.0-rc.110 ||
->=4.0.0` at beta.74). That range is what lets a stray dependency drag a
-different `effect` in, and it is why the CLI preflight exists.
+alchemy sits on top with a deliberately loose range (`>=4.0.0-rc.115 || >=4.0.0` at beta.78). That range is what lets a stray dependency drag a different `effect` in.
 
 ## Two audiences, two failure modes
 
@@ -70,22 +69,35 @@ different `effect` in, and it is why the CLI preflight exists.
   Only the consumer's own `overrides` can force alchemy's copy.
 
 That asymmetry is why `scripts/check-npm-effect-resolution.mjs` installs real
-tarballs with real npm, and why the CLI refuses to run when alchemy's resolved
-`effect` is not our pin (`check-effect-resolution.ts`).
+tarballs with real npm.
+
+## What a consumer sees when the tree is wrong
+
+Composer has no check of its own for a wrong `effect`. The app's
+`prisma.config.ts` imports the extensions' `/control` entries in its `composer`
+section, and those import alchemy, so a wrong `effect` fails the moment the
+engine evaluates the config file, before any command runs. The error is the
+engine's `CLI.CONFIG_UNREADABLE`, naming the file and carrying the module error,
+for example `prisma.config.ts could not be evaluated: Schema.TaggedError is not
+a function`. Only the consumer's package manager can fix that tree, usually
+with an `overrides` entry that forces our pinned `effect`
+(`docs/guides/deploying.md`). Keep the pins below exact and consistent so a bare
+install never gets there.
 
 ## Steps
 
-1. **Pick the target.** Read alchemy's latest peer range, then choose the
-   newest beta where *every* companion publishes a matching version:
+1. **Pick the target.** Read alchemy's latest peer range, then choose the newest release where *every* companion publishes a matching version:
 
    ```bash
    npm view alchemy dist-tags
    npm view alchemy@<version> peerDependencies
    for p in effect @effect/platform-node @effect/platform-bun \
-            @effect/platform-node-shared @effect/vitest; do
-     echo "$p $(npm view $p dist-tags.beta)"
+            @effect/platform-node-shared; do
+     echo "$p $(npm view $p version)"
    done
    ```
+
+   alchemy's floor is not a compatibility promise. alchemy 2.0.0-beta.75 to beta.77 accept `effect` rc.112 and later, but call `Config.string`, which rc.113 removed, so they crash on it. Pin the `effect` release alchemy was built against: the newest one published before that alchemy release (`npm view effect time`). Check the new alchemy's Prisma provider still loads from a plain npm install: in beta.79 it imports the optional peer `@alchemy.run/frontend-frameworks` and fails. Since beta.84 each provider is its own package, versioned in lockstep with `alchemy`: the Prisma provider is `@alchemy.run/prisma` (formerly the `alchemy/Prisma` module), and only `@prisma/composer-prisma-cloud` and the Prisma Cloud internals depend on it. Bump it with `alchemy`.
 
 2. **Find every pin.** They are spread across public packages, framework
    packages, examples, `test/integration`, and `website`:
@@ -111,26 +123,22 @@ tarballs with real npm, and why the CLI refuses to run when alchemy's resolved
 8. **The E2E deploy jobs are the real bar.** An alchemy upgrade changes the
    deploy engine; a green typecheck says very little about it.
 
-## The consumer overrides block
+## The effect-family packages a consumer installs are pinned in the public packages
 
-Until alchemy's `effect`-family ranges match its code (the upstream
-`TaggedErrorClass` drift: its dependency/peer ranges float to effect versions
-that removed APIs its shipped code still calls), every consumer tree carries a
-constellation `overrides` block pinning `effect`, `@effect/sql-d1`,
-`@effect/sql-pg`, `@effect/vitest`, and `@effect/platform-bun`/`-node`/
-`-node-shared` to `@prisma/composer`'s exact pin. It lives in three kinds of
-places — keep them in lockstep when the pin moves:
+alchemy's `effect`-family ranges float past what its code supports (the upstream `TaggedErrorClass` drift), and a floater whose newest release names an `effect` peer that does not exist yet sends npm into hours of backtracking instead of an error (2026-09-11: `@effect/*@4.0.0-rc.114` published ahead of `effect`). Consumers carry no overrides block. Instead, the rule is:
 
-- `examples/*/package.json` — the consumer-shaped fixtures (literal versions).
-- The docs that show a consumer `package.json`:
-  `docs/guides/getting-started.md` (literal versions) and
-  `docs/guides/deploying.md`.
-- `scripts/check-npm-effect-resolution.mjs` — its healthy shapes install with
-  the same block (`CONSTELLATION_OVERRIDES`, derived from the pin
-  automatically; only the package-name list can go stale).
+**Pin exactly, in a public package's `dependencies`, every `effect`-family package that a consumer's install will contain.** A package is in the install when it is a regular dependency of `alchemy` or `@alchemy.run/prisma`, an optional peer that one of them loads at runtime, or a package Composer's own code imports. An optional peer that nothing loads is not installed by npm at all, so it gets no pin: pinning it would install it, and everything it depends on, for every consumer.
 
-When alchemy fixes its ranges, delete the block everywhere at once — a
-half-removed block is the same drift hazard as a stale companion pin.
+Today that is:
+
+- `@prisma/composer` — `effect` itself.
+- `@prisma/composer-prisma-cloud` — `@effect/platform-bun` and `@effect/platform-node`, which alchemy loads at runtime (`alchemy/Util/PlatformServices`, `alchemy/Http`; Composer's provider wiring also imports `@effect/platform-node`), and `@effect/platform-node-shared`, which both depend on. It also depends on `@distilled.cloud/prisma`, whose `Credentials` the provider wiring imports; keep it at the exact version `@alchemy.run/prisma` depends on so npm installs one copy.
+
+To apply the rule on an upgrade, read `dependencies` and `peerDependenciesMeta` in both `alchemy/package.json` and `@alchemy.run/prisma/package.json`, and grep the built `dist/` of the public packages and the installed `lib/` of both for imports of each `@effect/*` package.
+
+History: beta.83 listed `@effect/sql-d1` and `@effect/sql-sqlite-do` as regular dependencies, so `@prisma/composer` pinned them, along with `@effect/vitest`, which it pinned on its own. Beta.84 no longer depends on the two SQL packages, and `@effect/vitest` is an optional peer that only `alchemy/Test/Vitest` loads. All three pins were dropped with the beta.84 bump. Dropping `@effect/vitest` also removed `vitest` and `vite` from every consumer's install.
+
+`check-npm-effect-resolution` installs the tarballs bare and fails when the install backtracks or resolves a second `effect`. It installs once more with npm 10, the npm that Node 22 bundles, because npm 10 has crashed on packages the tree once contained (`vitest@4.1.x`); the shape stays as a guard for Node 22 users. The only case left to a consumer's own `overrides` is an app that pins a different `effect` itself (documented in `docs/guides/deploying.md`).
 
 ## Breakage classes seen in practice
 
@@ -138,6 +146,9 @@ half-removed block is the same drift hazard as a stale companion pin.
   (intersection/union) disappeared at beta.97. `Schedule.both(spaced(x),
   during(y))` becomes `Schedule.spaced(x).pipe(Schedule.upTo({ duration: y }))`;
   `Schedule.max`/`Schedule.min` are the general replacements.
+- **Stable Effect HTTP imports.** Effect 4 uses `effect/http/*`, replacing `effect/unstable/http/*`.
+- **Alchemy lifecycle identity.** Since beta.82, provider fixtures supply `ResourceContext` (`logicalId`, `fqn`, `instanceId`, `type`) instead of `InstanceId`. Local Database, App and Bucket attributes also need `logicalId`; use `null` because local dev creates no platform rows.
+- **Vitest 5 type tests.** Stable `@effect/vitest` requires Vitest 5. Type-only files need a registered test; keep ambient declarations outside its callback or use definite-assignment fixtures inside it.
 - **New required fields on alchemy's resource-handler context** (e.g. `fqn`).
   These surface only in the test fixtures that build the context by hand.
 - **`exactOptionalPropertyTypes` vs alchemy's types.** See the patch section.
@@ -217,8 +228,10 @@ pin. Two things about it are easy to get wrong after an upgrade:
 
 - **Do not assert the presence of a specific combinator.** That only ever stood
   in for "alchemy can run on this `effect`", and it breaks the moment upstream
-  removes it for good reasons. `assertCliStarts` answers the same question
-  directly, because starting the built bin loads alchemy's provider tree.
+  removes it for good reasons. `importAlchemy` answers the same question
+  directly: it imports alchemy's root, `Output`, `Provider` and `Stack` entries
+  from the installed app, which must succeed in the healthy shapes and fail in
+  the adversarial one.
 - **`WRONG_EFFECT` must stay a published version other than the pin.** The
   adversarial shape used to depend on a release whose peer sat *above* our pin;
   that stopped existing once the pin reached the newest beta, and the shape
@@ -237,9 +250,8 @@ pin. Two things about it are easy to get wrong after an upgrade:
 - **`pnpm dedupe` after the pins move**, so stale peer-resolution keys do not
   linger in the lockfile — but commit it separately, since it touches
   resolutions beyond the ones being upgraded.
-- **The CLI preflight reads `@prisma/composer`'s `dependencies.effect` and
-  compares with `===`.** That pin must stay an exact version;
-  `check:npm-effect-resolution` enforces it.
+- **`@prisma/composer`'s `dependencies.effect` must stay an exact version.**
+  `check:npm-effect-resolution` reads it and fails on a range.
 
 ## What this skill does NOT do
 

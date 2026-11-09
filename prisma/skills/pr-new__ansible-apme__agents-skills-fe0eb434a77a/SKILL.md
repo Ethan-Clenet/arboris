@@ -106,7 +106,9 @@ artifact type, translate it:
 1. **Does every statement mean what it says?** Check every type
    annotation, return value, error code, version range, log level,
    comment, and docstring. If the code declares it, the runtime must
-   honor it on every path.
+   honor it on every path. For Markdown, verify heading levels follow the
+   document hierarchy and current-state labels describe the behavior that
+   exists at this point in a staged rollout.
    For recurring background work, compare steady-state and transition logs:
    unchanged successes and repeated failures should not crowd out meaningful
    changes; initial failures and recoveries must remain visible.
@@ -121,6 +123,17 @@ artifact type, translate it:
    something they shouldn't? Also check every capability grant:
    permission scopes, CORS origins, container capabilities. Does each
    grant the minimum necessary?
+   For event-triggered workflows that mutate multiple PRs or issues,
+   verify the triggering PR identity before acting. In per-item mutation
+   loops, catch failures per item, continue processing, and report all
+   items that could not be updated.
+   Trace every state-changing UI entry point against the host's permission
+   defaults, including creation dialogs and deep links. For public HTTP routes,
+   verify that rate limits and authorization precede expensive body parsing;
+   a later permission check does not bound work performed before it.
+   Reserve a finite process-wide budget before parsing large request bodies
+   and hold it until downstream writes complete; check retained payloads and
+   concurrent sends so transport queues cannot grow with client concurrency.
 
 3. **Would a caller be surprised?** Read every public function from
    the caller's perspective. Can it return a value the type doesn't
@@ -131,6 +144,18 @@ artifact type, translate it:
    the same module? When a helper opens a channel, socket, or other
    closeable resource, does every return path (success and failure)
    close it — typically via `finally` — or can a failed RPC leak it?
+   For fetch-based transports, trace response bodies on success, non-2xx,
+   cancellation and cleanup requests. Consuming a main stream does not dispose
+   separate creation, message or deletion responses.
+   For published package APIs, give each exported function or hook a
+   concise JSDoc description of its purpose and any non-obvious behavior;
+   enforce this on public exports rather than requiring boilerplate for
+   private callbacks.
+   For async route setup, trace disconnect and shutdown across every await: a
+   request that closes while authorization or host configuration is pending
+   must not attach a stream, clear orphan cleanup, or create an upstream session
+   after shutdown. Keep capacity reservations through parsing and downstream
+   send completion, releasing them on every error and disposal path.
    Trace async entry points through helpers to every filesystem operation,
    including discovery, metadata probes, and parsing. Blocking storage must
    stay off the event loop, and unchanged hot paths should avoid repeated
@@ -150,7 +175,9 @@ artifact type, translate it:
    that contradicts it. When docs name protobuf fields on
    `SessionEvent` / `SessionResult` / reporting events, verify the
    field exists on that message in the active `.proto` — aggregated
-   types defined elsewhere do not imply they are streamed.
+   types defined elsewhere do not imply they are streamed. For staged or
+   historical documents, verify that precedence and effective timing are
+   explicit so an archived plan cannot read as the current authority.
 
 5. **Are dependencies and versions pinned to intent?** Check every
    version range, action tag, and base image. Does each one express
@@ -158,11 +185,23 @@ artifact type, translate it:
    used by CI, compare all of its resolution sources: CI requirements,
    project lockfiles, developer install commands, and agent setup guides.
    Keep the resolved versions aligned or document the intentional split.
+   When requirements and research pin the same external source, reconcile
+   their revisions and identify which pin governs implementation versus which
+   records a historical snapshot.
    For workflow
    checkouts: if the job has write scopes (`packages: write`, etc.)
    or runs untrusted/repo scripts after checkout, is
    `persist-credentials: false` set so `GITHUB_TOKEN` is not left
    in local Git config? Match sibling jobs in the same workflow.
+   Reproduce build/test commands from a fresh checkout in CI order; verify their
+   dependency setup does not rely on outputs, symlinks, native addon binaries or
+   caches from an earlier local build. If lifecycle scripts are disabled, verify
+   runtime-required native dependencies have an explicit preparation step.
+   For published immutable assets, retries must verify existing bytes
+   and complete missing uploads without overwriting different published content.
+   Keep their manifests deterministic across retries: omit runner-specific
+   values such as the executing Node patch version unless that value is an
+   intentional, pinned part of the artifact contract.
 
 6. **Is there dead weight?** Check for unused imports, unreachable
    branches, written-but-never-read variables, parameters accepted
@@ -192,13 +231,25 @@ artifact type, translate it:
    like ``"outcome"``? When adding fields to an existing
    Pydantic/schema module, match sibling default patterns
    (`Field(default_factory=list)` vs mutable `=[]`)? Across the
-   repo: do proto RPCs have matching servicer methods in `daemon/`?
+   When multiple configuration sources feed a downstream contract,
+   test each source alone and test collisions. Confirm the merge order
+   matches the upstream producer, and every consumer sees the effective
+   values without mutating the authored inputs. Across the repo: do proto
+   RPCs have matching servicer methods in `daemon/`?
    Do rule IDs follow ADR-008 conventions (L/M/R/P/SEC)? Does
    `_DEFAULT_PORTS` match the services actually started? Are
+   Markdown indexes consistent across their canonical tables, directory
+   trees and phase lists, including names and status? Are
    `event_emitter` calls consistent with the reporting sink
    protocol? Cross-artifact mismatches (proto declaration vs Python
    implementation) are the easiest to miss and the most embarrassing
    to ship.
+   For optional host capabilities, compare the permission flag, transport,
+   backend installation and config default across Local and Portal. Do not
+   expose an active transport when its host integration is absent. For editable
+   values, trace omission (preserve), explicit clearing/reset, and a new value
+   separately through UI state, client types, serialized requests and stored
+   configuration; falsy values must not silently collapse these meanings.
 
 8. **Would a constructed scenario break this?** For each public
    function, construct one realistic failure case: an edge-case
@@ -206,6 +257,9 @@ artifact type, translate it:
    an empty-but-not-falsy value. Trace it through the code path.
    If it fails silently, sends a vacuous request, or produces a
    return value that violates the declared type, that's a finding.
+   Include requests disconnected during async authorization, shutdown while a
+   dependency lookup is pending, simultaneous large bodies across distinct
+   resources, and edits that preserve versus clear an existing optional value.
    When tests exercise optional OS or native capabilities, trace both
    available and unavailable cases: gate capability-specific assertions
    and separately assert the documented fallback.
@@ -214,6 +268,11 @@ artifact type, translate it:
    a token in a *different* grammar in the same string — Jinja
    filters (`{{ x | quote }}`), URLs, or quoted YAML. Strip or
    parse the inner language before applying the outer check.
+   For values accepted by multiple source grammars, also test when a
+   parser assigns another grammar's token a structural meaning (such as
+   `host:path` read as a URI scheme). Redaction and classification must
+   respect each grammar's boundaries and preserve content owned by the
+   other grammar.
    The strip pattern must allow nested tokens of the inner language
    (Jinja dicts ``{{ {'k': 'v'} }}`` — ``[^{}]*`` fails). Leftover
    delimiters after the strip (``{{``) are still uninspectable.
@@ -240,6 +299,14 @@ artifact type, translate it:
    route, or selected entity changes, resolve and reject an older request
    after cleanup; verify its success, catch, and finally handlers cannot
    overwrite current data, selections, persisted values, or loading state.
+   For refresh-in-place views that retain loaded data, make the refresh fail
+   after an initial success and verify the prior content and controls stay
+   mounted while the error is surfaced inline; also verify initial-load
+   failures still show the error state.
+   For requests that create a remote resource, also close the client after the
+   server accepts the request but before its response arrives. Verify the
+   client can still learn the resource id and dispose of it; aborting the
+   request must not hide a resource that the server already created.
    What happens when `asyncio.gather()`
    returns a mix of results and exceptions — does every caller
    handle `return_exceptions=True` correctly?
@@ -403,6 +470,13 @@ sibling helpers (``resolve`` + ``is_relative_to`` / reject ``..``),
 and short-circuiting ``a() or b()`` / ``a() and b()`` when both calls
 have required side effects (e.g. promote ledger status after approving
 progression — evaluate both unconditionally).
+For heuristic rules, trace each documented pass example through the same
+matching logic used by the rule and verify the expected fixture count against
+the rule's finding granularity. A passing example must not match the heuristic.
+For bounded shared capacity that responds with 429/503, trace two
+independent callers: verify the client retries transient contention within
+a finite budget, unrelated long-lived sessions do not fail immediately, and
+request bodies are not queued or parsed while waiting for capacity.
 When adding a new error return after a status-machine transition
 (``SUBMITTING_PR``, ``APPLYING``, etc.), construct the failure *after*
 that transition — both explicit raises *and* exceptions from helpers
@@ -500,6 +574,10 @@ critical/high/medium/low.
   unknown ids into hard 400s) is a semantic break even if the
   OpenAPI shape is unchanged — prefer log+ignore / intersection
   unless an ADR explicitly hardens the contract.
+- Configuration schema exposure is per key path: verify that the
+  generator recognizes the annotation syntax and that each frontend
+  setting, including nested leaf keys, appears in the host-visible
+  schema. Do not assume a parent's visibility annotation exposes children.
 - Cross-artifact parity (proto RPC ↔ daemon servicer; rule IDs ADR-008;
   _DEFAULT_PORTS ↔ started services; operator manifests ↔ Podman
   ``pod.yaml`` for the same in-pod env/volume/probe wiring — if the operator

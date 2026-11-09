@@ -9,7 +9,7 @@ metadata:
   origin: TanStack
   type: core
   library: '@tanstack/highlight'
-  library_version: '1.2.8'
+  library_version: '1.2.11'
 sources:
   - 'TanStack/highlight:docs/guides/language-registration.md'
   - 'TanStack/highlight:docs/guides/ssr-and-client.md'
@@ -128,7 +128,7 @@ export const html = highlighter.highlightToHtml('const answer = 42', {
 })
 ```
 
-The root entry constructs and retains the all-language registry.
+The root bound helper used here retains the all-language registry. Core-only imports from the root can tree-shake in a compatible bundler; direct `/core` imports make the separation explicit.
 
 Source: `docs/guides/language-registration.md`
 
@@ -160,7 +160,7 @@ export function render(code: string) {
 }
 ```
 
-The immutable registry can be shared across blocks and requests.
+Reuse the highlighter across blocks and requests to avoid rebuilding its name and alias maps. Registrations cannot be added through the API after construction. Keep retained language definitions unchanged and their tokenizers free of request-specific state.
 
 Source: `docs/guides/language-registration.md`
 

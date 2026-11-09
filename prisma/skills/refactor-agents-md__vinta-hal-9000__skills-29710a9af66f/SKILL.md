@@ -2,15 +2,6 @@
 name: refactor-agents-md
 description: Use when about to refactor or refine a user-level or project-level CLAUDE.md or AGENTS.md, from a full restructure down to a one-line wording fix; a change that looks too small to need this skill is not an exemption
 argument-hint: [user | project | path/to/CLAUDE.md or AGENTS.md]
-allowed-tools:
-  - WebFetch(domain:platform.claude.com)
-  - WebFetch(domain:code.claude.com)
-  - WebFetch(domain:developers.openai.com)
-  - WebFetch(domain:learn.chatgpt.com)
-  - Edit(CLAUDE.md)
-  - Edit(AGENTS.md)
-  - Read(~/.claude/CLAUDE.md)
-  - Read(~/.codex/AGENTS.md)
 metadata:
   origin: vinta
 ---
@@ -31,7 +22,7 @@ Use `AskUserQuestion` in Claude Code or `request_user_input` in Codex when avail
 
    For a targeted change, the verdicts below cover only the lines it adds or touches: the rest of the file stays as it is, and anything noticed there is a follow-up.
 
-2. **Fetch the guides.** Follow each loaded reference's guide-fetching instructions, for a one-line change too: a verdict without the guides rests on memory. Reuse current guidance already fetched in this conversation. Done when each page a reference lists has been fetched for each reader in this session.
+2. **Fetch the guides.** Follow each loaded reference's guide-fetching instructions, for a one-line change too: a verdict without the guides rests on memory. Read each page's full text, not a fetch tool's summary of it: a summary misquotes long pages and misses parts of them. Reuse current guidance already fetched in this conversation. Done when each page a reference lists has been fetched for each reader in this session.
 
 3. **Audit.** Read the file and give every instruction in scope exactly one verdict, judged against the target's bar below. Done when no instruction in scope lacks one.
    - **contradiction**: conflicts with another instruction or a reader's requirements such that both cannot be satisfied. Record both sides.

@@ -11,7 +11,7 @@ metadata:
   origin: Nous Research
   hermes:
     tags: [Shopping, E-commerce, Shop, Products, Orders, Returns, Checkout, Reorder]
-    related_skills: [shopify, maps]
+    related_skills: [maps]
     homepage: https://shop.app
     upstream: https://shop.app/SKILL.md
 ---
