@@ -18,8 +18,11 @@ describe('publicHtmlCacheHeaders', () => {
     expect(headers['Vercel-CDN-Cache-Control']).toBe(PUBLIC_HTML_CACHE_CONTROL)
   })
 
-  it('ne cache jamais les réponses privées', () => {
-    expect(privateNoStoreHeaders()['Cache-Control']).toBe(PRIVATE_NO_STORE)
+  it('ne cache jamais les réponses privées, y compris sur le CDN', () => {
+    const headers = privateNoStoreHeaders()
+    expect(headers['Cache-Control']).toBe(PRIVATE_NO_STORE)
+    expect(headers['CDN-Cache-Control']).toBe(PRIVATE_NO_STORE)
+    expect(headers['Vercel-CDN-Cache-Control']).toBe(PRIVATE_NO_STORE)
     expect(PRIVATE_NO_STORE).toContain('no-store')
   })
 })

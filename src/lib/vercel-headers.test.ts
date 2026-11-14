@@ -16,12 +16,9 @@ function header(source: string, key: string): string | undefined {
 }
 
 describe('en-têtes Vercel (cache, CSP, HSTS)', () => {
-  it('cache le HTML anonyme des listes et fiches (ISR CDN)', () => {
-    const htmlCache = 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400'
+  it('ne pose pas de cache HTML catch-all (sinon les 404 skills/* seraient ISR)', () => {
     for (const source of ['/', '/skills(.*)', '/commands(.*)', '/collections(.*)', '/getting-started']) {
-      expect(header(source, 'Cache-Control'), source).toBe(htmlCache)
-      expect(header(source, 'CDN-Cache-Control'), source).toBe(htmlCache)
-      expect(header(source, 'Vercel-CDN-Cache-Control'), source).toBe(htmlCache)
+      expect(vercel.headers.find((entry) => entry.source === source), source).toBeUndefined()
     }
   })
 

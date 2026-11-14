@@ -21,5 +21,9 @@ export function publicHtmlCacheHeaders(): Record<string, string> {
 }
 
 export function privateNoStoreHeaders(): Record<string, string> {
-  return { 'Cache-Control': PRIVATE_NO_STORE }
+  return {
+    'Cache-Control': PRIVATE_NO_STORE,
+    'CDN-Cache-Control': PRIVATE_NO_STORE,
+    'Vercel-CDN-Cache-Control': PRIVATE_NO_STORE,
+  }
 }
