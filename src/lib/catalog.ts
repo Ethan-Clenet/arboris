@@ -478,6 +478,14 @@ const TITLE_ACRONYMS: Record<string, string> = {
 const TITLE_FR_ALIASES: Record<string, string> = {
   'ai-seo': 'SEO',
   'ai-regression-testing': 'Tests de régression',
+  'ai-first-engineering': 'Ingénierie AI-first',
+  'ai-first-process-redesign': 'Refonte de process AI-first',
+  'ai-core': 'AI Core',
+  'ai-persistence': 'Persistance AI',
+  'ai-sandbox': 'Sandbox AI',
+  'ai-skills': 'Skills AI',
+  'ai-demo-assistant': 'Assistant de démo',
+  'ai-usecase-assessment': "Évaluation de cas d'usage",
 }
 
 /** Titre humain à partir d’un id/slug (sans chemin de dépôt). */
