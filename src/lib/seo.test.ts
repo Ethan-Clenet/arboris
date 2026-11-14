@@ -7,6 +7,7 @@ import {
   commandSeoTitle,
   entityDescription,
   frenchEntityDescription,
+  frenchVisibleDescription,
   isHashedVendorSkillId,
   isIndexableSkill,
   isPremiumPublisher,
@@ -282,6 +283,21 @@ describe('siteJsonLd', () => {
       height: 512,
     })
   })
+
+  it('relie Organization.founder et SoftwareApplication.author à Ethan Clenet', () => {
+    const graph = siteJsonLd()['@graph']
+    const person = graph.find((node) => node['@type'] === 'Person')
+    expect(person).toMatchObject({
+      '@id': 'https://clenet.is-a.dev/#person',
+      name: 'Ethan Clenet',
+      url: 'https://clenet.is-a.dev/',
+      sameAs: ['https://github.com/Ethan-Clenet'],
+    })
+    const org = graph.find((node) => node['@type'] === 'Organization')
+    expect(org?.founder).toEqual({ '@id': 'https://clenet.is-a.dev/#person' })
+    const app = graph.find((node) => node['@type'] === 'SoftwareApplication')
+    expect(app?.author).toEqual({ '@id': 'https://clenet.is-a.dev/#person' })
+  })
 })
 
 describe('skillJsonLd', () => {
@@ -319,6 +335,16 @@ describe('frenchEntityDescription', () => {
     expect(desc).toContain('FastAPI Patterns')
     expect(desc.toLowerCase()).not.toContain('best practices covering')
     expect(desc).not.toContain('…')
+  })
+
+  it('fournit un blurb FR visible si la description source est anglaise', () => {
+    const visible = frenchVisibleDescription(
+      'When the user wants to optimize content for AI search engines',
+      'skill',
+      'SEO',
+    )
+    expect(visible).toContain('SEO')
+    expect(visible.toLowerCase()).not.toContain('when the user')
   })
 })
 

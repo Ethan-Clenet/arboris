@@ -90,13 +90,17 @@ describe('loadHomeCatalog', () => {
     ] as never)
     vi.mocked(prisma.skill.count).mockResolvedValue(42 as never)
     vi.mocked(prisma.skill.findMany).mockResolvedValue([skillRow] as never)
+    vi.mocked(prisma.collection.findMany).mockResolvedValue([] as never)
 
     const home = await loadHomeCatalog()
     expect(home.skillTotal).toBe(42)
     expect(home.popular).toHaveLength(1)
     expect(home.trending).toHaveLength(1)
     expect(home.recent).toHaveLength(1)
+    expect(home.popular[0]?.stackCount).toBe(1)
+    expect(home.popular[0]).not.toHaveProperty('tag')
     expect(home.categories[0]?.id).toBe('security')
+    expect(home.collections.length).toBeGreaterThan(0)
     expect(prisma.skill.findMany).toHaveBeenCalledTimes(3)
   })
 

@@ -2,6 +2,7 @@
   "name": "arboris-cli",
   "version": "1.2.0",
   "description": "Installe les skills IA recommandés pour ta stack (Node, React, TypeScript…).",
+  "homepage": "https://arboristhree.xyz",
   "type": "module",
   "bin": {
     "arboris-cli": "dist/cli.mjs",

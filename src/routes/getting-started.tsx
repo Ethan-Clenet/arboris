@@ -5,6 +5,7 @@ import PageShell from '#/components/PageShell'
 import { useI18n } from '#/lib/i18n'
 import { getCollectionsIndex } from '#/server/functions'
 import { seoHead } from '#/lib/seo'
+import { publicHtmlCacheHeaders } from '#/lib/http-cache'
 import {
   collectionsInOrder,
   hexToRgba,
@@ -14,6 +15,7 @@ import {
 } from '#/lib/catalog'
 
 export const Route = createFileRoute('/getting-started')({
+  headers: publicHtmlCacheHeaders,
   loader: () => getCollectionsIndex(),
   head: () =>
     seoHead({

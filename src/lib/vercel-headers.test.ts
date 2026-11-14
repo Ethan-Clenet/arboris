@@ -16,13 +16,20 @@ function header(source: string, key: string): string | undefined {
 }
 
 describe('en-têtes Vercel (cache, CSP, HSTS)', () => {
-  it('cache le HTML anonyme des listes et fiches', () => {
-    const htmlCache = 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400'
-    expect(header('/', 'Cache-Control')).toBe(htmlCache)
-    expect(header('/skills(.*)', 'Cache-Control')).toBe(htmlCache)
-    expect(header('/commands(.*)', 'Cache-Control')).toBe(htmlCache)
-    expect(header('/collections(.*)', 'Cache-Control')).toBe(htmlCache)
-    expect(header('/getting-started', 'Cache-Control')).toBe(htmlCache)
+  it('cache le HTML anonyme des listes et fiches (ISR CDN)', () => {
+    const htmlCache = 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400'
+    for (const source of ['/', '/skills(.*)', '/commands(.*)', '/collections(.*)', '/getting-started']) {
+      expect(header(source, 'Cache-Control'), source).toBe(htmlCache)
+      expect(header(source, 'CDN-Cache-Control'), source).toBe(htmlCache)
+      expect(header(source, 'Vercel-CDN-Cache-Control'), source).toBe(htmlCache)
+    }
+  })
+
+  it('redirige sitemap_index.xml vers l’index unique', () => {
+    expect(vercel.redirects.find((entry) => entry.source === '/sitemap_index.xml')).toMatchObject({
+      destination: '/sitemap.xml',
+      permanent: true,
+    })
   })
 
   it('cache plus longtemps les pages légales', () => {

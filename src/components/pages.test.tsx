@@ -42,6 +42,11 @@ describe('AppShell', () => {
     const footer = screen.getByRole('contentinfo')
     expect(footer.querySelector('a[href="mailto:ethan.clenet@outlook.fr"]')?.textContent).toMatch(/contact/i)
     expect(footer.querySelector('a[href="/getting-started"]')?.textContent).toMatch(/installer la cli/i)
+    expect(footer.querySelector('a[href="https://clenet.is-a.dev/"]')?.textContent).toMatch(
+      /créé par ethan clenet/i,
+    )
+    expect(footer.querySelector('a[href="https://arbonews.com/"]')?.textContent).toMatch(/arbonews/i)
+    expect(footer.querySelectorAll('a[href="https://clenet.is-a.dev/"]').length).toBe(1)
     expect(footer.querySelector('a[href*="github.com"]')).toBeNull()
   })
 })

@@ -2,6 +2,7 @@
   "name": "@rubix0270/arboris",
   "version": "1.0.6",
   "description": "Alias de compatibilité vers arboris-cli.",
+  "homepage": "https://arboristhree.xyz",
   "type": "module",
   "bin": {
     "arboris": "run.mjs",

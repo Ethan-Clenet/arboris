@@ -15,6 +15,7 @@ import {
   listingPublisher,
   COMMUNITY_PUBLISHER,
   skillLabel,
+  titleCaseSkillSlug,
   uniqueSkillTitles,
   skillMatchesStack,
   skillsForStackAndCategory,
@@ -186,6 +187,12 @@ describe('uniqueSkillTitles (vendor)', () => {
     const id = 'codebase-onboarding'
     const titles = uniqueSkillTitles([{ id, publisher: 'Arboris' }])
     expect(titles.get(id)).toBe('Codebase Onboarding')
+  })
+
+  it('corrige les slugs ai-* (SEO, pas de préfixe IA)', () => {
+    expect(titleCaseSkillSlug('ai-seo')).toBe('SEO')
+    expect(titleCaseSkillSlug('ai-regression-testing')).toBe('Tests de régression')
+    expect(titleCaseSkillSlug('seo-audit')).toBe('SEO Audit')
   })
 
   it('désambiguïse les doublons via le chemin, sans le hash', () => {

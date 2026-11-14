@@ -12,7 +12,11 @@ export const SITE_DESCRIPTION =
 
 /** Éditeur / directeur de la publication (LCEN, art. 1-1). */
 export const EDITOR_NAME = 'Ethan Clenet'
+export const EDITOR_URL = 'https://clenet.is-a.dev/'
+export const EDITOR_GITHUB_URL = 'https://github.com/Ethan-Clenet'
+export const EDITOR_PERSON_ID = 'https://clenet.is-a.dev/#person'
 export const CONTACT_EMAIL = 'ethan.clenet@outlook.fr'
+export const ARBONEWS_URL = 'https://arbonews.com/'
 
 /** Date ISO de dernière mise à jour des pages légales. */
 export const LEGAL_UPDATED = '2026-09-30'

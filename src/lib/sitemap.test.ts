@@ -3,6 +3,7 @@ import { SITE_URL } from './site'
 import {
   sitemapHandler,
   sitemapIndexDocument,
+  sitemapIndexRedirectResponse,
   SITEMAP_CHILDREN,
   toLastmod,
   urlsetXml,
@@ -74,6 +75,14 @@ describe('sources sitemap hors DB', () => {
     expect(urls.map((u) => u.path)).toContain('/collections/swift-starter')
     expect(urls.map((u) => u.path)).toContain('/collections/huggingface-starter')
     expect(urls.map((u) => u.path)).toContain('/collections/google-workspace-starter')
+  })
+})
+
+describe('sitemapIndexRedirectResponse', () => {
+  it('redirige sitemap_index.xml vers /sitemap.xml en 308', () => {
+    const res = sitemapIndexRedirectResponse()
+    expect(res.status).toBe(308)
+    expect(res.headers.get('Location')).toBe('/sitemap.xml')
   })
 })
 

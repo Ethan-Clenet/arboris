@@ -10,8 +10,10 @@ import {
   collectionJsonLd,
   collectionSeoTitle,
   frenchEntityDescription,
+  localizedVisibleDescription,
   seoHead,
 } from '#/lib/seo'
+import { privateNoStoreHeaders, publicHtmlCacheHeaders } from '#/lib/http-cache'
 
 export const Route = createFileRoute('/collections/$id')({
   loader: async ({ params }) => {
@@ -19,6 +21,7 @@ export const Route = createFileRoute('/collections/$id')({
     if (!collection) throw notFound()
     return { collection }
   },
+  headers: ({ loaderData }) => (loaderData ? publicHtmlCacheHeaders() : privateNoStoreHeaders()),
   head: ({ loaderData }) => {
     const collection = loaderData?.collection
     if (!collection) return seoHead({ title: 'Collection', path: '/collections' })
@@ -139,7 +142,7 @@ function CollectionDetailPage() {
                       <span className="min-w-0 flex-1">
                         <span className={`block text-[13px] font-semibold ${skillLabel(skill) === skill.id ? 'font-mono' : ''}`}>{skillLabel(skill)}</span>
                         <span className="block truncate text-[12.5px] text-[var(--text-2)]">
-                          {skill.tag[lang]}
+                          {localizedVisibleDescription(skill.tag, 'skill', skillLabel(skill), lang)}
                         </span>
                       </span>
                     </Link>

@@ -1,5 +1,16 @@
 import { SECURITY_WARN_SCORE } from '#/lib/skillspector'
-import { absoluteUrl, pageTitle, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from '#/lib/site'
+import {
+  absoluteUrl,
+  EDITOR_GITHUB_URL,
+  EDITOR_NAME,
+  EDITOR_PERSON_ID,
+  EDITOR_URL,
+  pageTitle,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_URL,
+} from '#/lib/site'
 
 export type BreadcrumbItem = {
   name: string
@@ -228,8 +239,19 @@ export function rootFallbackMeta() {
   ]
 }
 
+const PERSON_JSON_LD = {
+  '@type': 'Person' as const,
+  '@id': EDITOR_PERSON_ID,
+  name: EDITOR_NAME,
+  url: EDITOR_URL,
+  sameAs: [EDITOR_GITHUB_URL],
+}
+
 /** JSON-LD WebSite + Organization + CLI (marque / Knowledge Graph). */
-export function siteJsonLd() {
+export function siteJsonLd(): {
+  '@context': string
+  '@graph': Array<Record<string, unknown>>
+} {
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -253,7 +275,9 @@ export function siteJsonLd() {
           width: 512,
           height: 512,
         },
+        founder: { '@id': EDITOR_PERSON_ID },
       },
+      PERSON_JSON_LD,
       {
         '@type': 'SoftwareApplication',
         '@id': `${SITE_URL}/#cli`,
@@ -263,6 +287,7 @@ export function siteJsonLd() {
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
         url: `${SITE_URL}/`,
         publisher: { '@id': `${SITE_URL}/#organization` },
+        author: { '@id': EDITOR_PERSON_ID },
       },
     ],
   }
@@ -287,6 +312,15 @@ export function looksEnglish(text: string): boolean {
   return /\b(the|and|with|for|from|this|that|your|into|using|best|practices)\b/i.test(value)
 }
 
+function frenchKindFallback(
+  kind: 'skill' | 'command' | 'collection',
+  id: string,
+): string {
+  const kindLabel =
+    kind === 'skill' ? 'Skill' : kind === 'command' ? 'Commande slash' : 'Collection'
+  return `${kindLabel} « ${id} » du catalogue Arboris, prêt pour Cursor, Claude, Codex et Copilot.`
+}
+
 /**
  * Description meta toujours en français (pas de version EN indexable).
  * Si le résumé source est anglais, on s’appuie sur le titre affiché.
@@ -298,13 +332,32 @@ export function frenchEntityDescription(
 ): string {
   const base = summary.trim().replace(/\s+/g, ' ')
   if (base && !looksEnglish(base)) return entityDescription(base, kind, id)
-  const kindLabel =
-    kind === 'skill' ? 'Skill' : kind === 'command' ? 'Commande slash' : 'Collection'
-  return entityDescription(
-    `${kindLabel} « ${id} » du catalogue Arboris, prêt pour Cursor, Claude, Codex et Copilot.`,
-    kind,
-    id,
-  )
+  return entityDescription(frenchKindFallback(kind, id), kind, id)
+}
+
+/**
+ * Texte visible d’une fiche `lang=fr` : résumé FR s’il en est un, sinon
+ * un blurb FR (évite un paragraphe anglais sous `<html lang="fr">`).
+ */
+export function frenchVisibleDescription(
+  summary: string,
+  kind: 'skill' | 'command' | 'collection',
+  id: string,
+): string {
+  const base = summary.trim().replace(/\s+/g, ' ')
+  if (base && !looksEnglish(base)) return base
+  return frenchKindFallback(kind, id)
+}
+
+/** Texte d’interface : FR de substitution si `tag.fr` est encore de l’anglais. */
+export function localizedVisibleDescription(
+  summary: { fr: string; en: string },
+  kind: 'skill' | 'command' | 'collection',
+  id: string,
+  lang: 'fr' | 'en',
+): string {
+  if (lang === 'en') return summary.en.trim() || summary.fr
+  return frenchVisibleDescription(summary.fr, kind, id)
 }
 
 /** Entité typée pour une fiche skill (résultat enrichi / compréhension SERP). */
