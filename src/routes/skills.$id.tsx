@@ -20,10 +20,12 @@ import { hasPublisherLogo } from '#/lib/publisher-logos'
 import {
   seoHead,
   frenchEntityDescription,
+  localizedVisibleDescription,
   skillSeoTitle,
   isIndexableSkill,
   skillJsonLd,
 } from '#/lib/seo'
+import { privateNoStoreHeaders, publicHtmlCacheHeaders } from '#/lib/http-cache'
 
 export const Route = createFileRoute('/skills/$id')({
   loader: async ({ params }) => {
@@ -34,6 +36,7 @@ export const Route = createFileRoute('/skills/$id')({
     if (!ctx) throw notFound()
     return { ...ctx, fileContent }
   },
+  headers: ({ loaderData }) => (loaderData ? publicHtmlCacheHeaders() : privateNoStoreHeaders()),
   head: ({ loaderData }) => {
     const skill = loaderData?.skill
     if (!skill) return seoHead({ title: 'Skill', path: '/skills', noIndex: true })
@@ -154,7 +157,7 @@ function SkillDetailPage() {
             {skillLabel(skill)}
           </h1>
           <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">
-            <LangText text={skill.tag[lang]} />
+            <LangText text={localizedVisibleDescription(skill.tag, 'skill', skillLabel(skill), lang)} />
           </p>
           <div className="flex flex-wrap items-center gap-3.5">
             <Button variant="primary" size="lg" copied={copied} onClick={handleCopy}>

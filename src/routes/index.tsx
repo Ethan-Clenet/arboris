@@ -11,15 +11,17 @@ import { AgentCompatList, AgentLogoRow } from '#/components/AgentLogo'
 import SecurityBadge from '#/components/SecurityBadge'
 import HomeTerminal from '#/components/HomeTerminal'
 import { seoHead } from '#/lib/seo'
+import { publicHtmlCacheHeaders } from '#/lib/http-cache'
 import {
   hexToRgba,
   skillLabel,
   type Category,
-  type SkillSummary,
+  type HomeSkill,
 } from '#/lib/catalog'
 
 export const Route = createFileRoute('/')({
   loader: () => getHomeCatalog(),
+  headers: publicHtmlCacheHeaders,
   head: () =>
     seoHead({
       path: '/',
@@ -54,7 +56,7 @@ function HomePage() {
   }, [catalog.popular, catalog.trending, catalog.recent, tab])
 
   const searchPool = useMemo(() => {
-    const map = new Map<string, SkillSummary>()
+    const map = new Map<string, HomeSkill>()
     for (const s of catalog.popular) map.set(s.id, s)
     for (const s of catalog.trending) map.set(s.id, s)
     for (const s of catalog.recent) map.set(s.id, s)
@@ -67,7 +69,7 @@ function HomePage() {
     if (!q) return source
     return source.filter((s) => {
       const cat = catById.get(s.categoryId)
-      const hay = `${skillLabel(s)} ${s.id} ${s.tag[lang]} ${s.tech.join(' ')} ${cat ? cat.label[lang] : ''}`.toLowerCase()
+      const hay = `${skillLabel(s)} ${s.id} ${cat ? cat.label[lang] : ''}`.toLowerCase()
       return hay.includes(q)
     })
   }, [query, searchPool, tabSkills, catById, lang])
@@ -207,6 +209,39 @@ function HomePage() {
             </Link>
           </div>
         </div>
+
+        {catalog.collections.length > 0 ? (
+          <nav className="mt-8" aria-labelledby="home-collections-heading">
+            <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
+              <h2
+                id="home-collections-heading"
+                className="font-display text-[18px] font-semibold text-[var(--text-1)]"
+              >
+                {t.home.collectionsHeading}
+              </h2>
+              <Link
+                to="/collections"
+                className="inline-flex cursor-pointer items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--text-3)] transition-colors hover:text-[var(--accent-text)]"
+              >
+                {t.home.collectionsLink}
+                <Icon name="arrow-right" size={12} />
+              </Link>
+            </div>
+            <ul className="flex flex-wrap gap-2">
+              {catalog.collections.map((collection) => (
+                <li key={collection.id}>
+                  <Link
+                    to="/collections/$id"
+                    params={{ id: collection.id }}
+                    className="inline-flex cursor-pointer rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-[13px] text-[var(--text-2)] transition-colors hover:border-[var(--accent-border)] hover:text-[var(--text-1)]"
+                  >
+                    {collection.label[lang]}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ) : null}
       </section>
     </PageShell>
   )
@@ -218,7 +253,7 @@ function HomeTableRow({
   copied,
   onCopy,
 }: {
-  skill: SkillSummary
+  skill: HomeSkill
   category?: Category
   copied: boolean
   onCopy: () => void
@@ -285,7 +320,7 @@ function HomeTableRow({
       </div>
 
       <div className="text-center font-mono text-[13px] tabular-nums text-[var(--text-2)]">
-        {skill.stacks.length || '—'}
+        {skill.stackCount || '—'}
       </div>
 
       <div className="flex min-w-[148px] items-center border-l border-[var(--border)] pl-5">

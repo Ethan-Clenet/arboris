@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import AnalyticsOptOut from '#/components/AnalyticsOptOut'
 import LegalLayout, { LegalLink, LegalList, LegalSection } from '#/components/LegalLayout'
 import { seoHead, webPageJsonLd } from '#/lib/seo'
+import { publicHtmlCacheHeaders } from '#/lib/http-cache'
 import {
   CONTACT_EMAIL,
   DB_HOST_ADDRESS,
@@ -22,6 +23,7 @@ const DESCRIPTION =
   'Politique de confidentialité RGPD d’Arboris : bases légales, durées de conservation, opt-out d’audience et droits.'
 
 export const Route = createFileRoute('/confidentialite')({
+  headers: publicHtmlCacheHeaders,
   head: () =>
     seoHead({
       title: TITLE,

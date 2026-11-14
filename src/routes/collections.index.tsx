@@ -15,8 +15,10 @@ import {
 import { useI18n } from '#/lib/i18n'
 import { getCollectionsIndex } from '#/server/functions'
 import { seoHead } from '#/lib/seo'
+import { publicHtmlCacheHeaders } from '#/lib/http-cache'
 
 export const Route = createFileRoute('/collections/')({
+  headers: publicHtmlCacheHeaders,
   loader: () => getCollectionsIndex(),
   head: () =>
     seoHead({

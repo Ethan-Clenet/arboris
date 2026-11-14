@@ -109,6 +109,17 @@ function fallbackXml(kind: SitemapKind): string {
  * Handler GET sitemap : jamais de 500. Un throw (Prisma, timeout Neon, import)
  * renvoie un XML valide (index synchrone ou urlset vide).
  */
+/** 308 vers l’index canonique `/sitemap.xml` (évite le doublon `/sitemap_index.xml`). */
+export function sitemapIndexRedirectResponse(): Response {
+  return new Response(null, {
+    status: 308,
+    headers: {
+      Location: '/sitemap.xml',
+      'Cache-Control': 'public, max-age=86400',
+    },
+  })
+}
+
 export function sitemapHandler(
   kind: SitemapKind,
   build: () => string | Promise<string>,

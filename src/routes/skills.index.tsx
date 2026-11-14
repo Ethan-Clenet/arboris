@@ -21,9 +21,11 @@ import {
   type SkillsSearch,
 } from '#/lib/skills-list'
 import type { SecurityRecommendation } from '#/lib/skillspector'
-import { absoluteUrl, seoHead } from '#/lib/seo'
+import { absoluteUrl, localizedVisibleDescription, seoHead } from '#/lib/seo'
+import { publicHtmlCacheHeaders } from '#/lib/http-cache'
 
 export const Route = createFileRoute('/skills/')({
+  headers: publicHtmlCacheHeaders,
   validateSearch: (search: Record<string, unknown>): SkillsSearch => parseSkillsSearch(search),
   loaderDeps: ({ search }) => search,
   loader: ({ deps }) => getSkillsListPage({ data: deps }),
@@ -643,7 +645,7 @@ function SkillRow({
       </Link>
 
       <div className="min-w-0 overflow-hidden line-clamp-2 self-center text-[13px] leading-[1.4] text-[var(--text-2)]">
-        <LangText text={skill.tag[lang]} />
+        <LangText text={localizedVisibleDescription(skill.tag, 'skill', skillLabel(skill), lang)} />
       </div>
 
       <div className="flex items-center border-l border-[var(--border)] pl-2">

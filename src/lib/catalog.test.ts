@@ -15,6 +15,7 @@ import {
   listingPublisher,
   COMMUNITY_PUBLISHER,
   skillLabel,
+  titleCaseSkillSlug,
   uniqueSkillTitles,
   skillMatchesStack,
   skillsForStackAndCategory,
@@ -186,6 +187,22 @@ describe('uniqueSkillTitles (vendor)', () => {
     const id = 'codebase-onboarding'
     const titles = uniqueSkillTitles([{ id, publisher: 'Arboris' }])
     expect(titles.get(id)).toBe('Codebase Onboarding')
+  })
+
+  it('corrige les slugs ai-* (SEO, pas de préfixe IA)', () => {
+    expect(titleCaseSkillSlug('ai-seo')).toBe('SEO')
+    expect(titleCaseSkillSlug('ai-regression-testing')).toBe('Tests de régression')
+    expect(titleCaseSkillSlug('ai-first-engineering')).toBe('Ingénierie AI-first')
+    expect(titleCaseSkillSlug('ai-first-process-redesign')).toBe('Refonte de process AI-first')
+    expect(titleCaseSkillSlug('ai-core')).toBe('AI Core')
+    expect(titleCaseSkillSlug('ai-persistence')).toBe('Persistance AI')
+    expect(titleCaseSkillSlug('ai-sandbox')).toBe('Sandbox AI')
+    expect(titleCaseSkillSlug('ai-skills')).toBe('Skills AI')
+    expect(titleCaseSkillSlug('ai-demo-assistant')).toBe('Assistant de démo')
+    expect(titleCaseSkillSlug("ai-usecase-assessment")).toBe("Évaluation de cas d'usage")
+    expect(titleCaseSkillSlug('ai-code-mode')).toBe('Code Mode')
+    expect(titleCaseSkillSlug('ai-mcp')).toBe('MCP')
+    expect(titleCaseSkillSlug('seo-audit')).toBe('SEO Audit')
   })
 
   it('désambiguïse les doublons via le chemin, sans le hash', () => {

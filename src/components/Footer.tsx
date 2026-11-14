@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import Icon from './Icon'
-import { CONTACT_EMAIL } from '#/lib/site'
+import { ARBONEWS_URL, CONTACT_EMAIL, EDITOR_URL } from '#/lib/site'
 import { useI18n } from '#/lib/i18n'
 
 export default function Footer() {
@@ -31,6 +31,24 @@ export default function Footer() {
         </div>
         <nav
           className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-[var(--border)] pt-3 text-[12px] text-[var(--text-3)]"
+          aria-label={t.a11y.creditsNav}
+        >
+          <a
+            href={EDITOR_URL}
+            rel="author"
+            className="cursor-pointer text-[var(--text-2)] transition-colors hover:text-[var(--text-1)]"
+          >
+            {t.home.createdBy}
+          </a>
+          <a
+            href={ARBONEWS_URL}
+            className="cursor-pointer text-[var(--text-3)] transition-colors hover:text-[var(--text-2)]"
+          >
+            {t.home.editorial}
+          </a>
+        </nav>
+        <nav
+          className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[var(--text-3)]"
           aria-label={t.a11y.legalNav}
         >
           <span className="font-medium text-[var(--text-3)]">{t.a11y.legalNav}</span>

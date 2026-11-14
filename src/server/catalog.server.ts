@@ -1,12 +1,14 @@
 import {
   COMPAT_ORDER,
   isVendorSkill,
+  toHomeSkill,
   withSkillTitles,
   type Catalog,
   type Category,
   type CollectionDetail,
   type CollectionSummary,
   type HomeCatalog,
+  type HomeCollectionLink,
   type SkillDetail,
   type SkillSummary,
   type Stack,
@@ -236,10 +238,14 @@ export async function loadCatalog(): Promise<Catalog> {
   return catalogInflight
 }
 
-/** Lignes max par onglet home (popular / trending / recent). */
-export const HOME_TAB_LIMIT = 24
+/** Lignes max par onglet home (popular / trending / recent) — HTML initial léger. */
+export const HOME_TAB_LIMIT = 8
 /** Candidats chargés pour dériver les onglets home (filtre indexable ensuite). */
 const HOME_FETCH_POOL = 400
+
+function toHomeCollectionLink(collection: CollectionSummary): HomeCollectionLink {
+  return { id: collection.id, label: collection.label }
+}
 
 function sliceHomeFromCatalog(catalog: Catalog): HomeCatalog {
   const indexable = catalog.skills.filter(isIndexableSkill)
@@ -259,32 +265,35 @@ function sliceHomeFromCatalog(catalog: Catalog): HomeCatalog {
     categories: catalog.categories,
     compatOrder: catalog.compatOrder,
     skillTotal: catalog.skills.length,
-    popular: byScore.slice(0, HOME_TAB_LIMIT),
-    trending: byStacks.slice(0, HOME_TAB_LIMIT),
-    recent: byUpdated.slice(0, HOME_TAB_LIMIT),
+    popular: byScore.slice(0, HOME_TAB_LIMIT).map(toHomeSkill),
+    trending: byStacks.slice(0, HOME_TAB_LIMIT).map(toHomeSkill),
+    recent: byUpdated.slice(0, HOME_TAB_LIMIT).map(toHomeSkill),
+    collections: catalog.collections.map(toHomeCollectionLink),
   }
 }
 
 async function fetchHomeCatalog(): Promise<HomeCatalog> {
-  const [categories, skillTotal, popularRows, recentRows, trendingPoolRows] = await Promise.all([
-    prisma.category.findMany({ orderBy: { sort: 'asc' } }),
-    prisma.skill.count(),
-    prisma.skill.findMany({
-      orderBy: [{ score: 'desc' }, { id: 'asc' }],
-      take: HOME_FETCH_POOL,
-      select: skillSummarySelect,
-    }),
-    prisma.skill.findMany({
-      orderBy: [{ updatedAt: 'desc' }, { id: 'asc' }],
-      take: HOME_FETCH_POOL,
-      select: skillSummarySelect,
-    }),
-    prisma.skill.findMany({
-      orderBy: [{ score: 'desc' }, { id: 'asc' }],
-      take: HOME_FETCH_POOL,
-      select: skillSummarySelect,
-    }),
-  ])
+  const [categories, skillTotal, popularRows, recentRows, trendingPoolRows, collections] =
+    await Promise.all([
+      prisma.category.findMany({ orderBy: { sort: 'asc' } }),
+      prisma.skill.count(),
+      prisma.skill.findMany({
+        orderBy: [{ score: 'desc' }, { id: 'asc' }],
+        take: HOME_FETCH_POOL,
+        select: skillSummarySelect,
+      }),
+      prisma.skill.findMany({
+        orderBy: [{ updatedAt: 'desc' }, { id: 'asc' }],
+        take: HOME_FETCH_POOL,
+        select: skillSummarySelect,
+      }),
+      prisma.skill.findMany({
+        orderBy: [{ score: 'desc' }, { id: 'asc' }],
+        take: HOME_FETCH_POOL,
+        select: skillSummarySelect,
+      }),
+      loadCollectionsFromDb(),
+    ])
 
   const [popularAll, recentAll, trendingPool] = await Promise.all([
     titledSummaries(popularRows),
@@ -315,9 +324,10 @@ async function fetchHomeCatalog(): Promise<HomeCatalog> {
     ),
     compatOrder: [...COMPAT_ORDER],
     skillTotal,
-    popular,
-    trending,
-    recent,
+    popular: popular.map(toHomeSkill),
+    trending: trending.map(toHomeSkill),
+    recent: recent.map(toHomeSkill),
+    collections: collections.map(toHomeCollectionLink),
   }
 }
 

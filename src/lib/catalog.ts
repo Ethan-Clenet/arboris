@@ -66,15 +66,33 @@ export interface Catalog {
   compatOrder: string[]
 }
 
+/**
+ * Ligne d’accueil — sans `tag` / `act` / `tech` (descriptions YAML trop lourdes
+ * pour le HTML initial).
+ */
+export type HomeSkill = Pick<
+  SkillSummary,
+  'id' | 'title' | 'categoryId' | 'score' | 'securityRecommendation' | 'compat'
+> & {
+  stackCount: number
+}
+
+/** Lien collection crawlable sur l’accueil (label seulement). */
+export type HomeCollectionLink = {
+  id: string
+  label: Bilingual
+}
+
 /** Payload home — évite de sérialiser les ~2k skills dans le HTML initial (LCP / TBT). */
 export interface HomeCatalog {
   categories: Category[]
   compatOrder: string[]
   /** Effectif total du catalogue (footer), pas la taille des listes ci-dessous. */
   skillTotal: number
-  popular: SkillSummary[]
-  trending: SkillSummary[]
-  recent: SkillSummary[]
+  popular: HomeSkill[]
+  trending: HomeSkill[]
+  recent: HomeSkill[]
+  collections: HomeCollectionLink[]
 }
 
 export interface CollectionSummary {
@@ -440,7 +458,10 @@ const TITLE_ACRONYMS: Record<string, string> = {
   pr: 'PR',
   ts: 'TypeScript',
   js: 'JS',
-  ai: 'IA',
+  seo: 'SEO',
+  llm: 'LLM',
+  aeo: 'AEO',
+  geo: 'GEO',
   db: 'DB',
   http: 'HTTP',
   css: 'CSS',
@@ -450,11 +471,33 @@ const TITLE_ACRONYMS: Record<string, string> = {
   adr: 'ADR',
 }
 
+/**
+ * Titres FR pour les slugs dont l’humanisation mot-à-mot reste absurde
+ * (`ai-seo` → « IA Seo »).
+ */
+const TITLE_FR_ALIASES: Record<string, string> = {
+  'ai-seo': 'SEO',
+  'ai-regression-testing': 'Tests de régression',
+  'ai-first-engineering': 'Ingénierie AI-first',
+  'ai-first-process-redesign': 'Refonte de process AI-first',
+  'ai-core': 'AI Core',
+  'ai-persistence': 'Persistance AI',
+  'ai-sandbox': 'Sandbox AI',
+  'ai-skills': 'Skills AI',
+  'ai-demo-assistant': 'Assistant de démo',
+  'ai-usecase-assessment': "Évaluation de cas d'usage",
+}
+
 /** Titre humain à partir d’un id/slug (sans chemin de dépôt). */
 export function titleCaseSkillSlug(slug: string): string {
-  return humanizeSlug(slug)
-    .split(' ')
-    .filter(Boolean)
+  const alias = TITLE_FR_ALIASES[slug]
+  if (alias) return alias
+  const words = humanizeSlug(slug).split(' ').filter(Boolean)
+  // Préfixe `ai-` générique : pas de « IA Seo » / « IA Regression Testing ».
+  if (words.length > 1 && words[0]?.toLowerCase() === 'ai') {
+    words.shift()
+  }
+  return words
     .map((word) => {
       const lower = word.toLowerCase()
       if (TITLE_ACRONYMS[lower]) return TITLE_ACRONYMS[lower]
@@ -562,6 +605,19 @@ export function skillLabel(skill: Pick<SkillSummary, 'id' | 'title'> | string): 
   if (typeof skill === 'string') return skill
   const title = skill.title?.trim()
   return title || skill.id
+}
+
+/** Réduit un résumé pour l’accueil (pas de YAML bilingue dans le HTML). */
+export function toHomeSkill(skill: SkillSummary): HomeSkill {
+  return {
+    id: skill.id,
+    title: skill.title,
+    categoryId: skill.categoryId,
+    score: skill.score,
+    securityRecommendation: skill.securityRecommendation,
+    compat: skill.compat,
+    stackCount: skill.stacks.length,
+  }
 }
 
 export function scoreColor(score: number | null): string {

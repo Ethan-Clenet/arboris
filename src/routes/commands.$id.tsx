@@ -11,7 +11,14 @@ import { AgentBadge } from '#/components/AgentLogo'
 import CommandInstallButtons from '#/components/CommandInstallButtons'
 import CloudInstallPanel from '#/components/CloudInstallPanel'
 import { commandInstallContent } from '#/lib/command-types'
-import { commandSeoTitle, frenchEntityDescription, seoHead, commandJsonLd } from '#/lib/seo'
+import {
+  commandSeoTitle,
+  frenchEntityDescription,
+  localizedVisibleDescription,
+  seoHead,
+  commandJsonLd,
+} from '#/lib/seo'
+import { privateNoStoreHeaders, publicHtmlCacheHeaders } from '#/lib/http-cache'
 
 export const Route = createFileRoute('/commands/$id')({
   loader: async ({ params }) => {
@@ -19,6 +26,7 @@ export const Route = createFileRoute('/commands/$id')({
     if (!command) throw notFound()
     return { command }
   },
+  headers: ({ loaderData }) => (loaderData ? publicHtmlCacheHeaders() : privateNoStoreHeaders()),
   head: ({ loaderData }) => {
     const command = loaderData?.command
     if (!command) return seoHead({ title: 'Commande', path: '/commands' })
@@ -82,7 +90,9 @@ function CommandDetailPage() {
               /{command.id}
             </h1>
             <p className="mb-[18px] max-w-[640px] text-[16px] text-[var(--text-2)]">
-              <LangText text={command.description[lang]} />
+              <LangText
+                text={localizedVisibleDescription(command.description, 'command', command.id, lang)}
+              />
             </p>
             <p className="mb-5 max-w-[640px] text-[14px] leading-relaxed text-[var(--text-2)]">
               {t.commands.aboutBody(command.id)}

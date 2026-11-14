@@ -54,6 +54,10 @@ const fr = {
     browseAll: 'Voir tous les skills',
     contact: 'Contact',
     installCli: 'Installer la CLI',
+    collectionsHeading: 'Collections à installer',
+    collectionsLink: 'Toutes les collections',
+    createdBy: 'Créé par Ethan Clenet',
+    editorial: 'ArboNews',
   },
   skills: {
     kicker: 'Catalogue de skills',
@@ -300,6 +304,7 @@ const fr = {
     openMenu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',
     legalNav: 'Informations légales',
+    creditsNav: 'Crédits',
   },
   legal: {
     mentions: 'Mentions légales',
@@ -364,6 +369,10 @@ const en: typeof fr = {
     browseAll: 'See all skills',
     contact: 'Contact',
     installCli: 'Install the CLI',
+    collectionsHeading: 'Collections to install',
+    collectionsLink: 'All collections',
+    createdBy: 'Created by Ethan Clenet',
+    editorial: 'ArboNews',
   },
   skills: {
     kicker: 'Skill catalog',
@@ -608,6 +617,7 @@ const en: typeof fr = {
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     legalNav: 'Legal information',
+    creditsNav: 'Credits',
   },
   legal: {
     mentions: 'Mentions légales',

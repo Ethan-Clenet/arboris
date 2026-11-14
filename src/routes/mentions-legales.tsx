@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import LegalLayout, { LegalLink, LegalList, LegalSection } from '#/components/LegalLayout'
 import { seoHead, webPageJsonLd } from '#/lib/seo'
+import { publicHtmlCacheHeaders } from '#/lib/http-cache'
 import {
   CONTACT_EMAIL,
   DB_HOST_ADDRESS,
@@ -20,6 +21,7 @@ const DESCRIPTION =
   'Éditeur, hébergeur et propriété intellectuelle d’Arboris, catalogue de skills IA publié par Ethan Clenet.'
 
 export const Route = createFileRoute('/mentions-legales')({
+  headers: publicHtmlCacheHeaders,
   head: () =>
     seoHead({
       title: TITLE,

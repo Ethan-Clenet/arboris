@@ -5,11 +5,15 @@
   "framework": null,
   "git": {
     "deploymentEnabled": {
-      "*": false,
       "master": true
     }
   },
   "redirects": [
+    {
+      "source": "/sitemap_index.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
     {
       "source": "/skills/neon-postgres-branches",
       "destination": "/skills/neon-postgres",
@@ -66,51 +70,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=86400"
-        }
-      ]
-    },
-    {
-      "source": "/",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=86400"
-        }
-      ]
-    },
-    {
-      "source": "/skills(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=86400"
-        }
-      ]
-    },
-    {
-      "source": "/commands(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=86400"
-        }
-      ]
-    },
-    {
-      "source": "/collections(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=86400"
-        }
-      ]
-    },
-    {
-      "source": "/getting-started",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=86400"
         }
       ]
     },

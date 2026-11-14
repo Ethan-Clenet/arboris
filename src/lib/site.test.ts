@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { SITE_NAME, SITE_TAGLINE, SITE_URL, absoluteUrl, pageTitle, EDITOR_NAME, CONTACT_EMAIL, LEGAL_UPDATED, LEGAL_ROUTES, formatLegalDate } from './site'
+import { SITE_NAME, SITE_TAGLINE, SITE_URL, absoluteUrl, pageTitle, EDITOR_NAME, EDITOR_URL, EDITOR_GITHUB_URL, EDITOR_PERSON_ID, ARBONEWS_URL, CONTACT_EMAIL, LEGAL_UPDATED, LEGAL_ROUTES, formatLegalDate } from './site'
 
 describe('SITE_URL', () => {
   it('pointe vers le domaine de production', () => {
@@ -33,6 +33,10 @@ describe('pageTitle', () => {
 describe('constantes légales', () => {
   it('identifie l’éditeur et la date de mise à jour', () => {
     expect(EDITOR_NAME).toBe('Ethan Clenet')
+    expect(EDITOR_URL).toBe('https://clenet.is-a.dev/')
+    expect(EDITOR_GITHUB_URL).toBe('https://github.com/Ethan-Clenet')
+    expect(EDITOR_PERSON_ID).toBe('https://clenet.is-a.dev/#person')
+    expect(ARBONEWS_URL).toBe('https://arbonews.com/')
     expect(CONTACT_EMAIL).toBe('ethan.clenet@outlook.fr')
     expect(LEGAL_UPDATED).toMatch(/^\d{4}-\d{2}-\d{2}$/)
     expect(LEGAL_ROUTES.map((r) => r.path)).toEqual(['/mentions-legales', '/confidentialite'])

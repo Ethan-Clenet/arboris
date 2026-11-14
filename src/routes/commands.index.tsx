@@ -6,10 +6,12 @@ import { AgentCompatList } from '#/components/AgentLogo'
 import { useI18n } from '#/lib/i18n'
 import { getCommandsIndex } from '#/server/functions'
 import type { CommandSummary } from '#/lib/command-types'
-import { seoHead } from '#/lib/seo'
+import { localizedVisibleDescription, seoHead } from '#/lib/seo'
+import { publicHtmlCacheHeaders } from '#/lib/http-cache'
 import LangText from '#/components/LangText'
 
 export const Route = createFileRoute('/commands/')({
+  headers: publicHtmlCacheHeaders,
   loader: () => getCommandsIndex(),
   head: () =>
     seoHead({
@@ -117,7 +119,7 @@ function CommandRow({ command }: { command: CommandSummary }) {
             </span>
           </span>
           <LangText
-            text={command.description[lang]}
+            text={localizedVisibleDescription(command.description, 'command', command.id, lang)}
             as="span"
             className="line-clamp-2 text-[13px] text-[var(--text-2)]"
           />

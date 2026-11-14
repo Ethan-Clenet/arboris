@@ -10,6 +10,7 @@ import { AnnouncerProvider } from '#/lib/announcer'
 import { fontPreloadLinks } from '#/lib/font-preload'
 import { I18nProvider } from '#/lib/i18n'
 import { beforeSendMeasurement } from '#/lib/analytics-optout'
+import { privateNoStoreHeaders } from '#/lib/http-cache'
 import { rootFallbackMeta, notFoundSeo } from '#/lib/seo'
 import appCss from '#/styles.css?url'
 
@@ -21,6 +22,10 @@ const SpeedInsights = lazy(() =>
 )
 
 export const Route = createRootRoute({
+  headers: ({ matches }) => {
+    if (matches.some((match) => match.status === 'notFound')) return privateNoStoreHeaders()
+    return {}
+  },
   head: ({ matches }) => {
     const isNotFound = matches.some((match) => match.status === 'notFound')
     const seo = isNotFound ? notFoundSeo() : { meta: rootFallbackMeta(), links: [] as Array<{ rel: string; href: string }> }
