@@ -2,6 +2,18 @@
 name: refactor-agents-md
 description: Use when about to refactor or refine a user-level or project-level CLAUDE.md or AGENTS.md, from a full restructure down to a one-line wording fix; a change that looks too small to need this skill is not an exemption
 argument-hint: [user | project | path/to/CLAUDE.md or AGENTS.md]
+allowed-tools:
+  - WebFetch(domain:platform.claude.com)
+  - WebFetch(domain:code.claude.com)
+  - WebFetch(domain:developers.openai.com)
+  - WebFetch(domain:learn.chatgpt.com)
+  - Edit(CLAUDE.md)
+  - Edit(AGENTS.md)
+  - Edit(~/.codex/AGENTS.md)
+  - Edit(~/.codex/AGENTS.override.md)
+  - Bash(claude -p --safe-mode *)
+  - Read(~/.claude/CLAUDE.md)
+  - Read(~/.codex/AGENTS.md)
 metadata:
   origin: vinta
 ---
@@ -37,6 +49,6 @@ Use `AskUserQuestion` in Claude Code or `request_user_input` in Codex when avail
    - **User-level** (loaded into every session in every project): a keep must apply across all projects.
    - **Project-level** (loaded into every session in this project, or in its directory's subtree for a nested file): a keep must be underivable from the code: a one-sentence project description, commands the readers would guess wrong, domain concepts, gotchas. Lines restating what the code already shows, and volatile detail like file trees, are deletes because they go stale and stale lines poison the context.
 
-4. **Get decisions.** Reuse changes and verdicts the user already authorized. Resolve contradictions from instruction priority and explicit user intent where possible; for each unresolved one, ask with `AskUserQuestion` or `request_user_input`, each conflicting version an option. Present any remaining delete and demote proposals, with the per-reader probe result beside each prompt-dependent delete, and collect sign-off. Preserve explicit review boundaries and leave unapproved proposals untouched.
+4. **Get decisions.** Reuse changes and verdicts the user already authorized. Resolve contradictions from instruction priority and explicit user intent where possible; for each unresolved one, ask with `AskUserQuestion` or `request_user_input`, each conflicting version an option. Present any remaining delete and demote proposals, with the per-reader probe result beside each prompt-dependent delete, and collect sign-off; rewrites need none unless the user asked to review them first. Leave unapproved proposals untouched.
 
-5. **Rewrite.** Apply the signed-off verdicts in one pass, without asking again; they are the request. Apply only those: anything else noticed while editing is a follow-up to report in the final message. Search references before removing or moving guidance, and update affected pointers. Done when every audited instruction landed where its verdict says: kept, rewritten, demoted, or deleted.
+5. **Rewrite.** Apply the authorized changes, the resolved contradictions, the rewrites, and the signed-off deletes and demotes in one pass, without asking again; they are the request. Apply only those: anything else noticed while editing is a follow-up to report in the final message. Search references before removing or moving guidance, and update affected pointers. Done when every audited instruction landed where its verdict says: kept, rewritten, demoted, or deleted.

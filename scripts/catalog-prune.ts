@@ -10,7 +10,7 @@ export const CATALOG_PRUNE_MIN_SOURCE = 500
 export const CATALOG_PRUNE_MIN_SOURCE_RATIO = 0.7
 
 /**
- * Ids retirés du disque (veille 10/10 + orphelins #65 + veille 19/10 + veille 26/10 + veille 02/11 + veille 09/11) —
+ * Ids retirés du disque (veille 10/10 + orphelins #65 + veille 19/10 + veille 26/10 + veille 02/11 + veille 09/11 + veille 16/11) —
  * toujours supprimés s’ils restent en base et absents de la source, même si
  * le prune global est ignoré.
  */
@@ -29,10 +29,13 @@ export const CATALOG_EXPLICIT_REMOVALS = [
   'frontend-playwright-e2e__ansible-ansible-ui__claude-skills-996f4ce3b4eb',
   'gemini-interactions-api',
   'get-search-view-results__microsoft-vscode__extensions-copilot-assets-prompts-skills-b03785026979',
+  'github__alibaba-anolisa__src-os-skills-devops-a691ca7ca94d',
   'guidance__nousresearch-hermes-agent__optional-skills-mlops-6dd335ed6f65',
   'honcho__nousresearch-hermes-agent__optional-skills-autonomous-ai-agents-996e893df65f',
   'huggingface-hub__nousresearch-hermes-agent__optional-skills-mlops-models-31740bee60f1',
   'huggingface-tokenizers__nousresearch-hermes-agent__optional-skills-mlops-450862a93950',
+  'humanizer__alibaba-anolisa__src-os-skills-others-9b6519f008e3',
+  'image-gen__alibaba-anolisa__src-os-skills-others-70692902821b',
   'install-vscode-extension__microsoft-vscode__extensions-copilot-assets-prompts-skills-2e7104cc5ce9',
   'instructor__nousresearch-hermes-agent__optional-skills-mlops-63c53d7f2315',
   'ito-basket-compare',
@@ -46,21 +49,26 @@ export const CATALOG_EXPLICIT_REMOVALS = [
   'neon-postgres-egress-optimizer',
   'openclaw-migration__nousresearch-hermes-agent__optional-skills-migration-fe317e719177',
   'outlines__nousresearch-hermes-agent__optional-skills-mlops-inference-2a0cea14b1ee',
+  'pdf-reader__alibaba-anolisa__src-os-skills-others-0bd4ac25f9ce',
   'pinecone-research__nousresearch-hermes-agent__optional-skills-research-ca8cc4dc1685',
   'pinecone__nousresearch-hermes-agent__optional-skills-mlops-b96e22fc8f42',
   'powerpoint__nousresearch-hermes-agent__skills-productivity-9dd70c272389',
   'qdrant__nousresearch-hermes-agent__optional-skills-mlops-e05b17a8a6f1',
   'refactor-claude-md__vinta-hal-9000__skills-02c1d0c985be',
+  'regex-mastery__alibaba-anolisa__src-os-skills-system-admin-1a84ff4952e7',
   'sandbox-sdk',
   'searxng-search__nousresearch-hermes-agent__optional-skills-research-8efe93ddacc5',
+  'shell-scripting__alibaba-anolisa__src-os-skills-system-admin-00d884fce336',
   'shopify__nousresearch-hermes-agent__optional-skills-productivity-af9e1116cb10',
   'stable-diffusion__nousresearch-hermes-agent__optional-skills-mlops-df5a6f6fe26e',
   'stories__storybookjs-storybook__code-lib-claude-plugin-skills-37800384acf4',
   'stories__storybookjs-storybook__code-lib-codex-plugin-plugins-storybook-skills-0d4224554f40',
   'trl-fine-tuning__nousresearch-hermes-agent__optional-skills-mlops-training-ee033cb02786',
   'update-playbooks__vinta-hal-9000__claude-skills-5cff35ed98e7',
+  'upgrade-alinux-kernel__alibaba-anolisa__src-os-skills-system-admin-a5506e95f65d',
   'weights-and-biases__nousresearch-hermes-agent__optional-skills-mlops-evaluation-753b94e388bc',
   'whisper__nousresearch-hermes-agent__optional-skills-mlops-6e1572243c5f',
+  'xlsx__alibaba-anolisa__src-os-skills-others-5cd510432218',
   'xlsx__nousresearch-hermes-agent__skills-productivity-7a88407e62d8',
   'yuanbao__nousresearch-hermes-agent__optional-skills-37c0ad287a36',
 ] as const

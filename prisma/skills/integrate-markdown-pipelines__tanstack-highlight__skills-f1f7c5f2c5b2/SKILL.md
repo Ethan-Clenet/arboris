@@ -9,7 +9,7 @@ metadata:
   origin: TanStack
   type: composition
   library: '@tanstack/highlight'
-  library_version: '1.2.11'
+  library_version: '1.2.12'
 requires:
   - 'configure-selective-highlighting'
 sources:
