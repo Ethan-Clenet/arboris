@@ -48,6 +48,8 @@ If a plugin's version already differs from `origin/main`, it was bumped for unre
 - **Minor** (0.2.0 -> 0.3.0): new features, new hooks, new commands.
 - **Major** (0.2.0 -> 1.0.0): breaking changes to hook behavior or config format.
 
+When a change makes a plugin rely on a Claude Code feature it did not use before (a mod's `$` API, hook or prop, a hook event, or a manifest or frontmatter field), find the Claude Code release that added it in the [changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md). If that release is newer than the floor in the plugin's `engines["claude-code"]`, or the plugin has none, set the floor to it (`">=X.Y.Z"`), so older clients keep the previous plugin release instead of loading one that breaks.
+
 Commit a bump made on its own through the `commit` skill with no argument: its subject already says why a bump exists.
 
 ## 4. Check the manifests are in sync
@@ -75,16 +77,16 @@ For every skill under `skills/`, check that `interface.short_description` in `ag
 ## 6. Validate
 
 ```bash
-claude plugin validate .
-claude plugin validate ./skills
-claude plugin validate ./plugins/hal-output-styles
-claude plugin validate ./plugins/hal-grammar-check
-claude plugin validate ./plugins/hal-session-auto-rename
-claude plugin validate ./plugins/hal-shell-mode-auto-suggest
-claude plugin validate ./plugins/hal-voice
+claude plugin validate --strict .
+claude plugin validate --strict ./skills
+claude plugin validate --strict ./plugins/hal-output-styles
+claude plugin validate --strict ./plugins/hal-grammar-check
+claude plugin validate --strict ./plugins/hal-session-auto-rename
+claude plugin validate --strict ./plugins/hal-shell-mode-auto-suggest
+claude plugin validate --strict ./plugins/hal-voice
 ```
 
-The first call validates the marketplace manifest; the rest validate each plugin manifest.
+The first call validates the marketplace manifest; the rest validate each plugin manifest. `--strict` fails on warnings too, such as a type error in a mod's TypeScript hooks module or its tests.
 
 ## 7. Run the mod tests
 

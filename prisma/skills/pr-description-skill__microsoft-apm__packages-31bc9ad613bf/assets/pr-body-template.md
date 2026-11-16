@@ -4,8 +4,8 @@
   Loaded by pr-description-skill ONLY at synthesis time, after every
   row of the activation contract has been filled. Replace every
   <PLACEHOLDER> with content drawn from the activation contract
-  inputs. Drop a section's body (keep its header) only when SKILL.md
-  explicitly allows it for this PR shape.
+  inputs. Omit an optional section only when SKILL.md allows it for
+  this PR shape.
 
   CHARSET: this template is ASCII because it lives in the repo and is
   subject to .github/instructions/encoding.instructions.md. The
@@ -19,6 +19,10 @@
 ## TL;DR
 
 <2-4 sentences: what changed, why now, the risk this eliminates.>
+
+<Fixes #N | Closes #N when this PR fully delivers issue N; Refs #N when
+partial or related. One line per issue; never a closing keyword for
+partial work.>
 
 > [!NOTE]
 > <Optional one-line callout: linked issue, follow-up plan, or the
@@ -72,8 +76,10 @@ https://github.com/microsoft/apm/blob/<sha>/path#L12-L34>
 
 ## Diagrams
 
-<1-3 mermaid blocks. Each preceded by a one-sentence legend. Every
-block MUST have been validated by mmdc before saving.>
+<When structure or control flow is non-trivial, include 1-3 mermaid
+blocks, each with a one-sentence legend and validated by the pinned
+mmdc package before saving. Simple, docs-only, and mechanical PRs may
+omit this entire section.>
 
 <DO NOT paste an example diagram here. Derive each diagram from THIS
 PR's actual artifacts -- nodes are real file names, function names,

@@ -90,4 +90,19 @@ describe('planExplicitRemovals', () => {
       expect.arrayContaining(['neon-postgres-branches', 'neon-postgres-egress-optimizer']),
     )
   })
+
+  it('inclut les retraits ANOLISA confirmés de la veille 16/11', () => {
+    expect(CATALOG_EXPLICIT_REMOVALS).toEqual(
+      expect.arrayContaining([
+        'github__alibaba-anolisa__src-os-skills-devops-a691ca7ca94d',
+        'humanizer__alibaba-anolisa__src-os-skills-others-9b6519f008e3',
+        'image-gen__alibaba-anolisa__src-os-skills-others-70692902821b',
+        'pdf-reader__alibaba-anolisa__src-os-skills-others-0bd4ac25f9ce',
+        'regex-mastery__alibaba-anolisa__src-os-skills-system-admin-1a84ff4952e7',
+        'shell-scripting__alibaba-anolisa__src-os-skills-system-admin-00d884fce336',
+        'upgrade-alinux-kernel__alibaba-anolisa__src-os-skills-system-admin-a5506e95f65d',
+        'xlsx__alibaba-anolisa__src-os-skills-others-5cd510432218',
+      ]),
+    )
+  })
 })
