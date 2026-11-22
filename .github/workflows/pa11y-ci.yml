@@ -24,6 +24,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
+          # pa11y-ci 5 / pa11y 10 exigent Node 22.13+.
           node-version: '22'
           cache: npm
 
