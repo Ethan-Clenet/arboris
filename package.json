@@ -42,13 +42,10 @@
     "db:sync": "tsx scripts/sync-catalog.ts",
     "db:studio": "prisma studio",
     "db:reset": "prisma migrate reset --force",
-    "skills:scan": "node scripts/skillspector-scan.mjs",
-    "skills:scan:sample": "node scripts/skillspector-scan.mjs --limit 5",
+    "skills:scan": "tsx scripts/skillspector-scan.mjs",
+    "skills:scan:sample": "tsx scripts/skillspector-scan.mjs --limit 5",
     "skills:scan:resolve": "node scripts/skillspector-resolve-version.mjs",
-    "skills:scan:ci": "node scripts/skillspector-scan.mjs --resolve --no-db"
-  },
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "skills:scan:ci": "tsx scripts/skillspector-scan.mjs --resolve --no-db"
   },
   "workspaces": [
     "packages/*"
@@ -57,7 +54,8 @@
     "@fontsource/hanken-grotesk": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",
     "@fontsource/space-grotesk": "^5.3.0",
-    "@prisma/client": "^6.19.2",
+    "@prisma/adapter-pg": "7.10.1",
+    "@prisma/client": "7.10.1",
     "@tailwindcss/vite": "^4.3.5",
     "@tanstack/react-devtools": "0.10.15",
     "@tanstack/react-router": "1.170.41",
@@ -67,7 +65,9 @@
     "@tanstack/router-plugin": "^1.132.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
+    "dotenv": "^18.0.10",
     "nitro": "3.0.260610-beta",
+    "pg": "^8.16.3",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "tailwindcss": "^4.3.5"
@@ -81,6 +81,7 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.4",
     "@types/node": "^22.20.5",
+    "@types/pg": "^8.15.6",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.3.0",
@@ -89,7 +90,7 @@
     "jsdom": "^29.1.1",
     "knip": "^6.47.0",
     "pa11y-ci": "^5.0.0",
-    "prisma": "^6.19.2",
+    "prisma": "7.10.1",
     "tsx": "^4.19.2",
     "typescript": "^6.0.2",
     "vite": "^8.3.8",

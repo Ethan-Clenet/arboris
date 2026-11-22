@@ -24,3 +24,6 @@ prisma/skillspector-reports/*.raw.json
 # Prisma / bases locales (legacy SQLite)
 prisma/*.db
 prisma/*.db-journal
+
+# Client Prisma 7 (généré au postinstall / build)
+src/generated/prisma

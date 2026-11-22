@@ -11,6 +11,7 @@
     "prisma/catalog-from-skills.ts",
     "vite.config.ts",
     "vitest.config.ts",
+    "prisma.config.ts",
     "lighthouserc.cjs",
     ".pa11yci.cjs",
     "src/test/setup.ts"
@@ -22,6 +23,7 @@
     "prisma/**/*.{ts,tsx}",
     "vite.config.ts",
     "vitest.config.ts",
+    "prisma.config.ts",
     "lighthouserc.cjs",
     ".pa11yci.cjs",
     "src/test/setup.ts"
@@ -45,7 +47,8 @@
     "@tanstack/react-router-ssr-query",
     "@tanstack/router-plugin",
     "tailwindcss",
-    "@lhci/cli"
+    "@lhci/cli",
+    "@prisma/client"
   ],
   "ignoreBinaries": ["docker", "vercel", "semgrep"],
   "vite": true,
