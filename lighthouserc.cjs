@@ -1,3 +1,4 @@
+// Compatible @lhci/cli 0.16 / Lighthouse 13.6 (mêmes clés de catégories).
 const base = (process.env.LHCI_BASE_URL || 'https://arboristhree.xyz').replace(
   /\/$/,
   '',

@@ -24,6 +24,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
+          # @lhci/cli 0.16 exige Node 22 (image officielle node:22).
           node-version: '22'
           cache: npm
 
