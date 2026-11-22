@@ -4,7 +4,7 @@
   "private": true,
   "description": "Catalogue de skills IA — application web Arboris.",
   "engines": {
-    "node": ">=20"
+    "node": "22.x"
   },
   "type": "module",
   "imports": {
@@ -58,8 +58,8 @@
     "@fontsource/jetbrains-mono": "^5.3.0",
     "@fontsource/space-grotesk": "^5.3.0",
     "@prisma/client": "^6.19.2",
-    "@tailwindcss/vite": "^4.1.18",
-    "@tanstack/react-devtools": "0.10.8",
+    "@tailwindcss/vite": "^4.3.5",
+    "@tanstack/react-devtools": "0.10.15",
     "@tanstack/react-router": "1.170.41",
     "@tanstack/react-router-devtools": "1.167.0",
     "@tanstack/react-router-ssr-query": "1.167.1",
@@ -68,9 +68,9 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "nitro": "3.0.260610-beta",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "tailwindcss": "^4.1.18"
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.5"
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
@@ -80,20 +80,20 @@
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.4",
-    "@types/node": "^22.10.2",
+    "@types/node": "^22.20.5",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "@vitejs/plugin-react": "^6.0.1",
-    "@vitest/coverage-v8": "^4.1.9",
+    "@vitejs/plugin-react": "^6.3.0",
+    "@vitest/coverage-v8": "^4.1.12",
     "esbuild": "^0.25.12",
     "jsdom": "^29.1.1",
-    "knip": "^6.32.1",
+    "knip": "^6.47.0",
     "pa11y-ci": "^4.1.1",
     "prisma": "^6.19.2",
     "tsx": "^4.19.2",
     "typescript": "^6.0.2",
-    "vite": "^8.0.0",
-    "vitest": "^4.1.5"
+    "vite": "^8.3.8",
+    "vitest": "^4.1.12"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -105,6 +105,13 @@
     ]
   },
   "overrides": {
-    "@tanstack/router-core": "1.171.34"
+    "@tanstack/router-core": "1.171.34",
+    "seroval": ">=1.6.11",
+    "proxy-addr": "2.0.8",
+    "shell-quote": "1.11.0",
+    "undici": "6.29.1",
+    "jsdom": {
+      "undici": "7.30.1"
+    }
   }
 }
