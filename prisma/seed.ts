@@ -1,9 +1,8 @@
-import { PrismaClient } from '@prisma/client'
+import 'dotenv/config'
+import { prisma } from '#/server/db'
 import { CATEGORIES, STACKS } from './catalog-data'
 import { COLLECTIONS } from './collections-data'
 import { loadSkillSeeds } from './catalog-from-skills'
-
-const prisma = new PrismaClient()
 
 async function main() {
   console.log('🌱 Seeding Arboris…')

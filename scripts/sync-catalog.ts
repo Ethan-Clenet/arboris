@@ -4,14 +4,13 @@
  * Après upsert, prune les ids absents du disque, avec garde-fous
  * (source vide / trop petite / trop d’orphelins → aucune suppression).
  */
+import 'dotenv/config'
 import { createHash } from 'node:crypto'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '#/server/db'
 import { CATEGORIES, STACKS } from '../prisma/catalog-data'
 import { COLLECTIONS } from '../prisma/collections-data'
 import { loadSkillSeeds } from '../prisma/catalog-from-skills'
 import { CATALOG_PRUNE_MIN_SOURCE, planCatalogPrune, planExplicitRemovals } from './catalog-prune'
-
-const prisma = new PrismaClient()
 
 function contentFingerprint(parts: Record<string, unknown>): string {
   return createHash('sha256').update(JSON.stringify(parts)).digest('hex')

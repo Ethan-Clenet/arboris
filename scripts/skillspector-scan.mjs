@@ -24,13 +24,11 @@ import { cp, mkdtemp, readdir, readFile, rm, writeFile, mkdir, stat } from 'node
 import { tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { createRequire } from 'node:module'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const skillsDir = join(root, 'prisma', 'skills')
 const reportsDir = join(root, 'prisma', 'skillspector-reports')
 const pinPath = join(root, 'skillspector-version.json')
-const require = createRequire(import.meta.url)
 
 function parseArgs(argv) {
   const skills = []
@@ -264,14 +262,13 @@ async function runDockerScan(image, skillId) {
 }
 
 async function upsertDb(skillId, report, safetyScore) {
-  let PrismaClient
+  let prisma
   try {
-    ;({ PrismaClient } = require('@prisma/client'))
+    ;({ prisma } = await import('#/server/db'))
   } catch (error) {
     console.warn(`  ⚠ Prisma indisponible (${error.message}) — rapport fichier seulement`)
     return false
   }
-  const prisma = new PrismaClient()
   try {
     const existing = await prisma.skill.findUnique({ where: { id: skillId }, select: { id: true } })
     if (!existing) {

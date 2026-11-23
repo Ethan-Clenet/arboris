@@ -62,7 +62,7 @@ describe('runVercelBuild', () => {
   it('échoue en production si la base est injoignable', () => {
     const unreachable = new Error("Can't reach database server")
     unreachable.stderr = 'P1001'
-    const exec = mockExec({ 'npx prisma migrate status': unreachable })
+    const exec = mockExec({ 'npx --no-install prisma migrate status': unreachable })
     expect(() =>
       runVercelBuild({
         env: { VERCEL_ENV: 'production', DATABASE_URL: 'postgres://x' },
@@ -76,7 +76,7 @@ describe('runVercelBuild', () => {
     const unreachable = new Error("Can't reach database server")
     unreachable.stderr = 'P1001'
     const exec = mockExec({
-      'npx prisma migrate status': unreachable,
+      'npx --no-install prisma migrate status': unreachable,
       'npm run build': '',
     })
     runVercelBuild({
@@ -88,8 +88,8 @@ describe('runVercelBuild', () => {
 
   it('échoue en production si migrate deploy échoue', () => {
     const exec = mockExec({
-      'npx prisma migrate status': 'The following migrations have not yet been applied:\n  20240101',
-      'npx prisma migrate deploy': Object.assign(new Error('migrate failed'), { stderr: 'boom' }),
+      'npx --no-install prisma migrate status': 'The following migrations have not yet been applied:\n  20240101',
+      'npx --no-install prisma migrate deploy': Object.assign(new Error('migrate failed'), { stderr: 'boom' }),
     })
     expect(() =>
       runVercelBuild({
@@ -101,7 +101,7 @@ describe('runVercelBuild', () => {
 
   it('ne fait pas échouer le build si le sync catalogue casse', () => {
     const exec = mockExec({
-      'npx prisma migrate status': 'Database schema is up to date',
+      'npx --no-install prisma migrate status': 'Database schema is up to date',
       'npx tsx scripts/sync-catalog.ts': new Error('quota'),
       'npm run build': '',
     })

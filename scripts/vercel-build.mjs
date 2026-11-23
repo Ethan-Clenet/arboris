@@ -59,7 +59,7 @@ function applyMigrations(status, exec, env) {
 
   if (needsMigrate) {
     console.log('[vercel-build] Migrations en attente — prisma migrate deploy…')
-    exec('npx prisma migrate deploy', { env, stdio: 'inherit' })
+    exec('npx --no-install prisma migrate deploy', { env, stdio: 'inherit' })
     return
   }
   if (/Database schema is up to date/i.test(status) || /No pending migrations/i.test(status)) {
@@ -68,7 +68,7 @@ function applyMigrations(status, exec, env) {
   }
   console.warn('[vercel-build] Statut migrate ambigu — tentative de prisma migrate deploy…')
   console.warn(status.slice(0, 800))
-  exec('npx prisma migrate deploy', { env, stdio: 'inherit' })
+  exec('npx --no-install prisma migrate deploy', { env, stdio: 'inherit' })
 }
 
 function syncCatalog(env, exec, dbEnv) {
@@ -98,7 +98,7 @@ export function runVercelBuild({ env = process.env, exec = execSync } = {}) {
     const dbEnv = { ...env, DATABASE_URL: migrateUrl }
     let status = ''
     try {
-      status = exec('npx prisma migrate status', { env: dbEnv, encoding: 'utf8' })
+      status = exec('npx --no-install prisma migrate status', { env: dbEnv, encoding: 'utf8' })
     } catch (error) {
       // Code ≠ 0 quand des migrations sont en attente — ou DB down.
       status = errorText(error)
