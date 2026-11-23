@@ -249,7 +249,7 @@ This is a focused edit workflow, not a lighter quality bar. Reuse `/create-mobil
 | Navigation/routes | Navigation/layout gate, route contract check, final `tsc` |
 | New screen | Shared scaffold gate, skeleton gate, screen-builder wave gate, style-quality sweep, route check, final `tsc` |
 | Existing screen TSX | Screen edit gate, style-quality sweep, route check when navigation changed, final `tsc` |
-| Native capability | Native allowlist gate, wrapper existence gate, final `tsc` |
+| Native capability | App-matched verified release/native inventory gate, wrapper existence gate, final `tsc` (not native validation) |
 | Pure-JavaScript dependency | Approved exact-version dependency table, package-content gate, package validation, final `tsc` |
 | Design/component/density | Design-system gate, affected-screen style sweep, final `tsc`, preview |
 | Application Insights configuration only | Valid `app.json`, provider `appConfig` wiring, final `tsc` only if `app/_layout.tsx` changed |
@@ -276,6 +276,26 @@ to every data child; a previous `cd` or inherited launch cwd is not a handoff.
 Immediately run the edit documentation protocol's `temp` command and bind its returned
 `directory`, `progress`, `progressHtml`, and `sync` paths as `<edit-temp-dir>` values before any
 inferred-plan sync or progress write below.
+
+Read [release lifecycle](../../shared/references/mobile-release-lifecycle.md).
+Resolve the existing app, not the newest bundled template:
+
+```bash
+cd -- '<working_dir>' || { echo "BLOCKED: cannot enter working_dir" >&2; exit 1; }
+node "${PLUGIN_ROOT}/scripts/resolve-mobile-release.js" --project-root '<working_dir>' --local-development
+```
+
+Keep the sanitized context, including unverified status, for every planner/builder
+handoff and native helper. Follow the shared lifecycle's local-development policy:
+source-only work can use installed contracts without claiming preview or
+TypeScript validates a player/base. Do not force repair before local startup.
+
+Native/host/Expo upgrades are a separate approved `/check-updates` migration to
+an exact verified release. Do not silently upgrade an existing app, install the
+controls aggregate to fix an older binary, or copy current template config.
+`--plan-only` may describe blocked native work, but does not authorize applying it.
+Preserve `app.json` → `expo.extra.powerappsNative` template/runtime requirements.
+Never backfill unknown state from installed packages or a plugin snapshot.
 
 ```bash
 cd -- '<working_dir>' || { echo "BLOCKED: cannot enter working_dir" >&2; exit 1; }
@@ -480,7 +500,7 @@ Loophole checks before continuing:
   consult the `/add-datasource` routing table read-only and resolve the choice
   before approval. Execute the selected leaf only in Step 5.
 - If a screen requires a native wrapper, run `/add-native` before screen-builders import `src/native/*`.
-- If a native capability is not shipped by the template, stop with a clear block; do not install native packages or fake support.
+- If a native capability/version is absent from the app's resolved release, stop with a clear block; do not install native packages or fake support.
 - If a screen requires a pure-JavaScript library, add it with an exact version to `## Screens → ### JavaScript Dependencies`, include it in the mutation preview, and install it before screen builders run. Determine JS-only status from shipped contents, not from a package-name prefix.
 - If the request changes navigation, update route layouts and navigation contracts before spawning screen-builders.
 - If the request adds a new screen, generate any needed route folder, generated-service snapshot, shared code, and skeleton before building TSX.
@@ -507,7 +527,7 @@ Before showing the impact question, mark `inspect: done`, set `impact: waiting`,
 `impact` to `done`, set `plan: active`, clear `waiting`, and run it again. A cancellation sets the
 top-level status to `done` with all unstarted operations `skipped`.
 
-Before spawning architects or mutating files, show a rough impact preview and ask for proceed/edit/cancel. This mirrors `/create-mobile-app` Step 2c at edit scale.
+Before spawning architects or mutating files, show a rough impact preview and ask for proceed/edit/cancel. This mirrors the rough plan preview (Step 2c) of `/create-mobile-app`'s data-model-first build order, at edit scale.
 
 Compute:
 
@@ -571,18 +591,21 @@ before asking. Restore it to `active` after the answer.
 
 Reuse the same planning primitives as `/create-mobile-app`, but only for the affected surfaces:
 
+Step numbers below are `/create-mobile-app`'s screens-first build order: Steps 1-8 are in [screens-first.md](../create-mobile-app/references/screens-first.md) and Steps 9-17 in [make-it-real.md](../create-mobile-app/references/make-it-real.md).
+
 | Surface | Reuse from create flow | Edit-app scope |
 |---|---|---|
-| Dataverse schema | `data-model-architect` + `/add-dataverse` Step 8 | New/changed tables, columns, lookups, calculated fields, generated services |
+| Dataverse schema | `data-model-architect` + `/add-dataverse` (create flow Step 12) | New/changed tables, columns, lookups, calculated fields, generated services |
 | Connector choice | `/add-datasource`, `/add-sharepoint`, `/add-connector` | New or changed external data/action surface |
-| Native capability | `/add-native` Step 9 | New wrappers/controls needed by edited screens |
+| Native capability | `/add-native` (create flow Step 13) | New wrappers/controls needed by edited screens |
 | JavaScript dependency | `screen-planner` + `shared/references/javascript-dependency-planning.md` | Explicit package requests or established JS libraries needed by edited screens |
-| Design | `/design-system` Step 9b | Token refresh, reskin, density/component rules |
-| Navigation | `/create-mobile-app` Step 10b | Changed tabs, stacks, route groups, modal/formSheet presentation |
-| Service snapshot | `/create-mobile-app` Step 10.7 | Refresh after any data source/schema change before builders run |
-| Shared code + skeletons | `/create-mobile-app` Step 10.8 | New screens, changed data imports, new shared row/card/hooks |
-| Screen implementation | `/create-mobile-app` Step 11 | Only affected screens, via `mobile-app:screen-builder` waves |
-| Quality sweep | `/create-mobile-app` Step 11.4 | Changed screen files and route layouts |
+| Design | `/design-system` + `/create-mobile-app` Step 9.2 | Token refresh, reskin, density/component rules |
+| Navigation | [navigation-and-skeletons.md](../create-mobile-app/references/navigation-and-skeletons.md) section 1 | Changed tabs, stacks, route groups, modal/formSheet presentation |
+| Service snapshot | `/create-mobile-app` Step 14.1 | Refresh after any data source/schema change before builders run |
+| Data layer | [`preview-data-layer.md`](../../shared/references/preview-data-layer.md) **Wiring** | Apps with `src/hooks/data/`: new entities, fields, queries, or device actions, wired straight to their real source |
+| Shared code + skeletons | Apps with `src/hooks/data/`: [navigation-and-skeletons.md](../create-mobile-app/references/navigation-and-skeletons.md) section 2. Apps without it: [data-model-first.md](../create-mobile-app/references/data-model-first.md) Step 10.8 | New screens, changed data imports, new shared row/card/hooks |
+| Screen implementation | Step 6.1 below | Only affected screens, via `mobile-app:screen-builder` waves |
+| Quality sweep | `/create-mobile-app` Step 15 | Changed screen files and route layouts |
 
 Read each affected section verbatim from `native-app-plan.md` and pass it as input to the relevant read-only agent. Use the plugin namespace for every `Task` invocation.
 
@@ -625,6 +648,7 @@ Prompt:
   Current section content: <verbatim>
   Working directory: <absolute path>
   Plugin root: ${PLUGIN_ROOT}
+  Release context: <sanitized resolved tuple, or explicit unresolved/source-only status>
   Phase: planning
   Proposal only: <true for --plan-only or a planning-phase caller>
 
@@ -662,6 +686,26 @@ edges so the Changes tab renders the updated screen graph.
 Run `progress --json-file` after writing this payload and before changing `approve` to `waiting`.
 
 For Native Capabilities (no separate agent), do it inline: read the current capability table, apply the change, regenerate the table. For PDF/pen rows, include storage/output notes in the table or immediately below it:
+
+Read [conditional native controls](../add-native/references/native-controls.md).
+Use `/pdf`, `/pen`, and `/geolocation` only when the resolved release contains
+the aggregate; its root is metadata. Legacy leaves require matching resolved
+inventory. There is no barcode subpath. Controls 0.2.0 uses the Expo 55 /
+React Native 0.83.6 baseline, not Expo 57. Host-owned `enableNativeControls`
+registration requires a verified supporting host release; published host 0.4.0
+lacks it. Never change config to make an unavailable API appear supported.
+
+Keep package inclusion, OS declarations, runtime grants, and actual use
+separate. Removing controls dependencies does not remove unused default Android
+permissions. Different declarations require another verified base; optional
+permission wrapping is deferred.
+
+One-shot location via `new BgLocationClient().getCurrentLocation()` needs no
+`app_id`, data source, table, or `startTracking`. Background-location 0.2.3
+tracking requests background permissions even with `trackInBackground: false`;
+tracking is shared and `stopTracking()` / `isTracking()` have no `app_id`.
+Plan a coordinated owner, not a stop-on-unmount behavior. Read installed
+docs/types; do not use the unrelated `configureSync` / `HttpSyncContract` API.
 
 - `native-pdf-viewer` 0.2.9+ opens HTTPS URLs and local `file://` URIs; it does not support `content://`, `blob:`, or `http://`.
 - `pdf-report` generates a local PDF only when `expo-print` is present; local output may be opened by `native-pdf-viewer` 0.2.9+, shared with `expo-sharing` when present, or uploaded to Dataverse File storage.
@@ -787,6 +831,11 @@ plan. Pass `MOBILE_APP_ORCHESTRATING=1` and the explicit implementation context
 above on each handoff, including through routers and on retries. Reuse supplied
 answers, and return to the approval gate if an unresolved choice changes scope.
 
+Before any native wrapper/control mutation, re-resolve the release if inputs
+changed and require the native inventory gate to pass. Forward the same
+sanitized context to all screen-builder waves. Never replace the gate with a
+package-name presence check; missing/unknown records remain a hard block.
+
 0. **Environment drift gate for data edits** — before Dataverse, SharePoint, connector, or sample-data work, compare `memory-bank.md`, `power.config.json`, and `.resolved-environment.json`. If they disagree, show the values and ask the user which environment is intended. Do not create tables or connections until confirmed.
 1. **Data Model** — invoke `/add-dataverse --skip-planning` with the approved
    delta and the scoped planning context below, not every row in the plan.
@@ -809,7 +858,7 @@ answers, and return to the approval gate if an unresolved choice changes scope.
    handles empty states; never report complete seed coverage.
 3. **Connector/Data Source** — read and execute `/add-datasource` when ambiguous, or `/add-sharepoint` / `/add-connector` for approved connector changes. For a retained source refresh, pass skill-only `--refresh --data-source-name "<registered-name>"` with its verified identity in `approved_scope`; do not route refreshes through addition. Use the same refresh branch for service-only Dataverse repairs without schema changes. Regenerate services and record connection notes in `memory-bank.md`.
 4. **Pure-JavaScript Dependencies** — execute the Installation Contract in [`shared/references/javascript-dependency-planning.md`](${PLUGIN_ROOT}/shared/references/javascript-dependency-planning.md) for new or changed rows in the approved `## Screens → ### JavaScript Dependencies` table. Approval is consent for those exact packages and versions. Install and validate before screen work; if final inspection finds native code/config or incompatible runtime dependencies, remove only the newly added package and stop with the exact failed criterion.
-5. **Native Capabilities** — read and execute `/add-native <capability>` for every new capability. Do not install missing native packages or fake wrappers. If a capability is unsupported by the current template, stop before rebuilding screens that import it, record the block, and tell the user what upstream template support is missing.
+5. **Native Capabilities** — read and execute `/add-native <capability>` for every new capability, with the same resolved release context. Do not install missing native packages or fake wrappers. If support is absent/unverified for this app's release, stop before rebuilding consuming screens and record the missing release/native evidence.
 6. **Design** — read and execute the approved `/design-system` operation (refresh,
    reskin, theme, or rollback). Include `CODE_APPS_NATIVE_ORCHESTRATING=1` in
    the child environment to suppress intermediate browser tabs, alongside the
@@ -957,11 +1006,12 @@ Before spawning builders:
 - Pass the approved retiring service/source list to every affected builder.
   Still-present generated files are transitional dependencies, not permission
   to keep or introduce usages that the edit is meant to remove.
-- Update route layout files using the `/create-mobile-app` Step 10b layout rules if navigation changed.
+- Update route layout files using the layout rules in [navigation-and-skeletons.md](../create-mobile-app/references/navigation-and-skeletons.md) section 1 if navigation changed.
 - Create missing route folders for new screens.
-- Refresh the `## Generated Services` table using `/create-mobile-app` Step 10.7 rules if any data source/schema changed.
-- Generate or refresh app-specific shared code from `/create-mobile-app` Step 10.8a when two or more affected screens share an entity row/card, choice map, cursor hook, or save helper.
-- For brand-new screens, write typed skeleton files using `/create-mobile-app` Step 10.8b patterns before calling builders.
+- Refresh the `## Generated Services` table using `/create-mobile-app` Step 14.1 rules if any data source/schema changed.
+- **Apps with `src/hooks/data/`** (created by the preview-first flow): screens reach data and device features only through `@/hooks/data`. `screen-planner` marks each Data Contract addition `(new)`; add each one to the data layer first (entity module, hook, field, query, or device action), wired directly to its real source by the **Wiring** rules in [`preview-data-layer.md`](../../shared/references/preview-data-layer.md) (no sample-data stage), then run `node "${PLUGIN_ROOT}/scripts/check-data-layer.js" --project-root '<working_dir>' --require-wired`. It accepts the `preview deferred` blocks creation left for entities the user chose to keep on sample data, so an edit that leaves those entities alone passes. Never mark a block deferred in an edit. An edit that changes a deferred entity (a new field, query, operation, or a screen that uses it) wires that entity's block in the same edit, so the checker holds the changed block to the same rule as the rest; when its source still does not exist, include adding it in the impact preview for the user to approve. Apps without that folder keep importing generated services in screens.
+- Generate or refresh app-specific shared code when two or more affected screens share an entity row/card, choice map, cursor hook, or save helper: per [navigation-and-skeletons.md](../create-mobile-app/references/navigation-and-skeletons.md) section 2.1 for apps with `src/hooks/data/`, or per [data-model-first.md](../create-mobile-app/references/data-model-first.md) Step 10.8a for apps without it. Section 2.1 types shared components with the domain types from `@/hooks/data`, and an app without that folder has nothing to import them from; Step 10.8a builds them on its generated services and models instead.
+- For brand-new screens, write typed skeleton files before calling builders: [navigation-and-skeletons.md](../create-mobile-app/references/navigation-and-skeletons.md) section 2.2 for apps with `src/hooks/data/`, [data-model-first.md](../create-mobile-app/references/data-model-first.md) Step 10.8b for apps without it.
 - For existing screens, do not overwrite with skeletons. Pass the current file content and the change request to the builder in edit mode. If imports/data hooks changed, update them surgically before the builder fills or revises JSX.
 - For removed screens, delete route files and remove layout entries only when the user approved deletion in Step 3.
 
@@ -979,7 +1029,7 @@ Shared scaffold algorithm:
 
 - If `src/components/index.tsx`, `src/hooks/index.ts`, `src/utils/index.ts`, or `src/tokens/index.ts` is missing, copy the missing file from `shared/samples/src/`. Never overwrite an existing shared file.
 - If affected screens share an entity card/row, choice map, cursor hook, detail hook, or save helper, create or update a focused app-specific shared file before spawning builders.
-- For brand-new screens, write a typed skeleton at the `target_file` using the relevant `/create-mobile-app` Step 10.8b template. The skeleton must compile with `return null` before screen-builder runs.
+- For brand-new screens, write a typed skeleton at the `target_file` using the relevant [navigation-and-skeletons.md](../create-mobile-app/references/navigation-and-skeletons.md) section 2.2 template (apps with `src/hooks/data/`) or [data-model-first.md](../create-mobile-app/references/data-model-first.md) Step 10.8b template (apps without it). The skeleton must compile with `return null` before screen-builder runs.
 - For existing screens, never replace the whole file with a skeleton. Patch imports/hooks only when the approved edit changes the data/native surface, then ask the builder to preserve existing behavior.
 
 Run the navigation/skeleton gate before screen-builder work:
@@ -1082,7 +1132,7 @@ Treat validator findings like create-flow gate failures: capture once, batch by 
 
 #### Step 7.1 — Targeted style-quality sweep
 
-When screen files changed, run a focused version of `/create-mobile-app` Step 11.4 against the changed screen files plus any route layouts changed by this edit.
+When screen files changed, run a focused version of `/create-mobile-app` Step 15 against the changed screen files plus any route layouts changed by this edit.
 
 Rules:
 

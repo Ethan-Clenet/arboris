@@ -10,7 +10,7 @@ export const CATALOG_PRUNE_MIN_SOURCE = 500
 export const CATALOG_PRUNE_MIN_SOURCE_RATIO = 0.7
 
 /**
- * Ids retirés du disque (veille 10/10 + orphelins #65 + veille 19/10 + veille 26/10 + veille 02/11 + veille 09/11 + veille 16/11) —
+ * Ids retirés du disque (veille 10/10 + orphelins #65 + veille 19/10 + veille 26/10 + veille 02/11 + veille 09/11 + veille 16/11 + veille 23/11) —
  * toujours supprimés s’ils restent en base et absents de la source, même si
  * le prune global est ignoré.
  */
@@ -18,6 +18,7 @@ export const CATALOG_EXPLICIT_REMOVALS = [
   'audiocraft-audio-generation__nousresearch-hermes-agent__optional-skills-creative-3347ca0db653',
   'audit-claude-settings__vinta-hal-9000__skills-f0ce6934a890',
   'author-auth0-skill',
+  'claude-devfleet',
   'clip__nousresearch-hermes-agent__optional-skills-mlops-a0801d3ca750',
   'cute-verify__pytorch-helion__claude-skills-5b17ace4dee2',
   'cypress-author',

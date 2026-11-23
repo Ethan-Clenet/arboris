@@ -211,6 +211,12 @@ artifact type, translate it:
    be O(1); `len(list(seq))` when `len(seq)` works; nested scans
    that are O(P×V) when an id→row map would be O(P+V) — reviewers
    treat these as dead weight even when functionally correct.
+   Follow bounded parser output through merges and reporting: a node limit
+   does not bound repeated full-map scans per key or full-source decoding per
+   diagnostic. Check scaling across both input width and nesting depth.
+   For inline annotations, verify the control's scope independently of the
+   source excerpt retained for display or identity: a comment on unrelated
+   child data must not suppress a neighboring diagnostic.
 
 7. **Is this internally and externally consistent?** Within each
    module: do all code paths use the same patterns (e.g., registry
@@ -257,6 +263,82 @@ artifact type, translate it:
    an empty-but-not-falsy value. Trace it through the code path.
    If it fails silently, sends a vacuous request, or produces a
    return value that violates the declared type, that's a finding.
+   For asynchronous resource acquisition, cancel before the handle is returned
+   as well as during use; the acquisition owner must finish disposal before
+   cleanup releases its storage or capacity reservation. Bind authorization
+   and quota checks to the actual resource used after resolution, translation
+   or pathname replacement. Security-boundary tests must exercise the production
+   path under real enforcement in a required CI gate; skip-only tests cannot
+   establish that the boundary works.
+   For patches built from nested snapshots, construct overlapping parent and
+   child edits against the same baseline, including length-changing edits,
+   identical edits, and insertion boundaries. Require explicit composition or
+   conflict detection before output; iteration order must never select a winner.
+   Exercise overlapping proposals that repeat an agreed change plus additional
+   nearby edits; broad span overlap alone does not establish a conflict, while
+   ambiguous alignment must never silently select or rewrite a proposal.
+   For source discovery, distinguish positive structural evidence from a
+   permissive fallback parser. Test arbitrary data fields, malformed leading
+   entries, and checkout ancestors that resemble source directories. Trace the
+   discovered objects through downstream validators and remediation as well.
+   Compare discovery evidence with every source root and identifier form the
+   loader supports. Preserve caller-established context instead of extending
+   path guesses whenever another supported directory or plugin layout appears.
+   Keep permission to parse custom actions separate from evidence that a file
+   is executable content; broad caller-selected roots can contain data fixtures
+   whose exclusion must survive that permission.
+   Trace shared source classification through formatting, loading, and output
+   assembly using the same inputs; verify explicitly supplied roots get their
+   own boundary and excluded fixtures stay excluded in every caller. Trace new
+   internal failure types through every command path to the public error event,
+   including approval gates, rather than relying on a broad transport catch.
+   For executor offloads, keep live mutations on their owner thread and validate
+   snapshots before commit. Cancel both before and after commit; an owned
+   continuation must finish persistence/phase advancement before releasing its
+   guard. Replay and duplicate requests must preserve that durable phase.
+   Bind requests to the prompt/generation they answer, including empty,
+   decline-all, and skip decisions; payload contents alone cannot identify a
+   round. Trace that identity through every transport and legacy omission path.
+   At shared source coordinates, distinguish nested ownership from independent
+   siblings before deduplicating or rejecting edits.
+   Inject persistence failures, including partial multi-file writes, between
+   preparation and acknowledgment; decisions must remain retryable until the
+   write succeeds. For bounded histories, identify and retain every snapshot
+   still referenced by rollback or approved-output selection, not just the
+   oldest and newest entries.
+   Preserve delivery latency when buffering streamed events: optional reporting
+   must not hold results or mutation guards, and disconnects must not orphan it.
+   Trace completion through the caller's final acknowledgment/close handshake,
+   including when the client waits for stream termination before committing output.
+
+   Keep content recognition independent of dispatch/exclusion policy, and trace
+   every recognized construct through invalid shapes as well as valid ones;
+   a mismatched value must not disappear through a missing branch. Repeated
+   membership checks should reuse an existing request-local index rather than
+   rescan the full input for each reference.
+   Bound expanded representations, including repeated shared references and
+   serialized bytes, at every downstream consumer; account for repeated work
+   after an aggregate budget is exhausted and combined transport payloads. Enforce
+   the budget during parsing as well as after it, and trace incomplete discovery
+   into every downstream decision that relies on the discovered set. After edits,
+   check that cached relationships and selectors reflect the current input.
+   Validate values after the same type conversions used by their real consumer.
+   Bound retained intermediate state across all callers before allocating it,
+   and trace inherited changes through incremental rescan and ledger updates.
+   Inspect repeated searches over input suffixes for quadratic work, and
+   normalize supported structured identity fields before hashing them.
+   When async work follows a state transition, trace failure and reconnect through
+   every awaited operation in order, including partial writes, retained inputs,
+   retries, reporting side effects, and updated results.
+   Trace reachability through imports using the runtime's exact path and value
+   semantics, including alternative caller bases and whitespace. Check execution
+   ordering and the outer value containing nested dynamic values. Trace distinct findings and explicit
+   remediation constraints through deduplication, storage, and routing. Treat
+   missing results as evidence of a fix only when the relevant check actually
+   assessed that input, including when findings are filtered or disabled.
+   When combining graph paths,
+   distinguish inactive paths from paths with unavailable context so inactive
+   metadata cannot affect an active invocation.
    Include requests disconnected during async authorization, shutdown while a
    dependency lookup is pending, simultaneous large bodies across distinct
    resources, and edits that preserve versus clear an existing optional value.
@@ -598,6 +680,12 @@ critical/high/medium/low.
   (``requires-python``, ``frontend/package.json`` ``engines.node``):
   prefer ``node-version-file`` over a hard-coded number. Extra setup
   actions need an explicit lean-ci exception next to the job.
+- Match each CI job's setup manifest to the workspace its tox command installs,
+  rather than inheriting a historical job convention. Keep required service
+  startup and teardown inside a reproducible tox environment or test fixture,
+  not inline workflow shell. For multi-host UI changes, check that host
+  composition matches the migration boundary, retained bridges still serve
+  unmigrated consumers, and global theme state reaches portaled overlays.
 - **Dead weight** — unused imports/params; paid-for-but-wasteful work:
   double JSON parse, list.pop(0)/insert(0,…) vs deque, len(list(seq)),
   O(P×V) nested scans that should be O(P+V)

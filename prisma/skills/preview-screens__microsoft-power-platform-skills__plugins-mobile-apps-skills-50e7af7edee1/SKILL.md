@@ -14,7 +14,7 @@ metadata:
 
 # Preview Screens
 
-Generates a self-contained HTML file that renders every screen in the app as a phone-frame mockup (375 × 812) with tab navigation and a dark/light toggle. The agent reads TSX files, understands the Tamagui component tree, and produces equivalent HTML/CSS — no programmatic TSX parsing.
+Generates a self-contained HTML file that renders every screen in the app as a phone-frame mockup (an iPhone 18 Pro, 402 × 874) with tab navigation and a dark/light toggle. The agent reads TSX files, understands the Tamagui component tree, and produces equivalent HTML/CSS — no programmatic TSX parsing.
 
 ## When to use
 
@@ -43,7 +43,7 @@ Determine the working directory:
 Validate the project:
 
 ```text
-Glob pattern="power.config.json" path="<working_dir>"
+Glob pattern="power.config.json" path='<working_dir>'
 ```
 
 If missing, check for `package.json`. If neither exists, report the error and stop.
@@ -63,7 +63,7 @@ Fallback: read `name` from `package.json`.
 Find all TSX files under the app directory:
 
 ```text
-Glob pattern="app/**/*.tsx" path="<working_dir>"
+Glob pattern="app/**/*.tsx" path='<working_dir>'
 ```
 
 **Exclude** these patterns — they are not screens:
@@ -121,7 +121,7 @@ Internalize:
 Also check if the project has custom brand tokens:
 
 ```text
-Glob pattern="tamagui.config.ts" path="<working_dir>"
+Glob pattern="tamagui.config.ts" path='<working_dir>'
 ```
 
 If found, read it and extract any custom color tokens (look for `tokens: { color: { ... } }`). Add them as additional CSS custom properties in the generated HTML.
@@ -192,7 +192,7 @@ Print confirmation:
 
 **Telemetry checkpoint: `open_screen_preview`**
 
-**Do NOT prompt.** The `visual_companion` flag in `<working_dir>/memory-bank.md` already encodes the answer; asking again is redundant. The flag is set by `/design-system` (Step 6.75) during project creation, or defaults to `yes` if `/design-system` was not run.
+**Do NOT prompt.** The `visual_companion` flag in `<working_dir>/memory-bank.md` already encodes the answer; asking again is redundant. `/create-mobile-app` writes the flag when it creates the memory bank (Step 3.4 in screens first, Step 6.7 in data model first); without it, the default is `yes`.
 
 Read the flag and act:
 
