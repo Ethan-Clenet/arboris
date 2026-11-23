@@ -105,4 +105,8 @@ describe('planExplicitRemovals', () => {
       ]),
     )
   })
+
+  it('inclut le retrait claude-devfleet confirmé de la veille 23/11', () => {
+    expect(CATALOG_EXPLICIT_REMOVALS).toEqual(expect.arrayContaining(['claude-devfleet']))
+  })
 })
